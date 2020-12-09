@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/jeethink.iml" filepath="$PROJECT_DIR$/.idea/jeethink.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JeeThink-activiti/jeethink-activiti.iml" filepath="$PROJECT_DIR$/JeeThink-activiti/jeethink-activiti.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JeeThink-admin/jeethink-admin.iml" filepath="$PROJECT_DIR$/JeeThink-admin/jeethink-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JeeThink-common/jeethink-common.iml" filepath="$PROJECT_DIR$/JeeThink-common/jeethink-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JeeThink-framework/jeethink-framework.iml" filepath="$PROJECT_DIR$/JeeThink-framework/jeethink-framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JeeThink-generator/jeethink-generator.iml" filepath="$PROJECT_DIR$/JeeThink-generator/jeethink-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JeeThink-quartz/jeethink-quartz.iml" filepath="$PROJECT_DIR$/JeeThink-quartz/jeethink-quartz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JeeThink-system/jeethink-system.iml" filepath="$PROJECT_DIR$/JeeThink-system/jeethink-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JeeThink-workFlow/jeethink-workFlow.iml" filepath="$PROJECT_DIR$/JeeThink-workFlow/jeethink-workFlow.iml" />
+    </modules>
+  </component>
+</project>

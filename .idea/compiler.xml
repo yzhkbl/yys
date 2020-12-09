@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="jeethink-activiti" />
+        <module name="jeethink-common" />
+        <module name="jeethink-workFlow" />
+        <module name="jeethink-quartz" />
+        <module name="jeethink-generator" />
+        <module name="jeethink-framework" />
+        <module name="jeethink-system" />
+        <module name="jeethink-admin" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="8">
+      <module name="jeethink" target="1.8" />
+      <module name="jeethink-activiti" target="1.8" />
+      <module name="jeethink-admin" target="1.8" />
+      <module name="jeethink-common" target="1.8" />
+      <module name="jeethink-framework" target="1.8" />
+      <module name="jeethink-generator" target="1.8" />
+      <module name="jeethink-quartz" target="1.8" />
+      <module name="jeethink-system" target="1.8" />
+      <module name="jeethink-workFlow" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

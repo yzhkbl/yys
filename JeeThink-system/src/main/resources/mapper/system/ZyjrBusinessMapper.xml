@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrBusinessMapper">
+    
+    <resultMap type="ZyjrBusiness" id="ZyjrBusinessResult">
+        <result property="id"    column="id"    />
+        <result property="team"    column="team"    />
+        <result property="carInformation"    column="car_information"    />
+        <result property="intentionPrice"    column="intention_price"    />
+        <result property="loanMoney"    column="loan_money"    />
+        <result property="repayPeriod"    column="repay_period"    />
+        <result property="carType"    column="car_type"    />
+        <result property="identityId"    column="identity_id"    />
+        <result property="orderState"    column="order_state"    />
+    </resultMap>
+
+    <sql id="selectZyjrBusinessVo">
+        select id, team, car_information, intention_price, loan_money, repay_period, car_type, identity_id, order_state from zyjr_business
+    </sql>
+
+    <select id="selectZyjrBusinessList" parameterType="ZyjrBusiness" resultMap="ZyjrBusinessResult">
+        <include refid="selectZyjrBusinessVo"/>
+        <where>  
+            <if test="team != null  and team != ''"> and team = #{team}</if>
+            <if test="carInformation != null "> and car_information = #{carInformation}</if>
+            <if test="intentionPrice != null "> and intention_price = #{intentionPrice}</if>
+            <if test="loanMoney != null "> and loan_money = #{loanMoney}</if>
+            <if test="repayPeriod != null "> and repay_period = #{repayPeriod}</if>
+            <if test="carType != null "> and car_type = #{carType}</if>
+            <if test="identityId != null  and identityId != ''"> and identity_id = #{identityId}</if>
+            <if test="orderState != null "> and order_state = #{orderState}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrBusinessById" parameterType="Long" resultMap="ZyjrBusinessResult">
+        <include refid="selectZyjrBusinessVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrBusiness" parameterType="ZyjrBusiness" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_business
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="team != null">team,</if>
+            <if test="carInformation != null">car_information,</if>
+            <if test="intentionPrice != null">intention_price,</if>
+            <if test="loanMoney != null">loan_money,</if>
+            <if test="repayPeriod != null">repay_period,</if>
+            <if test="carType != null">car_type,</if>
+            <if test="identityId != null">identity_id,</if>
+            <if test="orderState != null">order_state,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="team != null">#{team},</if>
+            <if test="carInformation != null">#{carInformation},</if>
+            <if test="intentionPrice != null">#{intentionPrice},</if>
+            <if test="loanMoney != null">#{loanMoney},</if>
+            <if test="repayPeriod != null">#{repayPeriod},</if>
+            <if test="carType != null">#{carType},</if>
+            <if test="identityId != null">#{identityId},</if>
+            <if test="orderState != null">#{orderState},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrBusiness" parameterType="ZyjrBusiness">
+        update zyjr_business
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="team != null">team = #{team},</if>
+            <if test="carInformation != null">car_information = #{carInformation},</if>
+            <if test="intentionPrice != null">intention_price = #{intentionPrice},</if>
+            <if test="loanMoney != null">loan_money = #{loanMoney},</if>
+            <if test="repayPeriod != null">repay_period = #{repayPeriod},</if>
+            <if test="carType != null">car_type = #{carType},</if>
+            <if test="identityId != null">identity_id = #{identityId},</if>
+            <if test="orderState != null">order_state = #{orderState},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrBusinessById" parameterType="Long">
+        delete from zyjr_business where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrBusinessByIds" parameterType="String">
+        delete from zyjr_business where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
