@@ -36,7 +36,7 @@ public class ZyjrBusinessController extends BaseController
     /**
      * 查询【请填写功能名称】列表
      */
-    @PreAuthorize("@ss.hasPermi('system:business:list')")
+    @PreAuthorize("@ss.hasPermi('process:business:list')")
     @GetMapping("/list")
     public TableDataInfo list(ZyjrBusiness zyjrBusiness)
     {
@@ -48,7 +48,7 @@ public class ZyjrBusinessController extends BaseController
     /**
      * 导出【请填写功能名称】列表
      */
-    @PreAuthorize("@ss.hasPermi('system:business:export')")
+    @PreAuthorize("@ss.hasPermi('process:business:export')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(ZyjrBusiness zyjrBusiness)
@@ -61,7 +61,7 @@ public class ZyjrBusinessController extends BaseController
     /**
      * 获取【请填写功能名称】详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:business:query')")
+    @PreAuthorize("@ss.hasPermi('process:business:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -71,7 +71,7 @@ public class ZyjrBusinessController extends BaseController
     /**
      * 新增【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:business:add')")
+    @PreAuthorize("@ss.hasPermi('process:business:add')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody ZyjrBusiness zyjrBusiness)
@@ -82,7 +82,7 @@ public class ZyjrBusinessController extends BaseController
     /**
      * 修改【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:business:edit')")
+    @PreAuthorize("@ss.hasPermi('process:business:edit')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody ZyjrBusiness zyjrBusiness)
@@ -93,7 +93,7 @@ public class ZyjrBusinessController extends BaseController
     /**
      * 删除【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:business:remove')")
+    @PreAuthorize("@ss.hasPermi('process:business:remove')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
