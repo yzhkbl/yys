@@ -39,7 +39,6 @@
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-config:5.1.12.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-crypto:5.1.12.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-web:5.1.12.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: io.swagger:swagger-annotations:1.5.10" level="project" />
     <orderEntry type="library" name="Maven: io.swagger:swagger-models:1.5.10" level="project" />
     <orderEntry type="library" name="Maven: org.activiti:activiti-common-rest:6.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.activiti:activiti-engine:6.0.0" level="project" />
@@ -99,6 +98,8 @@
     <orderEntry type="library" name="Maven: net.java.dev.jna:jna:5.6.0" level="project" />
     <orderEntry type="library" name="Maven: net.java.dev.jna:jna-platform:5.6.0" level="project" />
     <orderEntry type="module" module-name="jeethink-system" />
+    <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.16.10" level="project" />
+    <orderEntry type="library" name="Maven: io.swagger:swagger-annotations:1.5.10" level="project" />
     <orderEntry type="module" module-name="jeethink-common" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context-support:5.1.18.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-web:5.1.18.RELEASE" level="project" />

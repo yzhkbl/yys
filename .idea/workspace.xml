@@ -22,11 +22,74 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab4b5365-e565-46ed-95ac-5d8aaf08df5b" name="Default Changelist" comment="111">
+    <list default="true" id="ab4b5365-e565-46ed-95ac-5d8aaf08df5b" name="Default Changelist" comment="business">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_16_10.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-activiti/jeethink-activiti.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-activiti/jeethink-activiti.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-admin/jeethink-admin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-admin/jeethink-admin.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-framework/jeethink-framework.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-framework/jeethink-framework.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/jeethink-system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-system/jeethink-system.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-system/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JeeThink-system/src/main/java/com/jeethink/system/controller/YysController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JeeThink-system/src/main/java/com/jeethink/system/controller/ZyjrBusinessController.java" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-system/src/main/java/com/jeethink/system/controller/ZyjrBusinessController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/controller/ZyjrBusinessController.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/controller/ZyjrBusinessController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/src/main/java/com/jeethink/system/util/HttpPostUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-system/src/main/java/com/jeethink/system/util/HttpPostUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/controller/YysController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/controller/ZyjrBusinessController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/domain/SysConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/domain/SysLogininfor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/domain/SysNotice.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/domain/SysOperLog.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/domain/SysPost.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/domain/SysRoleDept.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/domain/SysRoleMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/domain/SysUserOnline.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/domain/SysUserPost.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/domain/SysUserRole.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/domain/ZyjrBusiness.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/domain/vo/MetaVo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/domain/vo/RouterVo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/mapper/SysConfigMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/mapper/SysDeptMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/mapper/SysDictDataMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/mapper/SysDictTypeMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/mapper/SysLogininforMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/mapper/SysMenuMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/mapper/SysNoticeMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/mapper/SysOperLogMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/mapper/SysPostMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/mapper/SysRoleDeptMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/mapper/SysRoleMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/mapper/SysRoleMenuMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/mapper/SysUserMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/mapper/SysUserPostMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/mapper/SysUserRoleMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/mapper/ZyjrBusinessMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/ISysConfigService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/ISysDeptService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/ISysDictDataService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/ISysDictTypeService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/ISysLogininforService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/ISysMenuService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/ISysNoticeService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/ISysOperLogService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/ISysPostService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/ISysRoleService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/ISysUserOnlineService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/ISysUserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/IZyjrBusinessService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/impl/SysConfigServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/impl/SysDeptServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/impl/SysDictDataServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/impl/SysDictTypeServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/impl/SysLogininforServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/impl/SysMenuServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/impl/SysNoticeServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/impl/SysOperLogServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/impl/SysPostServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/impl/SysRoleServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/impl/SysUserOnlineServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/impl/SysUserServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/service/impl/ZyjrBusinessServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-workFlow/jeethink-workFlow.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-workFlow/jeethink-workFlow.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,10 +126,11 @@
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="D:/demo" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/WeChat Files/wxid_o9as4i5rdood22/FileStorage/File/2020-12/commons-beanutils-1.8.0.jar" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
@@ -94,6 +158,19 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -135,7 +212,7 @@
       <workItem from="1607489411006" duration="1732000" />
       <workItem from="1607493290504" duration="1251000" />
       <workItem from="1607494576001" duration="16400000" />
-      <workItem from="1607560751481" duration="2589000" />
+      <workItem from="1607560751481" duration="12901000" />
     </task>
     <task id="LOCAL-00001" summary="111">
       <created>1607503649180</created>
@@ -144,7 +221,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607503649180</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="business">
+      <created>1607564065480</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1607564065480</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -163,49 +247,54 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="111" />
-    <option name="LAST_COMMIT_MESSAGE" value="111" />
+    <MESSAGE value="business" />
+    <option name="LAST_COMMIT_MESSAGE" value="business" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="855" y="281" key="FileChooserDialogImpl" timestamp="1607561612662">
+    <state x="999" y="238" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog" timestamp="1607580411134">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="855" y="281" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1607561612662" />
+    <state x="999" y="238" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607580411134" />
+    <state x="855" y="281" key="FileChooserDialogImpl" timestamp="1607580400011">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="855" y="281" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1607580400011" />
     <state x="776" y="420" key="Github.ShareDialog" timestamp="1607502387023">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="776" y="420" key="Github.ShareDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607502387023" />
-    <state width="1340" height="291" key="GridCell.Tab.0.bottom" timestamp="1607562056622">
+    <state width="1340" height="291" key="GridCell.Tab.0.bottom" timestamp="1607579540509">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="291" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607562056622" />
-    <state width="1340" height="291" key="GridCell.Tab.0.center" timestamp="1607562056621">
+    <state width="1340" height="291" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607579540509" />
+    <state width="1340" height="291" key="GridCell.Tab.0.center" timestamp="1607579540509">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="291" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607562056621" />
-    <state width="1340" height="291" key="GridCell.Tab.0.left" timestamp="1607562056621">
+    <state width="1340" height="291" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607579540509" />
+    <state width="1340" height="291" key="GridCell.Tab.0.left" timestamp="1607579540509">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="291" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607562056621" />
-    <state width="1340" height="291" key="GridCell.Tab.0.right" timestamp="1607562056622">
+    <state width="1340" height="291" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607579540509" />
+    <state width="1340" height="291" key="GridCell.Tab.0.right" timestamp="1607579540509">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="291" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607562056622" />
-    <state width="1340" height="291" key="GridCell.Tab.1.bottom" timestamp="1607562056623">
+    <state width="1340" height="291" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607579540509" />
+    <state width="1340" height="291" key="GridCell.Tab.1.bottom" timestamp="1607579540510">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="291" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607562056623" />
-    <state width="1340" height="291" key="GridCell.Tab.1.center" timestamp="1607562056622">
+    <state width="1340" height="291" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607579540510" />
+    <state width="1340" height="291" key="GridCell.Tab.1.center" timestamp="1607579540509">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="291" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607562056622" />
-    <state width="1340" height="291" key="GridCell.Tab.1.left" timestamp="1607562056622">
+    <state width="1340" height="291" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607579540509" />
+    <state width="1340" height="291" key="GridCell.Tab.1.left" timestamp="1607579540509">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="291" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607562056622" />
-    <state width="1340" height="291" key="GridCell.Tab.1.right" timestamp="1607562056622">
+    <state width="1340" height="291" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607579540509" />
+    <state width="1340" height="291" key="GridCell.Tab.1.right" timestamp="1607579540510">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="291" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607562056622" />
+    <state width="1340" height="291" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607579540510" />
     <state x="643" y="256" key="IDE.errors.dialog" timestamp="1607428095615">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -218,18 +307,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="782" y="277" key="NewModule_or_Project.wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1607423253465" />
-    <state x="649" y="102" key="SettingsEditor" timestamp="1607502252486">
+    <state x="649" y="102" key="SettingsEditor" timestamp="1607580426264">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="649" y="102" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1607502252486" />
-    <state x="561" y="194" key="Vcs.Push.Dialog.v2" timestamp="1607504629061">
+    <state x="649" y="102" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1607580426264" />
+    <state x="561" y="194" key="Vcs.Push.Dialog.v2" timestamp="1607564077739">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="561" y="194" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607504629061" />
-    <state x="707" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607503336515">
+    <state x="561" y="194" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607564077739" />
+    <state x="707" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607580572327">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="707" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607503336515" />
+    <state x="707" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607580572327" />
     <state x="448" y="234" key="run.anything.popup" timestamp="1607494436820">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
