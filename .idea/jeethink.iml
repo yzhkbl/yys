@@ -29,15 +29,6 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Documents/WeChat Files/wxid_o9as4i5rdood22/FileStorage/File/2020-12/json-lib-2.4-jdk15.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
           <root url="jar://$USER_HOME$/Documents/WeChat Files/wxid_o9as4i5rdood22/FileStorage/File/2020-12/RSAUtil-1.0.jar!/" />
         </CLASSES>
         <JAVADOC />
@@ -111,6 +102,15 @@
       <library>
         <CLASSES>
           <root url="jar://$USER_HOME$/Documents/WeChat Files/wxid_o9as4i5rdood22/FileStorage/File/2020-12/commons-beanutils-1.8.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://D:/框架/json-lib-2.4-jdk15.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

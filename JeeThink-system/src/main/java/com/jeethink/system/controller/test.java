@@ -4,6 +4,8 @@ package com.jeethink.system.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +30,7 @@ import com.rsa.RSAUtil;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import net.sf.json.JSONObject;
+
 
 @Controller
 @RequestMapping("/system/test")
