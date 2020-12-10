@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="test" value="true"/>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Hello/.m2/repository/io/swagger/swagger-annotations/1.5.10/swagger-annotations-1.5.10.jar" sourcepath="C:/Users/Hello/.m2/repository/io/swagger/swagger-annotations/1.5.10/swagger-annotations-1.5.10-sources.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="io.swagger"/>
+			<attribute name="maven.artifactId" value="swagger-annotations"/>
+			<attribute name="maven.version" value="1.5.10"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="F:/gitWork/yys/JeeThink-system/target/commons-beanutils-1.8.0.jar"/>
+	<classpathentry kind="lib" path="F:/gitWork/yys/JeeThink-system/target/commons-codec-1.10.jar"/>
+	<classpathentry kind="lib" path="F:/gitWork/yys/JeeThink-system/target/commons-collections-3.2.jar"/>
+	<classpathentry kind="lib" path="F:/gitWork/yys/JeeThink-system/target/commons-io-2.6.jar"/>
+	<classpathentry kind="lib" path="F:/gitWork/yys/JeeThink-system/target/commons-lang-2.5.jar"/>
+	<classpathentry kind="lib" path="F:/gitWork/yys/JeeThink-system/target/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="F:/gitWork/yys/JeeThink-system/target/ezmorph-1.0.6.jar"/>
+	<classpathentry kind="lib" path="F:/gitWork/yys/JeeThink-system/target/httpclient-4.5.2.jar"/>
+	<classpathentry kind="lib" path="F:/gitWork/yys/JeeThink-system/target/httpcore-4.4.4.jar"/>
+	<classpathentry kind="lib" path="F:/gitWork/yys/JeeThink-system/target/json-lib-2.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="F:/gitWork/yys/JeeThink-system/target/RSAUtil-1.0.jar"/>
+	<classpathentry kind="lib" path="F:/gitWork/yys/JeeThink-system/target/xom-1.0.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
