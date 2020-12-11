@@ -1,0 +1,289 @@
+<changelist name="Uncommitted_changes_before_Update_at_2020_12_10_13_55_[Default_Changelist]" date="1607579749762" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2020_12_10_13_55_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2020/12/10 13:55 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/domain/SysLogininfor.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/mapper/SysDictDataMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/mapper/SysMenuMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/impl/SysPostServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/controller/YysController.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/impl/SysOperLogServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/mapper/SysRoleDeptMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/mapper/SysUserRoleMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/mapper/SysLogininforMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/mapper/SysDictTypeMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/impl/SysUserServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/domain/SysUserOnline.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/ISysOperLogService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/mapper/SysUserMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/mapper/SysPostMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/domain/ZyjrBusiness.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/impl/SysNoticeServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/domain/vo/RouterVo.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/impl/SysDictTypeServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/domain/SysConfig.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/IZyjrBusinessService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/mapper/ZyjrBusinessMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/ISysLogininforService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/ISysPostService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/ISysUserOnlineService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/ISysDeptService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/domain/SysUserPost.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/controller/ZyjrBusinessController.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/domain/SysPost.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/impl/SysLogininforServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/mapper/SysUserPostMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/ISysRoleService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/domain/vo/MetaVo.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/ISysDictDataService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/ISysNoticeService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/domain/SysRoleMenu.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/impl/SysMenuServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/mapper/SysRoleMenuMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/impl/SysRoleServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/mapper/SysConfigMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/impl/ZyjrBusinessServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/impl/SysDeptServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/domain/SysNotice.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/domain/SysOperLog.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/ISysMenuService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/mapper/SysNoticeMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/impl/SysDictDataServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/domain/SysUserRole.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/mapper/SysDeptMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/mapper/SysOperLogMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/ISysConfigService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/impl/SysConfigServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/ISysDictTypeService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/domain/SysRoleDept.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/impl/SysUserOnlineServiceImpl.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/service/ISysUserService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="JeeThink-system/target/classes/com/jeethink/system/mapper/SysRoleMapper.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+</changelist>

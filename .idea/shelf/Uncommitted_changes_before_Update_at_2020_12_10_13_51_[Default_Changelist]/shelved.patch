@@ -1,0 +1,146 @@
+Index: JeeThink-system/src/main/java/com/jeethink/system/controller/YysController.java
+===================================================================
+--- JeeThink-system/src/main/java/com/jeethink/system/controller/YysController.java	(revision cc860abec94139e3534c761451e80caf68b241eb)
++++ JeeThink-system/src/main/java/com/jeethink/system/controller/YysController.java	(revision cc860abec94139e3534c761451e80caf68b241eb)
+@@ -1,15 +0,0 @@
+-package com.jeethink.system.controller;
+-
+-import org.springframework.web.bind.annotation.RequestMapping;
+-import org.springframework.web.bind.annotation.RestController;
+-
+-@RestController
+-@RequestMapping("/yys")
+-public class YysController {
+-
+-    @RequestMapping("/find")
+-    public Integer find(Integer id){
+-        int count = id;
+-        return count;
+-    }
+-}
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"BranchesTreeState\">\r\n    <expand>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"LOCAL_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"REMOTE_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"REMOTE_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"GROUP_NODE:yys\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n    </expand>\r\n    <select />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"ab4b5365-e565-46ed-95ac-5d8aaf08df5b\" name=\"Default Changelist\" comment=\"111\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/JeeThink-system/src/main/java/com/jeethink/system/controller/YysController.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/JeeThink-system/src/main/java/com/jeethink/system/controller/ZyjrBusinessController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/JeeThink-system/src/main/java/com/jeethink/system/controller/ZyjrBusinessController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/controller/ZyjrBusinessController.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/controller/ZyjrBusinessController.class\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"mavenHome\" value=\"D:\\Idea\\IntelliJ IDEA 2020.2.3\\plugins\\maven\\lib\\maven3\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1lJeB5TVeLPJCC8tprEerEaAW2G\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n    <option name=\"showMembers\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"RequestMappingsPanelOrder0\" value=\"0\" />\r\n    <property name=\"RequestMappingsPanelOrder1\" value=\"1\" />\r\n    <property name=\"RequestMappingsPanelWidth0\" value=\"75\" />\r\n    <property name=\"RequestMappingsPanelWidth1\" value=\"75\" />\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"aspect.path.notification.shown\" value=\"true\" />\r\n    <property name=\"last_opened_file_path\" value=\"D:/demo\" />\r\n    <property name=\"project.structure.last.edited\" value=\"SDKs\" />\r\n    <property name=\"project.structure.proportion\" value=\"0.0\" />\r\n    <property name=\"project.structure.side.proportion\" value=\"0.2\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"org.jetbrains.plugins.github.ui.GithubSettingsConfigurable\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"E:\\BaiduNetdiskDownload\\jeethink快速开发框架（前后分离工作流）\\jeethink快速开发框架（前后分离工作流版）\\jeethink快速开发框架（前后分离工作流版）\\jeethink\\JeeThink-admin\\src\\main\\webapp\\static\" />\r\n      <recent name=\"E:\\BaiduNetdiskDownload\\jeethink快速开发框架（前后分离工作流）\\jeethink快速开发框架（前后分离工作流版）\\jeethink快速开发框架（前后分离工作流版）\\jeethink\\JeeThink-admin\\src\\main\\webapp\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"E:\\BaiduNetdiskDownload\\jeethink快速开发框架（前后分离工作流）\\jeethink快速开发框架（前后分离工作流版）\\jeethink快速开发框架（前后分离工作流版）\\jeethink\\JeeThink-system\\src\\main\\resources\\mapper\\system\" />\r\n      <recent name=\"E:\\BaiduNetdiskDownload\\jeethink快速开发框架（前后分离工作流）\\jeethink快速开发框架（前后分离工作流版）\\jeethink快速开发框架（前后分离工作流版）\\jeethink\\JeeThink-system\\src\\main\\java\\com\\jeethink\\system\\service\\impl\" />\r\n      <recent name=\"E:\\BaiduNetdiskDownload\\jeethink快速开发框架（前后分离工作流）\\jeethink快速开发框架（前后分离工作流版）\\jeethink快速开发框架（前后分离工作流版）\\jeethink\\JeeThink-system\\src\\main\\java\\com\\jeethink\\system\\service\" />\r\n      <recent name=\"E:\\BaiduNetdiskDownload\\jeethink快速开发框架（前后分离工作流）\\jeethink快速开发框架（前后分离工作流版）\\jeethink快速开发框架（前后分离工作流版）\\jeethink\\JeeThink-system\\src\\main\\java\\com\\jeethink\\system\\mapper\" />\r\n      <recent name=\"E:\\BaiduNetdiskDownload\\jeethink快速开发框架（前后分离工作流）\\jeethink快速开发框架（前后分离工作流版）\\jeethink快速开发框架（前后分离工作流版）\\jeethink\\JeeThink-system\\src\\main\\java\\com\\jeethink\\system\\domain\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Spring Boot.JeeThinkApplication\">\r\n    <configuration name=\"JeeThinkApplication\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.jeethink.JeeThinkApplication\" />\r\n      <module name=\"jeethink-admin\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.jeethink.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"index.html\" type=\"JavascriptDebugType\" temporary=\"true\" nameIsGenerated=\"true\" uri=\"http://localhost:63342/jeethink/jeethink-admin/src/main/webapp/static/index.html\" useBuiltInWebServerPort=\"true\">\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"JeeThinkApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\">\r\n      <module name=\"jeethink-admin\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.jeethink.JeeThinkApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"JavaScript Debug.index.html\" />\r\n        <item itemvalue=\"Application.JeeThinkApplication\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"ab4b5365-e565-46ed-95ac-5d8aaf08df5b\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1607319484014</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1607319484014</updated>\r\n      <workItem from=\"1607319485269\" duration=\"54000\" />\r\n      <workItem from=\"1607319741573\" duration=\"580000\" />\r\n      <workItem from=\"1607320431316\" duration=\"671000\" />\r\n      <workItem from=\"1607423082848\" duration=\"87000\" />\r\n      <workItem from=\"1607423200766\" duration=\"105000\" />\r\n      <workItem from=\"1607423315623\" duration=\"168000\" />\r\n      <workItem from=\"1607423541144\" duration=\"3598000\" />\r\n      <workItem from=\"1607429640789\" duration=\"756000\" />\r\n      <workItem from=\"1607478479899\" duration=\"5859000\" />\r\n      <workItem from=\"1607489411006\" duration=\"1732000\" />\r\n      <workItem from=\"1607493290504\" duration=\"1251000\" />\r\n      <workItem from=\"1607494576001\" duration=\"16400000\" />\r\n      <workItem from=\"1607560751481\" duration=\"2589000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"111\">\r\n      <created>1607503649180</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1607503649180</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"111\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"111\" />\r\n  </component>\r\n  <component name=\"WindowStateProjectService\">\r\n    <state x=\"855\" y=\"281\" key=\"FileChooserDialogImpl\" timestamp=\"1607561612662\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state x=\"855\" y=\"281\" key=\"FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1607561612662\" />\r\n    <state x=\"776\" y=\"420\" key=\"Github.ShareDialog\" timestamp=\"1607502387023\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state x=\"776\" y=\"420\" key=\"Github.ShareDialog/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1607502387023\" />\r\n    <state width=\"1340\" height=\"291\" key=\"GridCell.Tab.0.bottom\" timestamp=\"1607562056622\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state width=\"1340\" height=\"291\" key=\"GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1607562056622\" />\r\n    <state width=\"1340\" height=\"291\" key=\"GridCell.Tab.0.center\" timestamp=\"1607562056621\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state width=\"1340\" height=\"291\" key=\"GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1607562056621\" />\r\n    <state width=\"1340\" height=\"291\" key=\"GridCell.Tab.0.left\" timestamp=\"1607562056621\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state width=\"1340\" height=\"291\" key=\"GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1607562056621\" />\r\n    <state width=\"1340\" height=\"291\" key=\"GridCell.Tab.0.right\" timestamp=\"1607562056622\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state width=\"1340\" height=\"291\" key=\"GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1607562056622\" />\r\n    <state width=\"1340\" height=\"291\" key=\"GridCell.Tab.1.bottom\" timestamp=\"1607562056623\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state width=\"1340\" height=\"291\" key=\"GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1607562056623\" />\r\n    <state width=\"1340\" height=\"291\" key=\"GridCell.Tab.1.center\" timestamp=\"1607562056622\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state width=\"1340\" height=\"291\" key=\"GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1607562056622\" />\r\n    <state width=\"1340\" height=\"291\" key=\"GridCell.Tab.1.left\" timestamp=\"1607562056622\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state width=\"1340\" height=\"291\" key=\"GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1607562056622\" />\r\n    <state width=\"1340\" height=\"291\" key=\"GridCell.Tab.1.right\" timestamp=\"1607562056622\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state width=\"1340\" height=\"291\" key=\"GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1607562056622\" />\r\n    <state x=\"643\" y=\"256\" key=\"IDE.errors.dialog\" timestamp=\"1607428095615\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state x=\"643\" y=\"256\" key=\"IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1607428095615\" />\r\n    <state x=\"649\" y=\"201\" key=\"Maven.ArtifactSearchDialog\" timestamp=\"1607423595641\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state x=\"649\" y=\"201\" key=\"Maven.ArtifactSearchDialog/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1607423595641\" />\r\n    <state x=\"782\" y=\"277\" key=\"NewModule_or_Project.wizard\" timestamp=\"1607423253465\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state x=\"782\" y=\"277\" key=\"NewModule_or_Project.wizard/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1607423253465\" />\r\n    <state x=\"649\" y=\"102\" key=\"SettingsEditor\" timestamp=\"1607502252486\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state x=\"649\" y=\"102\" key=\"SettingsEditor/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1607502252486\" />\r\n    <state x=\"561\" y=\"194\" key=\"Vcs.Push.Dialog.v2\" timestamp=\"1607504629061\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state x=\"561\" y=\"194\" key=\"Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1607504629061\" />\r\n    <state x=\"707\" y=\"436\" key=\"com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2\" timestamp=\"1607503336515\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state x=\"707\" y=\"436\" key=\"com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1607503336515\" />\r\n    <state x=\"448\" y=\"234\" key=\"run.anything.popup\" timestamp=\"1607494436820\">\r\n      <screen x=\"0\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state x=\"448\" y=\"234\" key=\"run.anything.popup/0.0.1920.1040@0.0.1920.1040\" timestamp=\"1607494436820\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(revision cc860abec94139e3534c761451e80caf68b241eb)
++++ .idea/workspace.xml	(date 1607579472268)
+@@ -22,11 +22,10 @@
+     <select />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="ab4b5365-e565-46ed-95ac-5d8aaf08df5b" name="Default Changelist" comment="111">
++    <list default="true" id="ab4b5365-e565-46ed-95ac-5d8aaf08df5b" name="Default Changelist" comment="business">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/JeeThink-system/src/main/java/com/jeethink/system/controller/YysController.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/JeeThink-system/src/main/java/com/jeethink/system/controller/ZyjrBusinessController.java" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-system/src/main/java/com/jeethink/system/controller/ZyjrBusinessController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/controller/ZyjrBusinessController.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/controller/ZyjrBusinessController.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/JeeThink-system/target/classes/com/jeethink/system/controller/YysController.class" beforeDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -135,7 +134,7 @@
+       <workItem from="1607489411006" duration="1732000" />
+       <workItem from="1607493290504" duration="1251000" />
+       <workItem from="1607494576001" duration="16400000" />
+-      <workItem from="1607560751481" duration="2589000" />
++      <workItem from="1607560751481" duration="11819000" />
+     </task>
+     <task id="LOCAL-00001" summary="111">
+       <created>1607503649180</created>
+@@ -144,7 +143,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1607503649180</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL-00002" summary="business">
++      <created>1607564065480</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1607564065480</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -163,7 +169,8 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="111" />
+-    <option name="LAST_COMMIT_MESSAGE" value="111" />
++    <MESSAGE value="business" />
++    <option name="LAST_COMMIT_MESSAGE" value="business" />
+   </component>
+   <component name="WindowStateProjectService">
+     <state x="855" y="281" key="FileChooserDialogImpl" timestamp="1607561612662">
+@@ -174,38 +181,38 @@
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+     <state x="776" y="420" key="Github.ShareDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607502387023" />
+-    <state width="1340" height="291" key="GridCell.Tab.0.bottom" timestamp="1607562056622">
++    <state width="670" height="291" key="GridCell.Tab.0.bottom" timestamp="1607571457276">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+-    <state width="1340" height="291" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607562056622" />
+-    <state width="1340" height="291" key="GridCell.Tab.0.center" timestamp="1607562056621">
++    <state width="670" height="291" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607571457276" />
++    <state width="670" height="291" key="GridCell.Tab.0.center" timestamp="1607571457276">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+-    <state width="1340" height="291" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607562056621" />
+-    <state width="1340" height="291" key="GridCell.Tab.0.left" timestamp="1607562056621">
++    <state width="670" height="291" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607571457276" />
++    <state width="670" height="291" key="GridCell.Tab.0.left" timestamp="1607571457275">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+-    <state width="1340" height="291" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607562056621" />
+-    <state width="1340" height="291" key="GridCell.Tab.0.right" timestamp="1607562056622">
++    <state width="670" height="291" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607571457275" />
++    <state width="670" height="291" key="GridCell.Tab.0.right" timestamp="1607571457276">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+-    <state width="1340" height="291" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607562056622" />
+-    <state width="1340" height="291" key="GridCell.Tab.1.bottom" timestamp="1607562056623">
++    <state width="670" height="291" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607571457276" />
++    <state width="670" height="291" key="GridCell.Tab.1.bottom" timestamp="1607571457276">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+-    <state width="1340" height="291" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607562056623" />
+-    <state width="1340" height="291" key="GridCell.Tab.1.center" timestamp="1607562056622">
++    <state width="670" height="291" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607571457276" />
++    <state width="670" height="291" key="GridCell.Tab.1.center" timestamp="1607571457276">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+-    <state width="1340" height="291" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607562056622" />
+-    <state width="1340" height="291" key="GridCell.Tab.1.left" timestamp="1607562056622">
++    <state width="670" height="291" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607571457276" />
++    <state width="670" height="291" key="GridCell.Tab.1.left" timestamp="1607571457276">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+-    <state width="1340" height="291" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607562056622" />
+-    <state width="1340" height="291" key="GridCell.Tab.1.right" timestamp="1607562056622">
++    <state width="670" height="291" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607571457276" />
++    <state width="670" height="291" key="GridCell.Tab.1.right" timestamp="1607571457276">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+-    <state width="1340" height="291" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607562056622" />
++    <state width="670" height="291" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607571457276" />
+     <state x="643" y="256" key="IDE.errors.dialog" timestamp="1607428095615">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+@@ -222,10 +229,10 @@
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+     <state x="649" y="102" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1607502252486" />
+-    <state x="561" y="194" key="Vcs.Push.Dialog.v2" timestamp="1607504629061">
++    <state x="561" y="194" key="Vcs.Push.Dialog.v2" timestamp="1607564077739">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
+-    <state x="561" y="194" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607504629061" />
++    <state x="561" y="194" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607564077739" />
+     <state x="707" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607503336515">
+       <screen x="0" y="0" width="1920" height="1040" />
+     </state>
