@@ -6,12 +6,15 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.jeethink.common.annotation.Excel;
 import com.jeethink.common.core.domain.BaseEntity;
 
+import lombok.Data;
+
 /**
  * 【请填写功能名称】对象 zyjr_business
  * 
  * @author jeethink
  * @date 2020-12-09
  */
+@Data
 public class ZyjrBusiness extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -41,7 +44,7 @@ public class ZyjrBusiness extends BaseEntity
 
     /** 业务品种 */
     @Excel(name = "业务品种")
-    private Long carType;
+    private Integer carType;
 
     /** 身份唯一识别码 */
     @Excel(name = "身份唯一识别码")
@@ -50,8 +53,11 @@ public class ZyjrBusiness extends BaseEntity
     /** 订单状态 */
     @Excel(name = "订单状态")
     private Integer orderState;
+    private String name;
 
-    public void setId(Long id) 
+    
+
+	public void setId(Long id) 
     {
         this.id = id;
     }
@@ -105,12 +111,12 @@ public class ZyjrBusiness extends BaseEntity
     {
         return repayPeriod;
     }
-    public void setCarType(Long carType) 
+    public void setCarType(Integer carType) 
     {
         this.carType = carType;
     }
 
-    public Long getCarType() 
+    public Integer getCarType() 
     {
         return carType;
     }

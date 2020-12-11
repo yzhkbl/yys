@@ -14,6 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="carType"    column="car_type"    />
         <result property="identityId"    column="identity_id"    />
         <result property="orderState"    column="order_state"    />
+         <result property="name"    column="user_name"    />
     </resultMap>
 
     <sql id="selectZyjrBusinessVo">
@@ -21,7 +22,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectZyjrBusinessList" parameterType="ZyjrBusiness" resultMap="ZyjrBusinessResult">
-        <include refid="selectZyjrBusinessVo"/>
+         select a.id, a.team, a.car_information, a.intention_price, a.loan_money, a.repay_period, a.car_type, a.identity_id, a.order_state,b.user_name 
+         from zyjr_business a
+         left join zyjr_borrower b on a.identity_id=b.identity_id
         <where>  
             <if test="team != null  and team != ''"> and team = #{team}</if>
             <if test="carInformation != null "> and car_information = #{carInformation}</if>
@@ -37,6 +40,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectZyjrBusinessById" parameterType="Long" resultMap="ZyjrBusinessResult">
         <include refid="selectZyjrBusinessVo"/>
         where id = #{id}
+    </select>
+    
+    <select id="selectById" parameterType="Long" resultMap="ZyjrBusinessResult">
+        <include refid="selectZyjrBusinessVo"/>
+        where identity_id = #{identityId}
     </select>
         
     <insert id="insertZyjrBusiness" parameterType="ZyjrBusiness" useGeneratedKeys="true" keyProperty="id">

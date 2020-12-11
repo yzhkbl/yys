@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrGuaranteeMapper">
+    
+    <resultMap type="ZyjrGuarantee" id="ZyjrGuaranteeResult">
+        <result property="id"    column="id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="idCard"    column="id_card"    />
+        <result property="bankCardNo"    column="bank_card_no"    />
+        <result property="phoneNumber"    column="phone_number"    />
+        <result property="issueAuthority"    column="issue_authority"    />
+        <result property="startDate"    column="start_date"    />
+        <result property="endDate"    column="end_date"    />
+        <result property="familyAddress"    column="family_address"    />
+        <result property="company"    column="company"    />
+        <result property="companyAddress"    column="company_address"    />
+        <result property="yearIncome"    column="year_income"    />
+        <result property="obverseId"    column="obverse_id"    />
+        <result property="obverseCode"    column="obverse_code"    />
+        <result property="obverseAddress"    column="obverse_address"    />
+        <result property="obverseName"    column="obverse_name"    />
+        <result property="backId"    column="back_id"    />
+        <result property="backCode"    column="back_code"    />
+        <result property="backAddress"    column="back_address"    />
+        <result property="backName"    column="back_name"    />
+        <result property="powerId"    column="power_id"    />
+        <result property="powerCode"    column="power_code"    />
+        <result property="powerAddress"    column="power_address"    />
+        <result property="powerName"    column="power_name"    />
+        <result property="creditPower"    column="credit_power"    />
+        <result property="peopleShip"    column="people_ship"    />
+        <result property="identityId"    column="identity_id"    />
+        <result property="orderState"    column="order_state"    />
+    </resultMap>
+
+    <sql id="selectZyjrGuaranteeVo">
+        select id, user_name, id_card, bank_card_no, phone_number, issue_authority, start_date, end_date, family_address, company, company_address, year_income, obverse_id, obverse_code, obverse_address, obverse_name, back_id, back_code, back_address, back_name, power_id, power_code, power_address, power_name, credit_power, people_ship, identity_id, order_state from zyjr_guarantee
+    </sql>
+
+    <select id="selectZyjrGuaranteeList" parameterType="ZyjrGuarantee" resultMap="ZyjrGuaranteeResult">
+        <include refid="selectZyjrGuaranteeVo"/>
+        <where>  
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
+            <if test="bankCardNo != null  and bankCardNo != ''"> and bank_card_no = #{bankCardNo}</if>
+            <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
+            <if test="issueAuthority != null  and issueAuthority != ''"> and issue_authority = #{issueAuthority}</if>
+            <if test="startDate != null  and startDate != ''"> and start_date = #{startDate}</if>
+            <if test="endDate != null  and endDate != ''"> and end_date = #{endDate}</if>
+            <if test="familyAddress != null  and familyAddress != ''"> and family_address = #{familyAddress}</if>
+            <if test="company != null  and company != ''"> and company = #{company}</if>
+            <if test="companyAddress != null  and companyAddress != ''"> and company_address = #{companyAddress}</if>
+            <if test="yearIncome != null "> and year_income = #{yearIncome}</if>
+            <if test="obverseId != null "> and obverse_id = #{obverseId}</if>
+            <if test="obverseCode != null  and obverseCode != ''"> and obverse_code = #{obverseCode}</if>
+            <if test="obverseAddress != null  and obverseAddress != ''"> and obverse_address = #{obverseAddress}</if>
+            <if test="obverseName != null  and obverseName != ''"> and obverse_name like concat('%', #{obverseName}, '%')</if>
+            <if test="backId != null "> and back_id = #{backId}</if>
+            <if test="backCode != null  and backCode != ''"> and back_code = #{backCode}</if>
+            <if test="backAddress != null  and backAddress != ''"> and back_address = #{backAddress}</if>
+            <if test="backName != null  and backName != ''"> and back_name like concat('%', #{backName}, '%')</if>
+            <if test="powerId != null "> and power_id = #{powerId}</if>
+            <if test="powerCode != null  and powerCode != ''"> and power_code = #{powerCode}</if>
+            <if test="powerAddress != null  and powerAddress != ''"> and power_address = #{powerAddress}</if>
+            <if test="powerName != null  and powerName != ''"> and power_name like concat('%', #{powerName}, '%')</if>
+            <if test="creditPower != null  and creditPower != ''"> and credit_power = #{creditPower}</if>
+            <if test="peopleShip != null  and peopleShip != ''"> and people_ship = #{peopleShip}</if>
+            <if test="identityId != null  and identityId != ''"> and identity_id = #{identityId}</if>
+            <if test="orderState != null "> and order_state = #{orderState}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrGuaranteeById" parameterType="Integer" resultMap="ZyjrGuaranteeResult">
+        <include refid="selectZyjrGuaranteeVo"/>
+        where id = #{id}
+    </select>
+    
+    <select id="selectById" parameterType="Integer" resultMap="ZyjrGuaranteeResult">
+        <include refid="selectZyjrGuaranteeVo"/>
+        where identity_id = #{identityId}
+    </select>
+        
+    <insert id="insertZyjrGuarantee" parameterType="ZyjrGuarantee" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_guarantee
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userName != null">user_name,</if>
+            <if test="idCard != null">id_card,</if>
+            <if test="bankCardNo != null">bank_card_no,</if>
+            <if test="phoneNumber != null">phone_number,</if>
+            <if test="issueAuthority != null">issue_authority,</if>
+            <if test="startDate != null">start_date,</if>
+            <if test="endDate != null">end_date,</if>
+            <if test="familyAddress != null">family_address,</if>
+            <if test="company != null">company,</if>
+            <if test="companyAddress != null">company_address,</if>
+            <if test="yearIncome != null">year_income,</if>
+            <if test="obverseId != null">obverse_id,</if>
+            <if test="obverseCode != null">obverse_code,</if>
+            <if test="obverseAddress != null">obverse_address,</if>
+            <if test="obverseName != null">obverse_name,</if>
+            <if test="backId != null">back_id,</if>
+            <if test="backCode != null">back_code,</if>
+            <if test="backAddress != null">back_address,</if>
+            <if test="backName != null">back_name,</if>
+            <if test="powerId != null">power_id,</if>
+            <if test="powerCode != null">power_code,</if>
+            <if test="powerAddress != null">power_address,</if>
+            <if test="powerName != null">power_name,</if>
+            <if test="creditPower != null">credit_power,</if>
+            <if test="peopleShip != null">people_ship,</if>
+            <if test="identityId != null">identity_id,</if>
+            <if test="orderState != null">order_state,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userName != null">#{userName},</if>
+            <if test="idCard != null">#{idCard},</if>
+            <if test="bankCardNo != null">#{bankCardNo},</if>
+            <if test="phoneNumber != null">#{phoneNumber},</if>
+            <if test="issueAuthority != null">#{issueAuthority},</if>
+            <if test="startDate != null">#{startDate},</if>
+            <if test="endDate != null">#{endDate},</if>
+            <if test="familyAddress != null">#{familyAddress},</if>
+            <if test="company != null">#{company},</if>
+            <if test="companyAddress != null">#{companyAddress},</if>
+            <if test="yearIncome != null">#{yearIncome},</if>
+            <if test="obverseId != null">#{obverseId},</if>
+            <if test="obverseCode != null">#{obverseCode},</if>
+            <if test="obverseAddress != null">#{obverseAddress},</if>
+            <if test="obverseName != null">#{obverseName},</if>
+            <if test="backId != null">#{backId},</if>
+            <if test="backCode != null">#{backCode},</if>
+            <if test="backAddress != null">#{backAddress},</if>
+            <if test="backName != null">#{backName},</if>
+            <if test="powerId != null">#{powerId},</if>
+            <if test="powerCode != null">#{powerCode},</if>
+            <if test="powerAddress != null">#{powerAddress},</if>
+            <if test="powerName != null">#{powerName},</if>
+            <if test="creditPower != null">#{creditPower},</if>
+            <if test="peopleShip != null">#{peopleShip},</if>
+            <if test="identityId != null">#{identityId},</if>
+            <if test="orderState != null">#{orderState},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrGuarantee" parameterType="ZyjrGuarantee">
+        update zyjr_guarantee
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="idCard != null">id_card = #{idCard},</if>
+            <if test="bankCardNo != null">bank_card_no = #{bankCardNo},</if>
+            <if test="phoneNumber != null">phone_number = #{phoneNumber},</if>
+            <if test="issueAuthority != null">issue_authority = #{issueAuthority},</if>
+            <if test="startDate != null">start_date = #{startDate},</if>
+            <if test="endDate != null">end_date = #{endDate},</if>
+            <if test="familyAddress != null">family_address = #{familyAddress},</if>
+            <if test="company != null">company = #{company},</if>
+            <if test="companyAddress != null">company_address = #{companyAddress},</if>
+            <if test="yearIncome != null">year_income = #{yearIncome},</if>
+            <if test="obverseId != null">obverse_id = #{obverseId},</if>
+            <if test="obverseCode != null">obverse_code = #{obverseCode},</if>
+            <if test="obverseAddress != null">obverse_address = #{obverseAddress},</if>
+            <if test="obverseName != null">obverse_name = #{obverseName},</if>
+            <if test="backId != null">back_id = #{backId},</if>
+            <if test="backCode != null">back_code = #{backCode},</if>
+            <if test="backAddress != null">back_address = #{backAddress},</if>
+            <if test="backName != null">back_name = #{backName},</if>
+            <if test="powerId != null">power_id = #{powerId},</if>
+            <if test="powerCode != null">power_code = #{powerCode},</if>
+            <if test="powerAddress != null">power_address = #{powerAddress},</if>
+            <if test="powerName != null">power_name = #{powerName},</if>
+            <if test="creditPower != null">credit_power = #{creditPower},</if>
+            <if test="peopleShip != null">people_ship = #{peopleShip},</if>
+            <if test="identityId != null">identity_id = #{identityId},</if>
+            <if test="orderState != null">order_state = #{orderState},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrGuaranteeById" parameterType="Integer">
+        delete from zyjr_guarantee where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrGuaranteeByIds" parameterType="String">
+        delete from zyjr_guarantee where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

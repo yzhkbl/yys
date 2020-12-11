@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import com.rsa.RSAUtil;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
+import com.jeethink.system.domain.ZyjrBorrower;
 import com.jeethink.system.domain.ZyjrBusiness;
+import com.jeethink.system.domain.ZyjrGuarantee;
 import com.jeethink.system.domain.ZyjrRelation;
 import com.jeethink.system.domain.vo.Pics;
 import com.jeethink.system.domain.vo.Pub;
@@ -22,11 +25,12 @@ import com.jeethink.system.domain.vo.lender;
 import com.jeethink.system.domain.vo.req;
 import com.jeethink.system.domain.vo.selVO;
 import com.jeethink.system.domain.vo.spouse;
+import com.jeethink.system.service.IZyjrBorrowerService;
 import com.jeethink.system.service.IZyjrBusinessService;
+import com.jeethink.system.service.IZyjrGuaranteeService;
 import com.jeethink.system.service.IZyjrRelationService;
 import com.jeethink.system.util.HttpPostUtil;
 import com.rsa.RSASignature;
-import com.rsa.RSAUtil;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -41,11 +45,15 @@ public class test extends BaseController{
 	private IZyjrRelationService r;
 	@Autowired
 	private IZyjrBusinessService b;
-	
+	@Autowired
+	private IZyjrBorrowerService o;
+	@Autowired
+	private IZyjrGuaranteeService g;
+
 	@ApiOperation("查询参数列表")
 	@PostMapping
 	@ResponseBody
-	    public AjaxResult find(){
+	public AjaxResult find(){
 		System.err.println("11");
 		selVO a=new selVO();
 		/**
@@ -54,19 +62,20 @@ public class test extends BaseController{
 		ZyjrBusiness business = b.selectZyjrBusinessById((long) 26);
 		List<spouse> lists=new ArrayList<>();
 		ZyjrRelation relation=r.selectZyjrRelationById(9);
-	
+		ZyjrBorrower borrowerById = o.selectZyjrBorrowerById(10);
+		ZyjrGuarantee guarantee = g.selectZyjrGuaranteeById(5);
 		/**
 		 * 现无数据后期该行改为sql查询
 		 */
-		
+
 		Pub pub=new Pub();
 		pub.setBankCode("0180400023");
-		pub.setAssurerNo("S36020729");
+		pub.setAssurerNo("S36029951");
+		pub.setPlatNo("zyhzjg");
 		pub.setOrderNo("vx01804000011113333999900000001");
 		pub.setProductType(1);
-		pub.setPlatNo("htxc");
 		pub.setBankType("ICBC");
-		/*pub.setBusiCode("1001");*/
+		pub.setBusiCode("1001");
 		System.out.println(pub);
 		Pics p1=new Pics();
 		p1.setPicId(relation.getObverseId());
@@ -83,50 +92,103 @@ public class test extends BaseController{
 		p3.setPicCode(relation.getPowerCode());
 		p3.setPicAddress(relation.getPowerAddress());
 		p3.setPicFileName(relation.getPowerName());
+		Pics p4=new Pics();
+		p4.setPicId(borrowerById.getPowerId());
+		p4.setPicCode(borrowerById.getPowerCode());
+		p4.setPicAddress(borrowerById.getPowerAddress());
+		p4.setPicFileName(borrowerById.getPowerName());
+		Pics p5=new Pics();
+		p5.setPicId(borrowerById.getPowerId());
+		p5.setPicCode(borrowerById.getPowerCode());
+		p5.setPicAddress(borrowerById.getPowerAddress());
+		p5.setPicFileName(borrowerById.getPowerName());
+		Pics p6=new Pics();
+		p6.setPicId(guarantee.getPowerId());
+		p6.setPicCode(guarantee.getPowerCode());
+		p6.setPicAddress(guarantee.getPowerAddress());
+		p6.setPicFileName(guarantee.getPowerName());
+		Pics p7=new Pics();
+		p7.setPicId(guarantee.getPowerId());
+		p7.setPicCode(guarantee.getPowerCode());
+		p7.setPicAddress(guarantee.getPowerAddress());
+		p7.setPicFileName(guarantee.getPowerName());
+		Pics p8=new Pics();
+		p8.setPicId(guarantee.getPowerId());
+		p8.setPicCode(guarantee.getPowerCode());
+		p8.setPicAddress(guarantee.getPowerAddress());
+		p8.setPicFileName(guarantee.getPowerName());
+		Pics p9=new Pics();
+		p9.setPicId(guarantee.getPowerId());
+		p9.setPicCode(guarantee.getPowerCode());
+		p9.setPicAddress(guarantee.getPowerAddress());
+		p9.setPicFileName(guarantee.getPowerName());
 		spouse s=new spouse();
 		s.setIdCard(relation.getIdCard());
-		/*s.setIssueAuthority(relation.getIssueAuthority());*/
+		s.setIssueAuthority(relation.getIssueAuthority());
 		s.setPhoneNum(relation.getPhoneNumber());
+		s.setBankCardNo(relation.getBankCardNo());
 		s.setUserName(relation.getUserName());
-		s.setRelationName("母子");
-		s.setRelationShip(2);
-		/*s.setStartDate(relation.getStartDate());
-		s.setEndDate(relation.getEndDate());*/
-	/*	s.setCompany(relation.getCompany());
+		s.setStartDate(relation.getStartDate());
+		s.setIsQueryCredit(0);
+		s.setUserRelationship(2);
+		s.setCompany(relation.getCompany());
 		s.setCompanyAddress(relation.getCompanyAddress());
 		s.setYearIncome(relation.getYearIncome());
-		s.setIsQueryCredit(1);
-		s.setUserRelationship(2);
+		s.setEndDate(relation.getEndDate());
 		s.setFamilyAddress(relation.getFamilyAddress());
-		s.setBankCardNo(relation.getBankCardNo());*/
 		List<Pics> pp=new ArrayList<>();
+		List<Pics> lenp=new ArrayList<>();
+		List<Pics> guaranteep=new ArrayList<>();
 		pp.add(p1);
 		pp.add(p2);
 		pp.add(p3);
+		lenp.add(p4);
+		lenp.add(p5);
+		lenp.add(p6);
+		guaranteep.add(p7);
+		guaranteep.add(p8);
+		guaranteep.add(p9);
 		s.setPic(pp);
 		lists.add(s);
+		spouse sguarantee=new spouse();
+		sguarantee.setIdCard(guarantee.getIdCard());
+		sguarantee.setIssueAuthority(guarantee.getIssueAuthority());
+		sguarantee.setPhoneNum(guarantee.getPhoneNumber());
+		sguarantee.setBankCardNo(guarantee.getBankCardNo());
+		sguarantee.setUserName(guarantee.getUserName());
+		sguarantee.setStartDate(guarantee.getStartDate());
+		sguarantee.setIsQueryCredit(0);
+		sguarantee.setUserRelationship(2);
+		sguarantee.setCompany(guarantee.getCompany());
+		sguarantee.setCompanyAddress(guarantee.getCompanyAddress());
+		sguarantee.setYearIncome(guarantee.getYearIncome());
+		sguarantee.setEndDate(guarantee.getEndDate());
+		sguarantee.setFamilyAddress(guarantee.getFamilyAddress());
+		sguarantee.setPic(guaranteep);
+		lists.add(sguarantee);
 		lender len=new lender();
 		req re=new req();
-		len.setPics(pp);
-	/*	len.setSignMode(1);
-		len.setStartDate(relation.getStartDate());
-		len.setEndDate(relation.getEndDate());*/
-		len.setUserName("老曹");//relation.getUserName()
-		/*len.setIssueAuthority(relation.getIssueAuthority());*/
-		len.setIdCard("123456789123456789");//relation.getIdCard()
-		/*len.setBankCardNo(relation.getBankCardNo());
-		len.setFamilyAddress(relation.getFamilyAddress());*/
-		len.setPhoneNum("13800000000");//relation.getPhoneNumber()
-	/*	len.setLoanMoney(business.getLoanMoney());
-		len.setRepayPeriod(business.getRepayPeriod());*/
+		len.setIdCard(borrowerById.getIdCard());//relation.getIdCard()
+		len.setBankCardNo(borrowerById.getBankCardNo());
+		len.setSignMode(1);
+		len.setIssueAuthority(borrowerById.getIssueAuthority());
+		len.setPhoneNum(borrowerById.getPhoneNumber());//relation.getPhoneNumber()
+		len.setUserName(borrowerById.getUserName());//relation.getUserName()
+		len.setStartDate(borrowerById.getStartDate());
+		len.setEndDate(borrowerById.getEndDate());
+		len.setFamilyAddress(borrowerById.getFamilyAddress());
+	/*	len.setLoanMoney(borrowerById.getLoanMoney());
+		len.setRepayPeriod(borrowerById.getRepayPeriod());*/
+		len.setPics(lenp);
 		/**
 		 * lender中缺少签约方式
 		 */
 		re.setLender(len);
-/*		re.setCarType(business.getCarType());
-		re.setIntentionPrice(886466.00);
-		re.setDownloadMode(1);*/
+		re.setCarType(business.getCarType());
+		re.setIntentionPrice(business.getIntentionPrice());
+		re.setDownloadMode(1);
 		re.setSpouse(lists);
+		re.setBusinessModel(9);
 		a.setReq(re);
 		a.setPub(pub);
 		String dataPublicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCFZnUVz07wuQfI5kf3uOaaJcpq*W3yQhJnIX2k-EKwKZaSkyuXutk0TXqwT-GXxIQJqmkjLup*HN7H1uF7JMfxl00AnncHB82LqUQKQwf5wcdDTNhvKLQtjRoLE3ry6ARoYHu5AkZPKW7sMM4o*UegPlSr45p4ZsK0iVdjqmgZfwIDAQAB";
@@ -135,34 +197,34 @@ public class test extends BaseController{
 //		String bankType = "ICBC";
 //		String busiCode = "0001";
 //		String platNo = "zajk";
-		String assurerNo = "S36020729";
+		String assurerNo = "S36029951";
 		String bankType = "ICBC";
-		String busiCode = "1003";
-		String platNo = "htxc";
+		String busiCode = "0000";
+		String platNo = "zyhzjg";
 		String c=a.toString();
-		
+
 		JSONObject json = encryptData(c, dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo);
 		JSONObject result = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:8998/bank/route", json);
-	    return AjaxResult.success(result);
-	    }
-	
+		return AjaxResult.success(result);
+	}
+
 	public static JSONObject encryptData(String data, String dataPublicKey ,String signPrivateKey ,String assurerNo
 			, String bankType, String busiCode, String platNo){
 		JSONObject request = new JSONObject();
 		String encryptData = RSAUtil.encrypt(data, dataPublicKey);
-	    request.put("data", encryptData);
-	    String signData = RSASignature.sign(data, signPrivateKey);     
-	    request.put("sign", signData);
-	    request.put("assurerNo", assurerNo);
-	    request.put("bankType", bankType);
-	    request.put("busiCode", busiCode);
-	    request.put("platNo", platNo);
-	    request.put("bankCode","0180400023");
-	    request.put("orderNo","vx01804000011113333999900000001");
-	    return request;
+		request.put("data", encryptData);
+		String signData = RSASignature.sign(data, signPrivateKey);
+		request.put("sign", signData);
+		request.put("assurerNo", assurerNo);
+		request.put("bankType", bankType);
+		request.put("busiCode", busiCode);
+		request.put("platNo", platNo);
+		request.put("bankCode","0180400023");
+		request.put("orderNo","vx01804000011113333999900000001");
+		return request;
 	}
-	
-	
+
+
 
 
 

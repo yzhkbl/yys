@@ -1,17 +1,15 @@
 package com.jeethink.system.service;
 
 import java.util.List;
-import java.util.Map;
-
-import com.jeethink.system.domain.ZyjrBusiness;
+import com.jeethink.system.domain.ZyjrBorrower;
 
 /**
  * 【请填写功能名称】Service接口
  * 
  * @author jeethink
- * @date 2020-12-09
+ * @date 2020-12-10
  */
-public interface IZyjrBusinessService 
+public interface IZyjrBorrowerService 
 {
     /**
      * 查询【请填写功能名称】
@@ -19,31 +17,33 @@ public interface IZyjrBusinessService
      * @param id 【请填写功能名称】ID
      * @return 【请填写功能名称】
      */
-    public ZyjrBusiness selectZyjrBusinessById(Long id);
+    public ZyjrBorrower selectZyjrBorrowerById(Integer id);
+    
+    
 
     /**
      * 查询【请填写功能名称】列表
      * 
-     * @param zyjrBusiness 【请填写功能名称】
+     * @param zyjrBorrower 【请填写功能名称】
      * @return 【请填写功能名称】集合
      */
-    public List<ZyjrBusiness> selectZyjrBusinessList(ZyjrBusiness zyjrBusiness);
+    public List<ZyjrBorrower> selectZyjrBorrowerList(ZyjrBorrower zyjrBorrower);
 
     /**
      * 新增【请填写功能名称】
      * 
-     * @param zyjrBusiness 【请填写功能名称】
+     * @param zyjrBorrower 【请填写功能名称】
      * @return 结果
      */
-    public int insertZyjrBusiness(ZyjrBusiness zyjrBusiness);
+    public int insertZyjrBorrower(ZyjrBorrower zyjrBorrower);
 
     /**
      * 修改【请填写功能名称】
      * 
-     * @param zyjrBusiness 【请填写功能名称】
+     * @param zyjrBorrower 【请填写功能名称】
      * @return 结果
      */
-    public int updateZyjrBusiness(ZyjrBusiness zyjrBusiness);
+    public int updateZyjrBorrower(ZyjrBorrower zyjrBorrower);
 
     /**
      * 批量删除【请填写功能名称】
@@ -51,7 +51,7 @@ public interface IZyjrBusinessService
      * @param ids 需要删除的【请填写功能名称】ID
      * @return 结果
      */
-    public int deleteZyjrBusinessByIds(Long[] ids);
+    public int deleteZyjrBorrowerByIds(Integer[] ids);
 
     /**
      * 删除【请填写功能名称】信息
@@ -59,7 +59,5 @@ public interface IZyjrBusinessService
      * @param id 【请填写功能名称】ID
      * @return 结果
      */
-    public int deleteZyjrBusinessById(Long id);
-
-	public Map<String, Object> seleMap(String id);
+    public int deleteZyjrBorrowerById(Integer id);
 }

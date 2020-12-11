@@ -1,10 +1,21 @@
 package com.jeethink.system.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.jeethink.system.mapper.ZyjrBorrowerMapper;
 import com.jeethink.system.mapper.ZyjrBusinessMapper;
+import com.jeethink.system.mapper.ZyjrGuaranteeMapper;
+import com.jeethink.system.mapper.ZyjrRelationMapper;
+import com.jeethink.system.domain.ZyjrBorrower;
 import com.jeethink.system.domain.ZyjrBusiness;
+import com.jeethink.system.domain.ZyjrGuarantee;
+import com.jeethink.system.domain.ZyjrRelation;
 import com.jeethink.system.service.IZyjrBusinessService;
 
 /**
@@ -18,6 +29,13 @@ public class ZyjrBusinessServiceImpl implements IZyjrBusinessService
 {
     @Autowired
     private ZyjrBusinessMapper zyjrBusinessMapper;
+    @Autowired
+    private ZyjrBorrowerMapper b;
+    @Autowired
+    ZyjrRelationMapper r;
+    @Autowired
+    ZyjrGuaranteeMapper g;
+
 
     /**
      * 查询【请填写功能名称】
@@ -90,4 +108,26 @@ public class ZyjrBusinessServiceImpl implements IZyjrBusinessService
     {
         return zyjrBusinessMapper.deleteZyjrBusinessById(id);
     }
+
+	@Override
+	public Map<String, Object> seleMap(String id) {
+		Map<String,Object> a=new HashMap<>();
+		ZyjrBusiness selectById = zyjrBusinessMapper.selectById(Long.parseLong(id));
+		if(selectById!=null) {
+			a.put("zyjrBusiness", selectById);
+		}
+		ZyjrBorrower selectById2 = b.selectById(Integer.parseInt(id));
+		if(selectById2!=null) {
+			a.put("zyjrBorrower", selectById2);
+		}
+		ZyjrRelation selectById4 = r.selectById(Integer.parseInt(id));
+		if(selectById4!=null) {
+			a.put("zyjrRelation", selectById4);
+		}
+		ZyjrGuarantee selectById3 = g.selectById(Integer.parseInt(id));
+		if(selectById3!=null) {
+			a.put("zyjrGuarantee", selectById3);
+		}
+		return a;
+	}
 }

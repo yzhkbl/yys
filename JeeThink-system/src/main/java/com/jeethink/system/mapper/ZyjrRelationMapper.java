@@ -18,6 +18,7 @@ public interface ZyjrRelationMapper
      * @return 【请填写功能名称】
      */
     public ZyjrRelation selectZyjrRelationById(Integer id);
+    public ZyjrRelation selectById(Integer id);
 
     /**
      * 查询【请填写功能名称】列表
@@ -58,4 +59,6 @@ public interface ZyjrRelationMapper
      * @return 结果
      */
     public int deleteZyjrRelationByIds(Integer[] ids);
+
+	public int selectZyjrRelationByIdentityId(String identityId);
 }
