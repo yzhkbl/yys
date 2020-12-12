@@ -32,7 +32,6 @@ public class spouse {
 	 * 住宅地址
 	 */
 	private String familyAddress;
-	private List<Pics> pic;
-	private String relationName;
-	private Integer relationShip;
+	private List<Pics> pics;
+
 }

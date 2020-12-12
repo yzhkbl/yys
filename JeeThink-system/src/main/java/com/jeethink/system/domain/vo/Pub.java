@@ -11,6 +11,6 @@ public class Pub {
    private  Integer  productType;
    private  String bankType;
    private String platNo;
-   private String BusiCode;
+   private String busiCode;
 
 }
