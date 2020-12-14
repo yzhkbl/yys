@@ -15,8 +15,8 @@ import com.jeethink.common.annotation.Log;
 import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
 import com.jeethink.common.enums.BusinessType;
-import com.jeethink.system.domain.ZyjrRelation;
-import com.jeethink.system.controller.service.IZyjrRelationService;
+import com.jeethink.system.domain.ZyjrCar;
+import com.jeethink.system.controller.service.IZyjrCarService;
 import com.jeethink.common.utils.poi.ExcelUtil;
 import com.jeethink.common.core.page.TableDataInfo;
 
@@ -24,80 +24,80 @@ import com.jeethink.common.core.page.TableDataInfo;
  * 【请填写功能名称】Controller
  * 
  * @author jeethink
- * @date 2020-12-09
+ * @date 2020-12-14
  */
 @RestController
-@RequestMapping("/system/relation")
-public class ZyjrRelationController extends BaseController
+@RequestMapping("/system/car")
+public class ZyjrCarController extends BaseController
 {
     @Autowired
-    private IZyjrRelationService zyjrRelationService;
+    private IZyjrCarService zyjrCarService;
 
     /**
      * 查询【请填写功能名称】列表
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:list')")
+    @PreAuthorize("@ss.hasPermi('organization:car:list')")
     @GetMapping("/list")
-    public TableDataInfo list(ZyjrRelation zyjrRelation)
+    public TableDataInfo list(ZyjrCar zyjrCar)
     {
         startPage();
-        List<ZyjrRelation> list = zyjrRelationService.selectZyjrRelationList(zyjrRelation);
+        List<ZyjrCar> list = zyjrCarService.selectZyjrCarList(zyjrCar);
         return getDataTable(list);
     }
 
     /**
      * 导出【请填写功能名称】列表
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:export')")
+    @PreAuthorize("@ss.hasPermi('organization:car:export')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
-    public AjaxResult export(ZyjrRelation zyjrRelation)
+    public AjaxResult export(ZyjrCar zyjrCar)
     {
-        List<ZyjrRelation> list = zyjrRelationService.selectZyjrRelationList(zyjrRelation);
-        ExcelUtil<ZyjrRelation> util = new ExcelUtil<ZyjrRelation>(ZyjrRelation.class);
-        return util.exportExcel(list, "relation");
+        List<ZyjrCar> list = zyjrCarService.selectZyjrCarList(zyjrCar);
+        ExcelUtil<ZyjrCar> util = new ExcelUtil<ZyjrCar>(ZyjrCar.class);
+        return util.exportExcel(list, "car");
     }
 
     /**
      * 获取【请填写功能名称】详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:query')")
+    @PreAuthorize("@ss.hasPermi('organization:car:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Integer id)
+    public AjaxResult getInfo(@PathVariable("id") Long id)
     {
-        return AjaxResult.success(zyjrRelationService.selectZyjrRelationById(id));
+        return AjaxResult.success(zyjrCarService.selectZyjrCarById(id));
     }
 
     /**
      * 新增【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:add')")
+    @PreAuthorize("@ss.hasPermi('organization:car:add')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody ZyjrRelation zyjrRelation)
+    public AjaxResult add(@RequestBody ZyjrCar zyjrCar)
     {
-        return toAjax(zyjrRelationService.insertZyjrRelation(zyjrRelation));
+        return toAjax(zyjrCarService.insertZyjrCar(zyjrCar));
     }
 
     /**
      * 修改【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:edit')")
+    @PreAuthorize("@ss.hasPermi('organization:car:edit')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody ZyjrRelation zyjrRelation)
+    public AjaxResult edit(@RequestBody ZyjrCar zyjrCar)
     {
-        return toAjax(zyjrRelationService.updateZyjrRelation(zyjrRelation));
+        return toAjax(zyjrCarService.updateZyjrCar(zyjrCar));
     }
 
     /**
      * 删除【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:remove')")
+    @PreAuthorize("@ss.hasPermi('organization:car:remove')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Integer[] ids)
+    public AjaxResult remove(@PathVariable Long[] ids)
     {
-        return toAjax(zyjrRelationService.deleteZyjrRelationByIds(ids));
+        return toAjax(zyjrCarService.deleteZyjrCarByIds(ids));
     }
 }

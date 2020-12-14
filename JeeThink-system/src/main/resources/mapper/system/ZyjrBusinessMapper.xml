@@ -12,20 +12,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="loanMoney"    column="loan_money"    />
         <result property="repayPeriod"    column="repay_period"    />
         <result property="carType"    column="car_type"    />
-        <result property="identityId"    column="identity_id"    />
+        <result property="userId"    column="user_id"    />
         <result property="orderState"    column="order_state"    />
          <result property="name"    column="user_name"    />
         <result property="transactionCode"    column="transaction_code"    />
     </resultMap>
 
     <sql id="selectZyjrBusinessVo">
-        select id, team, car_information, intention_price, loan_money, repay_period, car_type, identity_id, order_state,transaction_code from zyjr_business
+        select id, team, car_information, intention_price, loan_money, repay_period, car_type, user_id, order_state,transaction_code from zyjr_business
     </sql>
 
     <select id="selectZyjrBusinessList" parameterType="ZyjrBusiness" resultMap="ZyjrBusinessResult">
-         select a.id, a.team, a.car_information, a.intention_price, a.loan_money, a.repay_period, a.car_type, a.identity_id, a.order_state,b.user_name 
+         select a.id, a.team, a.car_information, a.intention_price, a.loan_money, a.repay_period, a.car_type, a.user_id, a.order_state,b.user_name
          from zyjr_business a
-         left join zyjr_borrower b on a.identity_id=b.identity_id
+         left join zyjr_borrower b on a.transaction_code=b.transaction_code
         <where>  
             <if test="team != null  and team != ''"> and team = #{team}</if>
             <if test="carInformation != null "> and car_information = #{carInformation}</if>
@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="loanMoney != null "> and loan_money = #{loanMoney}</if>
             <if test="repayPeriod != null "> and repay_period = #{repayPeriod}</if>
             <if test="carType != null "> and car_type = #{carType}</if>
-            <if test="identityId != null  and identityId != ''"> and identity_id = #{identityId}</if>
+            <if test="userId != null  and userId != ''"> and userId = #{userId}</if>
             <if test="orderState != null "> and order_state = #{orderState}</if>
         </where>
     </select>

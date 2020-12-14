@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="powerAddress"    column="power_address"    />
         <result property="powerName"    column="power_name"    />
         <result property="creditPower"    column="credit_power"    />
-        <result property="identityId"    column="identity_id"    />
+        <result property="userId"    column="user_id"    />
         <result property="orderState"    column="order_state"    />
         <result property="createBy"    column="create_by"    />
         <result property="createTime"    column="create_time"    />
@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectZyjrBorrowerVo">
-        select id, user_name, id_card, bank_card_no, phone_number, issue_authority, start_date, end_date, family_address, obverse_id, obverse_code, obverse_address, obverse_name, back_id, back_code, back_address, back_name, power_id, power_code, power_address, power_name, credit_power, identity_id, order_state, create_by, create_time, update_by, update_time ,transaction_code from zyjr_borrower
+        select id, user_name, id_card, bank_card_no, phone_number, issue_authority, start_date, end_date, family_address, obverse_id, obverse_code, obverse_address, obverse_name, back_id, back_code, back_address, back_name, power_id, power_code, power_address, power_name, credit_power, use_id, order_state, create_by, create_time, update_by, update_time ,transaction_code from zyjr_borrower
     </sql>
 
     <select id="selectZyjrBorrowerList" parameterType="ZyjrBorrower" resultMap="ZyjrBorrowerResult">
@@ -65,7 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="powerAddress != null  and powerAddress != ''"> and power_address = #{powerAddress}</if>
             <if test="powerName != null  and powerName != ''"> and power_name like concat('%', #{powerName}, '%')</if>
             <if test="creditPower != null "> and credit_power = #{creditPower}</if>
-            <if test="identityId != null  and identityId != ''"> and identity_id = #{identityId}</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
             <if test="orderState != null "> and order_state = #{orderState}</if>
         </where>
     </select>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrCarMapper">
+    
+    <resultMap type="ZyjrCar" id="ZyjrCarResult">
+        <result property="userName"    column="user_name"    />
+        <result property="gender"    column="gender"    />
+        <result property="phoneNumber"    column="phone_number"    />
+        <result property="isLinkman"    column="is_linkman"    />
+        <result property="identity"    column="identity"    />
+        <result property="remark"    column="remark"    />
+        <result property="area"    column="area"    />
+        <result property="city"    column="city"    />
+        <result property="bazaar"    column="bazaar"    />
+        <result property="typeOne"    column="type_one"    />
+        <result property="typeToo"    column="type_too"    />
+        <result property="stall"    column="stall"    />
+        <result property="businessNature"    column="business_nature"    />
+        <result property="passengerCar"    column="passenger_car"    />
+        <result property="typeThree"    column="type_three"    />
+        <result property="monthDeal"    column="month_deal"    />
+        <result property="monthInstallment"    column="month_installment"    />
+        <result property="matchAmount"    column="match_amount"    />
+        <result property="detailAddress"    column="detail_address"    />
+        <result property="pic"    column="pic"    />
+        <result property="accountName"    column="account_name"    />
+        <result property="accountUse"    column="account_use"    />
+        <result property="accountType"    column="account_type"    />
+        <result property="accountNumber"    column="account_number"    />
+        <result property="accountLicence"    column="account_licence"    />
+        <result property="accountCity"    column="account_city"    />
+        <result property="accountProvinc"    column="account_provinc"    />
+        <result property="accountSubBranch"    column="account_sub_branch"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="id"    column="id"    />
+    </resultMap>
+
+    <sql id="selectZyjrCarVo">
+        select user_name, gender, phone_number, is_linkman, identity, remark, area, city, bazaar, type_one, type_too, stall, business_nature, passenger_car, type_three, month_deal, month_installment, match_amount, detail_address, pic, account_name, account_use, account_type, account_number, account_licence, account_city, account_provinc, account_sub_branch, create_by, create_time, update_by, update_time, id from zyjr_car
+    </sql>
+
+    <select id="selectZyjrCarList" parameterType="ZyjrCar" resultMap="ZyjrCarResult">
+        <include refid="selectZyjrCarVo"/>
+        <where>  
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="gender != null  and gender != ''"> and gender = #{gender}</if>
+            <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
+            <if test="isLinkman != null  and isLinkman != ''"> and is_linkman = #{isLinkman}</if>
+            <if test="identity != null  and identity != ''"> and identity = #{identity}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="bazaar != null  and bazaar != ''"> and bazaar = #{bazaar}</if>
+            <if test="typeOne != null  and typeOne != ''"> and type_one = #{typeOne}</if>
+            <if test="typeToo != null  and typeToo != ''"> and type_too = #{typeToo}</if>
+            <if test="stall != null  and stall != ''"> and stall = #{stall}</if>
+            <if test="businessNature != null  and businessNature != ''"> and business_nature = #{businessNature}</if>
+            <if test="passengerCar != null  and passengerCar != ''"> and passenger_car = #{passengerCar}</if>
+            <if test="typeThree != null  and typeThree != ''"> and type_three = #{typeThree}</if>
+            <if test="monthDeal != null  and monthDeal != ''"> and month_deal = #{monthDeal}</if>
+            <if test="monthInstallment != null  and monthInstallment != ''"> and month_installment = #{monthInstallment}</if>
+            <if test="matchAmount != null  and matchAmount != ''"> and match_amount = #{matchAmount}</if>
+            <if test="detailAddress != null  and detailAddress != ''"> and detail_address = #{detailAddress}</if>
+            <if test="pic != null  and pic != ''"> and pic = #{pic}</if>
+            <if test="accountName != null  and accountName != ''"> and account_name like concat('%', #{accountName}, '%')</if>
+            <if test="accountUse != null  and accountUse != ''"> and account_use = #{accountUse}</if>
+            <if test="accountType != null  and accountType != ''"> and account_type = #{accountType}</if>
+            <if test="accountNumber != null  and accountNumber != ''"> and account_number = #{accountNumber}</if>
+            <if test="accountLicence != null  and accountLicence != ''"> and account_licence = #{accountLicence}</if>
+            <if test="accountCity != null  and accountCity != ''"> and account_city = #{accountCity}</if>
+            <if test="accountProvinc != null  and accountProvinc != ''"> and account_provinc = #{accountProvinc}</if>
+            <if test="accountSubBranch != null  and accountSubBranch != ''"> and account_sub_branch = #{accountSubBranch}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrCarById" parameterType="Long" resultMap="ZyjrCarResult">
+        <include refid="selectZyjrCarVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrCar" parameterType="ZyjrCar" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_car
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userName != null">user_name,</if>
+            <if test="gender != null">gender,</if>
+            <if test="phoneNumber != null">phone_number,</if>
+            <if test="isLinkman != null">is_linkman,</if>
+            <if test="identity != null">identity,</if>
+            <if test="remark != null">remark,</if>
+            <if test="area != null">area,</if>
+            <if test="city != null">city,</if>
+            <if test="bazaar != null">bazaar,</if>
+            <if test="typeOne != null">type_one,</if>
+            <if test="typeToo != null">type_too,</if>
+            <if test="stall != null">stall,</if>
+            <if test="businessNature != null">business_nature,</if>
+            <if test="passengerCar != null">passenger_car,</if>
+            <if test="typeThree != null">type_three,</if>
+            <if test="monthDeal != null">month_deal,</if>
+            <if test="monthInstallment != null">month_installment,</if>
+            <if test="matchAmount != null">match_amount,</if>
+            <if test="detailAddress != null">detail_address,</if>
+            <if test="pic != null">pic,</if>
+            <if test="accountName != null">account_name,</if>
+            <if test="accountUse != null">account_use,</if>
+            <if test="accountType != null">account_type,</if>
+            <if test="accountNumber != null">account_number,</if>
+            <if test="accountLicence != null">account_licence,</if>
+            <if test="accountCity != null">account_city,</if>
+            <if test="accountProvinc != null">account_provinc,</if>
+            <if test="accountSubBranch != null">account_sub_branch,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userName != null">#{userName},</if>
+            <if test="gender != null">#{gender},</if>
+            <if test="phoneNumber != null">#{phoneNumber},</if>
+            <if test="isLinkman != null">#{isLinkman},</if>
+            <if test="identity != null">#{identity},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="area != null">#{area},</if>
+            <if test="city != null">#{city},</if>
+            <if test="bazaar != null">#{bazaar},</if>
+            <if test="typeOne != null">#{typeOne},</if>
+            <if test="typeToo != null">#{typeToo},</if>
+            <if test="stall != null">#{stall},</if>
+            <if test="businessNature != null">#{businessNature},</if>
+            <if test="passengerCar != null">#{passengerCar},</if>
+            <if test="typeThree != null">#{typeThree},</if>
+            <if test="monthDeal != null">#{monthDeal},</if>
+            <if test="monthInstallment != null">#{monthInstallment},</if>
+            <if test="matchAmount != null">#{matchAmount},</if>
+            <if test="detailAddress != null">#{detailAddress},</if>
+            <if test="pic != null">#{pic},</if>
+            <if test="accountName != null">#{accountName},</if>
+            <if test="accountUse != null">#{accountUse},</if>
+            <if test="accountType != null">#{accountType},</if>
+            <if test="accountNumber != null">#{accountNumber},</if>
+            <if test="accountLicence != null">#{accountLicence},</if>
+            <if test="accountCity != null">#{accountCity},</if>
+            <if test="accountProvinc != null">#{accountProvinc},</if>
+            <if test="accountSubBranch != null">#{accountSubBranch},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrCar" parameterType="ZyjrCar">
+        update zyjr_car
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="phoneNumber != null">phone_number = #{phoneNumber},</if>
+            <if test="isLinkman != null">is_linkman = #{isLinkman},</if>
+            <if test="identity != null">identity = #{identity},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="area != null">area = #{area},</if>
+            <if test="city != null">city = #{city},</if>
+            <if test="bazaar != null">bazaar = #{bazaar},</if>
+            <if test="typeOne != null">type_one = #{typeOne},</if>
+            <if test="typeToo != null">type_too = #{typeToo},</if>
+            <if test="stall != null">stall = #{stall},</if>
+            <if test="businessNature != null">business_nature = #{businessNature},</if>
+            <if test="passengerCar != null">passenger_car = #{passengerCar},</if>
+            <if test="typeThree != null">type_three = #{typeThree},</if>
+            <if test="monthDeal != null">month_deal = #{monthDeal},</if>
+            <if test="monthInstallment != null">month_installment = #{monthInstallment},</if>
+            <if test="matchAmount != null">match_amount = #{matchAmount},</if>
+            <if test="detailAddress != null">detail_address = #{detailAddress},</if>
+            <if test="pic != null">pic = #{pic},</if>
+            <if test="accountName != null">account_name = #{accountName},</if>
+            <if test="accountUse != null">account_use = #{accountUse},</if>
+            <if test="accountType != null">account_type = #{accountType},</if>
+            <if test="accountNumber != null">account_number = #{accountNumber},</if>
+            <if test="accountLicence != null">account_licence = #{accountLicence},</if>
+            <if test="accountCity != null">account_city = #{accountCity},</if>
+            <if test="accountProvinc != null">account_provinc = #{accountProvinc},</if>
+            <if test="accountSubBranch != null">account_sub_branch = #{accountSubBranch},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrCarById" parameterType="Long">
+        delete from zyjr_car where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrCarByIds" parameterType="String">
+        delete from zyjr_car where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

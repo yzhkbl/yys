@@ -1,11 +1,11 @@
 package com.jeethink.system.controller;
 
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 
+import com.jeethink.common.utils.file.FileUploadUtils;
 import com.jeethink.system.domain.vo.*;
 import com.jeethink.system.mapper.ZyjrBorrowerMapper;
 import com.jeethink.system.mapper.ZyjrBusinessMapper;
@@ -13,14 +13,11 @@ import com.jeethink.system.mapper.ZyjrGuaranteeMapper;
 import com.jeethink.system.mapper.ZyjrRelationMapper;
 import com.rsa.RSASignature;
 import com.rsa.RSAUtil;
-import net.sf.json.JSON;
 import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import com.jeethink.system.util.HttpPostUtil;
 import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
@@ -28,16 +25,11 @@ import com.jeethink.system.domain.ZyjrBorrower;
 import com.jeethink.system.domain.ZyjrBusiness;
 import com.jeethink.system.domain.ZyjrGuarantee;
 import com.jeethink.system.domain.ZyjrRelation;
-import com.jeethink.system.service.IZyjrBorrowerService;
-import com.jeethink.system.service.IZyjrBusinessService;
-import com.jeethink.system.service.IZyjrGuaranteeService;
-import com.jeethink.system.service.IZyjrRelationService;
-
 
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Controller
@@ -266,12 +258,21 @@ selVO a=new selVO();
 		return request;
 	}
 
-	@ApiOperation("??????????")
-	@RequestMapping("ceshi")
+
+
+	/**
+	 * test 测试接口，测试是否能接到图片集合
+	 * @return
+	 */
+
+
+	@PostMapping("/ceshi")
 	@ResponseBody
-	public AjaxResult finds(){
-		System.err.println("ceshi");
-		return AjaxResult.success("ceshi");
-	}
+	public AjaxResult testFiles(MultipartFile file) throws Exception {
+		System.err.println("进来了");
+		String a=FileUploadUtils.upload(file);
+		System.err.println(a);
+		return AjaxResult.success(a);
+}
 
 }
