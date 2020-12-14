@@ -1,7 +1,9 @@
 package com.jeethink.system.mapper;
 
 import com.jeethink.system.domain.*;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface ExamineMapper {
     /**借款人信息添加*/
     int insertBorrower(ZyjrBorrower q);
