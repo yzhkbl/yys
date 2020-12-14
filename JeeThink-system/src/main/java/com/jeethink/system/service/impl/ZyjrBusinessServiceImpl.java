@@ -29,12 +29,12 @@ public class ZyjrBusinessServiceImpl implements IZyjrBusinessService
 {
     @Autowired
     private ZyjrBusinessMapper zyjrBusinessMapper;
-    @Autowired
+   /* @Autowired
     private ZyjrBorrowerMapper b;
     @Autowired
     ZyjrRelationMapper r;
     @Autowired
-    ZyjrGuaranteeMapper g;
+    ZyjrGuaranteeMapper g;*/
 
 
     /**
@@ -109,7 +109,7 @@ public class ZyjrBusinessServiceImpl implements IZyjrBusinessService
         return zyjrBusinessMapper.deleteZyjrBusinessById(id);
     }
 
-	@Override
+/*	@Override
 	public Map<String, Object> seleMap(String id) {
 		Map<String,Object> a=new HashMap<>();
 		ZyjrBusiness selectById = zyjrBusinessMapper.selectById(Long.parseLong(id));
@@ -129,5 +129,5 @@ public class ZyjrBusinessServiceImpl implements IZyjrBusinessService
 			a.put("zyjrGuarantee", selectById3);
 		}
 		return a;
-	}
+	}*/
 }

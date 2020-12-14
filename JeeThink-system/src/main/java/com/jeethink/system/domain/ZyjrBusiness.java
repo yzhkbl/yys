@@ -54,7 +54,16 @@ public class ZyjrBusiness extends BaseEntity
     @Excel(name = "订单状态")
     private Integer orderState;
     private String name;
+    private String transactionCode;
+    public void setTransactionCode(String transactionCode)
+    {
+        this.transactionCode = transactionCode;
+    }
 
+    public String getTransactionCode()
+    {
+        return transactionCode;
+    }
     
 
 	public void setId(Long id) 
@@ -151,6 +160,7 @@ public class ZyjrBusiness extends BaseEntity
             .append("carType", getCarType())
             .append("identityId", getIdentityId())
             .append("orderState", getOrderState())
+                .append("transactionCode", getTransactionCode())
             .toString();
     }
 }

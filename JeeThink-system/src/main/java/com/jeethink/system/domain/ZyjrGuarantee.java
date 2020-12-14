@@ -127,6 +127,17 @@ public class ZyjrGuarantee extends BaseEntity
     @Excel(name = "订单状态")
     private Integer orderState;
 
+    private String transactionCode;
+    public void setTransactionCode(String transactionCode)
+    {
+        this.transactionCode = transactionCode;
+    }
+
+    public String getTransactionCode()
+    {
+        return transactionCode;
+    }
+
     public void setId(Integer id) 
     {
         this.id = id;
@@ -411,6 +422,7 @@ public class ZyjrGuarantee extends BaseEntity
             .append("peopleShip", getPeopleShip())
             .append("identityId", getIdentityId())
             .append("orderState", getOrderState())
+                .append("transactionCode", getTransactionCode())
             .toString();
     }
 }

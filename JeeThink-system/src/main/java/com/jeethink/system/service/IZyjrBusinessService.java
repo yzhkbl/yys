@@ -61,5 +61,5 @@ public interface IZyjrBusinessService
      */
     public int deleteZyjrBusinessById(Long id);
 
-	public Map<String, Object> seleMap(String id);
+	/*public Map<String, Object> seleMap(String id);*/
 }

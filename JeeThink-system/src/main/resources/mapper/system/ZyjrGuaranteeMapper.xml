@@ -33,10 +33,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="peopleShip"    column="people_ship"    />
         <result property="identityId"    column="identity_id"    />
         <result property="orderState"    column="order_state"    />
+        <result property="transactionCode"    column="transaction_code"    />
     </resultMap>
 
     <sql id="selectZyjrGuaranteeVo">
-        select id, user_name, id_card, bank_card_no, phone_number, issue_authority, start_date, end_date, family_address, company, company_address, year_income, obverse_id, obverse_code, obverse_address, obverse_name, back_id, back_code, back_address, back_name, power_id, power_code, power_address, power_name, credit_power, people_ship, identity_id, order_state from zyjr_guarantee
+        select id,transaction_code, user_name, id_card, bank_card_no, phone_number, issue_authority, start_date, end_date, family_address, company, company_address, year_income, obverse_id, obverse_code, obverse_address, obverse_name, back_id, back_code, back_address, back_name, power_id, power_code, power_address, power_name, credit_power, people_ship, identity_id, order_state from zyjr_guarantee
     </sql>
 
     <select id="selectZyjrGuaranteeList" parameterType="ZyjrGuarantee" resultMap="ZyjrGuaranteeResult">
@@ -77,9 +78,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
     
-    <select id="selectById" parameterType="Integer" resultMap="ZyjrGuaranteeResult">
+    <select id="selectById" parameterType="String" resultMap="ZyjrGuaranteeResult">
         <include refid="selectZyjrGuaranteeVo"/>
-        where identity_id = #{identityId}
+        where transaction_code = #{identityId}
     </select>
         
     <insert id="insertZyjrGuarantee" parameterType="ZyjrGuarantee" useGeneratedKeys="true" keyProperty="id">

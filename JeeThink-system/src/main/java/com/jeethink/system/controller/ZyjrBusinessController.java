@@ -53,13 +53,13 @@ public class ZyjrBusinessController extends BaseController
         return getDataTable(list);
     }
     
-    @GetMapping("/info")
+/*    @GetMapping("/info")
     @ApiOperation("查询参数列表")
     public AjaxResult info(String id)
     {
         Map<String,Object> list = zyjrBusinessService.seleMap(id);
         return AjaxResult.success(list);
-    }
+    }*/
 
     /**
      * 导出【请填写功能名称】列表

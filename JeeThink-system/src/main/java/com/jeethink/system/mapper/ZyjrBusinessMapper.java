@@ -18,7 +18,7 @@ public interface ZyjrBusinessMapper
      * @return 【请填写功能名称】
      */
     public ZyjrBusiness selectZyjrBusinessById(Long id);
-    public ZyjrBusiness selectById(Long id);
+    public ZyjrBusiness selectById(String id);
 
     /**
      * 查询【请填写功能名称】列表

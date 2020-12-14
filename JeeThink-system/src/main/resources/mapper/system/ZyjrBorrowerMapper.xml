@@ -33,10 +33,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createTime"    column="create_time"    />
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
+        <result property="transactionCode"    column="transaction_code"    />
+
     </resultMap>
 
     <sql id="selectZyjrBorrowerVo">
-        select id, user_name, id_card, bank_card_no, phone_number, issue_authority, start_date, end_date, family_address, obverse_id, obverse_code, obverse_address, obverse_name, back_id, back_code, back_address, back_name, power_id, power_code, power_address, power_name, credit_power, identity_id, order_state, create_by, create_time, update_by, update_time from zyjr_borrower
+        select id, user_name, id_card, bank_card_no, phone_number, issue_authority, start_date, end_date, family_address, obverse_id, obverse_code, obverse_address, obverse_name, back_id, back_code, back_address, back_name, power_id, power_code, power_address, power_name, credit_power, identity_id, order_state, create_by, create_time, update_by, update_time ,transaction_code from zyjr_borrower
     </sql>
 
     <select id="selectZyjrBorrowerList" parameterType="ZyjrBorrower" resultMap="ZyjrBorrowerResult">
@@ -73,9 +75,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
     
-    <select id="selectById" parameterType="Integer" resultMap="ZyjrBorrowerResult">
+    <select id="selectById" parameterType="String" resultMap="ZyjrBorrowerResult">
         <include refid="selectZyjrBorrowerVo"/>
-        where identity_id = #{identityId}
+        where transaction_code = #{identityId}
     </select>
         
     <insert id="insertZyjrBorrower" parameterType="ZyjrBorrower" useGeneratedKeys="true" keyProperty="id">

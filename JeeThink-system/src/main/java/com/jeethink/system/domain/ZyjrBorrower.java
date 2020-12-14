@@ -110,6 +110,17 @@ public class ZyjrBorrower extends BaseEntity
     @Excel(name = "订单状态")
     private Integer orderState;
 
+    private String transactionCode;
+    public void setTransactionCode(String transactionCode)
+    {
+        this.transactionCode = transactionCode;
+    }
+
+    public String getTransactionCode()
+    {
+        return transactionCode;
+    }
+
     public void setId(Integer id) 
     {
         this.id = id;
@@ -358,6 +369,7 @@ public class ZyjrBorrower extends BaseEntity
             .append("createTime", getCreateTime())
             .append("updateBy", getUpdateBy())
             .append("updateTime", getUpdateTime())
+            .append("transactionCode", getTransactionCode())
             .toString();
     }
 }

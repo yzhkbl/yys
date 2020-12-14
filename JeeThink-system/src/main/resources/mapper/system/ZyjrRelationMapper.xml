@@ -34,10 +34,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="identityId"    column="identity_id"    />
         <result property="businessRole"    column="business_role"    />
         <result property="orderState"    column="order_state"    />
+        <result property="transactionCode"    column="transaction_code"    />
     </resultMap>
 
     <sql id="selectZyjrRelationVo">
-        select id, user_name, id_card, bank_card_no, phone_number, issue_authority, start_date, end_date, family_address, company, company_address, year_income, obverse_id, obverse_code, obverse_address, obverse_name, back_id, back_code, back_address, back_name, power_id, power_code, power_address, power_name, credit_power, people_ship, identity_id, business_role, order_state from zyjr_relation
+        select id,transaction_code, user_name, id_card, bank_card_no, phone_number, issue_authority, start_date, end_date, family_address, company, company_address, year_income, obverse_id, obverse_code, obverse_address, obverse_name, back_id, back_code, back_address, back_name, power_id, power_code, power_address, power_name, credit_power, people_ship, identity_id, business_role, order_state from zyjr_relation
     </sql>
 
     <select id="selectZyjrRelationList" parameterType="ZyjrRelation" resultMap="ZyjrRelationResult">
@@ -73,10 +74,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="orderState != null "> and order_state = #{orderState}</if>
         </where>
     </select>
-    
+
     <select id="selectZyjrRelationById" parameterType="Integer" resultMap="ZyjrRelationResult">
         <include refid="selectZyjrRelationVo"/>
         where id = #{id}
+    </select>
+
+    <select id="selectById" parameterType="String" resultMap="ZyjrRelationResult">
+        <include refid="selectZyjrRelationVo"/>
+        where transaction_code = #{id}
     </select>
         
     <insert id="insertZyjrRelation" parameterType="ZyjrRelation" useGeneratedKeys="true" keyProperty="id">

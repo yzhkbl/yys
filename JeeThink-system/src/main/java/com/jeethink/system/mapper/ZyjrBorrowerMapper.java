@@ -18,7 +18,7 @@ public interface ZyjrBorrowerMapper
      * @return 【请填写功能名称】
      */
     public ZyjrBorrower selectZyjrBorrowerById(Integer id);
-    public ZyjrBorrower selectById(Integer id);
+    public ZyjrBorrower selectById(String id);
 
     /**
      * 查询【请填写功能名称】列表

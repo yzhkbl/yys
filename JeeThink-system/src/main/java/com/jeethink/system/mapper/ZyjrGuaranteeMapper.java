@@ -18,7 +18,7 @@ public interface ZyjrGuaranteeMapper
      * @return 【请填写功能名称】
      */
     public ZyjrGuarantee selectZyjrGuaranteeById(Integer id);
-    public ZyjrGuarantee selectById(Integer id);
+    public ZyjrGuarantee selectById(String id);
 
     /**
      * 查询【请填写功能名称】列表

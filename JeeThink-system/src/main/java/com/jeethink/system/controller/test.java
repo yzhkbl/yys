@@ -6,7 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
+import com.jeethink.system.domain.vo.*;
+import com.jeethink.system.mapper.ZyjrBorrowerMapper;
+import com.jeethink.system.mapper.ZyjrBusinessMapper;
+import com.jeethink.system.mapper.ZyjrGuaranteeMapper;
+import com.jeethink.system.mapper.ZyjrRelationMapper;
 import com.rsa.RSASignature;
 import com.rsa.RSAUtil;
 import net.sf.json.JSON;
@@ -24,12 +28,6 @@ import com.jeethink.system.domain.ZyjrBorrower;
 import com.jeethink.system.domain.ZyjrBusiness;
 import com.jeethink.system.domain.ZyjrGuarantee;
 import com.jeethink.system.domain.ZyjrRelation;
-import com.jeethink.system.domain.vo.Pics;
-import com.jeethink.system.domain.vo.Pub;
-import com.jeethink.system.domain.vo.lender;
-import com.jeethink.system.domain.vo.req;
-import com.jeethink.system.domain.vo.selVO;
-import com.jeethink.system.domain.vo.spouse;
 import com.jeethink.system.service.IZyjrBorrowerService;
 import com.jeethink.system.service.IZyjrBusinessService;
 import com.jeethink.system.service.IZyjrGuaranteeService;
@@ -48,13 +46,13 @@ import io.swagger.annotations.ApiOperation;
 public class test extends BaseController{
 
 	@Autowired
-	private IZyjrRelationService r;
+	private ZyjrRelationMapper r;
 	@Autowired
-	private IZyjrBusinessService b;
+	private ZyjrBusinessMapper b;
 	@Autowired
-	private IZyjrBorrowerService o;
+	private ZyjrBorrowerMapper o;
 	@Autowired
-	private IZyjrGuaranteeService g;
+	private ZyjrGuaranteeMapper g;
 
 	private static String oCode="sfzzm";
 	private static String pCode="sfzfm";
@@ -63,22 +61,22 @@ public class test extends BaseController{
 	@ApiOperation("查询参数列表")
 	@PostMapping
 	@ResponseBody
-	public AjaxResult find(){
+	public AjaxResult find(String codes){
 		System.err.println("11");
 selVO a=new selVO();
 		/*List<Object> a=new ArrayList<>();*/
 		/**
 		 * 现id写死
 		 */
-		ZyjrBusiness business = b.selectZyjrBusinessById((long) 26);
+		ZyjrBusiness business = b.selectById(codes);
 		List<spouse> lists=new ArrayList<>();
-		ZyjrRelation relation=r.selectZyjrRelationById(9);
-		ZyjrBorrower borrowerById = o.selectZyjrBorrowerById(10);
-		ZyjrGuarantee guarantee = g.selectZyjrGuaranteeById(5);
+		ZyjrRelation relation=r.selectById(codes);
+		ZyjrBorrower borrowerById = o.selectById(codes);
+		ZyjrGuarantee guarantee = g.selectById(codes);
 		/**
 		 * 现无数据后期该行改为sql查询
 		 */
-		String orderNo="vx001002001786984798554951684";
+		String orderNo="vx001002001786984798554951686";
 		Pub pub=new Pub();
 		pub.setBankCode("0180400023");
 		pub.setAssurerNo("S36029951");
@@ -232,6 +230,23 @@ selVO a=new selVO();
 		System.err.println(json2.toString());
 		JSONObject json = encryptData(json2.toString(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo,orderNo);
 		JSONObject result = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", json);
+		/*	if(result.get("code").equals(0)){
+				System.err.println(result.get("data").toString().split("\"")[3]);
+				OkVo ok=new OkVo();
+				oKreq okreq=new oKreq();
+				okreq.setSignConfirm(1);
+				pub.setBusiCode("1008");
+				busiCode="1008";
+				ok.setPub(pub);
+				ok.setReq(okreq);
+				JSONObject json3 = new JSONObject().fromObject(ok);
+				JSONObject jsons = encryptData(json3.toString(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo,orderNo);
+				JSONObject results = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", jsons);
+				if(results.get("code").equals(0)){
+					return AjaxResult.error("提交成功");
+				}
+
+			}*/
 		return AjaxResult.success(result);
 	}
 
