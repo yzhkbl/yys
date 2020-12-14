@@ -16,12 +16,12 @@ public interface ExamineMapper {
     int updateRelation(ZyjrRelation q);
     int updateGuarantee(ZyjrGuarantee q);
     int updateBusiness(ZyjrBusiness q);
-    int updateStart(StartPage q);
+    int updateStart(ZyjrStartPage q);
 
-    int updateOne(Boolean orderState);
-    int updateTwo(Boolean orderState);
-    int updateThree(Boolean orderState);
-    int updateFour(Boolean orderState);
+    int updateOne(Boolean orderState,String transactionCode);
+    int updateTwo(Boolean orderState,String transactionCode);
+    int updateThree(Boolean orderState,String transactionCode);
+    int updateFour(Boolean orderState,String transactionCode);
 
     /**借款人信息查询*/
     ZyjrBorrower findByBorrower(Integer userId);
@@ -32,7 +32,7 @@ public interface ExamineMapper {
     /**业务信息查询*/
     ZyjrBusiness findByBusiness(Integer userId);
 
-    int insertStart(StartPage q);
+    int insertStart(ZyjrStartPage q);
 
-    StartPage findByStart(Integer userId);
+    ZyjrStartPage findByStart(Integer userId);
 }

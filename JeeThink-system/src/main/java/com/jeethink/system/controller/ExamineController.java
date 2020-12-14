@@ -70,14 +70,14 @@ public class ExamineController {
     }
 
     @RequestMapping("/add/start")
-    public ResponseDto addByStart(StartPage q){
+    public ResponseDto addByStart(ZyjrStartPage q){
         examineService.addByStart(q);
         return ResponseDto.success();
     }
 
     @RequestMapping("/find/start")
     public ResponseDto findByStart(Integer userId){
-        StartPage startPage = examineService.findByStart(userId);
+        ZyjrStartPage startPage = examineService.findByStart(userId);
         return ResponseDto.success(startPage);
     }
 }

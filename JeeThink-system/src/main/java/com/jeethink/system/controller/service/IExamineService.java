@@ -14,6 +14,6 @@ public interface IExamineService {
     ZyjrGuarantee findByGuarantee(Integer id);
     ZyjrBusiness findByBusiness(Integer id);
     Map<String,Object> find(Integer id);
-    int addByStart(StartPage q);
-    StartPage findByStart(Integer id);
+    int addByStart(ZyjrStartPage q);
+    ZyjrStartPage findByStart(Integer id);
 }
