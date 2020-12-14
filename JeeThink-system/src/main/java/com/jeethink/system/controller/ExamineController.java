@@ -40,32 +40,32 @@ public class ExamineController {
     }
 
     @RequestMapping("/find/borrower")
-    public ResponseDto findBorrower(String identityId){
-        ZyjrBorrower borrower = examineService.findByBorrower(identityId);
+    public ResponseDto findBorrower(Integer userId){
+        ZyjrBorrower borrower = examineService.findByBorrower(userId);
         return ResponseDto.success(borrower);
     }
 
     @RequestMapping("/find/relation")
-    public ResponseDto findRelation(String identityId){
-        ZyjrRelation relation = examineService.findByRelation(identityId);
+    public ResponseDto findRelation(Integer userId){
+        ZyjrRelation relation = examineService.findByRelation(userId);
         return ResponseDto.success(relation);
     }
 
     @RequestMapping("/find/guarantee")
-    public ResponseDto findGuarantee(String identityId){
-        ZyjrGuarantee guarantee= examineService.findByGuarantee(identityId);
+    public ResponseDto findGuarantee(Integer userId){
+        ZyjrGuarantee guarantee= examineService.findByGuarantee(userId);
         return ResponseDto.success(guarantee);
     }
 
     @RequestMapping("/find/business")
-    public ResponseDto findBusiness(String identityId){
-        ZyjrBusiness business = examineService.findByBusiness(identityId);
+    public ResponseDto findBusiness(Integer userId){
+        ZyjrBusiness business = examineService.findByBusiness(userId);
         return ResponseDto.success(business);
     }
 
     @RequestMapping("/find")
-    public ResponseDto find(String identityId){
-        Map<String,Object> find = examineService.find(identityId);
+    public ResponseDto find(Integer userId){
+        Map<String,Object> find = examineService.find(userId);
         return ResponseDto.success(find);
     }
 
@@ -76,8 +76,8 @@ public class ExamineController {
     }
 
     @RequestMapping("/find/start")
-    public ResponseDto findByStart(String identityId){
-        StartPage startPage = examineService.findByStart(identityId);
+    public ResponseDto findByStart(Integer userId){
+        StartPage startPage = examineService.findByStart(userId);
         return ResponseDto.success(startPage);
     }
 }

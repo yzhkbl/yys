@@ -12,5 +12,5 @@ public class StartPage {
 
     private Boolean orderState;
 
-    private String identityId;
+    private Integer userId;
 }

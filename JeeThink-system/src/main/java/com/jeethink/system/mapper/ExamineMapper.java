@@ -24,15 +24,15 @@ public interface ExamineMapper {
     int updateFour(Boolean orderState);
 
     /**借款人信息查询*/
-    ZyjrBorrower findByBorrower(String id);
+    ZyjrBorrower findByBorrower(Integer userId);
     /**关联人信息查询*/
-    ZyjrRelation findByRelation(String id);
+    ZyjrRelation findByRelation(Integer userId);
     /**担保人信息查询*/
-    ZyjrGuarantee findByGuarantee(String id);
+    ZyjrGuarantee findByGuarantee(Integer userId);
     /**业务信息查询*/
-    ZyjrBusiness findByBusiness(String id);
+    ZyjrBusiness findByBusiness(Integer userId);
 
     int insertStart(StartPage q);
 
-    StartPage findByStart(String id);
+    StartPage findByStart(Integer userId);
 }

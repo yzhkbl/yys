@@ -48,7 +48,7 @@ public class ZyjrBusiness extends BaseEntity
 
     /** 身份唯一识别码 */
     @Excel(name = "身份唯一识别码")
-    private String identityId;
+    private Integer userId;
 
     /** 订单状态 */
     @Excel(name = "订单状态")
@@ -120,14 +120,14 @@ public class ZyjrBusiness extends BaseEntity
     {
         return carType;
     }
-    public void setIdentityId(String identityId) 
+    public void setUserId(Integer userId)
     {
-        this.identityId = identityId;
+        this.userId = userId;
     }
 
-    public String getIdentityId() 
+    public Integer getUserId()
     {
-        return identityId;
+        return userId;
     }
     public void setOrderState(Integer orderState) 
     {
@@ -149,7 +149,7 @@ public class ZyjrBusiness extends BaseEntity
             .append("loanMoney", getLoanMoney())
             .append("repayPeriod", getRepayPeriod())
             .append("carType", getCarType())
-            .append("identityId", getIdentityId())
+            .append("userId", getUserId())
             .append("orderState", getOrderState())
             .toString();
     }

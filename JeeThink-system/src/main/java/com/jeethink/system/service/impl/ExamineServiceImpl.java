@@ -17,7 +17,7 @@ public class ExamineServiceImpl implements IExamineService {
 
     @Override
     public int addByBorrower(ZyjrBorrower q) {
-        if(findByBorrower(q.getIdentityId())!=null&&q.getOrderState()==0){
+        if(findByBorrower(q.getUserId())!=null&&q.getOrderState()==0){
             int count = examineDao.updateBorrower(q);
             return count;
         } else {
@@ -29,7 +29,7 @@ public class ExamineServiceImpl implements IExamineService {
 
     @Override
     public int addByRelation(ZyjrRelation q) {
-        if(findByRelation(q.getIdentityId())!=null&&q.getOrderState()==0){
+        if(findByRelation(q.getUserId())!=null&&q.getOrderState()==0){
             int count = examineDao.updateRelation(q);
             return count;
         } else {
@@ -41,7 +41,7 @@ public class ExamineServiceImpl implements IExamineService {
 
     @Override
     public int addByGuarantee(ZyjrGuarantee q) {
-        if(findByGuarantee(q.getIdentityId())!=null&&q.getOrderState()==0){
+        if(findByGuarantee(q.getUserId())!=null&&q.getOrderState()==0){
             int count = examineDao.updateGuarantee(q);
             return count;
         } else {
@@ -53,7 +53,7 @@ public class ExamineServiceImpl implements IExamineService {
 
     @Override
     public int addByBusiness(ZyjrBusiness q) {
-        if(findByBusiness(q.getIdentityId())!=null&&q.getOrderState()==0){
+        if(findByBusiness(q.getUserId())!=null&&q.getOrderState()==0){
             int count = examineDao.updateBusiness(q);
             return count;
         } else {
@@ -66,37 +66,37 @@ public class ExamineServiceImpl implements IExamineService {
 
 
     @Override
-    public ZyjrBorrower findByBorrower(String id) {
-        ZyjrBorrower borrower = examineDao.findByBorrower(id);
+    public ZyjrBorrower findByBorrower(Integer userId) {
+        ZyjrBorrower borrower = examineDao.findByBorrower(userId);
         return borrower;
     }
 
     @Override
-    public ZyjrRelation findByRelation(String id) {
-        ZyjrRelation relation = examineDao.findByRelation(id);
+    public ZyjrRelation findByRelation(Integer userId) {
+        ZyjrRelation relation = examineDao.findByRelation(userId);
         return relation;
     }
 
     @Override
-    public ZyjrGuarantee findByGuarantee(String id) {
-        ZyjrGuarantee guarantee = examineDao.findByGuarantee(id);
+    public ZyjrGuarantee findByGuarantee(Integer userId) {
+        ZyjrGuarantee guarantee = examineDao.findByGuarantee(userId);
         return guarantee;
     }
 
     @Override
-    public ZyjrBusiness findByBusiness(String id) {
-        ZyjrBusiness business = examineDao.findByBusiness(id);
+    public ZyjrBusiness findByBusiness(Integer userId) {
+        ZyjrBusiness business = examineDao.findByBusiness(userId);
         return business;
     }
 
     @Override
-    public Map<String,Object> find(String id){
+    public Map<String,Object> find(Integer userId){
         Map<String,Object>map = new HashMap<>();
-        map.put("business",findByBusiness(id));
-        map.put("borrower",findByBorrower(id));
-        map.put("relation",findByRelation(id));
-        map.put("guarantee",findByGuarantee(id));
-        map.put("start",findByStart(id));
+        map.put("business",findByBusiness(userId));
+        map.put("borrower",findByBorrower(userId));
+        map.put("relation",findByRelation(userId));
+        map.put("guarantee",findByGuarantee(userId));
+        map.put("start",findByStart(userId));
         System.out.println(map);
         return map;
     }
@@ -108,12 +108,12 @@ public class ExamineServiceImpl implements IExamineService {
         startPage.setFundSide(q.getFundSide());
         startPage.setBusinessPlace(q.getBusinessPlace());
         startPage.setOrderState(q.getOrderState());
-        startPage.setIdentityId(q.getIdentityId());
+        startPage.setUserId(q.getUserId());
         examineDao.updateOne(true);
         examineDao.updateTwo(true);
         examineDao.updateThree(true);
         examineDao.updateFour(true);
-        if(findByStart(q.getIdentityId())!=null&&q.getOrderState()==false){
+        if(findByStart(q.getUserId())!=null&&q.getOrderState()==false){
             int count = examineDao.insertStart(startPage);
 
             return count;
@@ -123,8 +123,8 @@ public class ExamineServiceImpl implements IExamineService {
     }
 
     @Override
-    public StartPage findByStart(String id) {
-        StartPage startPage = examineDao.findByStart(id);
+    public StartPage findByStart(Integer userId) {
+        StartPage startPage = examineDao.findByStart(userId);
         return startPage;
     }
 }

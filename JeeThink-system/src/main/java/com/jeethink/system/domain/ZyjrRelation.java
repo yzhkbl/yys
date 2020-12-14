@@ -121,7 +121,7 @@ public class ZyjrRelation extends BaseEntity
 
     /** 唯一身份识别码 */
     @Excel(name = "唯一身份识别码")
-    private String identityId;
+    private Integer userId;
 
     /** 业务角色 */
     @Excel(name = "业务角色")
@@ -365,14 +365,14 @@ public class ZyjrRelation extends BaseEntity
     {
         return peopleShip;
     }
-    public void setIdentityId(String identityId) 
+    public void setUserId(Integer userId)
     {
-        this.identityId = identityId;
+        this.userId = userId;
     }
 
-    public String getIdentityId() 
+    public Integer getUserId()
     {
-        return identityId;
+        return userId;
     }
     public void setBusinessRole(Integer businessRole) 
     {
@@ -422,7 +422,7 @@ public class ZyjrRelation extends BaseEntity
             .append("powerName", getPowerName())
             .append("creditPower", getCreditPower())
             .append("peopleShip", getPeopleShip())
-            .append("identityId", getIdentityId())
+            .append("userId", getUserId())
             .append("businessRole", getBusinessRole())
             .append("orderState", getOrderState())
             .toString();

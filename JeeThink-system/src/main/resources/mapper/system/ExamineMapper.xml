@@ -7,66 +7,66 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insertBorrower" parameterType="com.jeethink.system.domain.ZyjrBorrower">
         insert into borrower
         (id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,obverse_id,obverse_code,obverse_address,
-        obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,identity_id,order_state)
+        obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,user_id,order_state)
         values
         (#{id},#{userName},#{idCard},#{bankCardNo},#{phoneNumber},#{issueAuthority},#{startDate},#{endDate},#{familyAddress},#{obverseId},#{obverseCode},
-        #{obverseAddress},#{obverseName},#{backId},#{backCode},#{backAddress},#{backName},#{powerId},#{powerCode},#{powerAddress},#{powerName},#{creditPower},#{identityId},#{orderState})
+        #{obverseAddress},#{obverseName},#{backId},#{backCode},#{backAddress},#{backName},#{powerId},#{powerCode},#{powerAddress},#{powerName},#{creditPower},#{userId},#{orderState})
     </insert>
     <insert id="insertRelation" parameterType="com.jeethink.system.domain.ZyjrRelation">
         insert into relation
         (id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,company,company_address,year_income,obverse_id,obverse_code,obverse_address,
-        obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,people_ship,identity_id,business_role,order_state)
+        obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,people_ship,user_id,business_role,order_state)
         values
         (#{id},#{userName},#{idCard},#{bankCardNo},#{phoneNumber},#{issueAuthority},#{startDate},#{endDate},#{familyAddress},#{company},#{companyAddress},#{yearIncome},#{obverseId},
-        #{obverseCode},#{obverseAddress},#{obverseName},#{backId},#{backCode},#{backAddress},#{backName},#{powerId},#{powerCode},#{powerAddress},#{powerName},#{creditPower},#{peopleShip},#{identityId},#{businessRole},#{orderState})
+        #{obverseCode},#{obverseAddress},#{obverseName},#{backId},#{backCode},#{backAddress},#{backName},#{powerId},#{powerCode},#{powerAddress},#{powerName},#{creditPower},#{peopleShip},#{userId},#{businessRole},#{orderState})
     </insert>
     <insert id="insertGuarantee" parameterType="com.jeethink.system.domain.ZyjrGuarantee">
         insert into guarantee
         (id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,company,company_address,year_income,obverse_id,
-        obverse_code,obverse_address,obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,people_ship,identity_id,order_state)
+        obverse_code,obverse_address,obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,people_ship,user_id,order_state)
         values
         (#{id},#{userName},#{idCard},#{bankCardNo},#{phoneNumber},#{issueAuthority},#{startDate},#{endDate},#{familyAddress},#{company},#{companyAddress},#{yearIncome},#{obverseId},
-        #{obverseCode},#{obverseAddress},#{obverseName},#{backId},#{backCode},#{backAddress},#{backName},#{powerId},#{powerCode},#{powerAddress},#{powerName},#{creditPower},#{peopleShip},#{identityId},#{orderState})
+        #{obverseCode},#{obverseAddress},#{obverseName},#{backId},#{backCode},#{backAddress},#{backName},#{powerId},#{powerCode},#{powerAddress},#{powerName},#{creditPower},#{peopleShip},#{userId},#{orderState})
     </insert>
     <insert id="insertBusiness" parameterType="com.jeethink.system.domain.ZyjrBusiness">
         insert into business
-        (id,team,car_information,intention_price,loan_money,repay_period,car_type,identity_id,order_state)
+        (id,team,car_information,intention_price,loan_money,repay_period,car_type,user_id,order_state)
         values
-        (#{id},#{team},#{carInformation},#{intentionPrice},#{loanMoney},#{repayPeriod},#{carType},#{identityId},#{orderState})
+        (#{id},#{team},#{carInformation},#{intentionPrice},#{loanMoney},#{repayPeriod},#{carType},#{userId},#{orderState})
     </insert>
     <select id="findByBorrower" resultType="com.jeethink.system.domain.ZyjrBorrower">
         select id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,obverse_id,obverse_code,obverse_address,
-        obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,identity_id,order_state
+        obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,user_id,order_state
         from borrower
-        where identity_id=#{identityId} and order_state=false
+        where user_id=#{userId} and order_state=false
     </select>
     <select id="findByRelation" resultType="com.jeethink.system.domain.ZyjrRelation">
         select id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,company,company_address,year_income,obverse_id,
-        obverse_code,obverse_address,obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,people_ship,identity_id,business_role,order_state
+        obverse_code,obverse_address,obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,people_ship,user_id,business_role,order_state
         from relation
-        where identity_id=#{identityId} and order_state=false
+        where user_id=#{userId} and order_state=false
     </select>
     <select id="findByGuarantee" resultType="com.jeethink.system.domain.ZyjrGuarantee">
         select id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,company,company_address,year_income,obverse_id,
-        obverse_code,obverse_address,obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,people_ship,identity_id,order_state
+        obverse_code,obverse_address,obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,people_ship,user_id,order_state
         from guarantee
-        where identity_id=#{identityId} and order_state=false
+        where user_id=#{userId} and order_state=false
     </select>
     <select id="findByBusiness" resultType="com.jeethink.system.domain.ZyjrBusiness">
-        select id,team,car_information,intention_price,loan_money,repay_period,car_type,identity_id,order_state
+        select id,team,car_information,intention_price,loan_money,repay_period,car_type,user_id,order_state
         from business
-        where identity_id=#{identityId} and order_state=false
+        where user_id=#{userId} and order_state=false
     </select>
     <insert id="insertStart" parameterType="com.jeethink.system.domain.StartPage">
         insert into start_page
-        (id,fund_side,business_place,order_state,identity_id)
+        (id,fund_side,business_place,order_state,user_id)
         values
-        (#{id},#{fundSide},#{businessPlace},#{orderState},#{identityId})
+        (#{id},#{fundSide},#{businessPlace},#{orderState},#{userId})
     </insert>
     <select id="findByStart" resultType="com.jeethink.system.domain.StartPage">
-        select id,fund_side,business_place,order_state,identity_id
+        select id,fund_side,business_place,order_state,user_id
         from start_page
-        where identity_id=#{identityId} and order_state=false
+        where user_id=#{userId} and order_state=false
     </select>
     <update id="updateBorrower">
         update borrower
@@ -140,8 +140,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="creditPower!=null">
                 credit_power=#{creditPower},
             </if>
-            <if test="identityId!=null">
-                identity_id=#{identityId},
+            <if test="userId!=null">
+                user_id=#{userId},
             </if>
             <if test="orderState!=null">
                 order_state=#{orderState}
@@ -234,8 +234,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="peopleShip!=null">
                 people_ship=#{peopleShip},
             </if>
-            <if test="identityId!=null">
-                identity_id=#{identityId},
+            <if test="userId!=null">
+                user_id=#{userId},
             </if>
             <if test="businessRole!=null">
                 business_role=#{businessRole},
@@ -330,8 +330,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="peopleShip!=null">
                 people_ship=#{peopleShip},
             </if>
-            <if test="identityId!=null">
-                identity_id=#{identityId},
+            <if test="userId!=null">
+                user_id=#{userId},
             </if>
             <if test="orderState!=null">
                 order_state=#{orderState}
@@ -360,8 +360,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="carType != null">
                 car_type = #{carType},
             </if>
-            <if test="identityId != null">
-                identity_id = #{identityId},
+            <if test="userId != null">
+                user_id = #{userId},
             </if>
             <if test="orderState != null">
                 order_state = #{orderState},
@@ -384,8 +384,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="orderState != null">
                 order_state = #{orderState},
             </if>
-            <if test="identityId  != null">
-                identity_id = #{identityId},
+            <if test="userId  != null">
+                user_id = #{userId},
             </if>
         </set>
     </update>
