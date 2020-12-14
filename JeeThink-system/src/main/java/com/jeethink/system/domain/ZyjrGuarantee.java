@@ -121,7 +121,7 @@ public class ZyjrGuarantee extends BaseEntity
 
     /** 唯一身份识别 */
     @Excel(name = "唯一身份识别")
-    private String identityId;
+    private Integer userId;
 
     /** 订单状态 */
     @Excel(name = "订单状态")
@@ -372,14 +372,14 @@ public class ZyjrGuarantee extends BaseEntity
     {
         return peopleShip;
     }
-    public void setIdentityId(String identityId) 
+    public void setUserId(Integer userId)
     {
-        this.identityId = identityId;
+        this.userId = userId;
     }
 
-    public String getIdentityId() 
+    public Integer getUserId()
     {
-        return identityId;
+        return userId;
     }
     public void setOrderState(Integer orderState) 
     {
@@ -420,7 +420,7 @@ public class ZyjrGuarantee extends BaseEntity
             .append("powerName", getPowerName())
             .append("creditPower", getCreditPower())
             .append("peopleShip", getPeopleShip())
-            .append("identityId", getIdentityId())
+            .append("userId", getUserId())
             .append("orderState", getOrderState())
                 .append("transactionCode", getTransactionCode())
             .toString();

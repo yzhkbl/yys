@@ -104,7 +104,7 @@ public class ZyjrBorrower extends BaseEntity
 
     /** 唯一身份码 */
     @Excel(name = "唯一身份码")
-    private String identityId;
+    private Integer userId;
 
     /** 订单状态 */
     @Excel(name = "订单状态")
@@ -319,14 +319,14 @@ public class ZyjrBorrower extends BaseEntity
     {
         return creditPower;
     }
-    public void setIdentityId(String identityId) 
+    public void setUserId(Integer userId)
     {
-        this.identityId = identityId;
+        this.userId = userId;
     }
 
-    public String getIdentityId() 
+    public Integer getUserId()
     {
-        return identityId;
+        return userId;
     }
     public void setOrderState(Integer orderState) 
     {
@@ -363,7 +363,7 @@ public class ZyjrBorrower extends BaseEntity
             .append("powerAddress", getPowerAddress())
             .append("powerName", getPowerName())
             .append("creditPower", getCreditPower())
-            .append("identityId", getIdentityId())
+            .append("userId", getUserId())
             .append("orderState", getOrderState())
             .append("createBy", getCreateBy())
             .append("createTime", getCreateTime())

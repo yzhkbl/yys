@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ExamineMapper">
+
+    <insert id="insertBorrower" parameterType="com.jeethink.system.domain.ZyjrBorrower">
+        insert into borrower
+        (id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,obverse_id,obverse_code,obverse_address,
+        obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,user_id,order_state)
+        values
+        (#{id},#{userName},#{idCard},#{bankCardNo},#{phoneNumber},#{issueAuthority},#{startDate},#{endDate},#{familyAddress},#{obverseId},#{obverseCode},
+        #{obverseAddress},#{obverseName},#{backId},#{backCode},#{backAddress},#{backName},#{powerId},#{powerCode},#{powerAddress},#{powerName},#{creditPower},#{userId},#{orderState})
+    </insert>
+    <insert id="insertRelation" parameterType="com.jeethink.system.domain.ZyjrRelation">
+        insert into relation
+        (id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,company,company_address,year_income,obverse_id,obverse_code,obverse_address,
+        obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,people_ship,user_id,business_role,order_state)
+        values
+        (#{id},#{userName},#{idCard},#{bankCardNo},#{phoneNumber},#{issueAuthority},#{startDate},#{endDate},#{familyAddress},#{company},#{companyAddress},#{yearIncome},#{obverseId},
+        #{obverseCode},#{obverseAddress},#{obverseName},#{backId},#{backCode},#{backAddress},#{backName},#{powerId},#{powerCode},#{powerAddress},#{powerName},#{creditPower},#{peopleShip},#{userId},#{businessRole},#{orderState})
+    </insert>
+    <insert id="insertGuarantee" parameterType="com.jeethink.system.domain.ZyjrGuarantee">
+        insert into guarantee
+        (id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,company,company_address,year_income,obverse_id,
+        obverse_code,obverse_address,obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,people_ship,user_id,order_state)
+        values
+        (#{id},#{userName},#{idCard},#{bankCardNo},#{phoneNumber},#{issueAuthority},#{startDate},#{endDate},#{familyAddress},#{company},#{companyAddress},#{yearIncome},#{obverseId},
+        #{obverseCode},#{obverseAddress},#{obverseName},#{backId},#{backCode},#{backAddress},#{backName},#{powerId},#{powerCode},#{powerAddress},#{powerName},#{creditPower},#{peopleShip},#{userId},#{orderState})
+    </insert>
+    <insert id="insertBusiness" parameterType="com.jeethink.system.domain.ZyjrBusiness">
+        insert into business
+        (id,team,car_information,intention_price,loan_money,repay_period,car_type,user_id,order_state)
+        values
+        (#{id},#{team},#{carInformation},#{intentionPrice},#{loanMoney},#{repayPeriod},#{carType},#{userId},#{orderState})
+    </insert>
+    <select id="findByBorrower" resultType="com.jeethink.system.domain.ZyjrBorrower">
+        select id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,obverse_id,obverse_code,obverse_address,
+        obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,user_id,order_state
+        from borrower
+        where user_id=#{userId} and order_state=false
+    </select>
+    <select id="findByRelation" resultType="com.jeethink.system.domain.ZyjrRelation">
+        select id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,company,company_address,year_income,obverse_id,
+        obverse_code,obverse_address,obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,people_ship,user_id,business_role,order_state
+        from relation
+        where user_id=#{userId} and order_state=false
+    </select>
+    <select id="findByGuarantee" resultType="com.jeethink.system.domain.ZyjrGuarantee">
+        select id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,company,company_address,year_income,obverse_id,
+        obverse_code,obverse_address,obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,people_ship,user_id,order_state
+        from guarantee
+        where user_id=#{userId} and order_state=false
+    </select>
+    <select id="findByBusiness" resultType="com.jeethink.system.domain.ZyjrBusiness">
+        select id,team,car_information,intention_price,loan_money,repay_period,car_type,user_id,order_state
+        from business
+        where user_id=#{userId} and order_state=false
+    </select>
+    <insert id="insertStart" parameterType="com.jeethink.system.domain.StartPage">
+        insert into start_page
+        (id,fund_side,business_place,order_state,user_id)
+        values
+        (#{id},#{fundSide},#{businessPlace},#{orderState},#{userId})
+    </insert>
+    <select id="findByStart" resultType="com.jeethink.system.domain.StartPage">
+        select id,fund_side,business_place,order_state,user_id
+        from start_page
+        where user_id=#{userId} and order_state=false
+    </select>
+    <update id="updateBorrower">
+        update borrower
+        <set>
+            <if test="id != null">
+                id = #{id},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName},
+            </if>
+            <if test="idCard != null">
+                id_card = #{idCard},
+            </if>
+            <if test="bankCardNo != null">
+                bank_card_no = #{bankCardNo},
+            </if>
+            <if test="phoneNumber!=null">
+                phone_number=#{phoneNumber},
+            </if>
+            <if test="issueAuthority!=null">
+                issue_authority=#{issueAuthority},
+            </if>
+            <if test="startDate != null">
+                start_date = #{startDate},
+            </if>
+            <if test="endDate != null">
+                end_date = #{endDate},
+            </if>
+            <if test="familyAddress != null">
+                family_address = #{familyAddress},
+            </if>
+            <if test="obverseId != null">
+                obverse_id = #{obverseId},
+            </if>
+            <if test="obverseCode!=null">
+                obverse_code=#{obverseCode},
+            </if>
+            <if test="obverseAddress!=null">
+                obverse_address=#{obverseAddress},
+            </if>
+            <if test="obverseName != null">
+                obverse_name = #{obverseName},
+            </if>
+            <if test="backId != null">
+                back_id = #{backId},
+            </if>
+            <if test="backCode != null">
+                back_code = #{backCode},
+            </if>
+            <if test="backAddress != null">
+                back_address = #{backAddress},
+            </if>
+            <if test="backName!=null">
+                back_name=#{backName},
+            </if>
+            <if test="powerId!=null">
+                power_id=#{powerId},
+            </if>
+            <if test="powerCode != null">
+                power_code = #{powerCode},
+            </if>
+            <if test="powerAddress != null">
+                power_address = #{powerCode},
+            </if>
+            <if test="powerAddress != null">
+                power_address = #{powerAddress},
+            </if>
+            <if test="powerName != null">
+                power_name = #{powerName},
+            </if>
+            <if test="creditPower!=null">
+                credit_power=#{creditPower},
+            </if>
+            <if test="userId!=null">
+                user_id=#{userId},
+            </if>
+            <if test="orderState!=null">
+                order_state=#{orderState}
+            </if>
+        </set>
+        where order_state=false
+    </update>
+
+    <update id="updateRelation">
+        update relation
+        <set>
+            <if test="id != null">
+                id = #{id},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName},
+            </if>
+            <if test="idCard != null">
+                id_card = #{idCard},
+            </if>
+            <if test="bankCardNo != null">
+                bank_card_no = #{bankCardNo},
+            </if>
+            <if test="phoneNumber!=null">
+                phone_number=#{phoneNumber},
+            </if>
+            <if test="issueAuthority!=null">
+                issue_authority=#{issueAuthority},
+            </if>
+            <if test="startDate != null">
+                start_date = #{startDate},
+            </if>
+            <if test="endDate != null">
+                end_date = #{endDate},
+            </if>
+            <if test="familyAddress != null">
+                family_address = #{familyAddress},
+            </if>
+            <if test="company != null">
+                company = #{company},
+            </if>
+            <if test="companyAddress != null">
+                company_address = #{companyAddress},
+            </if>
+            <if test="yearIncome != null">
+                year_income = #{yearIncome},
+            </if>
+            <if test="obverseId != null">
+                obverse_id = #{obverseId},
+            </if>
+            <if test="obverseCode!=null">
+                obverse_code=#{obverseCode},
+            </if>
+            <if test="obverseAddress!=null">
+                obverse_address=#{obverseAddress},
+            </if>
+            <if test="obverseName != null">
+                obverse_name = #{obverseName},
+            </if>
+            <if test="backId != null">
+                back_id = #{backId},
+            </if>
+            <if test="backCode != null">
+                back_code = #{backCode},
+            </if>
+            <if test="backAddress != null">
+                back_address = #{backAddress},
+            </if>
+            <if test="backName!=null">
+                back_name=#{backName},
+            </if>
+            <if test="powerId!=null">
+                power_id=#{powerId},
+            </if>
+            <if test="powerCode != null">
+                power_code = #{powerCode},
+            </if>
+            <if test="powerAddress != null">
+                power_address = #{powerCode},
+            </if>
+            <if test="powerAddress != null">
+                power_address = #{powerAddress},
+            </if>
+            <if test="powerName != null">
+                power_name = #{powerName},
+            </if>
+            <if test="creditPower!=null">
+                credit_power=#{creditPower},
+            </if>
+            <if test="peopleShip!=null">
+                people_ship=#{peopleShip},
+            </if>
+            <if test="userId!=null">
+                user_id=#{userId},
+            </if>
+            <if test="businessRole!=null">
+                business_role=#{businessRole},
+            </if>
+            <if test="orderState!=null">
+                order_state=#{orderState}
+            </if>
+        </set>
+        where order_state=false
+    </update>
+    <update id="updateGuarantee">
+        update guarantee
+        <set>
+            <if test="id != null">
+                id = #{id},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName},
+            </if>
+            <if test="idCard != null">
+                id_card = #{idCard},
+            </if>
+            <if test="bankCardNo != null">
+                bank_card_no = #{bankCardNo},
+            </if>
+            <if test="phoneNumber!=null">
+                phone_number=#{phoneNumber},
+            </if>
+            <if test="issueAuthority!=null">
+                issue_authority=#{issueAuthority},
+            </if>
+            <if test="startDate != null">
+                start_date = #{startDate},
+            </if>
+            <if test="endDate != null">
+                end_date = #{endDate},
+            </if>
+            <if test="familyAddress != null">
+                family_address = #{familyAddress},
+            </if>
+            <if test="company != null">
+                company = #{company},
+            </if>
+            <if test="companyAddress != null">
+                company_address = #{companyAddress},
+            </if>
+            <if test="yearIncome != null">
+                year_income = #{yearIncome},
+            </if>
+            <if test="obverseId != null">
+                obverse_id = #{obverseId},
+            </if>
+            <if test="obverseCode!=null">
+                obverse_code=#{obverseCode},
+            </if>
+            <if test="obverseAddress!=null">
+                obverse_address=#{obverseAddress},
+            </if>
+            <if test="obverseName != null">
+                obverse_name = #{obverseName},
+            </if>
+            <if test="backId != null">
+                back_id = #{backId},
+            </if>
+            <if test="backCode != null">
+                back_code = #{backCode},
+            </if>
+            <if test="backAddress != null">
+                back_address = #{backAddress},
+            </if>
+            <if test="backName!=null">
+                back_name=#{backName},
+            </if>
+            <if test="powerId!=null">
+                power_id=#{powerId},
+            </if>
+            <if test="powerCode != null">
+                power_code = #{powerCode},
+            </if>
+            <if test="powerAddress != null">
+                power_address = #{powerCode},
+            </if>
+            <if test="powerAddress != null">
+                power_address = #{powerAddress},
+            </if>
+            <if test="powerName != null">
+                power_name = #{powerName},
+            </if>
+            <if test="creditPower!=null">
+                credit_power=#{creditPower},
+            </if>
+            <if test="peopleShip!=null">
+                people_ship=#{peopleShip},
+            </if>
+            <if test="userId!=null">
+                user_id=#{userId},
+            </if>
+            <if test="orderState!=null">
+                order_state=#{orderState}
+            </if>
+        </set>
+        where order_state=false
+    </update>
+    <update id="updateBusiness">
+        update business
+        <set>
+            <if test="team != null">
+                team = #{team},
+            </if>
+            <if test="carInformation != null">
+                car_information = #{carInformation},
+            </if>
+            <if test="intentionPrice != null">
+                intention_price = #{intentionPrice},
+            </if>
+            <if test="loanMoney!=null">
+                loan_money=#{loanMoney},
+            </if>
+            <if test="repayPeriod!=null">
+                repay_period=#{repayPeriod},
+            </if>
+            <if test="carType != null">
+                car_type = #{carType},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="orderState != null">
+                order_state = #{orderState},
+            </if>
+        </set>
+        where order_state=false
+    </update>
+    <update id="updateStart">
+        update start_page
+        <set>
+            <if test="id!=null">
+                id=#{id},
+            </if>
+            <if test="fundSide!=null">
+                fund_side=#{fundSide},
+            </if>
+            <if test="businessPlace != null">
+                business_place = #{businessPlace},
+            </if>
+            <if test="orderState != null">
+                order_state = #{orderState},
+            </if>
+            <if test="userId  != null">
+                user_id = #{userId},
+            </if>
+        </set>
+    </update>
+    <update id="updateOne">
+        update borrower
+        set order_state=#{orderState}
+    </update>
+    <update id="updateTwo">
+        update relation
+        set order_state=#{orderState}
+    </update>
+    <update id="updateThree">
+        update guarantee
+        set order_state=#{orderState}
+    </update>
+    <update id="updateFour">
+        update business
+        set order_state=#{orderState}
+    </update>
+</mapper>
