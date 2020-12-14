@@ -22,7 +22,7 @@
             <groupId>com.jeethink</groupId>
             <artifactId>jeethink-common</artifactId>
         </dependency>
-<dependency>
+    <dependency>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
     </dependency>

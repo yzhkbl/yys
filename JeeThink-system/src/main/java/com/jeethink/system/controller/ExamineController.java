@@ -4,6 +4,7 @@ import com.jeethink.system.Helper.ResponseDto;
 import com.jeethink.system.domain.*;
 import com.jeethink.system.service.IExamineService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,25 +17,25 @@ public class ExamineController {
     private IExamineService examineService;
 
     @RequestMapping("/add/borrower")
-    public ResponseDto addBorrower(ZyjrBorrower q){
+    public ResponseDto addBorrower(@RequestBody ZyjrBorrower q){
         examineService.addByBorrower(q);
         return ResponseDto.success();
     }
 
     @RequestMapping("/add/relation")
-    public ResponseDto addRelation(ZyjrRelation q){
+    public ResponseDto addRelation(@RequestBody ZyjrRelation q){
         examineService.addByRelation(q);
         return ResponseDto.success();
     }
 
     @RequestMapping("/add/guarantee")
-    public ResponseDto addGuarantee(ZyjrGuarantee q){
+    public ResponseDto addGuarantee(@RequestBody ZyjrGuarantee q){
         examineService.addByGuarantee(q);
         return ResponseDto.success();
     }
 
     @RequestMapping("/add/business")
-    public ResponseDto addBusiness(ZyjrBusiness q){
+    public ResponseDto addBusiness(@RequestBody ZyjrBusiness q){
         examineService.addByBusiness(q);
         return ResponseDto.success();
     }
@@ -70,7 +71,7 @@ public class ExamineController {
     }
 
     @RequestMapping("/add/start")
-    public ResponseDto addByStart(ZyjrStartPage q){
+    public ResponseDto addByStart(@RequestBody ZyjrStartPage q){
         examineService.addByStart(q);
         return ResponseDto.success();
     }
