@@ -17,7 +17,7 @@ import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
 import com.jeethink.common.enums.BusinessType;
 import com.jeethink.system.domain.ZyjrBusiness;
-import com.jeethink.system.controller.service.IZyjrBusinessService;
+import com.jeethink.system.service.IZyjrBusinessService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

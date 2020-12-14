@@ -16,12 +16,12 @@ import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
 import com.jeethink.common.enums.BusinessType;
 import com.jeethink.system.domain.ZyjrCar;
-import com.jeethink.system.controller.service.IZyjrCarService;
+import com.jeethink.system.service.IZyjrCarService;
 import com.jeethink.common.utils.poi.ExcelUtil;
 import com.jeethink.common.core.page.TableDataInfo;
 
 /**
- * 【请填写功能名称】Controller
+ * 车商信息Controller
  * 
  * @author jeethink
  * @date 2020-12-14
@@ -34,9 +34,9 @@ public class ZyjrCarController extends BaseController
     private IZyjrCarService zyjrCarService;
 
     /**
-     * 查询【请填写功能名称】列表
+     * 查询车商信息列表
      */
-    @PreAuthorize("@ss.hasPermi('organization:car:list')")
+    @PreAuthorize("@ss.hasPermi('system:car:list')")
     @GetMapping("/list")
     public TableDataInfo list(ZyjrCar zyjrCar)
     {
@@ -46,10 +46,10 @@ public class ZyjrCarController extends BaseController
     }
 
     /**
-     * 导出【请填写功能名称】列表
+     * 导出车商信息列表
      */
-    @PreAuthorize("@ss.hasPermi('organization:car:export')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.EXPORT)
+    @PreAuthorize("@ss.hasPermi('system:car:export')")
+    @Log(title = "车商信息", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(ZyjrCar zyjrCar)
     {
@@ -59,9 +59,9 @@ public class ZyjrCarController extends BaseController
     }
 
     /**
-     * 获取【请填写功能名称】详细信息
+     * 获取车商信息详细信息
      */
-    @PreAuthorize("@ss.hasPermi('organization:car:query')")
+    @PreAuthorize("@ss.hasPermi('system:car:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -69,10 +69,10 @@ public class ZyjrCarController extends BaseController
     }
 
     /**
-     * 新增【请填写功能名称】
+     * 新增车商信息
      */
-    @PreAuthorize("@ss.hasPermi('organization:car:add')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
+    @PreAuthorize("@ss.hasPermi('system:car:add')")
+    @Log(title = "车商信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody ZyjrCar zyjrCar)
     {
@@ -80,10 +80,10 @@ public class ZyjrCarController extends BaseController
     }
 
     /**
-     * 修改【请填写功能名称】
+     * 修改车商信息
      */
-    @PreAuthorize("@ss.hasPermi('organization:car:edit')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
+    @PreAuthorize("@ss.hasPermi('system:car:edit')")
+    @Log(title = "车商信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody ZyjrCar zyjrCar)
     {
@@ -91,10 +91,10 @@ public class ZyjrCarController extends BaseController
     }
 
     /**
-     * 删除【请填写功能名称】
+     * 删除车商信息
      */
-    @PreAuthorize("@ss.hasPermi('organization:car:remove')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
+    @PreAuthorize("@ss.hasPermi('system:car:remove')")
+    @Log(title = "车商信息", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {

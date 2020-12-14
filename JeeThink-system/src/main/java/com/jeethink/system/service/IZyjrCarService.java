@@ -1,15 +1,15 @@
-package com.jeethink.system.mapper;
+package com.jeethink.system.service;
 
 import java.util.List;
 import com.jeethink.system.domain.ZyjrCar;
 
 /**
- * 车商信息Mapper接口
+ * 车商信息Service接口
  * 
  * @author jeethink
  * @date 2020-12-14
  */
-public interface ZyjrCarMapper 
+public interface IZyjrCarService 
 {
     /**
      * 查询车商信息
@@ -44,18 +44,18 @@ public interface ZyjrCarMapper
     public int updateZyjrCar(ZyjrCar zyjrCar);
 
     /**
-     * 删除车商信息
+     * 批量删除车商信息
+     * 
+     * @param ids 需要删除的车商信息ID
+     * @return 结果
+     */
+    public int deleteZyjrCarByIds(Long[] ids);
+
+    /**
+     * 删除车商信息信息
      * 
      * @param id 车商信息ID
      * @return 结果
      */
     public int deleteZyjrCarById(Long id);
-
-    /**
-     * 批量删除车商信息
-     * 
-     * @param ids 需要删除的数据ID
-     * @return 结果
-     */
-    public int deleteZyjrCarByIds(Long[] ids);
 }

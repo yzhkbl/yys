@@ -38,10 +38,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
         <result property="id"    column="id"    />
+        <result property="state"    column="state"    />
     </resultMap>
 
     <sql id="selectZyjrCarVo">
-        select user_name, gender, phone_number, is_linkman, identity, remark, area, city, bazaar, type_one, type_too, stall, business_nature, passenger_car, type_three, month_deal, month_installment, match_amount, detail_address, pic, account_name, account_use, account_type, account_number, account_licence, account_city, account_provinc, account_sub_branch, create_by, create_time, update_by, update_time, id from zyjr_car
+        select user_name, gender, phone_number, is_linkman, identity, remark, area, city, bazaar, type_one, type_too, stall, business_nature, passenger_car, type_three, month_deal, month_installment, match_amount, detail_address, pic, account_name, account_use, account_type, account_number, account_licence, account_city, account_provinc, account_sub_branch, create_by, create_time, update_by, update_time, id, state from zyjr_car
     </sql>
 
     <select id="selectZyjrCarList" parameterType="ZyjrCar" resultMap="ZyjrCarResult">
@@ -52,9 +53,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
             <if test="isLinkman != null  and isLinkman != ''"> and is_linkman = #{isLinkman}</if>
             <if test="identity != null  and identity != ''"> and identity = #{identity}</if>
-            <if test="area != null  and area != ''"> and area = #{area}</if>
-            <if test="city != null  and city != ''"> and city = #{city}</if>
-            <if test="bazaar != null  and bazaar != ''"> and bazaar = #{bazaar}</if>
+            <if test="area != null  and area != ''"> and area like concat('%', #{area}, '%')</if>
+            <if test="city != null  and city != ''"> and city like concat('%', #{city}, '%')</if>
+            <if test="bazaar != null  and bazaar != ''"> and bazaar like concat('%', #{bazaar}, '%')</if>
             <if test="typeOne != null  and typeOne != ''"> and type_one = #{typeOne}</if>
             <if test="typeToo != null  and typeToo != ''"> and type_too = #{typeToo}</if>
             <if test="stall != null  and stall != ''"> and stall = #{stall}</if>
@@ -66,7 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="matchAmount != null  and matchAmount != ''"> and match_amount = #{matchAmount}</if>
             <if test="detailAddress != null  and detailAddress != ''"> and detail_address = #{detailAddress}</if>
             <if test="pic != null  and pic != ''"> and pic = #{pic}</if>
-            <if test="accountName != null  and accountName != ''"> and account_name like concat('%', #{accountName}, '%')</if>
+            <if test="accountName != null  and accountName != ''"> and account_name = #{accountName}</if>
             <if test="accountUse != null  and accountUse != ''"> and account_use = #{accountUse}</if>
             <if test="accountType != null  and accountType != ''"> and account_type = #{accountType}</if>
             <if test="accountNumber != null  and accountNumber != ''"> and account_number = #{accountNumber}</if>
@@ -74,6 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="accountCity != null  and accountCity != ''"> and account_city = #{accountCity}</if>
             <if test="accountProvinc != null  and accountProvinc != ''"> and account_provinc = #{accountProvinc}</if>
             <if test="accountSubBranch != null  and accountSubBranch != ''"> and account_sub_branch = #{accountSubBranch}</if>
+            <if test="state != null  and state != ''"> and state = #{state}</if>
         </where>
     </select>
     
@@ -117,6 +119,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
             <if test="updateTime != null">update_time,</if>
+            <if test="state != null">state,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userName != null">#{userName},</if>
@@ -151,6 +154,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
+            <if test="state != null">#{state},</if>
          </trim>
     </insert>
 
@@ -189,6 +193,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="state != null">state = #{state},</if>
         </trim>
         where id = #{id}
     </update>

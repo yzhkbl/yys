@@ -16,7 +16,7 @@ import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
 import com.jeethink.common.enums.BusinessType;
 import com.jeethink.system.domain.ZyjrGuarantee;
-import com.jeethink.system.controller.service.IZyjrGuaranteeService;
+import com.jeethink.system.service.IZyjrGuaranteeService;
 import com.jeethink.common.utils.poi.ExcelUtil;
 import com.jeethink.common.core.page.TableDataInfo;
 

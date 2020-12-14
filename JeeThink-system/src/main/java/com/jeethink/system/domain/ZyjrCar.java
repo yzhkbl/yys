@@ -6,7 +6,7 @@ import com.jeethink.common.annotation.Excel;
 import com.jeethink.common.core.domain.BaseEntity;
 
 /**
- * 【请填写功能名称】对象 zyjr_car
+ * 车商信息对象 zyjr_car
  * 
  * @author jeethink
  * @date 2020-12-14
@@ -15,8 +15,8 @@ public class ZyjrCar extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 名称 */
-    @Excel(name = "名称")
+    /** 车商名称 */
+    @Excel(name = "车商名称")
     private String userName;
 
     /** 年龄 */
@@ -123,8 +123,12 @@ public class ZyjrCar extends BaseEntity
     @Excel(name = "账户开户支行")
     private String accountSubBranch;
 
-    /** $column.columnComment */
+    /** id */
     private Long id;
+
+    /** 状态 */
+    @Excel(name = "状态")
+    private String state;
 
     public void setUserName(String userName) 
     {
@@ -378,6 +382,15 @@ public class ZyjrCar extends BaseEntity
     {
         return id;
     }
+    public void setState(String state) 
+    {
+        this.state = state;
+    }
+
+    public String getState() 
+    {
+        return state;
+    }
 
     @Override
     public String toString() {
@@ -415,6 +428,7 @@ public class ZyjrCar extends BaseEntity
             .append("updateBy", getUpdateBy())
             .append("updateTime", getUpdateTime())
             .append("id", getId())
+            .append("state", getState())
             .toString();
     }
 }

@@ -2,7 +2,7 @@ package com.jeethink.system.controller;
 
 import com.jeethink.system.Helper.ResponseDto;
 import com.jeethink.system.domain.*;
-import com.jeethink.system.controller.service.IExamineService;
+import com.jeethink.system.service.IExamineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
