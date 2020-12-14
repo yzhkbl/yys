@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="loanMoney"    column="loan_money"    />
         <result property="repayPeriod"    column="repay_period"    />
         <result property="carType"    column="car_type"    />
-        <result property="identityId"    column="identity_id"    />
+        <result property="userId"    column="user_id"    />
         <result property="orderState"    column="order_state"    />
          <result property="name"    column="user_name"    />
         <result property="transactionCode"    column="transaction_code"    />

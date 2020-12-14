@@ -1,8 +1,10 @@
 package com.jeethink.system.service.impl;
 
+import com.jeethink.common.utils.uuid.IdUtils;
 import com.jeethink.system.domain.*;
 import com.jeethink.system.mapper.ExamineMapper;
 import com.jeethink.system.service.IExamineService;
+import com.jeethink.system.util.orderCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,10 @@ import java.util.Map;
 
 @Service
 public class ExamineServiceImpl implements IExamineService {
+
+    private String a = orderCode.getOrderCode();
+    private String b = IdUtils.simpleUUID();
+
     @Autowired
     private ExamineMapper examineDao;
 
@@ -102,18 +108,24 @@ public class ExamineServiceImpl implements IExamineService {
     }
 
     @Override
-    public int addByStart(StartPage q) {
-        StartPage startPage = new StartPage();
+    public int addByStart(ZyjrStartPage q) {
+        ZyjrStartPage startPage = new ZyjrStartPage();
         startPage.setId(q.getId());
         startPage.setFundSide(q.getFundSide());
         startPage.setBusinessPlace(q.getBusinessPlace());
         startPage.setOrderState(q.getOrderState());
         startPage.setUserId(q.getUserId());
-        examineDao.updateOne(true);
-        examineDao.updateTwo(true);
-        examineDao.updateThree(true);
-        examineDao.updateFour(true);
-        if(findByStart(q.getUserId())!=null&&q.getOrderState()==false){
+
+        String a = orderCode.getOrderCode();
+        String b = IdUtils.simpleUUID();
+
+        startPage.setTransactionCode(a);
+        startPage.setPrivateCode(b);
+        examineDao.updateOne(true,a);
+        examineDao.updateTwo(true,a);
+        examineDao.updateThree(true,a);
+        examineDao.updateFour(true,a);
+        if(findByStart(q.getUserId())!=null&&q.getOrderState()==0){
             int count = examineDao.insertStart(startPage);
 
             return count;
@@ -123,8 +135,8 @@ public class ExamineServiceImpl implements IExamineService {
     }
 
     @Override
-    public StartPage findByStart(Integer userId) {
-        StartPage startPage = examineDao.findByStart(userId);
+    public ZyjrStartPage findByStart(Integer userId) {
+        ZyjrStartPage startPage = examineDao.findByStart(userId);
         return startPage;
     }
 }
