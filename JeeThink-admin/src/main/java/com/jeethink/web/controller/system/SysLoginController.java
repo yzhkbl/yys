@@ -2,9 +2,12 @@ package com.jeethink.web.controller.system;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.jeethink.web.controller.common.CaptchaController;
+import io.swagger.annotations.ResponseHeader;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,14 +52,18 @@ public class SysLoginController
      * @return 结果
      */
     @PostMapping("/login")
-    public AjaxResult login(@RequestBody LoginBody loginBody) throws IOException {
+    public AjaxResult login(@RequestParam(value = "username",required = false) String loginBody,@RequestParam(value = "password",required = false) String password) throws IOException {
+        System.err.println(loginBody);
         captchaController.getCode();
         AjaxResult ajax = AjaxResult.success();
         // 生成令牌
-        String token = loginService.login(loginBody.getUsername(), loginBody.getPassword(), "1",
-                loginBody.getUuid());
+       /* String token = loginService.login(loginBody.getUsername(), loginBody.getPassword(), "1",
+                loginBody.getUuid());*/
+        String token = loginService.login(loginBody, password, "1",
+                "22fa5d2b761244cb850b5e03c607e908");
         System.err.println(token);
         ajax.put(Constants.TOKEN, token);
+
         return ajax;
     }
 

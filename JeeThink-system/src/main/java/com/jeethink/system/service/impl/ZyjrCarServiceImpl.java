@@ -1,6 +1,9 @@
 package com.jeethink.system.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.jeethink.common.core.redis.RedisCache;
 import com.jeethink.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,7 @@ public class ZyjrCarServiceImpl implements IZyjrCarService
 {
     @Autowired
     private ZyjrCarMapper zyjrCarMapper;
+
 
     /**
      * 查询车商信息
@@ -54,6 +58,7 @@ public class ZyjrCarServiceImpl implements IZyjrCarService
     public int insertZyjrCar(ZyjrCar zyjrCar)
     {
         zyjrCar.setCreateTime(DateUtils.getNowDate());
+
         return zyjrCarMapper.insertZyjrCar(zyjrCar);
     }
 
@@ -67,6 +72,7 @@ public class ZyjrCarServiceImpl implements IZyjrCarService
     public int updateZyjrCar(ZyjrCar zyjrCar)
     {
         zyjrCar.setUpdateTime(DateUtils.getNowDate());
+
         return zyjrCarMapper.updateZyjrCar(zyjrCar);
     }
 
@@ -79,6 +85,8 @@ public class ZyjrCarServiceImpl implements IZyjrCarService
     @Override
     public int deleteZyjrCarByIds(Long[] ids)
     {
+
+
         return zyjrCarMapper.deleteZyjrCarByIds(ids);
     }
 
@@ -91,6 +99,8 @@ public class ZyjrCarServiceImpl implements IZyjrCarService
     @Override
     public int deleteZyjrCarById(Long id)
     {
+
+
         return zyjrCarMapper.deleteZyjrCarById(id);
     }
 }
