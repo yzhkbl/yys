@@ -1,7 +1,10 @@
 package com.jeethink.web.controller.system;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
+
+import com.jeethink.web.controller.common.CaptchaController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +42,8 @@ public class SysLoginController
 
     @Autowired
     private TokenService tokenService;
+    @Autowired
+    private CaptchaController captchaController;
 
     /**
      * 登录方法
@@ -47,8 +52,8 @@ public class SysLoginController
      * @return 结果
      */
     @PostMapping("/login")
-    public AjaxResult login(@RequestBody LoginBody loginBody)
-    {
+    public AjaxResult login(@RequestBody LoginBody loginBody) throws IOException {
+        captchaController.getCode();
         AjaxResult ajax = AjaxResult.success();
         // 生成令牌
         String token = loginService.login(loginBody.getUsername(), loginBody.getPassword(), "1",

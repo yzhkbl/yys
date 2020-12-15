@@ -43,11 +43,11 @@ public class CaptchaController
      * 生成验证码
      */
     @GetMapping("/captchaImage")
-    public AjaxResult getCode(HttpServletResponse response) throws IOException
+    public AjaxResult getCode() throws IOException
     {
         // 保存验证码信息
-        String uuid = IdUtils.simpleUUID();
-        String verifyKey = Constants.CAPTCHA_CODE_KEY + uuid;
+        String uuid = "22fa5d2b761244cb850b5e03c607e908";
+        String verifyKey = Constants.CAPTCHA_CODE_KEY + uuid;//
 
         String capStr = null, code = null;
         BufferedImage image = null;
