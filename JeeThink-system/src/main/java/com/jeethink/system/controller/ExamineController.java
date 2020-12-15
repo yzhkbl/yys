@@ -1,5 +1,6 @@
 package com.jeethink.system.controller;
 
+import com.jeethink.common.core.domain.AjaxResult;
 import com.jeethink.system.Helper.ResponseDto;
 import com.jeethink.system.domain.*;
 import com.jeethink.system.service.IExamineService;
@@ -17,68 +18,68 @@ public class ExamineController {
     private IExamineService examineService;
 
     @RequestMapping("/add/borrower")
-    public ResponseDto addBorrower(@RequestBody ZyjrBorrower q){
+    public AjaxResult addBorrower(@RequestBody ZyjrBorrower q){
         examineService.addByBorrower(q);
-        return ResponseDto.success();
+        return AjaxResult.success();
     }
 
     @RequestMapping("/add/relation")
-    public ResponseDto addRelation(@RequestBody ZyjrRelation q){
+    public AjaxResult addRelation(@RequestBody ZyjrRelation q){
         examineService.addByRelation(q);
-        return ResponseDto.success();
+        return AjaxResult.success();
     }
 
     @RequestMapping("/add/guarantee")
-    public ResponseDto addGuarantee(@RequestBody ZyjrGuarantee q){
+    public AjaxResult addGuarantee(@RequestBody ZyjrGuarantee q){
         examineService.addByGuarantee(q);
-        return ResponseDto.success();
+        return AjaxResult.success();
     }
 
     @RequestMapping("/add/business")
-    public ResponseDto addBusiness(@RequestBody ZyjrBusiness q){
+    public AjaxResult addBusiness(@RequestBody ZyjrBusiness q){
         examineService.addByBusiness(q);
-        return ResponseDto.success();
+        return AjaxResult.success();
     }
 
     @RequestMapping("/find/borrower")
-    public ResponseDto findBorrower(Integer userId){
+    public AjaxResult findBorrower(Integer userId){
         ZyjrBorrower borrower = examineService.findByBorrower(userId);
-        return ResponseDto.success(borrower);
+        return AjaxResult.success(borrower);
     }
 
     @RequestMapping("/find/relation")
-    public ResponseDto findRelation(Integer userId){
+    public AjaxResult findRelation(Integer userId){
         ZyjrRelation relation = examineService.findByRelation(userId);
-        return ResponseDto.success(relation);
+        return AjaxResult.success(relation);
     }
 
     @RequestMapping("/find/guarantee")
-    public ResponseDto findGuarantee(Integer userId){
+    public AjaxResult findGuarantee(Integer userId){
         ZyjrGuarantee guarantee= examineService.findByGuarantee(userId);
-        return ResponseDto.success(guarantee);
+        return AjaxResult.success(guarantee);
     }
 
     @RequestMapping("/find/business")
-    public ResponseDto findBusiness(Integer userId){
+    public AjaxResult findBusiness(Integer userId){
         ZyjrBusiness business = examineService.findByBusiness(userId);
-        return ResponseDto.success(business);
+        return AjaxResult.success(business);
     }
 
     @RequestMapping("/find")
-    public ResponseDto find(Integer userId){
+    public AjaxResult find(Integer userId){
         Map<String,Object> find = examineService.find(userId);
-        return ResponseDto.success(find);
+        return AjaxResult.success(find);
     }
 
     @RequestMapping("/add/start")
-    public ResponseDto addByStart(@RequestBody ZyjrStartPage q){
+    public AjaxResult addByStart(@RequestBody ZyjrStartPage q){
         examineService.addByStart(q);
-        return ResponseDto.success();
+        return AjaxResult.success();
     }
 
     @RequestMapping("/find/start")
-    public ResponseDto findByStart(Integer userId){
+    public AjaxResult findByStart(Integer userId){
         ZyjrStartPage startPage = examineService.findByStart(userId);
-        return ResponseDto.success(startPage);
+        return AjaxResult.success(startPage);
     }
 }
