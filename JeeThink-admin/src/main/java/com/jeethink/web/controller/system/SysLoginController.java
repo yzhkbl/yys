@@ -51,8 +51,9 @@ public class SysLoginController
     {
         AjaxResult ajax = AjaxResult.success();
         // 生成令牌
-        String token = loginService.login(loginBody.getUsername(), loginBody.getPassword(), loginBody.getCode(),
+        String token = loginService.login(loginBody.getUsername(), loginBody.getPassword(), "1",
                 loginBody.getUuid());
+        System.err.println(token);
         ajax.put(Constants.TOKEN, token);
         return ajax;
     }
@@ -65,7 +66,9 @@ public class SysLoginController
     @GetMapping("getInfo")
     public AjaxResult getInfo()
     {
+
         LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
+
         SysUser user = loginUser.getUser();
         // 角色集合
         Set<String> roles = permissionService.getRolePermission(user);
@@ -75,6 +78,7 @@ public class SysLoginController
         ajax.put("user", user);
         ajax.put("roles", roles);
         ajax.put("permissions", permissions);
+
         return ajax;
     }
 

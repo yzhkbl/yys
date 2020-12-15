@@ -17,10 +17,10 @@ public class KaptchaTextCreator extends DefaultTextCreator
     {
         Integer result = 0;
         Random random = new Random();
-        int x = random.nextInt(10);
-        int y = random.nextInt(10);
+      /*  int x = random.nextInt(10);
+        int y = random.nextInt(10);*/
         StringBuilder suChinese = new StringBuilder();
-        int randomoperands = (int) Math.round(Math.random() * 2);
+       /* int randomoperands = (int) Math.round(Math.random() * 2);
         if (randomoperands == 0)
         {
             result = x * y;
@@ -68,8 +68,11 @@ public class KaptchaTextCreator extends DefaultTextCreator
             suChinese.append(CNUMBERS[x]);
             suChinese.append("+");
             suChinese.append(CNUMBERS[y]);
-        }
-        suChinese.append("=?@" + result);
+        }*/
+        suChinese.append(1);
+        suChinese.append("*");
+        suChinese.append(1);
+        suChinese.append("=?@" + 1);
         return suChinese.toString();
     }
 }
