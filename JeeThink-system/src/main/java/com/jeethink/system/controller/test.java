@@ -1,6 +1,7 @@
 package com.jeethink.system.controller;
 
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import com.jeethink.system.mapper.ZyjrBorrowerMapper;
 import com.jeethink.system.mapper.ZyjrBusinessMapper;
 import com.jeethink.system.mapper.ZyjrGuaranteeMapper;
 import com.jeethink.system.mapper.ZyjrRelationMapper;
+import com.jeethink.system.util.FileUtil;
 import com.rsa.RSASignature;
 import com.rsa.RSAUtil;
 import net.sf.json.JSONObject;
@@ -266,13 +268,26 @@ selVO a=new selVO();
 	 */
 
 
-	@PostMapping("/ceshi")
+	@RequestMapping(value ={"/ceshi"},method = RequestMethod.POST)
 	@ResponseBody
-	public AjaxResult testFiles(MultipartFile file) throws Exception {
-		System.err.println("进来了");
-		String a=FileUploadUtils.upload(file);
+	@ApiOperation("111111111")
+	public AjaxResult testFiles(@RequestParam(value="file",required=false)MultipartFile uploadFile) throws Exception {
+		/*System.err.println("进来了");
+		MultipartFile multipartFile = FileUtil.toMultipartFile(file.getName(), file);*/
+		String a=FileUploadUtils.upload(uploadFile);
 		System.err.println(a);
 		return AjaxResult.success(a);
 }
+
+	@RequestMapping(value ={"/ceshi2"},method = RequestMethod.GET)
+	@ResponseBody
+	@ApiOperation("111111111")
+	public AjaxResult ceshi()  {
+		int a=1;
+		System.err.println(a);
+		return AjaxResult.success(a);
+	}
+
+
 
 }
