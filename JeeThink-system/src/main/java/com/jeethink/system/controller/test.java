@@ -2,6 +2,7 @@ package com.jeethink.system.controller;
 
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,9 @@ import com.jeethink.system.util.FileUtil;
 import com.rsa.RSASignature;
 import com.rsa.RSAUtil;
 import net.sf.json.JSONObject;
+import org.apache.http.entity.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -271,10 +274,11 @@ selVO a=new selVO();
 	@RequestMapping(value ={"/ceshi"},method = RequestMethod.POST)
 	@ResponseBody
 	@ApiOperation("111111111")
-	public AjaxResult testFiles(@RequestParam(value="file",required=false)MultipartFile uploadFile) throws Exception {
-		/*System.err.println("进来了");
-		MultipartFile multipartFile = FileUtil.toMultipartFile(file.getName(), file);*/
-		String a=FileUploadUtils.upload(uploadFile);
+	public AjaxResult testFiles(@RequestBody MultipartFile file) throws Exception {
+	/*	FileInputStream fileInputStream = new FileInputStream(file);
+		MultipartFile multipartFile = new MockMultipartFile("copy"+file.getName(),file.getName(), ContentType.APPLICATION_OCTET_STREAM.toString(),fileInputStream);
+		System.out.println(multipartFile.getName());*/
+		String a=FileUploadUtils.upload(file);
 		System.err.println(a);
 		return AjaxResult.success(a);
 }
@@ -287,6 +291,9 @@ selVO a=new selVO();
 		System.err.println(a);
 		return AjaxResult.success(a);
 	}
+
+
+
 
 
 
