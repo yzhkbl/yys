@@ -5,6 +5,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.jeethink.common.annotation.Excel;
 import com.jeethink.common.core.domain.BaseEntity;
 
+import java.util.List;
+
 /**
  * 车商信息对象 zyjr_car
  * 
@@ -130,7 +132,10 @@ public class ZyjrCar extends BaseEntity
     @Excel(name = "状态")
     private String state;
 
-    public void setUserName(String userName) 
+    private List<ZyjrCarAccount> ZyjrCarAccount;
+
+
+    public void setUserName(String userName)
     {
         this.userName = userName;
     }

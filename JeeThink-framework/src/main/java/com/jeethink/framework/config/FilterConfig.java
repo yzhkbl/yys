@@ -29,7 +29,7 @@ public class FilterConfig
     @Value("${xss.urlPatterns}")
     private String urlPatterns;
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+/*    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Bean
     public FilterRegistrationBean xssFilterRegistration()
     {
@@ -44,9 +44,9 @@ public class FilterConfig
         initParameters.put("enabled", enabled);
         registration.setInitParameters(initParameters);
         return registration;
-    }
+    }*/
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+   /* @SuppressWarnings({ "rawtypes", "unchecked" })
     @Bean
     public FilterRegistrationBean someFilterRegistration()
     {
@@ -56,6 +56,6 @@ public class FilterConfig
         registration.setName("repeatableFilter");
         registration.setOrder(FilterRegistrationBean.LOWEST_PRECEDENCE);
         return registration;
-    }
+    }*/
 
 }

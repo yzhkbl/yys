@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrCarAccountMapper">
+    
+    <resultMap type="ZyjrCarAccount" id="ZyjrCarAccountResult">
+        <result property="accountName"    column="account_name"    />
+        <result property="accountUse"    column="account_use"    />
+        <result property="accountType"    column="account_type"    />
+        <result property="accountNumber"    column="account_number"    />
+        <result property="accountLicence"    column="account_licence"    />
+        <result property="accountCity"    column="account_city"    />
+        <result property="accountProvinc"    column="account_provinc"    />
+        <result property="accountSubBranch"    column="account_sub_branch"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="id"    column="id"    />
+        <result property="zyjrCarId"    column="zyjr_car_id"    />
+    </resultMap>
+
+    <sql id="selectZyjrCarAccountVo">
+        select account_name, account_use, account_type, account_number, account_licence, account_city, account_provinc, account_sub_branch, create_by, create_time, update_by, update_time, id, zyjr_car_id from zyjr_car_account
+    </sql>
+
+    <select id="selectZyjrCarAccountList" parameterType="ZyjrCarAccount" resultMap="ZyjrCarAccountResult">
+        <include refid="selectZyjrCarAccountVo"/>
+        <where>  
+            <if test="accountName != null  and accountName != ''"> and account_name like concat('%', #{accountName}, '%')</if>
+            <if test="accountUse != null  and accountUse != ''"> and account_use = #{accountUse}</if>
+            <if test="accountType != null  and accountType != ''"> and account_type = #{accountType}</if>
+            <if test="accountNumber != null  and accountNumber != ''"> and account_number = #{accountNumber}</if>
+            <if test="accountLicence != null  and accountLicence != ''"> and account_licence = #{accountLicence}</if>
+            <if test="accountCity != null  and accountCity != ''"> and account_city = #{accountCity}</if>
+            <if test="accountProvinc != null  and accountProvinc != ''"> and account_provinc = #{accountProvinc}</if>
+            <if test="accountSubBranch != null  and accountSubBranch != ''"> and account_sub_branch = #{accountSubBranch}</if>
+            <if test="zyjrCarId != null  and zyjrCarId != ''"> and zyjr_car_id = #{zyjrCarId}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrCarAccountById" parameterType="Long" resultMap="ZyjrCarAccountResult">
+        <include refid="selectZyjrCarAccountVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrCarAccount" parameterType="ZyjrCarAccount" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_car_account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="accountName != null">account_name,</if>
+            <if test="accountUse != null">account_use,</if>
+            <if test="accountType != null">account_type,</if>
+            <if test="accountNumber != null">account_number,</if>
+            <if test="accountLicence != null">account_licence,</if>
+            <if test="accountCity != null">account_city,</if>
+            <if test="accountProvinc != null">account_provinc,</if>
+            <if test="accountSubBranch != null">account_sub_branch,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="zyjrCarId != null">zyjr_car_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="accountName != null">#{accountName},</if>
+            <if test="accountUse != null">#{accountUse},</if>
+            <if test="accountType != null">#{accountType},</if>
+            <if test="accountNumber != null">#{accountNumber},</if>
+            <if test="accountLicence != null">#{accountLicence},</if>
+            <if test="accountCity != null">#{accountCity},</if>
+            <if test="accountProvinc != null">#{accountProvinc},</if>
+            <if test="accountSubBranch != null">#{accountSubBranch},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="zyjrCarId != null">#{zyjrCarId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrCarAccount" parameterType="ZyjrCarAccount">
+        update zyjr_car_account
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="accountName != null">account_name = #{accountName},</if>
+            <if test="accountUse != null">account_use = #{accountUse},</if>
+            <if test="accountType != null">account_type = #{accountType},</if>
+            <if test="accountNumber != null">account_number = #{accountNumber},</if>
+            <if test="accountLicence != null">account_licence = #{accountLicence},</if>
+            <if test="accountCity != null">account_city = #{accountCity},</if>
+            <if test="accountProvinc != null">account_provinc = #{accountProvinc},</if>
+            <if test="accountSubBranch != null">account_sub_branch = #{accountSubBranch},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="zyjrCarId != null">zyjr_car_id = #{zyjrCarId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrCarAccountById" parameterType="Long">
+        delete from zyjr_car_account where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrCarAccountByIds" parameterType="String">
+        delete from zyjr_car_account where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
