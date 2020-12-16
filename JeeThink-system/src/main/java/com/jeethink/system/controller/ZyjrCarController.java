@@ -1,6 +1,9 @@
 package com.jeethink.system.controller;
 
 import java.util.List;
+
+import com.jeethink.system.domain.ZyjrCarAccount;
+import com.jeethink.system.service.IZyjrCarAccountService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +35,8 @@ public class ZyjrCarController extends BaseController
 {
     @Autowired
     private IZyjrCarService zyjrCarService;
+    @Autowired
+    private IZyjrCarAccountService zyjrCarAccountService;
 
     /**
      * 查询车商信息列表
@@ -42,6 +47,7 @@ public class ZyjrCarController extends BaseController
     {
         startPage();
         List<ZyjrCar> list = zyjrCarService.selectZyjrCarList(zyjrCar);
+
         return getDataTable(list);
     }
 
@@ -74,9 +80,13 @@ public class ZyjrCarController extends BaseController
     @PreAuthorize("@ss.hasPermi('system:car:add')")
     @Log(title = "车商信息", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody ZyjrCar zyjrCar)
+    public AjaxResult add(@RequestBody ZyjrCar zyjrCar, @RequestBody List<ZyjrCarAccount> zyjrCarAccount)
     {
-        return toAjax(zyjrCarService.insertZyjrCar(zyjrCar));
+        int a=zyjrCarService.insertZyjrCar(zyjrCar);
+        if(a!=0){
+
+        }
+        return toAjax(a);
     }
 
     /**

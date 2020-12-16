@@ -19,9 +19,11 @@ import com.rsa.RSAUtil;
 import net.sf.json.JSONObject;
 import org.apache.http.entity.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.jeethink.system.util.HttpPostUtil;
 import com.jeethink.common.core.controller.BaseController;
@@ -274,13 +276,15 @@ selVO a=new selVO();
 	@RequestMapping(value ={"/ceshi"},method = RequestMethod.POST)
 	@ResponseBody
 	@ApiOperation("111111111")
-	public AjaxResult testFiles(@RequestBody MultipartFile file) throws Exception {
+	public AjaxResult testFiles(@RequestParam(value = "file",required = false) String file) throws Exception {
 	/*	FileInputStream fileInputStream = new FileInputStream(file);
 		MultipartFile multipartFile = new MockMultipartFile("copy"+file.getName(),file.getName(), ContentType.APPLICATION_OCTET_STREAM.toString(),fileInputStream);
 		System.out.println(multipartFile.getName());*/
-		String a=FileUploadUtils.upload(file);
-		System.err.println(a);
-		return AjaxResult.success(a);
+		/*String a=FileUploadUtils.upload(file);
+		System.err.println(a);*/
+		System.err.println(file);
+
+		return AjaxResult.success();
 }
 
 	@RequestMapping(value ={"/ceshi2"},method = RequestMethod.GET)
@@ -291,8 +295,6 @@ selVO a=new selVO();
 		System.err.println(a);
 		return AjaxResult.success(a);
 	}
-
-
 
 
 
