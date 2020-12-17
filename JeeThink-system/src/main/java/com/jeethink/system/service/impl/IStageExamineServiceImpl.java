@@ -1,9 +1,6 @@
 package com.jeethink.system.service.impl;
 
-import com.jeethink.system.domain.ZyjrBorrower;
-import com.jeethink.system.domain.ZyjrBusiness;
-import com.jeethink.system.domain.ZyjrGuarantee;
-import com.jeethink.system.domain.ZyjrRelation;
+import com.jeethink.system.domain.*;
 import com.jeethink.system.mapper.StageExamineMapper;
 import com.jeethink.system.service.IStageExamineService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,15 +40,25 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     }
 
     @Override
-    public List<Object> find(String transactionCode){
+    public Map<String,Object> find(String transactionCode){
         Map<String,Object> map = new HashMap<>();
         map.put("business",findByBusiness(transactionCode));
         map.put("borrower",findByBorrower(transactionCode));
         map.put("relation",findByRelation(transactionCode));
         map.put("guarantee",findByGuarantee(transactionCode));
-        List<Object> list = new ArrayList<>();
-        list.add(map);
-            return list;
+            return map;
         }
+
+    @Override
+    public int addBankDetails(ZyjrDetails q) {
+        int count = examineDao.insertBank(q);
+        return count;
+    }
+
+    @Override
+    public ZyjrDetails findBankDetails(String transactionCode) {
+        ZyjrDetails zyjrDetails = examineDao.findByDetails(transactionCode);
+        return zyjrDetails;
+    }
 
 }

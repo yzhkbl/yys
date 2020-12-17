@@ -20,21 +20,21 @@ public interface ExamineMapper {
     int updateBusiness(ZyjrBusiness q);
     int updateStart(ZyjrStartPage q);
 
-    int updateOne(Boolean orderState,String transactionCode);
-    int updateTwo(Boolean orderState,String transactionCode);
-    int updateThree(Boolean orderState,String transactionCode);
-    int updateFour(Boolean orderState,String transactionCode);
+    int updateOne(Integer userId,String transactionCode);
+    int updateTwo(Integer userId,String transactionCode);
+    int updateThree(Integer userId,String transactionCode);
+    int updateFour(Integer userId,String transactionCode);
 
     /**借款人信息查询*/
-    ZyjrBorrower findByBorrower(Integer orderState);
+    ZyjrBorrower findByBorrower(Integer userId);
     /**关联人信息查询*/
-    ZyjrRelation findByRelation(Integer orderState);
+    ZyjrRelation findByRelation(Integer userId);
     /**担保人信息查询*/
-    ZyjrGuarantee findByGuarantee(Integer orderState);
+    ZyjrGuarantee findByGuarantee(Integer userId);
     /**业务信息查询*/
-    ZyjrBusiness findByBusiness(Integer orderState);
+    ZyjrBusiness findByBusiness(Integer userId);
 
     int insertStart(ZyjrStartPage q);
 
-    ZyjrStartPage findByStart(Integer orderState);
+    ZyjrStartPage findByStart(Integer userId);
 }

@@ -44,15 +44,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectZyjrCarAccountVo"/>
         where id = #{id}
     </select>
-<!--
-    <insert id="insertZyjrCarAccount"
-        insert into zyjr_car_account(account_name, account_use, account_type, account_number, account_licence, account_city, account_provinc, account_sub_branch, id, zyjr_car_id) values
-    <foreach item="item" collection="list" separator=",">
-        (#{item.id},#{item.comId},#{item.name},#{item.account},#{item.password},#{item.token},#{item.balance},
-        #{item.status},#{item.currency},#{item.deleted},#{item.createUser},#{item.createTime},#{item.updateUser},
-        #{item.updateTime})
-    </foreach>
-    </insert>-->
 
     <update id="updateZyjrCarAccount" parameterType="ZyjrCarAccount">
         update zyjr_car_account
@@ -84,5 +75,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+    <insert id="insertZyjrCarAccount" parameterType="java.util.List" useGeneratedKeys="false">
+        insert into zyjr_car_account
+        (id,account_name,account_use,account_type,account_number,account_licence,account_city,account_provinc,
+        account_sub_branch,zyjr_car_id,create_by,create_time,update_by,update_time)
+        values
+        <foreach collection="zyjrCarAccount" item="item" index="index" separator=",">
+            (#{item.id},#{item.accountName},#{item.accountUse},#{item.accountType},#{item.accountNumber},#{item.accountLicence},#{item.accountCity},
+            #{item.accountProvinc},#{item.accountSubBranch},#{item.zyjrCarId},#{item.createBy},#{item.createTime},#{item.updateBy},#{item.updateTime})
+        </foreach>
+
+    </insert>
     
 </mapper>

@@ -1,9 +1,6 @@
 package com.jeethink.system.mapper;
 
-import com.jeethink.system.domain.ZyjrBorrower;
-import com.jeethink.system.domain.ZyjrBusiness;
-import com.jeethink.system.domain.ZyjrGuarantee;
-import com.jeethink.system.domain.ZyjrRelation;
+import com.jeethink.system.domain.*;
 
 public interface StageExamineMapper {
     /**借款人信息查询*/
@@ -14,4 +11,8 @@ public interface StageExamineMapper {
     ZyjrGuarantee findByGuarantee(String transactionCode);
     /**业务信息查询*/
     ZyjrBusiness findByBusiness(String transactionCode);
+    /**银行岗信息录入*/
+    int insertBank(ZyjrDetails q);
+    /**征信详情回显*/
+    ZyjrDetails findByDetails(String transactionCode);
 }

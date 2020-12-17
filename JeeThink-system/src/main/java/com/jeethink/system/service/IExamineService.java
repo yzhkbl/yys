@@ -9,11 +9,11 @@ public interface IExamineService {
     int addByRelation(ZyjrRelation q);
     int addByGuarantee(ZyjrGuarantee q);
     int addByBusiness(ZyjrBusiness q);
-    ZyjrBorrower findByBorrower(Integer orderState);
-    ZyjrRelation findByRelation(Integer orderState);
-    ZyjrGuarantee findByGuarantee(Integer orderState);
-    ZyjrBusiness findByBusiness(Integer orderState);
-    Map<String,Object> find(Integer orderState);
+    ZyjrBorrower findByBorrower(Integer userId);
+    ZyjrRelation findByRelation(Integer userId);
+    ZyjrGuarantee findByGuarantee(Integer userId);
+    ZyjrBusiness findByBusiness(Integer userId);
+    Map<String,Object> find(Integer userId);
     int addByStart(ZyjrStartPage q);
-    ZyjrStartPage findByStart(Integer orderState);
+    ZyjrStartPage findByStart(Integer userId);
 }

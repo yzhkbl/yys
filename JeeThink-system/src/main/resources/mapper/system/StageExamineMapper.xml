@@ -26,5 +26,15 @@
         from zyjr_business
         where order_state=1 and transaction_code=#{transactionCode}
     </select>
-
+    <insert id="insertBank" parameterType="com.jeethink.system.domain.ZyjrDetails">
+        insert into zyjr_details
+        (id,transaction_code,details)
+        values
+        (#{id},#{transactionCode},#{details})
+    </insert>
+    <select id="findByDetails" resultType="com.jeethink.system.domain.ZyjrDetails">
+        select id,transaction_code,details
+        from zyjr_details
+        where transaction_code=#{transactionCode}
+    </select>
 </mapper>

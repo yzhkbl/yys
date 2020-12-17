@@ -43,32 +43,32 @@ public class ExamineController {
     }
 
     @RequestMapping("/find/borrower")
-    public AjaxResult findBorrower(Integer orderState){
-        ZyjrBorrower borrower = examineService.findByBorrower(orderState);
+    public AjaxResult findBorrower(Integer userId){
+        ZyjrBorrower borrower = examineService.findByBorrower(userId);
         return AjaxResult.success(borrower);
     }
 
     @RequestMapping("/find/relation")
-    public AjaxResult findRelation(Integer orderState){
-        ZyjrRelation relation = examineService.findByRelation(orderState);
+    public AjaxResult findRelation(Integer userId){
+        ZyjrRelation relation = examineService.findByRelation(userId);
         return AjaxResult.success(relation);
     }
 
     @RequestMapping("/find/guarantee")
-    public AjaxResult findGuarantee(Integer orderState){
-        ZyjrGuarantee guarantee= examineService.findByGuarantee(orderState);
+    public AjaxResult findGuarantee(Integer userId){
+        ZyjrGuarantee guarantee= examineService.findByGuarantee(userId);
         return AjaxResult.success(guarantee);
     }
 
     @RequestMapping("/find/business")
-    public AjaxResult findBusiness(Integer orderState){
-        ZyjrBusiness business = examineService.findByBusiness(orderState);
+    public AjaxResult findBusiness(Integer userId){
+        ZyjrBusiness business = examineService.findByBusiness(userId);
         return AjaxResult.success(business);
     }
 
     @RequestMapping("/find")
-    public AjaxResult find(Integer orderState){
-        Map<String,Object> find = examineService.find(orderState);
+    public AjaxResult find(Integer userId){
+        Map<String,Object> find = examineService.find(userId);
         return AjaxResult.success(find);
     }
 
@@ -79,8 +79,8 @@ public class ExamineController {
     }
 
     @RequestMapping("/find/start")
-    public AjaxResult findByStart(Integer orderState){
-        ZyjrStartPage startPage = examineService.findByStart(orderState);
+    public AjaxResult findByStart(Integer userId){
+        ZyjrStartPage startPage = examineService.findByStart(userId);
         return AjaxResult.success(startPage);
     }
 }

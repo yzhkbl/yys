@@ -38,24 +38,24 @@
         select id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,obverse_id,obverse_code,obverse_address,
         obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,user_id,order_state,transaction_code
         from zyjr_borrower
-        where order_state=#{orderState}
+        where order_state=0 and user_id = #{userId}
     </select>
     <select id="findByRelation" resultType="com.jeethink.system.domain.ZyjrRelation">
         select id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,company,company_address,year_income,obverse_id,
         obverse_code,obverse_address,obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,people_ship,user_id,business_role,order_state,transaction_code
         from zyjr_relation
-        where order_state=#{orderState}
+        where order_state=0 and user_id = #{userId}
     </select>
     <select id="findByGuarantee" resultType="com.jeethink.system.domain.ZyjrGuarantee">
         select id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,company,company_address,year_income,obverse_id,
         obverse_code,obverse_address,obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,people_ship,user_id,order_state,transaction_code
         from zyjr_guarantee
-        where order_state=#{orderState}
+        where order_state=0 and user_id = #{userId}
     </select>
     <select id="findByBusiness" resultType="com.jeethink.system.domain.ZyjrBusiness">
         select id,team,car_information,intention_price,loan_money,repay_period,car_type,user_id,order_state,transaction_code
         from zyjr_business
-        where order_state=#{orderState}
+        where order_state=0 and user_id = #{userId}
     </select>
     <insert id="insertStart" parameterType="com.jeethink.system.domain.ZyjrStartPage">
         insert into zyjr_start_page
@@ -66,7 +66,7 @@
     <select id="findByStart" resultType="com.jeethink.system.domain.ZyjrStartPage">
         select id,fund_side,business_place,order_state,user_id,transaction_code,private_code
         from zyjr_start_page
-        where order_state=#{orderState}
+        where order_state=0 and user_id = #{userId}
     </select>
     <update id="updateBorrower">
         update zyjr_borrower
@@ -150,7 +150,7 @@
                 transaction_code=#{transactionCode}
             </if>
         </set>
-        where order_state=#{orderState}
+        where order_state=0 and user_id = #{userId}
     </update>
 
     <update id="updateRelation">
@@ -250,7 +250,7 @@
                 transaction_code=#{transactionCode}
             </if>
         </set>
-        where order_state=#{orderState}
+        where order_state=0 and user_id = #{userId}
     </update>
     <update id="updateGuarantee">
         update zyjr_guarantee
@@ -346,7 +346,7 @@
                 transaction_code=#{transactionCode}
             </if>
         </set>
-        where order_state=#{orderState}
+        where order_state=0 and user_id = #{userId}
     </update>
     <update id="updateBusiness">
         update zyjr_business
@@ -380,7 +380,7 @@
             </if>
 
         </set>
-        where order_state=#{orderState}
+        where order_state=0 and user_id = #{userId}
     </update>
     <update id="updateStart">
         update zyjr_start_page
@@ -407,6 +407,7 @@
                 private_code = #{privateCode}
             </if>
         </set>
+        where order_state=0 and user_id = #{userId}
     </update>
     <update id="updateOne">
         update zyjr_borrower
@@ -418,18 +419,18 @@
         update zyjr_relation
         set order_state=#{orderState},
         transaction_code=#{transactionCode}
-        where order_state=false
+        where order_state=0 and user_id = #{userId}
     </update>
     <update id="updateThree">
         update zyjr_guarantee
         set order_state=#{orderState},
         transaction_code=#{transactionCode}
-        where order_state=false
+        where order_state=0 and user_id = #{userId}
     </update>
     <update id="updateFour">
         update zyjr_business
         set order_state=#{orderState},
         transaction_code=#{transactionCode}
-        where order_state=false
+        where order_state=0 and user_id = #{userId}
     </update>
 </mapper>

@@ -68,37 +68,37 @@ public class ExamineServiceImpl implements IExamineService {
 
 
     @Override
-    public ZyjrBorrower findByBorrower(Integer orderState) {
-        ZyjrBorrower borrower = examineDao.findByBorrower(orderState);
+    public ZyjrBorrower findByBorrower(Integer userId) {
+        ZyjrBorrower borrower = examineDao.findByBorrower(userId);
         return borrower;
     }
 
     @Override
-    public ZyjrRelation findByRelation(Integer orderState) {
-        ZyjrRelation relation = examineDao.findByRelation(orderState);
+    public ZyjrRelation findByRelation(Integer userId) {
+        ZyjrRelation relation = examineDao.findByRelation(userId);
         return relation;
     }
 
     @Override
-    public ZyjrGuarantee findByGuarantee(Integer orderState) {
-        ZyjrGuarantee guarantee = examineDao.findByGuarantee(orderState);
+    public ZyjrGuarantee findByGuarantee(Integer userId) {
+        ZyjrGuarantee guarantee = examineDao.findByGuarantee(userId);
         return guarantee;
     }
 
     @Override
-    public ZyjrBusiness findByBusiness(Integer orderState) {
-        ZyjrBusiness business = examineDao.findByBusiness(orderState);
+    public ZyjrBusiness findByBusiness(Integer userId) {
+        ZyjrBusiness business = examineDao.findByBusiness(userId);
         return business;
     }
 
     @Override
-    public Map<String,Object> find(Integer orderState){
+    public Map<String,Object> find(Integer userId){
         Map<String,Object>map = new HashMap<>();
-        map.put("business",findByBusiness(orderState));
-        map.put("borrower",findByBorrower(orderState));
-        map.put("relation",findByRelation(orderState));
-        map.put("guarantee",findByGuarantee(orderState));
-        map.put("start",findByStart(orderState));
+        map.put("business",findByBusiness(userId));
+        map.put("borrower",findByBorrower(userId));
+        map.put("relation",findByRelation(userId));
+        map.put("guarantee",findByGuarantee(userId));
+        map.put("start",findByStart(userId));
         return map;
     }
 
@@ -114,14 +114,14 @@ public class ExamineServiceImpl implements IExamineService {
         startPage.setUserId(q.getUserId());
 
         String a = orderCode.getOrderCode();
-        String b = IdUtils.simpleUUID();
+        //String b = IdUtils.simpleUUID();
 
         startPage.setTransactionCode(a);
-        startPage.setPrivateCode(b);
-        examineDao.updateOne(true,a);
-        examineDao.updateTwo(true,a);
-        examineDao.updateThree(true,a);
-        examineDao.updateFour(true,a);
+        //startPage.setPrivateCode(b);
+        examineDao.updateOne(q.getUserId(),a);
+        examineDao.updateTwo(q.getUserId(),a);
+        examineDao.updateThree(q.getUserId(),a);
+        examineDao.updateFour(q.getUserId(),a);
         if(findByStart(q.getUserId())!=null&&q.getOrderState()==0){
             int count = examineDao.insertStart(startPage);
 
@@ -132,8 +132,8 @@ public class ExamineServiceImpl implements IExamineService {
     }
 
     @Override
-    public ZyjrStartPage findByStart(Integer orderState) {
-        ZyjrStartPage startPage = examineDao.findByStart(orderState);
+    public ZyjrStartPage findByStart(Integer userId) {
+        ZyjrStartPage startPage = examineDao.findByStart(userId);
         return startPage;
     }
 }
