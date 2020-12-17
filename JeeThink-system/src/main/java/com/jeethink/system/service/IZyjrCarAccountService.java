@@ -9,7 +9,7 @@ import com.jeethink.system.domain.ZyjrCarAccount;
  * @author jeethink
  * @date 2020-12-15
  */
-public interface IZyjrCarAccountService 
+public interface IZyjrCarAccountService
 {
     /**
      * 查询【请填写功能名称】
@@ -33,7 +33,7 @@ public interface IZyjrCarAccountService
      * @param zyjrCarAccount 【请填写功能名称】
      * @return 结果
      */
-    public int insertZyjrCarAccount(ZyjrCarAccount zyjrCarAccount);
+    public int insertZyjrCarAccount(List<ZyjrCarAccount> zyjrCarAccount);
 
     /**
      * 修改【请填写功能名称】
