@@ -93,37 +93,8 @@ public class ZyjrCar extends BaseEntity
     @Excel(name = "门店照片")
     private String pic;
 
-    /** 账户名 */
-    @Excel(name = "账户名")
-    private String accountName;
 
-    /** 账户用途 */
-    @Excel(name = "账户用途")
-    private String accountUse;
-
-    /** 账户类型 */
-    @Excel(name = "账户类型")
-    private String accountType;
-
-    /** 账户卡号 */
-    @Excel(name = "账户卡号")
-    private String accountNumber;
-
-    /** 账户开户行 */
-    @Excel(name = "账户开户行")
-    private String accountLicence;
-
-    /** 账户行所在城市 */
-    @Excel(name = "账户行所在城市")
-    private String accountCity;
-
-    /** 账户所在省份 */
-    @Excel(name = "账户所在省份")
-    private String accountProvinc;
-
-    /** 账户开户支行 */
-    @Excel(name = "账户开户支行")
-    private String accountSubBranch;
+    private String dealerName;
 
     /** id */
     private Long id;
@@ -132,9 +103,27 @@ public class ZyjrCar extends BaseEntity
     @Excel(name = "状态")
     private String state;
 
-    private List<ZyjrCarAccount> ZyjrCarAccount;
+    private List<ZyjrCarAccount> zyjrCarAccount;
 
+    public void setDealerName(String dealerName)
+    {
+        this.dealerName = dealerName;
+    }
 
+    public String getDealerName()
+    {
+        return dealerName;
+    }
+
+    public void setZyjrCarAccount(List<ZyjrCarAccount> zyjrCarAccount)
+    {
+        this.zyjrCarAccount = zyjrCarAccount;
+    }
+
+    public List<ZyjrCarAccount> getZyjrCarAccount()
+    {
+        return zyjrCarAccount;
+    }
     public void setUserName(String userName)
     {
         this.userName = userName;
@@ -306,78 +295,7 @@ public class ZyjrCar extends BaseEntity
     {
         return pic;
     }
-    public void setAccountName(String accountName) 
-    {
-        this.accountName = accountName;
-    }
 
-    public String getAccountName() 
-    {
-        return accountName;
-    }
-    public void setAccountUse(String accountUse) 
-    {
-        this.accountUse = accountUse;
-    }
-
-    public String getAccountUse() 
-    {
-        return accountUse;
-    }
-    public void setAccountType(String accountType) 
-    {
-        this.accountType = accountType;
-    }
-
-    public String getAccountType() 
-    {
-        return accountType;
-    }
-    public void setAccountNumber(String accountNumber) 
-    {
-        this.accountNumber = accountNumber;
-    }
-
-    public String getAccountNumber() 
-    {
-        return accountNumber;
-    }
-    public void setAccountLicence(String accountLicence) 
-    {
-        this.accountLicence = accountLicence;
-    }
-
-    public String getAccountLicence() 
-    {
-        return accountLicence;
-    }
-    public void setAccountCity(String accountCity) 
-    {
-        this.accountCity = accountCity;
-    }
-
-    public String getAccountCity() 
-    {
-        return accountCity;
-    }
-    public void setAccountProvinc(String accountProvinc) 
-    {
-        this.accountProvinc = accountProvinc;
-    }
-
-    public String getAccountProvinc() 
-    {
-        return accountProvinc;
-    }
-    public void setAccountSubBranch(String accountSubBranch) 
-    {
-        this.accountSubBranch = accountSubBranch;
-    }
-
-    public String getAccountSubBranch() 
-    {
-        return accountSubBranch;
-    }
     public void setId(Long id) 
     {
         this.id = id;
@@ -420,20 +338,14 @@ public class ZyjrCar extends BaseEntity
             .append("matchAmount", getMatchAmount())
             .append("detailAddress", getDetailAddress())
             .append("pic", getPic())
-            .append("accountName", getAccountName())
-            .append("accountUse", getAccountUse())
-            .append("accountType", getAccountType())
-            .append("accountNumber", getAccountNumber())
-            .append("accountLicence", getAccountLicence())
-            .append("accountCity", getAccountCity())
-            .append("accountProvinc", getAccountProvinc())
-            .append("accountSubBranch", getAccountSubBranch())
             .append("createBy", getCreateBy())
             .append("createTime", getCreateTime())
             .append("updateBy", getUpdateBy())
             .append("updateTime", getUpdateTime())
             .append("id", getId())
             .append("state", getState())
+                .append("zyjrCarAccount",getZyjrCarAccount())
+                .append("dealerName",getDealerName())
             .toString();
     }
 }

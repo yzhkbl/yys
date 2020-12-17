@@ -44,40 +44,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectZyjrCarAccountVo"/>
         where id = #{id}
     </select>
-        
-    <insert id="insertZyjrCarAccount" parameterType="ZyjrCarAccount" useGeneratedKeys="true" keyProperty="id">
-        insert into zyjr_car_account
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="accountName != null">account_name,</if>
-            <if test="accountUse != null">account_use,</if>
-            <if test="accountType != null">account_type,</if>
-            <if test="accountNumber != null">account_number,</if>
-            <if test="accountLicence != null">account_licence,</if>
-            <if test="accountCity != null">account_city,</if>
-            <if test="accountProvinc != null">account_provinc,</if>
-            <if test="accountSubBranch != null">account_sub_branch,</if>
-            <if test="createBy != null">create_by,</if>
-            <if test="createTime != null">create_time,</if>
-            <if test="updateBy != null">update_by,</if>
-            <if test="updateTime != null">update_time,</if>
-            <if test="zyjrCarId != null">zyjr_car_id,</if>
-         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="accountName != null">#{accountName},</if>
-            <if test="accountUse != null">#{accountUse},</if>
-            <if test="accountType != null">#{accountType},</if>
-            <if test="accountNumber != null">#{accountNumber},</if>
-            <if test="accountLicence != null">#{accountLicence},</if>
-            <if test="accountCity != null">#{accountCity},</if>
-            <if test="accountProvinc != null">#{accountProvinc},</if>
-            <if test="accountSubBranch != null">#{accountSubBranch},</if>
-            <if test="createBy != null">#{createBy},</if>
-            <if test="createTime != null">#{createTime},</if>
-            <if test="updateBy != null">#{updateBy},</if>
-            <if test="updateTime != null">#{updateTime},</if>
-            <if test="zyjrCarId != null">#{zyjrCarId},</if>
-         </trim>
-    </insert>
+<!--
+    <insert id="insertZyjrCarAccount"
+        insert into zyjr_car_account(account_name, account_use, account_type, account_number, account_licence, account_city, account_provinc, account_sub_branch, id, zyjr_car_id) values
+    <foreach item="item" collection="list" separator=",">
+        (#{item.id},#{item.comId},#{item.name},#{item.account},#{item.password},#{item.token},#{item.balance},
+        #{item.status},#{item.currency},#{item.deleted},#{item.createUser},#{item.createTime},#{item.updateUser},
+        #{item.updateTime})
+    </foreach>
+    </insert>-->
 
     <update id="updateZyjrCarAccount" parameterType="ZyjrCarAccount">
         update zyjr_car_account
@@ -104,7 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteZyjrCarAccountByIds" parameterType="String">
-        delete from zyjr_car_account where id in 
+        delete from zyjr_car_account where zyjr_car_id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

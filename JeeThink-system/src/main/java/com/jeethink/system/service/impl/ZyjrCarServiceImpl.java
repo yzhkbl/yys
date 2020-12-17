@@ -2,9 +2,12 @@ package com.jeethink.system.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.jeethink.common.core.redis.RedisCache;
 import com.jeethink.common.utils.DateUtils;
+import com.jeethink.system.domain.ZyjrCarAccount;
+import com.jeethink.system.service.IZyjrCarAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.jeethink.system.mapper.ZyjrCarMapper;
@@ -22,6 +25,8 @@ public class ZyjrCarServiceImpl implements IZyjrCarService
 {
     @Autowired
     private ZyjrCarMapper zyjrCarMapper;
+    @Autowired
+    private IZyjrCarAccountService zyjrCarAccountService;
 
 
     /**
@@ -72,6 +77,15 @@ public class ZyjrCarServiceImpl implements IZyjrCarService
     public int updateZyjrCar(ZyjrCar zyjrCar)
     {
         zyjrCar.setUpdateTime(DateUtils.getNowDate());
+
+        if(zyjrCar.getZyjrCarAccount().size()>0){
+            List<ZyjrCarAccount> zyjrCarAccount = zyjrCar.getZyjrCarAccount();
+            List<Long> ids=zyjrCarAccount.stream().map(ZyjrCarAccount::getId).collect(Collectors.toList());
+            Long[] al=new Long[ids.size()];
+            Long[] longs = ids.toArray(al);
+            zyjrCarAccountService.deleteZyjrCarAccountByIds(longs);
+            zyjrCarAccountService.insertZyjrCarAccount(zyjrCar.getZyjrCarAccount());
+        }
 
         return zyjrCarMapper.updateZyjrCar(zyjrCar);
     }

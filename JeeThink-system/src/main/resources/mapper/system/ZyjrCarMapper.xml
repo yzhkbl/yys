@@ -31,16 +31,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateTime"    column="update_time"    />
         <result property="id"    column="id"    />
         <result property="state"    column="state"    />
+        <result property="dealerName"    column="dealer_name"    />
 
+        <collection property="zyjrCarAccount" columnPrefix="b_" ofType="ZyjrCarAccount">
+            <id column="id" property="id"/>
+            <result property="accountName" column="account_name"/>
+            <result property="accountUse" column="account_use"/>
+            <result property="accountType" column="account_type"/>
+            <result property="accountNumber" column="account_number"/>
+            <result property="accountCity" column="account_city"/>
+            <result property="accountSubBranch" column="account_sub_branch"/>
+        </collection>
     </resultMap>
 
     <sql id="selectZyjrCarVo">
-        select user_name, gender, phone_number, is_linkman, identity, remark, area, city, bazaar, type_one, type_too, stall, business_nature, passenger_car, type_three, month_deal, month_installment, match_amount, detail_address, pic,  create_by, create_time, update_by, update_time, id, state from zyjr_car
+        select user_name, gender, phone_number, is_linkman,dealer_name, identity, remark, area, city, bazaar, type_one, type_too, stall, business_nature, passenger_car, type_three, month_deal, month_installment, match_amount, detail_address, pic,  create_by, create_time, update_by, update_time, id, state from zyjr_car
     </sql>
 
     <select id="selectZyjrCarList" parameterType="ZyjrCar" resultMap="ZyjrCarResult">
-        select a.user_name, a.gender, a.phone_number, a.is_linkman, a.identity, a.remark, a.area, a.city, a.bazaar, a.type_one, type_too, stall, business_nature, passenger_car, type_three, month_deal, month_installment, match_amount, detail_address, pic,  create_by, create_time, update_by, update_time, id, state
-        ,b.*
+        select a.user_name, a.gender, a.phone_number, a.is_linkman,a.dealer_name, a.identity, a.remark, a.area, a.city, a.bazaar, a.type_one, a.type_too, a.stall, a.business_nature, a.passenger_car, a.type_three, a.month_deal, a.month_installment, a.match_amount, a.detail_address, a.pic,  a.create_by, a.create_time, a.update_by, a.update_time, a.id, a.state,b.id b_id,b.account_name b_account_name,
+        b.account_name b_account_name,b.account_use b_account_use,b.account_type b_account_type,b.account_number b_account_number,b.account_city b_account_city,b.account_sub_branch b_account_sub_branch
         from zyjr_car a LEFT JOIN zyjr_car_account b on a.id=b.zyjr_car_id
         <where>  
             <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
@@ -62,7 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="matchAmount != null  and matchAmount != ''"> and match_amount = #{matchAmount}</if>
             <if test="detailAddress != null  and detailAddress != ''"> and detail_address = #{detailAddress}</if>
             <if test="pic != null  and pic != ''"> and pic = #{pic}</if>
-
+            <if test="dealerName != null  and dealerName != ''"> and dealer_name  like concat('%', #{dealerName}, '%')</if>
             <if test="state != null  and state != ''"> and state = #{state}</if>
         </where>
     </select>

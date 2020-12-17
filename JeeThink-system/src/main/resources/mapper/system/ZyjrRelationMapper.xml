@@ -31,14 +31,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="powerName"    column="power_name"    />
         <result property="creditPower"    column="credit_power"    />
         <result property="peopleShip"    column="people_ship"    />
-        <result property="identityId"    column="identity_id"    />
+        <result property="userId"    column="user_id"    />
         <result property="businessRole"    column="business_role"    />
         <result property="orderState"    column="order_state"    />
         <result property="transactionCode"    column="transaction_code"    />
     </resultMap>
 
     <sql id="selectZyjrRelationVo">
-        select id,transaction_code, user_name, id_card, bank_card_no, phone_number, issue_authority, start_date, end_date, family_address, company, company_address, year_income, obverse_id, obverse_code, obverse_address, obverse_name, back_id, back_code, back_address, back_name, power_id, power_code, power_address, power_name, credit_power, people_ship, identity_id, business_role, order_state from zyjr_relation
+        select id,transaction_code, user_name, id_card, bank_card_no, phone_number, issue_authority, start_date, end_date, family_address, company, company_address, year_income, obverse_id, obverse_code, obverse_address, obverse_name, back_id, back_code, back_address, back_name, power_id, power_code, power_address, power_name, credit_power, people_ship, business_role, order_state from zyjr_relation
     </sql>
 
     <select id="selectZyjrRelationList" parameterType="ZyjrRelation" resultMap="ZyjrRelationResult">
@@ -69,7 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="powerName != null  and powerName != ''"> and power_name like concat('%', #{powerName}, '%')</if>
             <if test="creditPower != null "> and credit_power = #{creditPower}</if>
             <if test="peopleShip != null  and peopleShip != ''"> and people_ship = #{peopleShip}</if>
-            <if test="identityId != null  and identityId != ''"> and identity_id = #{identityId}</if>
+
             <if test="businessRole != null "> and business_role = #{businessRole}</if>
             <if test="orderState != null "> and order_state = #{orderState}</if>
         </where>
@@ -113,7 +113,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="powerName != null">power_name,</if>
             <if test="creditPower != null">credit_power,</if>
             <if test="peopleShip != null">people_ship,</if>
-            <if test="identityId != null">identity_id,</if>
+
             <if test="businessRole != null">business_role,</if>
             <if test="orderState != null">order_state,</if>
          </trim>
@@ -143,7 +143,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="powerName != null">#{powerName},</if>
             <if test="creditPower != null">#{creditPower},</if>
             <if test="peopleShip != null">#{peopleShip},</if>
-            <if test="identityId != null">#{identityId},</if>
+
             <if test="businessRole != null">#{businessRole},</if>
             <if test="orderState != null">#{orderState},</if>
          </trim>
@@ -177,7 +177,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="powerName != null">power_name = #{powerName},</if>
             <if test="creditPower != null">credit_power = #{creditPower},</if>
             <if test="peopleShip != null">people_ship = #{peopleShip},</if>
-            <if test="identityId != null">identity_id = #{identityId},</if>
+
             <if test="businessRole != null">business_role = #{businessRole},</if>
             <if test="orderState != null">order_state = #{orderState},</if>
         </trim>

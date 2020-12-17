@@ -1,12 +1,15 @@
 package com.jeethink.system.controller;
 
 
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
+import com.jeethink.common.config.JeeThinkConfig;
 import com.jeethink.common.utils.file.FileUploadUtils;
 import com.jeethink.system.domain.vo.*;
 import com.jeethink.system.mapper.ZyjrBorrowerMapper;
@@ -14,6 +17,7 @@ import com.jeethink.system.mapper.ZyjrBusinessMapper;
 import com.jeethink.system.mapper.ZyjrGuaranteeMapper;
 import com.jeethink.system.mapper.ZyjrRelationMapper;
 import com.jeethink.system.util.FileUtil;
+import com.jeethink.system.util.androidUpload;
 import com.rsa.RSASignature;
 import com.rsa.RSAUtil;
 import net.sf.json.JSONObject;
@@ -37,6 +41,11 @@ import com.jeethink.system.domain.ZyjrRelation;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import sun.misc.BASE64Decoder;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
 @Controller
@@ -58,10 +67,12 @@ public class test extends BaseController{
 	private static String zCode="zxsqs";
 
 	@ApiOperation("查询参数列表")
-	@PostMapping
+	@PostMapping("code")
 	@ResponseBody
 	public AjaxResult find(String codes){
-		System.err.println("11");
+		if(codes==null){
+			return AjaxResult.error("编号为空");
+		}
 selVO a=new selVO();
 		/*List<Object> a=new ArrayList<>();*/
 		/**
@@ -75,7 +86,7 @@ selVO a=new selVO();
 		/**
 		 * 现无数据后期该行改为sql查询
 		 */
-		String orderNo="vx001002001786984798554951686";
+		String orderNo=codes;
 		Pub pub=new Pub();
 		pub.setBankCode("0180400023");
 		pub.setAssurerNo("S36029951");
@@ -91,21 +102,21 @@ selVO a=new selVO();
 		List<Pics> guaranteep=new ArrayList<>();
 		spouse sguarantee=new spouse();
 		spouse s=new spouse();
-		if(relation==null){
+		if(relation!=null){
 		p1.setPicId(relation.getObverseId());
 		p1.setPicCode(oCode);
-		p1.setPicAddress(relation.getObverseAddress()+".jpg");
+		p1.setPicAddress("http://192.168.31.82:8080"+relation.getObverseAddress());
 		p1.setPicFileName(relation.getObverseName()+".jpg");
 		Pics p2=new Pics();
 		p2.setPicId(relation.getBackId());
 		p2.setPicCode(pCode);
-		p2.setPicAddress(relation.getBackAddress()+".jpg");
+		p2.setPicAddress("http://192.168.31.82:8080"+relation.getBackAddress());
 		p2.setPicFileName(relation.getBackName()+".jpg");
-		Pics p3=new Pics();
+		/*Pics p3=new Pics();
 		p3.setPicId(relation.getPowerId());
 		p3.setPicCode(zCode);
-		p3.setPicAddress(relation.getPowerAddress()+".jpg");
-		p3.setPicFileName(relation.getPowerName()+".jpg");
+		p3.setPicAddress("http://192.168.31.82:8080"+relation.getPowerAddress());
+		p3.setPicFileName(relation.getPowerName()+".jpg");*/
 			s.setIdCard(relation.getIdCard());
 			s.setIssueAuthority(relation.getIssueAuthority());
 			s.setPhoneNum(relation.getPhoneNumber());
@@ -121,46 +132,46 @@ selVO a=new selVO();
 			s.setFamilyAddress(relation.getFamilyAddress());
 			pp.add(p1);
 			pp.add(p2);
-			pp.add(p3);
+			/*pp.add(p3);*/
 			s.setPics(pp);
 			lists.add(s);
 		}
 		Pics p4=new Pics();
 		p4.setPicId(borrowerById.getPowerId());
 		p4.setPicCode(oCode);
-		p4.setPicAddress(borrowerById.getPowerAddress()+".jpg");
+		p4.setPicAddress("http://192.168.31.82/dev-api"+borrowerById.getObverseAddress());
 		p4.setPicFileName(borrowerById.getPowerName()+".jpg");
 		Pics p5=new Pics();
 		p5.setPicId(borrowerById.getPowerId());
 		p5.setPicCode(pCode);
-		p5.setPicAddress(borrowerById.getPowerAddress()+".jpg");
+		p5.setPicAddress("http://192.168.31.82/dev-api"+borrowerById.getBackAddress());
 		p5.setPicFileName(borrowerById.getPowerName()+".jpg");
-		Pics p6=new Pics();
+	/*	Pics p6=new Pics();
 		p6.setPicId(borrowerById.getPowerId());
 		p6.setPicCode(zCode);
-		p6.setPicAddress(borrowerById.getPowerAddress()+".jpg");
-		p6.setPicFileName(borrowerById.getPowerName()+".jpg");
+		p6.setPicAddress("http://192.168.31.82:8080"+borrowerById.getPowerAddress());
+		p6.setPicFileName(borrowerById.getPowerName()+".jpg");*/
 				lenp.add(p4);
 				lenp.add(p5);
-				lenp.add(p6);
+				/*lenp.add(p6);*/
 
 
-		if(guarantee==null){
+		if(guarantee!=null){
 			Pics p7=new Pics();
 			p7.setPicId(guarantee.getPowerId());
 			p7.setPicCode(oCode);
-			p7.setPicAddress(guarantee.getPowerAddress()+".jpg");
+			p7.setPicAddress("http://192.168.31.82:8080"+guarantee.getPowerAddress());
 			p7.setPicFileName(guarantee.getPowerName()+".jpg");
 			Pics p8=new Pics();
 			p8.setPicId(guarantee.getPowerId());
 			p8.setPicCode(pCode);
-			p8.setPicAddress(guarantee.getPowerAddress()+".jpg");
+			p8.setPicAddress("http://192.168.31.82:8080"+guarantee.getPowerAddress());
 			p8.setPicFileName(guarantee.getPowerName()+".jpg");
-			Pics p9=new Pics();
+		/*	Pics p9=new Pics();
 			p9.setPicId(guarantee.getPowerId());
 			p9.setPicCode(zCode);
-			p9.setPicAddress(guarantee.getPowerAddress()+".jpg");
-			p9.setPicFileName(guarantee.getPowerName()+".jpg");
+			p9.setPicAddress("http://192.168.31.82:8080"+guarantee.getPowerAddress());
+			p9.setPicFileName(guarantee.getPowerName()+".jpg");*/
 			sguarantee.setIdCard(guarantee.getIdCard());
 			sguarantee.setIssueAuthority(guarantee.getIssueAuthority());
 			sguarantee.setPhoneNum(guarantee.getPhoneNumber());
@@ -176,7 +187,7 @@ selVO a=new selVO();
 			sguarantee.setFamilyAddress(guarantee.getFamilyAddress());
 			guaranteep.add(p7);
 			guaranteep.add(p8);
-			guaranteep.add(p9);
+		/*	guaranteep.add(p9);*/
 			sguarantee.setPics(guaranteep);
 			lists.add(sguarantee);
 		}
@@ -229,7 +240,7 @@ selVO a=new selVO();
 		System.err.println(json2.toString());
 		JSONObject json = encryptData(json2.toString(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo,orderNo);
 		JSONObject result = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", json);
-		/*	if(result.get("code").equals(0)){
+			if(result.get("code").equals(0)){
 				System.err.println(result.get("data").toString().split("\"")[3]);
 				OkVo ok=new OkVo();
 				oKreq okreq=new oKreq();
@@ -245,7 +256,7 @@ selVO a=new selVO();
 					return AjaxResult.error("提交成功");
 				}
 
-			}*/
+			}
 		return AjaxResult.success(result);
 	}
 
@@ -273,18 +284,12 @@ selVO a=new selVO();
 	 */
 
 
-	@RequestMapping(value ={"/ceshi"},method = RequestMethod.POST)
+	@PostMapping("/ceshi")
 	@ResponseBody
 	@ApiOperation("111111111")
-	public AjaxResult testFiles(@RequestParam(value = "file",required = false) String file) throws Exception {
-	/*	FileInputStream fileInputStream = new FileInputStream(file);
-		MultipartFile multipartFile = new MockMultipartFile("copy"+file.getName(),file.getName(), ContentType.APPLICATION_OCTET_STREAM.toString(),fileInputStream);
-		System.out.println(multipartFile.getName());*/
-		/*String a=FileUploadUtils.upload(file);
-		System.err.println(a);*/
-		System.err.println(file);
-
-		return AjaxResult.success();
+	public AjaxResult testFiles(String file){
+		String a=androidUpload.upload(file);
+		return AjaxResult.success(a);
 }
 
 	@RequestMapping(value ={"/ceshi2"},method = RequestMethod.GET)
@@ -295,8 +300,4 @@ selVO a=new selVO();
 		System.err.println(a);
 		return AjaxResult.success(a);
 	}
-
-
-
-
 }

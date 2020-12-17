@@ -38,6 +38,7 @@ public class ZyjrCarController extends BaseController
     @Autowired
     private IZyjrCarAccountService zyjrCarAccountService;
 
+
     /**
      * 查询车商信息列表
      */
@@ -108,6 +109,7 @@ public class ZyjrCarController extends BaseController
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
+        zyjrCarAccountService.deleteZyjrCarAccountByIds(ids);
         return toAjax(zyjrCarService.deleteZyjrCarByIds(ids));
     }
 }

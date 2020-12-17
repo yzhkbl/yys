@@ -51,9 +51,9 @@ public class ZyjrCarAccountServiceImpl implements IZyjrCarAccountService
      * @return 结果
      */
     @Override
-    public int insertZyjrCarAccount(ZyjrCarAccount zyjrCarAccount)
+    public int insertZyjrCarAccount(List<ZyjrCarAccount> zyjrCarAccount)
     {
-        zyjrCarAccount.setCreateTime(DateUtils.getNowDate());
+
         return zyjrCarAccountMapper.insertZyjrCarAccount(zyjrCarAccount);
     }
 
