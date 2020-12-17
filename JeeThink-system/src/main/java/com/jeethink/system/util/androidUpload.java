@@ -11,7 +11,7 @@ import java.util.Date;
 
 public class androidUpload {
     public static String upload(String file){
-        String destDir = "/android";
+        /*String destDir = "/android";*/
         String imgByte=file;
         imgByte=imgByte.replaceAll("data:image/png;base64,","");
         BASE64Decoder decoder =  new BASE64Decoder();
@@ -29,10 +29,10 @@ public class androidUpload {
 
         if (imageByte.length>0) {
             try {
-                //获取文件上传的真实路径
-                String uploadPath = "E:\\demo\\JeeThink-admin\\src\\main\\java\\com\\jeethink\\web\\profile\\android";//request.getSession().getServletContext().getRealPath("/")
+                //获取文件上传的真实路径E:\demo\JeeThink-admin\src\main\java\com\jeethink\web\profile\web
+                String uploadPath = "E:\\demo\\JeeThink-admin\\src\\main\\java\\com\\jeethink\\web\\profile\\web";//request.getSession().getServletContext().getRealPath("/")
                 //保存文件的路径
-                String filepath = destDir + File.separator + createNewDir();
+                String filepath =  File.separator + createNewDir();
                 System.out.println("保存文件的路径："+filepath);
                 File destfile = new File(uploadPath + filepath);
                 System.out.println("获取文件上传的真实路径："+uploadPath);
@@ -59,8 +59,8 @@ public class androidUpload {
                 fos.close();
                 in.close();
                 String lastpath = filepath + File.separator + fileNameNew;
-                System.out.println("返回图片路径：" + lastpath);
-                return lastpath;
+                System.out.println("返回图片路径：" + fileNameNew);
+                return createNewDir2()+fileNameNew;
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -81,7 +81,15 @@ public class androidUpload {
      * @return
      */
     private static String createNewDir() {
-        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
-        return fmt.format(new Date());
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy\\MM\\dd");
+        return "avatar\\"+fmt.format(new Date());
+    }
+    private static String createNewDir2() {
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd");
+        return "/profile/avatar/"+fmt.format(new Date())+"/";
+    }
+
+    public static void main(String[] args) {
+        System.err.println(createNewDir2());
     }
 }

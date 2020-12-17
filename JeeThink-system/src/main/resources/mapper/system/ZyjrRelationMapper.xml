@@ -82,7 +82,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectById" parameterType="String" resultMap="ZyjrRelationResult">
         <include refid="selectZyjrRelationVo"/>
-        where transaction_code = #{id}
+        where transaction_code = #{id} and order_state=1
     </select>
         
     <insert id="insertZyjrRelation" parameterType="ZyjrRelation" useGeneratedKeys="true" keyProperty="id">

@@ -42,6 +42,18 @@ public class ZyjrStartPage extends BaseEntity
     @Excel(name = "内部订单号")
     private String privateCode;
 
+    private String creditState;
+
+    public void setCreditState(String creditState)
+    {
+        this.creditState = creditState;
+    }
+
+    public String getCreditState()
+    {
+        return creditState;
+    }
+
     public void setId(Long id) 
     {
         this.id = id;
@@ -120,6 +132,7 @@ public class ZyjrStartPage extends BaseEntity
             .append("userId", getUserId())
             .append("transactionCode", getTransactionCode())
             .append("privateCode", getPrivateCode())
+                .append("creditState",getCreditState())
             .toString();
     }
 }

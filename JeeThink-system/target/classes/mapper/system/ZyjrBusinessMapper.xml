@@ -45,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="selectById" parameterType="String" resultMap="ZyjrBusinessResult">
         <include refid="selectZyjrBusinessVo"/>
-        where transaction_code = #{identityId}
+        where transaction_code = #{identityId} and order_state=1
     </select>
         
     <insert id="insertZyjrBusiness" parameterType="ZyjrBusiness" useGeneratedKeys="true" keyProperty="id">

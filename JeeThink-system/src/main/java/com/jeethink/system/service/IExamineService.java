@@ -1,6 +1,7 @@
 package com.jeethink.system.service;
 
 import com.jeethink.system.domain.*;
+import com.jeethink.system.domain.vo.OkVo;
 
 import java.util.Map;
 
@@ -16,4 +17,6 @@ public interface IExamineService {
     Map<String,Object> find(Integer id);
     int addByStart(ZyjrStartPage q);
     ZyjrStartPage findByStart(Integer id);
+
+    String okPurchase(String codes);
 }

@@ -1,9 +1,17 @@
 package com.jeethink.system.service.impl;
 
+import com.jeethink.common.core.domain.AjaxResult;
 import com.jeethink.common.utils.uuid.IdUtils;
 import com.jeethink.system.domain.*;
+import com.jeethink.system.domain.vo.OkVo;
+import com.jeethink.system.domain.vo.Pub;
+import com.jeethink.system.domain.vo.oKreq;
 import com.jeethink.system.mapper.ExamineMapper;
 import com.jeethink.system.service.IExamineService;
+import com.jeethink.system.util.HttpPostUtil;
+import com.rsa.RSASignature;
+import com.rsa.RSAUtil;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -136,5 +144,50 @@ public class ExamineServiceImpl implements IExamineService {
     public ZyjrStartPage findByStart(Integer userId) {
         ZyjrStartPage startPage = examineDao.findByStart(userId);
         return startPage;
+    }
+
+    @Override
+    public String okPurchase(String codes) {
+        String dataPublicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCFZnUVz07wuQfI5kf3uOaaJcpq*W3yQhJnIX2k-EKwKZaSkyuXutk0TXqwT-GXxIQJqmkjLup*HN7H1uF7JMfxl00AnncHB82LqUQKQwf5wcdDTNhvKLQtjRoLE3ry6ARoYHu5AkZPKW7sMM4o*UegPlSr45p4ZsK0iVdjqmgZfwIDAQAB";
+        String signPrivateKey = "MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAKOoelzwAU5Asw9zknkTYGvfZr0Ap6ZDL6NMSNRYZ2maVJd5xOfSRqTkEq1Ne*h2Qe3wCKdxo0SuCVWNjM-nd3af*fb4YcWdlDuHaA1s28I5hZtVp2sbF*nvgdeUwSz-X0hQGcaqVzcTKDH9l2XuMC**OEofyyosU2jvEIGdwqSNAgMBAAECgYAkojvxvc*tApKSbN5mt82nl-RZbmIYt4VcWmEbF0bevqsc1SccdVdW5a7AmE2aNY6AgnCNesR-RS3Vtr-Ech2tVfwMXypJsXN5hq0uyM6iDkE6kFhGL1zui72u9RQJvdB7CsNfEONIaFlX46MUOdF0fR2n-sGLMc1qzpj*L3k6QQJBAOJfQRF6ehE5d1Sm*7q9uObte1ubako89TSGZmCOk-3vpm9CRTey-18Ids98yMNg3Wy53M4oEzjwjdnnulX9PpUCQQC5E-NySYbigVCsO5Tjr*iAA1ykdGIgaRM45s2tvbMLYQdZYhnkPRjSj*Y7I915cp5klQ75T260InPYQqBkb2gZAkEAjRYtKcWZ*s5EL4B7eCHy8gqlTa0JjAd*FCSH-joexq-snX9CQLrRKtvNoPf28L6YgsE8e0jC4kQbROqGWj2iGQJBAKkXVUCBdL7UrsPs26b6PE1YxPdrbYt29Jz0Ic4ulro6t*AuBMHGIDugRRSbO*mNkrEKjlew-s*M*pIGrUuVjWECQQC3qMemXCmqp7lAaSqYy9Rk8HNVgEeDqJfhcIS4SrRH0DSExPE9yfhadaiC4IIYmmK5L*2V3dxIUI7KXbeO*ptz";
+        String bankType = "ICBC";
+        Pub pub=new Pub();
+        pub.setBankCode("0180400023");
+        pub.setAssurerNo("S36029951");
+        pub.setPlatNo("zyhzjg");
+        pub.setOrderNo(codes);
+        pub.setProductType(1);
+        pub.setBankType(bankType);
+        String assurerNo = "S36029951";
+        String platNo = "zyhzjg";
+        OkVo ok = new OkVo();
+        oKreq okreq = new oKreq();
+        okreq.setSignConfirm(1);
+        String busiCode = "1008";
+        pub.setBusiCode(busiCode);
+        ok.setPub(pub);
+        ok.setReq(okreq);
+        JSONObject json3 = new JSONObject().fromObject(ok);
+        JSONObject jsons = encryptData(json3.toString(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo, codes);
+        JSONObject results = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", jsons);
+        if (results.get("code").equals(0)) {
+            return "ok";
+        }
+        return "出现未知错误";
+    }
+    public static JSONObject encryptData(String data, String dataPublicKey ,String signPrivateKey ,String assurerNo
+            , String bankType, String busiCode, String platNo,String orderNo){
+        JSONObject request = new JSONObject();
+        String encryptData = RSAUtil.encrypt(data, dataPublicKey);
+        request.put("data", encryptData);
+        String signData = RSASignature.sign(data, signPrivateKey);
+        request.put("sign", signData);
+        request.put("assurerNo", assurerNo);
+        request.put("bankType", bankType);
+        request.put("busiCode", busiCode);
+        request.put("platNo", platNo);
+        request.put("bankCode","0180400023");
+        request.put("orderNo",orderNo);
+        return request;
     }
 }

@@ -112,6 +112,7 @@ public class SysProfileController extends BaseController
         if (!file.isEmpty())
         {
             LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
+            System.err.println(JeeThinkConfig.getAvatarPath());
             String avatar = FileUploadUtils.upload(JeeThinkConfig.getAvatarPath(), file);
             System.err.println(avatar);
             System.err.println(JeeThinkConfig.getAvatarPath());

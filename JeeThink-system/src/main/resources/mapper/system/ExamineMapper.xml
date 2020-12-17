@@ -64,7 +64,7 @@
         (#{id},#{fundSide},#{businessPlace},#{orderState},#{userId},#{transaction_code},#{private_code})
     </insert>
     <select id="findByStart" resultType="com.jeethink.system.domain.ZyjrStartPage">
-        select id,fund_side,business_place,order_state,user_id,transaction_code,private_code
+        select id,fund_side,business_place,order_state,user_id,transaction_code,private_code,credit_state
         from zyjr_start_page
         where user_id=#{userId} and order_state=false
     </select>
@@ -151,6 +151,14 @@
             </if>
         </set>
         where order_state=false
+    </update>
+
+    <update id="updateBystates">
+        update zyjr_start_page set credit_state=#{creditState} where transaction_code=#{transactionCode} and order_state=1
+    </update>
+
+    <update id="updateByCode">
+        update zyjr_start_page set private_code=#{privateCode} where transaction_code=#{transactionCode} and order_state=1
     </update>
 
     <update id="updateRelation">

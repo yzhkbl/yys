@@ -24,7 +24,8 @@ public interface ExamineMapper {
     int updateTwo(Boolean orderState,String transactionCode);
     int updateThree(Boolean orderState,String transactionCode);
     int updateFour(Boolean orderState,String transactionCode);
-
+    int updateBystates(ZyjrStartPage q);
+    int updateByCode(ZyjrStartPage q);
     /**借款人信息查询*/
     ZyjrBorrower findByBorrower(Integer userId);
     /**关联人信息查询*/

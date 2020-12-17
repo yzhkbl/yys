@@ -11,11 +11,10 @@ import java.util.Map;
 
 import com.jeethink.common.config.JeeThinkConfig;
 import com.jeethink.common.utils.file.FileUploadUtils;
+import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.*;
-import com.jeethink.system.mapper.ZyjrBorrowerMapper;
-import com.jeethink.system.mapper.ZyjrBusinessMapper;
-import com.jeethink.system.mapper.ZyjrGuaranteeMapper;
-import com.jeethink.system.mapper.ZyjrRelationMapper;
+import com.jeethink.system.mapper.*;
+import com.jeethink.system.service.IExamineService;
 import com.jeethink.system.util.FileUtil;
 import com.jeethink.system.util.androidUpload;
 import com.rsa.RSASignature;
@@ -32,20 +31,18 @@ import org.springframework.web.bind.annotation.*;
 import com.jeethink.system.util.HttpPostUtil;
 import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
-import com.jeethink.system.domain.ZyjrBorrower;
-import com.jeethink.system.domain.ZyjrBusiness;
-import com.jeethink.system.domain.ZyjrGuarantee;
-import com.jeethink.system.domain.ZyjrRelation;
 
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.w3c.dom.html.HTMLFormElement;
 import sun.misc.BASE64Decoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.text.html.HTML;
 
 
 @Controller
@@ -61,6 +58,10 @@ public class test extends BaseController{
 	private ZyjrBorrowerMapper o;
 	@Autowired
 	private ZyjrGuaranteeMapper g;
+	@Autowired
+	private IExamineService examineService;
+	@Autowired
+	private ExamineMapper examineMapper;
 
 	private static String oCode="sfzzm";
 	private static String pCode="sfzfm";
@@ -69,7 +70,10 @@ public class test extends BaseController{
 	@ApiOperation("查询参数列表")
 	@PostMapping("code")
 	@ResponseBody
-	public AjaxResult find(String codes){
+	public AjaxResult find(Integer userId){
+		ZyjrBorrower byBorrower = examineMapper.findByBorrower(userId);
+		ZyjrBusiness byBusiness = examineMapper.findByBusiness(userId);
+		String codes=byBorrower.getTransactionCode();
 		if(codes==null){
 			return AjaxResult.error("编号为空");
 		}
@@ -139,12 +143,12 @@ selVO a=new selVO();
 		Pics p4=new Pics();
 		p4.setPicId(borrowerById.getPowerId());
 		p4.setPicCode(oCode);
-		p4.setPicAddress("http://192.168.31.82/dev-api"+borrowerById.getObverseAddress());
+		p4.setPicAddress(borrowerById.getObverseAddress());
 		p4.setPicFileName(borrowerById.getPowerName()+".jpg");
 		Pics p5=new Pics();
 		p5.setPicId(borrowerById.getPowerId());
 		p5.setPicCode(pCode);
-		p5.setPicAddress("http://192.168.31.82/dev-api"+borrowerById.getBackAddress());
+		p5.setPicAddress(borrowerById.getBackAddress());
 		p5.setPicFileName(borrowerById.getPowerName()+".jpg");
 	/*	Pics p6=new Pics();
 		p6.setPicId(borrowerById.getPowerId());
@@ -236,28 +240,75 @@ selVO a=new selVO();
 		AjaxResult c=AjaxResult.success(a);
 		JSONObject json2 = new JSONObject().fromObject(a);
 		AjaxResult as=AjaxResult.success(a.toString());
-		System.err.println(json2);
-		System.err.println(json2.toString());
+
 		JSONObject json = encryptData(json2.toString(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo,orderNo);
 		JSONObject result = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", json);
-			if(result.get("code").equals(0)){
-				System.err.println(result.get("data").toString().split("\"")[3]);
-				OkVo ok=new OkVo();
-				oKreq okreq=new oKreq();
-				okreq.setSignConfirm(1);
-				pub.setBusiCode("1008");
-				busiCode="1008";
-				ok.setPub(pub);
-				ok.setReq(okreq);
-				JSONObject json3 = new JSONObject().fromObject(ok);
-				JSONObject jsons = encryptData(json3.toString(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo,orderNo);
-				JSONObject results = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", jsons);
-				if(results.get("code").equals(0)){
-					return AjaxResult.error("提交成功");
-				}
-
-			}
+		System.err.println(result);
+		if(result.get("code").equals(0)){
+			ZyjrStartPage asd=new ZyjrStartPage();
+			asd.setTransactionCode(codes);
+			asd.setPrivateCode(result.getJSONObject("data").get("estageOrderNo").toString());
+			examineMapper.updateByCode(asd);
+		}
 		return AjaxResult.success(result);
+	}
+
+	@ApiOperation("发起确认")
+	@PostMapping("ok")
+	@ResponseBody
+	public AjaxResult find2(String codes) {
+
+		String a=examineService.okPurchase(codes);
+
+
+		return AjaxResult.error(a);
+	}
+
+	@ApiOperation("查询状态")
+	@PostMapping("selectState")
+	@ResponseBody
+	public AjaxResult find3(String codes) {
+		String dataPublicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCFZnUVz07wuQfI5kf3uOaaJcpq*W3yQhJnIX2k-EKwKZaSkyuXutk0TXqwT-GXxIQJqmkjLup*HN7H1uF7JMfxl00AnncHB82LqUQKQwf5wcdDTNhvKLQtjRoLE3ry6ARoYHu5AkZPKW7sMM4o*UegPlSr45p4ZsK0iVdjqmgZfwIDAQAB";
+		String signPrivateKey = "MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAKOoelzwAU5Asw9zknkTYGvfZr0Ap6ZDL6NMSNRYZ2maVJd5xOfSRqTkEq1Ne*h2Qe3wCKdxo0SuCVWNjM-nd3af*fb4YcWdlDuHaA1s28I5hZtVp2sbF*nvgdeUwSz-X0hQGcaqVzcTKDH9l2XuMC**OEofyyosU2jvEIGdwqSNAgMBAAECgYAkojvxvc*tApKSbN5mt82nl-RZbmIYt4VcWmEbF0bevqsc1SccdVdW5a7AmE2aNY6AgnCNesR-RS3Vtr-Ech2tVfwMXypJsXN5hq0uyM6iDkE6kFhGL1zui72u9RQJvdB7CsNfEONIaFlX46MUOdF0fR2n-sGLMc1qzpj*L3k6QQJBAOJfQRF6ehE5d1Sm*7q9uObte1ubako89TSGZmCOk-3vpm9CRTey-18Ids98yMNg3Wy53M4oEzjwjdnnulX9PpUCQQC5E-NySYbigVCsO5Tjr*iAA1ykdGIgaRM45s2tvbMLYQdZYhnkPRjSj*Y7I915cp5klQ75T260InPYQqBkb2gZAkEAjRYtKcWZ*s5EL4B7eCHy8gqlTa0JjAd*FCSH-joexq-snX9CQLrRKtvNoPf28L6YgsE8e0jC4kQbROqGWj2iGQJBAKkXVUCBdL7UrsPs26b6PE1YxPdrbYt29Jz0Ic4ulro6t*AuBMHGIDugRRSbO*mNkrEKjlew-s*M*pIGrUuVjWECQQC3qMemXCmqp7lAaSqYy9Rk8HNVgEeDqJfhcIS4SrRH0DSExPE9yfhadaiC4IIYmmK5L*2V3dxIUI7KXbeO*ptz";
+//		String assurerNo = "ceshi001";
+//		String bankType = "ICBC";
+//		String busiCode = "0001";
+//		String platNo = "zajk";
+		String bankType = "ICBC";
+		Pub pub=new Pub();
+		pub.setBankCode("0180400023");
+		pub.setAssurerNo("S36029951");
+		pub.setPlatNo("zyhzjg");
+		pub.setOrderNo(codes);
+		pub.setProductType(1);
+		pub.setBankType(bankType);
+		String assurerNo = "S36029951";
+		String platNo = "zyhzjg";
+		OkVo ok = new OkVo();
+		oKreq okreq = new oKreq();
+		okreq.setSignConfirm(1);
+		String busiCode = "1013";
+		pub.setBusiCode("1013");
+		ok.setPub(pub);
+		ok.setReq(okreq);
+		JSONObject json3 = new JSONObject().fromObject(ok);
+		JSONObject jsons = encryptData(json3.toString(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo, codes);
+		JSONObject results = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", jsons);
+
+		System.err.println(results.getJSONObject("data").getJSONObject("requestJson").getJSONObject("req").get("transType"));
+		System.err.println(results.getJSONObject("requestJson"));
+		if(results.get("code").equals(0)){
+			if(results.getJSONObject("data").getJSONObject("requestJson").getJSONObject("req").get("transType").equals(4)){
+				ZyjrStartPage asd=new ZyjrStartPage();
+				asd.setTransactionCode(codes);
+
+				asd.setCreditState("1");
+				examineMapper.updateStart(asd);
+			}
+
+		}
+			return AjaxResult.success(results);
+
 	}
 
 	public static JSONObject encryptData(String data, String dataPublicKey ,String signPrivateKey ,String assurerNo
@@ -289,15 +340,17 @@ selVO a=new selVO();
 	@ApiOperation("111111111")
 	public AjaxResult testFiles(String file){
 		String a=androidUpload.upload(file);
-		return AjaxResult.success(a);
+		String as="http://192.168.31.82/dev-api"+a;
+		return AjaxResult.success(""+as);
 }
 
 	@RequestMapping(value ={"/ceshi2"},method = RequestMethod.GET)
 	@ResponseBody
 	@ApiOperation("111111111")
 	public AjaxResult ceshi()  {
-		int a=1;
-		System.err.println(a);
-		return AjaxResult.success(a);
+
+		return AjaxResult.success();
 	}
+
+
 }
