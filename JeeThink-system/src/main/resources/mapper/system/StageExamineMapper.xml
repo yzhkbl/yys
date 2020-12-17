@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.StageExamineMapper">
+    <select id="findByBorrower" resultType="com.jeethink.system.domain.ZyjrBorrower">
+        select id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,obverse_id,obverse_code,obverse_address,
+        obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,user_id,order_state,transaction_code
+        from zyjr_borrower
+        where order_state=1 and transaction_code=#{transactionCode}
+    </select>
+    <select id="findByRelation" resultType="com.jeethink.system.domain.ZyjrRelation">
+        select id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,company,company_address,year_income,obverse_id,
+        obverse_code,obverse_address,obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,people_ship,user_id,business_role,order_state,transaction_code
+        from zyjr_relation
+        where order_state=1 and transaction_code=#{transactionCode}
+    </select>
+    <select id="findByGuarantee" resultType="com.jeethink.system.domain.ZyjrGuarantee">
+        select id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,company,company_address,year_income,obverse_id,
+        obverse_code,obverse_address,obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,people_ship,user_id,order_state,transaction_code
+        from zyjr_guarantee
+        where order_state=1 and transaction_code=#{transactionCode}
+    </select>
+    <select id="findByBusiness" resultType="com.jeethink.system.domain.ZyjrBusiness">
+        select id,team,car_information,intention_price,loan_money,repay_period,car_type,user_id,order_state,transaction_code
+        from zyjr_business
+        where order_state=1 and transaction_code=#{transactionCode}
+    </select>
+    <insert id="insertBank" parameterType="com.jeethink.system.domain.ZyjrDetails">
+        insert into zyjr_details
+        (id,transaction_code,details)
+        values
+        (#{id},#{transactionCode},#{details})
+    </insert>
+    <select id="findByDetails" resultType="com.jeethink.system.domain.ZyjrDetails">
+        select id,transaction_code,details
+        from zyjr_details
+        where transaction_code=#{transactionCode}
+    </select>
+</mapper>

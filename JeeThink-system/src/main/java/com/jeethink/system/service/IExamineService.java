@@ -1,7 +1,6 @@
 package com.jeethink.system.service;
 
 import com.jeethink.system.domain.*;
-import com.jeethink.system.domain.vo.OkVo;
 
 import java.util.Map;
 
@@ -10,13 +9,14 @@ public interface IExamineService {
     int addByRelation(ZyjrRelation q);
     int addByGuarantee(ZyjrGuarantee q);
     int addByBusiness(ZyjrBusiness q);
-    ZyjrBorrower findByBorrower(Integer id);
-    ZyjrRelation findByRelation(Integer id);
-    ZyjrGuarantee findByGuarantee(Integer id);
-    ZyjrBusiness findByBusiness(Integer id);
-    Map<String,Object> find(Integer id);
+    ZyjrBorrower findByBorrower(Integer userId);
+    ZyjrRelation findByRelation(Integer userId);
+    ZyjrGuarantee findByGuarantee(Integer userId);
+    ZyjrBusiness findByBusiness(Integer userId);
+    Map<String,Object> find(Integer userId);
     int addByStart(ZyjrStartPage q);
-    ZyjrStartPage findByStart(Integer id);
+
 
     String okPurchase(String codes);
+    ZyjrStartPage findByStart(Integer userId);
 }

@@ -107,7 +107,6 @@ public class ExamineServiceImpl implements IExamineService {
         map.put("relation",findByRelation(userId));
         map.put("guarantee",findByGuarantee(userId));
         map.put("start",findByStart(userId));
-        System.out.println(map);
         return map;
     }
 
@@ -123,14 +122,14 @@ public class ExamineServiceImpl implements IExamineService {
         startPage.setUserId(q.getUserId());
 
         String a = orderCode.getOrderCode();
-        String b = IdUtils.simpleUUID();
+        //String b = IdUtils.simpleUUID();
 
         startPage.setTransactionCode(a);
-        startPage.setPrivateCode(b);
-        examineDao.updateOne(true,a);
-        examineDao.updateTwo(true,a);
-        examineDao.updateThree(true,a);
-        examineDao.updateFour(true,a);
+        //startPage.setPrivateCode(b);
+        examineDao.updateOne(q.getUserId(),a);
+        examineDao.updateTwo(q.getUserId(),a);
+        examineDao.updateThree(q.getUserId(),a);
+        examineDao.updateFour(q.getUserId(),a);
         if(findByStart(q.getUserId())!=null&&q.getOrderState()==0){
             int count = examineDao.insertStart(startPage);
 

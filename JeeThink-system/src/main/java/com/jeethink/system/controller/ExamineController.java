@@ -7,6 +7,7 @@ import com.jeethink.system.service.IExamineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -18,25 +19,25 @@ public class ExamineController {
     private IExamineService examineService;
 
     @RequestMapping("/add/borrower")
-    public AjaxResult addBorrower(@RequestBody ZyjrBorrower q){
+    public AjaxResult addBorrower(ZyjrBorrower q){
         examineService.addByBorrower(q);
         return AjaxResult.success();
     }
 
     @RequestMapping("/add/relation")
-    public AjaxResult addRelation(@RequestBody ZyjrRelation q){
+    public AjaxResult addRelation(ZyjrRelation q){
         examineService.addByRelation(q);
         return AjaxResult.success();
     }
 
     @RequestMapping("/add/guarantee")
-    public AjaxResult addGuarantee(@RequestBody ZyjrGuarantee q){
+    public AjaxResult addGuarantee(ZyjrGuarantee q){
         examineService.addByGuarantee(q);
         return AjaxResult.success();
     }
 
     @RequestMapping("/add/business")
-    public AjaxResult addBusiness(@RequestBody ZyjrBusiness q){
+    public AjaxResult addBusiness(ZyjrBusiness q){
         examineService.addByBusiness(q);
         return AjaxResult.success();
     }
@@ -72,7 +73,7 @@ public class ExamineController {
     }
 
     @RequestMapping("/add/start")
-    public AjaxResult addByStart(@RequestBody ZyjrStartPage q){
+    public AjaxResult addByStart(ZyjrStartPage q){
         examineService.addByStart(q);
         return AjaxResult.success();
     }

@@ -33,6 +33,7 @@ public interface ZyjrCarAccountMapper
      * @param zyjrCarAccount 【请填写功能名称】
      * @return 结果
      */
+
     public int insertZyjrCarAccount(List<ZyjrCarAccount> zyjrCarAccount);
 
     /**
