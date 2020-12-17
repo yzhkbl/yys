@@ -68,38 +68,37 @@ public class ExamineServiceImpl implements IExamineService {
 
 
     @Override
-    public ZyjrBorrower findByBorrower(Integer userId) {
-        ZyjrBorrower borrower = examineDao.findByBorrower(userId);
+    public ZyjrBorrower findByBorrower(Integer orderState) {
+        ZyjrBorrower borrower = examineDao.findByBorrower(orderState);
         return borrower;
     }
 
     @Override
-    public ZyjrRelation findByRelation(Integer userId) {
-        ZyjrRelation relation = examineDao.findByRelation(userId);
+    public ZyjrRelation findByRelation(Integer orderState) {
+        ZyjrRelation relation = examineDao.findByRelation(orderState);
         return relation;
     }
 
     @Override
-    public ZyjrGuarantee findByGuarantee(Integer userId) {
-        ZyjrGuarantee guarantee = examineDao.findByGuarantee(userId);
+    public ZyjrGuarantee findByGuarantee(Integer orderState) {
+        ZyjrGuarantee guarantee = examineDao.findByGuarantee(orderState);
         return guarantee;
     }
 
     @Override
-    public ZyjrBusiness findByBusiness(Integer userId) {
-        ZyjrBusiness business = examineDao.findByBusiness(userId);
+    public ZyjrBusiness findByBusiness(Integer orderState) {
+        ZyjrBusiness business = examineDao.findByBusiness(orderState);
         return business;
     }
 
     @Override
-    public Map<String,Object> find(Integer userId){
+    public Map<String,Object> find(Integer orderState){
         Map<String,Object>map = new HashMap<>();
-        map.put("business",findByBusiness(userId));
-        map.put("borrower",findByBorrower(userId));
-        map.put("relation",findByRelation(userId));
-        map.put("guarantee",findByGuarantee(userId));
-        map.put("start",findByStart(userId));
-        System.out.println(map);
+        map.put("business",findByBusiness(orderState));
+        map.put("borrower",findByBorrower(orderState));
+        map.put("relation",findByRelation(orderState));
+        map.put("guarantee",findByGuarantee(orderState));
+        map.put("start",findByStart(orderState));
         return map;
     }
 
@@ -133,8 +132,8 @@ public class ExamineServiceImpl implements IExamineService {
     }
 
     @Override
-    public ZyjrStartPage findByStart(Integer userId) {
-        ZyjrStartPage startPage = examineDao.findByStart(userId);
+    public ZyjrStartPage findByStart(Integer orderState) {
+        ZyjrStartPage startPage = examineDao.findByStart(orderState);
         return startPage;
     }
 }

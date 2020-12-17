@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectZyjrBusinessList" parameterType="ZyjrBusiness" resultMap="ZyjrBusinessResult">
-         select a.id, a.team, a.car_information, a.intention_price, a.loan_money, a.repay_period, a.car_type, a.user_id, a.order_state,b.user_name
+         select a.id, a.team, a.car_information, a.intention_price, a.loan_money, a.repay_period, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name
          from zyjr_business a
          left join zyjr_borrower b on a.transaction_code=b.transaction_code
         <where>  
@@ -35,6 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="carType != null "> and car_type = #{carType}</if>
             <if test="userId != null  and userId != ''"> and userId = #{userId}</if>
             <if test="orderState != null "> and order_state = #{orderState}</if>
+            <if test="transactionCode != null "> and transaction_code = #{transactionCode}</if>
         </where>
     </select>
     

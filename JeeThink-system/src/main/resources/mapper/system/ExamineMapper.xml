@@ -10,7 +10,7 @@
         obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,user_id,order_state,transaction_code)
         values
         (#{id},#{userName},#{idCard},#{bankCardNo},#{phoneNumber},#{issueAuthority},#{startDate},#{endDate},#{familyAddress},#{obverseId},#{obverseCode},
-        #{obverseAddress},#{obverseName},#{backId},#{backCode},#{backAddress},#{backName},#{powerId},#{powerCode},#{powerAddress},#{powerName},#{creditPower},#{userId},#{orderState},#{transaction_code})
+        #{obverseAddress},#{obverseName},#{backId},#{backCode},#{backAddress},#{backName},#{powerId},#{powerCode},#{powerAddress},#{powerName},#{creditPower},#{userId},#{orderState},#{transactionCode})
     </insert>
     <insert id="insertRelation" parameterType="com.jeethink.system.domain.ZyjrRelation">
         insert into zyjr_relation
@@ -18,7 +18,7 @@
         obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,people_ship,user_id,business_role,order_state,transaction_code)
         values
         (#{id},#{userName},#{idCard},#{bankCardNo},#{phoneNumber},#{issueAuthority},#{startDate},#{endDate},#{familyAddress},#{company},#{companyAddress},#{yearIncome},#{obverseId},
-        #{obverseCode},#{obverseAddress},#{obverseName},#{backId},#{backCode},#{backAddress},#{backName},#{powerId},#{powerCode},#{powerAddress},#{powerName},#{creditPower},#{peopleShip},#{userId},#{businessRole},#{orderState},#{transaction_code})
+        #{obverseCode},#{obverseAddress},#{obverseName},#{backId},#{backCode},#{backAddress},#{backName},#{powerId},#{powerCode},#{powerAddress},#{powerName},#{creditPower},#{peopleShip},#{userId},#{businessRole},#{orderState},#{transactionCode})
     </insert>
     <insert id="insertGuarantee" parameterType="com.jeethink.system.domain.ZyjrGuarantee">
         insert into zyjr_guarantee
@@ -26,47 +26,47 @@
         obverse_code,obverse_address,obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,people_ship,user_id,order_state,transaction_code)
         values
         (#{id},#{userName},#{idCard},#{bankCardNo},#{phoneNumber},#{issueAuthority},#{startDate},#{endDate},#{familyAddress},#{company},#{companyAddress},#{yearIncome},#{obverseId},
-        #{obverseCode},#{obverseAddress},#{obverseName},#{backId},#{backCode},#{backAddress},#{backName},#{powerId},#{powerCode},#{powerAddress},#{powerName},#{creditPower},#{peopleShip},#{userId},#{orderState},#{transaction_code})
+        #{obverseCode},#{obverseAddress},#{obverseName},#{backId},#{backCode},#{backAddress},#{backName},#{powerId},#{powerCode},#{powerAddress},#{powerName},#{creditPower},#{peopleShip},#{userId},#{orderState},#{transactionCode})
     </insert>
     <insert id="insertBusiness" parameterType="com.jeethink.system.domain.ZyjrBusiness">
         insert into zyjr_business
         (id,team,car_information,intention_price,loan_money,repay_period,car_type,user_id,order_state,transaction_code)
         values
-        (#{id},#{team},#{carInformation},#{intentionPrice},#{loanMoney},#{repayPeriod},#{carType},#{userId},#{orderState},#{transaction_code})
+        (#{id},#{team},#{carInformation},#{intentionPrice},#{loanMoney},#{repayPeriod},#{carType},#{userId},#{orderState},#{transactionCode})
     </insert>
     <select id="findByBorrower" resultType="com.jeethink.system.domain.ZyjrBorrower">
         select id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,obverse_id,obverse_code,obverse_address,
         obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,user_id,order_state,transaction_code
         from zyjr_borrower
-        where user_id=#{userId} and order_state=false
+        where order_state=#{orderState}
     </select>
     <select id="findByRelation" resultType="com.jeethink.system.domain.ZyjrRelation">
         select id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,company,company_address,year_income,obverse_id,
         obverse_code,obverse_address,obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,people_ship,user_id,business_role,order_state,transaction_code
         from zyjr_relation
-        where user_id=#{userId} and order_state=false
+        where order_state=#{orderState}
     </select>
     <select id="findByGuarantee" resultType="com.jeethink.system.domain.ZyjrGuarantee">
         select id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,company,company_address,year_income,obverse_id,
         obverse_code,obverse_address,obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,people_ship,user_id,order_state,transaction_code
         from zyjr_guarantee
-        where user_id=#{userId} and order_state=false
+        where order_state=#{orderState}
     </select>
     <select id="findByBusiness" resultType="com.jeethink.system.domain.ZyjrBusiness">
         select id,team,car_information,intention_price,loan_money,repay_period,car_type,user_id,order_state,transaction_code
         from zyjr_business
-        where user_id=#{userId} and order_state=false
+        where order_state=#{orderState}
     </select>
     <insert id="insertStart" parameterType="com.jeethink.system.domain.ZyjrStartPage">
         insert into zyjr_start_page
         (id,fund_side,business_place,order_state,user_id,transaction_code,private_code)
         values
-        (#{id},#{fundSide},#{businessPlace},#{orderState},#{userId},#{transaction_code},#{private_code})
+        (#{id},#{fundSide},#{businessPlace},#{orderState},#{userId},#{transactionCode},#{privateCode})
     </insert>
     <select id="findByStart" resultType="com.jeethink.system.domain.ZyjrStartPage">
         select id,fund_side,business_place,order_state,user_id,transaction_code,private_code
         from zyjr_start_page
-        where user_id=#{userId} and order_state=false
+        where order_state=#{orderState}
     </select>
     <update id="updateBorrower">
         update zyjr_borrower
@@ -150,7 +150,7 @@
                 transaction_code=#{transactionCode}
             </if>
         </set>
-        where order_state=false
+        where order_state=#{orderState}
     </update>
 
     <update id="updateRelation">
@@ -250,7 +250,7 @@
                 transaction_code=#{transactionCode}
             </if>
         </set>
-        where order_state=false
+        where order_state=#{orderState}
     </update>
     <update id="updateGuarantee">
         update zyjr_guarantee
@@ -346,7 +346,7 @@
                 transaction_code=#{transactionCode}
             </if>
         </set>
-        where order_state=false
+        where order_state=#{orderState}
     </update>
     <update id="updateBusiness">
         update zyjr_business
@@ -380,7 +380,7 @@
             </if>
 
         </set>
-        where order_state=false
+        where order_state=#{orderState}
     </update>
     <update id="updateStart">
         update zyjr_start_page
