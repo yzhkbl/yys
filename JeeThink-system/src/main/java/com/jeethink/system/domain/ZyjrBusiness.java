@@ -53,7 +53,7 @@ public class ZyjrBusiness extends BaseEntity
     /** 订单状态 */
     @Excel(name = "订单状态")
     private Integer orderState;
-    private String name;
+    private String name;//联查用户名
     private String transactionCode;
     private String operator;
     public void setTransactionCode(String transactionCode)

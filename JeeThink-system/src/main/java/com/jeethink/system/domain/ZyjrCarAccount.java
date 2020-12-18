@@ -15,7 +15,7 @@ import com.jeethink.common.annotation.Excel;
  * @date 2020-12-15
  */
 @TableName(value = "zyjr_car_account")
-public class ZyjrCarAccount extends BaseModel<ZyjrCarAccount>
+public class ZyjrCarAccount extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
