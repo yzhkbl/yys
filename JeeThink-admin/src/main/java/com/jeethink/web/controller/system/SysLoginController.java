@@ -73,20 +73,32 @@ public class SysLoginController
      * @return 用户信息
      */
     @GetMapping("getInfo")
-    public AjaxResult getInfo()
+    public AjaxResult getInfo(String token)
     {
-
-        LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
-
-        SysUser user = loginUser.getUser();
-        // 角色集合
-        Set<String> roles = permissionService.getRolePermission(user);
-        // 权限集合
-        Set<String> permissions = permissionService.getMenuPermission(user);
         AjaxResult ajax = AjaxResult.success();
-        ajax.put("user", user);
-        ajax.put("roles", roles);
-        ajax.put("permissions", permissions);
+     if(token!=null){
+         LoginUser loginUser = tokenService.getLoginUser2(token);
+
+         SysUser user = loginUser.getUser();
+
+
+         ajax.put("user", user);
+
+     }else{
+         LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
+
+
+         SysUser user = loginUser.getUser();
+         // 角色集合
+         Set<String> roles = permissionService.getRolePermission(user);
+         // 权限集合
+         Set<String> permissions = permissionService.getMenuPermission(user);
+
+         ajax.put("user", user);
+         ajax.put("roles", roles);
+         ajax.put("permissions", permissions);
+     }
+
 
         return ajax;
     }

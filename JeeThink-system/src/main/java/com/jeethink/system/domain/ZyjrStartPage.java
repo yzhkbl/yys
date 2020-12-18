@@ -44,6 +44,7 @@ public class ZyjrStartPage extends BaseEntity
 
     private String creditState;
 
+
     public void setCreditState(String creditState)
     {
         this.creditState = creditState;

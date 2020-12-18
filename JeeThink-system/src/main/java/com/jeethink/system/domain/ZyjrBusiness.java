@@ -55,6 +55,7 @@ public class ZyjrBusiness extends BaseEntity
     private Integer orderState;
     private String name;
     private String transactionCode;
+    private String operator;
     public void setTransactionCode(String transactionCode)
     {
         this.transactionCode = transactionCode;
@@ -63,6 +64,16 @@ public class ZyjrBusiness extends BaseEntity
     public String getTransactionCode()
     {
         return transactionCode;
+    }
+
+    public void setOperator(String operator)
+    {
+        this.operator = operator;
+    }
+
+    public String getOperator()
+    {
+        return operator;
     }
     
 
@@ -161,6 +172,7 @@ public class ZyjrBusiness extends BaseEntity
             .append("userId", getUserId())
             .append("orderState", getOrderState())
                 .append("transactionCode", getTransactionCode())
+                .append("operator",getOperator())
             .toString();
     }
 }

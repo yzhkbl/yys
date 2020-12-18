@@ -16,6 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="orderState"    column="order_state"    />
          <result property="name"    column="user_name"    />
         <result property="transactionCode"    column="transaction_code"    />
+        <result property="operator"    column="operator"    />
     </resultMap>
 
     <sql id="selectZyjrBusinessVo">
@@ -23,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectZyjrBusinessList" parameterType="ZyjrBusiness" resultMap="ZyjrBusinessResult">
-         select a.id, a.team, a.car_information, a.intention_price, a.loan_money, a.repay_period, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name
+         select a.id, a.team,a.operator,a.update_by, a.car_information, a.intention_price, a.loan_money, a.repay_period, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name
          from zyjr_business a
          left join zyjr_borrower b on a.transaction_code=b.transaction_code
         <where>  
@@ -58,7 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="loanMoney != null">loan_money,</if>
             <if test="repayPeriod != null">repay_period,</if>
             <if test="carType != null">car_type,</if>
-            <if test="identityId != null">identity_id,</if>
+
             <if test="orderState != null">order_state,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -68,7 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="loanMoney != null">#{loanMoney},</if>
             <if test="repayPeriod != null">#{repayPeriod},</if>
             <if test="carType != null">#{carType},</if>
-            <if test="identityId != null">#{identityId},</if>
+
             <if test="orderState != null">#{orderState},</if>
          </trim>
     </insert>
@@ -82,7 +83,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="loanMoney != null">loan_money = #{loanMoney},</if>
             <if test="repayPeriod != null">repay_period = #{repayPeriod},</if>
             <if test="carType != null">car_type = #{carType},</if>
-            <if test="identityId != null">identity_id = #{identityId},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="operator != null">operator = #{operator},</if>
             <if test="orderState != null">order_state = #{orderState},</if>
         </trim>
         where id = #{id}
