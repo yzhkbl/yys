@@ -16,6 +16,7 @@ public interface IExamineService {
     Map<String,Object> find(Integer userId);
     int addByStart(ZyjrStartPage q);
 
+    String order(Integer userId);
 
     String okPurchase(String codes);
     ZyjrStartPage findByStart(Integer userId);

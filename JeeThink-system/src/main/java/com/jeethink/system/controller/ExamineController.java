@@ -17,6 +17,8 @@ import java.util.Map;
 public class ExamineController {
     @Autowired
     private IExamineService examineService;
+    @Autowired
+    private test t;
 
     @RequestMapping("/add/borrower")
     public AjaxResult addBorrower(ZyjrBorrower q){
@@ -82,5 +84,12 @@ public class ExamineController {
     public AjaxResult findByStart(Integer userId){
         ZyjrStartPage startPage = examineService.findByStart(userId);
         return AjaxResult.success(startPage);
+    }
+
+    @RequestMapping("/order")
+    public AjaxResult order(Integer userId){
+        String orderCode = examineService.order(userId);
+        AjaxResult ajaxResult = t.find(userId);
+        return AjaxResult.success(orderCode,ajaxResult);
     }
 }
