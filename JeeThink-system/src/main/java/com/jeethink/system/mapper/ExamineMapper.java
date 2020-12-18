@@ -20,16 +20,17 @@ public interface ExamineMapper {
     int updateBusiness(ZyjrBusiness q);
     int updateStart(ZyjrStartPage q);
 
-    int updateOne(Boolean orderState,String transactionCode);
+    /**int updateOne(Boolean orderState,String transactionCode);
     int updateTwo(Boolean orderState,String transactionCode);
     int updateThree(Boolean orderState,String transactionCode);
-    int updateFour(Boolean orderState,String transactionCode);
+    int updateFour(Boolean orderState,String transactionCode);*/
     int updateBystates(ZyjrStartPage q);
     int updateByCode(ZyjrStartPage q);
     int updateOne(Integer userId,String transactionCode);
     int updateTwo(Integer userId,String transactionCode);
     int updateThree(Integer userId,String transactionCode);
     int updateFour(Integer userId,String transactionCode);
+    int updateFive(Integer userId,String transactionCode);
 
     /**借款人信息查询*/
     ZyjrBorrower findByBorrower(Integer userId);

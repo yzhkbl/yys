@@ -111,6 +111,17 @@ public class ExamineServiceImpl implements IExamineService {
     }
 
 
+    public String order(Integer userId){
+        String a = orderCode.getOrderCode();
+        //String b = IdUtils.simpleUUID();
+        examineDao.updateOne(userId,a);
+        examineDao.updateTwo(userId,a);
+        examineDao.updateThree(userId,a);
+        examineDao.updateFour(userId,a);
+        examineDao.updateFive(userId,a);
+        return a;
+    }
+
 
     @Override
     public int addByStart(ZyjrStartPage q) {
@@ -120,16 +131,16 @@ public class ExamineServiceImpl implements IExamineService {
         startPage.setBusinessPlace(q.getBusinessPlace());
         startPage.setOrderState(q.getOrderState());
         startPage.setUserId(q.getUserId());
-
-        String a = orderCode.getOrderCode();
-        //String b = IdUtils.simpleUUID();
-
-        startPage.setTransactionCode(a);
-        //startPage.setPrivateCode(b);
-        examineDao.updateOne(q.getUserId(),a);
-        examineDao.updateTwo(q.getUserId(),a);
-        examineDao.updateThree(q.getUserId(),a);
-        examineDao.updateFour(q.getUserId(),a);
+        startPage.setTransactionCode(q.getTransactionCode());
+        if(findByBorrower(q.getUserId()).getCreditPower()==1) {
+            String a = orderCode.getOrderCode();
+            String b = IdUtils.simpleUUID();
+            startPage.setPrivateCode(b);
+            examineDao.updateOne(q.getUserId(),a);
+            examineDao.updateTwo(q.getUserId(),a);
+            examineDao.updateThree(q.getUserId(),a);
+            examineDao.updateFour(q.getUserId(),a);
+        }
         if(findByStart(q.getUserId())!=null&&q.getOrderState()==0){
             int count = examineDao.insertStart(startPage);
 
