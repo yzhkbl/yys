@@ -1,7 +1,11 @@
 package com.jeethink.system.mapper;
 
 import java.util.List;
+
+
+import com.jeethink.system.base.mapper.BaseMapper;
 import com.jeethink.system.domain.ZyjrCarAccount;
+import org.mybatis.spring.annotation.MapperScan;
 
 /**
  * 【请填写功能名称】Mapper接口
@@ -9,7 +13,8 @@ import com.jeethink.system.domain.ZyjrCarAccount;
  * @author jeethink
  * @date 2020-12-15
  */
-public interface ZyjrCarAccountMapper 
+@MapperScan
+public interface ZyjrCarAccountMapper extends BaseMapper<ZyjrCarAccount>
 {
     /**
      * 查询【请填写功能名称】

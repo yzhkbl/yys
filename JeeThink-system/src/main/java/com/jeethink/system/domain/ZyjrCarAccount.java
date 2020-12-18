@@ -1,9 +1,12 @@
 package com.jeethink.system.domain;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.jeethink.common.core.domain.BaseEntity;
+import com.jeethink.system.base.model.BaseModel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.jeethink.common.annotation.Excel;
-import com.jeethink.common.core.domain.BaseEntity;
+
 
 /**
  * 【请填写功能名称】对象 zyjr_car_account
@@ -11,7 +14,8 @@ import com.jeethink.common.core.domain.BaseEntity;
  * @author jeethink
  * @date 2020-12-15
  */
-public class ZyjrCarAccount extends BaseEntity
+@TableName(value = "zyjr_car_account")
+public class ZyjrCarAccount extends BaseModel<ZyjrCarAccount>
 {
     private static final long serialVersionUID = 1L;
 
@@ -48,7 +52,7 @@ public class ZyjrCarAccount extends BaseEntity
     private String accountSubBranch;
 
     /** $column.columnComment */
-    private Long id;
+    /*private Long id;*/
 
     /** 车商id */
     @Excel(name = "车商id")
@@ -126,7 +130,7 @@ public class ZyjrCarAccount extends BaseEntity
     {
         return accountSubBranch;
     }
-    public void setId(Long id) 
+ /*   public void setId(Long id)
     {
         this.id = id;
     }
@@ -134,7 +138,7 @@ public class ZyjrCarAccount extends BaseEntity
     public Long getId() 
     {
         return id;
-    }
+    }*/
     public void setZyjrCarId(String zyjrCarId) 
     {
         this.zyjrCarId = zyjrCarId;
@@ -156,11 +160,11 @@ public class ZyjrCarAccount extends BaseEntity
             .append("accountCity", getAccountCity())
             .append("accountProvinc", getAccountProvinc())
             .append("accountSubBranch", getAccountSubBranch())
-            .append("createBy", getCreateBy())
+           /* .append("createBy", getCreateBy())
             .append("createTime", getCreateTime())
             .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .append("id", getId())
+            .append("updateTime", getUpdateTime())*/
+           /* .append("id", getId())*/
             .append("zyjrCarId", getZyjrCarId())
             .toString();
     }

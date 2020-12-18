@@ -9,7 +9,7 @@ import com.jeethink.system.domain.ZyjrBusiness;
  * @author jeethink
  * @date 2020-12-09
  */
-public interface ZyjrBusinessMapper 
+public interface ZyjrBusinessMapper
 {
     /**
      * 查询【请填写功能名称】
@@ -43,7 +43,7 @@ public interface ZyjrBusinessMapper
      * @return 结果
      */
     public int updateZyjrBusiness(ZyjrBusiness zyjrBusiness);
-
+    public int updateById(String id);
     /**
      * 删除【请填写功能名称】
      * 

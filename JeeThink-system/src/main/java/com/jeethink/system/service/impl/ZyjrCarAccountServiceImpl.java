@@ -1,7 +1,11 @@
 package com.jeethink.system.service.impl;
 
 import java.util.List;
+
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jeethink.common.utils.DateUtils;
+import com.jeethink.system.base.service.impl.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.jeethink.system.mapper.ZyjrCarAccountMapper;
@@ -15,7 +19,7 @@ import com.jeethink.system.service.IZyjrCarAccountService;
  * @date 2020-12-15
  */
 @Service
-public class ZyjrCarAccountServiceImpl implements IZyjrCarAccountService 
+public class ZyjrCarAccountServiceImpl extends BaseServiceImpl<ZyjrCarAccountMapper,ZyjrCarAccount> implements IZyjrCarAccountService
 {
     @Autowired
     private ZyjrCarAccountMapper zyjrCarAccountMapper;
@@ -66,7 +70,7 @@ public class ZyjrCarAccountServiceImpl implements IZyjrCarAccountService
     @Override
     public int updateZyjrCarAccount(ZyjrCarAccount zyjrCarAccount)
     {
-        zyjrCarAccount.setUpdateTime(DateUtils.getNowDate());
+        /*zyjrCarAccount.setUpdateTime(DateUtils.getNowDate());*/
         return zyjrCarAccountMapper.updateZyjrCarAccount(zyjrCarAccount);
     }
 

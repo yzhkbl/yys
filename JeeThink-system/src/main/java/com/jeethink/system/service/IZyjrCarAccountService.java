@@ -1,6 +1,9 @@
 package com.jeethink.system.service;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.jeethink.system.base.service.BaseService;
 import com.jeethink.system.domain.ZyjrCarAccount;
 
 /**
@@ -9,7 +12,7 @@ import com.jeethink.system.domain.ZyjrCarAccount;
  * @author jeethink
  * @date 2020-12-15
  */
-public interface IZyjrCarAccountService
+public interface IZyjrCarAccountService extends BaseService<ZyjrCarAccount>
 {
     /**
      * 查询【请填写功能名称】
