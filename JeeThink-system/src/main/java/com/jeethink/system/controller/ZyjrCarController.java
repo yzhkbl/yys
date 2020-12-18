@@ -81,12 +81,10 @@ public class ZyjrCarController extends BaseController
     @PreAuthorize("@ss.hasPermi('system:car:add')")
     @Log(title = "车商信息", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody ZyjrCar zyjrCar, @RequestBody List<ZyjrCarAccount> zyjrCarAccount)
+    public AjaxResult add(@RequestBody ZyjrCar zyjrCar)
     {
         int a=zyjrCarService.insertZyjrCar(zyjrCar);
-        if(a!=0){
 
-        }
         return toAjax(a);
     }
 

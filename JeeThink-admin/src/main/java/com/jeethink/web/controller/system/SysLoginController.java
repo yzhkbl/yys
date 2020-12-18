@@ -1,6 +1,7 @@
 package com.jeethink.web.controller.system;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -79,8 +80,24 @@ public class SysLoginController
      if(token!=null){
          LoginUser loginUser = tokenService.getLoginUser2(token);
 
-         SysUser user = loginUser.getUser();
+         SysUser users = loginUser.getUser();
+            Map<String,String> user=new LinkedHashMap<>();
+            if(user!=null){
+                user.put("createBy",users.getCreateBy());
+                user.put("createTime",users.getCreateTime().toString());
+                user.put("remark",users.getRemark());
+                user.put("userId",users.getUserId().toString());
+                user.put("deptId",users.getDeptId().toString());
+                user.put("userName",users.getUserName());
+                user.put("nickName",users.getNickName());
+                user.put("email",users.getEmail());
+                user.put("phonenumber",users.getPhonenumber());
+                user.put("sex",users.getSex());
+                user.put("avatar",users.getAvatar());
+                user.put("status",users.getStatus());
+                user.put("delFlag",users.getDelFlag());
 
+            }
 
          ajax.put("user", user);
 

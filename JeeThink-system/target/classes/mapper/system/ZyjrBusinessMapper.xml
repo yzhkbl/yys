@@ -74,6 +74,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
+    <update id="updateById">
+update zyjr_business set update_by="",operator="" where id = #{id}
+    </update>
     <update id="updateZyjrBusiness" parameterType="ZyjrBusiness">
         update zyjr_business
         <trim prefix="SET" suffixOverrides=",">

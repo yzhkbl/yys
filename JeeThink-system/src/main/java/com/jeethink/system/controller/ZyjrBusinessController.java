@@ -2,6 +2,9 @@ package com.jeethink.system.controller;
 
 import java.util.List;
 
+import com.jeethink.system.domain.ZyjrCarAccount;
+import com.jeethink.system.mapper.ZyjrBusinessMapper;
+import com.jeethink.system.service.IZyjrCarAccountService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +41,10 @@ public class ZyjrBusinessController extends BaseController
 {
     @Autowired
     private IZyjrBusinessService zyjrBusinessService;
+    @Autowired
+    private ZyjrBusinessMapper zyjrBusinessMapper;
+    @Autowired
+    private IZyjrCarAccountService zyjrCarAccountService;
 
     /**
      * 查询【请填写功能名称】列表
@@ -50,6 +57,14 @@ public class ZyjrBusinessController extends BaseController
         startPage();
         List<ZyjrBusiness> list = zyjrBusinessService.selectZyjrBusinessList(zyjrBusiness);
         return getDataTable(list);
+    }
+
+    @GetMapping("/what")
+    @ApiOperation("测试查询参数列表")
+    public AjaxResult list2()
+    {
+        List<ZyjrCarAccount> as=zyjrCarAccountService.list();
+        return AjaxResult.success(as);
     }
     
 /*    @GetMapping("/info")
@@ -103,6 +118,12 @@ public class ZyjrBusinessController extends BaseController
     public AjaxResult edit(@RequestBody ZyjrBusiness zyjrBusiness)
     {
         return toAjax(zyjrBusinessService.updateZyjrBusiness(zyjrBusiness));
+    }
+
+    @GetMapping("edit")
+    public AjaxResult edit2(String id)
+    {
+        return toAjax(zyjrBusinessMapper.updateById(id));
     }
 
     /**
