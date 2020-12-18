@@ -2,6 +2,8 @@ package com.jeethink.system.service.impl;
 
 import java.util.List;
 
+import com.jeethink.common.utils.DateUtils;
+import com.jeethink.common.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -73,6 +75,8 @@ public class ZyjrBusinessServiceImpl implements IZyjrBusinessService
     @Override
     public int updateZyjrBusiness(ZyjrBusiness zyjrBusiness)
     {
+        zyjrBusiness.setUpdateBy(String.valueOf(SecurityUtils.getUserId()));
+        zyjrBusiness.setOperator(SecurityUtils.getUsername());
         return zyjrBusinessMapper.updateZyjrBusiness(zyjrBusiness);
     }
 

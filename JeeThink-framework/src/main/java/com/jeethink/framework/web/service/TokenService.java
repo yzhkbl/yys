@@ -60,6 +60,23 @@ public class TokenService
     {
         // 获取请求携带的令牌
         String token = getToken(request);
+
+        if (StringUtils.isNotEmpty(token))
+        {
+            Claims claims = parseToken(token);
+            // 解析对应的权限以及用户信息
+            String uuid = (String) claims.get(Constants.LOGIN_USER_KEY);
+            String userKey = getTokenKey(uuid);
+            LoginUser user = redisCache.getCacheObject(userKey);
+            return user;
+        }
+        return null;
+    }
+    public LoginUser getLoginUser2(String token)
+    {
+        // 获取请求携带的令牌
+
+
         if (StringUtils.isNotEmpty(token))
         {
             Claims claims = parseToken(token);

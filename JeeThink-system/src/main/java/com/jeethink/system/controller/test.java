@@ -202,7 +202,7 @@ selVO a=new selVO();
 		req re=new req();
 		len.setIdCard(borrowerById.getIdCard());//relation.getIdCard()
 		len.setBankCardNo(borrowerById.getBankCardNo());
-		len.setSignMode(1);
+		len.setSignMode(borrowerById.getCreditPower()+1);
 		len.setIssueAuthority(borrowerById.getIssueAuthority());
 		len.setPhoneNum(borrowerById.getPhoneNumber());//relation.getPhoneNumber()
 		len.setUserName(borrowerById.getUserName());//relation.getUserName()

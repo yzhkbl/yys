@@ -20,10 +20,10 @@ public interface ExamineMapper {
     int updateBusiness(ZyjrBusiness q);
     int updateStart(ZyjrStartPage q);
 
-    int updateOne(Boolean orderState,String transactionCode);
+    /*int updateOne(Boolean orderState,String transactionCode);
     int updateTwo(Boolean orderState,String transactionCode);
     int updateThree(Boolean orderState,String transactionCode);
-    int updateFour(Boolean orderState,String transactionCode);
+    int updateFour(Boolean orderState,String transactionCode);*/
     int updateBystates(ZyjrStartPage q);
     int updateByCode(ZyjrStartPage q);
     int updateOne(Integer userId,String transactionCode);
