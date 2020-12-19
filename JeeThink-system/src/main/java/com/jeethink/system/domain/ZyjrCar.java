@@ -92,7 +92,7 @@ public class ZyjrCar extends BaseEntity
     /** 门店照片 */
     @Excel(name = "门店照片")
     private String pic;
-
+    private List<SysFileInfo> sysFileInfo;
 
     private String dealerName;
 
@@ -286,14 +286,24 @@ public class ZyjrCar extends BaseEntity
     {
         return detailAddress;
     }
-    public void setPic(String pic) 
+
+    public void setPic(String pic)
     {
         this.pic = pic;
     }
 
-    public String getPic() 
+    public String getPic()
     {
         return pic;
+    }
+    public void setSysFileInfo(List<SysFileInfo> sysFileInfo)
+    {
+        this.sysFileInfo = sysFileInfo;
+    }
+
+    public List<SysFileInfo> getSysFileInfo()
+    {
+        return sysFileInfo;
     }
 
     public void setId(Long id) 
@@ -346,6 +356,7 @@ public class ZyjrCar extends BaseEntity
             .append("state", getState())
                 .append("zyjrCarAccount",getZyjrCarAccount())
                 .append("dealerName",getDealerName())
+                .append("sysFileInfo",getSysFileInfo())
             .toString();
     }
 }

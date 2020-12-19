@@ -48,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="selectById" parameterType="String" resultMap="ZyjrBusinessResult">
         <include refid="selectZyjrBusinessVo"/>
-        where transaction_code = #{identityId} and order_state=1
+        where transaction_code = #{identityId}
     </select>
         
     <insert id="insertZyjrBusiness" parameterType="ZyjrBusiness" useGeneratedKeys="true" keyProperty="id">
@@ -90,6 +90,7 @@ update zyjr_business set update_by="",operator="" where id = #{id}
             <if test="updateBy != null">update_by = #{updateBy},</if>
             <if test="operator != null">operator = #{operator},</if>
             <if test="orderState != null">order_state = #{orderState},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
         </trim>
         where id = #{id}
     </update>
