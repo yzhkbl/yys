@@ -3,6 +3,10 @@ package com.jeethink.system.controller;
 import com.jeethink.common.core.domain.AjaxResult;
 import com.jeethink.system.Helper.ResponseDto;
 import com.jeethink.system.domain.*;
+import com.jeethink.system.mapper.ZyjrBorrowerMapper;
+import com.jeethink.system.mapper.ZyjrBusinessMapper;
+import com.jeethink.system.mapper.ZyjrGuaranteeMapper;
+import com.jeethink.system.mapper.ZyjrRelationMapper;
 import com.jeethink.system.service.IExamineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +23,14 @@ public class ExamineController {
     private IExamineService examineService;
     @Autowired
     private test t;
+    @Autowired
+    private ZyjrBusinessMapper zyjrBusinessMapper;
+    @Autowired
+    private ZyjrBorrowerMapper zyjrBorrowerMapper;
+    @Autowired
+    private ZyjrRelationMapper zyjrRelationMapper;
+    @Autowired
+    private ZyjrGuaranteeMapper zyjrGuaranteeMapper;
 
     @RequestMapping("/add/borrower")
     public AjaxResult addBorrower(ZyjrBorrower q){
@@ -90,9 +102,36 @@ public class ExamineController {
     public AjaxResult order(Integer userId){
         String orderCode = examineService.order(userId);
         AjaxResult ajaxResult = t.find(orderCode);
-        if (ajaxResult.get("code").equals(200)) {
+        if (ajaxResult.get("code").equals("200")) {
             return AjaxResult.success(orderCode);
+        }else {
+            ZyjrBorrower zyjrBorrower = zyjrBorrowerMapper.selectById(orderCode);
+            if(zyjrBorrower != null) {
+                zyjrBorrower.setOrderState(0);
+                //zyjrBorrower.setTransactionCode(null);
+                zyjrBorrowerMapper.updateZyjrBorrower(zyjrBorrower);
+            }
+
+            ZyjrBusiness zyjrBusiness = zyjrBusinessMapper.selectById(orderCode);
+            if(zyjrBusiness != null) {
+                zyjrBusiness.setOrderState(0);
+                //zyjrBusiness.setTransactionCode(null);
+                zyjrBusinessMapper.updateZyjrBusiness(zyjrBusiness);
+            }
+            ZyjrRelation zyjrRelation = zyjrRelationMapper.selectById(orderCode);
+            if(zyjrRelation != null) {
+                zyjrRelation.setOrderState(0);
+                //zyjrRelation.setTransactionCode(null);
+                zyjrRelationMapper.updateZyjrRelation(zyjrRelation);
+            }
+
+            ZyjrGuarantee zyjrGuarantee = zyjrGuaranteeMapper.selectById(orderCode);
+            if(zyjrRelation != null) {
+                zyjrGuarantee.setOrderState(0);
+                //zyjrGuarantee.setTransactionCode(null);
+                zyjrGuaranteeMapper.updateZyjrGuarantee(zyjrGuarantee);
+            }
+            return ajaxResult;
         }
-        return ajaxResult;
     }
 }
