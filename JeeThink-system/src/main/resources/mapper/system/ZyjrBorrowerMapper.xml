@@ -34,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
         <result property="transactionCode"    column="transaction_code"    />
-
+        <result property="contractState"    column="contract_state"    />
     </resultMap>
 
     <sql id="selectZyjrBorrowerVo">
@@ -43,7 +43,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectZyjrBorrowerList" parameterType="ZyjrBorrower" resultMap="ZyjrBorrowerResult">
         <include refid="selectZyjrBorrowerVo"/>
-        <where>  
+        <where>
+            order_state = 1
             <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
             <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
             <if test="bankCardNo != null  and bankCardNo != ''"> and bank_card_no = #{bankCardNo}</if>
@@ -66,7 +67,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="powerName != null  and powerName != ''"> and power_name like concat('%', #{powerName}, '%')</if>
             <if test="creditPower != null "> and credit_power = #{creditPower}</if>
             <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
-            <if test="orderState != null "> and order_state = #{orderState}</if>
+
+
         </where>
     </select>
     
@@ -104,12 +106,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="powerAddress != null">power_address,</if>
             <if test="powerName != null">power_name,</if>
             <if test="creditPower != null">credit_power,</if>
-            <if test="identityId != null">identity_id,</if>
+            <if test="userId != null">user_id,</if>
             <if test="orderState != null">order_state,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
             <if test="updateTime != null">update_time,</if>
+            <if test="transactionCode != null">transaction_code,</if>
+            <if test="electronicState != null">electronic_state,</if>
+            <if test="electrpnicAddress != null">electrpnic_address,</if>
+            <if test="contractState != null">contract_state,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userName != null">#{userName},</if>
@@ -133,12 +139,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="powerAddress != null">#{powerAddress},</if>
             <if test="powerName != null">#{powerName},</if>
             <if test="creditPower != null">#{creditPower},</if>
-            <if test="identityId != null">#{identityId},</if>
+            <if test="userId != null">#{userId},</if>
             <if test="orderState != null">#{orderState},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
+            <if test="transactionCode != null">#{transactionCode},</if>
+            <if test="electronicState != null">#{electronicState},</if>
+            <if test="electrpnicAddress != null">#{electrpnicAddress},</if>
+            <if test="contractState != null">#{contractState},</if>
          </trim>
     </insert>
 
@@ -166,12 +176,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="powerAddress != null">power_address = #{powerAddress},</if>
             <if test="powerName != null">power_name = #{powerName},</if>
             <if test="creditPower != null">credit_power = #{creditPower},</if>
-            <if test="identityId != null">identity_id = #{identityId},</if>
             <if test="orderState != null">order_state = #{orderState},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="transactionCode != null">transaction_code=#{transactionCode},</if>
+            <if test="electronicState != null">electronic_state=#{electronicState},</if>
+            <if test="electrpnicAddress != null">electrpnic_address=#{electrpnicAddress},</if>
+            <if test="contractState != null">contract_state=#{contractState},</if>
         </trim>
         where id = #{id}
     </update>

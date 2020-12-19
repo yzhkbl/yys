@@ -248,7 +248,10 @@ selVO a=new selVO();
 			ZyjrStartPage asd=new ZyjrStartPage();
 			asd.setTransactionCode(codes);
 			asd.setPrivateCode(result.getJSONObject("data").get("estageOrderNo").toString());
-			examineMapper.updateByCode(asd);
+			int ceshi=examineMapper.updateByCode(asd);
+			if(ceshi>0){
+				return AjaxResult.success();
+			}
 		}
 		return AjaxResult.success(result);
 	}
@@ -344,19 +347,25 @@ selVO a=new selVO();
 		return AjaxResult.success(""+as);
 }
 
-	@RequestMapping(value ={"/ceshi2"},method = RequestMethod.GET)
+
+
+	@RequestMapping(value ={"/ceshi2"},method = RequestMethod.POST)
 	@ResponseBody
 	@ApiOperation("111111111")
-	public AjaxResult ceshi()  {
-
-		return AjaxResult.success();
+	public AjaxResult ceshi(MultipartFile file) throws IOException {
+     	String a=FileUploadUtils.upload(file);
+		return AjaxResult.success(a);
 	}
 
 	@RequestMapping(value ={"/ceshi3"},method = RequestMethod.GET)
 	@ResponseBody
 	@ApiOperation("111111111")
 	public AjaxResult ceshi3(String transactionCode)  {
-		System.out.println(transactionCode);
+		ZyjrBorrower a=o.selectById(transactionCode);
+		a.setContractState("1");
+		o.updateZyjrBorrower(a);
 		return AjaxResult.success();
 	}
+
+
 }

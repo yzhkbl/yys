@@ -42,7 +42,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectZyjrGuaranteeList" parameterType="ZyjrGuarantee" resultMap="ZyjrGuaranteeResult">
         <include refid="selectZyjrGuaranteeVo"/>
-        <where>  
+        <where>
+            order_state = 1
             <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
             <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
             <if test="bankCardNo != null  and bankCardNo != ''"> and bank_card_no = #{bankCardNo}</if>
@@ -69,7 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="creditPower != null  and creditPower != ''"> and credit_power = #{creditPower}</if>
             <if test="peopleShip != null  and peopleShip != ''"> and people_ship = #{peopleShip}</if>
             <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
-            <if test="orderState != null "> and order_state = #{orderState}</if>
+
         </where>
     </select>
     
