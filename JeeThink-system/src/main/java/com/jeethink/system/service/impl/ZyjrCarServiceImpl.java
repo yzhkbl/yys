@@ -82,15 +82,19 @@ public class ZyjrCarServiceImpl implements IZyjrCarService
     {
         zyjrCar.setUpdateTime(DateUtils.getNowDate());
 
-      /*  if(zyjrCar.getZyjrCarAccount().size()>0){
-            List<ZyjrCarAccount> zyjrCarAccount = zyjrCar.getZyjrCarAccount();
-            List<Long> ids=zyjrCarAccount.stream().map(ZyjrCarAccount::getId).collect(Collectors.toList());
-            Long[] al=new Long[ids.size()];
-            Long[] longs = ids.toArray(al);
-            zyjrCarAccountService.deleteZyjrCarAccountByIds(longs);
+       if(zyjrCar.getZyjrCarAccount().size()>0) {
+           List<ZyjrCarAccount> zyjrCarAccount = zyjrCar.getZyjrCarAccount();
+           List<Long> ids = zyjrCarAccount.stream().map(ZyjrCarAccount::getId).collect(Collectors.toList());
+           Long[] al = new Long[ids.size()];
+           Long[] longs = ids.toArray(al);
+           zyjrCarAccountService.deleteZyjrCarAccountByIds(longs);
+           for (ZyjrCarAccount a: zyjrCarAccount ) {
+               accountMapper.insert(a);
+           }
 
 
-        }*/
+
+       }
 
         return zyjrCarMapper.updateZyjrCar(zyjrCar);
     }
