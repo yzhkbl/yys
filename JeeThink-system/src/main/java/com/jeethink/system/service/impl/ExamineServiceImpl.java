@@ -118,7 +118,7 @@ public class ExamineServiceImpl implements IExamineService {
         examineDao.updateTwo(userId,a);
         examineDao.updateThree(userId,a);
         examineDao.updateFour(userId,a);
-        examineDao.updateFive(userId,a);
+        //examineDao.updateFive(userId,a);
         return a;
     }
 
@@ -129,7 +129,7 @@ public class ExamineServiceImpl implements IExamineService {
         startPage.setId(q.getId());
         startPage.setFundSide(q.getFundSide());
         startPage.setBusinessPlace(q.getBusinessPlace());
-        startPage.setOrderState(q.getOrderState());
+        startPage.setOrderState(1);
         startPage.setUserId(q.getUserId());
         startPage.setTransactionCode(q.getTransactionCode());
         if(findByBorrower(q.getUserId()).getCreditPower()==1) {

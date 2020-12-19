@@ -19,7 +19,7 @@ import com.jeethink.system.service.IZyjrCarAccountService;
  * @date 2020-12-15
  */
 @Service
-public class ZyjrCarAccountServiceImpl extends BaseServiceImpl<ZyjrCarAccountMapper,ZyjrCarAccount> implements IZyjrCarAccountService
+public class ZyjrCarAccountServiceImpl  implements IZyjrCarAccountService
 {
     @Autowired
     private ZyjrCarAccountMapper zyjrCarAccountMapper;

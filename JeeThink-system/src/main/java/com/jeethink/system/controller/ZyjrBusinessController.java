@@ -59,13 +59,7 @@ public class ZyjrBusinessController extends BaseController
         return getDataTable(list);
     }
 
-    @GetMapping("/what")
-    @ApiOperation("测试查询参数列表")
-    public AjaxResult list2()
-    {
-        List<ZyjrCarAccount> as=zyjrCarAccountService.list();
-        return AjaxResult.success(as);
-    }
+
     
 /*    @GetMapping("/info")
     @ApiOperation("查询参数列表")

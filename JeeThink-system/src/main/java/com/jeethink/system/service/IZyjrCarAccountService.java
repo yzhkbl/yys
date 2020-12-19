@@ -12,7 +12,7 @@ import com.jeethink.system.domain.ZyjrCarAccount;
  * @author jeethink
  * @date 2020-12-15
  */
-public interface IZyjrCarAccountService extends BaseService<ZyjrCarAccount>
+public interface IZyjrCarAccountService
 {
     /**
      * 查询【请填写功能名称】
