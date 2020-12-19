@@ -367,26 +367,5 @@ selVO a=new selVO();
 		return AjaxResult.success();
 	}
 
-	@RequestMapping(value ={"/ceshi4"},method = RequestMethod.GET)
-	@ResponseBody
-	@ApiOperation("111111111")
-	public AjaxResult ceshi4(String transactionCode)  {
-		ZyjrBorrower a=o.selectById(transactionCode);
-			if("1".equals(a.getContractState())){
-
-			}
-		AjaxResult as=ceshi5();
-
-		return AjaxResult.success(as.get("code"));
-	}
-
-
-	public static AjaxResult ceshi5()  {
-
-		return AjaxResult.error();
-	}
-
-
-
 
 }
