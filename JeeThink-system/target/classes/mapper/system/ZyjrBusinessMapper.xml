@@ -90,6 +90,7 @@ update zyjr_business set update_by="",operator="" where id = #{id}
             <if test="updateBy != null">update_by = #{updateBy},</if>
             <if test="operator != null">operator = #{operator},</if>
             <if test="orderState != null">order_state = #{orderState},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
         </trim>
         where id = #{id}
     </update>
