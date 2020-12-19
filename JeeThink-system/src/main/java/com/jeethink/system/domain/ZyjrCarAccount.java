@@ -19,6 +19,7 @@ public class ZyjrCarAccount extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
+    private Long id;
     /** 账户名 */
     @Excel(name = "账户名")
     private String accountName;
@@ -130,7 +131,7 @@ public class ZyjrCarAccount extends BaseEntity
     {
         return accountSubBranch;
     }
- /*   public void setId(Long id)
+    public void setId(Long id)
     {
         this.id = id;
     }
@@ -138,7 +139,7 @@ public class ZyjrCarAccount extends BaseEntity
     public Long getId() 
     {
         return id;
-    }*/
+    }
     public void setZyjrCarId(String zyjrCarId) 
     {
         this.zyjrCarId = zyjrCarId;
@@ -160,11 +161,11 @@ public class ZyjrCarAccount extends BaseEntity
             .append("accountCity", getAccountCity())
             .append("accountProvinc", getAccountProvinc())
             .append("accountSubBranch", getAccountSubBranch())
-           /* .append("createBy", getCreateBy())
+            .append("createBy", getCreateBy())
             .append("createTime", getCreateTime())
             .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())*/
-           /* .append("id", getId())*/
+            .append("updateTime", getUpdateTime())
+            .append("id", getId())
             .append("zyjrCarId", getZyjrCarId())
             .toString();
     }

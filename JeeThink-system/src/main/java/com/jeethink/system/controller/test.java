@@ -253,7 +253,7 @@ selVO a=new selVO();
 				return AjaxResult.success();
 			}
 		}
-		return AjaxResult.success(result);
+		return AjaxResult.error("错误",result);
 	}
 
 	@ApiOperation("发起确认")
