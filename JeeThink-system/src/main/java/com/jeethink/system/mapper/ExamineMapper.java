@@ -2,6 +2,7 @@ package com.jeethink.system.mapper;
 
 import com.jeethink.system.domain.*;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface ExamineMapper {
@@ -26,11 +27,11 @@ public interface ExamineMapper {
     int updateFour(Boolean orderState,String transactionCode);*/
     int updateBystates(ZyjrStartPage q);
     int updateByCode(ZyjrStartPage q);
-    int updateOne(Integer userId,String transactionCode);
-    int updateTwo(Integer userId,String transactionCode);
-    int updateThree(Integer userId,String transactionCode);
-    int updateFour(Integer userId,String transactionCode);
-    int updateFive(Integer userId,String transactionCode);
+    int updateOne(@Param("userId") Integer userId, @Param("transactionCode") String transactionCode);
+    int updateTwo(@Param("userId") Integer userId, @Param("transactionCode") String transactionCode);
+    int updateThree(@Param("userId") Integer userId, @Param("transactionCode") String transactionCode);
+    int updateFour(@Param("userId") Integer userId, @Param("transactionCode") String transactionCode);
+    int updateFive(@Param("userId") Integer userId, @Param("transactionCode") String transactionCode);
 
     /**借款人信息查询*/
     ZyjrBorrower findByBorrower(Integer userId);

@@ -114,6 +114,7 @@ public class ExamineServiceImpl implements IExamineService {
     public String order(Integer userId){
         String a = orderCode.getOrderCode();
         //String b = IdUtils.simpleUUID();
+        System.err.println(a);
         examineDao.updateOne(userId,a);
         examineDao.updateTwo(userId,a);
         examineDao.updateThree(userId,a);

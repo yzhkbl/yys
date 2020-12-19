@@ -352,5 +352,11 @@ selVO a=new selVO();
 		return AjaxResult.success();
 	}
 
-
+	@RequestMapping(value ={"/ceshi3"},method = RequestMethod.GET)
+	@ResponseBody
+	@ApiOperation("111111111")
+	public AjaxResult ceshi3(String transactionCode)  {
+		System.out.println(transactionCode);
+		return AjaxResult.success();
+	}
 }

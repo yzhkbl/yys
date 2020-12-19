@@ -90,6 +90,9 @@ public class ExamineController {
     public AjaxResult order(Integer userId){
         String orderCode = examineService.order(userId);
         AjaxResult ajaxResult = t.find(orderCode);
-        return AjaxResult.success(orderCode,ajaxResult);
+        if (ajaxResult.get("code").equals(200)) {
+            return AjaxResult.success(orderCode);
+        }
+        return ajaxResult;
     }
 }
