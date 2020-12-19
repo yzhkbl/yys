@@ -176,6 +176,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="peopleShip != null">people_ship = #{peopleShip},</if>
             <if test="identityId != null">identity_id = #{identityId},</if>
             <if test="orderState != null">order_state = #{orderState},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
         </trim>
         where id = #{id}
     </update>

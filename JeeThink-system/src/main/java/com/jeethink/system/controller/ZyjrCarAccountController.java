@@ -74,7 +74,7 @@ public class ZyjrCarAccountController extends BaseController
     @PreAuthorize("@ss.hasPermi('system:account:add')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody List<ZyjrCarAccount> zyjrCarAccount)
+    public AjaxResult add(@RequestBody ZyjrCarAccount zyjrCarAccount)
     {
         return toAjax(zyjrCarAccountService.insertZyjrCarAccount(zyjrCarAccount));
     }

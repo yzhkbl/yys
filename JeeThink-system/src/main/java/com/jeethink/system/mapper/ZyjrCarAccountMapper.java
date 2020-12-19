@@ -14,7 +14,7 @@ import org.mybatis.spring.annotation.MapperScan;
  * @date 2020-12-15
  */
 @MapperScan
-public interface ZyjrCarAccountMapper extends BaseMapper<ZyjrCarAccount>
+public interface ZyjrCarAccountMapper
 {
     /**
      * 查询【请填写功能名称】
@@ -39,7 +39,7 @@ public interface ZyjrCarAccountMapper extends BaseMapper<ZyjrCarAccount>
      * @return 结果
      */
 
-    public int insertZyjrCarAccount(List<ZyjrCarAccount> zyjrCarAccount);
+    public int insertZyjrCarAccount(ZyjrCarAccount zyjrCarAccount);
 
     /**
      * 修改【请填写功能名称】

@@ -55,7 +55,7 @@ public class ZyjrCarAccountServiceImpl  implements IZyjrCarAccountService
      * @return 结果
      */
     @Override
-    public int insertZyjrCarAccount(List<ZyjrCarAccount> zyjrCarAccount)
+    public int insertZyjrCarAccount(ZyjrCarAccount zyjrCarAccount)
     {
 
         return zyjrCarAccountMapper.insertZyjrCarAccount(zyjrCarAccount);

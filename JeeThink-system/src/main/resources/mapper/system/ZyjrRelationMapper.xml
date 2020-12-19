@@ -178,8 +178,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="powerName != null">power_name = #{powerName},</if>
             <if test="creditPower != null">credit_power = #{creditPower},</if>
             <if test="peopleShip != null">people_ship = #{peopleShip},</if>
-
             <if test="businessRole != null">business_role = #{businessRole},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
             <if test="orderState != null">order_state = #{orderState},</if>
         </trim>
         where id = #{id}

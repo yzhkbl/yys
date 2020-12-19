@@ -89,7 +89,8 @@ public class ZyjrCarServiceImpl implements IZyjrCarService
            Long[] longs = ids.toArray(al);
            zyjrCarAccountService.deleteZyjrCarAccountByIds(longs);
            for (ZyjrCarAccount a: zyjrCarAccount ) {
-               accountMapper.insert(a);
+               a.setZyjrCarId(String.valueOf(zyjrCar.getId()));
+               accountMapper.insertZyjrCarAccount(a);
            }
 
 

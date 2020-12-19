@@ -36,7 +36,7 @@ public interface IZyjrCarAccountService
      * @param zyjrCarAccount 【请填写功能名称】
      * @return 结果
      */
-    public int insertZyjrCarAccount(List<ZyjrCarAccount> zyjrCarAccount);
+    public int insertZyjrCarAccount(ZyjrCarAccount zyjrCarAccount);
 
     /**
      * 修改【请填写功能名称】
