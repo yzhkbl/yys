@@ -27,16 +27,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          select a.id, a.team,a.operator,a.update_by, a.car_information, a.intention_price, a.loan_money, a.repay_period, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name
          from zyjr_business a
          left join zyjr_borrower b on a.transaction_code=b.transaction_code
-        <where>  
-            <if test="team != null  and team != ''"> and team = #{team}</if>
-            <if test="carInformation != null "> and car_information = #{carInformation}</if>
-            <if test="intentionPrice != null "> and intention_price = #{intentionPrice}</if>
-            <if test="loanMoney != null "> and loan_money = #{loanMoney}</if>
-            <if test="repayPeriod != null "> and repay_period = #{repayPeriod}</if>
-            <if test="carType != null "> and car_type = #{carType}</if>
-            <if test="userId != null  and userId != ''"> and userId = #{userId}</if>
-            <if test="orderState != null "> and order_state = #{orderState}</if>
-            <if test="transactionCode != null "> and transaction_code = #{transactionCode}</if>
+        <where>
+            a.order_state = 1
+            <if test="team != null  and team != ''"> and a.team = #{team}</if>
+            <if test="carInformation != null "> and a.car_information = #{carInformation}</if>
+            <if test="intentionPrice != null "> and a.intention_price = #{intentionPrice}</if>
+            <if test="loanMoney != null "> and a.loan_money = #{loanMoney}</if>
+            <if test="repayPeriod != null "> and a.repay_period = #{repayPeriod}</if>
+            <if test="carType != null "> and a.car_type = #{carType}</if>
+            <if test="userId != null  and userId != ''"> and a.userId = #{userId}</if>
+
+            <if test="transactionCode != null "> and a.transaction_code = #{transactionCode}</if>
         </where>
     </select>
     
