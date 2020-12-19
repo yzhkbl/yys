@@ -107,12 +107,12 @@ selVO a=new selVO();
 		spouse sguarantee=new spouse();
 		spouse s=new spouse();
 		if(relation!=null){
-		p1.setPicId(relation.getObverseId());
+		p1.setPicId(1);
 		p1.setPicCode(oCode);
 		p1.setPicAddress("http://192.168.31.82:8080"+relation.getObverseAddress());
 		p1.setPicFileName(relation.getObverseName()+".jpg");
 		Pics p2=new Pics();
-		p2.setPicId(relation.getBackId());
+		p2.setPicId(1);
 		p2.setPicCode(pCode);
 		p2.setPicAddress("http://192.168.31.82:8080"+relation.getBackAddress());
 		p2.setPicFileName(relation.getBackName()+".jpg");
@@ -141,12 +141,12 @@ selVO a=new selVO();
 			lists.add(s);
 		}
 		Pics p4=new Pics();
-		p4.setPicId(borrowerById.getPowerId());
+		p4.setPicId(1);
 		p4.setPicCode(oCode);
 		p4.setPicAddress(borrowerById.getObverseAddress());
 		p4.setPicFileName(borrowerById.getPowerName()+".jpg");
 		Pics p5=new Pics();
-		p5.setPicId(borrowerById.getPowerId());
+		p5.setPicId(1);
 		p5.setPicCode(pCode);
 		p5.setPicAddress(borrowerById.getBackAddress());
 		p5.setPicFileName(borrowerById.getPowerName()+".jpg");
@@ -162,12 +162,12 @@ selVO a=new selVO();
 
 		if(guarantee!=null){
 			Pics p7=new Pics();
-			p7.setPicId(guarantee.getPowerId());
+			p7.setPicId(1);
 			p7.setPicCode(oCode);
 			p7.setPicAddress("http://192.168.31.82:8080"+guarantee.getPowerAddress());
 			p7.setPicFileName(guarantee.getPowerName()+".jpg");
 			Pics p8=new Pics();
-			p8.setPicId(guarantee.getPowerId());
+			p8.setPicId(1);
 			p8.setPicCode(pCode);
 			p8.setPicAddress("http://192.168.31.82:8080"+guarantee.getPowerAddress());
 			p8.setPicFileName(guarantee.getPowerName()+".jpg");
@@ -366,6 +366,17 @@ selVO a=new selVO();
 		o.updateZyjrBorrower(a);
 		return AjaxResult.success();
 	}
+	@RequestMapping(value ={"/ceshi4"},method = RequestMethod.GET)
+	@ResponseBody
+	@ApiOperation("111111111")
+	public AjaxResult ceshi4(String id)  {
+		ZyjrBorrower a=new ZyjrBorrower();
+		a.setContractState("1");
+		a.setTransactionCode(null);
+		o.updateZyjrBorrower(a);
+		return AjaxResult.success();
+	}
+
 
 
 }
