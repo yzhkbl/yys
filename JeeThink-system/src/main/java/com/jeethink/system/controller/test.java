@@ -15,6 +15,7 @@ import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.*;
 import com.jeethink.system.mapper.*;
 import com.jeethink.system.service.IExamineService;
+import com.jeethink.system.util.DataUtil;
 import com.jeethink.system.util.FileUtil;
 import com.jeethink.system.util.androidUpload;
 import com.rsa.RSASignature;
@@ -62,6 +63,8 @@ public class test extends BaseController{
 	private IExamineService examineService;
 	@Autowired
 	private ExamineMapper examineMapper;
+	@Autowired
+	private SysFileInfoMapper sysFileInfoMapper;
 
 	private static String oCode="sfzzm";
 	private static String pCode="sfzfm";
@@ -109,13 +112,13 @@ selVO a=new selVO();
 		if(relation!=null){
 		p1.setPicId(1);
 		p1.setPicCode(oCode);
-		p1.setPicAddress("http://192.168.31.82:8080"+relation.getObverseAddress());
-		p1.setPicFileName(relation.getObverseName()+".jpg");
+		p1.setPicAddress(relation.getObverseAddress());
+		p1.setPicFileName("1.jpg");
 		Pics p2=new Pics();
 		p2.setPicId(1);
 		p2.setPicCode(pCode);
-		p2.setPicAddress("http://192.168.31.82:8080"+relation.getBackAddress());
-		p2.setPicFileName(relation.getBackName()+".jpg");
+		p2.setPicAddress(relation.getBackAddress());
+		p2.setPicFileName("2.jpg");
 		/*Pics p3=new Pics();
 		p3.setPicId(relation.getPowerId());
 		p3.setPicCode(zCode);
@@ -126,13 +129,15 @@ selVO a=new selVO();
 			s.setPhoneNum(relation.getPhoneNumber());
 			s.setBankCardNo(relation.getBankCardNo());
 			s.setUserName(relation.getUserName());
-			s.setStartDate(relation.getStartDate());
+			String sd=DataUtil.data(relation.getStartDate());
+			s.setStartDate(sd);
 			s.setIsQueryCredit(0);
 			s.setUserRelationship(2);
 			s.setCompany(relation.getCompany());
 			s.setCompanyAddress(relation.getCompanyAddress());
 			s.setYearIncome(relation.getYearIncome());
-			s.setEndDate(relation.getEndDate());
+			String se=DataUtil.data(relation.getEndDate());
+			s.setEndDate(se);
 			s.setFamilyAddress(relation.getFamilyAddress());
 			pp.add(p1);
 			pp.add(p2);
@@ -144,12 +149,12 @@ selVO a=new selVO();
 		p4.setPicId(1);
 		p4.setPicCode(oCode);
 		p4.setPicAddress(borrowerById.getObverseAddress());
-		p4.setPicFileName(borrowerById.getPowerName()+".jpg");
+		p4.setPicFileName("3.jpg");
 		Pics p5=new Pics();
 		p5.setPicId(1);
 		p5.setPicCode(pCode);
 		p5.setPicAddress(borrowerById.getBackAddress());
-		p5.setPicFileName(borrowerById.getPowerName()+".jpg");
+		p5.setPicFileName("4.jpg");
 	/*	Pics p6=new Pics();
 		p6.setPicId(borrowerById.getPowerId());
 		p6.setPicCode(zCode);
@@ -164,13 +169,13 @@ selVO a=new selVO();
 			Pics p7=new Pics();
 			p7.setPicId(1);
 			p7.setPicCode(oCode);
-			p7.setPicAddress("http://192.168.31.82:8080"+guarantee.getPowerAddress());
-			p7.setPicFileName(guarantee.getPowerName()+".jpg");
+			p7.setPicAddress(guarantee.getPowerAddress());
+			p7.setPicFileName("5.jpg");
 			Pics p8=new Pics();
 			p8.setPicId(1);
 			p8.setPicCode(pCode);
-			p8.setPicAddress("http://192.168.31.82:8080"+guarantee.getPowerAddress());
-			p8.setPicFileName(guarantee.getPowerName()+".jpg");
+			p8.setPicAddress(guarantee.getPowerAddress());
+			p8.setPicFileName("6.jpg");
 		/*	Pics p9=new Pics();
 			p9.setPicId(guarantee.getPowerId());
 			p9.setPicCode(zCode);
@@ -181,13 +186,15 @@ selVO a=new selVO();
 			sguarantee.setPhoneNum(guarantee.getPhoneNumber());
 			sguarantee.setBankCardNo(guarantee.getBankCardNo());
 			sguarantee.setUserName(guarantee.getUserName());
-			sguarantee.setStartDate(guarantee.getStartDate());
+			String gsd=DataUtil.data(guarantee.getStartDate());
+			sguarantee.setStartDate(gsd);
 			sguarantee.setIsQueryCredit(0);
 			sguarantee.setUserRelationship(2);
 			sguarantee.setCompany(guarantee.getCompany());
 			sguarantee.setCompanyAddress(guarantee.getCompanyAddress());
 			sguarantee.setYearIncome(guarantee.getYearIncome());
-			sguarantee.setEndDate(guarantee.getEndDate());
+			String gse=DataUtil.data(guarantee.getEndDate());
+			sguarantee.setEndDate(gse);
 			sguarantee.setFamilyAddress(guarantee.getFamilyAddress());
 			guaranteep.add(p7);
 			guaranteep.add(p8);
@@ -206,8 +213,10 @@ selVO a=new selVO();
 		len.setIssueAuthority(borrowerById.getIssueAuthority());
 		len.setPhoneNum(borrowerById.getPhoneNumber());//relation.getPhoneNumber()
 		len.setUserName(borrowerById.getUserName());//relation.getUserName()
-		len.setStartDate(borrowerById.getStartDate());
-		len.setEndDate(borrowerById.getEndDate());
+		String lsd=DataUtil.data(borrowerById.getStartDate());
+		len.setStartDate(lsd);
+		String lse=DataUtil.data(borrowerById.getEndDate());
+		len.setEndDate(lse);
 		len.setFamilyAddress(borrowerById.getFamilyAddress());
 	/*	len.setLoanMoney(borrowerById.getLoanMoney());
 		len.setRepayPeriod(borrowerById.getRepayPeriod());*/
@@ -242,13 +251,14 @@ selVO a=new selVO();
 		AjaxResult as=AjaxResult.success(a.toString());
 
 		JSONObject json = encryptData(json2.toString(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo,orderNo);
+
 		JSONObject result = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", json);
 		System.err.println(result);
 		if(result.get("code").equals(0)){
-			ZyjrStartPage asd=new ZyjrStartPage();
-			asd.setTransactionCode(codes);
-			asd.setPrivateCode(result.getJSONObject("data").get("estageOrderNo").toString());
-			int ceshi=examineMapper.updateByCode(asd);
+
+			borrowerById.setTransactionCode(codes);
+			borrowerById.setPrivateCode(result.getJSONObject("data").get("estageOrderNo").toString());
+			int ceshi=o.updateZyjrBorrower(borrowerById);
 			if(ceshi>0){
 				return AjaxResult.success();
 			}
@@ -352,9 +362,17 @@ selVO a=new selVO();
 	@RequestMapping(value ={"/ceshi2"},method = RequestMethod.POST)
 	@ResponseBody
 	@ApiOperation("111111111")
-	public AjaxResult ceshi(MultipartFile file) throws IOException {
-     	String a=FileUploadUtils.upload(file);
-		return AjaxResult.success(a);
+	public AjaxResult ceshi(@RequestParam("name") List<String> name,@RequestParam("file") List<MultipartFile> file,@RequestParam("id") List<String> id) throws IOException {
+		for (int i = 0; i < id.size(); i++) {
+			String a=FileUploadUtils.upload(file.get(i));
+			SysFileInfo info=new SysFileInfo();
+			info.setFilePath(a);
+			info.setId(id.get(i));
+			info.setFileName(name.get(i));
+			sysFileInfoMapper.insertSysFileInfo(info);
+		}
+
+		return AjaxResult.success();
 	}
 
 	@RequestMapping(value ={"/ceshi3"},method = RequestMethod.GET)

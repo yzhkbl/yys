@@ -109,6 +109,9 @@ public class ZyjrBorrower extends BaseEntity
     /** 订单状态 */
     @Excel(name = "订单状态")
     private Integer orderState;
+    /** 内部订单号 */
+    @Excel(name = "内部订单号")
+    private String privateCode;
 
     private String transactionCode;
 
@@ -123,6 +126,15 @@ public class ZyjrBorrower extends BaseEntity
     public String getContractState()
     {
         return contractState;
+    }
+    public void setPrivateCode(String privateCode)
+    {
+        this.privateCode = privateCode;
+    }
+
+    public String getPrivateCode()
+    {
+        return privateCode;
     }
 
     public void setElectronicState(String electronicState)
@@ -405,6 +417,7 @@ public class ZyjrBorrower extends BaseEntity
             .append("electronicState",getElectronicState())
             .append("electrpnicAddress",getElectrpnicAddress())
             .append("contractState",getContractState())
+                .append("privateCode", getPrivateCode())
             .toString();
     }
 }

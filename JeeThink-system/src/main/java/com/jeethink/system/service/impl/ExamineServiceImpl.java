@@ -136,7 +136,6 @@ public class ExamineServiceImpl implements IExamineService {
         if(findByBorrower(q.getUserId()).getCreditPower()==1) {
             String a = orderCode.getOrderCode();
             String b = IdUtils.simpleUUID();
-            startPage.setPrivateCode(b);
             examineDao.updateOne(q.getUserId(),a);
             examineDao.updateTwo(q.getUserId(),a);
             examineDao.updateThree(q.getUserId(),a);

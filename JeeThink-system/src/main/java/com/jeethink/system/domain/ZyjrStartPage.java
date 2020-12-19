@@ -38,9 +38,7 @@ public class ZyjrStartPage extends BaseEntity
     @Excel(name = "订单编号")
     private String transactionCode;
 
-    /** 内部订单号 */
-    @Excel(name = "内部订单号")
-    private String privateCode;
+
 
     private String creditState;
 
@@ -109,15 +107,7 @@ public class ZyjrStartPage extends BaseEntity
     {
         return transactionCode;
     }
-    public void setPrivateCode(String privateCode) 
-    {
-        this.privateCode = privateCode;
-    }
 
-    public String getPrivateCode() 
-    {
-        return privateCode;
-    }
 
     @Override
     public String toString() {
@@ -132,7 +122,7 @@ public class ZyjrStartPage extends BaseEntity
             .append("orderState", getOrderState())
             .append("userId", getUserId())
             .append("transactionCode", getTransactionCode())
-            .append("privateCode", getPrivateCode())
+
                 .append("creditState",getCreditState())
             .toString();
     }

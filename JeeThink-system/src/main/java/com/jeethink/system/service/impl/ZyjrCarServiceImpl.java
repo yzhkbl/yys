@@ -84,10 +84,8 @@ public class ZyjrCarServiceImpl implements IZyjrCarService
 
        if(zyjrCar.getZyjrCarAccount().size()>0) {
            List<ZyjrCarAccount> zyjrCarAccount = zyjrCar.getZyjrCarAccount();
-           List<Long> ids = zyjrCarAccount.stream().map(ZyjrCarAccount::getId).collect(Collectors.toList());
-           Long[] al = new Long[ids.size()];
-           Long[] longs = ids.toArray(al);
-           zyjrCarAccountService.deleteZyjrCarAccountByIds(longs);
+
+           zyjrCarAccountService.deleteZyjrCarAccountById(zyjrCar.getId());
            for (ZyjrCarAccount a: zyjrCarAccount ) {
                a.setZyjrCarId(String.valueOf(zyjrCar.getId()));
                accountMapper.insertZyjrCarAccount(a);

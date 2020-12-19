@@ -59,12 +59,12 @@
     </select>
     <insert id="insertStart" parameterType="com.jeethink.system.domain.ZyjrStartPage">
         insert into zyjr_start_page
-        (id,fund_side,business_place,order_state,user_id,transaction_code,private_code)
+        (id,fund_side,business_place,order_state,user_id,transaction_code)
         values
-        (#{id},#{fundSide},#{businessPlace},#{orderState},#{userId},#{transactionCode},#{privateCode})
+        (#{id},#{fundSide},#{businessPlace},#{orderState},#{userId},#{transactionCode})
     </insert>
     <select id="findByStart" resultType="com.jeethink.system.domain.ZyjrStartPage">
-        select id,fund_side,business_place,order_state,user_id,transaction_code,private_code,credit_state
+        select id,fund_side,business_place,order_state,user_id,transaction_code,credit_state
         from zyjr_start_page
         where order_state=0 and user_id = #{userId}
     </select>
@@ -158,7 +158,7 @@
     </update>
 
     <update id="updateByCode">
-        update zyjr_start_page set private_code=#{privateCode} where transaction_code=#{transactionCode} and order_state=1
+        update zyjr_start_page set private_code=#{privateCode} where transaction_code=#{transactionCode}
     </update>
 
     <update id="updateRelation">
@@ -411,9 +411,7 @@
             <if test="transactionCode != null">
                 transaction_code = #{transactionCode},
             </if>
-            <if test="privateCode != null">
-                private_code = #{privateCode}
-            </if>
+
         </set>
         where order_state=0 and user_id = #{userId}
     </update>
