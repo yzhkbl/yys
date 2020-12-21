@@ -11,6 +11,7 @@ import java.util.Map;
 
 import com.jeethink.common.config.JeeThinkConfig;
 import com.jeethink.common.utils.file.FileUploadUtils;
+import com.jeethink.common.utils.file.FileUtils;
 import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.*;
 import com.jeethink.system.mapper.*;
@@ -393,6 +394,28 @@ selVO a=new selVO();
 		a.setTransactionCode(null);
 		o.updateZyjrBorrower(a);
 		return AjaxResult.success();
+	}
+
+	@RequestMapping(value ={"/delete"},method = RequestMethod.GET)
+	@ResponseBody
+	@ApiOperation("111111111")
+	public AjaxResult delete(String path)  {
+		String paths="E:/demo/JeeThink-admin/src/main/java/com/jeethink/web/";
+		System.err.println(path);
+		int a=sysFileInfoMapper.deleteSysFileInfoByPath(path);
+		if(a>0){
+			String [] s=path.split("//");
+			System.err.println(paths+"profile/web/"+s[1]);
+			boolean b=FileUtils.deleteFile(paths+"profile/web/"+s[1]);
+			if(b){
+				return AjaxResult.success(b);
+			}else{
+				return AjaxResult.error("路径删除成功，但图片删除失败",b);
+			}
+		}
+
+		System.err.println(a);
+		return AjaxResult.success(a);
 	}
 
 
