@@ -134,4 +134,11 @@ public class ExamineController {
             return ajaxResult;
         }
     }
+
+    @RequestMapping("/findByState")
+    public AjaxResult findbY(String transactionCode){
+        ZyjrBorrower z= zyjrBorrowerMapper.selectById(transactionCode);
+
+        return AjaxResult.success(z.getContractState());
+    }
 }
