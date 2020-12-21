@@ -140,7 +140,7 @@ public class ExamineServiceImpl implements IExamineService {
             examineDao.updateTwo(q.getUserId(),a);
             examineDao.updateThree(q.getUserId(),a);
             examineDao.updateFour(q.getUserId(),a);
-            //examineDao.updateFive(q.getUserId(),a);
+            //examineDao.updateFive(q.getUserId(),a);                                                                 
         }
         if(findByStart(q.getUserId())!=null&&q.getOrderState()==0){
             int count = examineDao.insertStart(startPage);
