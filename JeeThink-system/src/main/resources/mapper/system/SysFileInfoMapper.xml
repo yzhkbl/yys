@@ -57,6 +57,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         delete from sys_file_info where file_id = #{fileId}
     </delete>
 
+    <delete id="deleteSysFileInfoByPath" parameterType="String">
+        delete from sys_file_info where file_path = #{filePath}
+    </delete>
+
     <delete id="deleteSysFileInfoByIds" parameterType="String">
         delete from sys_file_info where file_id in 
         <foreach item="fileId" collection="array" open="(" separator="," close=")">

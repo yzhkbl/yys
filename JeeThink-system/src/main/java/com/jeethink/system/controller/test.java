@@ -11,6 +11,7 @@ import java.util.Map;
 
 import com.jeethink.common.config.JeeThinkConfig;
 import com.jeethink.common.utils.file.FileUploadUtils;
+import com.jeethink.common.utils.file.FileUtils;
 import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.*;
 import com.jeethink.system.mapper.*;
@@ -155,6 +156,14 @@ selVO a=new selVO();
 		p5.setPicCode(pCode);
 		p5.setPicAddress(borrowerById.getBackAddress());
 		p5.setPicFileName("4.jpg");
+		if(borrowerById.getCreditPower()>0){
+			Pics p6=new Pics();
+		p6.setPicId(1);
+		p6.setPicCode(zCode);
+		p6.setPicAddress(borrowerById.getPowerAddress());
+		p6.setPicFileName("5.jpg");
+			lenp.add(p6);
+		}
 	/*	Pics p6=new Pics();
 		p6.setPicId(borrowerById.getPowerId());
 		p6.setPicCode(zCode);
@@ -162,7 +171,7 @@ selVO a=new selVO();
 		p6.setPicFileName(borrowerById.getPowerName()+".jpg");*/
 				lenp.add(p4);
 				lenp.add(p5);
-				/*lenp.add(p6);*/
+
 
 
 		if(guarantee!=null){
@@ -393,6 +402,28 @@ selVO a=new selVO();
 		a.setTransactionCode(null);
 		o.updateZyjrBorrower(a);
 		return AjaxResult.success();
+	}
+
+	@RequestMapping(value ={"/delete"},method = RequestMethod.GET)
+	@ResponseBody
+	@ApiOperation("111111111")
+	public AjaxResult delete(String path)  {
+		String paths="E:/demo/JeeThink-admin/src/main/java/com/jeethink/web/";
+		System.err.println(path);
+		int a=sysFileInfoMapper.deleteSysFileInfoByPath(path);
+		if(a>0){
+			String [] s=path.split("//");
+			System.err.println(paths+"profile/web/"+s[1]);
+			boolean b=FileUtils.deleteFile(paths+"profile/web/"+s[1]);
+			if(b){
+				return AjaxResult.success(b);
+			}else{
+				return AjaxResult.error("路径删除成功，但图片删除失败",b);
+			}
+		}
+
+		System.err.println(a);
+		return AjaxResult.success(a);
 	}
 
 

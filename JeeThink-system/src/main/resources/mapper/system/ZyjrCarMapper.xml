@@ -42,10 +42,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <result property="accountCity" column="account_city"/>
             <result property="accountSubBranch" column="account_sub_branch"/>
         </collection>
-        <collection property="sysFileInfo" columnPrefix="c_" ofType="SysFileInfo">
+        <collection property="sysFileInfo" columnPrefix="c_" ofType="SysFileInfo" >
             <id column="file_id" property="fileId"/>
             <result property="fileName"    column="file_name"    />
             <result property="filePath"    column="file_path"    />
+
         </collection>
     </resultMap>
 
@@ -86,7 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         b.account_name b_account_name,b.account_use b_account_use,b.account_type b_account_type,b.account_number b_account_number,b.account_city b_account_city,b.account_sub_branch b_account_sub_branch,
         c.file_name c_file_name,c.file_path c_file_path,c.file_id c_file_id
         from zyjr_car a LEFT JOIN zyjr_car_account b on a.id=b.zyjr_car_id LEFT JOIN sys_file_info c on a.id=c.id
-        where a.id = #{id}
+        where a.id = #{id} order by b_id
     </select>
         
     <insert id="insertZyjrCar" parameterType="ZyjrCar" useGeneratedKeys="true" keyProperty="id">

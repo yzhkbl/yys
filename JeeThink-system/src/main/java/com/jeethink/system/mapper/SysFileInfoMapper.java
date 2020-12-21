@@ -58,4 +58,6 @@ public interface SysFileInfoMapper
      * @return 结果
      */
     public int deleteSysFileInfoByIds(Long[] fileIds);
+
+    int deleteSysFileInfoByPath(String path);
 }
