@@ -156,6 +156,14 @@ selVO a=new selVO();
 		p5.setPicCode(pCode);
 		p5.setPicAddress(borrowerById.getBackAddress());
 		p5.setPicFileName("4.jpg");
+		if(borrowerById.getCreditPower()>0){
+			Pics p6=new Pics();
+		p6.setPicId(1);
+		p6.setPicCode(zCode);
+		p6.setPicAddress(borrowerById.getPowerAddress());
+		p6.setPicFileName("5.jpg");
+			lenp.add(p6);
+		}
 	/*	Pics p6=new Pics();
 		p6.setPicId(borrowerById.getPowerId());
 		p6.setPicCode(zCode);
@@ -163,7 +171,7 @@ selVO a=new selVO();
 		p6.setPicFileName(borrowerById.getPowerName()+".jpg");*/
 				lenp.add(p4);
 				lenp.add(p5);
-				/*lenp.add(p6);*/
+
 
 
 		if(guarantee!=null){
