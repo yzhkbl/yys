@@ -23,7 +23,156 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab4b5365-e565-46ed-95ac-5d8aaf08df5b" name="Default Changelist" comment="1">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_attoparser_attoparser_2_0_5_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_thymeleaf_2_1_17_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_thymeleaf_extras_thymeleaf_extras_java8time_3_0_4_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_thymeleaf_thymeleaf_3_0_11_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_thymeleaf_thymeleaf_spring5_3_0_11_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_unbescape_unbescape_1_1_6_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JeeThink-admin/src/main/java/com/jeethink/web/profile/2020/12/16/628b305a-4165-4298-a497-3c78e0f60e29.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JeeThink-admin/src/main/java/com/jeethink/web/profile/android/20201216/20201216150541893.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JeeThink-admin/src/main/java/com/jeethink/web/profile/android/20201216/20201216152302987.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JeeThink-admin/src/main/java/com/jeethink/web/profile/android/20201216/20201216152427247.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JeeThink-system/src/main/resources/static/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2020_12_10_13_51_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2020_12_10_13_51__Default_Changelist_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2020_12_10_13_55_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2020_12_10_13_55__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-activiti/jeethink-activiti.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-activiti/jeethink-activiti.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-admin/jeethink-admin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-admin/jeethink-admin.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-admin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-admin/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-admin/target/classes/com/jeethink/web/controller/system/SysProfileController.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-admin/target/classes/com/jeethink/web/controller/system/SysProfileController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/annotation/DataScope.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/annotation/DataScope.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/annotation/DataSource.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/annotation/DataSource.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/annotation/Excel$ColumnType.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/annotation/Excel$ColumnType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/annotation/Excel$Type.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/annotation/Excel$Type.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/annotation/Excel.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/annotation/Excel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/annotation/Excels.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/annotation/Excels.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/annotation/Log.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/annotation/Log.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/annotation/RepeatSubmit.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/annotation/RepeatSubmit.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/config/JeeThinkConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/config/JeeThinkConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/constant/Constants.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/constant/Constants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/constant/GenConstants.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/constant/GenConstants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/constant/HttpStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/constant/HttpStatus.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/constant/ScheduleConstants$Status.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/constant/ScheduleConstants$Status.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/constant/ScheduleConstants.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/constant/ScheduleConstants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/constant/UserConstants.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/constant/UserConstants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/controller/BaseController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/controller/BaseController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/controller/BaseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/controller/BaseController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/AjaxResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/AjaxResult.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/BaseEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/BaseEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/TreeEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/TreeEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/TreeSelect.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/TreeSelect.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/entity/SysDept.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/entity/SysDept.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/entity/SysDictData.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/entity/SysDictData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/entity/SysDictType.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/entity/SysDictType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/entity/SysMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/entity/SysMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/entity/SysRole.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/entity/SysRole.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/entity/SysUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/entity/SysUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/model/LoginBody.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/model/LoginBody.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/model/LoginUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/domain/model/LoginUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/page/PageDomain.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/page/PageDomain.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/page/TableDataInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/page/TableDataInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/page/TableSupport.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/page/TableSupport.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/redis/RedisCache.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/redis/RedisCache.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/text/CharsetKit.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/text/CharsetKit.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/text/Convert.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/text/Convert.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/text/StrFormatter.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/core/text/StrFormatter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/enums/BusinessStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/enums/BusinessStatus.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/enums/BusinessType.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/enums/BusinessType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/enums/DataSourceType.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/enums/DataSourceType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/enums/HttpMethod.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/enums/HttpMethod.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/enums/OperatorType.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/enums/OperatorType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/enums/UserStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/enums/UserStatus.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/BaseException.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/BaseException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/CustomException.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/CustomException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/DemoModeException.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/DemoModeException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/UtilException.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/UtilException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/file/FileException.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/file/FileException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/file/FileNameLengthLimitExceededException.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/file/FileNameLengthLimitExceededException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/file/FileSizeLimitExceededException.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/file/FileSizeLimitExceededException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/file/InvalidExtensionException$InvalidFlashExtensionException.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/file/InvalidExtensionException$InvalidFlashExtensionException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/file/InvalidExtensionException$InvalidImageExtensionException.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/file/InvalidExtensionException$InvalidImageExtensionException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/file/InvalidExtensionException$InvalidMediaExtensionException.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/file/InvalidExtensionException$InvalidMediaExtensionException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/file/InvalidExtensionException.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/file/InvalidExtensionException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/job/TaskException$Code.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/job/TaskException$Code.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/job/TaskException.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/job/TaskException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/user/CaptchaException.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/user/CaptchaException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/user/CaptchaExpireException.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/user/CaptchaExpireException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/user/UserException.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/user/UserException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/user/UserPasswordNotMatchException.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/exception/user/UserPasswordNotMatchException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/filter/RepeatableFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/filter/RepeatableFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/filter/RepeatedlyRequestWrapper$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/filter/RepeatedlyRequestWrapper$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/filter/RepeatedlyRequestWrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/filter/RepeatedlyRequestWrapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/filter/XssFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/filter/XssFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/filter/XssHttpServletRequestWrapper$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/filter/XssHttpServletRequestWrapper$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/filter/XssHttpServletRequestWrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/filter/XssHttpServletRequestWrapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/Arith.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/Arith.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/DateUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/DateUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/DictUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/DictUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/ExceptionUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/ExceptionUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/LogUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/LogUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/MessageUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/MessageUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/SecurityUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/SecurityUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/ServletUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/ServletUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/StringUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/StringUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/Threads.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/Threads.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/VerifyCodeUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/VerifyCodeUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/bean/BeanUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/bean/BeanUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/file/FileUploadUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/file/FileUploadUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/file/FileUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/file/FileUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/file/MimeTypeUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/file/MimeTypeUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/html/EscapeUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/html/EscapeUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/html/HTMLFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/html/HTMLFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/http/HttpHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/http/HttpHelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/http/HttpUtils$TrustAnyHostnameVerifier.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/http/HttpUtils$TrustAnyHostnameVerifier.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/http/HttpUtils$TrustAnyTrustManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/http/HttpUtils$TrustAnyTrustManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/http/HttpUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/http/HttpUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/ip/AddressUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/ip/AddressUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/ip/IpUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/ip/IpUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/poi/ExcelUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/poi/ExcelUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/reflect/ReflectUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/reflect/ReflectUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/sign/Base64.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/sign/Base64.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/sign/Md5Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/sign/Md5Utils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/spring/SpringUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/spring/SpringUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/sql/SqlUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/sql/SqlUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/uuid/IdUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/uuid/IdUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/uuid/UUID$Holder.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/uuid/UUID$Holder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/uuid/UUID.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-common/target/classes/com/jeethink/common/utils/uuid/UUID.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-framework/jeethink-framework.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-framework/jeethink-framework.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/config/GenConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/config/GenConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/controller/GenController.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/controller/GenController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/domain/GenTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/domain/GenTable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/domain/GenTableColumn.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/domain/GenTableColumn.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/mapper/GenTableColumnMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/mapper/GenTableColumnMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/mapper/GenTableMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/mapper/GenTableMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/service/GenTableColumnServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/service/GenTableColumnServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/service/GenTableServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/service/GenTableServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/service/IGenTableColumnService.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/service/IGenTableColumnService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/service/IGenTableService.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/service/IGenTableService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/util/GenUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/util/GenUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/util/VelocityInitializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/util/VelocityInitializer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/util/VelocityUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-generator/target/classes/com/jeethink/generator/util/VelocityUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/config/ScheduleConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/config/ScheduleConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/controller/SysJobController.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/controller/SysJobController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/controller/SysJobLogController.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/controller/SysJobLogController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/domain/SysJob.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/domain/SysJob.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/domain/SysJobLog.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/domain/SysJobLog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/mapper/SysJobLogMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/mapper/SysJobLogMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/mapper/SysJobMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/mapper/SysJobMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/service/ISysJobLogService.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/service/ISysJobLogService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/service/ISysJobService.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/service/ISysJobService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/service/impl/SysJobLogServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/service/impl/SysJobLogServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/service/impl/SysJobServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/service/impl/SysJobServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/task/RyTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/task/RyTask.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/util/AbstractQuartzJob.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/util/AbstractQuartzJob.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/util/CronUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/util/CronUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/util/JobInvokeUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/util/JobInvokeUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/util/QuartzDisallowConcurrentExecution.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/util/QuartzDisallowConcurrentExecution.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/util/QuartzJobExecution.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/util/QuartzJobExecution.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/util/ScheduleUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-quartz/target/classes/com/jeethink/quartz/util/ScheduleUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JeeThink-system/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/JeeThink-system/src/main/resources/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,8 +183,12 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
+  </component>
+  <component name="Git.Pull.Settings">
+    <option name="BRANCH" value="master" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -43,7 +196,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="D:\Idea\IntelliJ IDEA 2020.2.3\plugins\maven\lib\maven3" />
+        <option name="mavenHome" value="D:\IntelliJ IDEA 2020.2.3\plugins\maven\lib\maven3" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -55,6 +208,7 @@
     <option name="showMembers" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
@@ -63,35 +217,58 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="D:/demo" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/JeeThink-admin/src/main/resources" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\BaiduNetdiskDownload\jeethink快速开发框架（前后分离工作流）\jeethink快速开发框架（前后分离工作流版）\jeethink快速开发框架（前后分离工作流版）\jeethink\.idea\libraries" />
-      <recent name="E:\BaiduNetdiskDownload\jeethink快速开发框架（前后分离工作流）\jeethink快速开发框架（前后分离工作流版）\jeethink快速开发框架（前后分离工作流版）\jeethink\JeeThink-system\src\main\resources\mapper\system" />
-      <recent name="E:\BaiduNetdiskDownload\jeethink快速开发框架（前后分离工作流）\jeethink快速开发框架（前后分离工作流版）\jeethink快速开发框架（前后分离工作流版）\jeethink\JeeThink-system\src\main\java\com\jeethink\system\service\impl" />
-      <recent name="E:\BaiduNetdiskDownload\jeethink快速开发框架（前后分离工作流）\jeethink快速开发框架（前后分离工作流版）\jeethink快速开发框架（前后分离工作流版）\jeethink\JeeThink-system\src\main\java\com\jeethink\system\service" />
-      <recent name="E:\BaiduNetdiskDownload\jeethink快速开发框架（前后分离工作流）\jeethink快速开发框架（前后分离工作流版）\jeethink快速开发框架（前后分离工作流版）\jeethink\JeeThink-system\src\main\java\com\jeethink\system\mapper" />
+      <recent name="E:\demo\JeeThink-system\src\main\java\com\jeethink\system\service\impl" />
+      <recent name="E:\demo\JeeThink-system\src\main\java\com\jeethink\system\service" />
+      <recent name="E:\demo\JeeThink-system\src\main\java\com\jeethink\system\mapper" />
+      <recent name="E:\demo\JeeThink-system\src\main\java\com\jeethink\system\domain" />
+      <recent name="E:\demo\JeeThink-system\src\main\java\com\jeethink\system\controller" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\BaiduNetdiskDownload\jeethink快速开发框架（前后分离工作流）\jeethink快速开发框架（前后分离工作流版）\jeethink快速开发框架（前后分离工作流版）\jeethink\JeeThink-admin\src\main\webapp\static" />
-      <recent name="E:\BaiduNetdiskDownload\jeethink快速开发框架（前后分离工作流）\jeethink快速开发框架（前后分离工作流版）\jeethink快速开发框架（前后分离工作流版）\jeethink\JeeThink-admin\src\main\webapp" />
+      <recent name="E:\demo\JeeThink-admin\src\main\resources" />
+      <recent name="E:\demo\JeeThink-common\src\main\java\com\jeethink\common" />
+      <recent name="E:\demo\JeeThink-admin\src\main\java\com\jeethink\web" />
+      <recent name="E:\demo\JeeThink-system\src\main\resources\mapper\system" />
+      <recent name="E:\demo\JeeThink-system\src\main\java\com\jeethink\system\controller" />
     </key>
   </component>
+  <component name="RestClientSettings">
+    <option name="REQUEST_HISTORY">
+      <list>
+        <RestClientRequest>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost/getInfo" />
+          <option name="urlPath" value="" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+      </list>
+    </option>
+  </component>
   <component name="RunManager" selected="Spring Boot.JeeThinkApplication">
-    <configuration name="JeeThinkApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.jeethink.JeeThinkApplication" />
-      <module name="jeethink-admin" />
+    <configuration name="DataUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.jeethink.system.util.DataUtil" />
+      <module name="jeethink-system" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.jeethink.*" />
+          <option name="PATTERN" value="com.jeethink.system.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -99,8 +276,68 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/jeethink/jeethink-admin/src/main/webapp/static/index.html" useBuiltInWebServerPort="true">
-      <method v="2" />
+    <configuration name="FileUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.jeethink.common.utils.file.FileUtils" />
+      <module name="jeethink-common" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.jeethink.common.utils.file.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HttpUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.jeethink.common.utils.http.HttpUtils" />
+      <module name="jeethink-common" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.jeethink.common.utils.http.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="androidUpload" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.jeethink.system.util.androidUpload" />
+      <module name="jeethink-system" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.jeethink.system.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.jeethink.system.util.test" />
+      <module name="jeethink-system" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.jeethink.system.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="JeeThinkApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="jeethink-admin" />
@@ -111,12 +348,18 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JavaScript Debug.index.html" />
-        <item itemvalue="Application.JeeThinkApplication" />
+        <item itemvalue="Application.test (1)" />
+        <item itemvalue="Application.HttpUtils" />
+        <item itemvalue="Application.FileUtils" />
+        <item itemvalue="Application.DataUtil" />
+        <item itemvalue="Application.androidUpload" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\Hello\AppData\Roaming\Subversion</configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="ab4b5365-e565-46ed-95ac-5d8aaf08df5b" name="Default Changelist" comment="" />
@@ -140,6 +383,9 @@
       <workItem from="1607580873515" duration="3550000" />
       <workItem from="1607584464362" duration="5338000" />
       <workItem from="1607647196023" duration="2611000" />
+      <workItem from="1607993075216" duration="142903000" />
+      <workItem from="1608511337191" duration="93000" />
+      <workItem from="1608511542085" duration="19700000" />
     </task>
     <task id="LOCAL-00001" summary="111">
       <created>1607503649180</created>
@@ -176,7 +422,119 @@
       <option name="project" value="LOCAL" />
       <updated>1607584922475</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="1">
+      <created>1607995503700</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1607995503700</updated>
+    </task>
+    <task id="LOCAL-00007" summary="1">
+      <created>1608000573273</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1608000573273</updated>
+    </task>
+    <task id="LOCAL-00008" summary="1">
+      <created>1608018223595</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1608018223595</updated>
+    </task>
+    <task id="LOCAL-00009" summary="1">
+      <created>1608080708375</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1608080708375</updated>
+    </task>
+    <task id="LOCAL-00010" summary="1">
+      <created>1608168202630</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1608168202630</updated>
+    </task>
+    <task id="LOCAL-00011" summary="1">
+      <created>1608197715277</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1608197715278</updated>
+    </task>
+    <task id="LOCAL-00012" summary="1">
+      <created>1608257734145</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1608257734145</updated>
+    </task>
+    <task id="LOCAL-00013" summary="1">
+      <created>1608281523422</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1608281523423</updated>
+    </task>
+    <task id="LOCAL-00014" summary="1">
+      <created>1608343606843</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1608343606843</updated>
+    </task>
+    <task id="LOCAL-00015" summary="1">
+      <created>1608344356065</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1608344356065</updated>
+    </task>
+    <task id="LOCAL-00016" summary="1">
+      <created>1608346813576</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1608346813576</updated>
+    </task>
+    <task id="LOCAL-00017" summary="1">
+      <created>1608349324430</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1608349324430</updated>
+    </task>
+    <task id="LOCAL-00018" summary="1">
+      <created>1608366382532</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1608366382532</updated>
+    </task>
+    <task id="LOCAL-00019" summary="1">
+      <created>1608518323389</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1608518323389</updated>
+    </task>
+    <task id="LOCAL-00020" summary="1">
+      <created>1608519418157</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1608519418157</updated>
+    </task>
+    <task id="LOCAL-00021" summary="1">
+      <created>1608537364608</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1608537364608</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -201,50 +559,74 @@
     <option name="LAST_COMMIT_MESSAGE" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="765" y="204" key="#com.intellij.ide.util.MemberChooser" timestamp="1608277064521">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="204" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1608277064521" />
     <state x="999" y="238" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog" timestamp="1607584181139">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="999" y="238" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607584181139" />
-    <state x="710" y="327" key="FileChooserDialogImpl" timestamp="1607647212898">
+    <state x="623" y="485" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1608276623920">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="710" y="327" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1607647212898" />
+    <state x="623" y="485" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1608276623920" />
+    <state x="888" y="496" width="489" height="273" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1608111614093">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="888" y="496" width="489" height="273" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040@0.0.1920.1040" timestamp="1608111614093" />
+    <state x="463" y="87" key="CommitChangelistDialog2" timestamp="1608537361456">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="463" y="87" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1608537361456" />
+    <state x="184" y="86" key="DiffContextDialog" timestamp="1608000532073">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="184" y="86" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1608000532073" />
+    <state x="710" y="327" key="FileChooserDialogImpl" timestamp="1608529367992">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="710" y="327" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1608529367992" />
+    <state x="771" y="421" key="Github.CreateGistDialog" timestamp="1608534592282">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="771" y="421" key="Github.CreateGistDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1608534592282" />
     <state x="776" y="420" key="Github.ShareDialog" timestamp="1607502387023">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="776" y="420" key="Github.ShareDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607502387023" />
-    <state width="1340" height="314" key="GridCell.Tab.0.bottom" timestamp="1607648132580">
+    <state width="1706" height="250" key="GridCell.Tab.0.bottom" timestamp="1608537259808">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="314" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607648132580" />
-    <state width="1340" height="314" key="GridCell.Tab.0.center" timestamp="1607648132579">
+    <state width="1706" height="250" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608537259808" />
+    <state width="1706" height="250" key="GridCell.Tab.0.center" timestamp="1608537259807">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="314" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607648132579" />
-    <state width="1340" height="314" key="GridCell.Tab.0.left" timestamp="1607648132579">
+    <state width="1706" height="250" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608537259807" />
+    <state width="1706" height="250" key="GridCell.Tab.0.left" timestamp="1608537259807">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="314" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607648132579" />
-    <state width="1340" height="314" key="GridCell.Tab.0.right" timestamp="1607648132579">
+    <state width="1706" height="250" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608537259807" />
+    <state width="1706" height="250" key="GridCell.Tab.0.right" timestamp="1608537259808">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="314" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607648132579" />
-    <state width="1340" height="314" key="GridCell.Tab.1.bottom" timestamp="1607648132580">
+    <state width="1706" height="250" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608537259808" />
+    <state width="1706" height="250" key="GridCell.Tab.1.bottom" timestamp="1608537259808">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="314" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607648132580" />
-    <state width="1340" height="314" key="GridCell.Tab.1.center" timestamp="1607648132580">
+    <state width="1706" height="250" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608537259808" />
+    <state width="1706" height="250" key="GridCell.Tab.1.center" timestamp="1608537259808">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="314" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607648132580" />
-    <state width="1340" height="314" key="GridCell.Tab.1.left" timestamp="1607648132580">
+    <state width="1706" height="250" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608537259808" />
+    <state width="1706" height="250" key="GridCell.Tab.1.left" timestamp="1608537259808">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="314" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607648132580" />
-    <state width="1340" height="314" key="GridCell.Tab.1.right" timestamp="1607648132580">
+    <state width="1706" height="250" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608537259808" />
+    <state width="1706" height="250" key="GridCell.Tab.1.right" timestamp="1608537259808">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="314" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607648132580" />
+    <state width="1706" height="250" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608537259808" />
     <state width="1340" height="328" key="GridCell.Tab.2.bottom" timestamp="1607584452745">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -265,29 +647,71 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="643" y="256" key="IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607587139068" />
-    <state x="421" y="201" key="Maven.ArtifactSearchDialog" timestamp="1607583234435">
+    <state x="27" y="157" key="Maven.ArtifactSearchDialog" timestamp="1608273812179">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="421" y="201" key="Maven.ArtifactSearchDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607583234435" />
+    <state x="27" y="157" key="Maven.ArtifactSearchDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1608273812179" />
+    <state x="0" y="5" key="MergeDialog" timestamp="1608197910281">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="0" y="5" key="MergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1608197910281" />
+    <state x="331" y="199" key="MultipleFileMergeDialog" timestamp="1608197910289">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="331" y="199" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1608197910289" />
     <state x="782" y="277" key="NewModule_or_Project.wizard" timestamp="1607423253465">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="782" y="277" key="NewModule_or_Project.wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1607423253465" />
-    <state x="649" y="102" key="SettingsEditor" timestamp="1607652145624">
+    <state x="649" y="102" key="SettingsEditor" timestamp="1608535849527">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="649" y="102" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1607652145624" />
-    <state x="561" y="194" key="Vcs.Push.Dialog.v2" timestamp="1607584938547">
+    <state x="649" y="102" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1608535849527" />
+    <state x="561" y="194" key="Vcs.Push.Dialog.v2" timestamp="1608537368271">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="561" y="194" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607584938547" />
+    <state x="561" y="194" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1608537368271" />
     <state x="707" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607587107018">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="707" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607587107018" />
-    <state x="448" y="234" key="run.anything.popup" timestamp="1607494436820">
+    <state x="-62" y="6" width="1126" height="694" key="dock-window-1" timestamp="1608341105512">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="448" y="234" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1607494436820" />
+    <state x="-62" y="6" width="1126" height="694" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1608341105512" />
+    <state x="0" y="0" width="1456" height="694" key="dock-window-2" timestamp="1608346705705">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="0" y="0" width="1456" height="694" key="dock-window-2/0.0.1920.1040@0.0.1920.1040" timestamp="1608346705705" />
+    <state x="448" y="234" key="run.anything.popup" timestamp="1608020422641">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="448" y="234" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1608020422641" />
+    <state x="1155" y="287" width="672" height="678" key="search.everywhere.popup" timestamp="1608535742352">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1155" y="287" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1608535742352" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/JeeThink-system/src/main/java/com/jeethink/system/util/androidUpload.java</url>
+          <line>91</line>
+          <properties class="com.jeethink.system.util.androidUpload" method="main">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/JeeThink-system/src/main/java/com/jeethink/system/mapper/SysFileInfoMapper.java</url>
+          <line>61</line>
+          <properties class="com.jeethink.system.mapper.SysFileInfoMapper" method="deleteSysFileInfoByPath">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
