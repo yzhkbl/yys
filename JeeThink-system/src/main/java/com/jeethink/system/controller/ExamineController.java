@@ -102,7 +102,7 @@ public class ExamineController {
     public AjaxResult order(Integer userId){
         String orderCode = examineService.order(userId);
         AjaxResult ajaxResult = t.find(orderCode);
-        if (ajaxResult.get("code").equals("200")) {
+        if (ajaxResult.get("code").equals(200)) {
             return AjaxResult.success(orderCode);
         }else {
             ZyjrBorrower zyjrBorrower = zyjrBorrowerMapper.selectById(orderCode);
