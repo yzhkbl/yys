@@ -17,14 +17,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          <result property="name"    column="user_name"    />
         <result property="transactionCode"    column="transaction_code"    />
         <result property="operator"    column="operator"    />
+        <result property="falseOperator"    column="false_operator"    />
+        <result property="falseOperatorId"    column="false_operator_id"    />
     </resultMap>
 
     <sql id="selectZyjrBusinessVo">
-        select id, team, car_information, intention_price, loan_money, repay_period, car_type, user_id, order_state,transaction_code from zyjr_business
+        select id, team, car_information,false_operator,false_operator_id, intention_price, loan_money, repay_period, car_type, user_id, order_state,transaction_code from zyjr_business
     </sql>
 
     <select id="selectZyjrBusinessList" parameterType="ZyjrBusiness" resultMap="ZyjrBusinessResult">
-         select a.id, a.team,a.operator,a.update_by, a.car_information, a.intention_price, a.loan_money, a.repay_period, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name
+         select a.id, a.team,a.operator,a.update_by,a.false_operator,a.false_operator_id, a.car_information, a.intention_price, a.loan_money, a.repay_period, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name
          from zyjr_business a
          left join zyjr_borrower b on a.transaction_code=b.transaction_code
         <where>
@@ -36,7 +38,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="repayPeriod != null "> and a.repay_period = #{repayPeriod}</if>
             <if test="carType != null "> and a.car_type = #{carType}</if>
             <if test="userId != null  and userId != ''"> and a.userId = #{userId}</if>
-
+            <if test="falseOperator != null "> and a.false_operator = #{falseOperator}</if>
+            <if test="falseOperatorId != null "> and a.false_operator_id = #{falseOperatorId}</if>
             <if test="transactionCode != null "> and a.transaction_code = #{transactionCode}</if>
         </where>
     </select>
@@ -60,8 +63,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="loanMoney != null">loan_money,</if>
             <if test="repayPeriod != null">repay_period,</if>
             <if test="carType != null">car_type,</if>
-
             <if test="orderState != null">order_state,</if>
+            <if test="falseOperator != null">false_operator,</if>
+            <if test="falseOperatorId != null">false_operator_id,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="team != null">#{team},</if>
@@ -70,6 +74,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="loanMoney != null">#{loanMoney},</if>
             <if test="repayPeriod != null">#{repayPeriod},</if>
             <if test="carType != null">#{carType},</if>
+            <if test="falseOperator != null">#{falseOperator},</if>
+            <if test="falseOperatorId != null">#{falseOperatorId},</if>
 
             <if test="orderState != null">#{orderState},</if>
          </trim>
@@ -77,6 +83,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <update id="updateById">
 update zyjr_business set update_by="",operator="" where id = #{id}
+    </update>
+    <update id="updateByIds">
+update zyjr_business set false_operator=#{falseOperator},false_operator_id=#{falseOperatorId} where id = #{id}
     </update>
     <update id="updateZyjrBusiness" parameterType="ZyjrBusiness">
         update zyjr_business
@@ -91,6 +100,8 @@ update zyjr_business set update_by="",operator="" where id = #{id}
             <if test="operator != null">operator = #{operator},</if>
             <if test="orderState != null">order_state = #{orderState},</if>
             <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+            <if test="falseOperator != null">false_operator = #{falseOperator},</if>
+            <if test="falseOperatorId != null">false_operator_id = #{falseOperatorId},</if>
         </trim>
         where id = #{id}
     </update>

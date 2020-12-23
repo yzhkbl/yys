@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrInsuranceMapper">
+    
+    <resultMap type="ZyjrInsurance" id="ZyjrInsuranceResult">
+        <result property="id"    column="id"    />
+        <result property="insuranceCompany"    column="insurance_company"    />
+        <result property="money"    column="money"    />
+        <result property="zyjrCarId"    column="zyjr_car_id"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="userId"    column="user_id"    />
+        <result property="transactionCode"    column="transaction_code"    />
+        <result property="state"    column="state"    />
+    </resultMap>
+
+    <sql id="selectZyjrInsuranceVo">0
+        select id, insurance_company, money, zyjr_car_id, create_by, create_time, update_by, update_time, user_id, transaction_code, state from zyjr_insurance
+    </sql>
+
+    <select id="selectZyjrInsuranceList" parameterType="ZyjrInsurance" resultMap="ZyjrInsuranceResult">
+        <include refid="selectZyjrInsuranceVo"/>
+        <where>  
+            <if test="insuranceCompany != null  and insuranceCompany != ''"> and insurance_company = #{insuranceCompany}</if>
+            <if test="money != null  and money != ''"> and money = #{money}</if>
+            <if test="zyjrCarId != null  and zyjrCarId != ''"> and zyjr_car_id = #{zyjrCarId}</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
+            <if test="state != null  and state != ''"> and state = #{state}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrInsuranceById" parameterType="Long" resultMap="ZyjrInsuranceResult">
+        <include refid="selectZyjrInsuranceVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrInsurance" parameterType="ZyjrInsurance" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_insurance
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="insuranceCompany != null">insurance_company,</if>
+            <if test="money != null">money,</if>
+            <if test="zyjrCarId != null">zyjr_car_id,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="transactionCode != null">transaction_code,</if>
+            <if test="state != null">state,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="insuranceCompany != null">#{insuranceCompany},</if>
+            <if test="money != null">#{money},</if>
+            <if test="zyjrCarId != null">#{zyjrCarId},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="transactionCode != null">#{transactionCode},</if>
+            <if test="state != null">#{state},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrInsurance" parameterType="ZyjrInsurance">
+        update zyjr_insurance
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="insuranceCompany != null">insurance_company = #{insuranceCompany},</if>
+            <if test="money != null">money = #{money},</if>
+            <if test="zyjrCarId != null">zyjr_car_id = #{zyjrCarId},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+            <if test="state != null">state = #{state},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrInsuranceById" parameterType="Long">
+        delete from zyjr_insurance where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrInsuranceByIds" parameterType="String">
+        delete from zyjr_insurance where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

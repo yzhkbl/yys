@@ -56,6 +56,27 @@ public class ZyjrBusiness extends BaseEntity
     private String name;//联查用户名
     private String transactionCode;
     private String operator;
+    private String falseOperator;
+    private String falseOperatorId;
+
+
+
+    public String getFalseOperator() {
+        return falseOperator;
+    }
+
+    public void setFalseOperator(String falseOperator) {
+        this.falseOperator = falseOperator;
+    }
+
+    public String getFalseOperatorId() {
+        return falseOperatorId;
+    }
+
+    public void setFalseOperatorId(String falseOperatorId) {
+        this.falseOperatorId = falseOperatorId;
+    }
+
     public void setTransactionCode(String transactionCode)
     {
         this.transactionCode = transactionCode;
@@ -173,6 +194,8 @@ public class ZyjrBusiness extends BaseEntity
             .append("orderState", getOrderState())
                 .append("transactionCode", getTransactionCode())
                 .append("operator",getOperator())
+                .append("falseOperator",getFalseOperator())
+                .append("falseOperatorId",getFalseOperatorId())
             .toString();
     }
 }

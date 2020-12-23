@@ -36,10 +36,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="transactionCode"    column="transaction_code"    />
         <result property="contractState"    column="contract_state"    />
         <result property="privateCode"    column="private_code"    />
+        <result property="encryptData"    column="encrypt_data"    />
     </resultMap>
 
     <sql id="selectZyjrBorrowerVo">
-        select id, user_name, id_card,private_code, bank_card_no, phone_number, issue_authority, start_date, end_date, family_address, obverse_id, obverse_code, obverse_address, obverse_name, back_id, back_code, back_address, back_name, power_id, power_code, power_address, power_name, credit_power, user_id, order_state, create_by, create_time, update_by, update_time ,transaction_code from zyjr_borrower
+        select id, user_name,encrypt_data,conf, id_card,private_code, bank_card_no, phone_number, issue_authority, start_date, end_date, family_address, obverse_id, obverse_code, obverse_address, obverse_name, back_id, back_code, back_address, back_name, power_id, power_code, power_address, power_name, credit_power, user_id, order_state, create_by, create_time, update_by, update_time ,transaction_code from zyjr_borrower
     </sql>
 
     <select id="selectZyjrBorrowerList" parameterType="ZyjrBorrower" resultMap="ZyjrBorrowerResult">
@@ -68,6 +69,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="powerName != null  and powerName != ''"> and power_name like concat('%', #{powerName}, '%')</if>
             <if test="creditPower != null "> and credit_power = #{creditPower}</if>
             <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="encryptData != null  and encryptData != ''"> and encrypt_data = #{encryptData}</if>
+            <if test="conf != null  and conf != ''"> and conf = #{conf}</if>
 
 
         </where>
@@ -118,6 +121,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="electrpnicAddress != null">electrpnic_address,</if>
             <if test="contractState != null">contract_state,</if>
             <if test="privateCode != null">private_code,</if>
+            <if test="encryptData != null">encrypt_data,</if>
+            <if test="conf != null">conf,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userName != null">#{userName},</if>
@@ -152,6 +157,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="electrpnicAddress != null">#{electrpnicAddress},</if>
             <if test="contractState != null">#{contractState},</if>
             <if test="privateCode != null">#{privateCode},</if>
+            <if test="encryptData != null">#{encryptData},</if>
+            <if test="conf != null">#{conf},</if>
          </trim>
     </insert>
 
@@ -189,6 +196,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="electrpnicAddress != null">electrpnic_address=#{electrpnicAddress},</if>
             <if test="contractState != null">contract_state=#{contractState},</if>
             <if test="privateCode != null">private_code=#{privateCode},</if>
+            <if test="encryptData != null">encrypt_data=#{encryptData},</if>
+            <if test="conf != null">conf=#{conf},</if>
         </trim>
         where id = #{id}
     </update>

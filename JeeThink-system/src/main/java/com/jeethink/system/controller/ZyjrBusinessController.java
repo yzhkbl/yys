@@ -3,18 +3,12 @@ package com.jeethink.system.controller;
 import java.util.List;
 
 import com.jeethink.system.domain.ZyjrCarAccount;
+import com.jeethink.system.domain.vo.Bodys;
 import com.jeethink.system.mapper.ZyjrBusinessMapper;
 import com.jeethink.system.service.IZyjrCarAccountService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.jeethink.common.annotation.Log;
 import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
@@ -118,6 +112,13 @@ public class ZyjrBusinessController extends BaseController
     public AjaxResult edit2(String id)
     {
         return toAjax(zyjrBusinessMapper.updateById(id));
+    }
+
+    @GetMapping("edit2")
+    public AjaxResult edit22(Bodys bodys)
+    {
+        System.err.println(bodys);
+        return toAjax(zyjrBusinessMapper.updateByIds(bodys));
     }
 
     /**

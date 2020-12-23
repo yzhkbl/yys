@@ -179,8 +179,10 @@ public class ExamineServiceImpl implements IExamineService {
         ok.setPub(pub);
         ok.setReq(okreq);
         JSONObject json3 = new JSONObject().fromObject(ok);
+        System.err.println(json3);
         JSONObject jsons = encryptData(json3.toString(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo, codes);
         JSONObject results = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", jsons);
+        System.err.println(results);
         if (results.get("code").equals(0)) {
             return "ok";
         }
