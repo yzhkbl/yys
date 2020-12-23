@@ -1,6 +1,9 @@
 package com.jeethink.system.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,6 +59,18 @@ public class ZyjrGpsController extends BaseController
         List<ZyjrGps> list = zyjrGpsService.selectZyjrGpsList(zyjrGps);
         ExcelUtil<ZyjrGps> util = new ExcelUtil<ZyjrGps>(ZyjrGps.class);
         return util.exportExcel(list, "gps");
+    }
+
+    @PostMapping("insert")
+    public AjaxResult post(ZyjrGps zyjrGps){
+        zyjrGps.setState("1");
+        int ceshi=zyjrGpsService.insertZyjrGps(zyjrGps);
+        if(ceshi>0){
+            Map<String,String> map=new HashMap<>();
+            map.put("transactionCode",zyjrGps.getTransactionCode());
+            return  AjaxResult.success(map);
+        }
+        return  AjaxResult.error();
     }
 
     /**

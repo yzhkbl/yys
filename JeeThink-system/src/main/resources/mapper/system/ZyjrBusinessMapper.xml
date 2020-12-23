@@ -31,16 +31,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          left join zyjr_borrower b on a.transaction_code=b.transaction_code
         <where>
             a.order_state = 1
-            <if test="team != null  and team != ''"> and a.team = #{team}</if>
-            <if test="carInformation != null "> and a.car_information = #{carInformation}</if>
-            <if test="intentionPrice != null "> and a.intention_price = #{intentionPrice}</if>
-            <if test="loanMoney != null "> and a.loan_money = #{loanMoney}</if>
-            <if test="repayPeriod != null "> and a.repay_period = #{repayPeriod}</if>
-            <if test="carType != null "> and a.car_type = #{carType}</if>
+            <if test="team != null  and team != ''"> and a.team like concat('%', #{team}, '%') </if>
+            <if test="carInformation != null "> and a.car_information like concat('%', #{carInformation}, '%') </if>
+            <if test="intentionPrice != null "> and a.intention_price like concat('%', #{intentionPrice}, '%') </if>
+            <if test="loanMoney != null "> and a.loan_money like concat('%', #{loanMoney}, '%') </if>
+            <if test="repayPeriod != null "> and a.repay_period like concat('%', #{repayPeriod}, '%') </if>
+            <if test="carType != null "> and a.car_type like concat('%', #{carType}, '%') </if>
             <if test="userId != null  and userId != ''"> and a.userId = #{userId}</if>
-            <if test="falseOperator != null "> and a.false_operator = #{falseOperator}</if>
+            <if test="falseOperator != null "> and a.false_operator like concat('%', #{falseOperator}, '%') </if>
             <if test="falseOperatorId != null "> and a.false_operator_id = #{falseOperatorId}</if>
-            <if test="transactionCode != null "> and a.transaction_code = #{transactionCode}</if>
+            <if test="transactionCode != null "> and a.transaction_code like concat('%', #{transactionCode}, '%') </if>
+            <if test="name != null "> and b.user_name like concat('%', #{name}, '%')</if>
         </where>
     </select>
     

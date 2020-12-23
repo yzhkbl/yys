@@ -186,6 +186,16 @@ public class ZyjrCarController extends BaseController
         return AjaxResult.error();
     }
 
+    @GetMapping("/delete/{id}")
+    public AjaxResult dele(@PathVariable("id") String id)
+    {
+        int ceshi=zyjrCarService.deleteZyjrCarById(Long.parseLong(id));
+        if(ceshi>0){
+            return AjaxResult.success();
+        }
+        return AjaxResult.error();
+    }
+
     @PostMapping("/pic")
     @ApiOperation("111111111")
     public AjaxResult testFiles(@RequestParam("file")List<String> file, @RequestParam("name") List<String> name,  @RequestParam("id") List<String> id){

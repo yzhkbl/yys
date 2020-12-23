@@ -68,7 +68,7 @@ public class ZyjrBorrowerController extends BaseController
         return AjaxResult.success(zyjrBorrowerService.selectZyjrBorrowerById(id));
     }
 
-    /**
+    /**0
      * 新增【请填写功能名称】
      */
     @PreAuthorize("@ss.hasPermi('system:borrower:add')")
