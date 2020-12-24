@@ -15,8 +15,8 @@ import com.jeethink.common.annotation.Log;
 import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
 import com.jeethink.common.enums.BusinessType;
-import com.jeethink.system.domain.ZyjrBorrower;
-import com.jeethink.system.service.IZyjrBorrowerService;
+import com.jeethink.system.domain.ZyjrInsurance;
+import com.jeethink.system.service.IZyjrInsuranceService;
 import com.jeethink.common.utils.poi.ExcelUtil;
 import com.jeethink.common.core.page.TableDataInfo;
 
@@ -24,80 +24,80 @@ import com.jeethink.common.core.page.TableDataInfo;
  * 【请填写功能名称】Controller
  * 
  * @author jeethink
- * @date 2020-12-10
+ * @date 2020-12-23
  */
 @RestController
-@RequestMapping("/system/borrower")
-public class ZyjrBorrowerController extends BaseController
+@RequestMapping("/system/insurance")
+public class ZyjrInsuranceController extends BaseController
 {
     @Autowired
-    private IZyjrBorrowerService zyjrBorrowerService;
+    private IZyjrInsuranceService zyjrInsuranceService;
 
     /**
      * 查询【请填写功能名称】列表
      */
-    @PreAuthorize("@ss.hasPermi('system:borrower:list')")
+    @PreAuthorize("@ss.hasPermi('system:insurance:list')")
     @GetMapping("/list")
-    public TableDataInfo list(ZyjrBorrower zyjrBorrower)
+    public TableDataInfo list(ZyjrInsurance zyjrInsurance)
     {
         startPage();
-        List<ZyjrBorrower> list = zyjrBorrowerService.selectZyjrBorrowerList(zyjrBorrower);
+        List<ZyjrInsurance> list = zyjrInsuranceService.selectZyjrInsuranceList(zyjrInsurance);
         return getDataTable(list);
     }
 
     /**
      * 导出【请填写功能名称】列表
      */
-    @PreAuthorize("@ss.hasPermi('system:borrower:export')")
+    @PreAuthorize("@ss.hasPermi('system:insurance:export')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
-    public AjaxResult export(ZyjrBorrower zyjrBorrower)
+    public AjaxResult export(ZyjrInsurance zyjrInsurance)
     {
-        List<ZyjrBorrower> list = zyjrBorrowerService.selectZyjrBorrowerList(zyjrBorrower);
-        ExcelUtil<ZyjrBorrower> util = new ExcelUtil<ZyjrBorrower>(ZyjrBorrower.class);
-        return util.exportExcel(list, "borrower");
+        List<ZyjrInsurance> list = zyjrInsuranceService.selectZyjrInsuranceList(zyjrInsurance);
+        ExcelUtil<ZyjrInsurance> util = new ExcelUtil<ZyjrInsurance>(ZyjrInsurance.class);
+        return util.exportExcel(list, "insurance");
     }
 
     /**
      * 获取【请填写功能名称】详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:borrower:query')")
+    @PreAuthorize("@ss.hasPermi('system:insurance:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Integer id)
+    public AjaxResult getInfo(@PathVariable("id") Long id)
     {
-        return AjaxResult.success(zyjrBorrowerService.selectZyjrBorrowerById(id));
+        return AjaxResult.success(zyjrInsuranceService.selectZyjrInsuranceById(id));
     }
 
-    /**0
+    /**
      * 新增【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:borrower:add')")
+    @PreAuthorize("@ss.hasPermi('system:insurance:add')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody ZyjrBorrower zyjrBorrower)
+    public AjaxResult add(@RequestBody ZyjrInsurance zyjrInsurance)
     {
-        return toAjax(zyjrBorrowerService.insertZyjrBorrower(zyjrBorrower));
+        return toAjax(zyjrInsuranceService.insertZyjrInsurance(zyjrInsurance));
     }
 
     /**
      * 修改【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:borrower:edit')")
+    @PreAuthorize("@ss.hasPermi('system:insurance:edit')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody ZyjrBorrower zyjrBorrower)
+    public AjaxResult edit(@RequestBody ZyjrInsurance zyjrInsurance)
     {
-        return toAjax(zyjrBorrowerService.updateZyjrBorrower(zyjrBorrower));
+        return toAjax(zyjrInsuranceService.updateZyjrInsurance(zyjrInsurance));
     }
 
     /**
      * 删除【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:borrower:remove')")
+    @PreAuthorize("@ss.hasPermi('system:insurance:remove')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Integer[] ids)
+    public AjaxResult remove(@PathVariable Long[] ids)
     {
-        return toAjax(zyjrBorrowerService.deleteZyjrBorrowerByIds(ids));
+        return toAjax(zyjrInsuranceService.deleteZyjrInsuranceByIds(ids));
     }
 }

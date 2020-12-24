@@ -1,6 +1,9 @@
 package com.jeethink.system.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +18,8 @@ import com.jeethink.common.annotation.Log;
 import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
 import com.jeethink.common.enums.BusinessType;
-import com.jeethink.system.domain.ZyjrBorrower;
-import com.jeethink.system.service.IZyjrBorrowerService;
+import com.jeethink.system.domain.ZyjrGps;
+import com.jeethink.system.service.IZyjrGpsService;
 import com.jeethink.common.utils.poi.ExcelUtil;
 import com.jeethink.common.core.page.TableDataInfo;
 
@@ -24,80 +27,92 @@ import com.jeethink.common.core.page.TableDataInfo;
  * 【请填写功能名称】Controller
  * 
  * @author jeethink
- * @date 2020-12-10
+ * @date 2020-12-23
  */
 @RestController
-@RequestMapping("/system/borrower")
-public class ZyjrBorrowerController extends BaseController
+@RequestMapping("/system/gps")
+public class ZyjrGpsController extends BaseController
 {
     @Autowired
-    private IZyjrBorrowerService zyjrBorrowerService;
+    private IZyjrGpsService zyjrGpsService;
 
     /**
      * 查询【请填写功能名称】列表
      */
-    @PreAuthorize("@ss.hasPermi('system:borrower:list')")
+    @PreAuthorize("@ss.hasPermi('system:gps:list')")
     @GetMapping("/list")
-    public TableDataInfo list(ZyjrBorrower zyjrBorrower)
+    public TableDataInfo list(ZyjrGps zyjrGps)
     {
         startPage();
-        List<ZyjrBorrower> list = zyjrBorrowerService.selectZyjrBorrowerList(zyjrBorrower);
+        List<ZyjrGps> list = zyjrGpsService.selectZyjrGpsList(zyjrGps);
         return getDataTable(list);
     }
 
     /**
      * 导出【请填写功能名称】列表
      */
-    @PreAuthorize("@ss.hasPermi('system:borrower:export')")
+    @PreAuthorize("@ss.hasPermi('system:gps:export')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
-    public AjaxResult export(ZyjrBorrower zyjrBorrower)
+    public AjaxResult export(ZyjrGps zyjrGps)
     {
-        List<ZyjrBorrower> list = zyjrBorrowerService.selectZyjrBorrowerList(zyjrBorrower);
-        ExcelUtil<ZyjrBorrower> util = new ExcelUtil<ZyjrBorrower>(ZyjrBorrower.class);
-        return util.exportExcel(list, "borrower");
+        List<ZyjrGps> list = zyjrGpsService.selectZyjrGpsList(zyjrGps);
+        ExcelUtil<ZyjrGps> util = new ExcelUtil<ZyjrGps>(ZyjrGps.class);
+        return util.exportExcel(list, "gps");
+    }
+
+    @PostMapping("insert")
+    public AjaxResult post(ZyjrGps zyjrGps){
+        zyjrGps.setState("1");
+        int ceshi=zyjrGpsService.insertZyjrGps(zyjrGps);
+        if(ceshi>0){
+            Map<String,String> map=new HashMap<>();
+            map.put("transactionCode",zyjrGps.getTransactionCode());
+            return  AjaxResult.success(map);
+        }
+        return  AjaxResult.error();
     }
 
     /**
      * 获取【请填写功能名称】详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:borrower:query')")
+    @PreAuthorize("@ss.hasPermi('system:gps:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Integer id)
+    public AjaxResult getInfo(@PathVariable("id") Long id)
     {
-        return AjaxResult.success(zyjrBorrowerService.selectZyjrBorrowerById(id));
+        return AjaxResult.success(zyjrGpsService.selectZyjrGpsById(id));
     }
 
-    /**0
+    /**
      * 新增【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:borrower:add')")
+    @PreAuthorize("@ss.hasPermi('system:gps:add')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody ZyjrBorrower zyjrBorrower)
+    public AjaxResult add(@RequestBody ZyjrGps zyjrGps)
     {
-        return toAjax(zyjrBorrowerService.insertZyjrBorrower(zyjrBorrower));
+        return toAjax(zyjrGpsService.insertZyjrGps(zyjrGps));
     }
 
     /**
      * 修改【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:borrower:edit')")
+    @PreAuthorize("@ss.hasPermi('system:gps:edit')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody ZyjrBorrower zyjrBorrower)
+    public AjaxResult edit(@RequestBody ZyjrGps zyjrGps)
     {
-        return toAjax(zyjrBorrowerService.updateZyjrBorrower(zyjrBorrower));
+        return toAjax(zyjrGpsService.updateZyjrGps(zyjrGps));
     }
 
     /**
      * 删除【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:borrower:remove')")
+    @PreAuthorize("@ss.hasPermi('system:gps:remove')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Integer[] ids)
+    public AjaxResult remove(@PathVariable Long[] ids)
     {
-        return toAjax(zyjrBorrowerService.deleteZyjrBorrowerByIds(ids));
+        return toAjax(zyjrGpsService.deleteZyjrGpsByIds(ids));
     }
 }

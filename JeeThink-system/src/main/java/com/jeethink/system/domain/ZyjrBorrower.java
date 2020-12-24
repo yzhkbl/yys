@@ -118,6 +118,26 @@ public class ZyjrBorrower extends BaseEntity
     private String electronicState;
     private String electrpnicAddress;
     private String contractState;
+    private String conf;
+    private String encryptData;
+    public void setConf(String conf)
+    {
+        this.conf = conf;
+    }
+
+    public String getConf()
+    {
+        return conf;
+    }
+    public void setEncryptData(String encryptData)
+    {
+        this.encryptData = encryptData;
+    }
+
+    public String getEncryptData()
+    {
+        return encryptData;
+    }
     public void setContractState(String contractState)
     {
         this.contractState = contractState;
@@ -418,6 +438,8 @@ public class ZyjrBorrower extends BaseEntity
             .append("electrpnicAddress",getElectrpnicAddress())
             .append("contractState",getContractState())
                 .append("privateCode", getPrivateCode())
+                .append("encryptData",getEncryptData())
+                .append("conf",getConf())
             .toString();
     }
 }

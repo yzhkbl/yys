@@ -51,11 +51,11 @@ public class ZyjrCar extends BaseEntity
 
     /** 第一个门店类型 */
     @Excel(name = "第一个门店类型")
-    private String typeOne;
+    private String shopType;
 
     /** 第二个门店类型 */
     @Excel(name = "第二个门店类型")
-    private String typeToo;
+    private String businessType;
 
     /** 车位数 */
     @Excel(name = "车位数")
@@ -69,9 +69,7 @@ public class ZyjrCar extends BaseEntity
     @Excel(name = "乘用车")
     private String passengerCar;
 
-    /** 第三个门店类型 */
-    @Excel(name = "第三个门店类型")
-    private String typeThree;
+
 
     /** 月交易量 */
     @Excel(name = "月交易量")
@@ -95,6 +93,10 @@ public class ZyjrCar extends BaseEntity
     private List<SysFileInfo> sysFileInfo;
 
     private String dealerName;
+    private String oneCarState;
+    private String twoCarState;
+    private String threeCarState;
+
 
     /** id */
     private Long id;
@@ -104,6 +106,35 @@ public class ZyjrCar extends BaseEntity
     private String state;
 
     private List<ZyjrCarAccount> zyjrCarAccount;
+
+    public void setThreeCarState(String threeCarState)
+    {
+        this.threeCarState = threeCarState;
+    }
+
+    public String getThreeCarState()
+    {
+        return threeCarState;
+    }
+
+    public void setTwoCarState(String twoCarState)
+    {
+        this.twoCarState = twoCarState;
+    }
+
+    public String getTwoCarState()
+    {
+        return twoCarState;
+    }
+    public void setOneCarState(String oneCarState)
+    {
+        this.oneCarState = oneCarState;
+    }
+
+    public String getOneCarState()
+    {
+        return oneCarState;
+    }
 
     public void setDealerName(String dealerName)
     {
@@ -192,27 +223,27 @@ public class ZyjrCar extends BaseEntity
         this.bazaar = bazaar;
     }
 
-    public String getBazaar() 
+    public String getBazaar()
     {
         return bazaar;
     }
-    public void setTypeOne(String typeOne) 
+    public void setShopType(String shopType)
     {
-        this.typeOne = typeOne;
+        this.shopType = shopType;
     }
 
-    public String getTypeOne() 
+    public String getShopType()
     {
-        return typeOne;
+        return shopType;
     }
-    public void setTypeToo(String typeToo) 
+    public void setBusinessType(String businessType)
     {
-        this.typeToo = typeToo;
+        this.businessType = businessType;
     }
 
-    public String getTypeToo() 
+    public String getBusinessType()
     {
-        return typeToo;
+        return businessType;
     }
     public void setStall(String stall) 
     {
@@ -241,15 +272,7 @@ public class ZyjrCar extends BaseEntity
     {
         return passengerCar;
     }
-    public void setTypeThree(String typeThree) 
-    {
-        this.typeThree = typeThree;
-    }
 
-    public String getTypeThree() 
-    {
-        return typeThree;
-    }
     public void setMonthDeal(String monthDeal) 
     {
         this.monthDeal = monthDeal;
@@ -337,12 +360,11 @@ public class ZyjrCar extends BaseEntity
             .append("area", getArea())
             .append("city", getCity())
             .append("bazaar", getBazaar())
-            .append("typeOne", getTypeOne())
-            .append("typeToo", getTypeToo())
+            .append("typeOne", getShopType())
+            .append("typeToo", getBusinessType())
             .append("stall", getStall())
             .append("businessNature", getBusinessNature())
             .append("passengerCar", getPassengerCar())
-            .append("typeThree", getTypeThree())
             .append("monthDeal", getMonthDeal())
             .append("monthInstallment", getMonthInstallment())
             .append("matchAmount", getMatchAmount())
@@ -354,9 +376,12 @@ public class ZyjrCar extends BaseEntity
             .append("updateTime", getUpdateTime())
             .append("id", getId())
             .append("state", getState())
-                .append("zyjrCarAccount",getZyjrCarAccount())
-                .append("dealerName",getDealerName())
-                .append("sysFileInfo",getSysFileInfo())
+            .append("zyjrCarAccount",getZyjrCarAccount())
+            .append("dealerName",getDealerName())
+             .append("sysFileInfo",getSysFileInfo())
+                .append("threeCarState",getThreeCarState())
+                .append("twoCarState",getTwoCarState())
+                .append("oneCarState",getOneCarState())
             .toString();
     }
 }

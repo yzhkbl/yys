@@ -3,18 +3,12 @@ package com.jeethink.system.controller;
 import java.util.List;
 
 import com.jeethink.system.domain.ZyjrCarAccount;
+import com.jeethink.system.domain.vo.Bodys;
 import com.jeethink.system.mapper.ZyjrBusinessMapper;
 import com.jeethink.system.service.IZyjrCarAccountService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.jeethink.common.annotation.Log;
 import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
@@ -85,7 +79,7 @@ public class ZyjrBusinessController extends BaseController
     /**
      * 获取【请填写功能名称】详细信息
      */
-    @PreAuthorize("@ss.hasPermi('process:business:query')")
+
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -106,7 +100,6 @@ public class ZyjrBusinessController extends BaseController
     /**
      * 修改【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('process:business:edit')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody ZyjrBusiness zyjrBusiness)
@@ -120,10 +113,16 @@ public class ZyjrBusinessController extends BaseController
         return toAjax(zyjrBusinessMapper.updateById(id));
     }
 
+    @GetMapping("edit2")
+    public AjaxResult edit22(Bodys bodys)
+    {
+        System.err.println(bodys);
+        return toAjax(zyjrBusinessMapper.updateByIds(bodys));
+    }
+
     /**
      * 删除【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('process:business:remove')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
