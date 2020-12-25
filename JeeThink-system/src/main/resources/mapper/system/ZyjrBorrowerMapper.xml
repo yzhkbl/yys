@@ -69,8 +69,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="powerName != null  and powerName != ''"> and power_name like concat('%', #{powerName}, '%')</if>
             <if test="creditPower != null "> and credit_power = #{creditPower}</if>
             <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
-            <if test="encryptData != null  and encryptData != ''"> and encrypt_data = #{encryptData}</if>
-            <if test="conf != null  and conf != ''"> and conf = #{conf}</if>
 
 
         </where>
@@ -121,8 +119,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="electrpnicAddress != null">electrpnic_address,</if>
             <if test="contractState != null">contract_state,</if>
             <if test="privateCode != null">private_code,</if>
-            <if test="encryptData != null">encrypt_data,</if>
-            <if test="conf != null">conf,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userName != null">#{userName},</if>
@@ -157,8 +153,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="electrpnicAddress != null">#{electrpnicAddress},</if>
             <if test="contractState != null">#{contractState},</if>
             <if test="privateCode != null">#{privateCode},</if>
-            <if test="encryptData != null">#{encryptData},</if>
-            <if test="conf != null">#{conf},</if>
          </trim>
     </insert>
 
@@ -196,8 +190,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="electrpnicAddress != null">electrpnic_address=#{electrpnicAddress},</if>
             <if test="contractState != null">contract_state=#{contractState},</if>
             <if test="privateCode != null">private_code=#{privateCode},</if>
-            <if test="encryptData != null">encrypt_data=#{encryptData},</if>
-            <if test="conf != null">conf=#{conf},</if>
         </trim>
         where id = #{id}
     </update>
