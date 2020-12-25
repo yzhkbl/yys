@@ -76,15 +76,15 @@ public class ZyjrGpsController extends BaseController
     /**
      * 获取【请填写功能名称】详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:gps:query')")
+   // @PreAuthorize("@ss.hasPermi('system:gps:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Long id)
+    public AjaxResult getInfo(@PathVariable("id") String id)
     {
         return AjaxResult.success(zyjrGpsService.selectZyjrGpsById(id));
     }
 
     /**
-     * 新增【请填写功能名称】
+     * 新增【请填写功能名称】7
      */
     @PreAuthorize("@ss.hasPermi('system:gps:add')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)

@@ -47,9 +47,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
     
-    <select id="selectZyjrGpsById" parameterType="Long" resultMap="ZyjrGpsResult">
+    <select id="selectZyjrGpsById" parameterType="String" resultMap="ZyjrGpsResult">
         <include refid="selectZyjrGpsVo"/>
-        where id = #{id}
+        where transaction_code = #{id}
     </select>
         
     <insert id="insertZyjrGps" parameterType="ZyjrGps" useGeneratedKeys="true" keyProperty="id">

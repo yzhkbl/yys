@@ -27,7 +27,7 @@ public class ZyjrGpsServiceImpl implements IZyjrGpsService
      * @return 【请填写功能名称】
      */
     @Override
-    public ZyjrGps selectZyjrGpsById(Long id)
+    public ZyjrGps selectZyjrGpsById(String id)
     {
         return zyjrGpsMapper.selectZyjrGpsById(id);
     }

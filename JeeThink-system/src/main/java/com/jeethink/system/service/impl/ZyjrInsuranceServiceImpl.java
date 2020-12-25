@@ -9,10 +9,10 @@ import com.jeethink.system.domain.ZyjrInsurance;
 import com.jeethink.system.service.IZyjrInsuranceService;
 
 /**
- * 【请填写功能名称】Service业务层处理
+ * 123Service业务层处理
  * 
  * @author jeethink
- * @date 2020-12-23
+ * @date 2020-12-24
  */
 @Service
 public class ZyjrInsuranceServiceImpl implements IZyjrInsuranceService 
@@ -21,10 +21,10 @@ public class ZyjrInsuranceServiceImpl implements IZyjrInsuranceService
     private ZyjrInsuranceMapper zyjrInsuranceMapper;
 
     /**
-     * 查询【请填写功能名称】
+     * 查询123
      * 
-     * @param id 【请填写功能名称】ID
-     * @return 【请填写功能名称】
+     * @param id 123ID
+     * @return 123
      */
     @Override
     public ZyjrInsurance selectZyjrInsuranceById(Long id)
@@ -32,11 +32,16 @@ public class ZyjrInsuranceServiceImpl implements IZyjrInsuranceService
         return zyjrInsuranceMapper.selectZyjrInsuranceById(id);
     }
 
+    public ZyjrInsurance selectZyjrInsuranceByIds(String id)
+    {
+        return zyjrInsuranceMapper.selectZyjrInsuranceByIds(id);
+    }
+
     /**
-     * 查询【请填写功能名称】列表
+     * 查询123列表
      * 
-     * @param zyjrInsurance 【请填写功能名称】
-     * @return 【请填写功能名称】
+     * @param zyjrInsurance 123
+     * @return 123
      */
     @Override
     public List<ZyjrInsurance> selectZyjrInsuranceList(ZyjrInsurance zyjrInsurance)
@@ -44,10 +49,11 @@ public class ZyjrInsuranceServiceImpl implements IZyjrInsuranceService
         return zyjrInsuranceMapper.selectZyjrInsuranceList(zyjrInsurance);
     }
 
+
     /**
-     * 新增【请填写功能名称】
+     * 新增123
      * 
-     * @param zyjrInsurance 【请填写功能名称】
+     * @param zyjrInsurance 123
      * @return 结果
      */
     @Override
@@ -58,9 +64,9 @@ public class ZyjrInsuranceServiceImpl implements IZyjrInsuranceService
     }
 
     /**
-     * 修改【请填写功能名称】
+     * 修改123
      * 
-     * @param zyjrInsurance 【请填写功能名称】
+     * @param zyjrInsurance 123
      * @return 结果
      */
     @Override
@@ -71,9 +77,9 @@ public class ZyjrInsuranceServiceImpl implements IZyjrInsuranceService
     }
 
     /**
-     * 批量删除【请填写功能名称】
+     * 批量删除123
      * 
-     * @param ids 需要删除的【请填写功能名称】ID
+     * @param ids 需要删除的123ID
      * @return 结果
      */
     @Override
@@ -83,9 +89,9 @@ public class ZyjrInsuranceServiceImpl implements IZyjrInsuranceService
     }
 
     /**
-     * 删除【请填写功能名称】信息
+     * 删除123信息
      * 
-     * @param id 【请填写功能名称】ID
+     * @param id 123ID
      * @return 结果
      */
     @Override

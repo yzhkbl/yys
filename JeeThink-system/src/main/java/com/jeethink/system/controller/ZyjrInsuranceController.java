@@ -21,10 +21,10 @@ import com.jeethink.common.utils.poi.ExcelUtil;
 import com.jeethink.common.core.page.TableDataInfo;
 
 /**
- * 【请填写功能名称】Controller
+ * 123Controller
  * 
  * @author jeethink
- * @date 2020-12-23
+ * @date 2020-12-24
  */
 @RestController
 @RequestMapping("/system/insurance")
@@ -34,7 +34,7 @@ public class ZyjrInsuranceController extends BaseController
     private IZyjrInsuranceService zyjrInsuranceService;
 
     /**
-     * 查询【请填写功能名称】列表
+     * 查询123列表
      */
     @PreAuthorize("@ss.hasPermi('system:insurance:list')")
     @GetMapping("/list")
@@ -46,10 +46,10 @@ public class ZyjrInsuranceController extends BaseController
     }
 
     /**
-     * 导出【请填写功能名称】列表
+     * 导出123列表
      */
     @PreAuthorize("@ss.hasPermi('system:insurance:export')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.EXPORT)
+    @Log(title = "123", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(ZyjrInsurance zyjrInsurance)
     {
@@ -59,7 +59,7 @@ public class ZyjrInsuranceController extends BaseController
     }
 
     /**
-     * 获取【请填写功能名称】详细信息
+     * 获取123详细信息
      */
     @PreAuthorize("@ss.hasPermi('system:insurance:query')")
     @GetMapping(value = "/{id}")
@@ -68,11 +68,17 @@ public class ZyjrInsuranceController extends BaseController
         return AjaxResult.success(zyjrInsuranceService.selectZyjrInsuranceById(id));
     }
 
+    @GetMapping(value = "/get/{id}")
+    public AjaxResult getInfos(@PathVariable("id") String id)
+    {
+        return AjaxResult.success(zyjrInsuranceService.selectZyjrInsuranceByIds(id));
+    }
+
     /**
-     * 新增【请填写功能名称】
+     * 新增123
      */
     @PreAuthorize("@ss.hasPermi('system:insurance:add')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
+    @Log(title = "123", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody ZyjrInsurance zyjrInsurance)
     {
@@ -80,10 +86,10 @@ public class ZyjrInsuranceController extends BaseController
     }
 
     /**
-     * 修改【请填写功能名称】
+     * 修改123
      */
     @PreAuthorize("@ss.hasPermi('system:insurance:edit')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
+    @Log(title = "123", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody ZyjrInsurance zyjrInsurance)
     {
@@ -91,10 +97,10 @@ public class ZyjrInsuranceController extends BaseController
     }
 
     /**
-     * 删除【请填写功能名称】
+     * 删除123
      */
     @PreAuthorize("@ss.hasPermi('system:insurance:remove')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
+    @Log(title = "123", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {

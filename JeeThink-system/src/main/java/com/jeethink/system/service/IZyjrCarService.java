@@ -2,6 +2,7 @@ package com.jeethink.system.service;
 
 import java.util.List;
 import com.jeethink.system.domain.ZyjrCar;
+import com.jeethink.system.domain.vo.carVo;
 
 /**
  * 车商信息Service接口
@@ -27,6 +28,7 @@ public interface IZyjrCarService
      */
     public List<ZyjrCar> selectZyjrCarList(ZyjrCar zyjrCar);
 
+    public List<ZyjrCar> selectZyjrCarLists();
     /**
      * 新增车商信息
      * 

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrAssureMapper">
+    
+    <resultMap type="ZyjrAssure" id="ZyjrAssureResult">
+        <result property="id"    column="id"    />
+        <result property="assureName"    column="assure_name"    />
+        <result property="address"    column="address"    />
+        <result property="assureLocation"    column="assure_location"    />
+        <result property="linkman"    column="linkman"    />
+        <result property="remark"    column="remark"    />
+        <result property="phoneNumber"    column="phone_number"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectZyjrAssureVo">
+        select id, assure_name, address, assure_location, linkman, remark, phone_number, create_by, create_time, update_by, update_time from zyjr_assure
+    </sql>
+
+    <select id="selectZyjrAssureList" parameterType="ZyjrAssure" resultMap="ZyjrAssureResult">
+        <include refid="selectZyjrAssureVo"/>
+        <where>  
+            <if test="assureName != null  and assureName != ''"> and assure_name like concat('%', #{assureName}, '%')</if>
+            <if test="address != null  and address != ''"> and address like concat('%', #{address}, '%')</if>
+            <if test="assureLocation != null  and assureLocation != ''"> and assure_location like concat('%', #{assureLocation}, '%')</if>
+            <if test="linkman != null  and linkman != ''"> and linkman like concat('%', #{linkman}, '%')</if>
+            <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrAssureById" parameterType="Long" resultMap="ZyjrAssureResult">
+        <include refid="selectZyjrAssureVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrAssure" parameterType="ZyjrAssure" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_assure
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="assureName != null">assure_name,</if>
+            <if test="address != null">address,</if>
+            <if test="assureLocation != null">assure_location,</if>
+            <if test="linkman != null">linkman,</if>
+            <if test="remark != null">remark,</if>
+            <if test="phoneNumber != null">phone_number,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="assureName != null">#{assureName},</if>
+            <if test="address != null">#{address},</if>
+            <if test="assureLocation != null">#{assureLocation},</if>
+            <if test="linkman != null">#{linkman},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="phoneNumber != null">#{phoneNumber},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrAssure" parameterType="ZyjrAssure">
+        update zyjr_assure
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="assureName != null">assure_name = #{assureName},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="assureLocation != null">assure_location = #{assureLocation},</if>
+            <if test="linkman != null">linkman = #{linkman},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="phoneNumber != null">phone_number = #{phoneNumber},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrAssureById" parameterType="Long">
+        delete from zyjr_assure where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrAssureByIds" parameterType="String">
+        delete from zyjr_assure where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -68,6 +68,12 @@
         from zyjr_start_page
         where order_state=0 and user_id = #{userId}
     </select>
+
+    <select id="findByStarts" resultType="com.jeethink.system.domain.ZyjrStartPage">
+        select *
+        from zyjr_start_page
+        where transaction_code=#{transactionCode}
+    </select>
     <update id="updateBorrower">
         update zyjr_borrower
         <set>
@@ -414,6 +420,12 @@
 
         </set>
         where order_state=0 and user_id = #{userId}
+    </update>
+
+    <update id="updateStarts">
+        update zyjr_start_page
+        set credit_state="1"
+        where  transaction_code = #{transactionCode}
     </update>
     <update id="updateOne">
         update zyjr_borrower
