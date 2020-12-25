@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrBankMapper">
+    
+    <resultMap type="ZyjrBank" id="ZyjrBankResult">
+        <result property="id"    column="id"    />
+        <result property="bankName"    column="bank_name"    />
+        <result property="bankLocation"    column="bank_location"    />
+        <result property="linkman"    column="linkman"    />
+        <result property="remark"    column="remark"    />
+        <result property="phoneNumber"    column="phone_number"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectZyjrBankVo">
+        select id, bank_name, bank_location, linkman, remark, phone_number, create_by, create_time, update_by, update_time from zyjr_bank
+    </sql>
+
+    <select id="selectZyjrBankList" parameterType="ZyjrBank" resultMap="ZyjrBankResult">
+        <include refid="selectZyjrBankVo"/>
+        <where>  
+            <if test="bankName != null  and bankName != ''"> and bank_name like concat('%', #{bankName}, '%')</if>
+            <if test="bankLocation != null  and bankLocation != ''"> and bank_location like concat('%', #{bankLocation}, '%')</if>
+            <if test="linkman != null  and linkman != ''"> and linkman like concat('%', #{linkman}, '%')</if>
+            <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrBankById" parameterType="Long" resultMap="ZyjrBankResult">
+        <include refid="selectZyjrBankVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrBank" parameterType="ZyjrBank" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_bank
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bankName != null">bank_name,</if>
+            <if test="bankLocation != null">bank_location,</if>
+            <if test="linkman != null">linkman,</if>
+            <if test="remark != null">remark,</if>
+            <if test="phoneNumber != null">phone_number,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bankName != null">#{bankName},</if>
+            <if test="bankLocation != null">#{bankLocation},</if>
+            <if test="linkman != null">#{linkman},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="phoneNumber != null">#{phoneNumber},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrBank" parameterType="ZyjrBank">
+        update zyjr_bank
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="bankName != null">bank_name = #{bankName},</if>
+            <if test="bankLocation != null">bank_location = #{bankLocation},</if>
+            <if test="linkman != null">linkman = #{linkman},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="phoneNumber != null">phone_number = #{phoneNumber},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrBankById" parameterType="Long">
+        delete from zyjr_bank where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrBankByIds" parameterType="String">
+        delete from zyjr_bank where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

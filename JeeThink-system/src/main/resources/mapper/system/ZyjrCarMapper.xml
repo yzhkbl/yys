@@ -85,6 +85,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="oneCarState != null  and oneCarState != ''"> and one_car_state = #{oneCarState}</if>
         </where>
     </select>
+
+    <select id="selectZyjrCarLists" parameterType="ZyjrCar" resultMap="ZyjrCarResult">
+        select user_name, gender, phone_number, is_linkman,dealer_name, identity, remark, area, city, bazaar, shop_type, business_type, stall, business_nature, passenger_car,  month_deal, month_installment, match_amount, detail_address, pic,  create_by, create_time, update_by, update_time, id, state,three_car_state,two_car_state,one_car_state
+        from zyjr_car
+       where two_car_state="1"
+    </select>
     
     <select id="selectZyjrCarById" parameterType="Long" resultMap="ZyjrCarResult">
          select a.user_name, a.gender, a.phone_number, a.is_linkman,a.dealer_name, a.identity, a.remark, a.area, a.city, a.bazaar, a.shop_type, a.business_type, a.stall, a.business_nature, a.passenger_car,  a.month_deal, a.month_installment, a.match_amount, a.detail_address, a.pic,  a.create_by, a.create_time, a.update_by, a.update_time, a.id,a.three_car_state,a.two_car_state,a.one_car_state, a.state,b.id b_id,b.account_name b_account_name,
@@ -170,7 +176,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="area != null">area = #{area},</if>
             <if test="city != null">city = #{city},</if>
             <if test="bazaar != null">bazaar = #{bazaar},</if>
-            <if test="shopType != null">type_one = #{shopType},</if>
+            <if test="shopType != null">shop_type = #{shopType},</if>
             <if test="businessType != null">business_type = #{businessType},</if>
             <if test="stall != null">stall = #{stall},</if>
             <if test="businessNature != null">business_nature = #{businessNature},</if>

@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import com.jeethink.common.core.redis.RedisCache;
 import com.jeethink.common.utils.DateUtils;
 import com.jeethink.system.domain.ZyjrCarAccount;
+import com.jeethink.system.domain.vo.carVo;
 import com.jeethink.system.mapper.ZyjrCarAccountMapper;
 import com.jeethink.system.service.IZyjrCarAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,11 @@ public class ZyjrCarServiceImpl implements IZyjrCarService
     public List<ZyjrCar> selectZyjrCarList(ZyjrCar zyjrCar)
     {
         return zyjrCarMapper.selectZyjrCarList(zyjrCar);
+    }
+
+    @Override
+    public List<ZyjrCar> selectZyjrCarLists() {
+        return zyjrCarMapper.selectZyjrCarLists();
     }
 
     /**

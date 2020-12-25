@@ -2,6 +2,7 @@ package com.jeethink.system.mapper;
 
 import java.util.List;
 import com.jeethink.system.domain.ZyjrCar;
+import com.jeethink.system.domain.vo.carVo;
 
 /**
  * 车商信息Mapper接口
@@ -58,4 +59,6 @@ public interface ZyjrCarMapper
      * @return 结果
      */
     public int deleteZyjrCarByIds(Long[] ids);
+
+    List<ZyjrCar> selectZyjrCarLists();
 }

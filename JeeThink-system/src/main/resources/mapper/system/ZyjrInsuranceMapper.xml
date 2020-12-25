@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="state"    column="state"    />
     </resultMap>
 
-    <sql id="selectZyjrInsuranceVo">0
+    <sql id="selectZyjrInsuranceVo">
         select id, insurance_company, money, zyjr_car_id, create_by, create_time, update_by, update_time, user_id, transaction_code, state from zyjr_insurance
     </sql>
 
@@ -28,15 +28,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="insuranceCompany != null  and insuranceCompany != ''"> and insurance_company = #{insuranceCompany}</if>
             <if test="money != null  and money != ''"> and money = #{money}</if>
             <if test="zyjrCarId != null  and zyjrCarId != ''"> and zyjr_car_id = #{zyjrCarId}</if>
+            <if test="params.beginUpdateTime != null and params.beginUpdateTime != '' and params.endUpdateTime != null and params.endUpdateTime != ''"> and update_time between #{params.beginUpdateTime} and #{params.endUpdateTime}</if>
             <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
             <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
             <if test="state != null  and state != ''"> and state = #{state}</if>
         </where>
     </select>
-    
+
     <select id="selectZyjrInsuranceById" parameterType="Long" resultMap="ZyjrInsuranceResult">
         <include refid="selectZyjrInsuranceVo"/>
         where id = #{id}
+    </select>
+
+    <select id="selectZyjrInsuranceByIds" parameterType="String" resultMap="ZyjrInsuranceResult">
+        <include refid="selectZyjrInsuranceVo"/>
+        where transaction_code = #{id}
     </select>
         
     <insert id="insertZyjrInsurance" parameterType="ZyjrInsurance" useGeneratedKeys="true" keyProperty="id">

@@ -6,10 +6,10 @@ import com.jeethink.common.annotation.Excel;
 import com.jeethink.common.core.domain.BaseEntity;
 
 /**
- * 【请填写功能名称】对象 zyjr_insurance
+ * 123对象 zyjr_insurance
  * 
  * @author jeethink
- * @date 2020-12-23
+ * @date 2020-12-24
  */
 public class ZyjrInsurance extends BaseEntity
 {

@@ -29,7 +29,7 @@ public class StoreInformation {
     /** 乘用车 */
     private String passengerCar;
 
-
+    private String dealerName;
     /** 月交易量 */
     private String monthDeal;
 

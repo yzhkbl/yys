@@ -45,4 +45,7 @@ public interface ExamineMapper {
     int insertStart(ZyjrStartPage q);
 
     ZyjrStartPage findByStart(Integer userId);
+    ZyjrStartPage findByStarts(String transactionCode);
+
+    int updateStarts(String transactionCode);
 }

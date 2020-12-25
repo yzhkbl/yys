@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrInsuranceTypeMapper">
+    
+    <resultMap type="ZyjrInsuranceType" id="ZyjrInsuranceTypeResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="address"    column="address"    />
+        <result property="linkman"    column="linkman"    />
+        <result property="remark"    column="remark"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectZyjrInsuranceTypeVo">
+        select id, name, address, linkman, remark, create_by, create_time, update_by, update_time from zyjr_insurance_type
+    </sql>
+
+    <select id="selectZyjrInsuranceTypeList" parameterType="ZyjrInsuranceType" resultMap="ZyjrInsuranceTypeResult">
+        <include refid="selectZyjrInsuranceTypeVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="linkman != null  and linkman != ''"> and linkman = #{linkman}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrInsuranceTypeById" parameterType="Long" resultMap="ZyjrInsuranceTypeResult">
+        <include refid="selectZyjrInsuranceTypeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrInsuranceType" parameterType="ZyjrInsuranceType" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_insurance_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="address != null">address,</if>
+            <if test="linkman != null">linkman,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="address != null">#{address},</if>
+            <if test="linkman != null">#{linkman},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrInsuranceType" parameterType="ZyjrInsuranceType">
+        update zyjr_insurance_type
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="linkman != null">linkman = #{linkman},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrInsuranceTypeById" parameterType="Long">
+        delete from zyjr_insurance_type where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrInsuranceTypeByIds" parameterType="String">
+        delete from zyjr_insurance_type where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

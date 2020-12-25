@@ -10,6 +10,7 @@ import com.jeethink.system.domain.SysFileInfo;
 import com.jeethink.system.domain.ZyjrCarAccount;
 import com.jeethink.system.domain.vo.Linkman;
 import com.jeethink.system.domain.vo.StoreInformation;
+import com.jeethink.system.domain.vo.carVo;
 import com.jeethink.system.mapper.SysFileInfoMapper;
 import com.jeethink.system.service.IZyjrCarAccountService;
 import com.jeethink.system.util.androidUpload;
@@ -50,7 +51,7 @@ public class ZyjrCarController extends BaseController
     /**
      * 查询车商信息列表
      */
-    @PreAuthorize("@ss.hasPermi('system:car:list')")
+    @PreAuthorize("@ss.hasPermi('organization:car:list')")
     @GetMapping("/list")
     public TableDataInfo list(ZyjrCar zyjrCar)
     {
@@ -63,7 +64,7 @@ public class ZyjrCarController extends BaseController
     /**
      * 导出车商信息列表
      */
-    @PreAuthorize("@ss.hasPermi('system:car:export')")
+    @PreAuthorize("@ss.hasPermi('organization:car:export')")
     @Log(title = "车商信息", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(ZyjrCar zyjrCar)
@@ -73,10 +74,23 @@ public class ZyjrCarController extends BaseController
         return util.exportExcel(list, "car");
     }
 
+    @GetMapping("/lists")
+    public AjaxResult lists(){
+        List<ZyjrCar> list = zyjrCarService.selectZyjrCarLists();
+        return AjaxResult.success(list);
+    }
+
+    @GetMapping(value = "/get/{id}")
+    public AjaxResult getInfos(@PathVariable("id") Long id)
+    {
+        return AjaxResult.success(zyjrCarService.selectZyjrCarById(id));
+    }
+
+
     /**
      * 获取车商信息详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:car:query')")
+    @PreAuthorize("@ss.hasPermi('organization:car:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -86,7 +100,7 @@ public class ZyjrCarController extends BaseController
     /**
      * 新增车商信息
      */
-    @PreAuthorize("@ss.hasPermi('system:car:add')")
+    @PreAuthorize("@ss.hasPermi('organization:car:add')")
     @Log(title = "车商信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody ZyjrCar zyjrCar)
@@ -96,16 +110,14 @@ public class ZyjrCarController extends BaseController
         return toAjax(a);
     }
 
-   /* @GetMapping("/get")
+    @GetMapping("/get")
     public AjaxResult insert()
     {
         ZyjrCar zyjrCar=new ZyjrCar();
-        int a=zyjrCarService.insertZyjrCar(zyjrCar);
-        if(a>0){
-            return AjaxResult.success(zyjrCar.getId());
-        }
-        return AjaxResult.error();
-    }*/
+        zyjrCarService.insertZyjrCar(zyjrCar);
+
+        return AjaxResult.success(zyjrCar.getId());
+    }
 
     @PostMapping("/linkman")
     @ApiOperation("ffffffffffff")
@@ -149,7 +161,7 @@ public class ZyjrCarController extends BaseController
             a.setStall(storeInformation.getStall());
             a.setBusinessNature(storeInformation.getBusinessNature());
         }
-
+        a.setDealerName(storeInformation.getDealerName());
         a.setPassengerCar(storeInformation.getPassengerCar());
         a.setMonthDeal(storeInformation.getMonthDeal());
         a.setMonthInstallment(storeInformation.getMonthInstallment());
@@ -187,7 +199,7 @@ public class ZyjrCarController extends BaseController
     }
 
     @GetMapping("/delete/{id}")
-    public AjaxResult dele(@PathVariable("id") String id)
+    public AjaxResult delete(@PathVariable("id") String id)
     {
         int ceshi=zyjrCarService.deleteZyjrCarById(Long.parseLong(id));
         if(ceshi>0){
@@ -222,7 +234,7 @@ public class ZyjrCarController extends BaseController
     /**
      * 修改车商信息
      */
-    @PreAuthorize("@ss.hasPermi('system:car:edit')")
+    @PreAuthorize("@ss.hasPermi('organization:car:edit')")
     @Log(title = "车商信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody ZyjrCar zyjrCar)
@@ -233,7 +245,7 @@ public class ZyjrCarController extends BaseController
     /**
      * 删除车商信息
      */
-    @PreAuthorize("@ss.hasPermi('system:car:remove')")
+    @PreAuthorize("@ss.hasPermi('organization:car:remove')")
     @Log(title = "车商信息", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

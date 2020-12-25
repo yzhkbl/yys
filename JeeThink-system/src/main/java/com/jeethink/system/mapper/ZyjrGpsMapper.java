@@ -17,7 +17,7 @@ public interface ZyjrGpsMapper
      * @param id 【请填写功能名称】ID
      * @return 【请填写功能名称】
      */
-    public ZyjrGps selectZyjrGpsById(Long id);
+    public ZyjrGps selectZyjrGpsById(String id);
 
     /**
      * 查询【请填写功能名称】列表
