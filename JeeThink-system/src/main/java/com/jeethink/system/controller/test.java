@@ -362,7 +362,7 @@ public class test extends BaseController {
     @ApiOperation("111111111")
     public AjaxResult testFiles(String file) {
         String a = androidUpload.upload(file);
-        String as = "http://192.168.31.82/dev-api" + a;
+        String as = "http://192.168.31.86:8080" + a;
         return AjaxResult.success("" + as);
     }
 

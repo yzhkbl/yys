@@ -133,22 +133,18 @@ public class ExamineServiceImpl implements IExamineService {
         startPage.setOrderState(1);
         startPage.setUserId(q.getUserId());
         startPage.setTransactionCode(q.getTransactionCode());
-        if(findByBorrower(q.getUserId()).getCreditPower()==1) {
+        startPage.setRealAddress(q.getRealAddress());
+        /**if(findByBorrower(q.getUserId()).getCreditPower()==1) {
             String a = orderCode.getOrderCode();
             String b = IdUtils.simpleUUID();
             examineDao.updateOne(q.getUserId(),a);
             examineDao.updateTwo(q.getUserId(),a);
             examineDao.updateThree(q.getUserId(),a);
             examineDao.updateFour(q.getUserId(),a);
-            //examineDao.updateFive(q.getUserId(),a);                                                                 
-        }
-        if(findByStart(q.getUserId())!=null&&q.getOrderState()==0){
-            int count = examineDao.insertStart(startPage);
-
-            return count;
-        } else {
-            return 0;
-        }
+            startPage.setTransactionCode(a);
+            //examineDao.updateFive(q.getUserId(),a);
+        }*/
+           return examineDao.insertStart(startPage);
     }
 
     @Override

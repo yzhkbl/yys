@@ -39,9 +39,18 @@ public class ZyjrStartPage extends BaseEntity
     private String transactionCode;
 
 
+    private String realAddress;
 
     private String creditState;
 
+
+    public String getRealAddress() {
+        return realAddress;
+    }
+
+    public void setRealAddress(String realAddress) {
+        this.realAddress = realAddress;
+    }
 
     public void setCreditState(String creditState)
     {
@@ -109,21 +118,4 @@ public class ZyjrStartPage extends BaseEntity
     }
 
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .append("id", getId())
-            .append("fundSide", getFundSide())
-            .append("businessPlace", getBusinessPlace())
-            .append("orderState", getOrderState())
-            .append("userId", getUserId())
-            .append("transactionCode", getTransactionCode())
-
-                .append("creditState",getCreditState())
-            .toString();
-    }
 }

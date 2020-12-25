@@ -35,11 +35,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="fileName != null">file_name,</if>
             <if test="filePath != null">file_path,</if>
             <if test="id != null">id,</if>
+            <if test="photoCarId !=null">photo_car_id,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="fileName != null">#{fileName},</if>
             <if test="filePath != null">#{filePath},</if>
             <if test="id != null">#{id},</if>
+            <if test="photoCarId !=null">#{photoCarId},</if>
          </trim>
     </insert>
 

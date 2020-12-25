@@ -59,12 +59,12 @@
     </select>
     <insert id="insertStart" parameterType="com.jeethink.system.domain.ZyjrStartPage">
         insert into zyjr_start_page
-        (id,fund_side,business_place,order_state,user_id,transaction_code)
+        (id,fund_side,business_place,order_state,user_id,transaction_code,real_address)
         values
-        (#{id},#{fundSide},#{businessPlace},#{orderState},#{userId},#{transactionCode})
+        (#{id},#{fundSide},#{businessPlace},#{orderState},#{userId},#{transactionCode},#{realAddress})
     </insert>
     <select id="findByStart" resultType="com.jeethink.system.domain.ZyjrStartPage">
-        select id,fund_side,business_place,order_state,user_id,transaction_code,credit_state
+        select id,fund_side,business_place,order_state,user_id,transaction_code,credit_state,real_address
         from zyjr_start_page
         where order_state=0 and user_id = #{userId}
     </select>
