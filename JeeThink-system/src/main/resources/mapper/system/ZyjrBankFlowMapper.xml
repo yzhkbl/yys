@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrBankFlowMapper">
+    
+    <resultMap type="ZyjrBankFlow" id="ZyjrBankFlowResult">
+        <result property="id"    column="id"    />
+
+        <result property="bankId"    column="bank_id"    />
+        <result property="flowName"    column="flow_name"    />
+        <result property="flowCode"    column="flow_code"    />
+    </resultMap>
+
+    <sql id="selectZyjrBankFlowVo">
+        select id, bank_id, flow_name, flow_code from zyjr_bank_flow
+    </sql>
+
+    <select id="selectZyjrBankFlowList" parameterType="ZyjrBankFlow" resultMap="ZyjrBankFlowResult">
+        <include refid="selectZyjrBankFlowVo"/>
+        <where>  
+            <if test="bankId != null  and bankId != ''"> and bank_id = #{bankId}</if>
+            <if test="flowName != null  and flowName != ''"> and flow_name like concat('%', #{flowName}, '%')</if>
+            <if test="flowCode != null  and flowCode != ''"> and flow_code = #{flowCode}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrBankFlowById" parameterType="Long" resultMap="ZyjrBankFlowResult">
+        <include refid="selectZyjrBankFlowVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrBankFlow" parameterType="ZyjrBankFlow" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_bank_flow
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="bankId != null">bank_id,</if>
+            <if test="flowName != null">flow_name,</if>
+            <if test="flowCode != null">flow_code,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+            <if test="bankId != null">#{bankId},</if>
+            <if test="flowName != null">#{flowName},</if>
+            <if test="flowCode != null">#{flowCode},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrBankFlow" parameterType="ZyjrBankFlow">
+        update zyjr_bank_flow
+        <trim prefix="SET" suffixOverrides=",">
+
+            <if test="bankId != null">bank_id = #{bankId},</if>
+            <if test="flowName != null">flow_name = #{flowName},</if>
+            <if test="flowCode != null">flow_code = #{flowCode},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrBankFlowById" parameterType="Long">
+        delete from zyjr_bank_flow where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrBankFlowByIds" parameterType="String">
+        delete from zyjr_bank_flow where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

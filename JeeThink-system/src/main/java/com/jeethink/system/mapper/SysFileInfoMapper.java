@@ -60,4 +60,7 @@ public interface SysFileInfoMapper
     public int deleteSysFileInfoByIds(Long[] fileIds);
 
     int deleteSysFileInfoByPath(String path);
+
+    int deleteSysFileInfoByCarId(String id);
+
 }

@@ -58,7 +58,7 @@ public class ZyjrBusiness extends BaseEntity
     private String operator;
     private String falseOperator;
     private String falseOperatorId;
-
+    private String realAddress;
 
 
     public String getFalseOperator() {

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrBankAccountMapper">
+    
+    <resultMap type="ZyjrBankAccount" id="ZyjrBankAccountResult">
+        <result property="id"    column="id"    />
+  <!--      <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />-->
+        <result property="bankId"    column="bank_id"    />
+        <result property="bankDeposit"    column="bank_deposit"    />
+        <result property="userNumber"    column="user_number"    />
+        <result property="householdName"    column="household_name"    />
+    </resultMap>
+
+    <sql id="selectZyjrBankAccountVo">
+        select id, bank_id, bank_deposit, user_number, household_name from zyjr_bank_account
+    </sql>
+
+    <select id="selectZyjrBankAccountList" parameterType="ZyjrBankAccount" resultMap="ZyjrBankAccountResult">
+        <include refid="selectZyjrBankAccountVo"/>
+        <where>  
+            <if test="bankId != null  and bankId != ''"> and bank_id = #{bankId}</if>
+            <if test="bankDeposit != null  and bankDeposit != ''"> and bank_deposit = #{bankDeposit}</if>
+            <if test="userNumber != null  and userNumber != ''"> and user_number = #{userNumber}</if>
+            <if test="householdName != null  and householdName != ''"> and household_name like concat('%', #{householdName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrBankAccountById" parameterType="Long" resultMap="ZyjrBankAccountResult">
+        <include refid="selectZyjrBankAccountVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrBankAccount" parameterType="ZyjrBankAccount" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_bank_account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="bankId != null">bank_id,</if>
+            <if test="bankDeposit != null">bank_deposit,</if>
+            <if test="userNumber != null">user_number,</if>
+            <if test="householdName != null">household_name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+            <if test="bankId != null">#{bankId},</if>
+            <if test="bankDeposit != null">#{bankDeposit},</if>
+            <if test="userNumber != null">#{userNumber},</if>
+            <if test="householdName != null">#{householdName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrBankAccount" parameterType="ZyjrBankAccount">
+        update zyjr_bank_account
+        <trim prefix="SET" suffixOverrides=",">
+
+            <if test="bankId != null">bank_id = #{bankId},</if>
+            <if test="bankDeposit != null">bank_deposit = #{bankDeposit},</if>
+            <if test="userNumber != null">user_number = #{userNumber},</if>
+            <if test="householdName != null">household_name = #{householdName},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrBankAccountById" parameterType="Long">
+        delete from zyjr_bank_account where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrBankAccountByIds" parameterType="String">
+        delete from zyjr_bank_account where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

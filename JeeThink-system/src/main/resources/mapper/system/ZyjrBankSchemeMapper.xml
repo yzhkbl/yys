@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrBankSchemeMapper">
+    
+    <resultMap type="ZyjrBankScheme" id="ZyjrBankSchemeResult">
+        <result property="id"    column="id"    />
+
+        <result property="zyjrBankProductId"    column="zyjr_bank_product_id"    />
+        <result property="stageNum"    column="stage_num"    />
+        <result property="baseRate"    column="base_rate"    />
+        <result property="shouldRate"    column="should_rate"    />
+    </resultMap>
+
+    <sql id="selectZyjrBankSchemeVo">
+        select id, zyjr_bank_product_id, stage_num, base_rate, should_rate from zyjr_bank_scheme
+    </sql>
+
+    <select id="selectZyjrBankSchemeList" parameterType="ZyjrBankScheme" resultMap="ZyjrBankSchemeResult">
+        <include refid="selectZyjrBankSchemeVo"/>
+        <where>  
+            <if test="zyjrBankProductId != null  and zyjrBankProductId != ''"> and zyjr_bank_product_id = #{zyjrBankProductId}</if>
+            <if test="stageNum != null  and stageNum != ''"> and stage_num = #{stageNum}</if>
+            <if test="baseRate != null  and baseRate != ''"> and base_rate = #{baseRate}</if>
+            <if test="shouldRate != null  and shouldRate != ''"> and should_rate = #{shouldRate}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrBankSchemeById" parameterType="Long" resultMap="ZyjrBankSchemeResult">
+        <include refid="selectZyjrBankSchemeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrBankScheme" parameterType="ZyjrBankScheme" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_bank_scheme
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="zyjrBankProductId != null">zyjr_bank_product_id,</if>
+            <if test="stageNum != null">stage_num,</if>
+            <if test="baseRate != null">base_rate,</if>
+            <if test="shouldRate != null">should_rate,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+            <if test="zyjrBankProductId != null">#{zyjrBankProductId},</if>
+            <if test="stageNum != null">#{stageNum},</if>
+            <if test="baseRate != null">#{baseRate},</if>
+            <if test="shouldRate != null">#{shouldRate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrBankScheme" parameterType="ZyjrBankScheme">
+        update zyjr_bank_scheme
+        <trim prefix="SET" suffixOverrides=",">
+
+            <if test="zyjrBankProductId != null">zyjr_bank_product_id = #{zyjrBankProductId},</if>
+            <if test="stageNum != null">stage_num = #{stageNum},</if>
+            <if test="baseRate != null">base_rate = #{baseRate},</if>
+            <if test="shouldRate != null">should_rate = #{shouldRate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrBankSchemeById" parameterType="Long">
+        delete from zyjr_bank_scheme where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrBankSchemeByIds" parameterType="String">
+        delete from zyjr_bank_scheme where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

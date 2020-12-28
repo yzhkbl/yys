@@ -15,25 +15,71 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createTime"    column="create_time"    />
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
+        <result property="isInsurance"    column="is_insurance"    />
+        <result property="isSign"    column="is_sign"    />
+        <result property="template"    column="template"    />
+        <collection property="returns"  ofType="ZyjrBankAccount" >
+            <result property="bankDeposit"    column="bank_deposit"    />
+            <result property="id"    column="account"    />
+            <result property="userNumber"    column="user_number"    />
+            <result property="householdName"    column="household_name"    />
+        </collection>
+        <collection property="extend"  ofType="ZyjrBankExtend" >
+            <result property="extendCode"    column="extend_code"    />
+            <result property="id"    column="extend"    />
+            <result property="extendField"    column="extend_field"    />
+        </collection>
+        <collection property="flow"  ofType="ZyjrBankFlow" >
+            <result property="flowName"    column="flow_name"    />
+            <result property="id"    column="flow"    />
+            <result property="flowCode"    column="flow_code"    />
+        </collection>
+        <collection property="product"  ofType="ZyjrBankProduct" >
+            <result property="productName"    column="product_name"    />
+            <result property="id"    column="product"    />
+            <result property="productCode"    column="product_code"    />
+            <result property="productBrand"    column="product_brand"    />
+            <result property="productRemark"    column="product_remark"    />
+            <result property="carType"    column="car_type"    />
+            <result property="businessArea"    column="business_area"    />
+            <collection property="scheme" ofType="ZyjrBankScheme">
+                <result property="stageNum"    column="stage_num"    />
+                <result property="id"    column="scheme"    />
+                <result property="baseRate"    column="base_rate"    />
+                <result property="shouldRate"    column="should_rate"    />
+            </collection>
+        </collection>
+
     </resultMap>
 
     <sql id="selectZyjrBankVo">
-        select id, bank_name, bank_location, linkman, remark, phone_number, create_by, create_time, update_by, update_time from zyjr_bank
+        select id, bank_name, bank_location, linkman, remark, phone_number, create_by, create_time, update_by, update_time, is_insurance, is_sign, template from zyjr_bank
     </sql>
 
     <select id="selectZyjrBankList" parameterType="ZyjrBank" resultMap="ZyjrBankResult">
         <include refid="selectZyjrBankVo"/>
         <where>  
             <if test="bankName != null  and bankName != ''"> and bank_name like concat('%', #{bankName}, '%')</if>
-            <if test="bankLocation != null  and bankLocation != ''"> and bank_location like concat('%', #{bankLocation}, '%')</if>
-            <if test="linkman != null  and linkman != ''"> and linkman like concat('%', #{linkman}, '%')</if>
+            <if test="bankLocation != null  and bankLocation != ''"> and bank_location = #{bankLocation}</if>
+            <if test="linkman != null  and linkman != ''"> and linkman = #{linkman}</if>
             <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
+            <if test="isInsurance != null "> and is_insurance = #{isInsurance}</if>
+            <if test="isSign != null "> and is_sign = #{isSign}</if>
+            <if test="template != null  and template != ''"> and template = #{template}</if>
         </where>
     </select>
     
     <select id="selectZyjrBankById" parameterType="Long" resultMap="ZyjrBankResult">
-        <include refid="selectZyjrBankVo"/>
-        where id = #{id}
+         select a.id, a.bank_name, a.bank_location, a.linkman, a.remark, a.phone_number, a.create_by, a.create_time, a.update_by, a.update_time, a.is_insurance, a.is_sign, a.template,
+         b.bank_deposit,b.id account,b.bank_id,b.user_number,b.household_name,c.id extend,c.bank_id,c.extend_code,c.extend_field,d.id flow,d.bank_id,d.flow_name,d.flow_code,
+         e.id product,e.bank_id,e.product_name,e.product_brand,e.product_remark,e.car_type,e.business_area,f.id scheme,f.zyjr_bank_product_id,f.stage_num,f.base_rate,f.should_rate
+         from zyjr_bank a
+         left join zyjr_bank_account b on a.id=b.bank_id
+         left join zyjr_bank_extend c on a.id=c.bank_id
+         left join zyjr_bank_flow d on a.id=d.bank_id
+         left join zyjr_bank_product e on a.id=e.bank_id
+         left join zyjr_bank_scheme f on e.id=f.zyjr_bank_product_id
+         where a.id = #{id}
     </select>
         
     <insert id="insertZyjrBank" parameterType="ZyjrBank" useGeneratedKeys="true" keyProperty="id">
@@ -48,6 +94,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
             <if test="updateTime != null">update_time,</if>
+            <if test="isInsurance != null">is_insurance,</if>
+            <if test="isSign != null">is_sign,</if>
+            <if test="template != null">template,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="bankName != null">#{bankName},</if>
@@ -59,6 +108,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
+            <if test="isInsurance != null">#{isInsurance},</if>
+            <if test="isSign != null">#{isSign},</if>
+            <if test="template != null">#{template},</if>
          </trim>
     </insert>
 
@@ -74,6 +126,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="isInsurance != null">is_insurance = #{isInsurance},</if>
+            <if test="isSign != null">is_sign = #{isSign},</if>
+            <if test="template != null">template = #{template},</if>
         </trim>
         where id = #{id}
     </update>

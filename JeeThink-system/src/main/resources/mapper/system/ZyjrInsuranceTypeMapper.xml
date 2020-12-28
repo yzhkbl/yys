@@ -24,8 +24,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectZyjrInsuranceTypeVo"/>
         <where>  
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
-            <if test="address != null  and address != ''"> and address = #{address}</if>
-            <if test="linkman != null  and linkman != ''"> and linkman = #{linkman}</if>
+            <if test="address != null  and address != ''"> and address like concat('%', #{address}, '%') </if>
+            <if test="linkman != null  and linkman != ''"> and linkman like concat('%', #{linkman}, '%') </if>
         </where>
     </select>
     

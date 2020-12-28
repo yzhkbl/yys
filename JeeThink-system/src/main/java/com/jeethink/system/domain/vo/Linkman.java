@@ -2,10 +2,12 @@ package com.jeethink.system.domain.vo;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class Linkman {
 
-    private String id;
+    private Long id;
     private String remark;
     private String userName;
 
@@ -20,4 +22,6 @@ public class Linkman {
 
 
     private String identity;
+    private String twoCarState;
+
 }

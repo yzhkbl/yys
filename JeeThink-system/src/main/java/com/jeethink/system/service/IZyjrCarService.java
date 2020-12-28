@@ -28,7 +28,7 @@ public interface IZyjrCarService
      */
     public List<ZyjrCar> selectZyjrCarList(ZyjrCar zyjrCar);
 
-    public List<ZyjrCar> selectZyjrCarLists();
+    public List<ZyjrCar> selectZyjrCarLists(String userId);
     /**
      * 新增车商信息
      * 

@@ -5,11 +5,13 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.jeethink.common.annotation.Excel;
 import com.jeethink.common.core.domain.BaseEntity;
 
+import java.util.List;
+
 /**
  * bank对象 zyjr_bank
  * 
  * @author jeethink
- * @date 2020-12-25
+ * @date 2020-12-26
  */
 public class ZyjrBank extends BaseEntity
 {
@@ -34,7 +36,56 @@ public class ZyjrBank extends BaseEntity
     @Excel(name = "联系电话")
     private String phoneNumber;
 
-    public void setId(Long id) 
+    /** 履约保险设置 */
+    @Excel(name = "履约保险设置")
+    private Integer isInsurance;
+
+    /** 是否电子签约设置 */
+    @Excel(name = "是否电子签约设置")
+    private Integer isSign;
+
+    /** 选择需要关联的字段模板 */
+    @Excel(name = "选择需要关联的字段模板")
+    private String template;
+    /**进件流程*/
+    private List<ZyjrBankFlow> flow;
+    private List<ZyjrBankAccount> returns;
+    private List<ZyjrBankProduct> product;
+    private List<ZyjrBankExtend> extend;
+
+    public List<ZyjrBankFlow> getFlow() {
+        return flow;
+    }
+
+    public void setFlow(List<ZyjrBankFlow> flow) {
+        this.flow = flow;
+    }
+
+    public List<ZyjrBankAccount> getReturns() {
+        return returns;
+    }
+
+    public void setReturns(List<ZyjrBankAccount> returns) {
+        this.returns = returns;
+    }
+
+    public List<ZyjrBankProduct> getProduct() {
+        return product;
+    }
+
+    public void setProduct(List<ZyjrBankProduct> product) {
+        this.product = product;
+    }
+
+    public List<ZyjrBankExtend> getExtend() {
+        return extend;
+    }
+
+    public void setExtend(List<ZyjrBankExtend> extend) {
+        this.extend = extend;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }
@@ -52,12 +103,12 @@ public class ZyjrBank extends BaseEntity
     {
         return bankName;
     }
-    public void setBankLocation(String bankLocation) 
+    public void setBankLocation(String bankLocation)
     {
         this.bankLocation = bankLocation;
     }
 
-    public String getBankLocation() 
+    public String getBankLocation()
     {
         return bankLocation;
     }
@@ -79,6 +130,33 @@ public class ZyjrBank extends BaseEntity
     {
         return phoneNumber;
     }
+    public void setIsInsurance(Integer isInsurance) 
+    {
+        this.isInsurance = isInsurance;
+    }
+
+    public Integer getIsInsurance() 
+    {
+        return isInsurance;
+    }
+    public void setIsSign(Integer isSign) 
+    {
+        this.isSign = isSign;
+    }
+
+    public Integer getIsSign() 
+    {
+        return isSign;
+    }
+    public void setTemplate(String template) 
+    {
+        this.template = template;
+    }
+
+    public String getTemplate() 
+    {
+        return template;
+    }
 
     @Override
     public String toString() {
@@ -93,6 +171,13 @@ public class ZyjrBank extends BaseEntity
             .append("createTime", getCreateTime())
             .append("updateBy", getUpdateBy())
             .append("updateTime", getUpdateTime())
+            .append("isInsurance", getIsInsurance())
+            .append("isSign", getIsSign())
+            .append("template", getTemplate())
+                .append("product",getProduct())
+                .append("returns",getReturns())
+                .append("extend",getExtend())
+                .append("flow",getFlow())
             .toString();
     }
 }

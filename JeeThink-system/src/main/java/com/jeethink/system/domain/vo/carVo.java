@@ -1,6 +1,5 @@
 package com.jeethink.system.domain.vo;
 
-import com.jeethink.common.annotation.Excel;
 import lombok.Data;
 
 @Data
@@ -8,6 +7,9 @@ public class carVo {
     private Long id;
     /**所属区域**/
     private String area;
+
+    private String city;
+
 
     /** 所属市场 */
     private String bazaar;

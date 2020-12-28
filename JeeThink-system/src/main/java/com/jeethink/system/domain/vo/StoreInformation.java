@@ -7,7 +7,8 @@ import lombok.Data;
 public class StoreInformation {
     /** 所属区域 */
     private String area;
-
+    private String status;
+    private String id;
     /** 所属城市 */
     private String city;
 
@@ -44,5 +45,8 @@ public class StoreInformation {
 
     /** 门店照片 */
     private String pic;
+
+    private String createBy;
+
 
 }

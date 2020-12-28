@@ -19,10 +19,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="operator"    column="operator"    />
         <result property="falseOperator"    column="false_operator"    />
         <result property="falseOperatorId"    column="false_operator_id"    />
+        <result property="realAddress"    column="real_address"    />
     </resultMap>
 
     <sql id="selectZyjrBusinessVo">
-        select id, team, car_information,false_operator,false_operator_id, intention_price, loan_money, repay_period, car_type, user_id, order_state,transaction_code from zyjr_business
+        select a.id, a.team, a.car_information,a.false_operator,a.false_operator_id, a.intention_price, a.loan_money, a.repay_period,a. car_type,a. user_id, a.order_state,a.transaction_code,b.real_address from zyjr_business a
+        left join zyjr_start_page b on a.transaction_code=b.transaction_code
     </sql>
 
     <select id="selectZyjrBusinessList" parameterType="ZyjrBusiness" resultMap="ZyjrBusinessResult">
