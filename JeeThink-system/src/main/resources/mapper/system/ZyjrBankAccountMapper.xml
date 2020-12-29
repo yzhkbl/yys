@@ -11,13 +11,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />-->
         <result property="bankId"    column="bank_id"    />
+        <result property="baoxian"    column="baoxian"    />
         <result property="bankDeposit"    column="bank_deposit"    />
         <result property="userNumber"    column="user_number"    />
         <result property="householdName"    column="household_name"    />
     </resultMap>
 
     <sql id="selectZyjrBankAccountVo">
-        select id, bank_id, bank_deposit, user_number, household_name from zyjr_bank_account
+        select id, bank_id, bank_deposit, user_number,baoxian, household_name from zyjr_bank_account
     </sql>
 
     <select id="selectZyjrBankAccountList" parameterType="ZyjrBankAccount" resultMap="ZyjrBankAccountResult">
@@ -27,6 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="bankDeposit != null  and bankDeposit != ''"> and bank_deposit = #{bankDeposit}</if>
             <if test="userNumber != null  and userNumber != ''"> and user_number = #{userNumber}</if>
             <if test="householdName != null  and householdName != ''"> and household_name like concat('%', #{householdName}, '%')</if>
+            <if test="baoxian != null  and baoxian != ''"> and baoxian like concat('%', #{baoxian}, '%')</if>
         </where>
     </select>
     
@@ -43,6 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="bankDeposit != null">bank_deposit,</if>
             <if test="userNumber != null">user_number,</if>
             <if test="householdName != null">household_name,</if>
+            <if test="baoxian != null">baoxian,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
 
@@ -50,7 +53,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="bankDeposit != null">#{bankDeposit},</if>
             <if test="userNumber != null">#{userNumber},</if>
             <if test="householdName != null">#{householdName},</if>
+            <if test="baoxian != null">#{baoxian},</if>
          </trim>
+    </insert>
+    <insert id="insertZyjrBankAccounts" parameterType="java.util.List">
+        INSERT INTO zyjr_bank_account (
+
+        bank_id,
+        baoxian,
+        bank_deposit,
+        user_number,
+        household_name
+        )
+        VALUES
+        <foreach collection ="list" item="ZyjrBankAccount" separator =",">
+            (#{ZyjrBankAccount.bankId},#{ZyjrBankAccount.baoxian}, #{ZyjrBankAccount.bankDeposit},#{ZyjrBankAccount.userNumber},#{ZyjrBankAccount.householdName})
+        </foreach >
     </insert>
 
     <update id="updateZyjrBankAccount" parameterType="ZyjrBankAccount">
@@ -58,6 +76,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
 
             <if test="bankId != null">bank_id = #{bankId},</if>
+            <if test="baoxian != null">baoxian = #{baoxian},</if>
             <if test="bankDeposit != null">bank_deposit = #{bankDeposit},</if>
             <if test="userNumber != null">user_number = #{userNumber},</if>
             <if test="householdName != null">household_name = #{householdName},</if>
@@ -66,11 +85,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteZyjrBankAccountById" parameterType="Long">
-        delete from zyjr_bank_account where id = #{id}
+        delete from zyjr_bank_account where bank_id = #{id}
     </delete>
 
     <delete id="deleteZyjrBankAccountByIds" parameterType="String">
-        delete from zyjr_bank_account where id in 
+        delete from zyjr_bank_account where bank_id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

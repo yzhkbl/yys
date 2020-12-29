@@ -62,5 +62,6 @@ public interface SysFileInfoMapper
     int deleteSysFileInfoByPath(String path);
 
     int deleteSysFileInfoByCarId(String id);
+    int deleteSysFileInfoByBankId(String id);
 
 }

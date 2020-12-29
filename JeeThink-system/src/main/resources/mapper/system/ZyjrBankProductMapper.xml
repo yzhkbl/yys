@@ -8,28 +8,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="id"    column="id"    />
 
         <result property="bankId"    column="bank_id"    />
+        <result property="baoxian"    column="baoxian"    />
         <result property="productName"    column="product_name"    />
         <result property="productCode"    column="product_code"    />
         <result property="productBrand"    column="product_brand"    />
         <result property="productRemark"    column="product_remark"    />
         <result property="carType"    column="car_type"    />
         <result property="businessArea"    column="business_area"    />
+        <result property="areaInput"    column="area_input"    />
+        <result property="brandInput"    column="brand_input"    />
+        <result property="belongBank"    column="belong_bank"    />
     </resultMap>
 
     <sql id="selectZyjrBankProductVo">
-        select id,  bank_id, product_name, product_code, product_brand, product_remark, car_type, business_area from zyjr_bank_product
+        select id,baoxian,  bank_id, product_name,belong_bank,area_input,brand_input, product_code, product_brand, product_remark, car_type, business_area from zyjr_bank_product
     </sql>
 
     <select id="selectZyjrBankProductList" parameterType="ZyjrBankProduct" resultMap="ZyjrBankProductResult">
         <include refid="selectZyjrBankProductVo"/>
         <where>  
             <if test="bankId != null  and bankId != ''"> and bank_id = #{bankId}</if>
+            <if test="baoxian != null  and baoxian != ''"> and baoxian = #{baoxian}</if>
             <if test="productName != null  and productName != ''"> and product_name like concat('%', #{productName}, '%')</if>
             <if test="productCode != null  and productCode != ''"> and product_code = #{productCode}</if>
             <if test="productBrand != null  and productBrand != ''"> and product_brand = #{productBrand}</if>
             <if test="productRemark != null  and productRemark != ''"> and product_remark = #{productRemark}</if>
             <if test="carType != null  and carType != ''"> and car_type = #{carType}</if>
             <if test="businessArea != null  and businessArea != ''"> and business_area = #{businessArea}</if>
+            <if test="areaInput != null  and areaInput != ''"> and area_input = #{areaInput}</if>
+            <if test="brandInput != null  and areaInput != ''"> and brand_input = #{brandInput}</if>
+            <if test="belongBank != null  and belongBank != ''"> and belong_bank = #{belongBank}</if>
         </where>
     </select>
     
@@ -43,23 +51,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
 
             <if test="bankId != null">bank_id,</if>
+            <if test="baoxian != null">baoxian,</if>
             <if test="productName != null">product_name,</if>
             <if test="productCode != null">product_code,</if>
             <if test="productBrand != null">product_brand,</if>
             <if test="productRemark != null">product_remark,</if>
             <if test="carType != null">car_type,</if>
             <if test="businessArea != null">business_area,</if>
+            <if test="areaInput != null">area_input,</if>
+            <if test="brandInput != null">brand_input,</if>
+            <if test="belongBank != null">belong_bank,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
 
             <if test="bankId != null">#{bankId},</if>
+            <if test="baoxian != null">#{baoxian},</if>
             <if test="productName != null">#{productName},</if>
             <if test="productCode != null">#{productCode},</if>
             <if test="productBrand != null">#{productBrand},</if>
             <if test="productRemark != null">#{productRemark},</if>
             <if test="carType != null">#{carType},</if>
             <if test="businessArea != null">#{businessArea},</if>
+            <if test="areaInput != null">#{areaInput},</if>
+            <if test="brandInput != null">#{brandInput},</if>
+            <if test="belongBank != null">#{belongBank},</if>
          </trim>
+    </insert>
+
+    <insert id="insertZyjrBankProducts" parameterType="java.util.List">
+        <selectKey keyProperty="id" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO zyjr_bank_product (
+        baoxian,
+        belong_bank,
+        bank_id,
+        product_name,
+        product_code,
+        product_brand,
+        product_remark,
+        car_type,
+        business_area,
+        area_input,
+        brand_input
+        )
+        VALUES
+        <foreach collection ="list" item="ZyjrBankProduct" separator =",">
+            (#{ZyjrBankProduct.baoxian},#{ZyjrBankProduct.belongBank},#{ZyjrBankProduct.bankId}, #{ZyjrBankProduct.productName},#{ZyjrBankProduct.productCode},#{ZyjrBankProduct.productBrand},#{ZyjrBankProduct.productRemark},#{ZyjrBankProduct.carType},#{ZyjrBankProduct.businessArea},#{ZyjrBankProduct.areaInput},#{ZyjrBankProduct.brandInput})
+        </foreach >
     </insert>
 
     <update id="updateZyjrBankProduct" parameterType="ZyjrBankProduct">
@@ -67,22 +106,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
 
             <if test="bankId != null">bank_id = #{bankId},</if>
+            <if test="baoxian != null">baoxian = #{baoxian},</if>
             <if test="productName != null">product_name = #{productName},</if>
             <if test="productCode != null">product_code = #{productCode},</if>
             <if test="productBrand != null">product_brand = #{productBrand},</if>
             <if test="productRemark != null">product_remark = #{productRemark},</if>
             <if test="carType != null">car_type = #{carType},</if>
             <if test="businessArea != null">business_area = #{businessArea},</if>
+            <if test="areaInput != null">area_input = #{areaInput},</if>
+            <if test="brandInput != null">brand_input = #{brandInput},</if>
+            <if test="belongBank != null">belong_bank = #{belongBank},</if>
         </trim>
         where id = #{id}
     </update>
 
     <delete id="deleteZyjrBankProductById" parameterType="Long">
-        delete from zyjr_bank_product where id = #{id}
+        delete from zyjr_bank_product where bank_id = #{id}
     </delete>
 
     <delete id="deleteZyjrBankProductByIds" parameterType="String">
-        delete from zyjr_bank_product where id in 
+        delete from zyjr_bank_product where bank_id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

@@ -42,12 +42,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <result property="productRemark"    column="product_remark"    />
             <result property="carType"    column="car_type"    />
             <result property="businessArea"    column="business_area"    />
+            <result property="areaInput"    column="area_input"    />
+            <result property="brandInput"    column="brand_input"    />
+
             <collection property="scheme" ofType="ZyjrBankScheme">
                 <result property="stageNum"    column="stage_num"    />
                 <result property="id"    column="scheme"    />
                 <result property="baseRate"    column="base_rate"    />
                 <result property="shouldRate"    column="should_rate"    />
             </collection>
+
+        </collection>
+        <collection property="sysFileInfo" ofType="SysFileInfo" >
+            <id column="file_id" property="fileId"/>
+            <result property="fileName"    column="file_name"    />
+            <result property="filePath"    column="file_path"    />
         </collection>
 
     </resultMap>
@@ -71,14 +80,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="selectZyjrBankById" parameterType="Long" resultMap="ZyjrBankResult">
          select a.id, a.bank_name, a.bank_location, a.linkman, a.remark, a.phone_number, a.create_by, a.create_time, a.update_by, a.update_time, a.is_insurance, a.is_sign, a.template,
-         b.bank_deposit,b.id account,b.bank_id,b.user_number,b.household_name,c.id extend,c.bank_id,c.extend_code,c.extend_field,d.id flow,d.bank_id,d.flow_name,d.flow_code,
-         e.id product,e.bank_id,e.product_name,e.product_brand,e.product_remark,e.car_type,e.business_area,f.id scheme,f.zyjr_bank_product_id,f.stage_num,f.base_rate,f.should_rate
+         b.bank_deposit,b.id account,b.bank_id,b.user_number,b.household_name,c.id extend,c.bank_id,c.extend_code,c.extend_field,d.id flow,d.bank_id,d.flow_name,d.flow_code,g.file_id,g.file_path,g.file_name,g.bank_id,
+         e.id product,e.bank_id,e.product_name,e.product_code,e.brand_input,e.area_input,e.product_brand,e.product_remark,e.car_type,e.business_area,f.id scheme,f.zyjr_bank_product_id,f.stage_num,f.base_rate,f.should_rate
          from zyjr_bank a
          left join zyjr_bank_account b on a.id=b.bank_id
          left join zyjr_bank_extend c on a.id=c.bank_id
          left join zyjr_bank_flow d on a.id=d.bank_id
          left join zyjr_bank_product e on a.id=e.bank_id
          left join zyjr_bank_scheme f on e.id=f.zyjr_bank_product_id
+         left join sys_file_info g on a.id=g.bank_id
          where a.id = #{id}
     </select>
         

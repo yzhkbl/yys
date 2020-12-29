@@ -21,10 +21,10 @@ import com.jeethink.common.utils.poi.ExcelUtil;
 import com.jeethink.common.core.page.TableDataInfo;
 
 /**
- * 保险Controller
+ * insuranceTypeController
  * 
  * @author jeethink
- * @date 2020-12-25
+ * @date 2020-12-29
  */
 @RestController
 @RequestMapping("/system/insuranceType")
@@ -34,9 +34,9 @@ public class ZyjrInsuranceTypeController extends BaseController
     private IZyjrInsuranceTypeService zyjrInsuranceTypeService;
 
     /**
-     * 查询保险列表
+     * 查询insuranceType列表
      */
-    @PreAuthorize("@ss.hasPermi('organization:insuranceType:list')")
+    @PreAuthorize("@ss.hasPermi('system:insuranceType:list')")
     @GetMapping("/list")
     public TableDataInfo list(ZyjrInsuranceType zyjrInsuranceType)
     {
@@ -46,10 +46,10 @@ public class ZyjrInsuranceTypeController extends BaseController
     }
 
     /**
-     * 导出保险列表
+     * 导出insuranceType列表
      */
-    @PreAuthorize("@ss.hasPermi('organization:insuranceType:export')")
-    @Log(title = "保险", businessType = BusinessType.EXPORT)
+    @PreAuthorize("@ss.hasPermi('system:insuranceType:export')")
+    @Log(title = "insuranceType", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(ZyjrInsuranceType zyjrInsuranceType)
     {
@@ -59,9 +59,8 @@ public class ZyjrInsuranceTypeController extends BaseController
     }
 
     /**
-     * 获取保险详细信息
+     * 获取insuranceType详细信息
      */
-    @PreAuthorize("@ss.hasPermi('organization:insuranceType:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -69,21 +68,21 @@ public class ZyjrInsuranceTypeController extends BaseController
     }
 
     /**
-     * 新增保险
+     * 新增insuranceType
      */
-    @PreAuthorize("@ss.hasPermi('organization:insuranceType:add')")
-    @Log(title = "保险", businessType = BusinessType.INSERT)
+    @Log(title = "insuranceType", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody ZyjrInsuranceType zyjrInsuranceType)
     {
-        return toAjax(zyjrInsuranceTypeService.insertZyjrInsuranceType(zyjrInsuranceType));
+        Long a=zyjrInsuranceTypeService.insertZyjrInsuranceType(zyjrInsuranceType);
+        return AjaxResult.success(a);
     }
 
     /**
-     * 修改保险
+     * 修改insuranceType
      */
-    @PreAuthorize("@ss.hasPermi('organization:insuranceType:edit')")
-    @Log(title = "保险", businessType = BusinessType.UPDATE)
+
+    @Log(title = "insuranceType", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody ZyjrInsuranceType zyjrInsuranceType)
     {
@@ -91,10 +90,10 @@ public class ZyjrInsuranceTypeController extends BaseController
     }
 
     /**
-     * 删除保险
+     * 删除insuranceType
      */
-    @PreAuthorize("@ss.hasPermi('organization:insuranceType:remove')")
-    @Log(title = "保险", businessType = BusinessType.DELETE)
+    @PreAuthorize("@ss.hasPermi('system:insuranceType:remove')")
+    @Log(title = "insuranceType", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {

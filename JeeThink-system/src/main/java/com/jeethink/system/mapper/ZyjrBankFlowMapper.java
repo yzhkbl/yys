@@ -34,6 +34,7 @@ public interface ZyjrBankFlowMapper
      * @return 结果
      */
     public int insertZyjrBankFlow(ZyjrBankFlow zyjrBankFlow);
+    public int insertZyjrBankFlows(List<ZyjrBankFlow> ZyjrBankFlow);
 
     /**
      * 修改flow

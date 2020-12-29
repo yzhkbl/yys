@@ -64,4 +64,5 @@ public interface ZyjrCarAccountMapper
      * @return 结果
      */
     public int deleteZyjrCarAccountByIds(Long[] ids);
+    int insertTestList(List<ZyjrCarAccount>  ZyjrCarAccount);
 }

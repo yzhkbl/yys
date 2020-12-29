@@ -11,10 +11,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="stageNum"    column="stage_num"    />
         <result property="baseRate"    column="base_rate"    />
         <result property="shouldRate"    column="should_rate"    />
+        <result property="shouldPut"    column="should_put"    />
     </resultMap>
 
     <sql id="selectZyjrBankSchemeVo">
-        select id, zyjr_bank_product_id, stage_num, base_rate, should_rate from zyjr_bank_scheme
+        select id, zyjr_bank_product_id,should_put, stage_num, base_rate, should_rate from zyjr_bank_scheme
     </sql>
 
     <select id="selectZyjrBankSchemeList" parameterType="ZyjrBankScheme" resultMap="ZyjrBankSchemeResult">
@@ -24,6 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="stageNum != null  and stageNum != ''"> and stage_num = #{stageNum}</if>
             <if test="baseRate != null  and baseRate != ''"> and base_rate = #{baseRate}</if>
             <if test="shouldRate != null  and shouldRate != ''"> and should_rate = #{shouldRate}</if>
+            <if test="shouldPut != null  and shouldPut != ''"> and should_put = #{shouldPut}</if>
         </where>
     </select>
     
@@ -40,6 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="stageNum != null">stage_num,</if>
             <if test="baseRate != null">base_rate,</if>
             <if test="shouldRate != null">should_rate,</if>
+            <if test="shouldPut != null">should_put,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
 
@@ -47,7 +50,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="stageNum != null">#{stageNum},</if>
             <if test="baseRate != null">#{baseRate},</if>
             <if test="shouldRate != null">#{shouldRate},</if>
+            <if test="shouldPut != null">#{shouldPut},</if>
          </trim>
+    </insert>
+
+    <insert id="insertZyjrBankSchemes" parameterType="java.util.List">
+        INSERT INTO zyjr_bank_scheme (
+        should_put,
+        zyjr_bank_product_id,
+        stage_num,
+        base_rate,
+        should_rate
+        )
+        VALUES
+        <foreach collection ="list" item="ZyjrBankScheme" separator =",">
+            (#{ZyjrBankScheme.shouldPut},#{ZyjrBankScheme.zyjrBankProductId}, #{ZyjrBankScheme.stageNum},#{ZyjrBankScheme.baseRate},#{ZyjrBankScheme.shouldRate})
+        </foreach >
     </insert>
 
     <update id="updateZyjrBankScheme" parameterType="ZyjrBankScheme">
@@ -58,16 +76,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="stageNum != null">stage_num = #{stageNum},</if>
             <if test="baseRate != null">base_rate = #{baseRate},</if>
             <if test="shouldRate != null">should_rate = #{shouldRate},</if>
+            <if test="shouldPut != null">should_put = #{shouldPut},</if>
         </trim>
         where id = #{id}
     </update>
 
     <delete id="deleteZyjrBankSchemeById" parameterType="Long">
-        delete from zyjr_bank_scheme where id = #{id}
+        delete from zyjr_bank_scheme where zyjr_bank_product_id = #{id}
     </delete>
 
     <delete id="deleteZyjrBankSchemeByIds" parameterType="String">
-        delete from zyjr_bank_scheme where id in 
+        delete from zyjr_bank_scheme where bank_id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

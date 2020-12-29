@@ -14,6 +14,7 @@ import com.jeethink.system.domain.vo.StoreInformation;
 import com.jeethink.system.domain.vo.carVo;
 import com.jeethink.system.mapper.ExamineMapper;
 import com.jeethink.system.mapper.SysFileInfoMapper;
+import com.jeethink.system.mapper.ZyjrCarAccountMapper;
 import com.jeethink.system.service.IZyjrCarAccountService;
 import com.jeethink.system.util.androidUpload;
 import io.swagger.annotations.Api;
@@ -185,9 +186,8 @@ public class ZyjrCarController extends BaseController {
             a.setShopType(storeInformation.getShopType());
             a.setBusinessType(storeInformation.getBusinessType());
 
-            a.setStall(storeInformation.getStall());
             a.setBusinessNature(storeInformation.getBusinessNature());
-
+            a.setStall(storeInformation.getStall());
             a.setDealerName(storeInformation.getDealerName());
             a.setPassengerCar(storeInformation.getPassengerCar());
             a.setMonthDeal(storeInformation.getMonthDeal());
@@ -339,6 +339,8 @@ public class ZyjrCarController extends BaseController {
 
         return AjaxResult.success(pic);
     }
+
+
 
 
     /**

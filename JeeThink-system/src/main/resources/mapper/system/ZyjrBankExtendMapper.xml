@@ -29,6 +29,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectZyjrBankExtendVo"/>
         where id = #{id}
     </select>
+    <insert id="insertZyjrBankExtends" parameterType="java.util.List">
+        INSERT INTO zyjr_bank_extend (
+
+        bank_id,
+        extend_code,
+        extend_field
+        )
+        VALUES
+        <foreach collection ="list" item="ZyjrBankExtend" separator =",">
+            (#{ZyjrBankExtend.bankId}, #{ZyjrBankExtend.extendCode},#{ZyjrBankExtend.extendField})
+        </foreach >
+    </insert>
         
     <insert id="insertZyjrBankExtend" parameterType="ZyjrBankExtend" useGeneratedKeys="true" keyProperty="id">
         insert into zyjr_bank_extend
@@ -58,11 +70,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteZyjrBankExtendById" parameterType="Long">
-        delete from zyjr_bank_extend where id = #{id}
+        delete from zyjr_bank_extend where bank_id = #{id}
     </delete>
 
     <delete id="deleteZyjrBankExtendByIds" parameterType="String">
-        delete from zyjr_bank_extend where id in 
+        delete from zyjr_bank_extend where bank_id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

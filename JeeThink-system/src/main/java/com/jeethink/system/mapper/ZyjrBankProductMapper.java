@@ -34,6 +34,7 @@ public interface ZyjrBankProductMapper
      * @return 结果
      */
     public int insertZyjrBankProduct(ZyjrBankProduct zyjrBankProduct);
+    public int insertZyjrBankProducts(List<ZyjrBankProduct> ZyjrBankProduct);
 
     /**
      * 修改product

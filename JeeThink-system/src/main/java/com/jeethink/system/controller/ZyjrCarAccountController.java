@@ -1,6 +1,11 @@
 package com.jeethink.system.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.jeethink.system.mapper.ZyjrCarAccountMapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,10 +33,13 @@ import com.jeethink.common.core.page.TableDataInfo;
  */
 @RestController
 @RequestMapping("/system/account")
+@Api
 public class ZyjrCarAccountController extends BaseController
 {
     @Autowired
     private IZyjrCarAccountService zyjrCarAccountService;
+    @Autowired
+    private ZyjrCarAccountMapper zyjrCarAccountMapper;
 
     /**
      * 查询【请填写功能名称】列表
@@ -44,6 +52,7 @@ public class ZyjrCarAccountController extends BaseController
         List<ZyjrCarAccount> list = zyjrCarAccountService.selectZyjrCarAccountList(zyjrCarAccount);
         return getDataTable(list);
     }
+
 
     /**
      * 导出【请填写功能名称】列表

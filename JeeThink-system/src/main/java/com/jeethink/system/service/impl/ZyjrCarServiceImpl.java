@@ -98,8 +98,9 @@ public class ZyjrCarServiceImpl implements IZyjrCarService
            zyjrCarAccountService.deleteZyjrCarAccountById(zyjrCar.getId());
            for (ZyjrCarAccount a: zyjrCarAccount ) {
                a.setZyjrCarId(String.valueOf(zyjrCar.getId()));
-               accountMapper.insertZyjrCarAccount(a);
+
            }
+           accountMapper.insertTestList(zyjrCar.getZyjrCarAccount());
 
 
 

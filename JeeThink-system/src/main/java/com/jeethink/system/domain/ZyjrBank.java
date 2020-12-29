@@ -52,6 +52,15 @@ public class ZyjrBank extends BaseEntity
     private List<ZyjrBankAccount> returns;
     private List<ZyjrBankProduct> product;
     private List<ZyjrBankExtend> extend;
+    private List<SysFileInfo> sysFileInfo;
+
+    public List<SysFileInfo> getSysFileInfo() {
+        return sysFileInfo;
+    }
+
+    public void setSysFileInfo(List<SysFileInfo> sysFileInfo) {
+        this.sysFileInfo = sysFileInfo;
+    }
 
     public List<ZyjrBankFlow> getFlow() {
         return flow;
@@ -178,6 +187,7 @@ public class ZyjrBank extends BaseEntity
                 .append("returns",getReturns())
                 .append("extend",getExtend())
                 .append("flow",getFlow())
+                .append("sysFileInfo",getSysFileInfo())
             .toString();
     }
 }

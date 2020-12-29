@@ -30,7 +30,17 @@ public class ZyjrBankFlow
     @Excel(name = "流程编码")
     private String flowCode;
 
-    public void setId(Long id) 
+    private String baoxian;
+
+    public String getBaoxian() {
+        return baoxian;
+    }
+
+    public void setBaoxian(String baoxian) {
+        this.baoxian = baoxian;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }
@@ -75,6 +85,7 @@ public class ZyjrBankFlow
             .append("bankId", getBankId())
             .append("flowName", getFlowName())
             .append("flowCode", getFlowCode())
+                .append("baoxian",getBaoxian())
             .toString();
     }
 }

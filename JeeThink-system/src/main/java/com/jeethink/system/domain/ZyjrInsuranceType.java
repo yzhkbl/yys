@@ -5,11 +5,13 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.jeethink.common.annotation.Excel;
 import com.jeethink.common.core.domain.BaseEntity;
 
+import java.util.List;
+
 /**
- * 保险对象 zyjr_insurance_type
+ * insuranceType对象 zyjr_insurance_type
  * 
  * @author jeethink
- * @date 2020-12-25
+ * @date 2020-12-29
  */
 public class ZyjrInsuranceType extends BaseEntity
 {
@@ -30,7 +32,51 @@ public class ZyjrInsuranceType extends BaseEntity
     @Excel(name = "联系人员")
     private String linkman;
 
-    public void setId(Long id) 
+    /** 履约保险设置 */
+    @Excel(name = "履约保险设置")
+    private Integer isInsurance;
+
+    /** 是否电子签约设置 */
+    @Excel(name = "是否电子签约设置")
+    private Integer isSign;
+    private List<ZyjrBankFlow> flow;
+    private List<ZyjrBankAccount> returns;
+    private List<ZyjrBankProduct> product;
+    private String area;
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public List<ZyjrBankFlow> getFlow() {
+        return flow;
+    }
+
+    public void setFlow(List<ZyjrBankFlow> flow) {
+        this.flow = flow;
+    }
+
+    public List<ZyjrBankAccount> getReturns() {
+        return returns;
+    }
+
+    public void setReturns(List<ZyjrBankAccount> returns) {
+        this.returns = returns;
+    }
+
+    public List<ZyjrBankProduct> getProduct() {
+        return product;
+    }
+
+    public void setProduct(List<ZyjrBankProduct> product) {
+        this.product = product;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }
@@ -66,6 +112,24 @@ public class ZyjrInsuranceType extends BaseEntity
     {
         return linkman;
     }
+    public void setIsInsurance(Integer isInsurance) 
+    {
+        this.isInsurance = isInsurance;
+    }
+
+    public Integer getIsInsurance() 
+    {
+        return isInsurance;
+    }
+    public void setIsSign(Integer isSign) 
+    {
+        this.isSign = isSign;
+    }
+
+    public Integer getIsSign() 
+    {
+        return isSign;
+    }
 
     @Override
     public String toString() {
@@ -79,6 +143,9 @@ public class ZyjrInsuranceType extends BaseEntity
             .append("createTime", getCreateTime())
             .append("updateBy", getUpdateBy())
             .append("updateTime", getUpdateTime())
+            .append("isInsurance", getIsInsurance())
+            .append("isSign", getIsSign())
+                .append("area",getArea())
             .toString();
     }
 }

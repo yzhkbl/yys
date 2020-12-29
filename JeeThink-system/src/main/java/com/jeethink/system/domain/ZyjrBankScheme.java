@@ -33,8 +33,17 @@ public class ZyjrBankScheme
     /** 应付费率 */
     @Excel(name = "应付费率")
     private String shouldRate;
+    private String shouldPut;
 
-    public void setId(Long id) 
+    public String getShouldPut() {
+        return shouldPut;
+    }
+
+    public void setShouldPut(String shouldPut) {
+        this.shouldPut = shouldPut;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }

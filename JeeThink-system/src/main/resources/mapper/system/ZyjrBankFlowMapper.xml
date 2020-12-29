@@ -8,12 +8,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="id"    column="id"    />
 
         <result property="bankId"    column="bank_id"    />
+        <result property="baoxian"    column="baoxian"    />
         <result property="flowName"    column="flow_name"    />
         <result property="flowCode"    column="flow_code"    />
     </resultMap>
 
     <sql id="selectZyjrBankFlowVo">
-        select id, bank_id, flow_name, flow_code from zyjr_bank_flow
+        select id, bank_id, flow_name,baoxian, flow_code from zyjr_bank_flow
     </sql>
 
     <select id="selectZyjrBankFlowList" parameterType="ZyjrBankFlow" resultMap="ZyjrBankFlowResult">
@@ -22,6 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="bankId != null  and bankId != ''"> and bank_id = #{bankId}</if>
             <if test="flowName != null  and flowName != ''"> and flow_name like concat('%', #{flowName}, '%')</if>
             <if test="flowCode != null  and flowCode != ''"> and flow_code = #{flowCode}</if>
+            <if test="baoxian != null  and baoxian != ''"> and baoxian = #{baoxian}</if>
         </where>
     </select>
     
@@ -37,13 +39,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="bankId != null">bank_id,</if>
             <if test="flowName != null">flow_name,</if>
             <if test="flowCode != null">flow_code,</if>
+            <if test="baoxian != null">baoxian,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
 
             <if test="bankId != null">#{bankId},</if>
             <if test="flowName != null">#{flowName},</if>
             <if test="flowCode != null">#{flowCode},</if>
+            <if test="baoxian != null">#{baoxian},</if>
          </trim>
+    </insert>
+
+    <insert id="insertZyjrBankFlows" parameterType="java.util.List">
+        INSERT INTO zyjr_bank_flow (
+        baoxian,
+        bank_id,
+        flow_name,
+        flow_code
+        )
+        VALUES
+        <foreach collection ="list" item="ZyjrBankFlow" separator =",">
+            (#{ZyjrBankFlow.baoxian},#{ZyjrBankFlow.bankId}, #{ZyjrBankFlow.flowName},#{ZyjrBankFlow.flowCode})
+        </foreach >
     </insert>
 
     <update id="updateZyjrBankFlow" parameterType="ZyjrBankFlow">
@@ -51,6 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
 
             <if test="bankId != null">bank_id = #{bankId},</if>
+            <if test="baoxian != null">baoxian = #{baoxian},</if>
             <if test="flowName != null">flow_name = #{flowName},</if>
             <if test="flowCode != null">flow_code = #{flowCode},</if>
         </trim>
@@ -58,11 +76,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteZyjrBankFlowById" parameterType="Long">
-        delete from zyjr_bank_flow where id = #{id}
+        delete from zyjr_bank_flow where bank_id = #{id}
     </delete>
 
     <delete id="deleteZyjrBankFlowByIds" parameterType="String">
-        delete from zyjr_bank_flow where id in 
+        delete from zyjr_bank_flow where bank_id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

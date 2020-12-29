@@ -3,10 +3,7 @@ package com.jeethink.system.controller;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 
@@ -337,7 +334,7 @@ public class test extends BaseController {
 
 
         }
-        return AjaxResult.errors();
+        return null;
     }
 
     public static JSONObject encryptData(String data, String dataPublicKey, String signPrivateKey, String assurerNo
@@ -482,10 +479,16 @@ public class test extends BaseController {
         }
     }
     @ResponseBody
-    @GetMapping("wc")
+    @GetMapping("jinzhengu")
     public AjaxResult wc(){
-        int a=examineMapper.updateStarts("gsggh4455417");
-        return AjaxResult.success(a);
+        SysFileInfo sysFileInfo=new SysFileInfo();
+        sysFileInfo.setBankId("99");
+        List<SysFileInfo> a=sysFileInfoMapper.selectSysFileInfoList(sysFileInfo);
+        Map<String,String> map=new HashMap<>();
+        for (SysFileInfo fileInfo : a) {
+            map.put(fileInfo.getFileName(),fileInfo.getFilePath());
+        }
+        return AjaxResult.success(map);
     }
 
 

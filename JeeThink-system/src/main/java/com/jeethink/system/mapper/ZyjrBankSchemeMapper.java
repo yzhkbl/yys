@@ -35,6 +35,8 @@ public interface ZyjrBankSchemeMapper
      */
     public int insertZyjrBankScheme(ZyjrBankScheme zyjrBankScheme);
 
+    public int insertZyjrBankSchemes(List<ZyjrBankScheme> ZyjrBankScheme);
+
     /**
      * 修改scheme
      * 

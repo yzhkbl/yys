@@ -9,6 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="fileName"    column="file_name"    />
         <result property="filePath"    column="file_path"    />
         <result property="id"    column="id"    />
+        <result property="bankId"    column="bank_id"    />
     </resultMap>
 
     <sql id="selectSysFileInfoVo">
@@ -21,6 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="fileName != null  and fileName != ''"> and file_name like concat('%', #{fileName}, '%')</if>
             <if test="filePath != null  and filePath != ''"> and file_path = #{filePath}</if>
             <if test="id != null  and id != ''"> and id = #{id}</if>
+            <if test="bankId != null  and bankId != ''"> and bank_id = #{bankId}</if>
         </where>
     </select>
     
@@ -36,12 +38,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="filePath != null">file_path,</if>
             <if test="id != null">id,</if>
             <if test="photoCarId !=null">photo_car_id,</if>
+            <if test="bankId !=null">bank_id,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="fileName != null">#{fileName},</if>
             <if test="filePath != null">#{filePath},</if>
             <if test="id != null">#{id},</if>
             <if test="photoCarId !=null">#{photoCarId},</if>
+            <if test="bankId !=null">#{bankId},</if>
          </trim>
     </insert>
 
@@ -61,6 +65,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <delete id="deleteSysFileInfoByCarId" parameterType="String">
         delete from sys_file_info where id = #{id}
+    </delete>
+    <delete id="deleteSysFileInfoByBankId" parameterType="String">
+        delete from sys_file_info where bank_id = #{bankId}
     </delete>
 
     <delete id="deleteSysFileInfoByPath" parameterType="String">

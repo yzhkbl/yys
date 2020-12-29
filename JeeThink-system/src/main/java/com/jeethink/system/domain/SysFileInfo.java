@@ -30,6 +30,16 @@ public class SysFileInfo extends BaseEntity
 
     private Long photoCarId;
 
+    private String bankId;
+
+    public String getBankId() {
+        return bankId;
+    }
+
+    public void setBankId(String bankId) {
+        this.bankId = bankId;
+    }
+
     public void setPhotoCarId(Long photoCarId)
     {
         this.photoCarId = photoCarId;
@@ -85,6 +95,7 @@ public class SysFileInfo extends BaseEntity
             .append("filePath", getFilePath())
                 .append("id",getId())
                 .append("photoCarId",getPhotoCarId())
+                .append("bankId",getBankId())
             .toString();
     }
 }

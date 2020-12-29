@@ -34,6 +34,7 @@ public interface ZyjrBankExtendMapper
      * @return 结果
      */
     public int insertZyjrBankExtend(ZyjrBankExtend zyjrBankExtend);
+    public int insertZyjrBankExtends(List<ZyjrBankExtend> ZyjrBankExtend);
 
     /**
      * 修改extend

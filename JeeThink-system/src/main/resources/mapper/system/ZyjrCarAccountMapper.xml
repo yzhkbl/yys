@@ -97,6 +97,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="zyjrCarId != null">#{zyjrCarId},</if>
         </trim>
     </insert>
-
+    <insert id="insertTestList" parameterType="java.util.List">
+        INSERT INTO zyjr_car_account (
+        account_name,
+        account_use,
+        account_type,
+        account_number,
+        account_licence,
+        account_city,
+        account_provinc,
+        account_sub_branch,
+        zyjr_car_id
+        )
+        VALUES
+        <foreach collection ="list" item="ZyjrCarAccount" separator =",">
+            (#{ZyjrCarAccount.accountName}, #{ZyjrCarAccount.accountUse},#{ZyjrCarAccount.accountType},#{ZyjrCarAccount.accountNumber},#{ZyjrCarAccount.accountLicence},#{ZyjrCarAccount.accountCity},#{ZyjrCarAccount.accountProvinc},#{ZyjrCarAccount.accountSubBranch},#{ZyjrCarAccount.zyjrCarId})
+        </foreach >
+    </insert>
 
 </mapper>

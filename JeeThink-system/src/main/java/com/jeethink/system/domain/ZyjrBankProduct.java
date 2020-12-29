@@ -48,6 +48,42 @@ public class ZyjrBankProduct
     @Excel(name = "业务区域")
     private String businessArea;
     private List<ZyjrBankScheme> scheme;
+    private String areaInput;
+    private String brandInput;
+    private String baoxian;
+    private String belongBank;
+
+    public String getBelongBank() {
+        return belongBank;
+    }
+
+    public void setBelongBank(String belongBank) {
+        this.belongBank = belongBank;
+    }
+
+    public String getBaoxian() {
+        return baoxian;
+    }
+
+    public void setBaoxian(String baoxian) {
+        this.baoxian = baoxian;
+    }
+
+    public String getBrandInput() {
+        return brandInput;
+    }
+
+    public void setBrandInput(String brandInput) {
+        this.brandInput = brandInput;
+    }
+
+    public String getAreaInput() {
+        return areaInput;
+    }
+
+    public void setAreaInput(String areaInput) {
+        this.areaInput = areaInput;
+    }
 
     public List<ZyjrBankScheme> getScheme() {
         return scheme;
@@ -143,6 +179,10 @@ public class ZyjrBankProduct
             .append("carType", getCarType())
                 .append("scheme",getScheme())
             .append("businessArea", getBusinessArea())
+                .append("areaInput",getAreaInput())
+                .append("brandInput",getBrandInput())
+                .append("baoxian",getBaoxian())
+                .append("belongBank",getBelongBank())
             .toString();
     }
 }

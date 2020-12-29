@@ -34,7 +34,17 @@ public class ZyjrBankAccount
     @Excel(name = "户名")
     private String householdName;
 
-    public void setId(Long id) 
+    private String baoxian;
+
+    public String getBaoxian() {
+        return baoxian;
+    }
+
+    public void setBaoxian(String baoxian) {
+        this.baoxian = baoxian;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }
@@ -89,6 +99,7 @@ public class ZyjrBankAccount
             .append("bankDeposit", getBankDeposit())
             .append("userNumber", getUserNumber())
             .append("householdName", getHouseholdName())
+                .append("baoxian",getBaoxian())
             .toString();
     }
 }

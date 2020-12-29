@@ -35,6 +35,8 @@ public interface ZyjrBankAccountMapper
      */
     public int insertZyjrBankAccount(ZyjrBankAccount zyjrBankAccount);
 
+    public int insertZyjrBankAccounts(List<ZyjrBankAccount> ZyjrBankAccount);
+
     /**
      * 修改account
      * 

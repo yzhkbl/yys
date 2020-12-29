@@ -33,7 +33,7 @@ public interface IZyjrBankService
      * @param zyjrBank bank
      * @return 结果
      */
-    public int insertZyjrBank(ZyjrBank zyjrBank);
+    public Long insertZyjrBank(ZyjrBank zyjrBank);
 
     /**
      * 修改bank
@@ -42,7 +42,7 @@ public interface IZyjrBankService
      * @return 结果
      */
     public int updateZyjrBank(ZyjrBank zyjrBank);
-
+    int delete();
     /**
      * 批量删除bank
      * 

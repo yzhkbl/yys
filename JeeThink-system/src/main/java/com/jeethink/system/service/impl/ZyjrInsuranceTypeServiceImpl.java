@@ -1,30 +1,51 @@
 package com.jeethink.system.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.jeethink.common.utils.DateUtils;
+import com.jeethink.system.domain.*;
+import com.jeethink.system.mapper.*;
+import com.jeethink.system.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.jeethink.system.mapper.ZyjrInsuranceTypeMapper;
-import com.jeethink.system.domain.ZyjrInsuranceType;
-import com.jeethink.system.service.IZyjrInsuranceTypeService;
 
 /**
- * 保险Service业务层处理
+ * insuranceTypeService业务层处理
  * 
  * @author jeethink
- * @date 2020-12-25
+ * @date 2020-12-29
  */
 @Service
 public class ZyjrInsuranceTypeServiceImpl implements IZyjrInsuranceTypeService 
 {
     @Autowired
     private ZyjrInsuranceTypeMapper zyjrInsuranceTypeMapper;
+    @Autowired
+    private IZyjrBankAccountService iZyjrBankAccountService;
+    @Autowired
+    private IZyjrBankExtendService iZyjrBankExtendService;
+    @Autowired
+    private IZyjrBankFlowService iZyjrBankFlowService;
+    @Autowired
+    private IZyjrBankProductService iZyjrBankProductService;
+    @Autowired
+    private IZyjrBankSchemeService iZyjrBankSchemeService;
+    @Autowired
+    private ZyjrBankAccountMapper zyjrBankAccountMapper;
+    @Autowired
+    private ZyjrBankExtendMapper zyjrBankExtendMapper;
+    @Autowired
+    private ZyjrBankFlowMapper zyjrBankFlowMapper;
+    @Autowired
+    private ZyjrBankProductMapper zyjrBankProductMapper;
+    @Autowired
+    private ZyjrBankSchemeMapper zyjrBankSchemeMapper;
 
     /**
-     * 查询保险
+     * 查询insuranceType
      * 
-     * @param id 保险ID
-     * @return 保险
+     * @param id insuranceTypeID
+     * @return insuranceType
      */
     @Override
     public ZyjrInsuranceType selectZyjrInsuranceTypeById(Long id)
@@ -33,10 +54,10 @@ public class ZyjrInsuranceTypeServiceImpl implements IZyjrInsuranceTypeService
     }
 
     /**
-     * 查询保险列表
+     * 查询insuranceType列表
      * 
-     * @param zyjrInsuranceType 保险
-     * @return 保险
+     * @param zyjrInsuranceType insuranceType
+     * @return insuranceType
      */
     @Override
     public List<ZyjrInsuranceType> selectZyjrInsuranceTypeList(ZyjrInsuranceType zyjrInsuranceType)
@@ -45,35 +66,117 @@ public class ZyjrInsuranceTypeServiceImpl implements IZyjrInsuranceTypeService
     }
 
     /**
-     * 新增保险
+     * 新增insuranceType
      * 
-     * @param zyjrInsuranceType 保险
+     * @param
      * @return 结果
      */
     @Override
-    public int insertZyjrInsuranceType(ZyjrInsuranceType zyjrInsuranceType)
+    public Long insertZyjrInsuranceType(ZyjrInsuranceType zyjrBank)
     {
-        zyjrInsuranceType.setCreateTime(DateUtils.getNowDate());
-        return zyjrInsuranceTypeMapper.insertZyjrInsuranceType(zyjrInsuranceType);
+        zyjrBank.setCreateTime(DateUtils.getNowDate());
+        zyjrInsuranceTypeMapper.insertZyjrInsuranceType(zyjrBank);
+        iZyjrBankAccountService.deleteZyjrBankAccountById(zyjrBank.getId());
+        iZyjrBankExtendService.deleteZyjrBankExtendById(zyjrBank.getId());
+        iZyjrBankFlowService.deleteZyjrBankFlowById(zyjrBank.getId());
+        iZyjrBankProductService.deleteZyjrBankProductById(zyjrBank.getId());
+        if(zyjrBank.getReturns().size()>0){
+            for (ZyjrBankAccount aReturn : zyjrBank.getReturns()) {
+                aReturn.setBaoxian(zyjrBank.getId().toString());
+            }
+            zyjrBankAccountMapper.insertZyjrBankAccounts(zyjrBank.getReturns());
+        }
+        if(zyjrBank.getFlow().size()>0){
+            for (ZyjrBankFlow zyjrBankFlow : zyjrBank.getFlow()) {
+                zyjrBankFlow.setBaoxian(zyjrBank.getId().toString());
+            }
+            zyjrBankFlowMapper.insertZyjrBankFlows(zyjrBank.getFlow());
+        }
+        if(zyjrBank.getProduct().size()>0){
+            List<ZyjrBankProduct> list=new ArrayList<>();
+            for (ZyjrBankProduct zyjrBankProduct : zyjrBank.getProduct()) {
+                zyjrBankProduct.setBaoxian(zyjrBank.getId().toString());
+                zyjrBankProductMapper.insertZyjrBankProduct(zyjrBankProduct);
+                list.add(zyjrBankProduct);
+            }
+
+
+            System.err.println(list);
+            if(list.size()>0){
+                List<ZyjrBankScheme> slist=new ArrayList<>();
+                for (ZyjrBankProduct zyjrBankProduct : list) {
+                    iZyjrBankSchemeService.deleteZyjrBankSchemeById(zyjrBankProduct.getId());
+                    for (ZyjrBankScheme zyjrBankScheme : zyjrBankProduct.getScheme()) {
+                        zyjrBankScheme.setZyjrBankProductId(zyjrBankProduct.getId().toString());
+                        slist.add(zyjrBankScheme);
+                    }
+                }
+                zyjrBankSchemeMapper.insertZyjrBankSchemes(slist);
+
+            }
+        }
+
+        return zyjrBank.getId();
     }
 
     /**
-     * 修改保险
+     * 修改insuranceType
      * 
-     * @param zyjrInsuranceType 保险
+     * @param zyjrInsuranceType insuranceType
      * @return 结果
      */
     @Override
-    public int updateZyjrInsuranceType(ZyjrInsuranceType zyjrInsuranceType)
+    public int updateZyjrInsuranceType(ZyjrInsuranceType zyjrBank)
     {
-        zyjrInsuranceType.setUpdateTime(DateUtils.getNowDate());
-        return zyjrInsuranceTypeMapper.updateZyjrInsuranceType(zyjrInsuranceType);
+        zyjrBank.setUpdateTime(DateUtils.getNowDate());
+        zyjrInsuranceTypeMapper.updateZyjrInsuranceType(zyjrBank);
+        iZyjrBankAccountService.deleteZyjrBankAccountById(zyjrBank.getId());
+        iZyjrBankExtendService.deleteZyjrBankExtendById(zyjrBank.getId());
+        iZyjrBankFlowService.deleteZyjrBankFlowById(zyjrBank.getId());
+        iZyjrBankProductService.deleteZyjrBankProductById(zyjrBank.getId());
+        if(zyjrBank.getReturns().size()>0){
+            for (ZyjrBankAccount aReturn : zyjrBank.getReturns()) {
+                aReturn.setBaoxian(zyjrBank.getId().toString());
+            }
+            zyjrBankAccountMapper.insertZyjrBankAccounts(zyjrBank.getReturns());
+        }
+        if(zyjrBank.getFlow().size()>0){
+            for (ZyjrBankFlow zyjrBankFlow : zyjrBank.getFlow()) {
+                zyjrBankFlow.setBaoxian(zyjrBank.getId().toString());
+            }
+            zyjrBankFlowMapper.insertZyjrBankFlows(zyjrBank.getFlow());
+        }
+        if(zyjrBank.getProduct().size()>0){
+            List<ZyjrBankProduct> list=new ArrayList<>();
+            for (ZyjrBankProduct zyjrBankProduct : zyjrBank.getProduct()) {
+                zyjrBankProduct.setBaoxian(zyjrBank.getId().toString());
+                zyjrBankProductMapper.insertZyjrBankProduct(zyjrBankProduct);
+                list.add(zyjrBankProduct);
+            }
+
+
+            System.err.println(list);
+            if(list.size()>0){
+                List<ZyjrBankScheme> slist=new ArrayList<>();
+                for (ZyjrBankProduct zyjrBankProduct : list) {
+                    iZyjrBankSchemeService.deleteZyjrBankSchemeById(zyjrBankProduct.getId());
+                    for (ZyjrBankScheme zyjrBankScheme : zyjrBankProduct.getScheme()) {
+                        zyjrBankScheme.setZyjrBankProductId(zyjrBankProduct.getId().toString());
+                        slist.add(zyjrBankScheme);
+                    }
+                }
+                zyjrBankSchemeMapper.insertZyjrBankSchemes(slist);
+
+            }
+        }
+
+        return 1;
     }
 
     /**
-     * 批量删除保险
+     * 批量删除insuranceType
      * 
-     * @param ids 需要删除的保险ID
+     * @param ids 需要删除的insuranceTypeID
      * @return 结果
      */
     @Override
@@ -83,9 +186,9 @@ public class ZyjrInsuranceTypeServiceImpl implements IZyjrInsuranceTypeService
     }
 
     /**
-     * 删除保险信息
+     * 删除insuranceType信息
      * 
-     * @param id 保险ID
+     * @param id insuranceTypeID
      * @return 结果
      */
     @Override
