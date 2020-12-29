@@ -2,6 +2,7 @@ package com.jeethink.system.mapper;
 
 import java.util.List;
 import com.jeethink.system.domain.SysFileInfo;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 文件信息Mapper接口
@@ -60,4 +61,16 @@ public interface SysFileInfoMapper
     public int deleteSysFileInfoByIds(Long[] fileIds);
 
     int deleteSysFileInfoByPath(String path);
+    int deleteSysFileInfoByPhotoCarId(Long photoCarId);
+
+    int deleteByLender(Long photoLenderId);
+    int deleteByCredit(Long photoCreditId);
+    int deleteByHouse(Long photoHouseId);
+
+
+    List<SysFileInfo> photoCar(@Param("photoCarId") Long photoCarId);
+    List<SysFileInfo> photoLender(@Param("photoLenderId") Long photoLenderId);
+    List<SysFileInfo> photoCredit(@Param("photoCreditId") Long photoCreditId);
+    List<SysFileInfo> photoHouse(@Param("photoHouseId") Long photoHouseId);
+
 }

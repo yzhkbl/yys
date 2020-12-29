@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrDebtServiceMapper">
+    
+    <resultMap type="ZyjrDebtService" id="ZyjrDebtServiceResult">
+        <result property="id"    column="id"    />
+        <result property="isDebt"    column="is_debt"    />
+        <result property="peopleShip"    column="people_ship"    />
+        <result property="cardAddress"    column="card_address"    />
+        <result property="backAddress"    column="back_address"    />
+        <result property="debtName"    column="debt_name"    />
+        <result property="idCard"    column="id_card"    />
+        <result property="education"    column="education"    />
+        <result property="nowPlace"    column="now_place"    />
+        <result property="phoneNamber"    column="phone_namber"    />
+        <result property="nowWork"    column="now_work"    />
+        <result property="workPlace"    column="work_place"    />
+        <result property="companyPhone"    column="company_phone"    />
+        <result property="companyNature"    column="company_nature"    />
+        <result property="monthlyIncome"    column="monthly_income"    />
+        <result property="userId"    column="user_id"    />
+        <result property="transactionCode"    column="transaction_code"    />
+        <result property="orderState"    column="order_state"    />
+    </resultMap>
+
+    <sql id="selectZyjrDebtServiceVo">
+        select id, is_debt, people_ship, card_address, back_address, debt_name, id_card, education, now_place, phone_namber, now_work, work_place, company_phone, company_nature, monthly_income, user_id, transaction_code, order_state from zyjr_debt_service
+    </sql>
+
+    <select id="selectZyjrDebtServiceList" parameterType="ZyjrDebtService" resultMap="ZyjrDebtServiceResult">
+        <include refid="selectZyjrDebtServiceVo"/>
+        <where>  
+            <if test="isDebt != null "> and is_debt = #{isDebt}</if>
+            <if test="peopleShip != null  and peopleShip != ''"> and people_ship = #{peopleShip}</if>
+            <if test="cardAddress != null  and cardAddress != ''"> and card_address = #{cardAddress}</if>
+            <if test="backAddress != null  and backAddress != ''"> and back_address = #{backAddress}</if>
+            <if test="debtName != null  and debtName != ''"> and debt_name like concat('%', #{debtName}, '%')</if>
+            <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
+            <if test="education != null  and education != ''"> and education = #{education}</if>
+            <if test="nowPlace != null  and nowPlace != ''"> and now_place = #{nowPlace}</if>
+            <if test="phoneNamber != null  and phoneNamber != ''"> and phone_namber = #{phoneNamber}</if>
+            <if test="nowWork != null  and nowWork != ''"> and now_work = #{nowWork}</if>
+            <if test="workPlace != null  and workPlace != ''"> and work_place = #{workPlace}</if>
+            <if test="companyPhone != null  and companyPhone != ''"> and company_phone = #{companyPhone}</if>
+            <if test="companyNature != null  and companyNature != ''"> and company_nature = #{companyNature}</if>
+            <if test="monthlyIncome != null  and monthlyIncome != ''"> and monthly_income = #{monthlyIncome}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
+            <if test="orderState != null "> and order_state = #{orderState}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrDebtServiceById" parameterType="Long" resultMap="ZyjrDebtServiceResult">
+        <include refid="selectZyjrDebtServiceVo"/>
+        where user_id = #{userId} and transaction_code=#{transactionCode} and order_state=#{orderState}
+    </select>
+        
+    <insert id="insertZyjrDebtService" parameterType="ZyjrDebtService" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_debt_service
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="isDebt != null">is_debt,</if>
+            <if test="peopleShip != null">people_ship,</if>
+            <if test="cardAddress != null">card_address,</if>
+            <if test="backAddress != null">back_address,</if>
+            <if test="debtName != null">debt_name,</if>
+            <if test="idCard != null">id_card,</if>
+            <if test="education != null">education,</if>
+            <if test="nowPlace != null">now_place,</if>
+            <if test="phoneNamber != null">phone_namber,</if>
+            <if test="nowWork != null">now_work,</if>
+            <if test="workPlace != null">work_place,</if>
+            <if test="companyPhone != null">company_phone,</if>
+            <if test="companyNature != null">company_nature,</if>
+            <if test="monthlyIncome != null">monthly_income,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="transactionCode != null">transaction_code,</if>
+            <if test="orderState != null">order_state,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="isDebt != null">#{isDebt},</if>
+            <if test="peopleShip != null">#{peopleShip},</if>
+            <if test="cardAddress != null">#{cardAddress},</if>
+            <if test="backAddress != null">#{backAddress},</if>
+            <if test="debtName != null">#{debtName},</if>
+            <if test="idCard != null">#{idCard},</if>
+            <if test="education != null">#{education},</if>
+            <if test="nowPlace != null">#{nowPlace},</if>
+            <if test="phoneNamber != null">#{phoneNamber},</if>
+            <if test="nowWork != null">#{nowWork},</if>
+            <if test="workPlace != null">#{workPlace},</if>
+            <if test="companyPhone != null">#{companyPhone},</if>
+            <if test="companyNature != null">#{companyNature},</if>
+            <if test="monthlyIncome != null">#{monthlyIncome},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="transactionCode != null">#{transactionCode},</if>
+            <if test="orderState != null">#{orderState},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrDebtService" parameterType="ZyjrDebtService">
+        update zyjr_debt_service
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="isDebt != null">is_debt = #{isDebt},</if>
+            <if test="peopleShip != null">people_ship = #{peopleShip},</if>
+            <if test="cardAddress != null">card_address = #{cardAddress},</if>
+            <if test="backAddress != null">back_address = #{backAddress},</if>
+            <if test="debtName != null">debt_name = #{debtName},</if>
+            <if test="idCard != null">id_card = #{idCard},</if>
+            <if test="education != null">education = #{education},</if>
+            <if test="nowPlace != null">now_place = #{nowPlace},</if>
+            <if test="phoneNamber != null">phone_namber = #{phoneNamber},</if>
+            <if test="nowWork != null">now_work = #{nowWork},</if>
+            <if test="workPlace != null">work_place = #{workPlace},</if>
+            <if test="companyPhone != null">company_phone = #{companyPhone},</if>
+            <if test="companyNature != null">company_nature = #{companyNature},</if>
+            <if test="monthlyIncome != null">monthly_income = #{monthlyIncome},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+            <if test="orderState != null">order_state = #{orderState},</if>
+        </trim>
+        where user_id = #{userId} and transaction_code=#{transactionCode} and order_state=#{orderState}
+    </update>
+
+    <delete id="deleteZyjrDebtServiceById" parameterType="Long">
+        delete from zyjr_debt_service where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrDebtServiceByIds" parameterType="String">
+        delete from zyjr_debt_service where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
