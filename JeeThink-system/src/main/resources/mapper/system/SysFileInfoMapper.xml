@@ -10,25 +10,65 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="filePath"    column="file_path"    />
         <result property="id"    column="id"    />
         <result property="bankId"    column="bank_id"    />
+        <result property="photoCarId"    column="photo_car_id"    />
+        <result property="photoLenderId"    column="photo_lender_id"    />
+        <result property="photoCreditId"    column="photo_credit_id"    />
+        <result property="photoHouseId"    column="photo_house_id"    />
     </resultMap>
 
     <sql id="selectSysFileInfoVo">
-        select file_id, file_name, file_path,id from sys_file_info
+        select file_id, file_name, file_path,id,photo_car_id,photo_lender_id,photo_credit_id,photo_house_id from sys_file_info
     </sql>
 
     <select id="selectSysFileInfoList" parameterType="SysFileInfo" resultMap="SysFileInfoResult">
         <include refid="selectSysFileInfoVo"/>
-        <where>  
+        <where>
             <if test="fileName != null  and fileName != ''"> and file_name like concat('%', #{fileName}, '%')</if>
             <if test="filePath != null  and filePath != ''"> and file_path = #{filePath}</if>
             <if test="id != null  and id != ''"> and id = #{id}</if>
+            <if test="photoCarId != null  and photoCarId != ''"> and photo_car_id = #{photoCarId}</if>
+            <if test="photoLenderId != null  and photoLenderId != ''"> and photo_lender_id = #{photoLenderId}</if>
+            <if test="photoCreditId != null  and photoCreditId != ''"> and photo_credit_id = #{photoCreditId}</if>
+            <if test="photoHouseId != null  and photoHouseId != ''"> and photo_house_id = #{photoHouseId}</if>
+        </where>
+    </select>
+
+
+    <select id="photoCar" parameterType="Long" resultMap="SysFileInfoResult">
+        <include refid="selectSysFileInfoVo"/>
+        <where>
+            <if test="photoCarId != null  and photoCarId != ''"> and photo_car_id = #{photoCarId}</if>
+        </where>
+    </select>
+
+    <select id="photoLender" parameterType="Long" resultMap="SysFileInfoResult">
+        <include refid="selectSysFileInfoVo"/>
+        <where>
+            <if test="photoLenderId != null  and photoLenderId != ''"> and photo_lender_id = #{photoLenderId}</if>
+        </where>
+    </select>
+
+    <select id="photoCredit" parameterType="Long" resultMap="SysFileInfoResult">
+        <include refid="selectSysFileInfoVo"/>
+        <where>
+            <if test="photoCreditId != null  and photoCreditId != ''"> and photo_credit_id = #{photoCreditId}</if>
+        </where>
+    </select>
+
+    <select id="photoHouse" parameterType="Long" resultMap="SysFileInfoResult">
+        <include refid="selectSysFileInfoVo"/>
+        <where>
+            <if test="photoHouseId != null  and photoHouseId != ''"> and photo_house_id = #{photoHouseId}</if>
             <if test="bankId != null  and bankId != ''"> and bank_id = #{bankId}</if>
         </where>
     </select>
-    
+
     <select id="selectSysFileInfoById" parameterType="Long" resultMap="SysFileInfoResult">
         <include refid="selectSysFileInfoVo"/>
-        where file_id = #{fileId}
+        <where>
+            <if test="photoCarId != null  and photoCarId != ''"> and photo_car_id = #{photoCarId}</if>
+
+        </where>
     </select>
         
     <insert id="insertSysFileInfo" parameterType="SysFileInfo" useGeneratedKeys="true" keyProperty="fileId">
@@ -39,6 +79,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="id != null">id,</if>
             <if test="photoCarId !=null">photo_car_id,</if>
             <if test="bankId !=null">bank_id,</if>
+            <if test="photoLenderId !=null">photo_lender_id,</if>
+            <if test="photoCreditId !=null">photo_credit_id,</if>
+            <if test="photoHouseId !=null">photo_house_id,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="fileName != null">#{fileName},</if>
@@ -46,6 +89,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="id != null">#{id},</if>
             <if test="photoCarId !=null">#{photoCarId},</if>
             <if test="bankId !=null">#{bankId},</if>
+            <if test="photoLenderId !=null">#{photoLenderId},</if>
+            <if test="photoHouseId !=null">#{photoHouseId},</if>
          </trim>
     </insert>
 
@@ -56,11 +101,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="filePath != null">file_path = #{filePath},</if>
             <if test="id != null">id = #{id},</if>
         </trim>
-        where file_id = #{fileId}
+        <where>
+            <if test="photoCarId != null and photoCarId != ''">and photo_car_id =#{photoCarId}</if>
+        </where>
     </update>
 
     <delete id="deleteSysFileInfoById" parameterType="Long">
         delete from sys_file_info where file_id = #{fileId}
+    </delete>
+
+    <delete id="deleteSysFileInfoByPhotoCarId" parameterType="Long">
+        delete from sys_file_info where photo_car_id = #{photoCarId}
+    </delete>
+
+    <delete id="deleteByLender" parameterType="Long">
+        delete from sys_file_info where photo_lender_id = #{photoLenderId}
+    </delete>
+
+    <delete id="deleteByCredit" parameterType="Long">
+        delete from sys_file_info where photo_credit_id = #{photoCreditId}
+    </delete>
+
+    <delete id="deleteByHouse" parameterType="Long">
+        delete from sys_file_info where photo_house_id = #{photoHouseId}
     </delete>
 
     <delete id="deleteSysFileInfoByCarId" parameterType="String">

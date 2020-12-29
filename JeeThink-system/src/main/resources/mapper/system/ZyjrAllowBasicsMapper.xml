@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrAllowBasicsMapper">
+    
+    <resultMap type="ZyjrAllowBasics" id="ZyjrAllowBasicsResult">
+        <result property="id"    column="id"    />
+        <result property="approvalType"    column="approval_type"    />
+        <result property="dealersId"    column="dealers_id"    />
+        <result property="dealerStores"    column="dealer_stores"    />
+        <result property="plateType"    column="plate_type"    />
+        <result property="market"    column="market"    />
+        <result property="store"    column="store"    />
+        <result property="operate"    column="operate"    />
+        <result property="moreInfo"    column="more_info"    />
+        <result property="userId"    column="user_id"    />
+        <result property="transactionCode"    column="transaction_code"    />
+        <result property="orderState"    column="order_state"    />
+    </resultMap>
+
+    <sql id="selectZyjrAllowBasicsVo">
+        select id, approval_type, dealers_id, dealer_stores, plate_type, market, store, operate, more_info, user_id, transaction_code, order_state from zyjr_allow_basics
+    </sql>
+
+    <select id="selectZyjrAllowBasicsList" parameterType="ZyjrAllowBasics" resultMap="ZyjrAllowBasicsResult">
+        <include refid="selectZyjrAllowBasicsVo"/>
+        <where>  
+            <if test="dealerStores != null  and dealerStores != ''"> and dealer_stores = #{dealerStores}</if>
+            <if test="plateType != null "> and plate_type = #{plateType}</if>
+            <if test="market != null  and market != ''"> and market = #{market}</if>
+            <if test="store != null  and store != ''"> and store = #{store}</if>
+            <if test="operate != null  and operate != ''"> and operate = #{operate}</if>
+            <if test="moreInfo != null  and moreInfo != ''"> and more_info = #{moreInfo}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
+            <if test="orderState != null "> and order_state = #{orderState}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrAllowBasicsById" parameterType="Long" resultMap="ZyjrAllowBasicsResult">
+        <include refid="selectZyjrAllowBasicsVo"/>
+        where user_id=#{userId} and transaction_code=#{transactionCode} and order_state=0
+    </select>
+        
+    <insert id="insertZyjrAllowBasics" parameterType="ZyjrAllowBasics" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_allow_basics
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="approvalType != null">approval_type,</if>
+            <if test="dealersId != null">dealers_id,</if>
+            <if test="dealerStores != null">dealer_stores,</if>
+            <if test="plateType != null">plate_type,</if>
+            <if test="market != null">market,</if>
+            <if test="store != null">store,</if>
+            <if test="operate != null">operate,</if>
+            <if test="moreInfo != null">more_info,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="transactionCode != null">transaction_code,</if>
+            <if test="orderState != null">order_state,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="approvalType != null">#{approvalType},</if>
+            <if test="dealersId != null">#{dealersId},</if>
+            <if test="dealerStores != null">#{dealerStores},</if>
+            <if test="plateType != null">#{plateType},</if>
+            <if test="market != null">#{market},</if>
+            <if test="store != null">#{store},</if>
+            <if test="operate != null">#{operate},</if>
+            <if test="moreInfo != null">#{moreInfo},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="transactionCode != null">#{transactionCode},</if>
+            <if test="orderState != null">#{orderState},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrAllowBasics" parameterType="ZyjrAllowBasics">
+        update zyjr_allow_basics
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="approvalType != null">approval_type = #{approvalType},</if>
+            <if test="dealersId != null">dealers_id = #{dealersId},</if>
+            <if test="dealerStores != null">dealer_stores = #{dealerStores},</if>
+            <if test="plateType != null">plate_type = #{plateType},</if>
+            <if test="market != null">market = #{market},</if>
+            <if test="store != null">store = #{store},</if>
+            <if test="operate != null">operate = #{operate},</if>
+            <if test="moreInfo != null">more_info = #{moreInfo},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+            <if test="orderState != null">order_state = #{orderState},</if>
+        </trim>
+        where user_id=#{userId} and transaction_code=#{transactionCode} and order_state=0
+    </update>
+
+    <delete id="deleteZyjrAllowBasicsById" parameterType="Long">
+        delete from zyjr_allow_basics where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrAllowBasicsByIds" parameterType="String">
+        delete from zyjr_allow_basics where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrAllowApplicantMapper">
+    
+    <resultMap type="ZyjrAllowApplicant" id="ZyjrAllowApplicantResult">
+        <result property="id"    column="id"    />
+        <result property="householdNature"    column="household_nature"    />
+        <result property="liveTime"    column="live_time"    />
+        <result property="liveAddress"    column="live_address"    />
+        <result property="phoneNumber"    column="phone_number"    />
+        <result property="housePower"    column="house_power"    />
+        <result property="education"    column="education"    />
+        <result property="isLicense"    column="is_license"    />
+        <result property="driverShip"    column="driver_ship"    />
+        <result property="licenseType"    column="license_type"    />
+        <result property="unitName"    column="unit_name"    />
+        <result property="workAddress"    column="work_address"    />
+        <result property="unitPhone"    column="unit_phone"    />
+        <result property="unitNature"    column="unit_nature"    />
+        <result property="industry"    column="industry"    />
+        <result property="position"    column="position"    />
+        <result property="monthlyIncome"    column="monthly_income"    />
+        <result property="marriage"    column="marriage"    />
+        <result property="cardAddress"    column="card_address"    />
+        <result property="backAddress"    column="back_address"    />
+        <result property="spouseName"    column="spouse_name"    />
+        <result property="idNumber"    column="id_number"    />
+        <result property="permanentAddress"    column="permanent_address"    />
+        <result property="phoneNo"    column="phone_no"    />
+        <result property="spouseEducation"    column="spouse_education"    />
+        <result property="spouseUnitName"    column="spouse_unit_name"    />
+        <result property="spouseWorkPlace"    column="spouse_work_place"    />
+        <result property="spouseWorkPhone"    column="spouse_work_phone"    />
+        <result property="spouseMonthlyIncome"    column="spouse_monthly_income"    />
+        <result property="orderState"    column="order_state"    />
+        <result property="transactionCode"    column="transaction_code"    />
+        <result property="userId"    column="user_id"    />
+    </resultMap>
+
+    <sql id="selectZyjrAllowApplicantVo">
+        select id, household_nature, live_time, live_address, phone_number, house_power, education, is_license, driver_ship, license_type, unit_name, work_address, unit_phone, unit_nature, industry, position, monthly_income, marriage, card_address, back_address, spouse_name, id_number, permanent_address, phone_no, spouse_education, spouse_unit_name, spouse_work_place, spouse_work_phone, spouse_monthly_income, order_state, transaction_code, user_id from zyjr_allow_applicant
+    </sql>
+
+    <select id="selectZyjrAllowApplicantList" parameterType="ZyjrAllowApplicant" resultMap="ZyjrAllowApplicantResult">
+        <include refid="selectZyjrAllowApplicantVo"/>
+        <where>  
+            <if test="householdNature != null  and householdNature != ''"> and household_nature = #{householdNature}</if>
+            <if test="liveTime != null  and liveTime != ''"> and live_time = #{liveTime}</if>
+            <if test="liveAddress != null  and liveAddress != ''"> and live_address = #{liveAddress}</if>
+            <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
+            <if test="housePower != null  and housePower != ''"> and house_power = #{housePower}</if>
+            <if test="education != null  and education != ''"> and education = #{education}</if>
+            <if test="isLicense != null "> and is_license = #{isLicense}</if>
+            <if test="driverShip != null  and driverShip != ''"> and driver_ship = #{driverShip}</if>
+            <if test="licenseType != null  and licenseType != ''"> and license_type = #{licenseType}</if>
+            <if test="unitName != null  and unitName != ''"> and unit_name like concat('%', #{unitName}, '%')</if>
+            <if test="workAddress != null  and workAddress != ''"> and work_address = #{workAddress}</if>
+            <if test="unitPhone != null  and unitPhone != ''"> and unit_phone = #{unitPhone}</if>
+            <if test="unitNature != null  and unitNature != ''"> and unit_nature = #{unitNature}</if>
+            <if test="industry != null  and industry != ''"> and industry = #{industry}</if>
+            <if test="position != null  and position != ''"> and position = #{position}</if>
+            <if test="monthlyIncome != null  and monthlyIncome != ''"> and monthly_income = #{monthlyIncome}</if>
+            <if test="marriage != null  and marriage != ''"> and marriage = #{marriage}</if>
+            <if test="cardAddress != null  and cardAddress != ''"> and card_address = #{cardAddress}</if>
+            <if test="backAddress != null  and backAddress != ''"> and back_address = #{backAddress}</if>
+            <if test="spouseName != null  and spouseName != ''"> and spouse_name like concat('%', #{spouseName}, '%')</if>
+            <if test="idNumber != null  and idNumber != ''"> and id_number = #{idNumber}</if>
+            <if test="permanentAddress != null  and permanentAddress != ''"> and permanent_address = #{permanentAddress}</if>
+            <if test="phoneNo != null  and phoneNo != ''"> and phone_no = #{phoneNo}</if>
+            <if test="spouseEducation != null  and spouseEducation != ''"> and spouse_education = #{spouseEducation}</if>
+            <if test="spouseUnitName != null  and spouseUnitName != ''"> and spouse_unit_name like concat('%', #{spouseUnitName}, '%')</if>
+            <if test="spouseWorkPlace != null  and spouseWorkPlace != ''"> and spouse_work_place = #{spouseWorkPlace}</if>
+            <if test="spouseWorkPhone != null  and spouseWorkPhone != ''"> and spouse_work_phone = #{spouseWorkPhone}</if>
+            <if test="spouseMonthlyIncome != null  and spouseMonthlyIncome != ''"> and spouse_monthly_income = #{spouseMonthlyIncome}</if>
+            <if test="orderState != null "> and order_state = #{orderState}</if>
+            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrAllowApplicantById" parameterType="Long" resultMap="ZyjrAllowApplicantResult">
+        <include refid="selectZyjrAllowApplicantVo"/>
+        where user_id = #{userId} and transaction_code=#{transactionCode} and order_state=0
+    </select>
+        
+    <insert id="insertZyjrAllowApplicant" parameterType="ZyjrAllowApplicant" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_allow_applicant
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="householdNature != null">household_nature,</if>
+            <if test="liveTime != null">live_time,</if>
+            <if test="liveAddress != null">live_address,</if>
+            <if test="phoneNumber != null">phone_number,</if>
+            <if test="housePower != null">house_power,</if>
+            <if test="education != null">education,</if>
+            <if test="isLicense != null">is_license,</if>
+            <if test="driverShip != null">driver_ship,</if>
+            <if test="licenseType != null">license_type,</if>
+            <if test="unitName != null">unit_name,</if>
+            <if test="workAddress != null">work_address,</if>
+            <if test="unitPhone != null">unit_phone,</if>
+            <if test="unitNature != null">unit_nature,</if>
+            <if test="industry != null">industry,</if>
+            <if test="position != null">position,</if>
+            <if test="monthlyIncome != null">monthly_income,</if>
+            <if test="marriage != null">marriage,</if>
+            <if test="cardAddress != null">card_address,</if>
+            <if test="backAddress != null">back_address,</if>
+            <if test="spouseName != null">spouse_name,</if>
+            <if test="idNumber != null">id_number,</if>
+            <if test="permanentAddress != null">permanent_address,</if>
+            <if test="phoneNo != null">phone_no,</if>
+            <if test="spouseEducation != null">spouse_education,</if>
+            <if test="spouseUnitName != null">spouse_unit_name,</if>
+            <if test="spouseWorkPlace != null">spouse_work_place,</if>
+            <if test="spouseWorkPhone != null">spouse_work_phone,</if>
+            <if test="spouseMonthlyIncome != null">spouse_monthly_income,</if>
+            <if test="orderState != null">order_state,</if>
+            <if test="transactionCode != null">transaction_code,</if>
+            <if test="userId != null">user_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="householdNature != null">#{householdNature},</if>
+            <if test="liveTime != null">#{liveTime},</if>
+            <if test="liveAddress != null">#{liveAddress},</if>
+            <if test="phoneNumber != null">#{phoneNumber},</if>
+            <if test="housePower != null">#{housePower},</if>
+            <if test="education != null">#{education},</if>
+            <if test="isLicense != null">#{isLicense},</if>
+            <if test="driverShip != null">#{driverShip},</if>
+            <if test="licenseType != null">#{licenseType},</if>
+            <if test="unitName != null">#{unitName},</if>
+            <if test="workAddress != null">#{workAddress},</if>
+            <if test="unitPhone != null">#{unitPhone},</if>
+            <if test="unitNature != null">#{unitNature},</if>
+            <if test="industry != null">#{industry},</if>
+            <if test="position != null">#{position},</if>
+            <if test="monthlyIncome != null">#{monthlyIncome},</if>
+            <if test="marriage != null">#{marriage},</if>
+            <if test="cardAddress != null">#{cardAddress},</if>
+            <if test="backAddress != null">#{backAddress},</if>
+            <if test="spouseName != null">#{spouseName},</if>
+            <if test="idNumber != null">#{idNumber},</if>
+            <if test="permanentAddress != null">#{permanentAddress},</if>
+            <if test="phoneNo != null">#{phoneNo},</if>
+            <if test="spouseEducation != null">#{spouseEducation},</if>
+            <if test="spouseUnitName != null">#{spouseUnitName},</if>
+            <if test="spouseWorkPlace != null">#{spouseWorkPlace},</if>
+            <if test="spouseWorkPhone != null">#{spouseWorkPhone},</if>
+            <if test="spouseMonthlyIncome != null">#{spouseMonthlyIncome},</if>
+            <if test="orderState != null">#{orderState},</if>
+            <if test="transactionCode != null">#{transactionCode},</if>
+            <if test="userId != null">#{userId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrAllowApplicant" parameterType="ZyjrAllowApplicant">
+        update zyjr_allow_applicant
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="householdNature != null">household_nature = #{householdNature},</if>
+            <if test="liveTime != null">live_time = #{liveTime},</if>
+            <if test="liveAddress != null">live_address = #{liveAddress},</if>
+            <if test="phoneNumber != null">phone_number = #{phoneNumber},</if>
+            <if test="housePower != null">house_power = #{housePower},</if>
+            <if test="education != null">education = #{education},</if>
+            <if test="isLicense != null">is_license = #{isLicense},</if>
+            <if test="driverShip != null">driver_ship = #{driverShip},</if>
+            <if test="licenseType != null">license_type = #{licenseType},</if>
+            <if test="unitName != null">unit_name = #{unitName},</if>
+            <if test="workAddress != null">work_address = #{workAddress},</if>
+            <if test="unitPhone != null">unit_phone = #{unitPhone},</if>
+            <if test="unitNature != null">unit_nature = #{unitNature},</if>
+            <if test="industry != null">industry = #{industry},</if>
+            <if test="position != null">position = #{position},</if>
+            <if test="monthlyIncome != null">monthly_income = #{monthlyIncome},</if>
+            <if test="marriage != null">marriage = #{marriage},</if>
+            <if test="cardAddress != null">card_address = #{cardAddress},</if>
+            <if test="backAddress != null">back_address = #{backAddress},</if>
+            <if test="spouseName != null">spouse_name = #{spouseName},</if>
+            <if test="idNumber != null">id_number = #{idNumber},</if>
+            <if test="permanentAddress != null">permanent_address = #{permanentAddress},</if>
+            <if test="phoneNo != null">phone_no = #{phoneNo},</if>
+            <if test="spouseEducation != null">spouse_education = #{spouseEducation},</if>
+            <if test="spouseUnitName != null">spouse_unit_name = #{spouseUnitName},</if>
+            <if test="spouseWorkPlace != null">spouse_work_place = #{spouseWorkPlace},</if>
+            <if test="spouseWorkPhone != null">spouse_work_phone = #{spouseWorkPhone},</if>
+            <if test="spouseMonthlyIncome != null">spouse_monthly_income = #{spouseMonthlyIncome},</if>
+            <if test="orderState != null">order_state = #{orderState},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+        </trim>
+        where user_id = #{userId} and transaction_code=#{transactionCode} and order_state=0
+    </update>
+
+    <delete id="deleteZyjrAllowApplicantById" parameterType="Long">
+        delete from zyjr_allow_applicant where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrAllowApplicantByIds" parameterType="String">
+        delete from zyjr_allow_applicant where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrCarLoanMapper">
+    
+    <resultMap type="ZyjrCarLoan" id="ZyjrCarLoanResult">
+        <result property="id"    column="id"    />
+        <result property="carType"    column="car_type"    />
+        <result property="vinCode"    column="vin_code"    />
+        <result property="brand"    column="brand"    />
+        <result property="carSeries"    column="car_series"    />
+        <result property="carYear"    column="car_year"    />
+        <result property="style"    column="style"    />
+        <result property="mileage"    column="mileage"    />
+        <result property="sellerName"    column="seller_name"    />
+        <result property="sellerId"    column="seller_id"    />
+        <result property="sellerCarNo"    column="seller_car_no"    />
+        <result property="isHouseProperty"    column="is_house_property"    />
+        <result property="actualPrice"    column="actual_price"    />
+        <result property="loanAmount"    column="loan_amount"    />
+        <result property="repaymentTerm"    column="repayment_term"    />
+        <result property="interestRate"    column="interest_rate"    />
+        <result property="gpsGear"    column="gps_gear"    />
+        <result property="deposit"    column="deposit"    />
+        <result property="transactionCode"    column="transaction_code"    />
+        <result property="orderState"    column="order_state"    />
+        <result property="userId"    column="user_id"    />
+    </resultMap>
+
+    <sql id="selectZyjrCarLoanVo">
+        select id, car_type, vin_code, brand, car_series, car_year, style, mileage, seller_name, seller_id, seller_car_no, is_house_property, actual_price, loan_amount, repayment_term, interest_rate, gps_gear, deposit, transaction_code, order_state, user_id from zyjr_car_loan
+    </sql>
+
+    <select id="selectZyjrCarLoanList" parameterType="ZyjrCarLoan" resultMap="ZyjrCarLoanResult">
+        <include refid="selectZyjrCarLoanVo"/>
+        <where>  
+            <if test="carType != null "> and car_type = #{carType}</if>
+            <if test="vinCode != null  and vinCode != ''"> and vin_code = #{vinCode}</if>
+            <if test="brand != null  and brand != ''"> and brand = #{brand}</if>
+            <if test="carSeries != null  and carSeries != ''"> and car_series = #{carSeries}</if>
+            <if test="carYear != null  and carYear != ''"> and car_year = #{carYear}</if>
+            <if test="style != null  and style != ''"> and style = #{style}</if>
+            <if test="mileage != null  and mileage != ''"> and mileage = #{mileage}</if>
+            <if test="sellerName != null  and sellerName != ''"> and seller_name like concat('%', #{sellerName}, '%')</if>
+            <if test="sellerId != null  and sellerId != ''"> and seller_id = #{sellerId}</if>
+            <if test="sellerCarNo != null  and sellerCarNo != ''"> and seller_car_no = #{sellerCarNo}</if>
+            <if test="isHouseProperty != null  and isHouseProperty != ''"> and is_house_property = #{isHouseProperty}</if>
+            <if test="actualPrice != null "> and actual_price = #{actualPrice}</if>
+            <if test="loanAmount != null "> and loan_amount = #{loanAmount}</if>
+            <if test="repaymentTerm != null "> and repayment_term = #{repaymentTerm}</if>
+            <if test="interestRate != null "> and interest_rate = #{interestRate}</if>
+            <if test="gpsGear != null  and gpsGear != ''"> and gps_gear = #{gpsGear}</if>
+            <if test="deposit != null "> and deposit = #{deposit}</if>
+            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
+            <if test="orderState != null "> and order_state = #{orderState}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrCarLoanById" parameterType="Long" resultMap="ZyjrCarLoanResult">
+        <include refid="selectZyjrCarLoanVo"/>
+        where user_id=#{userId} and transaction_code=#{transactionCode} and order_state=0
+    </select>
+        
+    <insert id="insertZyjrCarLoan" parameterType="ZyjrCarLoan" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_car_loan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="carType != null">car_type,</if>
+            <if test="vinCode != null">vin_code,</if>
+            <if test="brand != null">brand,</if>
+            <if test="carSeries != null">car_series,</if>
+            <if test="carYear != null">car_year,</if>
+            <if test="style != null">style,</if>
+            <if test="mileage != null">mileage,</if>
+            <if test="sellerName != null">seller_name,</if>
+            <if test="sellerId != null">seller_id,</if>
+            <if test="sellerCarNo != null">seller_car_no,</if>
+            <if test="isHouseProperty != null">is_house_property,</if>
+            <if test="actualPrice != null">actual_price,</if>
+            <if test="loanAmount != null">loan_amount,</if>
+            <if test="repaymentTerm != null">repayment_term,</if>
+            <if test="interestRate != null">interest_rate,</if>
+            <if test="gpsGear != null">gps_gear,</if>
+            <if test="deposit != null">deposit,</if>
+            <if test="transactionCode != null">transaction_code,</if>
+            <if test="orderState != null">order_state,</if>
+            <if test="userId != null">user_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="carType != null">#{carType},</if>
+            <if test="vinCode != null">#{vinCode},</if>
+            <if test="brand != null">#{brand},</if>
+            <if test="carSeries != null">#{carSeries},</if>
+            <if test="carYear != null">#{carYear},</if>
+            <if test="style != null">#{style},</if>
+            <if test="mileage != null">#{mileage},</if>
+            <if test="sellerName != null">#{sellerName},</if>
+            <if test="sellerId != null">#{sellerId},</if>
+            <if test="sellerCarNo != null">#{sellerCarNo},</if>
+            <if test="isHouseProperty != null">#{isHouseProperty},</if>
+            <if test="actualPrice != null">#{actualPrice},</if>
+            <if test="loanAmount != null">#{loanAmount},</if>
+            <if test="repaymentTerm != null">#{repaymentTerm},</if>
+            <if test="interestRate != null">#{interestRate},</if>
+            <if test="gpsGear != null">#{gpsGear},</if>
+            <if test="deposit != null">#{deposit},</if>
+            <if test="transactionCode != null">#{transactionCode},</if>
+            <if test="orderState != null">#{orderState},</if>
+            <if test="userId != null">#{userId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrCarLoan" parameterType="ZyjrCarLoan">
+        update zyjr_car_loan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="carType != null">car_type = #{carType},</if>
+            <if test="vinCode != null">vin_code = #{vinCode},</if>
+            <if test="brand != null">brand = #{brand},</if>
+            <if test="carSeries != null">car_series = #{carSeries},</if>
+            <if test="carYear != null">car_year = #{carYear},</if>
+            <if test="style != null">style = #{style},</if>
+            <if test="mileage != null">mileage = #{mileage},</if>
+            <if test="sellerName != null">seller_name = #{sellerName},</if>
+            <if test="sellerId != null">seller_id = #{sellerId},</if>
+            <if test="sellerCarNo != null">seller_car_no = #{sellerCarNo},</if>
+            <if test="isHouseProperty != null">is_house_property = #{isHouseProperty},</if>
+            <if test="actualPrice != null">actual_price = #{actualPrice},</if>
+            <if test="loanAmount != null">loan_amount = #{loanAmount},</if>
+            <if test="repaymentTerm != null">repayment_term = #{repaymentTerm},</if>
+            <if test="interestRate != null">interest_rate = #{interestRate},</if>
+            <if test="gpsGear != null">gps_gear = #{gpsGear},</if>
+            <if test="deposit != null">deposit = #{deposit},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+            <if test="orderState != null">order_state = #{orderState},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+        </trim>
+        where user_id=#{userId} and transaction_code=#{transactionCode} and order_state=0
+    </update>
+
+    <delete id="deleteZyjrCarLoanById" parameterType="Long">
+        delete from zyjr_car_loan where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrCarLoanByIds" parameterType="String">
+        delete from zyjr_car_loan where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

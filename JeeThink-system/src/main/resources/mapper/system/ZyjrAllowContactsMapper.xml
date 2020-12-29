@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrAllowContactsMapper">
+    
+    <resultMap type="ZyjrAllowContacts" id="ZyjrAllowContactsResult">
+        <result property="id"    column="id"    />
+        <result property="nameOne"    column="name_one"    />
+        <result property="shipOne"    column="ship_one"    />
+        <result property="phoneOne"    column="phone_one"    />
+        <result property="nameTwo"    column="name_two"    />
+        <result property="shipTwo"    column="ship_two"    />
+        <result property="phoneTwo"    column="phone_two"    />
+        <result property="transactionCode"    column="transaction_code"    />
+        <result property="orderState"    column="order_state"    />
+        <result property="userId"    column="user_id"    />
+    </resultMap>
+
+    <sql id="selectZyjrAllowContactsVo">
+        select id, name_one, ship_one, phone_one, name_two, ship_two, phone_two, transaction_code, order_state, user_id from zyjr_allow_contacts
+    </sql>
+
+    <select id="selectZyjrAllowContactsList" parameterType="ZyjrAllowContacts" resultMap="ZyjrAllowContactsResult">
+        <include refid="selectZyjrAllowContactsVo"/>
+        <where>  
+            <if test="nameOne != null  and nameOne != ''"> and name_one = #{nameOne}</if>
+            <if test="shipOne != null  and shipOne != ''"> and ship_one = #{shipOne}</if>
+            <if test="phoneOne != null  and phoneOne != ''"> and phone_one = #{phoneOne}</if>
+            <if test="nameTwo != null  and nameTwo != ''"> and name_two = #{nameTwo}</if>
+            <if test="shipTwo != null  and shipTwo != ''"> and ship_two = #{shipTwo}</if>
+            <if test="phoneTwo != null  and phoneTwo != ''"> and phone_two = #{phoneTwo}</if>
+            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
+            <if test="orderState != null "> and order_state = #{orderState}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrAllowContactsById" parameterType="Long" resultMap="ZyjrAllowContactsResult">
+        <include refid="selectZyjrAllowContactsVo"/>
+        where user_id=#{userId} and transaction_code=#{transactionCode} and order_state=0
+    </select>
+        
+    <insert id="insertZyjrAllowContacts" parameterType="ZyjrAllowContacts" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_allow_contacts
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="nameOne != null">name_one,</if>
+            <if test="shipOne != null">ship_one,</if>
+            <if test="phoneOne != null">phone_one,</if>
+            <if test="nameTwo != null">name_two,</if>
+            <if test="shipTwo != null">ship_two,</if>
+            <if test="phoneTwo != null">phone_two,</if>
+            <if test="transactionCode != null">transaction_code,</if>
+            <if test="orderState != null">order_state,</if>
+            <if test="userId != null">user_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="nameOne != null">#{nameOne},</if>
+            <if test="shipOne != null">#{shipOne},</if>
+            <if test="phoneOne != null">#{phoneOne},</if>
+            <if test="nameTwo != null">#{nameTwo},</if>
+            <if test="shipTwo != null">#{shipTwo},</if>
+            <if test="phoneTwo != null">#{phoneTwo},</if>
+            <if test="transactionCode != null">#{transactionCode},</if>
+            <if test="orderState != null">#{orderState},</if>
+            <if test="userId != null">#{userId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrAllowContacts" parameterType="ZyjrAllowContacts">
+        update zyjr_allow_contacts
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="nameOne != null">name_one = #{nameOne},</if>
+            <if test="shipOne != null">ship_one = #{shipOne},</if>
+            <if test="phoneOne != null">phone_one = #{phoneOne},</if>
+            <if test="nameTwo != null">name_two = #{nameTwo},</if>
+            <if test="shipTwo != null">ship_two = #{shipTwo},</if>
+            <if test="phoneTwo != null">phone_two = #{phoneTwo},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+            <if test="orderState != null">order_state = #{orderState},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+        </trim>
+        where user_id=#{userId} and transaction_code=#{transactionCode} and order_state=0
+    </update>
+
+    <delete id="deleteZyjrAllowContactsById" parameterType="Long">
+        delete from zyjr_allow_contacts where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrAllowContactsByIds" parameterType="String">
+        delete from zyjr_allow_contacts where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

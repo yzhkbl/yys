@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrPhotoCreditMapper">
+    
+    <resultMap type="ZyjrPhotoCredit" id="ZyjrPhotoCreditResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="transactionCode"    column="transaction_code"    />
+        <result property="orderState"    column="order_state"    />
+    </resultMap>
+
+    <sql id="selectZyjrPhotoCreditVo">
+        select id, user_id, transaction_code, order_state from zyjr_photo_credit
+    </sql>
+
+    <select id="selectZyjrPhotoCreditList" parameterType="ZyjrPhotoCredit" resultMap="ZyjrPhotoCreditResult">
+        <include refid="selectZyjrPhotoCreditVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
+            <if test="orderState != null "> and order_state = #{orderState}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrPhotoCreditById" parameterType="Long" resultMap="ZyjrPhotoCreditResult">
+        <include refid="selectZyjrPhotoCreditVo"/>
+        where user_id = #{userId} and transaction_code=#{transactionCode} and order_state=0
+    </select>
+        
+    <insert id="insertZyjrPhotoCredit" parameterType="ZyjrPhotoCredit" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_photo_credit
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="transactionCode != null">transaction_code,</if>
+            <if test="orderState != null">order_state,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="transactionCode != null">#{transactionCode},</if>
+            <if test="orderState != null">#{orderState},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrPhotoCredit" parameterType="ZyjrPhotoCredit">
+        update zyjr_photo_credit
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+            <if test="orderState != null">order_state = #{orderState},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrPhotoCreditById" parameterType="Long">
+        delete from zyjr_photo_credit where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrPhotoCreditByIds" parameterType="String">
+        delete from zyjr_photo_credit where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
