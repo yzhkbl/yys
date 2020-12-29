@@ -122,6 +122,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         delete from sys_file_info where photo_house_id = #{photoHouseId}
     </delete>
 
+    <delete id="deleteSysFileInfoByCarId" parameterType="String">
+        delete from sys_file_info where id = #{id}
+    </delete>
+
     <delete id="deleteSysFileInfoByPath" parameterType="String">
         delete from sys_file_info where file_path = #{filePath}
     </delete>

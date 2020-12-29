@@ -24,7 +24,7 @@ import com.jeethink.common.core.page.TableDataInfo;
  * bankController
  * 
  * @author jeethink
- * @date 2020-12-25
+ * @date 2020-12-26
  */
 @RestController
 @RequestMapping("/system/bank")
@@ -61,7 +61,7 @@ public class ZyjrBankController extends BaseController
     /**
      * 获取bank详细信息
      */
-    @PreAuthorize("@ss.hasPermi('organization:bank:query')")
+
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {

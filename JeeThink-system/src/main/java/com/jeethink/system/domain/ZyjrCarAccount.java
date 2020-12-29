@@ -15,7 +15,7 @@ import com.jeethink.common.annotation.Excel;
  * @date 2020-12-15
  */
 @TableName(value = "zyjr_car_account")
-public class ZyjrCarAccount extends BaseEntity
+public class ZyjrCarAccount
 {
     private static final long serialVersionUID = 1L;
 
@@ -161,10 +161,7 @@ public class ZyjrCarAccount extends BaseEntity
             .append("accountCity", getAccountCity())
             .append("accountProvinc", getAccountProvinc())
             .append("accountSubBranch", getAccountSubBranch())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
+
             .append("id", getId())
             .append("zyjrCarId", getZyjrCarId())
             .toString();

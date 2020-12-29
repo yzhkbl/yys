@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="monthInstallment"    column="month_installment"    />
         <result property="matchAmount"    column="match_amount"    />
         <result property="detailAddress"    column="detail_address"    />
-        <result property="pic"    column="pic"    />
+
         <result property="createBy"    column="create_by"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateBy"    column="update_by"    />
@@ -53,11 +53,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectZyjrCarVo">
-        select user_name, gender, phone_number, is_linkman,dealer_name, identity, remark, area, city, bazaar, shop_type, business_type, stall, business_nature, passenger_car,  month_deal, month_installment, match_amount, detail_address, pic,  create_by, create_time, update_by, update_time, id, state,three_car_state,two_car_state,one_car_state from zyjr_car
+        select user_name, gender, phone_number, is_linkman,dealer_name, identity, remark, area, city, bazaar, shop_type, business_type, stall, business_nature, passenger_car,  month_deal, month_installment, match_amount, detail_address,  create_by, create_time, update_by, update_time, id, state,three_car_state,two_car_state,one_car_state from zyjr_car
     </sql>
 
     <select id="selectZyjrCarList" parameterType="ZyjrCar" resultMap="ZyjrCarResult">
-        select user_name, gender, phone_number, is_linkman,dealer_name, identity, remark, area, city, bazaar, shop_type, business_type, stall, business_nature, passenger_car,  month_deal, month_installment, match_amount, detail_address, pic,  create_by, create_time, update_by, update_time, id, state,three_car_state,two_car_state,one_car_state
+        select user_name, gender, phone_number, is_linkman,dealer_name, identity, remark, area, city, bazaar, shop_type, business_type, stall, business_nature, passenger_car,  month_deal, month_installment, match_amount, detail_address,  create_by, create_time, update_by, update_time, id, state,three_car_state,two_car_state,one_car_state
         from zyjr_car
         <where>  
             <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
@@ -77,7 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="monthInstallment != null  and monthInstallment != ''"> and month_installment = #{monthInstallment}</if>
             <if test="matchAmount != null  and matchAmount != ''"> and match_amount = #{matchAmount}</if>
             <if test="detailAddress != null  and detailAddress != ''"> and detail_address = #{detailAddress}</if>
-            <if test="pic != null  and pic != ''"> and pic = #{pic}</if>
+
             <if test="dealerName != null  and dealerName != ''"> and dealer_name  like concat('%', #{dealerName}, '%')</if>
             <if test="state != null  and state != ''"> and state = #{state}</if>
             <if test="threeCarState != null  and threeCarState != ''"> and three_car_state = #{threeCarState}</if>
@@ -87,13 +87,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="selectZyjrCarLists" parameterType="ZyjrCar" resultMap="ZyjrCarResult">
-        select user_name, gender, phone_number, is_linkman,dealer_name, identity, remark, area, city, bazaar, shop_type, business_type, stall, business_nature, passenger_car,  month_deal, month_installment, match_amount, detail_address, pic,  create_by, create_time, update_by, update_time, id, state,three_car_state,two_car_state,one_car_state
+        select dealer_name, area, city, bazaar,  id, state,three_car_state,two_car_state,one_car_state,create_by, create_time
         from zyjr_car
-       where two_car_state="1"
+       where two_car_state="1" and create_by=#{userId}
     </select>
     
     <select id="selectZyjrCarById" parameterType="Long" resultMap="ZyjrCarResult">
-         select a.user_name, a.gender, a.phone_number, a.is_linkman,a.dealer_name, a.identity, a.remark, a.area, a.city, a.bazaar, a.shop_type, a.business_type, a.stall, a.business_nature, a.passenger_car,  a.month_deal, a.month_installment, a.match_amount, a.detail_address, a.pic,  a.create_by, a.create_time, a.update_by, a.update_time, a.id,a.three_car_state,a.two_car_state,a.one_car_state, a.state,b.id b_id,b.account_name b_account_name,
+         select a.user_name, a.gender, a.phone_number, a.is_linkman,a.dealer_name, a.identity, a.remark, a.area, a.city, a.bazaar, a.shop_type, a.business_type, a.stall, a.business_nature, a.passenger_car,  a.month_deal, a.month_installment, a.match_amount, a.detail_address,  a.create_by, a.create_time, a.update_by, a.update_time, a.id,a.three_car_state,a.two_car_state,a.one_car_state, a.state,b.id b_id,b.account_name b_account_name,
         b.account_name b_account_name,b.account_use b_account_use,b.account_type b_account_type,b.account_number b_account_number,b.account_city b_account_city,b.account_sub_branch b_account_sub_branch,
         c.file_name c_file_name,c.file_path c_file_path,c.file_id c_file_id
         from zyjr_car a LEFT JOIN zyjr_car_account b on a.id=b.zyjr_car_id LEFT JOIN sys_file_info c on a.id=c.id
@@ -121,8 +121,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="monthInstallment != null">month_installment,</if>
             <if test="matchAmount != null">match_amount,</if>
             <if test="detailAddress != null">detail_address,</if>
-            <if test="pic != null">pic,</if>
 
+            <if test="dealerName != null">dealer_name,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
@@ -151,7 +151,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="monthInstallment != null">#{monthInstallment},</if>
             <if test="matchAmount != null">#{matchAmount},</if>
             <if test="detailAddress != null">#{detailAddress},</if>
-            <if test="pic != null">#{pic},</if>
+
             <if test="dealerName != null">#{dealerName},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
@@ -185,7 +185,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="monthInstallment != null">month_installment = #{monthInstallment},</if>
             <if test="matchAmount != null">match_amount = #{matchAmount},</if>
             <if test="detailAddress != null">detail_address = #{detailAddress},</if>
-            <if test="pic != null">pic = #{pic},</if>
+
 
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="createTime != null">create_time = #{createTime},</if>

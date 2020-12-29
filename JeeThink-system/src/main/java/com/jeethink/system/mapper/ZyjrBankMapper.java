@@ -7,7 +7,7 @@ import com.jeethink.system.domain.ZyjrBank;
  * bankMapper接口
  * 
  * @author jeethink
- * @date 2020-12-25
+ * @date 2020-12-26
  */
 public interface ZyjrBankMapper 
 {

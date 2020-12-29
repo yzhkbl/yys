@@ -60,5 +60,6 @@ public interface ZyjrCarMapper
      */
     public int deleteZyjrCarByIds(Long[] ids);
 
-    List<ZyjrCar> selectZyjrCarLists();
+
+    List<ZyjrCar> selectZyjrCarLists(String userId);
 }

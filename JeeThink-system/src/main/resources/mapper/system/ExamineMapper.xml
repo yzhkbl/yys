@@ -4,6 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jeethink.system.mapper.ExamineMapper">
 
+
     <insert id="insertBorrower" parameterType="com.jeethink.system.domain.ZyjrBorrower">
         insert into zyjr_borrower
         (id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,obverse_id,obverse_code,obverse_address,
@@ -46,6 +47,11 @@
         from zyjr_relation
         where order_state=0 and user_id = #{userId}
     </select>
+    <select id="selectZyjrCarByLinkman" resultType="com.jeethink.system.domain.vo.Linkman" >
+        select id,remark,user_name,gender,phone_number,is_linkman,identity, two_car_state
+        from zyjr_car
+       where two_car_state="1" and id=#{id}
+    </select>
     <select id="findByGuarantee" resultType="com.jeethink.system.domain.ZyjrGuarantee">
         select id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,company,company_address,year_income,obverse_id,
         obverse_code,obverse_address,obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,people_ship,user_id,order_state,transaction_code
@@ -56,6 +62,12 @@
         select id,team,car_information,intention_price,loan_money,repay_period,car_type,user_id,order_state,transaction_code
         from zyjr_business
         where order_state=0 and user_id = #{userId}
+    </select>
+
+    <select id="selectZyjrCarLists" resultType="com.jeethink.system.domain.vo.carVo" >
+        select dealer_name, area, city, bazaar,  id, state,three_car_state,two_car_state,one_car_state,create_by, create_time
+        from zyjr_car
+       where two_car_state="1" and create_by=#{userId}
     </select>
     <insert id="insertStart" parameterType="com.jeethink.system.domain.ZyjrStartPage">
         insert into zyjr_start_page

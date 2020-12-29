@@ -262,7 +262,7 @@ public class test extends BaseController {
         JSONObject json = encryptData(json2.toString(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo, orderNo);
 
         JSONObject result = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", json);
-        System.err.println(result);
+
         if (result.get("code").equals(0)) {
 
             borrowerById.setTransactionCode(codes);
@@ -291,9 +291,11 @@ public class test extends BaseController {
     @GetMapping("selectState")
     @ResponseBody
     public AjaxResult find3(String codes) {
+
         ZyjrStartPage zyjrStartPage=examineMapper.findByStarts(codes);
-        if(zyjrStartPage!=null&&zyjrStartPage.getCreditState().equals("1")){
-            return AjaxResult.success("征信通过");
+
+        if(zyjrStartPage!=null&&zyjrStartPage.getCreditState()!=null&&zyjrStartPage.getCreditState().equals("1")){
+            return AjaxResult.success((Object)4);
         }
 
         System.err.println(codes);
@@ -314,24 +316,28 @@ public class test extends BaseController {
         ceshi ceshis=new ceshi();
         ceshis.setPub(pub);
         JSONObject json3 = new JSONObject().fromObject(ceshis);
-        System.err.println(json3.toString());
+
         JSONObject jsons = encryptData(json3.toString(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo, codes);
-        System.err.println(jsons);
+
         JSONObject results = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", jsons);
 
 
         if (results.get("code").equals(0)) {
+
             if (results.getJSONObject("data").getJSONObject("requestJson").getJSONObject("req").get("transType").equals(4)) {
+
                 int ceshi=examineMapper.updateStarts(codes);
+
                 if(ceshi>0){
-                    return AjaxResult.success("征信通过");
+                    return AjaxResult.success((Object)4);
+
                 }
             }
             return AjaxResult.success(results.getJSONObject("data").getJSONObject("requestJson").getJSONObject("req").get("transType"));
 
-        }
-        return AjaxResult.success(results);
 
+        }
+        return AjaxResult.errors();
     }
 
     public static JSONObject encryptData(String data, String dataPublicKey, String signPrivateKey, String assurerNo
@@ -375,7 +381,8 @@ public class test extends BaseController {
         for (int i = 0; i < id.size(); i++) {
             String a = FileUploadUtils.upload(file.get(i));
             SysFileInfo info = new SysFileInfo();
-            info.setFilePath(a);
+            String as = "http://192.168.31.82/dev-api" + a;
+            info.setFilePath(as);
             info.setId(id.get(i));
             info.setFileName(name.get(i));
             sysFileInfoMapper.insertSysFileInfo(info);
@@ -411,10 +418,13 @@ public class test extends BaseController {
     public AjaxResult delete(String path) {
         String paths = "E:/demo/JeeThink-admin/src/main/java/com/jeethink/web/";
         System.err.println(path);
+
         int a = sysFileInfoMapper.deleteSysFileInfoByPath(path);
         if (a > 0) {
+            path=path.substring(28,path.length());
             String[] s = path.split("//");
             System.err.println(paths + "profile/web/" + s[1]);
+
             boolean b = FileUtils.deleteFile(paths + "profile/web/" + s[1]);
             if (b) {
                 return AjaxResult.success(b);

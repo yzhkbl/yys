@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrBankExtendMapper">
+    
+    <resultMap type="ZyjrBankExtend" id="ZyjrBankExtendResult">
+        <result property="id"    column="id"    />
+
+        <result property="bankId"    column="bank_id"    />
+        <result property="extendCode"    column="extend_code"    />
+        <result property="extendField"    column="extend_field"    />
+    </resultMap>
+
+    <sql id="selectZyjrBankExtendVo">
+        select id,  bank_id, extend_code, extend_field from zyjr_bank_extend
+    </sql>
+
+    <select id="selectZyjrBankExtendList" parameterType="ZyjrBankExtend" resultMap="ZyjrBankExtendResult">
+        <include refid="selectZyjrBankExtendVo"/>
+        <where>  
+            <if test="bankId != null  and bankId != ''"> and bank_id = #{bankId}</if>
+            <if test="extendCode != null  and extendCode != ''"> and extend_code = #{extendCode}</if>
+            <if test="extendField != null  and extendField != ''"> and extend_field = #{extendField}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrBankExtendById" parameterType="Long" resultMap="ZyjrBankExtendResult">
+        <include refid="selectZyjrBankExtendVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrBankExtend" parameterType="ZyjrBankExtend" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_bank_extend
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="bankId != null">bank_id,</if>
+            <if test="extendCode != null">extend_code,</if>
+            <if test="extendField != null and extendField != ''">extend_field,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+            <if test="bankId != null">#{bankId},</if>
+            <if test="extendCode != null">#{extendCode},</if>
+            <if test="extendField != null and extendField != ''">#{extendField},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrBankExtend" parameterType="ZyjrBankExtend">
+        update zyjr_bank_extend
+        <trim prefix="SET" suffixOverrides=",">
+
+            <if test="bankId != null">bank_id = #{bankId},</if>
+            <if test="extendCode != null">extend_code = #{extendCode},</if>
+            <if test="extendField != null and extendField != ''">extend_field = #{extendField},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrBankExtendById" parameterType="Long">
+        delete from zyjr_bank_extend where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrBankExtendByIds" parameterType="String">
+        delete from zyjr_bank_extend where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

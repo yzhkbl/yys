@@ -1,8 +1,12 @@
 package com.jeethink.system.mapper;
 
 import com.jeethink.system.domain.*;
+import com.jeethink.system.domain.vo.Linkman;
+import com.jeethink.system.domain.vo.carVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface ExamineMapper {
@@ -48,4 +52,7 @@ public interface ExamineMapper {
     ZyjrStartPage findByStarts(String transactionCode);
 
     int updateStarts(String transactionCode);
+    List<carVo> selectZyjrCarLists(String userId);
+
+    Linkman selectZyjrCarByLinkman(Long id);
 }

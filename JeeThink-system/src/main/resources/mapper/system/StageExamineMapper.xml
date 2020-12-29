@@ -22,9 +22,9 @@
         where order_state=1 and transaction_code=#{transactionCode}
     </select>
     <select id="findByBusiness" resultType="com.jeethink.system.domain.ZyjrBusiness">
-        select id,team,car_information,intention_price,loan_money,repay_period,car_type,user_id,order_state,transaction_code
-        from zyjr_business
-        where order_state=1 and transaction_code=#{transactionCode}
+        select a.id, a.team, a.car_information,a.false_operator,a.false_operator_id, a.intention_price, a.loan_money, a.repay_period,a. car_type,a. user_id, a.order_state,a.transaction_code,b.real_address from zyjr_business a
+        left join zyjr_start_page b on a.transaction_code=b.transaction_code
+        where a.order_state=1 and a.transaction_code=#{transactionCode}
     </select>
     <insert id="insertBank" parameterType="com.jeethink.system.domain.ZyjrDetails">
         insert into zyjr_details

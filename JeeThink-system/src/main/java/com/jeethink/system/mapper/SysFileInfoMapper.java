@@ -73,4 +73,7 @@ public interface SysFileInfoMapper
     List<SysFileInfo> photoCredit(@Param("photoCreditId") Long photoCreditId);
     List<SysFileInfo> photoHouse(@Param("photoHouseId") Long photoHouseId);
 
+
+    int deleteSysFileInfoByCarId(String id);
+
 }
