@@ -146,4 +146,8 @@ public class AjaxResult extends HashMap<String, Object>
     {
         return new AjaxResult(code, msg, null);
     }
+
+    public static AjaxResult errors() {
+        return AjaxResult.success("操作失败");
+    }
 }
