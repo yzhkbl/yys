@@ -59,7 +59,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectSysFileInfoVo"/>
         <where>
             <if test="photoHouseId != null  and photoHouseId != ''"> and photo_house_id = #{photoHouseId}</if>
-            <if test="bankId != null  and bankId != ''"> and bank_id = #{bankId}</if>
         </where>
     </select>
 
@@ -67,7 +66,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectSysFileInfoVo"/>
         <where>
             <if test="photoCarId != null  and photoCarId != ''"> and photo_car_id = #{photoCarId}</if>
-
         </where>
     </select>
         

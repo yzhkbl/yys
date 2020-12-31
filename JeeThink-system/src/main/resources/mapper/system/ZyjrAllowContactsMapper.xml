@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
     
-    <select id="selectZyjrAllowContactsById" parameterType="Long" resultMap="ZyjrAllowContactsResult">
+    <select id="selectZyjrAllowContactsById" resultMap="ZyjrAllowContactsResult">
         <include refid="selectZyjrAllowContactsVo"/>
         where user_id=#{userId} and transaction_code=#{transactionCode} and order_state=0
     </select>

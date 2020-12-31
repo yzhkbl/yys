@@ -9,7 +9,7 @@ import com.jeethink.common.core.domain.BaseEntity;
  * 【请填写功能名称】对象 zyjr_people_guarantee
  * 
  * @author jeethink
- * @date 2020-12-22
+ * @date 2020-12-31
  */
 public class ZyjrPeopleGuarantee extends BaseEntity
 {
@@ -18,6 +18,8 @@ public class ZyjrPeopleGuarantee extends BaseEntity
     /** $column.columnComment */
     private Long id;
 
+    /** 是否有担保人 */
+    @Excel(name = "是否有担保人")
     private String isAny;
 
     /** 正面照地址 */
@@ -40,29 +42,33 @@ public class ZyjrPeopleGuarantee extends BaseEntity
     @Excel(name = "与申请人关系")
     private String peopleShip;
 
-    /** 担保人户籍省市 */
-    @Excel(name = "担保人户籍省市")
-    private String nativePlace;
+    /** 学历 */
+    @Excel(name = "学历")
+    private String education;
 
-    /** 担保人现居省市 */
-    @Excel(name = "担保人现居省市")
-    private String currentPlace;
+    /** 税后月收入 */
+    @Excel(name = "税后月收入")
+    private String monthlyIncome;
 
     /** 担保人现住地址 */
     @Excel(name = "担保人现住地址")
     private String detailPlace;
 
+    /** 担保人手机号 */
+    @Excel(name = "担保人手机号")
+    private String phoneNumber;
+
     /** 担保人现工作单位名称 */
     @Excel(name = "担保人现工作单位名称")
     private String workUnit;
 
-    /** 担保人现工作单位省市 */
-    @Excel(name = "担保人现工作单位省市")
-    private String workPlace;
-
     /** 担保人工作单位地址 */
     @Excel(name = "担保人工作单位地址")
     private String unitPlace;
+
+    /** 工作电话 */
+    @Excel(name = "工作电话")
+    private String workPhone;
 
     /** 订单编号 */
     @Excel(name = "订单编号")
@@ -85,7 +91,15 @@ public class ZyjrPeopleGuarantee extends BaseEntity
     {
         return id;
     }
+    public void setIsAny(String isAny) 
+    {
+        this.isAny = isAny;
+    }
 
+    public String getIsAny() 
+    {
+        return isAny;
+    }
     public void setCardAddress(String cardAddress) 
     {
         this.cardAddress = cardAddress;
@@ -95,7 +109,6 @@ public class ZyjrPeopleGuarantee extends BaseEntity
     {
         return cardAddress;
     }
-
     public void setBackAddress(String backAddress) 
     {
         this.backAddress = backAddress;
@@ -132,23 +145,23 @@ public class ZyjrPeopleGuarantee extends BaseEntity
     {
         return peopleShip;
     }
-    public void setNativePlace(String nativePlace) 
+    public void setEducation(String education) 
     {
-        this.nativePlace = nativePlace;
+        this.education = education;
     }
 
-    public String getNativePlace() 
+    public String getEducation() 
     {
-        return nativePlace;
+        return education;
     }
-    public void setCurrentPlace(String currentPlace) 
+    public void setMonthlyIncome(String monthlyIncome) 
     {
-        this.currentPlace = currentPlace;
+        this.monthlyIncome = monthlyIncome;
     }
 
-    public String getCurrentPlace() 
+    public String getMonthlyIncome() 
     {
-        return currentPlace;
+        return monthlyIncome;
     }
     public void setDetailPlace(String detailPlace) 
     {
@@ -159,6 +172,15 @@ public class ZyjrPeopleGuarantee extends BaseEntity
     {
         return detailPlace;
     }
+    public void setPhoneNumber(String phoneNumber) 
+    {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getPhoneNumber() 
+    {
+        return phoneNumber;
+    }
     public void setWorkUnit(String workUnit) 
     {
         this.workUnit = workUnit;
@@ -168,15 +190,6 @@ public class ZyjrPeopleGuarantee extends BaseEntity
     {
         return workUnit;
     }
-    public void setWorkPlace(String workPlace) 
-    {
-        this.workPlace = workPlace;
-    }
-
-    public String getWorkPlace() 
-    {
-        return workPlace;
-    }
     public void setUnitPlace(String unitPlace) 
     {
         this.unitPlace = unitPlace;
@@ -185,6 +198,15 @@ public class ZyjrPeopleGuarantee extends BaseEntity
     public String getUnitPlace() 
     {
         return unitPlace;
+    }
+    public void setWorkPhone(String workPhone) 
+    {
+        this.workPhone = workPhone;
+    }
+
+    public String getWorkPhone() 
+    {
+        return workPhone;
     }
     public void setTransactionCode(String transactionCode) 
     {
@@ -214,14 +236,6 @@ public class ZyjrPeopleGuarantee extends BaseEntity
         return userId;
     }
 
-    public String getIsAny() {
-        return isAny;
-    }
-
-    public void setIsAny(String isAny) {
-        this.isAny = isAny;
-    }
-
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -232,12 +246,13 @@ public class ZyjrPeopleGuarantee extends BaseEntity
             .append("guaranteeName", getGuaranteeName())
             .append("idNumber", getIdNumber())
             .append("peopleShip", getPeopleShip())
-            .append("nativePlace", getNativePlace())
-            .append("currentPlace", getCurrentPlace())
+            .append("education", getEducation())
+            .append("monthlyIncome", getMonthlyIncome())
             .append("detailPlace", getDetailPlace())
+            .append("phoneNumber", getPhoneNumber())
             .append("workUnit", getWorkUnit())
-            .append("workPlace", getWorkPlace())
             .append("unitPlace", getUnitPlace())
+            .append("workPhone", getWorkPhone())
             .append("transactionCode", getTransactionCode())
             .append("orderState", getOrderState())
             .append("userId", getUserId())

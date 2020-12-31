@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
     
-    <select id="selectZyjrPhotoCreditById" parameterType="Long" resultMap="ZyjrPhotoCreditResult">
+    <select id="selectZyjrPhotoCreditById" resultMap="ZyjrPhotoCreditResult">
         <include refid="selectZyjrPhotoCreditVo"/>
         where user_id = #{userId} and transaction_code=#{transactionCode} and order_state=0
     </select>

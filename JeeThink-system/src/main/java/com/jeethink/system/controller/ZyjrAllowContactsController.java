@@ -3,14 +3,7 @@ package com.jeethink.system.controller;
 import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.jeethink.common.annotation.Log;
 import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
@@ -61,7 +54,7 @@ public class ZyjrAllowContactsController extends BaseController
     /**
      * 获取【请填写功能名称】详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:contacts:query')")
+    //@PreAuthorize("@ss.hasPermi('system:contacts:query')")
     @GetMapping(value = "/{userId}/{transactionCode}")
     public AjaxResult getInfo(@PathVariable("userId") Long userId,@PathVariable("transactionCode")String transactionCode)
     {
@@ -71,10 +64,10 @@ public class ZyjrAllowContactsController extends BaseController
     /**
      * 新增【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:contacts:add')")
+    //@PreAuthorize("@ss.hasPermi('system:contacts:add')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody ZyjrAllowContacts zyjrAllowContacts)
+    public AjaxResult add(ZyjrAllowContacts zyjrAllowContacts)
     {
         return toAjax(zyjrAllowContactsService.insertZyjrAllowContacts(zyjrAllowContacts));
     }

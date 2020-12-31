@@ -10,7 +10,7 @@ import com.jeethink.common.core.domain.BaseEntity;
  * 【请填写功能名称】对象 zyjr_car_loan
  * 
  * @author jeethink
- * @date 2020-12-22
+ * @date 2020-12-30
  */
 public class ZyjrCarLoan extends BaseEntity
 {
@@ -39,29 +39,33 @@ public class ZyjrCarLoan extends BaseEntity
     @Excel(name = "车款年代")
     private String carYear;
 
+    /** 排量/吨位 */
+    @Excel(name = "排量/吨位")
+    private String displacement;
+
+    /** 挡位 */
+    @Excel(name = "挡位")
+    private String gear;
+
     /** 款式 */
     @Excel(name = "款式")
     private String style;
+
+    /** 发动机号 */
+    @Excel(name = "发动机号")
+    private String engineCode;
+
+    /** 燃料类型 */
+    @Excel(name = "燃料类型")
+    private String fuelType;
 
     /** 二手车行驶里程（新车无） */
     @Excel(name = "二手车行驶里程", readConverterExp = "新=车无")
     private String mileage;
 
-    /** 卖方姓名 */
-    @Excel(name = "卖方姓名")
-    private String sellerName;
-
-    /** 卖方身份证号 */
-    @Excel(name = "卖方身份证号")
-    private String sellerId;
-
-    /** 卖方车牌号 */
-    @Excel(name = "卖方车牌号")
-    private String sellerCarNo;
-
-    /** 是否提供房产 */
-    @Excel(name = "是否提供房产")
-    private String isHouseProperty;
+    /** 首次登记日期 */
+    @Excel(name = "首次登记日期")
+    private String startDate;
 
     /** 实际销售价 */
     @Excel(name = "实际销售价")
@@ -78,10 +82,6 @@ public class ZyjrCarLoan extends BaseEntity
     /** 利率换挡 */
     @Excel(name = "利率换挡")
     private BigDecimal interestRate;
-
-    /** gps挡位 */
-    @Excel(name = "gps挡位")
-    private String gpsGear;
 
     /** 续保押金 */
     @Excel(name = "续保押金")
@@ -153,6 +153,24 @@ public class ZyjrCarLoan extends BaseEntity
     {
         return carYear;
     }
+    public void setDisplacement(String displacement) 
+    {
+        this.displacement = displacement;
+    }
+
+    public String getDisplacement() 
+    {
+        return displacement;
+    }
+    public void setGear(String gear) 
+    {
+        this.gear = gear;
+    }
+
+    public String getGear() 
+    {
+        return gear;
+    }
     public void setStyle(String style) 
     {
         this.style = style;
@@ -161,6 +179,24 @@ public class ZyjrCarLoan extends BaseEntity
     public String getStyle() 
     {
         return style;
+    }
+    public void setEngineCode(String engineCode) 
+    {
+        this.engineCode = engineCode;
+    }
+
+    public String getEngineCode() 
+    {
+        return engineCode;
+    }
+    public void setFuelType(String fuelType) 
+    {
+        this.fuelType = fuelType;
+    }
+
+    public String getFuelType() 
+    {
+        return fuelType;
     }
     public void setMileage(String mileage) 
     {
@@ -171,41 +207,14 @@ public class ZyjrCarLoan extends BaseEntity
     {
         return mileage;
     }
-    public void setSellerName(String sellerName) 
+    public void setStartDate(String startDate) 
     {
-        this.sellerName = sellerName;
+        this.startDate = startDate;
     }
 
-    public String getSellerName() 
+    public String getStartDate() 
     {
-        return sellerName;
-    }
-    public void setSellerId(String sellerId) 
-    {
-        this.sellerId = sellerId;
-    }
-
-    public String getSellerId() 
-    {
-        return sellerId;
-    }
-    public void setSellerCarNo(String sellerCarNo) 
-    {
-        this.sellerCarNo = sellerCarNo;
-    }
-
-    public String getSellerCarNo() 
-    {
-        return sellerCarNo;
-    }
-    public void setIsHouseProperty(String isHouseProperty) 
-    {
-        this.isHouseProperty = isHouseProperty;
-    }
-
-    public String getIsHouseProperty() 
-    {
-        return isHouseProperty;
+        return startDate;
     }
     public void setActualPrice(BigDecimal actualPrice) 
     {
@@ -242,15 +251,6 @@ public class ZyjrCarLoan extends BaseEntity
     public BigDecimal getInterestRate() 
     {
         return interestRate;
-    }
-    public void setGpsGear(String gpsGear) 
-    {
-        this.gpsGear = gpsGear;
-    }
-
-    public String getGpsGear() 
-    {
-        return gpsGear;
     }
     public void setDeposit(BigDecimal deposit) 
     {
@@ -298,17 +298,17 @@ public class ZyjrCarLoan extends BaseEntity
             .append("brand", getBrand())
             .append("carSeries", getCarSeries())
             .append("carYear", getCarYear())
+            .append("displacement", getDisplacement())
+            .append("gear", getGear())
             .append("style", getStyle())
+            .append("engineCode", getEngineCode())
+            .append("fuelType", getFuelType())
             .append("mileage", getMileage())
-            .append("sellerName", getSellerName())
-            .append("sellerId", getSellerId())
-            .append("sellerCarNo", getSellerCarNo())
-            .append("isHouseProperty", getIsHouseProperty())
+            .append("startDate", getStartDate())
             .append("actualPrice", getActualPrice())
             .append("loanAmount", getLoanAmount())
             .append("repaymentTerm", getRepaymentTerm())
             .append("interestRate", getInterestRate())
-            .append("gpsGear", getGpsGear())
             .append("deposit", getDeposit())
             .append("transactionCode", getTransactionCode())
             .append("orderState", getOrderState())

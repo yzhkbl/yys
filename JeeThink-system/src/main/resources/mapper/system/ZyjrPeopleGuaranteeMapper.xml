@@ -12,44 +12,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="guaranteeName"    column="guarantee_name"    />
         <result property="idNumber"    column="id_number"    />
         <result property="peopleShip"    column="people_ship"    />
-        <result property="nativePlace"    column="native_place"    />
-        <result property="currentPlace"    column="current_place"    />
+        <result property="education"    column="education"    />
+        <result property="monthlyIncome"    column="monthly_income"    />
         <result property="detailPlace"    column="detail_place"    />
+        <result property="phoneNumber"    column="phone_number"    />
         <result property="workUnit"    column="work_unit"    />
-        <result property="workPlace"    column="work_place"    />
         <result property="unitPlace"    column="unit_place"    />
+        <result property="workPhone"    column="work_phone"    />
         <result property="transactionCode"    column="transaction_code"    />
         <result property="orderState"    column="order_state"    />
         <result property="userId"    column="user_id"    />
     </resultMap>
 
     <sql id="selectZyjrPeopleGuaranteeVo">
-        select id, is_any, card_address, back_address, guarantee_name, id_number, people_ship, native_place, current_place, detail_place, work_unit, work_place, unit_place, transaction_code, order_state, user_id from zyjr_people_guarantee
+        select id, is_any, card_address, back_address, guarantee_name, id_number, people_ship, education, monthly_income, detail_place, phone_number, work_unit, unit_place, work_phone, transaction_code, order_state, user_id from zyjr_people_guarantee
     </sql>
 
     <select id="selectZyjrPeopleGuaranteeList" parameterType="ZyjrPeopleGuarantee" resultMap="ZyjrPeopleGuaranteeResult">
         <include refid="selectZyjrPeopleGuaranteeVo"/>
-        <where>
+        <where>  
+            <if test="isAny != null  and isAny != ''"> and is_any = #{isAny}</if>
             <if test="cardAddress != null  and cardAddress != ''"> and card_address = #{cardAddress}</if>
             <if test="backAddress != null  and backAddress != ''"> and back_address = #{backAddress}</if>
             <if test="guaranteeName != null  and guaranteeName != ''"> and guarantee_name like concat('%', #{guaranteeName}, '%')</if>
             <if test="idNumber != null  and idNumber != ''"> and id_number = #{idNumber}</if>
             <if test="peopleShip != null  and peopleShip != ''"> and people_ship = #{peopleShip}</if>
-            <if test="nativePlace != null  and nativePlace != ''"> and native_place = #{nativePlace}</if>
-            <if test="currentPlace != null  and currentPlace != ''"> and current_place = #{currentPlace}</if>
+            <if test="education != null  and education != ''"> and education = #{education}</if>
+            <if test="monthlyIncome != null  and monthlyIncome != ''"> and monthly_income = #{monthlyIncome}</if>
             <if test="detailPlace != null  and detailPlace != ''"> and detail_place = #{detailPlace}</if>
+            <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
             <if test="workUnit != null  and workUnit != ''"> and work_unit = #{workUnit}</if>
-            <if test="workPlace != null  and workPlace != ''"> and work_place = #{workPlace}</if>
             <if test="unitPlace != null  and unitPlace != ''"> and unit_place = #{unitPlace}</if>
+            <if test="workPhone != null  and workPhone != ''"> and work_phone = #{workPhone}</if>
             <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
             <if test="orderState != null "> and order_state = #{orderState}</if>
             <if test="userId != null "> and user_id = #{userId}</if>
         </where>
     </select>
     
-    <select id="selectZyjrPeopleGuaranteeById" parameterType="Long" resultMap="ZyjrPeopleGuaranteeResult">
+    <select id="selectZyjrPeopleGuaranteeById" resultMap="ZyjrPeopleGuaranteeResult">
         <include refid="selectZyjrPeopleGuaranteeVo"/>
-        where user_id=#{userId} and transaction_code=#{transactionCode} and order_state=0
+        where user_id = #{userId} and transaction_code=#{transactionCode} and order_state=0
     </select>
         
     <insert id="insertZyjrPeopleGuarantee" parameterType="ZyjrPeopleGuarantee" useGeneratedKeys="true" keyProperty="id">
@@ -61,12 +64,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="guaranteeName != null">guarantee_name,</if>
             <if test="idNumber != null">id_number,</if>
             <if test="peopleShip != null">people_ship,</if>
-            <if test="nativePlace != null">native_place,</if>
-            <if test="currentPlace != null">current_place,</if>
+            <if test="education != null">education,</if>
+            <if test="monthlyIncome != null">monthly_income,</if>
             <if test="detailPlace != null">detail_place,</if>
+            <if test="phoneNumber != null">phone_number,</if>
             <if test="workUnit != null">work_unit,</if>
-            <if test="workPlace != null">work_place,</if>
             <if test="unitPlace != null">unit_place,</if>
+            <if test="workPhone != null">work_phone,</if>
             <if test="transactionCode != null">transaction_code,</if>
             <if test="orderState != null">order_state,</if>
             <if test="userId != null">user_id,</if>
@@ -78,12 +82,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="guaranteeName != null">#{guaranteeName},</if>
             <if test="idNumber != null">#{idNumber},</if>
             <if test="peopleShip != null">#{peopleShip},</if>
-            <if test="nativePlace != null">#{nativePlace},</if>
-            <if test="currentPlace != null">#{currentPlace},</if>
+            <if test="education != null">#{education},</if>
+            <if test="monthlyIncome != null">#{monthlyIncome},</if>
             <if test="detailPlace != null">#{detailPlace},</if>
+            <if test="phoneNumber != null">#{phoneNumber},</if>
             <if test="workUnit != null">#{workUnit},</if>
-            <if test="workPlace != null">#{workPlace},</if>
             <if test="unitPlace != null">#{unitPlace},</if>
+            <if test="workPhone != null">#{workPhone},</if>
             <if test="transactionCode != null">#{transactionCode},</if>
             <if test="orderState != null">#{orderState},</if>
             <if test="userId != null">#{userId},</if>
@@ -99,17 +104,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="guaranteeName != null">guarantee_name = #{guaranteeName},</if>
             <if test="idNumber != null">id_number = #{idNumber},</if>
             <if test="peopleShip != null">people_ship = #{peopleShip},</if>
-            <if test="nativePlace != null">native_place = #{nativePlace},</if>
-            <if test="currentPlace != null">current_place = #{currentPlace},</if>
+            <if test="education != null">education = #{education},</if>
+            <if test="monthlyIncome != null">monthly_income = #{monthlyIncome},</if>
             <if test="detailPlace != null">detail_place = #{detailPlace},</if>
+            <if test="phoneNumber != null">phone_number = #{phoneNumber},</if>
             <if test="workUnit != null">work_unit = #{workUnit},</if>
-            <if test="workPlace != null">work_place = #{workPlace},</if>
             <if test="unitPlace != null">unit_place = #{unitPlace},</if>
+            <if test="workPhone != null">work_phone = #{workPhone},</if>
             <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
             <if test="orderState != null">order_state = #{orderState},</if>
             <if test="userId != null">user_id = #{userId},</if>
         </trim>
-        where user_id=#{userId} and transaction_code=#{transactionCode} and order_state=0
+        where user_id = #{userId} and transaction_code=#{transactionCode} and order_state=0
     </update>
 
     <delete id="deleteZyjrPeopleGuaranteeById" parameterType="Long">

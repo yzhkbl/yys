@@ -1,7 +1,7 @@
 package com.jeethink.system.service.impl;
 
 import com.jeethink.system.domain.*;
-import com.jeethink.system.mapper.StageExamineMapper;
+import com.jeethink.system.mapper.*;
 import com.jeethink.system.service.IStageExamineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +14,31 @@ import java.util.Map;
 public class IStageExamineServiceImpl implements IStageExamineService {
     @Autowired
     private StageExamineMapper examineDao;
+    @Autowired
+    private ZyjrAllowApplicantMapper zyjrAllowApplicantMapper;
+    @Autowired
+    private ZyjrAllowBasicsMapper zyjrAllowBasicsMapper;
+    @Autowired
+    private ZyjrAllowContactsMapper zyjrAllowContactsMapper;
+    @Autowired
+    private ZyjrCarLoanMapper zyjrCarLoanMapper;
+    @Autowired
+    private ZyjrCompanyGuaranteeMapper zyjrCompanyGuaranteeMapper;
+    @Autowired
+    private ZyjrDebtServiceMapper zyjrDebtServiceMapper;
+    @Autowired
+    private ZyjrPeopleGuaranteeMapper zyjrPeopleGuaranteeMapper;
+    @Autowired
+    private ZyjrPhotoCarMapper zyjrPhotoCarMapper;
+    @Autowired
+    private ZyjrPhotoCreditMapper zyjrPhotoCreditMapper;
+    @Autowired
+    private ZyjrPhotoHouseMapper zyjrPhotoHouseMapper;
+    @Autowired
+    private ZyjrPhotoLenderMapper zyjrPhotoLenderMapper;
+    @Autowired
+    private SysFileInfoMapper sysFileInfoMapper;
+
 
     @Override
     public ZyjrBorrower findByBorrower(String transactionCode) {
@@ -46,7 +71,7 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         map.put("borrower",findByBorrower(transactionCode));
         map.put("relation",findByRelation(transactionCode));
         map.put("guarantee",findByGuarantee(transactionCode));
-            return map;
+        return map;
         }
 
     @Override
@@ -60,5 +85,31 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         ZyjrDetails zyjrDetails = examineDao.findByDetails(transactionCode);
         return zyjrDetails;
     }
+
+    @Override
+    public Map<String,Object> findByAllow(Long userId,String transactionCode){
+        Map<String,Object> map = new HashMap<>();
+        map.put("borrower",examineDao.findByBorrower(transactionCode));
+        map.put("applicant",zyjrAllowApplicantMapper.selectZyjrAllowApplicantById(userId, transactionCode));
+        map.put("basics",zyjrAllowBasicsMapper.selectZyjrAllowBasicsById(userId, transactionCode));
+        map.put("contacts",zyjrAllowContactsMapper.selectZyjrAllowContactsById(userId, transactionCode));
+        map.put("debtService",zyjrDebtServiceMapper.selectZyjrDebtServiceById(userId, transactionCode));
+        map.put("carLoan",zyjrCarLoanMapper.selectZyjrCarLoanById(userId, transactionCode));
+        map.put("companyGuarantee",zyjrCompanyGuaranteeMapper.selectZyjrCompanyGuaranteeById(userId, transactionCode));
+        map.put("peopleGuarantee",zyjrPeopleGuaranteeMapper.selectZyjrPeopleGuaranteeById(userId, transactionCode));
+        ZyjrPhotoCar zyjrPhotoCar = zyjrPhotoCarMapper.selectZyjrPhotoCarById(userId, transactionCode);
+        ZyjrPhotoCredit zyjrPhotoCredit = zyjrPhotoCreditMapper.selectZyjrPhotoCreditById(userId, transactionCode);
+        ZyjrPhotoHouse zyjrPhotoHouse = zyjrPhotoHouseMapper.selectZyjrPhotoHouseById(userId, transactionCode);
+        ZyjrPhotoLender zyjrPhotoLender = zyjrPhotoLenderMapper.selectZyjrPhotoLenderById(userId, transactionCode);
+        if(zyjrPhotoCar!=null&&zyjrPhotoCredit!=null&&zyjrPhotoHouse!=null&&zyjrPhotoLender!=null) {
+            map.put("photoCar", sysFileInfoMapper.photoCar(zyjrPhotoCar.getId()));
+            map.put("photoCredit", sysFileInfoMapper.photoCredit(zyjrPhotoCredit.getId()));
+            map.put("photoHouse", sysFileInfoMapper.photoHouse(zyjrPhotoHouse.getId()));
+            map.put("photoLender", sysFileInfoMapper.photoLender(zyjrPhotoLender.getId()));
+        }
+        return map;
+    }
+
+
 
 }
