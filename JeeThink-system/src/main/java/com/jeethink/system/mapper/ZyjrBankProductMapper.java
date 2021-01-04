@@ -59,4 +59,6 @@ public interface ZyjrBankProductMapper
      * @return 结果
      */
     public int deleteZyjrBankProductByIds(Long[] ids);
+
+    int deleteZyjrBankProductByIdd(Long id);
 }

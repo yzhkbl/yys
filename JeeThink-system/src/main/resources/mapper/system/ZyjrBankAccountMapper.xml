@@ -88,6 +88,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         delete from zyjr_bank_account where bank_id = #{id}
     </delete>
 
+    <delete id="deleteZyjrBankAccountByIdd" parameterType="Long">
+        delete from zyjr_bank_account where baoxian = #{id}
+    </delete>
+
     <delete id="deleteZyjrBankAccountByIds" parameterType="String">
         delete from zyjr_bank_account where bank_id in
         <foreach item="id" collection="array" open="(" separator="," close=")">

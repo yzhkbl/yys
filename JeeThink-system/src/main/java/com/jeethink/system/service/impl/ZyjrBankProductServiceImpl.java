@@ -93,4 +93,9 @@ public class ZyjrBankProductServiceImpl implements IZyjrBankProductService
     {
         return zyjrBankProductMapper.deleteZyjrBankProductById(id);
     }
+
+    @Override
+    public int deleteZyjrBankProductByIdd(Long id) {
+        return zyjrBankProductMapper.deleteZyjrBankProductByIdd(id);
+    }
 }

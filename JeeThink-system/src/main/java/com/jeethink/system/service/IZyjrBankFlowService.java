@@ -58,4 +58,6 @@ public interface IZyjrBankFlowService
      * @return 结果
      */
     public int deleteZyjrBankFlowById(Long id);
+
+    int  deleteZyjrBankFlowByIdd(Long id);
 }

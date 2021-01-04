@@ -58,4 +58,6 @@ public interface IZyjrBankProductService
      * @return 结果
      */
     public int deleteZyjrBankProductById(Long id);
+
+    int deleteZyjrBankProductByIdd(Long id);
 }

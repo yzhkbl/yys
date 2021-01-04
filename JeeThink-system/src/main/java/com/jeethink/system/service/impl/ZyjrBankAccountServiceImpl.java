@@ -93,4 +93,9 @@ public class ZyjrBankAccountServiceImpl implements IZyjrBankAccountService
     {
         return zyjrBankAccountMapper.deleteZyjrBankAccountById(id);
     }
+
+    @Override
+    public int deleteZyjrBankAccountByIdd(Long id) {
+        return zyjrBankAccountMapper.deleteZyjrBankAccountByIdd(id);
+    }
 }

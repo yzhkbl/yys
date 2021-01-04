@@ -14,16 +14,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="photoLenderId"    column="photo_lender_id"    />
         <result property="photoCreditId"    column="photo_credit_id"    />
         <result property="photoHouseId"    column="photo_house_id"    />
+        <result property="baoxian"    column="baoxian"    />
     </resultMap>
 
     <sql id="selectSysFileInfoVo">
-        select file_id, file_name, file_path,id,photo_car_id,photo_lender_id,photo_credit_id,photo_house_id from sys_file_info
+        select file_id, file_name,baoxian, file_path,id,photo_car_id,photo_lender_id,photo_credit_id,photo_house_id from sys_file_info
     </sql>
 
     <select id="selectSysFileInfoList" parameterType="SysFileInfo" resultMap="SysFileInfoResult">
         <include refid="selectSysFileInfoVo"/>
         <where>
             <if test="fileName != null  and fileName != ''"> and file_name like concat('%', #{fileName}, '%')</if>
+            <if test="baoxian != null  and baoxian != ''"> and baoxian like concat('%', #{baoxian}, '%')</if>
             <if test="filePath != null  and filePath != ''"> and file_path = #{filePath}</if>
             <if test="id != null  and id != ''"> and id = #{id}</if>
             <if test="photoCarId != null  and photoCarId != ''"> and photo_car_id = #{photoCarId}</if>
@@ -75,6 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into sys_file_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="fileName != null">file_name,</if>
+            <if test="baoxian != null">baoxian,</if>
             <if test="filePath != null">file_path,</if>
             <if test="id != null">id,</if>
             <if test="photoCarId !=null">photo_car_id,</if>
@@ -85,6 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="fileName != null">#{fileName},</if>
+            <if test="baoxian != null">#{baoxian},</if>
             <if test="filePath != null">#{filePath},</if>
             <if test="id != null">#{id},</if>
             <if test="photoCarId !=null">#{photoCarId},</if>
