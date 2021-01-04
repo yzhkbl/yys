@@ -20,4 +20,6 @@ public interface IStageExamineService {
     int addBankDetails(ZyjrDetails q);
     /**详版证信回显*/
     ZyjrDetails findBankDetails(String transactionCode);
+
+    Map<String,Object> findByAllow(Long userId,String transactionCode);
 }

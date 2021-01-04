@@ -15,6 +15,7 @@ import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import  com.jeethink.system.util.orderCode;
@@ -134,6 +135,7 @@ public class ExamineServiceImpl implements IExamineService {
         startPage.setUserId(q.getUserId());
         startPage.setTransactionCode(q.getTransactionCode());
         startPage.setRealAddress(q.getRealAddress());
+        startPage.setCreateTime(new Date());
         /**if(findByBorrower(q.getUserId()).getCreditPower()==1) {
             String a = orderCode.getOrderCode();
             String b = IdUtils.simpleUUID();

@@ -4,9 +4,7 @@ import com.jeethink.common.core.domain.AjaxResult;
 import com.jeethink.system.domain.ZyjrDetails;
 import com.jeethink.system.service.IStageExamineService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -32,5 +30,12 @@ public class StageExamineController {
     @RequestMapping("/find/details")
     public AjaxResult findDetails(String transactionCode){
         return AjaxResult.success(stageExamineService.findBankDetails(transactionCode));
+    }
+
+    @GetMapping("/{userId}/{transactionCode}")
+    public AjaxResult findAllow(@PathVariable("userId") Long userId,@PathVariable("transactionCode")String transactionCode){
+        System.err.println(userId);
+        System.err.println(transactionCode);
+        return AjaxResult.success(stageExamineService.findByAllow(userId, transactionCode));
     }
 }
