@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrAllowOpinionMapper">
+    
+    <resultMap type="ZyjrAllowOpinion" id="ZyjrAllowOpinionResult">
+        <result property="id"    column="id"    />
+        <result property="advise"    column="advise"    />
+        <result property="approvalType"    column="approval_type"    />
+        <result property="transactionCode"    column="transaction_code"    />
+        <result property="userId"    column="user_id"    />
+    </resultMap>
+
+    <sql id="selectZyjrAllowOpinionVo">
+        select id, advise, approval_type, transaction_code, user_id from zyjr_allow_opinion
+    </sql>
+
+    <select id="selectZyjrAllowOpinionList" parameterType="ZyjrAllowOpinion" resultMap="ZyjrAllowOpinionResult">
+        <include refid="selectZyjrAllowOpinionVo"/>
+        <where>  
+            <if test="advise != null  and advise != ''"> and advise = #{advise}</if>
+            <if test="approvalType != null "> and approval_type = #{approvalType}</if>
+            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrAllowOpinionById" resultMap="ZyjrAllowOpinionResult">
+        <include refid="selectZyjrAllowOpinionVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrAllowOpinion" parameterType="ZyjrAllowOpinion" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_allow_opinion
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="advise != null">advise,</if>
+            <if test="approvalType != null">approval_type,</if>
+            <if test="transactionCode != null">transaction_code,</if>
+            <if test="userId != null">user_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="advise != null">#{advise},</if>
+            <if test="approvalType != null">#{approvalType},</if>
+            <if test="transactionCode != null">#{transactionCode},</if>
+            <if test="userId != null">#{userId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrAllowOpinion" parameterType="ZyjrAllowOpinion">
+        update zyjr_allow_opinion
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="advise != null">advise = #{advise},</if>
+            <if test="approvalType != null">approval_type = #{approvalType},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrAllowOpinionById" parameterType="Long">
+        delete from zyjr_allow_opinion where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrAllowOpinionByIds" parameterType="String">
+        delete from zyjr_allow_opinion where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

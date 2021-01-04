@@ -199,6 +199,8 @@ public class ZyjrPhotoCarController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody ZyjrPhotoCar zyjrPhotoCar)
     {
+
+
         return toAjax(zyjrPhotoCarService.updateZyjrPhotoCar(zyjrPhotoCar));
     }
 
