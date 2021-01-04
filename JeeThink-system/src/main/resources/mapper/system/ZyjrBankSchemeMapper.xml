@@ -85,6 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         delete from zyjr_bank_scheme where zyjr_bank_product_id = #{id}
     </delete>
 
+
     <delete id="deleteZyjrBankSchemeByIds" parameterType="String">
         delete from zyjr_bank_scheme where bank_id in
         <foreach item="id" collection="array" open="(" separator="," close=")">

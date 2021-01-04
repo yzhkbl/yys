@@ -186,18 +186,11 @@ public class ZyjrBankServiceImpl implements IZyjrBankService
                 for (ZyjrBankProduct zyjrBankProduct : list) {
                     iZyjrBankSchemeService.deleteZyjrBankSchemeById(zyjrBankProduct.getId());
                     for (ZyjrBankScheme zyjrBankScheme : zyjrBankProduct.getScheme()) {
-                        if(zyjrBankProduct.getScheme().size()>0){
-                            zyjrBankScheme.setZyjrBankProductId(zyjrBankProduct.getId().toString());
-                            slist.add(zyjrBankScheme);
-                        }
-
+                        zyjrBankScheme.setZyjrBankProductId(zyjrBankProduct.getId().toString());
+                        slist.add(zyjrBankScheme);
                     }
                 }
-                System.err.println(slist);
-                if(slist.size()>0){
-                    zyjrBankSchemeMapper.insertZyjrBankSchemes(slist);
-                }
-
+                zyjrBankSchemeMapper.insertZyjrBankSchemes(slist);
 
             }
         }

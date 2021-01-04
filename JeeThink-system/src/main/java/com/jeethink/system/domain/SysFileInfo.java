@@ -36,6 +36,15 @@ public class SysFileInfo
 
 
     private String bankId;
+    private String baoxian;
+
+    public String getBaoxian() {
+        return baoxian;
+    }
+
+    public void setBaoxian(String baoxian) {
+        this.baoxian = baoxian;
+    }
 
     public String getBankId() {
         return bankId;

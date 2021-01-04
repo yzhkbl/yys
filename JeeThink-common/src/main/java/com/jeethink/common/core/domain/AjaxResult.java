@@ -112,6 +112,11 @@ public class AjaxResult extends HashMap<String, Object>
         return AjaxResult.error("操作失败");
     }
 
+    public static AjaxResult errors()
+    {
+        return AjaxResult.error("征信查询失败");
+    }
+
     /**
      * 返回错误消息
      * 
@@ -147,7 +152,5 @@ public class AjaxResult extends HashMap<String, Object>
         return new AjaxResult(code, msg, null);
     }
 
-    public static AjaxResult errors() {
-        return AjaxResult.success("操作失败");
-    }
+
 }

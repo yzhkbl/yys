@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrJzgAddOrderMapper">
+    
+    <resultMap type="ZyjrJzgAddOrder" id="ZyjrJzgAddOrderResult">
+        <result property="id"    column="id"    />
+        <result property="vin"    column="vin"    />
+        <result property="carLicense"    column="car_license"    />
+        <result property="recordBrand"    column="record_brand"    />
+        <result property="engineNum"    column="engine_num"    />
+        <result property="service"    column="service"    />
+        <result property="recordDate"    column="record_date"    />
+        <result property="provinceId"    column="province_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="regionCodeStyle"    column="region_code_style"    />
+        <result property="cityId"    column="city_id"    />
+        <result property="productType"    column="product_type"    />
+        <result property="imageList"    column="image_list"    />
+        <result property="thirdImageList"    column="third_image_list"    />
+        <result property="appendImageList"    column="append_image_list"    />
+        <result property="thirdAppendImageList"    column="third_append_image_list"    />
+        <result property="videoPath"    column="video_path"    />
+        <result property="orderName"    column="order_name"    />
+        <result property="orderPhone"    column="order_phone"    />
+        <result property="businessPrice"    column="business_price"    />
+        <result property="data"    column="data"    />
+        <result property="transactionCode"    column="transaction_code"    />
+        <result property="id"    column="id"    />
+    </resultMap>
+
+    <sql id="selectZyjrJzgAddOrderVo">
+        select id,vin, car_license, record_brand, engine_num, service, record_date, province_id, user_id, region_code_style, city_id, product_type, image_list, third_image_list, append_image_list, third_append_image_list, video_path, order_name, order_phone, business_price, data, transaction_code, id from zyjr_jzg_add_order
+    </sql>
+
+    <select id="selectZyjrJzgAddOrderList" parameterType="ZyjrJzgAddOrder" resultMap="ZyjrJzgAddOrderResult">
+        <include refid="selectZyjrJzgAddOrderVo"/>
+        <where>  
+            <if test="vin != null  and vin != ''"> and vin = #{vin}</if>
+            <if test="carLicense != null  and carLicense != ''"> and car_license = #{carLicense}</if>
+            <if test="recordBrand != null  and recordBrand != ''"> and record_brand = #{recordBrand}</if>
+            <if test="engineNum != null "> and engine_num = #{engineNum}</if>
+            <if test="service != null  and service != ''"> and service = #{service}</if>
+            <if test="recordDate != null "> and record_date = #{recordDate}</if>
+            <if test="provinceId != null "> and province_id = #{provinceId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="regionCodeStyle != null  and regionCodeStyle != ''"> and region_code_style = #{regionCodeStyle}</if>
+            <if test="cityId != null "> and city_id = #{cityId}</if>
+            <if test="productType != null  and productType != ''"> and product_type = #{productType}</if>
+            <if test="imageList != null  and imageList != ''"> and image_list = #{imageList}</if>
+            <if test="thirdImageList != null  and thirdImageList != ''"> and third_image_list = #{thirdImageList}</if>
+            <if test="appendImageList != null  and appendImageList != ''"> and append_image_list = #{appendImageList}</if>
+            <if test="thirdAppendImageList != null  and thirdAppendImageList != ''"> and third_append_image_list = #{thirdAppendImageList}</if>
+            <if test="videoPath != null  and videoPath != ''"> and video_path = #{videoPath}</if>
+            <if test="orderName != null  and orderName != ''"> and order_name like concat('%', #{orderName}, '%')</if>
+            <if test="orderPhone != null  and orderPhone != ''"> and order_phone = #{orderPhone}</if>
+            <if test="businessPrice != null "> and business_price = #{businessPrice}</if>
+            <if test="data != null  and data != ''"> and data = #{data}</if>
+            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrJzgAddOrderById" parameterType="Long" resultMap="ZyjrJzgAddOrderResult">
+        <include refid="selectZyjrJzgAddOrderVo"/>
+        where id = #{id}
+    </select>
+    <select id="selectZyjrJzgAddOrderByTransactionCode" parameterType="String" resultMap="ZyjrJzgAddOrderResult">
+        <include refid="selectZyjrJzgAddOrderVo"/>
+        where transaction_code = #{transactionCode}
+    </select>
+        
+    <insert id="insertZyjrJzgAddOrder" parameterType="ZyjrJzgAddOrder" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_jzg_add_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="vin != null">vin,</if>
+            <if test="carLicense != null">car_license,</if>
+            <if test="recordBrand != null">record_brand,</if>
+            <if test="engineNum != null">engine_num,</if>
+            <if test="service != null">service,</if>
+            <if test="recordDate != null">record_date,</if>
+            <if test="provinceId != null">province_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="regionCodeStyle != null">region_code_style,</if>
+            <if test="cityId != null">city_id,</if>
+            <if test="productType != null">product_type,</if>
+            <if test="imageList != null">image_list,</if>
+            <if test="thirdImageList != null">third_image_list,</if>
+            <if test="appendImageList != null">append_image_list,</if>
+            <if test="thirdAppendImageList != null">third_append_image_list,</if>
+            <if test="videoPath != null">video_path,</if>
+            <if test="orderName != null">order_name,</if>
+            <if test="orderPhone != null">order_phone,</if>
+            <if test="businessPrice != null">business_price,</if>
+            <if test="data != null">data,</if>
+            <if test="transactionCode != null">transaction_code,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="vin != null">#{vin},</if>
+            <if test="carLicense != null">#{carLicense},</if>
+            <if test="recordBrand != null">#{recordBrand},</if>
+            <if test="engineNum != null">#{engineNum},</if>
+            <if test="service != null">#{service},</if>
+            <if test="recordDate != null">#{recordDate},</if>
+            <if test="provinceId != null">#{provinceId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="regionCodeStyle != null">#{regionCodeStyle},</if>
+            <if test="cityId != null">#{cityId},</if>
+            <if test="productType != null">#{productType},</if>
+            <if test="imageList != null">#{imageList},</if>
+            <if test="thirdImageList != null">#{thirdImageList},</if>
+            <if test="appendImageList != null">#{appendImageList},</if>
+            <if test="thirdAppendImageList != null">#{thirdAppendImageList},</if>
+            <if test="videoPath != null">#{videoPath},</if>
+            <if test="orderName != null">#{orderName},</if>
+            <if test="orderPhone != null">#{orderPhone},</if>
+            <if test="businessPrice != null">#{businessPrice},</if>
+            <if test="data != null">#{data},</if>
+            <if test="transactionCode != null">#{transactionCode},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrJzgAddOrder" parameterType="ZyjrJzgAddOrder">
+        update zyjr_jzg_add_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="vin != null">vin = #{vin},</if>
+            <if test="carLicense != null">car_license = #{carLicense},</if>
+            <if test="recordBrand != null">record_brand = #{recordBrand},</if>
+            <if test="engineNum != null">engine_num = #{engineNum},</if>
+            <if test="service != null">service = #{service},</if>
+            <if test="recordDate != null">record_date = #{recordDate},</if>
+            <if test="provinceId != null">province_id = #{provinceId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="regionCodeStyle != null">region_code_style = #{regionCodeStyle},</if>
+            <if test="cityId != null">city_id = #{cityId},</if>
+            <if test="productType != null">product_type = #{productType},</if>
+            <if test="imageList != null">image_list = #{imageList},</if>
+            <if test="thirdImageList != null">third_image_list = #{thirdImageList},</if>
+            <if test="appendImageList != null">append_image_list = #{appendImageList},</if>
+            <if test="thirdAppendImageList != null">third_append_image_list = #{thirdAppendImageList},</if>
+            <if test="videoPath != null">video_path = #{videoPath},</if>
+            <if test="orderName != null">order_name = #{orderName},</if>
+            <if test="orderPhone != null">order_phone = #{orderPhone},</if>
+            <if test="businessPrice != null">business_price = #{businessPrice},</if>
+            <if test="data != null">data = #{data},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrJzgAddOrderById" parameterType="Long">
+        delete from zyjr_jzg_add_order where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrJzgAddOrderByIds" parameterType="String">
+        delete from zyjr_jzg_add_order where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -41,7 +41,12 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/system/car")
 @Api("ccccc")
-public class ZyjrCarController extends BaseController {
+public class
+
+
+
+
+ZyjrCarController extends BaseController {
     @Autowired
     private IZyjrCarService zyjrCarService;
     @Autowired

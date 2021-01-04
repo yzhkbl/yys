@@ -59,4 +59,6 @@ public interface ZyjrBankFlowMapper
      * @return 结果
      */
     public int deleteZyjrBankFlowByIds(Long[] ids);
+
+    int deleteZyjrBankFlowByIdd(Long id);
 }

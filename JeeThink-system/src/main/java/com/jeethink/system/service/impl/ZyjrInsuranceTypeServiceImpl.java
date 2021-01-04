@@ -76,10 +76,9 @@ public class ZyjrInsuranceTypeServiceImpl implements IZyjrInsuranceTypeService
     {
         zyjrBank.setCreateTime(DateUtils.getNowDate());
         zyjrInsuranceTypeMapper.insertZyjrInsuranceType(zyjrBank);
-        iZyjrBankAccountService.deleteZyjrBankAccountById(zyjrBank.getId());
-        iZyjrBankExtendService.deleteZyjrBankExtendById(zyjrBank.getId());
-        iZyjrBankFlowService.deleteZyjrBankFlowById(zyjrBank.getId());
-        iZyjrBankProductService.deleteZyjrBankProductById(zyjrBank.getId());
+        iZyjrBankAccountService.deleteZyjrBankAccountByIdd(zyjrBank.getId());
+        iZyjrBankFlowService.deleteZyjrBankFlowByIdd(zyjrBank.getId());
+        iZyjrBankProductService.deleteZyjrBankProductByIdd(zyjrBank.getId());
         if(zyjrBank.getReturns().size()>0){
             for (ZyjrBankAccount aReturn : zyjrBank.getReturns()) {
                 aReturn.setBaoxian(zyjrBank.getId().toString());
@@ -115,14 +114,13 @@ public class ZyjrInsuranceTypeServiceImpl implements IZyjrInsuranceTypeService
 
             }
         }
-
         return zyjrBank.getId();
     }
 
     /**
      * 修改insuranceType
      * 
-     * @param zyjrInsuranceType insuranceType
+     * @param
      * @return 结果
      */
     @Override
@@ -130,10 +128,9 @@ public class ZyjrInsuranceTypeServiceImpl implements IZyjrInsuranceTypeService
     {
         zyjrBank.setUpdateTime(DateUtils.getNowDate());
         zyjrInsuranceTypeMapper.updateZyjrInsuranceType(zyjrBank);
-        iZyjrBankAccountService.deleteZyjrBankAccountById(zyjrBank.getId());
-        iZyjrBankExtendService.deleteZyjrBankExtendById(zyjrBank.getId());
-        iZyjrBankFlowService.deleteZyjrBankFlowById(zyjrBank.getId());
-        iZyjrBankProductService.deleteZyjrBankProductById(zyjrBank.getId());
+        iZyjrBankAccountService.deleteZyjrBankAccountByIdd(zyjrBank.getId());
+        iZyjrBankFlowService.deleteZyjrBankFlowByIdd(zyjrBank.getId());
+        iZyjrBankProductService.deleteZyjrBankProductByIdd(zyjrBank.getId());
         if(zyjrBank.getReturns().size()>0){
             for (ZyjrBankAccount aReturn : zyjrBank.getReturns()) {
                 aReturn.setBaoxian(zyjrBank.getId().toString());

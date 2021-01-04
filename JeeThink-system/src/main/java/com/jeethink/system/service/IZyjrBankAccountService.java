@@ -58,4 +58,6 @@ public interface IZyjrBankAccountService
      * @return 结果
      */
     public int deleteZyjrBankAccountById(Long id);
+
+    int deleteZyjrBankAccountByIdd(Long id);
 }

@@ -40,7 +40,7 @@ public class ZyjrBankController extends BaseController
     /**
      * 查询bank列表
      */
-    @PreAuthorize("@ss.hasPermi('organization:bank:list')")
+   // @PreAuthorize("@ss.hasPermi('organization:bank:list')")
     @GetMapping("/list")
     public TableDataInfo list(ZyjrBank zyjrBank)
     {

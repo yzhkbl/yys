@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrCardMapper">
+    
+    <resultMap type="ZyjrCard" id="ZyjrCardResult">
+        <result property="id"    column="id"    />
+        <result property="custsort"    column="custsort"    />
+        <result property="custcode"    column="custcode"    />
+        <result property="chnsname"    column="chnsname"    />
+        <result property="engname"    column="engname"    />
+        <result property="sex"    column="sex"    />
+        <result property="mrtlstat"    column="mrtlstat"    />
+        <result property="edulvl"    column="edulvl"    />
+        <result property="drawmode"    column="drawmode"    />
+        <result property="drawzono"    column="drawzono"    />
+        <result property="drawbrno"    column="drawbrno"    />
+        <result property="homestat"    column="homestat"    />
+        <result property="hprovince"    column="hprovince"    />
+        <result property="hcity"    column="hcity"    />
+        <result property="hcounty"    column="hcounty"    />
+        <result property="haddress"    column="haddress"    />
+        <result property="homezip"    column="homezip"    />
+        <result property="indate"    column="indate"    />
+        <result property="mvblno"    column="mvblno"    />
+        <result property="email"    column="email"    />
+        <result property="unitname"    column="unitname"    />
+        <result property="duty"    column="duty"    />
+        <result property="cophozono"    column="cophozono"    />
+        <result property="cophoneno"    column="cophoneno"    />
+        <result property="cprovince"    column="cprovince"    />
+        <result property="ccity"    column="ccity"    />
+        <result property="ccounty"    column="ccounty"    />
+        <result property="caddress"    column="caddress"    />
+        <result property="corpzip"    column="corpzip"    />
+        <result property="joindate"    column="joindate"    />
+        <result property="yearincome"    column="yearincome"    />
+        <result property="modelcode"    column="modelcode"    />
+        <result property="occptn"    column="occptn"    />
+        <result property="carstat"    column="carstat"    />
+        <result property="reltname1"    column="reltname1"    />
+        <result property="reltship1"    column="reltship1"    />
+        <result property="reltphzon1"    column="reltphzon1"    />
+        <result property="relaphone1"    column="relaphone1"    />
+        <result property="reltmobl1"    column="reltmobl1"    />
+        <result property="statdate"    column="statdate"    />
+        <result property="primnat"    column="primnat"    />
+        <result property="cstsign"    column="cstsign"    />
+        <result property="almebno"    column="almebno"    />
+        <result property="outcardno1"    column="outcardno1"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="transactionCode"    column="transaction_code"    />
+    </resultMap>
+
+    <sql id="selectZyjrCardVo">
+        select id, custsort, custcode, chnsname, engname, sex, mrtlstat, edulvl, drawmode, drawzono, drawbrno, homestat, hprovince, hcity, hcounty, haddress, homezip, indate, mvblno, email, unitname, duty, cophozono, cophoneno, cprovince, ccity, ccounty, caddress, corpzip, joindate, yearincome, modelcode, occptn, carstat, reltname1, reltship1, reltphzon1, relaphone1, reltmobl1, statdate, primnat, cstsign, almebno, outcardno1, create_by, create_time, update_by, update_time, transaction_code from zyjr_card
+    </sql>
+
+    <select id="selectZyjrCardList" parameterType="ZyjrCard" resultMap="ZyjrCardResult">
+        <include refid="selectZyjrCardVo"/>
+        <where>  
+            <if test="custsort != null "> and custsort = #{custsort}</if>
+            <if test="custcode != null  and custcode != ''"> and custcode = #{custcode}</if>
+            <if test="chnsname != null  and chnsname != ''"> and chnsname like concat('%', #{chnsname}, '%')</if>
+            <if test="engname != null  and engname != ''"> and engname like concat('%', #{engname}, '%')</if>
+            <if test="sex != null "> and sex = #{sex}</if>
+            <if test="mrtlstat != null "> and mrtlstat = #{mrtlstat}</if>
+            <if test="edulvl != null "> and edulvl = #{edulvl}</if>
+            <if test="drawmode != null "> and drawmode = #{drawmode}</if>
+            <if test="drawzono != null  and drawzono != ''"> and drawzono = #{drawzono}</if>
+            <if test="drawbrno != null  and drawbrno != ''"> and drawbrno = #{drawbrno}</if>
+            <if test="homestat != null "> and homestat = #{homestat}</if>
+            <if test="hprovince != null  and hprovince != ''"> and hprovince = #{hprovince}</if>
+            <if test="hcity != null  and hcity != ''"> and hcity = #{hcity}</if>
+            <if test="hcounty != null  and hcounty != ''"> and hcounty = #{hcounty}</if>
+            <if test="haddress != null  and haddress != ''"> and haddress = #{haddress}</if>
+            <if test="homezip != null  and homezip != ''"> and homezip = #{homezip}</if>
+            <if test="indate != null  and indate != ''"> and indate = #{indate}</if>
+            <if test="mvblno != null  and mvblno != ''"> and mvblno = #{mvblno}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="unitname != null  and unitname != ''"> and unitname like concat('%', #{unitname}, '%')</if>
+            <if test="duty != null "> and duty = #{duty}</if>
+            <if test="cophozono != null  and cophozono != ''"> and cophozono = #{cophozono}</if>
+            <if test="cophoneno != null  and cophoneno != ''"> and cophoneno = #{cophoneno}</if>
+            <if test="cprovince != null  and cprovince != ''"> and cprovince = #{cprovince}</if>
+            <if test="ccity != null  and ccity != ''"> and ccity = #{ccity}</if>
+            <if test="ccounty != null  and ccounty != ''"> and ccounty = #{ccounty}</if>
+            <if test="caddress != null  and caddress != ''"> and caddress = #{caddress}</if>
+            <if test="corpzip != null  and corpzip != ''"> and corpzip = #{corpzip}</if>
+            <if test="joindate != null  and joindate != ''"> and joindate = #{joindate}</if>
+            <if test="yearincome != null "> and yearincome = #{yearincome}</if>
+            <if test="modelcode != null "> and modelcode = #{modelcode}</if>
+            <if test="occptn != null "> and occptn = #{occptn}</if>
+            <if test="carstat != null "> and carstat = #{carstat}</if>
+            <if test="reltname1 != null  and reltname1 != ''"> and reltname1 = #{reltname1}</if>
+            <if test="reltship1 != null "> and reltship1 = #{reltship1}</if>
+            <if test="reltphzon1 != null  and reltphzon1 != ''"> and reltphzon1 = #{reltphzon1}</if>
+            <if test="relaphone1 != null  and relaphone1 != ''"> and relaphone1 = #{relaphone1}</if>
+            <if test="reltmobl1 != null  and reltmobl1 != ''"> and reltmobl1 = #{reltmobl1}</if>
+            <if test="statdate != null  and statdate != ''"> and statdate = #{statdate}</if>
+            <if test="primnat != null "> and primnat = #{primnat}</if>
+            <if test="cstsign != null "> and cstsign = #{cstsign}</if>
+            <if test="almebno != null  and almebno != ''"> and almebno = #{almebno}</if>
+            <if test="outcardno1 != null  and outcardno1 != ''"> and outcardno1 = #{outcardno1}</if>
+            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrCardById" parameterType="Long" resultMap="ZyjrCardResult">
+        <include refid="selectZyjrCardVo"/>
+        where id = #{id}
+    </select>
+    <select id="selectZyjrCardByTransactionCode" parameterType="String" resultMap="ZyjrCardResult">
+        <include refid="selectZyjrCardVo"/>
+        where transaction_code = #{transactionCode}
+    </select>
+        
+    <insert id="insertZyjrCard" parameterType="ZyjrCard" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_card
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="custsort != null">custsort,</if>
+            <if test="custcode != null">custcode,</if>
+            <if test="chnsname != null">chnsname,</if>
+            <if test="engname != null">engname,</if>
+            <if test="sex != null">sex,</if>
+            <if test="mrtlstat != null">mrtlstat,</if>
+            <if test="edulvl != null">edulvl,</if>
+            <if test="drawmode != null">drawmode,</if>
+            <if test="drawzono != null">drawzono,</if>
+            <if test="drawbrno != null">drawbrno,</if>
+            <if test="homestat != null">homestat,</if>
+            <if test="hprovince != null">hprovince,</if>
+            <if test="hcity != null">hcity,</if>
+            <if test="hcounty != null">hcounty,</if>
+            <if test="haddress != null">haddress,</if>
+            <if test="homezip != null">homezip,</if>
+            <if test="indate != null">indate,</if>
+            <if test="mvblno != null">mvblno,</if>
+            <if test="email != null">email,</if>
+            <if test="unitname != null">unitname,</if>
+            <if test="duty != null">duty,</if>
+            <if test="cophozono != null">cophozono,</if>
+            <if test="cophoneno != null">cophoneno,</if>
+            <if test="cprovince != null">cprovince,</if>
+            <if test="ccity != null">ccity,</if>
+            <if test="ccounty != null">ccounty,</if>
+            <if test="caddress != null">caddress,</if>
+            <if test="corpzip != null">corpzip,</if>
+            <if test="joindate != null">joindate,</if>
+            <if test="yearincome != null">yearincome,</if>
+            <if test="modelcode != null">modelcode,</if>
+            <if test="occptn != null">occptn,</if>
+            <if test="carstat != null">carstat,</if>
+            <if test="reltname1 != null">reltname1,</if>
+            <if test="reltship1 != null">reltship1,</if>
+            <if test="reltphzon1 != null">reltphzon1,</if>
+            <if test="relaphone1 != null">relaphone1,</if>
+            <if test="reltmobl1 != null">reltmobl1,</if>
+            <if test="statdate != null">statdate,</if>
+            <if test="primnat != null">primnat,</if>
+            <if test="cstsign != null">cstsign,</if>
+            <if test="almebno != null">almebno,</if>
+            <if test="outcardno1 != null">outcardno1,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="transactionCode != null">transaction_code,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="custsort != null">#{custsort},</if>
+            <if test="custcode != null">#{custcode},</if>
+            <if test="chnsname != null">#{chnsname},</if>
+            <if test="engname != null">#{engname},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="mrtlstat != null">#{mrtlstat},</if>
+            <if test="edulvl != null">#{edulvl},</if>
+            <if test="drawmode != null">#{drawmode},</if>
+            <if test="drawzono != null">#{drawzono},</if>
+            <if test="drawbrno != null">#{drawbrno},</if>
+            <if test="homestat != null">#{homestat},</if>
+            <if test="hprovince != null">#{hprovince},</if>
+            <if test="hcity != null">#{hcity},</if>
+            <if test="hcounty != null">#{hcounty},</if>
+            <if test="haddress != null">#{haddress},</if>
+            <if test="homezip != null">#{homezip},</if>
+            <if test="indate != null">#{indate},</if>
+            <if test="mvblno != null">#{mvblno},</if>
+            <if test="email != null">#{email},</if>
+            <if test="unitname != null">#{unitname},</if>
+            <if test="duty != null">#{duty},</if>
+            <if test="cophozono != null">#{cophozono},</if>
+            <if test="cophoneno != null">#{cophoneno},</if>
+            <if test="cprovince != null">#{cprovince},</if>
+            <if test="ccity != null">#{ccity},</if>
+            <if test="ccounty != null">#{ccounty},</if>
+            <if test="caddress != null">#{caddress},</if>
+            <if test="corpzip != null">#{corpzip},</if>
+            <if test="joindate != null">#{joindate},</if>
+            <if test="yearincome != null">#{yearincome},</if>
+            <if test="modelcode != null">#{modelcode},</if>
+            <if test="occptn != null">#{occptn},</if>
+            <if test="carstat != null">#{carstat},</if>
+            <if test="reltname1 != null">#{reltname1},</if>
+            <if test="reltship1 != null">#{reltship1},</if>
+            <if test="reltphzon1 != null">#{reltphzon1},</if>
+            <if test="relaphone1 != null">#{relaphone1},</if>
+            <if test="reltmobl1 != null">#{reltmobl1},</if>
+            <if test="statdate != null">#{statdate},</if>
+            <if test="primnat != null">#{primnat},</if>
+            <if test="cstsign != null">#{cstsign},</if>
+            <if test="almebno != null">#{almebno},</if>
+            <if test="outcardno1 != null">#{outcardno1},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="transactionCode != null">#{transactionCode},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrCard" parameterType="ZyjrCard">
+        update zyjr_card
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="custsort != null">custsort = #{custsort},</if>
+            <if test="custcode != null">custcode = #{custcode},</if>
+            <if test="chnsname != null">chnsname = #{chnsname},</if>
+            <if test="engname != null">engname = #{engname},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="mrtlstat != null">mrtlstat = #{mrtlstat},</if>
+            <if test="edulvl != null">edulvl = #{edulvl},</if>
+            <if test="drawmode != null">drawmode = #{drawmode},</if>
+            <if test="drawzono != null">drawzono = #{drawzono},</if>
+            <if test="drawbrno != null">drawbrno = #{drawbrno},</if>
+            <if test="homestat != null">homestat = #{homestat},</if>
+            <if test="hprovince != null">hprovince = #{hprovince},</if>
+            <if test="hcity != null">hcity = #{hcity},</if>
+            <if test="hcounty != null">hcounty = #{hcounty},</if>
+            <if test="haddress != null">haddress = #{haddress},</if>
+            <if test="homezip != null">homezip = #{homezip},</if>
+            <if test="indate != null">indate = #{indate},</if>
+            <if test="mvblno != null">mvblno = #{mvblno},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="unitname != null">unitname = #{unitname},</if>
+            <if test="duty != null">duty = #{duty},</if>
+            <if test="cophozono != null">cophozono = #{cophozono},</if>
+            <if test="cophoneno != null">cophoneno = #{cophoneno},</if>
+            <if test="cprovince != null">cprovince = #{cprovince},</if>
+            <if test="ccity != null">ccity = #{ccity},</if>
+            <if test="ccounty != null">ccounty = #{ccounty},</if>
+            <if test="caddress != null">caddress = #{caddress},</if>
+            <if test="corpzip != null">corpzip = #{corpzip},</if>
+            <if test="joindate != null">joindate = #{joindate},</if>
+            <if test="yearincome != null">yearincome = #{yearincome},</if>
+            <if test="modelcode != null">modelcode = #{modelcode},</if>
+            <if test="occptn != null">occptn = #{occptn},</if>
+            <if test="carstat != null">carstat = #{carstat},</if>
+            <if test="reltname1 != null">reltname1 = #{reltname1},</if>
+            <if test="reltship1 != null">reltship1 = #{reltship1},</if>
+            <if test="reltphzon1 != null">reltphzon1 = #{reltphzon1},</if>
+            <if test="relaphone1 != null">relaphone1 = #{relaphone1},</if>
+            <if test="reltmobl1 != null">reltmobl1 = #{reltmobl1},</if>
+            <if test="statdate != null">statdate = #{statdate},</if>
+            <if test="primnat != null">primnat = #{primnat},</if>
+            <if test="cstsign != null">cstsign = #{cstsign},</if>
+            <if test="almebno != null">almebno = #{almebno},</if>
+            <if test="outcardno1 != null">outcardno1 = #{outcardno1},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrCardById" parameterType="Long">
+        delete from zyjr_card where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrCardByIds" parameterType="String">
+        delete from zyjr_card where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

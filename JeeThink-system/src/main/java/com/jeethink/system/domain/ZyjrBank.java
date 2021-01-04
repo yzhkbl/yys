@@ -38,11 +38,11 @@ public class ZyjrBank extends BaseEntity
 
     /** 履约保险设置 */
     @Excel(name = "履约保险设置")
-    private Integer isInsurance;
+    private Boolean isInsurance;
 
     /** 是否电子签约设置 */
     @Excel(name = "是否电子签约设置")
-    private Integer isSign;
+    private Boolean isSign;
 
     /** 选择需要关联的字段模板 */
     @Excel(name = "选择需要关联的字段模板")
@@ -139,30 +139,30 @@ public class ZyjrBank extends BaseEntity
     {
         return phoneNumber;
     }
-    public void setIsInsurance(Integer isInsurance) 
+    public void setIsInsurance(Boolean isInsurance)
     {
         this.isInsurance = isInsurance;
     }
 
-    public Integer getIsInsurance() 
+    public Boolean getIsInsurance()
     {
         return isInsurance;
     }
-    public void setIsSign(Integer isSign) 
+    public void setIsSign(Boolean isSign)
     {
         this.isSign = isSign;
     }
 
-    public Integer getIsSign() 
+    public Boolean getIsSign()
     {
         return isSign;
     }
-    public void setTemplate(String template) 
+    public void setTemplate(String template)
     {
         this.template = template;
     }
 
-    public String getTemplate() 
+    public String getTemplate()
     {
         return template;
     }

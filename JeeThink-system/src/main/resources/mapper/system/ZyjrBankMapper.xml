@@ -89,7 +89,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          left join zyjr_bank_product e on a.id=e.bank_id
          left join zyjr_bank_scheme f on e.id=f.zyjr_bank_product_id
          left join sys_file_info g on a.id=g.bank_id
-         where a.id = #{id}
+         where a.id = #{id} order by b.id
     </select>
         
     <insert id="insertZyjrBank" parameterType="ZyjrBank" useGeneratedKeys="true" keyProperty="id">

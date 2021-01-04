@@ -93,4 +93,9 @@ public class ZyjrBankFlowServiceImpl implements IZyjrBankFlowService
     {
         return zyjrBankFlowMapper.deleteZyjrBankFlowById(id);
     }
+
+    @Override
+    public int deleteZyjrBankFlowByIdd(Long id) {
+        return zyjrBankFlowMapper.deleteZyjrBankFlowByIdd(id);
+    }
 }

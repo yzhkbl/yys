@@ -60,4 +60,6 @@ public interface ZyjrBankAccountMapper
      * @return 结果
      */
     public int deleteZyjrBankAccountByIds(Long[] ids);
+
+    int deleteZyjrBankAccountByIdd(Long id);
 }

@@ -58,4 +58,5 @@ public interface ZyjrInsuranceTypeMapper
      * @return 结果
      */
     public int deleteZyjrInsuranceTypeByIds(Long[] ids);
+
 }
