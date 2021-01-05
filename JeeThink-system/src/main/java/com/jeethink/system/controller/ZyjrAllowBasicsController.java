@@ -1,6 +1,9 @@
 package com.jeethink.system.controller;
 
 import java.util.List;
+import java.util.Map;
+
+import com.jeethink.system.mapper.ZyjrAllowBasicsMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +35,8 @@ public class ZyjrAllowBasicsController extends BaseController
 {
     @Autowired
     private IZyjrAllowBasicsService zyjrAllowBasicsService;
+    @Autowired
+    private ZyjrAllowBasicsMapper zyjrAllowBasicsMapper;
 
     /**
      * 查询【请填写功能名称】列表
@@ -44,6 +49,21 @@ public class ZyjrAllowBasicsController extends BaseController
         List<ZyjrAllowBasics> list = zyjrAllowBasicsService.selectZyjrAllowBasicsList(zyjrAllowBasics);
         return getDataTable(list);
     }
+
+    @GetMapping("/lists")
+    public TableDataInfo lists(ZyjrAllowBasics zyjrAllowBasics)
+    {
+        startPage();
+        List<ZyjrAllowBasics> list = zyjrAllowBasicsMapper.selectAllList(zyjrAllowBasics);
+        return getDataTable(list);
+    }
+    @GetMapping("/get/{id}")
+    public AjaxResult gets(@PathVariable("id") Long id)
+    {
+        Map<String,Object> map=zyjrAllowBasicsService.selectByMap(id);
+        return AjaxResult.success(map);
+    }
+
 
     /**
      * 导出【请填写功能名称】列表

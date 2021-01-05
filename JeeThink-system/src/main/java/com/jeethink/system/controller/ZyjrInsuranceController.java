@@ -1,6 +1,16 @@
 package com.jeethink.system.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.jeethink.system.domain.ZyjrDaiqianAccout;
+import com.jeethink.system.domain.ZyjrGps;
+import com.jeethink.system.domain.vo.DqVo;
+import com.jeethink.system.mapper.ExamineMapper;
+import com.jeethink.system.mapper.ZyjrDaiqianAccoutMapper;
+import com.jeethink.system.mapper.ZyjrGpsMapper;
+import com.jeethink.system.mapper.ZyjrInsuranceMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +42,16 @@ public class ZyjrInsuranceController extends BaseController
 {
     @Autowired
     private IZyjrInsuranceService zyjrInsuranceService;
+    @Autowired
+    private ZyjrInsuranceMapper zyjrInsuranceMapper;
+    @Autowired
+    private ExamineMapper examineMapper;
+    @Autowired
+    private ZyjrGpsMapper zyjrGpsMapper;
+    @Autowired
+    private ZyjrDaiqianAccoutMapper zyjrDaiqianAccoutMapper;
+
+
 
     /**
      * 查询123列表
@@ -44,6 +64,59 @@ public class ZyjrInsuranceController extends BaseController
         List<ZyjrInsurance> list = zyjrInsuranceService.selectZyjrInsuranceList(zyjrInsurance);
         return getDataTable(list);
     }
+
+    @GetMapping("getCar/{transactionCode}")
+    public AjaxResult app(@PathVariable("transactionCode") String transactionCode){
+        ZyjrInsurance zyjrInsurance = zyjrInsuranceMapper.selectZyjrInsuranceByIds(transactionCode);
+        Map<String,Object> map=new HashMap<>();
+        map.put("id",zyjrInsurance.getId());
+        map.put("insuranceCompany",zyjrInsurance.getInsuranceCompany());
+        map.put("money",zyjrInsurance.getMoney());
+        map.put("zyjrCarId",zyjrInsurance.getZyjrCarId());
+        map.put("transactionCode",zyjrInsurance.getTransactionCode());
+        map.put("userId",zyjrInsurance.getUserId());
+
+        return AjaxResult.success("操作成功",zyjrInsurance);
+    }
+
+    @GetMapping("ceshi/{transactionCode}")
+    public AjaxResult apqp(@PathVariable("transactionCode") String transactionCode){
+        DqVo a=examineMapper.selectDQ(transactionCode);
+        return AjaxResult.success(a);
+    }
+
+
+    @PostMapping("update")
+    public AjaxResult insert(ZyjrInsurance zyjrInsurance){
+        DqVo a=examineMapper.selectDQ(zyjrInsurance.getTransactionCode());
+        ZyjrGps gps=new ZyjrGps();
+        gps.setId(a.getGps());
+        gps.setState("2");
+        ZyjrDaiqianAccout zyjrDaiqianAccout=new ZyjrDaiqianAccout();
+        zyjrDaiqianAccout.setId(a.getDaiqian());
+        zyjrDaiqianAccout.setState("2");
+        if(zyjrInsurance.getId()!=null){
+            zyjrInsurance.setState("1");
+             if("1".equals(a.getStateb())&&"1".equals(a.getStatec())){
+                 zyjrInsurance.setState("2");
+                 zyjrGpsMapper.updateZyjrGps(gps);
+                 zyjrDaiqianAccoutMapper.updateZyjrDaiqianAccout(zyjrDaiqianAccout);
+             }
+            zyjrInsuranceMapper.updateZyjrInsurance(zyjrInsurance);
+                return  AjaxResult.success();
+        }
+        zyjrInsurance.setState("1");
+        if("1".equals(a.getStateb())&&"1".equals(a.getStatec())){
+            zyjrInsurance.setState("2");
+            zyjrGpsMapper.updateZyjrGps(gps);
+            zyjrDaiqianAccoutMapper.updateZyjrDaiqianAccout(zyjrDaiqianAccout);
+        }
+        zyjrInsuranceMapper.insertZyjrInsurance(zyjrInsurance);
+            return  AjaxResult.success();
+    }
+
+
+
 
     /**
      * 导出123列表

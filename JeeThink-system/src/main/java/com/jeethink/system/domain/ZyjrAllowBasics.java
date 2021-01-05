@@ -1,5 +1,6 @@
 package com.jeethink.system.domain;
 
+import com.jeethink.system.domain.vo.Daiqian;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.jeethink.common.annotation.Excel;
@@ -59,8 +60,17 @@ public class ZyjrAllowBasics extends BaseEntity
     /** 订单状态 */
     @Excel(name = "订单状态")
     private Integer orderState;
+    private Daiqian daiqian;
 
-    public void setId(Long id) 
+    public Daiqian getDaiqian() {
+        return daiqian;
+    }
+
+    public void setDaiqian(Daiqian daiqian) {
+        this.daiqian = daiqian;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }

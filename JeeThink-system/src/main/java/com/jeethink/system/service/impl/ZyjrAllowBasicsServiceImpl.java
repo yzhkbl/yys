@@ -1,10 +1,13 @@
 package com.jeethink.system.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.jeethink.system.domain.*;
+import com.jeethink.system.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.jeethink.system.mapper.ZyjrAllowBasicsMapper;
-import com.jeethink.system.domain.ZyjrAllowBasics;
 import com.jeethink.system.service.IZyjrAllowBasicsService;
 
 /**
@@ -18,6 +21,16 @@ public class ZyjrAllowBasicsServiceImpl implements IZyjrAllowBasicsService
 {
     @Autowired
     private ZyjrAllowBasicsMapper zyjrAllowBasicsMapper;
+    @Autowired
+    private ZyjrCarMapper zyjrCarMapper;
+    @Autowired
+    private ZyjrCarAccountMapper zyjrCarAccountMapper;
+    @Autowired
+    private ZyjrGpsMapper zyjrGpsMapper;
+    @Autowired
+    private ZyjrPicMapper zyjrPicMapper;
+    @Autowired
+    private ZyjrInsuranceMapper zyjrInsuranceMapper;
 
     /**
      * 查询【请填写功能名称】
@@ -89,5 +102,31 @@ public class ZyjrAllowBasicsServiceImpl implements IZyjrAllowBasicsService
     public int deleteZyjrAllowBasicsById(Long id)
     {
         return zyjrAllowBasicsMapper.deleteZyjrAllowBasicsById(id);
+    }
+
+    @Override
+    public Map<String, Object> selectByMap(Long id) {
+        Map<String,Object> map=new HashMap<>();
+        ZyjrAllowBasics zyjrAllowBasics = zyjrAllowBasicsMapper.selectById(id);
+        ZyjrCar zyjrCar = zyjrCarMapper.selectZyjrCarById(zyjrAllowBasics.getDealersId());
+        ZyjrCarAccount z=new ZyjrCarAccount();
+        if(zyjrCar!=null&&zyjrCar.getId()!=null){
+            z.setZyjrCarId(zyjrCar.getId().toString());
+            List<ZyjrCarAccount> zyjrCarAccounts = zyjrCarAccountMapper.selectZyjrCarAccountList(z);
+            map.put("Account",zyjrCarAccounts);
+        }
+        ZyjrGps zyjrGps = zyjrGpsMapper.selectZyjrGpsById(zyjrAllowBasics.getTransactionCode());
+
+            map.put("Gps",zyjrGps);
+        if(zyjrGps!=null){
+            ZyjrPic pic=new ZyjrPic();
+            pic.setGpsId(zyjrGps.getId().toString());
+            List<ZyjrPic> zyjrPics = zyjrPicMapper.selectZyjrPicList(pic);
+            map.put("pic",zyjrPics);
+        }
+        ZyjrInsurance zyjrInsurance = zyjrInsuranceMapper.selectZyjrInsuranceByIds(zyjrAllowBasics.getTransactionCode());
+        map.put("Insurance",zyjrInsurance);
+
+        return map;
     }
 }

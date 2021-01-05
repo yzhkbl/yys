@@ -1,49 +1,47 @@
 package com.jeethink.system.service;
 
 import java.util.List;
-import java.util.Map;
-
-import com.jeethink.system.domain.ZyjrAllowBasics;
+import com.jeethink.system.domain.ZyjrPic;
 
 /**
  * 【请填写功能名称】Service接口
  * 
  * @author jeethink
- * @date 2020-12-22
+ * @date 2021-01-05
  */
-public interface IZyjrAllowBasicsService 
+public interface IZyjrPicService 
 {
     /**
      * 查询【请填写功能名称】
      * 
-     * @param userId 【请填写功能名称】ID
+     * @param id 【请填写功能名称】ID
      * @return 【请填写功能名称】
      */
-    public ZyjrAllowBasics selectZyjrAllowBasicsById(Long userId,String transactionCode);
+    public ZyjrPic selectZyjrPicById(Long id);
 
     /**
      * 查询【请填写功能名称】列表
      * 
-     * @param zyjrAllowBasics 【请填写功能名称】
+     * @param zyjrPic 【请填写功能名称】
      * @return 【请填写功能名称】集合
      */
-    public List<ZyjrAllowBasics> selectZyjrAllowBasicsList(ZyjrAllowBasics zyjrAllowBasics);
+    public List<ZyjrPic> selectZyjrPicList(ZyjrPic zyjrPic);
 
     /**
      * 新增【请填写功能名称】
      * 
-     * @param zyjrAllowBasics 【请填写功能名称】
+     * @param zyjrPic 【请填写功能名称】
      * @return 结果
      */
-    public int insertZyjrAllowBasics(ZyjrAllowBasics zyjrAllowBasics);
+    public int insertZyjrPic(ZyjrPic zyjrPic);
 
     /**
      * 修改【请填写功能名称】
      * 
-     * @param zyjrAllowBasics 【请填写功能名称】
+     * @param zyjrPic 【请填写功能名称】
      * @return 结果
      */
-    public int updateZyjrAllowBasics(ZyjrAllowBasics zyjrAllowBasics);
+    public int updateZyjrPic(ZyjrPic zyjrPic);
 
     /**
      * 批量删除【请填写功能名称】
@@ -51,7 +49,7 @@ public interface IZyjrAllowBasicsService
      * @param ids 需要删除的【请填写功能名称】ID
      * @return 结果
      */
-    public int deleteZyjrAllowBasicsByIds(Long[] ids);
+    public int deleteZyjrPicByIds(Long[] ids);
 
     /**
      * 删除【请填写功能名称】信息
@@ -59,7 +57,5 @@ public interface IZyjrAllowBasicsService
      * @param id 【请填写功能名称】ID
      * @return 结果
      */
-    public int deleteZyjrAllowBasicsById(Long id);
-
-    Map<String, Object> selectByMap(Long id);
+    public int deleteZyjrPicById(Long id);
 }

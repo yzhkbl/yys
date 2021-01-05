@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrDaiqianAccoutMapper">
+    
+    <resultMap type="ZyjrDaiqianAccout" id="ZyjrDaiqianAccoutResult">
+        <result property="id"    column="id"    />
+        <result property="transactionCode"    column="transaction_code"    />
+        <result property="state"    column="state"    />
+        <result property="accountId"    column="account_id"    />
+        <result property="accountOne"    column="account_one"    />
+    </resultMap>
+
+    <sql id="selectZyjrDaiqianAccoutVo">
+        select id, transaction_code, state, account_id, account_one from zyjr_daiqian_accout
+    </sql>
+
+    <select id="selectZyjrDaiqianAccoutList" parameterType="ZyjrDaiqianAccout" resultMap="ZyjrDaiqianAccoutResult">
+        <include refid="selectZyjrDaiqianAccoutVo"/>
+        <where>  
+            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
+            <if test="state != null  and state != ''"> and state = #{state}</if>
+            <if test="accountId != null  and accountId != ''"> and account_id = #{accountId}</if>
+            <if test="accountOne != null  and accountOne != ''"> and account_one = #{accountOne}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrDaiqianAccoutById" parameterType="Long" resultMap="ZyjrDaiqianAccoutResult">
+        <include refid="selectZyjrDaiqianAccoutVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectById" parameterType="String" resultMap="ZyjrDaiqianAccoutResult">
+        <include refid="selectZyjrDaiqianAccoutVo"/>
+        where transaction_code = #{transactionCode}
+    </select>
+        
+    <insert id="insertZyjrDaiqianAccout" parameterType="ZyjrDaiqianAccout" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_daiqian_accout
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="transactionCode != null">transaction_code,</if>
+            <if test="state != null">state,</if>
+            <if test="accountId != null">account_id,</if>
+            <if test="accountOne != null">account_one,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="transactionCode != null">#{transactionCode},</if>
+            <if test="state != null">#{state},</if>
+            <if test="accountId != null">#{accountId},</if>
+            <if test="accountOne != null">#{accountOne},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrDaiqianAccout" parameterType="ZyjrDaiqianAccout">
+        update zyjr_daiqian_accout
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="accountId != null">account_id = #{accountId},</if>
+            <if test="accountOne != null">account_one = #{accountOne},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrDaiqianAccoutById" parameterType="Long">
+        delete from zyjr_daiqian_accout where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrDaiqianAccoutByIds" parameterType="String">
+        delete from zyjr_daiqian_accout where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

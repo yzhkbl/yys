@@ -29,6 +29,13 @@
         (#{id},#{userName},#{idCard},#{bankCardNo},#{phoneNumber},#{issueAuthority},#{startDate},#{endDate},#{familyAddress},#{company},#{companyAddress},#{yearIncome},#{obverseId},
         #{obverseCode},#{obverseAddress},#{obverseName},#{backId},#{backCode},#{backAddress},#{backName},#{powerId},#{powerCode},#{powerAddress},#{powerName},#{creditPower},#{peopleShip},#{userId},#{orderState},#{transactionCode})
     </insert>
+
+    <insert id="insertDaiqian" parameterType="com.jeethink.system.domain.ZyjrDaiqian">
+        insert into zyjr_daiqian
+        (state,opinion,transaction_code)
+        values
+        (#{state},#{opinion},#{transactionCode})
+    </insert>
     <insert id="insertBusiness" parameterType="com.jeethink.system.domain.ZyjrBusiness">
         insert into zyjr_business
         (id,team,car_information,intention_price,loan_money,repay_period,car_type,user_id,order_state,transaction_code)
@@ -68,6 +75,17 @@
         select dealer_name, area, city, bazaar,  id, state,three_car_state,two_car_state,one_car_state,create_by, create_time
         from zyjr_car
        where two_car_state="1" and create_by=#{userId}
+    </select>
+    <select id="selByDaiqian" resultType="com.jeethink.system.domain.ZyjrDaiqian" >
+        select *
+        from zyjr_daiqian
+       where transaction_code=#{transactionCode}
+    </select>
+    <select id="selectDQ" resultType="com.jeethink.system.domain.vo.DqVo" >
+       select a.state statea,b.state stateb,c.state statec,a.id insurance,b.id gps,c.id daiqian from zyjr_insurance a
+        LEFT JOIN zyjr_gps b on a.transaction_code=b.transaction_code
+        LEFT JOIN zyjr_daiqian_accout c on a.transaction_code=c.transaction_code
+        where a.transaction_code=#{transactionCode}
     </select>
     <insert id="insertStart" parameterType="com.jeethink.system.domain.ZyjrStartPage">
         insert into zyjr_start_page
@@ -177,6 +195,10 @@
 
     <update id="updateByCode">
         update zyjr_start_page set private_code=#{privateCode} where transaction_code=#{transactionCode}
+    </update>
+
+    <update id="updateByDaiqian">
+        update zyjr_daiqian set state=#{state},opinion=#{opinion} where transaction_code=#{transactionCode}
     </update>
 
     <update id="updateRelation">

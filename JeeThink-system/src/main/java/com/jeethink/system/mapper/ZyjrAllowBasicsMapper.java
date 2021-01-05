@@ -19,6 +19,8 @@ public interface ZyjrAllowBasicsMapper
      * @return 【请填写功能名称】
      */
     public ZyjrAllowBasics selectZyjrAllowBasicsById(@Param("userId") Long userId, @Param("transactionCode") String transactionCode);
+    public ZyjrAllowBasics selectById(Long id);
+    public ZyjrAllowBasics selectByT(String id);
 
     /**
      * 查询【请填写功能名称】列表
@@ -59,4 +61,6 @@ public interface ZyjrAllowBasicsMapper
      * @return 结果
      */
     public int deleteZyjrAllowBasicsByIds(Long[] ids);
+
+    List<ZyjrAllowBasics> selectAllList(ZyjrAllowBasics zyjrAllowBasics);
 }

@@ -1,6 +1,7 @@
 package com.jeethink.system.mapper;
 
 import com.jeethink.system.domain.*;
+import com.jeethink.system.domain.vo.DqVo;
 import com.jeethink.system.domain.vo.Linkman;
 import com.jeethink.system.domain.vo.carVo;
 import org.apache.ibatis.annotations.Mapper;
@@ -10,6 +11,9 @@ import java.util.List;
 
 @Mapper
 public interface ExamineMapper {
+    ZyjrDaiqian selByDaiqian(String transactionCode);
+    int insertDaiqian(ZyjrDaiqian zyjrDaiqian);
+    int updateByDaiqian(ZyjrDaiqian zyjrDaiqian);
     /**借款人信息添加*/
     int insertBorrower(ZyjrBorrower q);
     /**关联人信息添加*/
@@ -55,4 +59,5 @@ public interface ExamineMapper {
     List<carVo> selectZyjrCarLists(String userId);
 
     Linkman selectZyjrCarByLinkman(Long id);
+    DqVo selectDQ(String transactionCode);
 }

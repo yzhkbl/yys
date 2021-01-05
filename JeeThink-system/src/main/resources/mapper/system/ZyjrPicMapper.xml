@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrPicMapper">
+    
+    <resultMap type="ZyjrPic" id="ZyjrPicResult">
+        <result property="id"    column="id"    />
+        <result property="fileName"    column="file_name"    />
+        <result property="filePath"    column="file_path"    />
+        <result property="gpsId"    column="gps_id"    />
+    </resultMap>
+
+    <sql id="selectZyjrPicVo">
+        select id, file_name, file_path,gps_id from zyjr_pic
+    </sql>
+
+    <select id="selectZyjrPicList" parameterType="ZyjrPic" resultMap="ZyjrPicResult">
+        <include refid="selectZyjrPicVo"/>
+        <where>  
+            <if test="fileName != null  and fileName != ''"> and file_name like concat('%', #{fileName}, '%')</if>
+            <if test="filePath != null  and filePath != ''"> and file_path = #{filePath}</if>
+            <if test="gpsId != null  and gpsId != ''"> and gps_id = #{gpsId}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrPicById" parameterType="Long" resultMap="ZyjrPicResult">
+        <include refid="selectZyjrPicVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrPic" parameterType="ZyjrPic" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_pic
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fileName != null">file_name,</if>
+            <if test="filePath != null">file_path,</if>
+            <if test="gpsId != null">gps_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fileName != null">#{fileName},</if>
+            <if test="filePath != null">#{filePath},</if>
+            <if test="gpsId != null">#{gpsId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrPic" parameterType="ZyjrPic">
+        update zyjr_pic
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fileName != null">file_name = #{fileName},</if>
+            <if test="filePath != null">file_path = #{filePath},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrPicById" parameterType="Long">
+        delete from zyjr_pic where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrPicByIds" parameterType="String">
+        delete from zyjr_pic where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
