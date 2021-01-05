@@ -1,7 +1,11 @@
 package com.jeethink.system.controller;
 
+import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
+import com.jeethink.common.core.page.TableDataInfo;
+import com.jeethink.system.domain.ZyjrBusiness;
 import com.jeethink.system.domain.ZyjrDetails;
+import com.jeethink.system.domain.ZyjrRepeatOpinion;
 import com.jeethink.system.service.IStageExamineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +15,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/stage")
-public class StageExamineController {
+public class StageExamineController extends BaseController {
     @Autowired
     private IStageExamineService stageExamineService;
 
@@ -37,5 +41,22 @@ public class StageExamineController {
         System.err.println(userId);
         System.err.println(transactionCode);
         return AjaxResult.success(stageExamineService.findByAllow(userId, transactionCode));
+    }
+
+    @RequestMapping("/add/opinion")
+    public AjaxResult addOpinion(@RequestBody ZyjrRepeatOpinion q){
+        return AjaxResult.success(stageExamineService.addOpinion(q));
+    }
+
+    @RequestMapping("/find/opinion")
+    public AjaxResult findOpinion(String transactionCode){
+        return AjaxResult.success(stageExamineService.findOpinion(transactionCode));
+    }
+
+    @RequestMapping("/list")
+    public TableDataInfo list(){
+        startPage();
+        List<ZyjrBusiness>list = stageExamineService.list();
+        return getDataTable(list);
     }
 }

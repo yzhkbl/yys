@@ -2,6 +2,8 @@ package com.jeethink.system.mapper;
 
 import com.jeethink.system.domain.*;
 
+import java.util.List;
+
 public interface StageExamineMapper {
     /**借款人信息查询*/
     ZyjrBorrower findByBorrower(String transactionCode);
@@ -15,4 +17,9 @@ public interface StageExamineMapper {
     int insertBank(ZyjrDetails q);
     /**征信详情回显*/
     ZyjrDetails findByDetails(String transactionCode);
+
+
+    int insertOpinion(ZyjrRepeatOpinion q);
+    ZyjrRepeatOpinion findOpinion(String transactionCode);
+    List<ZyjrBusiness> list();
 }

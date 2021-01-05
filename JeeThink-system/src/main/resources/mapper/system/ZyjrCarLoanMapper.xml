@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="selectZyjrCarLoanById" resultMap="ZyjrCarLoanResult">
         <include refid="selectZyjrCarLoanVo"/>
-        where user_id = #{userId} and transaction_code=#{transactionCode} and order_state=0
+        where user_id = #{userId} and transaction_code=#{transactionCode}
     </select>
         
     <insert id="insertZyjrCarLoan" parameterType="ZyjrCarLoan" useGeneratedKeys="true" keyProperty="id">
@@ -135,7 +135,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="orderState != null">order_state = #{orderState},</if>
             <if test="userId != null">user_id = #{userId},</if>
         </trim>
-        where user_id = #{userId} and transaction_code=#{transactionCode} and order_state=0
+        where user_id = #{userId} and transaction_code=#{transactionCode}
     </update>
 
     <delete id="deleteZyjrCarLoanById" parameterType="Long">

@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="selectZyjrAllowOpinionById" resultMap="ZyjrAllowOpinionResult">
         <include refid="selectZyjrAllowOpinionVo"/>
-        where id = #{id}
+        where transaction_code = #{transactionCode}
     </select>
         
     <insert id="insertZyjrAllowOpinion" parameterType="ZyjrAllowOpinion" useGeneratedKeys="true" keyProperty="id">

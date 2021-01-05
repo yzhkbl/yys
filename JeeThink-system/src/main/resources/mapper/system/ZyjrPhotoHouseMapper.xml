@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="selectZyjrPhotoHouseById" resultMap="ZyjrPhotoHouseResult">
         <include refid="selectZyjrPhotoHouseVo"/>
-        where user_id = #{userId} and transaction_code=#{transactionCode} and order_state=0
+        where user_id = #{userId} and transaction_code=#{transactionCode}
     </select>
         
     <insert id="insertZyjrPhotoHouse" parameterType="ZyjrPhotoHouse" useGeneratedKeys="true" keyProperty="id">

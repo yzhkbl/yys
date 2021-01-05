@@ -22,4 +22,8 @@ public interface IStageExamineService {
     ZyjrDetails findBankDetails(String transactionCode);
 
     Map<String,Object> findByAllow(Long userId,String transactionCode);
+
+    int addOpinion(ZyjrRepeatOpinion q);
+    ZyjrRepeatOpinion findOpinion(String transactionCode);
+    List<ZyjrBusiness> list();
 }
