@@ -22,13 +22,13 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
     /**
      * 查询【请填写功能名称】
      * 
-     * @param id 【请填写功能名称】ID
+     * @param transactionCode 【请填写功能名称】ID
      * @return 【请填写功能名称】
      */
     @Override
-    public ZyjrAllowOpinion selectZyjrAllowOpinionById(Long id)
+    public ZyjrAllowOpinion selectZyjrAllowOpinionById(String transactionCode)
     {
-        return zyjrAllowOpinionMapper.selectZyjrAllowOpinionById(id);
+        return zyjrAllowOpinionMapper.selectZyjrAllowOpinionById(transactionCode);
     }
 
     /**

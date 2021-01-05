@@ -37,21 +37,22 @@
         from zyjr_details
         where transaction_code=#{transactionCode}
     </select>
-    <select id="find">
-        select a.id, a.household_nature, a.live_time, a.live_address, a.phone_number, a.house_power, a.education, a.is_license, a.driver_ship, a.license_type, a.unit_name, a.work_address, a.unit_phone, a.unit_nature, a.industry, a.position, a.monthly_income, a.marriage, a.card_address, a.back_address, a.spouse_name, a.id_number, a.permanent_address, a.phone_no, a.spouse_education, a.spouse_unit_name, a.spouse_work_place, a.spouse_work_phone, a.spouse_monthly_income, a.order_state, a.transaction_code, a.user_id
-        b.id, b.approval_type, b.dealers_id, b.dealer_stores, b.plate_type, b.market, b.store, b.operate, b.more_info, b.user_id, b.transaction_code, b.order_state
-        c.id, c.name_one, c.ship_one, c.phone_one, c.name_two, c.ship_two, c.phone_two, c.transaction_code, c.order_state, c.user_id
-        d.id, d.car_type, d.vin_code, d.brand, d.car_series, d.car_year, d.displacement, d.gear, d.style, d.engine_code, d.fuel_type, d.mileage, d.start_date, d.actual_price, d.loan_amount, d.repayment_term, d.interest_rate, d.deposit, d.transaction_code, d.order_state, d.user_id
-        e.id, e.is_any, e.company_name, e.enterprise_type, e.register_money, e.establish_time, e.operation_period, e.company_city, e.company_address, e.corporate_id, e.corporate_phone, e.transaction_code, e.order_state, e.user_id
-        f.id, f.is_debt, f.people_ship, f.card_address, f.back_address, f.debt_name, f.id_card, f.education, f.now_place, f.phone_namber, f.now_work, f.work_place, f.company_phone, f.company_nature, f.monthly_income, f.user_id, f.transaction_code, f.order_state
-        g.id, g.is_any, g.card_address, g.back_address, g.guarantee_name, g.id_number, g.people_ship, g.education, g.monthly_income, g.detail_place, g.phone_number, g.work_unit, g.unit_place, g.work_phone, g.transaction_code, g.order_state, g.user_id
 
-        from zyjr_allow_applicant a
-        left join zyjr_allow_basics b on b.user_id=a.user_id and b.transaction_code=a.transaction_code
-        left join zyjr_allow_contacts c on c.user_id=c.user_id and c.transaction_code=b.transaction_code
-        left join zyjr_car_loan d on d.user_id=c.user_id and d.transaction_code=b.transaction_code
-        left join zyjr_company_guarantee e on e.user_id=d.user_id and e.transaction_code=d.transaction_code
-        left join zyjr_debt_service f on f.user_id=e.user_id and f.transaction_code=e.transaction_code
-        left join zyjr_people_guarantee g on g.user_id=f.user_id and g.transaction_code=f.transaction_code
+    <insert id="insertOpinion" parameterType="com.jeethink.system.domain.ZyjrRepeatOpinion">
+        insert into zyjr_repeat_opinion
+        (advise, approval_type, transaction_code, user_id)
+        values
+        (#{advise},#{approvalType},#{transactionCode},#{userId})
+    </insert>
+    <select id="findOpinion" resultType="com.jeethink.system.domain.ZyjrRepeatOpinion">
+        select id, advise, approval_type, transaction_code, user_id
+        from zyjr_repeat_opinion
+        where transaction_code=#{transactionCode}
+    </select>
+    <select id="list" resultType="com.jeethink.system.domain.ZyjrBusiness">
+        select a.id, a.team,a.operator,a.update_by,a.false_operator,a.false_operator_id, a.car_information, a.intention_price, a.loan_money, a.repay_period, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name
+         from zyjr_business a
+         left join zyjr_borrower b on a.transaction_code=b.transaction_code
+         where b.transaction_code in (select transaction_code from zyjr_allow_opinion where approval_type=1)
     </select>
 </mapper>

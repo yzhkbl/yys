@@ -110,6 +110,18 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         return map;
     }
 
+    @Override
+    public int addOpinion(ZyjrRepeatOpinion q){
+        return examineDao.insertOpinion(q);
+    }
 
+    @Override
+    public ZyjrRepeatOpinion findOpinion(String transactionCode){
+        return examineDao.findOpinion(transactionCode);
+    }
 
+    @Override
+    public List<ZyjrBusiness> list(){
+        return examineDao.list();
+    }
 }

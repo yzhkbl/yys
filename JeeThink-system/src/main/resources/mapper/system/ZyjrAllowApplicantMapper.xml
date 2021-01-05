@@ -79,10 +79,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null "> and user_id = #{userId}</if>
         </where>
     </select>
-    
+
     <select id="selectZyjrAllowApplicantById" resultMap="ZyjrAllowApplicantResult">
         <include refid="selectZyjrAllowApplicantVo"/>
-        where user_id = #{userId} and transaction_code=#{transactionCode} and order_state=0
+        where user_id = #{userId} and transaction_code=#{transactionCode}
     </select>
         
     <insert id="insertZyjrAllowApplicant" parameterType="ZyjrAllowApplicant" useGeneratedKeys="true" keyProperty="id">
@@ -190,7 +190,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
             <if test="userId != null">user_id = #{userId},</if>
         </trim>
-        where user_id = #{userId} and transaction_code=#{transactionCode} and order_state=0
+        where user_id = #{userId} and transaction_code=#{transactionCode}
     </update>
 
     <delete id="deleteZyjrAllowApplicantById" parameterType="Long">

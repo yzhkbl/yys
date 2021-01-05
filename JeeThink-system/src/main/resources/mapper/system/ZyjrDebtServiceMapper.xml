@@ -54,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="selectZyjrDebtServiceById" resultMap="ZyjrDebtServiceResult">
         <include refid="selectZyjrDebtServiceVo"/>
-        where user_id = #{userId} and transaction_code=#{transactionCode} and order_state=0
+        where user_id = #{userId} and transaction_code=#{transactionCode}
     </select>
         
     <insert id="insertZyjrDebtService" parameterType="ZyjrDebtService" useGeneratedKeys="true" keyProperty="id">
@@ -120,7 +120,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
             <if test="orderState != null">order_state = #{orderState},</if>
         </trim>
-        where user_id = #{userId} and transaction_code=#{transactionCode} and order_state=0
+        where user_id = #{userId} and transaction_code=#{transactionCode}
     </update>
 
     <delete id="deleteZyjrDebtServiceById" parameterType="Long">
