@@ -7,6 +7,7 @@ import com.jeethink.common.utils.DateUtils;
 import com.jeethink.common.utils.SecurityUtils;
 import com.jeethink.common.utils.file.FileUploadUtils;
 import com.jeethink.common.utils.file.FileUtils;
+import com.jeethink.common.utils.ip.IpUtils;
 import com.jeethink.system.domain.SysFileInfo;
 import com.jeethink.system.domain.ZyjrCarAccount;
 import com.jeethink.system.domain.vo.Linkman;
@@ -212,7 +213,7 @@ a.setType(storeInformation.getType());
                 SysFileInfo sysFileInfo=new SysFileInfo();
                 sysFileInfo.setFileName("store");
                 sysFileInfo.setId(a.getId().toString());
-                String as = "http://192.168.31.82/dev-api" + asd;
+                String as = "http://"+ IpUtils.getHostIp() + asd;
                 sysFileInfo.setFilePath(as);
                 sysFileInfoMapper.insertSysFileInfo(sysFileInfo);
             }
@@ -228,7 +229,7 @@ a.setType(storeInformation.getType());
             sysFileInfoMapper.deleteSysFileInfoByCarId(storeInformation.getId());
             if(SysFileInfo!=null){
                 for (SysFileInfo sysFileInfo : SysFileInfo) {
-                    String paths = "E:/demo/JeeThink-admin/src/main/java/com/jeethink/web/";
+                    String paths = "C:/demo";
                     String[] s = sysFileInfo.getFilePath().split("//");
                     System.err.println(paths + "profile/web/" + s[1]);
                     boolean b = FileUtils.deleteFile(paths + "profile/web/" + s[1]);

@@ -27,6 +27,15 @@ public class ZyjrPic
     private String filePath;
 
     private String gpsId;
+    private String jinzhengu;
+
+    public String getJinzhengu() {
+        return jinzhengu;
+    }
+
+    public void setJinzhengu(String jinzhengu) {
+        this.jinzhengu = jinzhengu;
+    }
 
     public String getGpsId() {
         return gpsId;
