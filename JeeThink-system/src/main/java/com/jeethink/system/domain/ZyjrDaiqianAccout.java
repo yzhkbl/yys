@@ -34,7 +34,17 @@ public class ZyjrDaiqianAccout extends BaseEntity
     @Excel(name = "状态")
     private String accountOne;
 
-    public void setId(Long id) 
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }

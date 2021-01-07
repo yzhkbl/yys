@@ -65,4 +65,6 @@ public interface ZyjrCarAccountMapper
      */
     public int deleteZyjrCarAccountByIds(Long[] ids);
     int insertTestList(List<ZyjrCarAccount>  ZyjrCarAccount);
+
+    ZyjrCarAccount selectZyjrCarAccountByStringId(String accountId);
 }

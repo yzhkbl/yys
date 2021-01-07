@@ -190,7 +190,7 @@ ZyjrCarController extends BaseController {
             a.setBazaar(storeInformation.getBazaar());
             a.setShopType(storeInformation.getShopType());
             a.setBusinessType(storeInformation.getBusinessType());
-
+a.setType(storeInformation.getType());
             a.setBusinessNature(storeInformation.getBusinessNature());
             a.setStall(storeInformation.getStall());
             a.setDealerName(storeInformation.getDealerName());

@@ -12,6 +12,7 @@ import com.jeethink.common.core.redis.RedisCache;
 import com.jeethink.common.utils.file.FileUploadUtils;
 import com.jeethink.common.utils.file.FileUtils;
 import com.jeethink.common.utils.http.HttpUtils;
+import com.jeethink.common.utils.ip.IpUtils;
 import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.*;
 import com.jeethink.system.mapper.*;
@@ -337,6 +338,7 @@ public class test extends BaseController {
         return null;
     }
 
+
     public static JSONObject encryptData(String data, String dataPublicKey, String signPrivateKey, String assurerNo
             , String bankType, String busiCode, String platNo, String orderNo) {
         JSONObject request = new JSONObject();
@@ -366,7 +368,7 @@ public class test extends BaseController {
     @ApiOperation("111111111")
     public AjaxResult testFiles(String file) {
         String a = androidUpload.upload(file);
-        String as = "http://192.168.31.86:8080" + a;
+        String as = IpUtils.getHostIp() +":8080" + a;
         return AjaxResult.success("" + as);
     }
 
@@ -378,7 +380,7 @@ public class test extends BaseController {
         for (int i = 0; i < id.size(); i++) {
             String a = FileUploadUtils.upload(file.get(i));
             SysFileInfo info = new SysFileInfo();
-            String as = "http://192.168.31.82/dev-api" + a;
+            String as = IpUtils.getHostIp() +":8080"+ a;
             info.setFilePath(as);
             info.setId(id.get(i));
             info.setFileName(name.get(i));

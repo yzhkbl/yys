@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.jeethink.system.domain.*;
 import com.jeethink.system.mapper.*;
+import com.jeethink.system.service.IZyjrDaiqianAccoutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.jeethink.system.service.IZyjrAllowBasicsService;
@@ -31,6 +32,8 @@ public class ZyjrAllowBasicsServiceImpl implements IZyjrAllowBasicsService
     private ZyjrPicMapper zyjrPicMapper;
     @Autowired
     private ZyjrInsuranceMapper zyjrInsuranceMapper;
+    @Autowired
+    private IZyjrDaiqianAccoutService zyjrDaiqianAccoutService;
 
     /**
      * 查询【请填写功能名称】
@@ -108,12 +111,25 @@ public class ZyjrAllowBasicsServiceImpl implements IZyjrAllowBasicsService
     public Map<String, Object> selectByMap(Long id) {
         Map<String,Object> map=new HashMap<>();
         ZyjrAllowBasics zyjrAllowBasics = zyjrAllowBasicsMapper.selectById(id);
+        if(zyjrAllowBasics==null||id==null){
+            return null;
+        }
         ZyjrCar zyjrCar = zyjrCarMapper.selectZyjrCarById(zyjrAllowBasics.getDealersId());
         ZyjrCarAccount z=new ZyjrCarAccount();
         if(zyjrCar!=null&&zyjrCar.getId()!=null){
-            z.setZyjrCarId(zyjrCar.getId().toString());
+          /*  z.setZyjrCarId(zyjrCar.getId().toString());
             List<ZyjrCarAccount> zyjrCarAccounts = zyjrCarAccountMapper.selectZyjrCarAccountList(z);
-            map.put("Account",zyjrCarAccounts);
+            map.put("Account",zyjrCarAccounts);*/
+            ZyjrDaiqianAccout a=zyjrDaiqianAccoutService.selectZyjrDaiqianAccoutByIds(zyjrAllowBasics.getTransactionCode());
+            map.put("Account",null);
+            map.put("Account2",null);
+            if(a!=null){
+                ZyjrCarAccount b=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountId());
+                ZyjrCarAccount c=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountOne());
+                map.put("Account",b);
+                map.put("Account2",c);
+            }
+
         }
         ZyjrGps zyjrGps = zyjrGpsMapper.selectZyjrGpsById(zyjrAllowBasics.getTransactionCode());
 

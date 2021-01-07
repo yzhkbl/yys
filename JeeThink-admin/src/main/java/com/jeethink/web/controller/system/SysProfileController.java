@@ -1,6 +1,8 @@
 package com.jeethink.web.controller.system;
 
 import java.io.IOException;
+
+import com.jeethink.common.utils.ip.IpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,6 +54,7 @@ public class SysProfileController extends BaseController
         ajax.put("postGroup", userService.selectUserPostGroup(loginUser.getUsername()));
         return ajax;
     }
+
 
     /**
      * 修改用户
@@ -112,11 +115,8 @@ public class SysProfileController extends BaseController
         if (!file.isEmpty())
         {
             LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
-            System.err.println(JeeThinkConfig.getAvatarPath());
-            String avatar = FileUploadUtils.upload(JeeThinkConfig.getAvatarPath(), file);
-            System.err.println(avatar);
-            System.err.println(JeeThinkConfig.getAvatarPath());
-            System.err.println(file);
+            String avatar = FileUploadUtils.uploads(JeeThinkConfig.getAvatarPath(), file);
+            avatar= "http://"+IpUtils.getHostIp() +":8080" +avatar;
             if (userService.updateUserAvatar(loginUser.getUsername(), avatar))
             {
                 AjaxResult ajax = AjaxResult.success();

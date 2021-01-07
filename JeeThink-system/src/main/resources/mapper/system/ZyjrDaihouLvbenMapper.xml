@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrDaihouLvbenMapper">
+    
+    <resultMap type="ZyjrDaihouLvben" id="ZyjrDaihouLvbenResult">
+        <result property="id"    column="id"    />
+        <result property="shenqingdanhao"    column="shenqingdanhao"    />
+        <result property="name"    column="name"    />
+        <result property="gongsi"    column="gongsi"    />
+        <result property="kuaididanhao"    column="kuaididanhao"    />
+        <result property="type"    column="type"    />
+        <result property="count"    column="count"    />
+        <result property="fujian"    column="fujian"    />
+        <result property="daihou"    column="daihou"    />
+    </resultMap>
+
+    <sql id="selectZyjrDaihouLvbenVo">
+        select id, shenqingdanhao,daihou, name, gongsi, kuaididanhao, type, count, fujian from zyjr_daihou_lvben
+    </sql>
+
+    <select id="selectZyjrDaihouLvbenList" parameterType="ZyjrDaihouLvben" resultMap="ZyjrDaihouLvbenResult">
+        <include refid="selectZyjrDaihouLvbenVo"/>
+        <where>  
+            <if test="shenqingdanhao != null  and shenqingdanhao != ''"> and shenqingdanhao = #{shenqingdanhao}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="gongsi != null  and gongsi != ''"> and gongsi = #{gongsi}</if>
+            <if test="kuaididanhao != null  and kuaididanhao != ''"> and kuaididanhao = #{kuaididanhao}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="count != null  and count != ''"> and count = #{count}</if>
+            <if test="fujian != null  and fujian != ''"> and fujian = #{fujian}</if>
+            <if test="daihou != null  and daihou != ''"> and daihou = #{daihou}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrDaihouLvbenById" parameterType="Long" resultMap="ZyjrDaihouLvbenResult">
+        <include refid="selectZyjrDaihouLvbenVo"/>
+        where daihou = #{id}
+    </select>
+        
+    <insert id="insertZyjrDaihouLvben" parameterType="ZyjrDaihouLvben" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_daihou_lvben
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="shenqingdanhao != null">shenqingdanhao,</if>
+            <if test="name != null">name,</if>
+            <if test="gongsi != null">gongsi,</if>
+            <if test="kuaididanhao != null">kuaididanhao,</if>
+            <if test="type != null">type,</if>
+            <if test="count != null">count,</if>
+            <if test="fujian != null">fujian,</if>
+            <if test="daihou != null">daihou,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="shenqingdanhao != null">#{shenqingdanhao},</if>
+            <if test="name != null">#{name},</if>
+            <if test="gongsi != null">#{gongsi},</if>
+            <if test="kuaididanhao != null">#{kuaididanhao},</if>
+            <if test="type != null">#{type},</if>
+            <if test="count != null">#{count},</if>
+            <if test="fujian != null">#{fujian},</if>
+            <if test="daihou != null">#{daihou},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrDaihouLvben" parameterType="ZyjrDaihouLvben">
+        update zyjr_daihou_lvben
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="shenqingdanhao != null">shenqingdanhao = #{shenqingdanhao},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="gongsi != null">gongsi = #{gongsi},</if>
+            <if test="kuaididanhao != null">kuaididanhao = #{kuaididanhao},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="count != null">count = #{count},</if>
+            <if test="fujian != null">fujian = #{fujian},</if>
+            <if test="daihou != null">daihou = #{daihou},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrDaihouLvbenById" parameterType="Long">
+        delete from zyjr_daihou_lvben where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrDaihouLvbenByIds" parameterType="String">
+        delete from zyjr_daihou_lvben where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -30,7 +30,7 @@ public class androidUpload {
         if (imageByte.length>0) {
             try {
                 //获取文件上传的真实路径E:\demo\JeeThink-admin\src\main\java\com\jeethink\web\profile\web
-                String uploadPath = "E:\\demo\\JeeThink-admin\\src\\main\\java\\com\\jeethink\\web\\profile\\web";//request.getSession().getServletContext().getRealPath("/")
+                String uploadPath = "C:\\demo";//request.getSession().getServletContext().getRealPath("/")
                 //保存文件的路径
                 String filepath =  File.separator + createNewDir();
                 System.out.println("保存文件的路径："+filepath);

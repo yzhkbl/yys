@@ -1,24 +1,23 @@
 package com.jeethink.system.service.impl;
 
 import java.util.List;
-import com.jeethink.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.jeethink.system.mapper.ZyjrGpsMapper;
-import com.jeethink.system.domain.ZyjrGps;
-import com.jeethink.system.service.IZyjrGpsService;
+import com.jeethink.system.mapper.ZyjrDaihouMapper;
+import com.jeethink.system.domain.ZyjrDaihou;
+import com.jeethink.system.service.IZyjrDaihouService;
 
 /**
  * 【请填写功能名称】Service业务层处理
  * 
  * @author jeethink
- * @date 2020-12-23
+ * @date 2021-01-06
  */
 @Service
-public class ZyjrGpsServiceImpl implements IZyjrGpsService 
+public class ZyjrDaihouServiceImpl implements IZyjrDaihouService 
 {
     @Autowired
-    private ZyjrGpsMapper zyjrGpsMapper;
+    private ZyjrDaihouMapper zyjrDaihouMapper;
 
     /**
      * 查询【请填写功能名称】
@@ -27,45 +26,45 @@ public class ZyjrGpsServiceImpl implements IZyjrGpsService
      * @return 【请填写功能名称】
      */
     @Override
-    public ZyjrGps selectZyjrGpsById(String id)
+    public ZyjrDaihou selectZyjrDaihouById(Long id)
     {
-        return zyjrGpsMapper.selectZyjrGpsById(id);
+        return zyjrDaihouMapper.selectZyjrDaihouById(id);
     }
 
     /**
      * 查询【请填写功能名称】列表
      * 
-     * @param zyjrGps 【请填写功能名称】
+     * @param zyjrDaihou 【请填写功能名称】
      * @return 【请填写功能名称】
      */
     @Override
-    public List<ZyjrGps> selectZyjrGpsList(ZyjrGps zyjrGps)
+    public List<ZyjrDaihou> selectZyjrDaihouList(ZyjrDaihou zyjrDaihou)
     {
-        return zyjrGpsMapper.selectZyjrGpsList(zyjrGps);
+        return zyjrDaihouMapper.selectZyjrDaihouList(zyjrDaihou);
     }
 
     /**
      * 新增【请填写功能名称】
      * 
-     * @param zyjrGps 【请填写功能名称】
+     * @param zyjrDaihou 【请填写功能名称】
      * @return 结果
      */
     @Override
-    public int insertZyjrGps(ZyjrGps zyjrGps)
+    public int insertZyjrDaihou(ZyjrDaihou zyjrDaihou)
     {
-        return zyjrGpsMapper.insertZyjrGps(zyjrGps);
+        return zyjrDaihouMapper.insertZyjrDaihou(zyjrDaihou);
     }
 
     /**
      * 修改【请填写功能名称】
      * 
-     * @param zyjrGps 【请填写功能名称】
+     * @param zyjrDaihou 【请填写功能名称】
      * @return 结果
      */
     @Override
-    public int updateZyjrGps(ZyjrGps zyjrGps)
+    public int updateZyjrDaihou(ZyjrDaihou zyjrDaihou)
     {
-        return zyjrGpsMapper.updateZyjrGps(zyjrGps);
+        return zyjrDaihouMapper.updateZyjrDaihou(zyjrDaihou);
     }
 
     /**
@@ -75,9 +74,9 @@ public class ZyjrGpsServiceImpl implements IZyjrGpsService
      * @return 结果
      */
     @Override
-    public int deleteZyjrGpsByIds(Long[] ids)
+    public int deleteZyjrDaihouByIds(Long[] ids)
     {
-        return zyjrGpsMapper.deleteZyjrGpsByIds(ids);
+        return zyjrDaihouMapper.deleteZyjrDaihouByIds(ids);
     }
 
     /**
@@ -87,8 +86,8 @@ public class ZyjrGpsServiceImpl implements IZyjrGpsService
      * @return 结果
      */
     @Override
-    public int deleteZyjrGpsById(Long id)
+    public int deleteZyjrDaihouById(Long id)
     {
-        return zyjrGpsMapper.deleteZyjrGpsById(id);
+        return zyjrDaihouMapper.deleteZyjrDaihouById(id);
     }
 }

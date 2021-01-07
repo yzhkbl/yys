@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrDaihouZhengshuMapper">
+    
+    <resultMap type="ZyjrDaihouZhengshu" id="ZyjrDaihouZhengshuResult">
+        <result property="id"    column="id"    />
+        <result property="fileName"    column="file_name"    />
+        <result property="filePath"    column="file_path"    />
+        <result property="daihou"    column="daihou"    />
+    </resultMap>
+
+    <sql id="selectZyjrDaihouZhengshuVo">
+        select id, file_name, file_path, daihou from zyjr_daihou_zhengshu
+    </sql>
+
+    <select id="selectZyjrDaihouZhengshuList" parameterType="ZyjrDaihouZhengshu" resultMap="ZyjrDaihouZhengshuResult">
+        <include refid="selectZyjrDaihouZhengshuVo"/>
+        <where>  
+            <if test="fileName != null  and fileName != ''"> and file_name like concat('%', #{fileName}, '%')</if>
+            <if test="filePath != null  and filePath != ''"> and file_path = #{filePath}</if>
+            <if test="daihou != null  and daihou != ''"> and daihou = #{daihou}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrDaihouZhengshuById" parameterType="Long" resultMap="ZyjrDaihouZhengshuResult">
+        <include refid="selectZyjrDaihouZhengshuVo"/>
+        where daihou = #{id}
+    </select>
+        
+    <insert id="insertZyjrDaihouZhengshu" parameterType="ZyjrDaihouZhengshu" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_daihou_zhengshu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fileName != null">file_name,</if>
+            <if test="filePath != null">file_path,</if>
+            <if test="daihou != null">daihou,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fileName != null">#{fileName},</if>
+            <if test="filePath != null">#{filePath},</if>
+            <if test="daihou != null">#{daihou},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrDaihouZhengshu" parameterType="ZyjrDaihouZhengshu">
+        update zyjr_daihou_zhengshu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fileName != null">file_name = #{fileName},</if>
+            <if test="filePath != null">file_path = #{filePath},</if>
+            <if test="daihou != null">daihou = #{daihou},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrDaihouZhengshuById" parameterType="Long">
+        delete from zyjr_daihou_zhengshu where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrDaihouZhengshuByIds" parameterType="String">
+        delete from zyjr_daihou_zhengshu where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

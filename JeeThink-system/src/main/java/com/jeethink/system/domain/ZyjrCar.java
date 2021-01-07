@@ -107,6 +107,16 @@ public class ZyjrCar extends BaseEntity
 
     private List<ZyjrCarAccount> zyjrCarAccount;
 
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public void setThreeCarState(String threeCarState)
     {
         this.threeCarState = threeCarState;

@@ -6,12 +6,12 @@ import com.jeethink.common.annotation.Excel;
 import com.jeethink.common.core.domain.BaseEntity;
 
 /**
- * 【请填写功能名称】对象 zyjr_pic
+ * 【请填写功能名称】对象 zyjr_daihou_zhengshu
  * 
  * @author jeethink
- * @date 2021-01-05
+ * @date 2021-01-06
  */
-public class ZyjrPic
+public class ZyjrDaihouZhengshu
 {
     private static final long serialVersionUID = 1L;
 
@@ -26,17 +26,11 @@ public class ZyjrPic
     @Excel(name = "文件路径")
     private String filePath;
 
-    private String gpsId;
+    /** daihou的id */
+    @Excel(name = "daihou的id")
+    private String daihou;
 
-    public String getGpsId() {
-        return gpsId;
-    }
-
-    public void setGpsId(String gpsId) {
-        this.gpsId = gpsId;
-    }
-
-    public void setId(Long id)
+    public void setId(Long id) 
     {
         this.id = id;
     }
@@ -63,6 +57,15 @@ public class ZyjrPic
     {
         return filePath;
     }
+    public void setDaihou(String daihou) 
+    {
+        this.daihou = daihou;
+    }
+
+    public String getDaihou() 
+    {
+        return daihou;
+    }
 
     @Override
     public String toString() {
@@ -70,6 +73,7 @@ public class ZyjrPic
             .append("id", getId())
             .append("fileName", getFileName())
             .append("filePath", getFilePath())
+            .append("daihou", getDaihou())
             .toString();
     }
 }

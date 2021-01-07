@@ -11,7 +11,7 @@ import com.jeethink.common.core.domain.BaseEntity;
  * @author jeethink
  * @date 2020-12-23
  */
-public class ZyjrGps extends BaseEntity
+public class ZyjrGps
 {
     private static final long serialVersionUID = 1L;
 
@@ -65,8 +65,53 @@ public class ZyjrGps extends BaseEntity
     /** 状态 */
     @Excel(name = "状态")
     private String state;
+    private String remark;
+    private String bianhaoPic;
+    private String yuanjingPic;
+    private String jinjingPic;
+    private String pic;
 
-    public void setId(Long id) 
+    public String getBianhaoPic() {
+        return bianhaoPic;
+    }
+
+    public void setBianhaoPic(String bianhaoPic) {
+        this.bianhaoPic = bianhaoPic;
+    }
+
+    public String getYuanjingPic() {
+        return yuanjingPic;
+    }
+
+    public void setYuanjingPic(String yuanjingPic) {
+        this.yuanjingPic = yuanjingPic;
+    }
+
+    public String getJinjingPic() {
+        return jinjingPic;
+    }
+
+    public void setJinjingPic(String jinjingPic) {
+        this.jinjingPic = jinjingPic;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }
@@ -188,10 +233,7 @@ public class ZyjrGps extends BaseEntity
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
+
             .append("zyjrCarId", getZyjrCarId())
             .append("industryWired", getIndustryWired())
             .append("industryWireless", getIndustryWireless())
