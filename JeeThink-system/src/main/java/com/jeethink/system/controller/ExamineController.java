@@ -1,24 +1,25 @@
 package com.jeethink.system.controller;
 
+import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
+import com.jeethink.common.core.page.TableDataInfo;
 import com.jeethink.system.Helper.ResponseDto;
 import com.jeethink.system.domain.*;
+import com.jeethink.system.domain.vo.orderVo;
 import com.jeethink.system.mapper.ZyjrBorrowerMapper;
 import com.jeethink.system.mapper.ZyjrBusinessMapper;
 import com.jeethink.system.mapper.ZyjrGuaranteeMapper;
 import com.jeethink.system.mapper.ZyjrRelationMapper;
 import com.jeethink.system.service.IExamineService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/examine")
-public class ExamineController {
+public class ExamineController extends BaseController {
     @Autowired
     private IExamineService examineService;
     @Autowired
@@ -141,4 +142,32 @@ public class ExamineController {
 
         return AjaxResult.success(z.getContractState());
     }
+
+    @GetMapping(value = "/{userId}")
+    public TableDataInfo findOrder(@PathVariable("userId") Long userId){
+        startPage();
+        List<orderVo> list = examineService.findOrder(userId);
+        return getDataTable(list);
+    }
+
+    @GetMapping("/total")
+    public AjaxResult findExamine(String transactionCode){
+        return AjaxResult.success(examineService.findExamine(transactionCode));
+    }
+
+    @GetMapping("/group")
+    public AjaxResult findGroup(){
+        return AjaxResult.success(examineService.findGroup());
+    }
+
+    @GetMapping("/series")
+    public AjaxResult findSeries(Integer brandId){
+        return AjaxResult.success(examineService.findSeries(brandId));
+    }
+
+    @GetMapping("/info")
+    public AjaxResult findInfo(Integer brandId,Integer groupId){
+        return AjaxResult.success(examineService.findInfo(brandId, groupId));
+    }
 }
+

@@ -54,13 +54,20 @@ public class ZyjrBusiness extends BaseEntity
     @Excel(name = "订单状态")
     private Integer orderState;
     private String name;//联查用户名
+    private Integer approvalType;
     private String transactionCode;
     private String operator;
     private String falseOperator;
     private String falseOperatorId;
     private String realAddress;
 
+    public Integer getApprovalType() {
+        return approvalType;
+    }
 
+    public void setApprovalType(Integer approvalType) {
+        this.approvalType = approvalType;
+    }
     public String getFalseOperator() {
         return falseOperator;
     }

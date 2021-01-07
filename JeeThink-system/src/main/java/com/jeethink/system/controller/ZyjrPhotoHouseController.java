@@ -6,10 +6,12 @@ import java.util.List;
 import com.jeethink.common.utils.file.FileUtils;
 import com.jeethink.system.domain.SysFileInfo;
 import com.jeethink.system.domain.ZyjrPhotoCredit;
+import com.jeethink.system.domain.vo.fileInfoDto;
 import com.jeethink.system.domain.vo.fileInfoVo;
 import com.jeethink.system.mapper.SysFileInfoMapper;
 import com.jeethink.system.util.androidUpload;
 import io.swagger.annotations.ApiOperation;
+import net.sf.json.JSONArray;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,8 +48,10 @@ public class ZyjrPhotoHouseController extends BaseController
 
     @PostMapping("/pic")
     @ApiOperation("111111111")
-    public AjaxResult testFiles(@RequestBody fileInfoVo q) {
-
+    public AjaxResult testFiles(fileInfoVo q) {
+        JSONArray jsonarray = JSONArray.fromObject(q.getPhotoFile());
+        System.out.println(jsonarray);
+        List<SysFileInfo> list = (List)JSONArray.toList(jsonarray, SysFileInfo.class);
         if (q.getId() != null) {
             SysFileInfo infos = new SysFileInfo();
             infos.setPhotoHouseId(q.getId());
@@ -69,13 +73,13 @@ public class ZyjrPhotoHouseController extends BaseController
             zyjrPhotoHouseService.insertZyjrPhotoHouse(zyjrPhotoHouse);
             List<String> pic = new ArrayList<>();
             if (q.getPhotoFile() != null) {
-                for (int i = 0; i < q.getPhotoFile().size(); i++) {
-                    String asd = androidUpload.upload(q.getPhotoFile().get(i).getFilePath());
+                for (int i = 0; i < list.size(); i++) {
+                    String asd = androidUpload.upload(list.get(i).getFilePath());
                     SysFileInfo info = new SysFileInfo();
                     String as = "http://192.168.31.86:8080" + asd;
                     info.setFilePath(as);
                     info.setPhotoHouseId(zyjrPhotoHouse.getId());
-                    info.setFileName(q.getPhotoFile().get(i).getFileName());
+                    info.setFileName(list.get(i).getFileName());
                     int ceshi = sysFileInfoMapper.insertSysFileInfo(info);
                     if (ceshi < 1) {
                         return AjaxResult.error();
@@ -98,7 +102,7 @@ public class ZyjrPhotoHouseController extends BaseController
         ZyjrPhotoHouse zyjrPhotoHouse = zyjrPhotoHouseService.selectZyjrPhotoHouseById(userId, transactionCode);
         if(zyjrPhotoHouse != null) {
             List<SysFileInfo> list = sysFileInfoMapper.photoHouse(zyjrPhotoHouse.getId());
-            fileInfoVo f = new fileInfoVo();
+            fileInfoDto f = new fileInfoDto();
             f.setId(zyjrPhotoHouse.getId());
             f.setUserId(zyjrPhotoHouse.getUserId());
             f.setTransactionCode(zyjrPhotoHouse.getTransactionCode());

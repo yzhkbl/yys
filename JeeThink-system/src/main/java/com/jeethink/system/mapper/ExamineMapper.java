@@ -1,9 +1,7 @@
 package com.jeethink.system.mapper;
 
 import com.jeethink.system.domain.*;
-import com.jeethink.system.domain.vo.DqVo;
-import com.jeethink.system.domain.vo.Linkman;
-import com.jeethink.system.domain.vo.carVo;
+import com.jeethink.system.domain.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -60,4 +58,19 @@ public interface ExamineMapper {
 
     Linkman selectZyjrCarByLinkman(Long id);
     DqVo selectDQ(String transactionCode);
+
+    List<orderVo>findOrder(Long userId);
+
+
+
+    ZyjrBorrower Borrower(String transactionCode);
+    ZyjrRelation Relation(String transactionCode);
+    ZyjrGuarantee Guarantee(String transactionCode);
+    ZyjrBusiness Business(String transactionCode);
+    ZyjrStartPage Start(String transactionCode);
+
+
+    List<CarSeriseGroup> findGroup();
+    List<CarSeries> findSeries(Integer brandId);
+    List<CarInfo> findInfo(@Param("brandId") Integer brandId,@Param("groupId") Integer groupId);
 }

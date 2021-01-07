@@ -2,14 +2,12 @@ package com.jeethink.system.domain.vo;
 
 import com.jeethink.common.annotation.Excel;
 import com.jeethink.system.domain.SysFileInfo;
-import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class fileInfoVo {
-
+public class fileInfoDto {
     /** 二手车图片信息表主键 */
     private Long id;
 
@@ -29,5 +27,5 @@ public class fileInfoVo {
     //private Long photoCarId;
 
     /**图片list*/
-    private String photoFile;
+    private List<SysFileInfo> photoFile;
 }

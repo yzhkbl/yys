@@ -52,7 +52,7 @@ public class ZyjrDebtService extends BaseEntity
 
     /** 手机号 */
     @Excel(name = "手机号")
-    private String phoneNamber;
+    private String phoneNumber;
 
     /** 现工作单位名称 */
     @Excel(name = "现工作单位名称")
@@ -168,14 +168,14 @@ public class ZyjrDebtService extends BaseEntity
         return nowPlace;
     }
 
-    public void setPhoneNamber(String phoneNamber) 
+    public void setPhoneNumber(String phoneNumber)
     {
-        this.phoneNamber = phoneNamber;
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getPhoneNamber() 
+    public String getPhoneNumber()
     {
-        return phoneNamber;
+        return phoneNumber;
     }
     public void setNowWork(String nowWork)
     {
@@ -263,7 +263,7 @@ public class ZyjrDebtService extends BaseEntity
             .append("idCard", getIdCard())
             .append("education", getEducation())
             .append("newPlace", getNowPlace())
-            .append("phoneNamber", getPhoneNamber())
+            .append("phoneNamber", getPhoneNumber())
             .append("newWork", getNowWork())
             .append("workPlace", getWorkPlace())
             .append("companyPhone", getCompanyPhone())
