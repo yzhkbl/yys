@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrDaihouMapper">
+    
+    <resultMap type="ZyjrDaihou" id="ZyjrDaihouResult">
+        <result property="id"    column="id"    />
+        <result property="state"    column="state"    />
+        <result property="opinion"    column="opinion"    />
+        <result property="userId"    column="user_id"    />
+        <result property="transactionCode"    column="transaction_code"    />
+        <result property="zhengshu"    column="zhengshu"    />
+        <result property="baoxian"    column="baoxian"    />
+        <result property="qita"    column="qita"    />
+        <result property="lvben"    column="lvben"    />
+        <result property="tiche"    column="tiche"    />
+    </resultMap>
+
+    <sql id="selectZyjrDaihouVo">
+        select id, state, opinion, user_id, transaction_code, zhengshu, baoxian, qita, lvben, tiche from zyjr_daihou
+    </sql>
+
+    <select id="selectZyjrDaihouList" parameterType="ZyjrDaihou" resultMap="ZyjrDaihouResult">
+        <include refid="selectZyjrDaihouVo"/>
+        <where>  
+            <if test="state != null  and state != ''"> and state = #{state}</if>
+            <if test="opinion != null  and opinion != ''"> and opinion = #{opinion}</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
+            <if test="zhengshu != null  and zhengshu != ''"> and zhengshu = #{zhengshu}</if>
+            <if test="baoxian != null  and baoxian != ''"> and baoxian = #{baoxian}</if>
+            <if test="qita != null  and qita != ''"> and qita = #{qita}</if>
+            <if test="lvben != null  and lvben != ''"> and lvben = #{lvben}</if>
+            <if test="tiche != null  and tiche != ''"> and tiche = #{tiche}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrDaihouById" parameterType="Long" resultMap="ZyjrDaihouResult">
+        <include refid="selectZyjrDaihouVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrDaihou" parameterType="ZyjrDaihou" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_daihou
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="state != null">state,</if>
+            <if test="opinion != null">opinion,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="transactionCode != null">transaction_code,</if>
+            <if test="zhengshu != null">zhengshu,</if>
+            <if test="baoxian != null">baoxian,</if>
+            <if test="qita != null">qita,</if>
+            <if test="lvben != null">lvben,</if>
+            <if test="tiche != null">tiche,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="state != null">#{state},</if>
+            <if test="opinion != null">#{opinion},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="transactionCode != null">#{transactionCode},</if>
+            <if test="zhengshu != null">#{zhengshu},</if>
+            <if test="baoxian != null">#{baoxian},</if>
+            <if test="qita != null">#{qita},</if>
+            <if test="lvben != null">#{lvben},</if>
+            <if test="tiche != null">#{tiche},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrDaihou" parameterType="ZyjrDaihou">
+        update zyjr_daihou
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="state != null">state = #{state},</if>
+            <if test="opinion != null">opinion = #{opinion},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+            <if test="zhengshu != null">zhengshu = #{zhengshu},</if>
+            <if test="baoxian != null">baoxian = #{baoxian},</if>
+            <if test="qita != null">qita = #{qita},</if>
+            <if test="lvben != null">lvben = #{lvben},</if>
+            <if test="tiche != null">tiche = #{tiche},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrDaihouById" parameterType="Long">
+        delete from zyjr_daihou where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrDaihouByIds" parameterType="String">
+        delete from zyjr_daihou where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

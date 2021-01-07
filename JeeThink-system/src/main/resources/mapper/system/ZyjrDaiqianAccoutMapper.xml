@@ -8,12 +8,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="id"    column="id"    />
         <result property="transactionCode"    column="transaction_code"    />
         <result property="state"    column="state"    />
+        <result property="type"    column="type"    />
         <result property="accountId"    column="account_id"    />
         <result property="accountOne"    column="account_one"    />
     </resultMap>
 
     <sql id="selectZyjrDaiqianAccoutVo">
-        select id, transaction_code, state, account_id, account_one from zyjr_daiqian_accout
+        select id,type, transaction_code, state, account_id, account_one from zyjr_daiqian_accout
     </sql>
 
     <select id="selectZyjrDaiqianAccoutList" parameterType="ZyjrDaiqianAccout" resultMap="ZyjrDaiqianAccoutResult">
@@ -21,6 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>  
             <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
             <if test="state != null  and state != ''"> and state = #{state}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
             <if test="accountId != null  and accountId != ''"> and account_id = #{accountId}</if>
             <if test="accountOne != null  and accountOne != ''"> and account_one = #{accountOne}</if>
         </where>
@@ -41,12 +43,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="transactionCode != null">transaction_code,</if>
             <if test="state != null">state,</if>
+            <if test="type != null">type,</if>
             <if test="accountId != null">account_id,</if>
             <if test="accountOne != null">account_one,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="transactionCode != null">#{transactionCode},</if>
             <if test="state != null">#{state},</if>
+            <if test="type != null">#{type},</if>
             <if test="accountId != null">#{accountId},</if>
             <if test="accountOne != null">#{accountOne},</if>
          </trim>
@@ -57,6 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
             <if test="state != null">state = #{state},</if>
+            <if test="type != null">type = #{type},</if>
             <if test="accountId != null">account_id = #{accountId},</if>
             <if test="accountOne != null">account_one = #{accountOne},</if>
         </trim>

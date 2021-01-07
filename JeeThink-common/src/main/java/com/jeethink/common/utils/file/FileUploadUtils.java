@@ -85,6 +85,18 @@ public class FileUploadUtils
         }
     }
 
+    public static final String uploads(String baseDir, MultipartFile file) throws IOException
+    {
+        try
+        {
+            return uploads(baseDir, file, MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION);
+        }
+        catch (Exception e)
+        {
+            throw new IOException(e.getMessage(), e);
+        }
+    }
+
     /**
      * 文件上传
      *
@@ -117,6 +129,26 @@ public class FileUploadUtils
         return pathFileName;
     }
 
+    public static final String uploads(String baseDir, MultipartFile file, String[] allowedExtension)
+            throws FileSizeLimitExceededException, IOException, FileNameLengthLimitExceededException,
+            InvalidExtensionException
+    {
+        int fileNamelength = file.getOriginalFilename().length();
+        if (fileNamelength > FileUploadUtils.DEFAULT_FILE_NAME_LENGTH)
+        {
+            throw new FileNameLengthLimitExceededException(FileUploadUtils.DEFAULT_FILE_NAME_LENGTH);
+        }
+
+        assertAllowed(file, allowedExtension);
+
+        String fileName = extractFilename(file);
+
+        File desc = getAbsoluteFile(baseDir, fileName);
+        file.transferTo(desc);
+        String pathFileName = getPathFileNames(baseDir, fileName);
+        return pathFileName;
+    }
+
     /**
      * 编码文件名
      */
@@ -143,11 +175,19 @@ public class FileUploadUtils
         return desc;
     }
 
-    private static final String getPathFileName(String uploadDir, String fileName) throws IOException
+    private static final String getPathFileNames(String uploadDir, String fileName) throws IOException
     {
         int dirLastIndex = JeeThinkConfig.getProfile().length() + 1;
         String currentDir = StringUtils.substring(uploadDir, dirLastIndex);
         String pathFileName = Constants.RESOURCE_PREFIX + "/" + currentDir + "/" + fileName;
+        return pathFileName;
+    }
+
+    private static final String getPathFileName(String uploadDir, String fileName) throws IOException
+    {
+        int dirLastIndex = JeeThinkConfig.getProfile().length() + 1;
+        String currentDir = StringUtils.substring(uploadDir, dirLastIndex);
+        String pathFileName = Constants.RESOURCE_PREFIX + "/" + fileName;
         return pathFileName;
     }
 

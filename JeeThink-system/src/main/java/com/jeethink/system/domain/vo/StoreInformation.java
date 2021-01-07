@@ -17,6 +17,7 @@ public class StoreInformation {
 
     /** 第一个门店类型 */
     private String shopType;
+    private String type;
 
     /** 第二个门店类型 */
     private String businessType;

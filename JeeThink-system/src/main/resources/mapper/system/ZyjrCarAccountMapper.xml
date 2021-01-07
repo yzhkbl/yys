@@ -42,6 +42,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where zyjr_car_id = #{id}
     </select>
 
+    <select id="selectZyjrCarAccountByStringId" parameterType="String" resultMap="ZyjrCarAccountResult">
+        <include refid="selectZyjrCarAccountVo"/>
+        where id = #{id}
+    </select>
+
     <update id="updateZyjrCarAccount" parameterType="ZyjrCarAccount">
         update zyjr_car_account
         <trim prefix="SET" suffixOverrides=",">
