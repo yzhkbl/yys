@@ -57,7 +57,7 @@ public class ZyjrPhotoLenderController extends BaseController
             infos.setPhotoLenderId(q.getId());
             List<SysFileInfo> sysFileInfos = sysFileInfoMapper.selectSysFileInfoList(infos);
             int a = sysFileInfoMapper.deleteByLender(q.getId());
-            String paths = "E:/demo/JeeThink-admin/src/main/java/com/jeethink/web/";
+            String paths = "c:/demo";
             //System.err.println(path);
             //int a = sysFileInfoMapper.deleteSysFileInfoByPath(path);
             for (SysFileInfo sysFileInfo : sysFileInfos) {

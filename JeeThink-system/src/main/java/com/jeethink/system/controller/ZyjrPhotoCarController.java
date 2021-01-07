@@ -51,6 +51,7 @@ public class ZyjrPhotoCarController extends BaseController
     @ApiOperation("111111111")
     public AjaxResult testFiles(fileInfoVo q){
         JSONArray jsonarray = JSONArray.fromObject(q.getPhotoFile());
+        System.err.println(q);
         System.out.println(jsonarray);
         List<SysFileInfo> list = (List)JSONArray.toList(jsonarray, SysFileInfo.class);
         if(q.getId()!=null){
@@ -58,7 +59,7 @@ public class ZyjrPhotoCarController extends BaseController
                 infos.setPhotoCarId(q.getId());
                 List<SysFileInfo> sysFileInfos = sysFileInfoMapper.selectSysFileInfoList(infos);
                 int a = sysFileInfoMapper.deleteSysFileInfoByPhotoCarId(q.getId());
-                String paths = "E:/demo/JeeThink-admin/src/main/java/com/jeethink/web/";
+                String paths = "c:/demo";
                 //System.err.println(path);
                 //int a = sysFileInfoMapper.deleteSysFileInfoByPath(path);
                 for (SysFileInfo sysFileInfo :sysFileInfos) {
