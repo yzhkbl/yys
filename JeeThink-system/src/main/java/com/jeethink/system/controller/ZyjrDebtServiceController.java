@@ -75,7 +75,7 @@ public class ZyjrDebtServiceController extends BaseController
     //@PreAuthorize("@ss.hasPermi('system:service:add')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody ZyjrDebtService zyjrDebtService)
+    public AjaxResult add(ZyjrDebtService zyjrDebtService)
     {
         return toAjax(zyjrDebtServiceService.insertZyjrDebtService(zyjrDebtService));
     }

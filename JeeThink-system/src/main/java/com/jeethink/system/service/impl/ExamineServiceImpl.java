@@ -3,9 +3,7 @@ package com.jeethink.system.service.impl;
 import com.jeethink.common.core.domain.AjaxResult;
 import com.jeethink.common.utils.uuid.IdUtils;
 import com.jeethink.system.domain.*;
-import com.jeethink.system.domain.vo.OkVo;
-import com.jeethink.system.domain.vo.Pub;
-import com.jeethink.system.domain.vo.oKreq;
+import com.jeethink.system.domain.vo.*;
 import com.jeethink.system.mapper.ExamineMapper;
 import com.jeethink.system.service.IExamineService;
 import com.jeethink.system.util.HttpPostUtil;
@@ -17,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import  com.jeethink.system.util.orderCode;
 
@@ -201,4 +200,38 @@ public class ExamineServiceImpl implements IExamineService {
         request.put("orderNo",orderNo);
         return request;
     }
+
+    @Override
+    public List<orderVo> findOrder(Long userId){
+        return examineDao.findOrder(userId);
+    }
+
+
+    @Override
+    public Map<String,Object> findExamine(String transactionCode){
+        Map<String,Object>map = new HashMap<>();
+        map.put("business",examineDao.Business(transactionCode));
+        map.put("borrower",examineDao.Borrower(transactionCode));
+        map.put("relation",examineDao.Relation(transactionCode));
+        map.put("guarantee",examineDao.Guarantee(transactionCode));
+        map.put("start",examineDao.Start(transactionCode));
+        return map;
+    }
+
+    @Override
+    public List<CarSeriseGroup> findGroup() {
+        return examineDao.findGroup();
+    }
+
+    @Override
+    public List<CarSeries> findSeries(Integer brandId) {
+        return examineDao.findSeries(brandId);
+    }
+
+    @Override
+    public List<CarInfo>findInfo(Integer brandId, Integer groupId) {
+        return examineDao.findInfo(brandId, groupId);
+    }
+
+
 }

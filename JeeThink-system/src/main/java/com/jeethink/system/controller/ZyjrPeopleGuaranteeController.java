@@ -74,7 +74,7 @@ public class ZyjrPeopleGuaranteeController extends BaseController
     //@PreAuthorize("@ss.hasPermi('system:guarantee:add')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody ZyjrPeopleGuarantee zyjrPeopleGuarantee)
+    public AjaxResult add(ZyjrPeopleGuarantee zyjrPeopleGuarantee)
     {
         return toAjax(zyjrPeopleGuaranteeService.insertZyjrPeopleGuarantee(zyjrPeopleGuarantee));
     }

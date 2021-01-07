@@ -74,7 +74,7 @@ public class ZyjrCarLoanController extends BaseController
     //@PreAuthorize("@ss.hasPermi('system:loan:add')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody ZyjrCarLoan zyjrCarLoan)
+    public AjaxResult add(ZyjrCarLoan zyjrCarLoan)
     {
         return toAjax(zyjrCarLoanService.insertZyjrCarLoan(zyjrCarLoan));
     }

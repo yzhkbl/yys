@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="idCard"    column="id_card"    />
         <result property="education"    column="education"    />
         <result property="nowPlace"    column="now_place"    />
-        <result property="phoneNamber"    column="phone_namber"    />
+        <result property="phoneNumber"    column="phone_number"    />
         <result property="nowWork"    column="now_work"    />
         <result property="workPlace"    column="work_place"    />
         <result property="companyPhone"    column="company_phone"    />
@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectZyjrDebtServiceVo">
-        select id, is_debt, people_ship, card_address, back_address, debt_name, id_card, education, now_place, phone_namber, now_work, work_place, company_phone, company_nature, monthly_income, user_id, transaction_code, order_state from zyjr_debt_service
+        select id, is_debt, people_ship, card_address, back_address, debt_name, id_card, education, now_place, phone_number, now_work, work_place, company_phone, company_nature, monthly_income, user_id, transaction_code, order_state from zyjr_debt_service
     </sql>
 
     <select id="selectZyjrDebtServiceList" parameterType="ZyjrDebtService" resultMap="ZyjrDebtServiceResult">
@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
             <if test="education != null  and education != ''"> and education = #{education}</if>
             <if test="nowPlace != null  and nowPlace != ''"> and now_place = #{nowPlace}</if>
-            <if test="phoneNamber != null  and phoneNamber != ''"> and phone_namber = #{phoneNamber}</if>
+            <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
             <if test="nowWork != null  and nowWork != ''"> and now_work = #{nowWork}</if>
             <if test="workPlace != null  and workPlace != ''"> and work_place = #{workPlace}</if>
             <if test="companyPhone != null  and companyPhone != ''"> and company_phone = #{companyPhone}</if>
@@ -68,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="idCard != null">id_card,</if>
             <if test="education != null">education,</if>
             <if test="nowPlace != null">now_place,</if>
-            <if test="phoneNamber != null">phone_namber,</if>
+            <if test="phoneNumber != null">phone_number,</if>
             <if test="nowWork != null">now_work,</if>
             <if test="workPlace != null">work_place,</if>
             <if test="companyPhone != null">company_phone,</if>
@@ -87,7 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="idCard != null">#{idCard},</if>
             <if test="education != null">#{education},</if>
             <if test="nowPlace != null">#{nowPlace},</if>
-            <if test="phoneNamber != null">#{phoneNamber},</if>
+            <if test="phoneNumber != null">#{phoneNumber},</if>
             <if test="nowWork != null">#{nowWork},</if>
             <if test="workPlace != null">#{workPlace},</if>
             <if test="companyPhone != null">#{companyPhone},</if>
@@ -110,7 +110,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="idCard != null">id_card = #{idCard},</if>
             <if test="education != null">education = #{education},</if>
             <if test="nowPlace != null">now_place = #{nowPlace},</if>
-            <if test="phoneNamber != null">phone_namber = #{phoneNamber},</if>
+            <if test="phoneNumber != null">phone_number = #{phoneNumber},</if>
             <if test="nowWork != null">now_work = #{nowWork},</if>
             <if test="workPlace != null">work_place = #{workPlace},</if>
             <if test="companyPhone != null">company_phone = #{companyPhone},</if>

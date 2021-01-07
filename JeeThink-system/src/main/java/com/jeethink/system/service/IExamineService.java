@@ -1,7 +1,13 @@
 package com.jeethink.system.service;
 
 import com.jeethink.system.domain.*;
+import com.jeethink.system.domain.vo.CarInfo;
+import com.jeethink.system.domain.vo.CarSeries;
+import com.jeethink.system.domain.vo.CarSeriseGroup;
+import com.jeethink.system.domain.vo.orderVo;
+import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 import java.util.Map;
 
 public interface IExamineService {
@@ -20,4 +26,13 @@ public interface IExamineService {
 
     String okPurchase(String codes);
     ZyjrStartPage findByStart(Integer userId);
+
+    List<orderVo> findOrder(Long userId);
+
+    Map<String,Object> findExamine(String transactionCode);
+
+
+    List<CarSeriseGroup> findGroup();
+    List<CarSeries> findSeries(Integer brandId);
+    List<CarInfo> findInfo(Integer brandId,Integer groupId);
 }

@@ -491,4 +491,55 @@
         transaction_code=#{transactionCode}
         where order_state=0 and user_id = #{userId}
     </update>
+    <select id="findOrder" resultType="com.jeethink.system.domain.vo.orderVo">
+        select a.transaction_code,b.user_name,a.car_information,a.car_type,c.progress,d.create_time
+        from zyjr_business a
+        left join zyjr_borrower b on b.transaction_code=a.transaction_code
+        left join zyjr_order_progress c on c.transaction_code=b.transaction_code
+        left join zyjr_start_page d on d.transaction_code=c.transaction_code
+        where a.user_id=#{userId}
+    </select>
+
+    <select id="Borrower" resultType="com.jeethink.system.domain.ZyjrBorrower">
+        select id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,obverse_id,obverse_code,obverse_address,
+        obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,user_id,order_state,transaction_code
+        from zyjr_borrower
+        where transaction_code=#{transactionCode}
+    </select>
+    <select id="Relation" resultType="com.jeethink.system.domain.ZyjrRelation">
+        select id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,company,company_address,year_income,obverse_id,
+        obverse_code,obverse_address,obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,people_ship,user_id,business_role,order_state,transaction_code
+        from zyjr_relation
+        where transaction_code=#{transactionCode}
+    </select>
+    <select id="Guarantee" resultType="com.jeethink.system.domain.ZyjrGuarantee">
+        select id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,company,company_address,year_income,obverse_id,
+        obverse_code,obverse_address,obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,people_ship,user_id,order_state,transaction_code
+        from zyjr_guarantee
+        where transaction_code=#{transactionCode}
+    </select>
+    <select id="Business" resultType="com.jeethink.system.domain.ZyjrBusiness">
+        select id,team,car_information,intention_price,loan_money,repay_period,car_type,user_id,order_state,transaction_code
+        from zyjr_business
+        where transaction_code=#{transactionCode}
+    </select>
+    <select id="Start" resultType="com.jeethink.system.domain.ZyjrStartPage">
+        select id,fund_side,business_place,order_state,user_id,transaction_code,credit_state,real_address
+        from zyjr_start_page
+        where transaction_code=#{transactionCode}
+    </select>
+    <select id="findGroup" resultType="com.jeethink.system.domain.vo.CarSeriseGroup">
+        select brand_id,name
+        from car_series_group
+    </select>
+    <select id="findSeries" resultType="com.jeethink.system.domain.vo.CarSeries">
+        select brand_id,group_id,full_name
+        from car_series
+        where brand_id=#{brandId}
+    </select>
+    <select id="findInfo" resultType="com.jeethink.system.domain.vo.CarInfo">
+        select full_name
+        from car_info
+        where brand_id=#{brandId} and group_id=#{groupId}
+    </select>
 </mapper>
