@@ -94,7 +94,7 @@ public class ZyjrAllowBasicsController extends BaseController
     //@PreAuthorize("@ss.hasPermi('system:basics:add')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody ZyjrAllowBasics zyjrAllowBasics)
+    public AjaxResult add(ZyjrAllowBasics zyjrAllowBasics)
     {
         return toAjax(zyjrAllowBasicsService.insertZyjrAllowBasics(zyjrAllowBasics));
     }
