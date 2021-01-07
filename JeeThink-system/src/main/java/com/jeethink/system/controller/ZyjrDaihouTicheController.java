@@ -1,6 +1,12 @@
 package com.jeethink.system.controller;
 
 import java.util.List;
+
+import com.jeethink.system.domain.ZyjrDaihou;
+import com.jeethink.system.domain.ZyjrDaihouBaoxian;
+import com.jeethink.system.domain.ZyjrDaihouQita;
+import com.jeethink.system.mapper.ZyjrDaihouMapper;
+import net.sf.json.JSONArray;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +38,8 @@ public class ZyjrDaihouTicheController extends BaseController
 {
     @Autowired
     private IZyjrDaihouTicheService zyjrDaihouTicheService;
+    @Autowired
+    private ZyjrDaihouMapper zyjrDaihouMapper;
 
     /**
      * 查询【请填写功能名称】列表
@@ -61,22 +69,50 @@ public class ZyjrDaihouTicheController extends BaseController
     /**
      * 获取【请填写功能名称】详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:tiche:query')")
-    @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Long id)
+    @GetMapping(value = "/{transactionCode}")
+    public AjaxResult getInfo(@PathVariable("transactionCode") String transactionCode)
     {
-        return AjaxResult.success(zyjrDaihouTicheService.selectZyjrDaihouTicheById(id));
+        ZyjrDaihou Daihou=zyjrDaihouMapper.selectZyjrDaihouByT(transactionCode);
+        if(Daihou!=null){
+            ZyjrDaihouTiche zyjrDaihouBaoxian=new ZyjrDaihouTiche();
+            zyjrDaihouBaoxian.setDaihou(Daihou.getId().toString());
+            List<ZyjrDaihouTiche> zyjrDaihouTiches = zyjrDaihouTicheService.selectZyjrDaihouTicheList(zyjrDaihouBaoxian);
+            return AjaxResult.success(zyjrDaihouTiches);
+        }
+        return AjaxResult.success();
     }
 
     /**
      * 新增【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:tiche:add')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
+
     @PostMapping
-    public AjaxResult add(@RequestBody ZyjrDaihouTiche zyjrDaihouTiche)
+    public AjaxResult add( ZyjrDaihouTiche zyjrDaihouBaoxian)
     {
-        return toAjax(zyjrDaihouTicheService.insertZyjrDaihouTiche(zyjrDaihouTiche));
+
+        ZyjrDaihou Daihou=zyjrDaihouMapper.selectZyjrDaihouByT(zyjrDaihouBaoxian.getDaihou());
+        if(Daihou==null){
+            Daihou.setTiche("1");
+            Daihou.setTransactionCode(zyjrDaihouBaoxian.getDaihou());
+            zyjrDaihouMapper.insertZyjrDaihou(Daihou);
+        }else{
+            Daihou.setTiche("1");
+            zyjrDaihouMapper.updateZyjrDaihou(Daihou);
+        }
+
+        zyjrDaihouTicheService.deleteZyjrDaihouTicheById(Daihou.getId());
+        if(zyjrDaihouBaoxian.getPic()!=null){
+            JSONArray jsonarray = JSONArray.fromObject(zyjrDaihouBaoxian.getPic());
+            System.out.println(jsonarray);
+            List<ZyjrDaihouTiche> list = (List)JSONArray.toList(jsonarray, ZyjrDaihouBaoxian.class);
+            for (ZyjrDaihouTiche daihouBaoxian : list) {
+                daihouBaoxian.setDaihou(Daihou.getId().toString());
+                zyjrDaihouTicheService.insertZyjrDaihouTiche(daihouBaoxian);
+            }
+            return AjaxResult.success();
+        }
+
+        return AjaxResult.success();
     }
 
     /**

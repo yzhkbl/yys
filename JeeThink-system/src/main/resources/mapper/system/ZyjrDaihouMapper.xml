@@ -40,6 +40,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectZyjrDaihouVo"/>
         where id = #{id}
     </select>
+    <select id="selectZyjrDaihouByT" parameterType="String" resultMap="ZyjrDaihouResult">
+        <include refid="selectZyjrDaihouVo"/>
+        where transaction_code = #{id}
+    </select>
         
     <insert id="insertZyjrDaihou" parameterType="ZyjrDaihou" useGeneratedKeys="true" keyProperty="id">
         insert into zyjr_daihou

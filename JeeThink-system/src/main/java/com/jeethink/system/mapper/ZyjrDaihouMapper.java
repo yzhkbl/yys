@@ -58,4 +58,6 @@ public interface ZyjrDaihouMapper
      * @return 结果
      */
     public int deleteZyjrDaihouByIds(Long[] ids);
+
+    ZyjrDaihou selectZyjrDaihouByT(String daihou);
 }

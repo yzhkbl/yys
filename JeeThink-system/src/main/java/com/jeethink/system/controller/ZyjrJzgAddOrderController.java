@@ -7,7 +7,10 @@ import java.util.Map;
 
 import com.jeethink.common.utils.StringUtils;
 import com.jeethink.common.utils.http.HttpUtils;
+import com.jeethink.system.domain.ZyjrDaihouBaoxian;
+import com.jeethink.system.domain.ZyjrPic;
 import com.jeethink.system.mapper.ZyjrJzgAddOrderMapper;
+import com.jeethink.system.mapper.ZyjrPicMapper;
 import com.jeethink.system.service.IZyjrJzgAddOrderService;
 import com.jeethink.system.util.HttpClientUtil;
 import com.jeethink.system.util.HttpPostUtil;
@@ -16,6 +19,7 @@ import com.rsa.RSASignature;
 import com.rsa.RSAUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +54,9 @@ public class ZyjrJzgAddOrderController extends BaseController
     private IZyjrJzgAddOrderService zyjrJzgAddOrderService;
     @Autowired
     private ZyjrJzgAddOrderMapper zyjrJzgAddOrderMapper;
+    @Autowired
+    private ZyjrPicMapper zyjrPicMapper;
+
     private static final String userId="18686";
     private static final String tokenId="177";
     private static final String tokenKey="82CF76A1-3C3A-4E0B-9969-1789137982F5";
@@ -103,6 +110,15 @@ public class ZyjrJzgAddOrderController extends BaseController
     @PostMapping("/insert")
     public AjaxResult addd(ZyjrJzgAddOrder zyjrJzgAddOrder)
     {
+        if(zyjrJzgAddOrder.getPic()!=null) {
+            JSONArray jsonarray = JSONArray.fromObject(zyjrJzgAddOrder.getPic());
+            System.out.println(jsonarray);
+            List<ZyjrPic> list = (List) JSONArray.toList(jsonarray, ZyjrDaihouBaoxian.class);
+            for (ZyjrPic zyjrPic : list) {
+                zyjrPic.setJinzhengu(zyjrJzgAddOrder.getTransactionCode());
+                zyjrPicMapper.insertZyjrPic(zyjrPic);
+            }
+        }
         return toAjax(zyjrJzgAddOrderService.insertZyjrJzgAddOrder(zyjrJzgAddOrder));
     }
 

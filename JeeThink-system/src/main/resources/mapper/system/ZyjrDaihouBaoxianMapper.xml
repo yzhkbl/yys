@@ -54,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteZyjrDaihouBaoxianById" parameterType="Long">
-        delete from zyjr_daihou_baoxian where id = #{id}
+        delete from zyjr_daihou_baoxian where daihou = #{id}
     </delete>
 
     <delete id="deleteZyjrDaihouBaoxianByIds" parameterType="String">

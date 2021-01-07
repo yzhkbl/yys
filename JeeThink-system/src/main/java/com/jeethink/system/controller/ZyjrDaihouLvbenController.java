@@ -1,6 +1,10 @@
 package com.jeethink.system.controller;
 
 import java.util.List;
+
+import com.jeethink.system.domain.ZyjrDaihou;
+import com.jeethink.system.domain.ZyjrDaihouQita;
+import com.jeethink.system.mapper.ZyjrDaihouMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +36,8 @@ public class ZyjrDaihouLvbenController extends BaseController
 {
     @Autowired
     private IZyjrDaihouLvbenService zyjrDaihouLvbenService;
+    @Autowired
+    private ZyjrDaihouMapper zyjrDaihouMapper;
 
     /**
      * 查询【请填写功能名称】列表
@@ -61,22 +67,40 @@ public class ZyjrDaihouLvbenController extends BaseController
     /**
      * 获取【请填写功能名称】详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:lvben:query')")
-    @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Long id)
+    @GetMapping(value = "/{transactionCode}")
+    public AjaxResult getInfo(@PathVariable("transactionCode") String transactionCode)
     {
-        return AjaxResult.success(zyjrDaihouLvbenService.selectZyjrDaihouLvbenById(id));
+        ZyjrDaihou Daihou=zyjrDaihouMapper.selectZyjrDaihouByT(transactionCode);
+        if(Daihou!=null){
+            ZyjrDaihouLvben zyjrDaihouBaoxian=new ZyjrDaihouLvben();
+            zyjrDaihouBaoxian.setDaihou(Daihou.getId().toString());
+            List<ZyjrDaihouLvben> zyjrDaihouQitas = zyjrDaihouLvbenService.selectZyjrDaihouLvbenList(zyjrDaihouBaoxian);
+            return AjaxResult.success(zyjrDaihouQitas);
+        }
+        return AjaxResult.success();
     }
 
     /**
      * 新增【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:lvben:add')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody ZyjrDaihouLvben zyjrDaihouLvben)
+    public AjaxResult add( ZyjrDaihouLvben zyjrDaihouLvben)
     {
-        return toAjax(zyjrDaihouLvbenService.insertZyjrDaihouLvben(zyjrDaihouLvben));
+        ZyjrDaihou zyjrDaihou = zyjrDaihouMapper.selectZyjrDaihouByT(zyjrDaihouLvben.getDaihou());
+        if(zyjrDaihou==null){
+            zyjrDaihou.setLvben("1");
+            zyjrDaihou.setTransactionCode(zyjrDaihouLvben.getDaihou());
+            zyjrDaihouMapper.insertZyjrDaihou(zyjrDaihou);
+        }else{
+            zyjrDaihou.setLvben("1");
+            zyjrDaihouMapper.updateZyjrDaihou(zyjrDaihou);
+        }
+        zyjrDaihouLvbenService.deleteZyjrDaihouLvbenById(zyjrDaihou.getId());
+        if(zyjrDaihou.getId()!=null){
+            zyjrDaihouLvben.setDaihou(zyjrDaihou.getId().toString());
+            zyjrDaihouLvbenService.insertZyjrDaihouLvben(zyjrDaihouLvben);
+        }
+        return AjaxResult.success();
     }
 
     /**

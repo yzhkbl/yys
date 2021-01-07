@@ -90,11 +90,14 @@ public class ZyjrInsuranceController extends BaseController
     public AjaxResult insert(ZyjrInsurance zyjrInsurance){
         DqVo a=examineMapper.selectDQ(zyjrInsurance.getTransactionCode());
         ZyjrGps gps=new ZyjrGps();
-        gps.setId(a.getGps());
-        gps.setState("2");
         ZyjrDaiqianAccout zyjrDaiqianAccout=new ZyjrDaiqianAccout();
-        zyjrDaiqianAccout.setId(a.getDaiqian());
-        zyjrDaiqianAccout.setState("2");
+        if(a!=null){
+            gps.setId(a.getGps());
+            gps.setState("2");
+            zyjrDaiqianAccout.setId(a.getDaiqian());
+            zyjrDaiqianAccout.setState("2");
+
+
         if(zyjrInsurance.getId()!=null){
             zyjrInsurance.setState("1");
              if("1".equals(a.getStateb())&&"1".equals(a.getStatec())){
@@ -112,6 +115,7 @@ public class ZyjrInsuranceController extends BaseController
             zyjrDaiqianAccoutMapper.updateZyjrDaiqianAccout(zyjrDaiqianAccout);
         }
         zyjrInsuranceMapper.insertZyjrInsurance(zyjrInsurance);
+        }
             return  AjaxResult.success();
     }
 

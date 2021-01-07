@@ -3,7 +3,9 @@ package com.jeethink.system.controller;
 import java.util.List;
 
 import com.jeethink.system.domain.ZyjrDaihou;
+import com.jeethink.system.mapper.ZyjrDaihouMapper;
 import com.jeethink.system.service.IZyjrDaihouService;
+import net.sf.json.JSONArray;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +39,8 @@ public class ZyjrDaihouBaoxianController extends BaseController
     private IZyjrDaihouBaoxianService zyjrDaihouBaoxianService;
     @Autowired
     private IZyjrDaihouService zyjrDaihouService;
+    @Autowired
+    private ZyjrDaihouMapper zyjrDaihouMapper;
 
     /**
      * 查询【请填写功能名称】列表
@@ -66,11 +70,17 @@ public class ZyjrDaihouBaoxianController extends BaseController
     /**
      * 获取【请填写功能名称】详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:baoxian:query')")
-    @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Long id)
+    @GetMapping(value = "/{transactionCode}")
+    public AjaxResult getInfo(@PathVariable("transactionCode") String transactionCode)
     {
-        return AjaxResult.success(zyjrDaihouBaoxianService.selectZyjrDaihouBaoxianById(id));
+        ZyjrDaihou Daihou=zyjrDaihouMapper.selectZyjrDaihouByT(transactionCode);
+        if(Daihou!=null){
+            ZyjrDaihouBaoxian zyjrDaihouBaoxian=new ZyjrDaihouBaoxian();
+            zyjrDaihouBaoxian.setDaihou(Daihou.getId().toString());
+            List<ZyjrDaihouBaoxian> zyjrDaihouBaoxians = zyjrDaihouBaoxianService.selectZyjrDaihouBaoxianList(zyjrDaihouBaoxian);
+            return AjaxResult.success(zyjrDaihouBaoxians);
+        }
+        return AjaxResult.success();
     }
 
     /**
@@ -80,18 +90,29 @@ public class ZyjrDaihouBaoxianController extends BaseController
     @PostMapping
     public AjaxResult add( ZyjrDaihouBaoxian zyjrDaihouBaoxian)
     {
-        //zyjrDaihouService.selectZyjrDaihouByT(zyjrDaihouBaoxian.getDaihou());
-        if(zyjrDaihouBaoxian.getId()!=null){
-            zyjrDaihouBaoxianService.updateZyjrDaihouBaoxian(zyjrDaihouBaoxian);
-            ZyjrDaihou zyjrDaihou=new ZyjrDaihou();
-            zyjrDaihou.setId(Long.parseLong(zyjrDaihouBaoxian.getDaihou()));
-            zyjrDaihouService.updateZyjrDaihou(zyjrDaihou);
-            return AjaxResult.success();
+
+        ZyjrDaihou Daihou=zyjrDaihouMapper.selectZyjrDaihouByT(zyjrDaihouBaoxian.getDaihou());
+        if(Daihou==null){
+            Daihou.setBaoxian("1");
+            Daihou.setTransactionCode(zyjrDaihouBaoxian.getDaihou());
+            zyjrDaihouMapper.insertZyjrDaihou(Daihou);
+        }else{
+            Daihou.setBaoxian("1");
+            zyjrDaihouMapper.updateZyjrDaihou(Daihou);
         }
-        zyjrDaihouBaoxianService.insertZyjrDaihouBaoxian(zyjrDaihouBaoxian);
-        ZyjrDaihou zyjrDaihou=new ZyjrDaihou();
-        zyjrDaihou.setId(Long.parseLong(zyjrDaihouBaoxian.getDaihou()));
-        zyjrDaihouService.updateZyjrDaihou(zyjrDaihou);
+
+            zyjrDaihouBaoxianService.deleteZyjrDaihouBaoxianById(Daihou.getId());
+            if(zyjrDaihouBaoxian.getPic()!=null){
+                JSONArray jsonarray = JSONArray.fromObject(zyjrDaihouBaoxian.getPic());
+                System.out.println(jsonarray);
+                List<ZyjrDaihouBaoxian> list = (List)JSONArray.toList(jsonarray, ZyjrDaihouBaoxian.class);
+                for (ZyjrDaihouBaoxian daihouBaoxian : list) {
+                    daihouBaoxian.setDaihou(Daihou.getId().toString());
+                    zyjrDaihouBaoxianService.insertZyjrDaihouBaoxian(daihouBaoxian);
+                }
+                return AjaxResult.success();
+            }
+
         return AjaxResult.success();
     }
 
