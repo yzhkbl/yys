@@ -50,7 +50,10 @@ public class ZyjrPhotoCreditController extends BaseController
     @ApiOperation("111111111")
     public AjaxResult testFiles(fileInfoVo q) {
         JSONArray jsonarray = JSONArray.fromObject(q.getPhotoFile());
-        System.out.println(jsonarray);
+        System.err.println(q);
+        System.err.println(jsonarray);
+
+        ZyjrPhotoCredit zyjrPhotoCredit = new ZyjrPhotoCredit();
         List<SysFileInfo> list = (List)JSONArray.toList(jsonarray, SysFileInfo.class);
         if (q.getId() != null) {
             SysFileInfo infos = new SysFileInfo();
@@ -60,37 +63,44 @@ public class ZyjrPhotoCreditController extends BaseController
             String paths = "c:/demo";
             //System.err.println(path);
             //int a = sysFileInfoMapper.deleteSysFileInfoByPath(path);
-            for (SysFileInfo sysFileInfo : sysFileInfos) {
+            for (SysFileInfo sysFileInfo :sysFileInfos) {
                 String[] s = sysFileInfo.getFilePath().split("//");
-                System.err.println(paths + "profile/web/" + s[1]);
-                boolean b = FileUtils.deleteFile(paths + "profile/web/" + s[1]);
+                String l = sysFileInfo.getFilePath().substring(33);
+                System.err.println("删除路径"+paths+l);
+                boolean b = FileUtils.deleteFile(paths +l);
             }
         } else {
-            ZyjrPhotoCredit zyjrPhotoCredit = new ZyjrPhotoCredit();
+
             zyjrPhotoCredit.setOrderState(q.getOrderState());
             zyjrPhotoCredit.setTransactionCode(q.getTransactionCode());
             zyjrPhotoCredit.setUserId(q.getUserId());
             zyjrPhotoCreditService.insertZyjrPhotoCredit(zyjrPhotoCredit);
-            List<String> pic = new ArrayList<>();
-            if (q.getPhotoFile() != null) {
-                for (int i = 0; i < list.size(); i++) {
-                    String asd = androidUpload.upload(list.get(i).getFilePath());
-                    SysFileInfo info = new SysFileInfo();
-                    String as = "http://192.168.31.86:8080" + asd;
-                    info.setFilePath(as);
-                    info.setPhotoCreditId(zyjrPhotoCredit.getId());
-                    info.setFileName(list.get(i).getFileName());
-                    int ceshi = sysFileInfoMapper.insertSysFileInfo(info);
-                    if (ceshi < 1) {
-                        return AjaxResult.error();
-                    }
-                    pic.add(as);
-                }
-            }
 
-            return AjaxResult.success(pic);
         }
-        return AjaxResult.error();
+        List<String> pic = new ArrayList<>();
+        if (q.getPhotoFile() != null) {
+            for (int i = 0; i < list.size(); i++) {
+                //String asd = androidUpload.upload(list.get(i).getFilePath());
+                //System.err.println("？"+asd);
+                SysFileInfo info = new SysFileInfo();
+                //String as = "http://192.168.31.86:8080" + asd;
+                info.setFilePath(list.get(i).getFilePath());
+                if(q.getId()!=null){
+                    info.setPhotoCreditId(q.getId());
+                }else{
+                    info.setPhotoCreditId(zyjrPhotoCredit.getId());
+                }
+                info.setFileName(list.get(i).getFileName());
+                int ceshi = sysFileInfoMapper.insertSysFileInfo(info);
+                if (ceshi < 1) {
+                    return AjaxResult.error();
+                }
+                pic.add(info.getFilePath());
+            }
+        }
+
+        return AjaxResult.success(pic);
+        //return AjaxResult.error();
     }
 
 

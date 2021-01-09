@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.jeethink.common.utils.file.FileUtils;
+import com.jeethink.common.utils.ip.IpUtils;
 import com.jeethink.system.domain.SysFileInfo;
 import com.jeethink.system.domain.vo.fileInfoDto;
 import com.jeethink.system.domain.vo.fileInfoVo;
@@ -54,26 +55,30 @@ public class ZyjrPhotoCarController extends BaseController
         System.err.println(q);
         System.out.println(jsonarray);
         List<SysFileInfo> list = (List)JSONArray.toList(jsonarray, SysFileInfo.class);
+        ZyjrPhotoCar zyjrPhotoCar = new ZyjrPhotoCar();
         if(q.getId()!=null){
                 SysFileInfo infos=new SysFileInfo();
                 infos.setPhotoCarId(q.getId());
                 List<SysFileInfo> sysFileInfos = sysFileInfoMapper.selectSysFileInfoList(infos);
                 int a = sysFileInfoMapper.deleteSysFileInfoByPhotoCarId(q.getId());
-                String paths = "c:/demo";
+                String paths = "C:/demo";
                 //System.err.println(path);
                 //int a = sysFileInfoMapper.deleteSysFileInfoByPath(path);
                 for (SysFileInfo sysFileInfo :sysFileInfos) {
                     String[] s = sysFileInfo.getFilePath().split("//");
-                    System.err.println(paths + "profile/web/" + s[1]);
-                    boolean b = FileUtils.deleteFile(paths + "profile/web/" + s[1]);
+                    String l = sysFileInfo.getFilePath().substring(33);
+                    System.err.println("删除路径"+paths+l);
+                    boolean b = FileUtils.deleteFile(paths +l);
                 }
+
+
             }else{
-                ZyjrPhotoCar zyjrPhotoCar = new ZyjrPhotoCar();
+
                 zyjrPhotoCar.setOrderState(q.getOrderState());
                 zyjrPhotoCar.setTransactionCode(q.getTransactionCode());
                 zyjrPhotoCar.setUserId(q.getUserId());
                 zyjrPhotoCarService.insertZyjrPhotoCar(zyjrPhotoCar);
-                List<String> pic = new ArrayList<>();
+               /* List<String> pic = new ArrayList<>();
                 if (list != null) {
                     for (int i = 0; i < list.size(); i++) {
                         String asd = androidUpload.upload(list.get(i).getFilePath());
@@ -89,9 +94,33 @@ public class ZyjrPhotoCarController extends BaseController
                         pic.add(as);
                     }
                 }
-                return AjaxResult.success(pic);
+                System.err.println(pic);
+                return AjaxResult.success(pic);*/
             }
-        return AjaxResult.error();
+        List<String> pic = new ArrayList<>();
+        if (list != null) {
+            for (int i = 0; i < list.size(); i++) {
+                //String asd = androidUpload.upload(list.get(i).getFilePath());
+                SysFileInfo info = new SysFileInfo();
+                //String as = "http://"+ IpUtils.getHostIp()+":8080" + asd;
+                info.setFilePath(list.get(i).getFilePath());
+                if(q.getId()!=null){
+                    info.setPhotoCarId(q.getId());
+                }else{
+                    info.setPhotoCarId(zyjrPhotoCar.getId());
+                }
+
+                info.setFileName(list.get(i).getFileName());
+                int ceshi = sysFileInfoMapper.insertSysFileInfo(info);
+                if (ceshi < 1) {
+                    return AjaxResult.error();
+                }
+                pic.add(info.getFilePath());
+            }
+        }
+        System.err.println(pic);
+        return AjaxResult.success(pic);
+
     }
 
         /**if(zyjrPhotoCarService.selectZyjrPhotoCarById(q.getUserId(),q.getTransactionCode())!=null){
