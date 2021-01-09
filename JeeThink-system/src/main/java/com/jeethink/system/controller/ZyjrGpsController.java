@@ -11,6 +11,7 @@ import com.jeethink.system.mapper.ZyjrDaiqianAccoutMapper;
 import com.jeethink.system.mapper.ZyjrInsuranceMapper;
 import com.jeethink.system.mapper.ZyjrPicMapper;
 import com.jeethink.system.util.androidUpload;
+import net.sf.json.JSONArray;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -91,33 +92,6 @@ public class ZyjrGpsController extends BaseController
     public AjaxResult date(ZyjrGps zyjrGps){
         DqVo dq=examineMapper.selectDQ(zyjrGps.getTransactionCode());
         if(zyjrGps.getId()!=null){
-            if(zyjrGps.getPic()!=null){
-                String pics=zyjrGps.getPic().substring(1,zyjrGps.getPic().length() - 1);
-                String[] pic=pics.split(",");
-                for (String s : pic) {
-                    String asd= androidUpload.upload(s);
-                    ZyjrPic zyjrPic=new ZyjrPic();
-                    zyjrPic.setFileName("cailiao");
-                    zyjrPic.setGpsId(zyjrGps.getId().toString());
-                    String as = "http://192.168.31.82/dev-api" + asd;
-                    zyjrPic.setFilePath(as);
-                    zyjrPicMapper.insertZyjrPic(zyjrPic);
-                }
-            }
-
-            if(zyjrGps.getBianhaoPic()!=null){
-                String a= androidUpload.upload(zyjrGps.getBianhaoPic());
-                zyjrGps.setBianhaoPic(a);
-            }
-            if(zyjrGps.getYuanjingPic()!=null){
-                String a= androidUpload.upload(zyjrGps.getYuanjingPic());
-                zyjrGps.setYuanjingPic(a);
-            }
-            if(zyjrGps.getJinjingPic()!=null){
-                String a= androidUpload.upload(zyjrGps.getJinjingPic());
-                zyjrGps.setJinjingPic(a);
-            }
-
             if(dq!=null&&"1".equals(dq.getStatec())&&"1".equals(dq.getStatea())){
                 zyjrGps.setState("2");
                 ZyjrInsurance zyjrInsurance=new ZyjrInsurance();
@@ -132,7 +106,6 @@ public class ZyjrGpsController extends BaseController
             zyjrGpsService.updateZyjrGps(zyjrGps);
             return AjaxResult.success();
         }
-
         if(dq!=null&&"1".equals(dq.getStatec())&&"1".equals(dq.getStatea())){
             zyjrGps.setState("2");
             ZyjrInsurance zyjrInsurance=new ZyjrInsurance();
@@ -144,46 +117,35 @@ public class ZyjrGpsController extends BaseController
             zyjrDaiqianAccout.setState("2");
             zyjrDaiqianAccoutMapper.updateZyjrDaiqianAccout(zyjrDaiqianAccout);
         }
-        if(zyjrGps.getBianhaoPic()!=null){
-            String a= androidUpload.upload(zyjrGps.getBianhaoPic());
-            zyjrGps.setBianhaoPic(a);
-        }
-        if(zyjrGps.getYuanjingPic()!=null){
-            String a= androidUpload.upload(zyjrGps.getYuanjingPic());
-            zyjrGps.setYuanjingPic(a);
-        }
-        if(zyjrGps.getJinjingPic()!=null){
-            String a= androidUpload.upload(zyjrGps.getJinjingPic());
-            zyjrGps.setJinjingPic(a);
+        zyjrGpsService.insertZyjrGps(zyjrGps);
+        return  AjaxResult.error();
+    }
+
+    @PostMapping("insert/pic")
+    public AjaxResult pic(ZyjrGps zyjrGps){
+        DqVo dq=examineMapper.selectDQ(zyjrGps.getTransactionCode());
+        if(dq!=null&&dq.getGps()!=null){
+            zyjrPicMapper.deleteZyjrPicById(dq.getGps());
+                JSONArray jsonarray = JSONArray.fromObject(zyjrGps.getPic());
+                System.out.println(jsonarray);
+                List<ZyjrPic> list = (List)JSONArray.toList(jsonarray, ZyjrDaihouBaoxian.class);
+                for (ZyjrPic pic : list) {
+                    pic.setGpsId(dq.getGps().toString());
+                    zyjrPicMapper.insertZyjrPic(pic);
+                }
+                return AjaxResult.success();
+
         }
         zyjrGpsService.insertZyjrGps(zyjrGps);
-        System.err.println(zyjrGps);
-        if(zyjrGps.getPic()!=null){
-            String pics=zyjrGps.getPic().substring(1,zyjrGps.getPic().length() - 1);
-            String[] pic=pics.split(",");
-            for (String s : pic) {
-                String asd= androidUpload.upload(s);
-                ZyjrPic zyjrPic=new ZyjrPic();
-                zyjrPic.setFileName("cailiao");
-                zyjrPic.setGpsId(zyjrGps.getId().toString());
-                String as = "http://192.168.31.82/dev-api" + asd;
-                zyjrPic.setFilePath(as);
-                zyjrPicMapper.insertZyjrPic(zyjrPic);
-            }
+        JSONArray jsonarray = JSONArray.fromObject(zyjrGps.getPic());
+        System.out.println(jsonarray);
+        List<ZyjrPic> list = (List)JSONArray.toList(jsonarray, ZyjrDaihouBaoxian.class);
+        for (ZyjrPic pic : list) {
+            pic.setGpsId(zyjrGps.getId().toString() );
+            zyjrPicMapper.insertZyjrPic(pic);
         }
 
-
-
-
-
-  /*      zyjrGps.setState("1");
-        int ceshi=zyjrGpsService.insertZyjrGps(zyjrGps);
-        if(ceshi>0){
-            Map<String,String> map=new HashMap<>();
-            map.put("transactionCode",zyjrGps.getTransactionCode());
-            return  AjaxResult.success(map);
-        }*/
-        return  AjaxResult.error();
+        return  AjaxResult.success();
     }
 
     /**
@@ -203,7 +165,7 @@ public class ZyjrGpsController extends BaseController
             map.put("Pic",b);
         }
 
-        return AjaxResult.success(map);
+        return AjaxResult.success("操作成功",map);
     }
 
     /**

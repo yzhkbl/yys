@@ -372,7 +372,6 @@ public class test extends BaseController {
         return AjaxResult.success("" + as);
     }
 
-
     @RequestMapping(value = {"/ceshi2"}, method = RequestMethod.POST)
     @ResponseBody
     @ApiOperation("111111111")
@@ -380,7 +379,7 @@ public class test extends BaseController {
         for (int i = 0; i < id.size(); i++) {
             String a = FileUploadUtils.upload(file.get(i));
             SysFileInfo info = new SysFileInfo();
-            String as = IpUtils.getHostIp() +":8080"+ a;
+            String as = "http://"+IpUtils.getHostIp() +":8080"+ a;
             info.setFilePath(as);
             info.setId(id.get(i));
             info.setFileName(name.get(i));
@@ -415,16 +414,16 @@ public class test extends BaseController {
     @ResponseBody
     @ApiOperation("111111111")
     public AjaxResult delete(String path) {
-        String paths = "E:/demo/JeeThink-admin/src/main/java/com/jeethink/web/";
+        String paths = "C:/demo";
         System.err.println(path);
 
         int a = sysFileInfoMapper.deleteSysFileInfoByPath(path);
         if (a > 0) {
-            path=path.substring(28,path.length());
-            String[] s = path.split("//");
-            System.err.println(paths + "profile/web/" + s[1]);
+            path=path.substring(36,path.length());
+            /*String[] s = path.split("/");*/
+            System.err.println(paths + "/20" + path);
 
-            boolean b = FileUtils.deleteFile(paths + "profile/web/" + s[1]);
+            boolean b = FileUtils.deleteFile(paths + "/20" + path);
             if (b) {
                 return AjaxResult.success(b);
             } else {

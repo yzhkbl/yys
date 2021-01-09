@@ -20,6 +20,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="daiqian.userName"    column="user_name"    />
         <result property="daiqian.carType"    column="car_type"    />
     </resultMap>
+    <resultMap type="com.jeethink.system.domain.ZyjrDaiqian" id="ZyjrAllowBasicsResult2">
+        <result property="id"    column="id"    />
+        <result property="state"    column="state"    />
+        <result property="opinion"    column="opinion"    />
+        <result property="userId"    column="user_id"    />
+        <result property="transactionCode"    column="transaction_code"    />
+        <result property="userName"    column="user_name"    />
+        <result property="carType"    column="car_type"    />
+        <result property="team"    column="team"    />
+        <result property="loanAmount"    column="loan_amount"    />
+        <result property="repaymentTerm"    column="repayment_term"    />
+        <result property="actualPrice"    column="actual_price"    />
+        <result property="dealersId"    column="dealers_id"    />
+    </resultMap>
+
 
     <sql id="selectZyjrAllowBasicsVo">
         select id, approval_type, dealers_id, dealer_stores, plate_type, market, store, operate, more_info, user_id, transaction_code, order_state from zyjr_allow_basics
@@ -40,27 +55,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
 
-    <select id="selectAllList" parameterType="ZyjrAllowBasics" resultMap="ZyjrAllowBasicsResult">
-        select a.id, a.approval_type, a.dealers_id, a.dealer_stores,a.plate_type, a.market, a.store, a.operate, a.more_info, a.user_id, a.transaction_code, a.order_state,
-        b.user_name,c.car_type
-
-        from zyjr_allow_basics a
-        left join zyjr_borrower b on a.transaction_code=b.transaction_code
-        left join zyjr_business c on a.transaction_code=c.transaction_code
-
-
-        <where>
-            <if test="dealerStores != null  and dealerStores != ''"> and dealer_stores = #{dealerStores}</if>
-            <if test="plateType != null "> and plate_type = #{plateType}</if>
-            <if test="market != null  and market != ''"> and market = #{market}</if>
-            <if test="store != null  and store != ''"> and store = #{store}</if>
-            <if test="operate != null  and operate != ''"> and operate = #{operate}</if>
-            <if test="moreInfo != null  and moreInfo != ''"> and more_info = #{moreInfo}</if>
-            <if test="userId != null "> and user_id = #{userId}</if>
-            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
-            <if test="orderState != null "> and order_state = #{orderState}</if>
-        </where>
-    </select>
     
     <select id="selectZyjrAllowBasicsById" resultMap="ZyjrAllowBasicsResult">
         <include refid="selectZyjrAllowBasicsVo"/>
@@ -71,9 +65,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id=#{id}
     </select>
 
-    <select id="selectByT" resultMap="ZyjrAllowBasicsResult">
-        <include refid="selectZyjrAllowBasicsVo"/>
-        where transaction_code=#{transactionCode}
+    <select id="selectByT" parameterType="com.jeethink.system.domain.ZyjrDaiqian" resultMap="ZyjrAllowBasicsResult2">
+        select a.transaction_code,b.dealers_id from zyjr_daiqian a
+        left join zyjr_allow_basics b on a.transaction_code=b.transaction_code
+        left join zyjr_car c on b.dealers_id=c.id
+        where a.transaction_code=#{transactionCode}
     </select>
         
     <insert id="insertZyjrAllowBasics" parameterType="ZyjrAllowBasics" useGeneratedKeys="true" keyProperty="id">

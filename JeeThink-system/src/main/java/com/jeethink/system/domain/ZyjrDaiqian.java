@@ -9,5 +9,13 @@ public class ZyjrDaiqian {
     private String opinion;
     private String userId;
     private String transactionCode;
+    private Integer carType;
+    private String userName;
+    private String team;
+    private Double loanAmount;
+    private Integer repaymentTerm;
+    private Double actualPrice;
+    private Long dealersId;
+    private Integer carInformation;
 
 }
