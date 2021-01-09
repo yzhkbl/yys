@@ -1,5 +1,6 @@
 package com.jeethink.system.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -89,7 +90,9 @@ public class ZyjrAllowBasicsController extends BaseController
     @GetMapping(value = "/{userId}/{transactionCode}")
     public AjaxResult getInfo(@PathVariable("userId") Long userId,@PathVariable("transactionCode") String transactionCode)
     {
-        return AjaxResult.success(zyjrAllowBasicsService.selectZyjrAllowBasicsById(userId, transactionCode));
+        ZyjrAllowBasics zyjrAllowBasics = zyjrAllowBasicsService.selectZyjrAllowBasicsById(userId, transactionCode);
+            return AjaxResult.success(zyjrAllowBasics);
+
     }
 
     /**

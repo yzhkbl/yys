@@ -53,7 +53,7 @@
         select a.id, a.team,a.operator,a.update_by,a.false_operator,a.false_operator_id, a.car_information, a.intention_price, a.loan_money, a.repay_period, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name as name,c.approval_type
          from zyjr_business a
          left join zyjr_borrower b on a.transaction_code=b.transaction_code
-         left join zyjr_allow_opinion c on c.transaction_code=b.transaction_code
-         where a.transaction_code in (select transaction_code from zyjr_allow_opinion where approval_type=1)
+         left join zyjr_repeat_opinion c on c.transaction_code=b.transaction_code
+         where a.transaction_code in (select transaction_code from zyjr_allow_opinion where approval_type=1 and c.approval_type!=1)
     </select>
 </mapper>

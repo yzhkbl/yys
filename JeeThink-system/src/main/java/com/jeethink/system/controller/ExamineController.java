@@ -139,8 +139,12 @@ public class ExamineController extends BaseController {
     @RequestMapping("/findByState")
     public AjaxResult findbY(String transactionCode){
         ZyjrBorrower z= zyjrBorrowerMapper.selectById(transactionCode);
+            if(z!=null){
+
 
         return AjaxResult.success(z.getContractState());
+            }
+            return  AjaxResult.success(z);
     }
 
     @GetMapping(value = "/{userId}")
