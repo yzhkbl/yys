@@ -70,6 +70,7 @@ ZyjrCarController extends BaseController {
         return getDataTable(list);
     }
 
+
     /**
      * 导出车商信息列表
      */
@@ -230,9 +231,11 @@ a.setType(storeInformation.getType());
             if(SysFileInfo!=null){
                 for (SysFileInfo sysFileInfo : SysFileInfo) {
                     String paths = "C:/demo";
-                    String[] s = sysFileInfo.getFilePath().split("//");
-                    System.err.println(paths + "profile/web/" + s[1]);
-                    boolean b = FileUtils.deleteFile(paths + "profile/web/" + s[1]);
+                    String path=sysFileInfo.getFilePath();
+                     path=path.substring(36,path.length());
+
+
+                    boolean b = FileUtils.deleteFile(paths + "/20" + path);
                     if (b) {
                         return AjaxResult.success(b);
                     } else {
@@ -273,7 +276,7 @@ a.setType(storeInformation.getType());
                 SysFileInfo sysFileInfo=new SysFileInfo();
                 sysFileInfo.setFileName("store");
                 sysFileInfo.setId(a.getId().toString());
-                String as = "http://192.168.31.82/dev-api" + asd;
+                String as = "http://"+IpUtils.getHostIp()+":8080" + asd;
                 sysFileInfo.setFilePath(as);
                 sysFileInfoMapper.insertSysFileInfo(sysFileInfo);
             }
@@ -339,7 +342,7 @@ a.setType(storeInformation.getType());
             if (ceshi < 1) {
                 return AjaxResult.error();
             }
-            String as = "http://192.168.31.82/dev-api" + a;
+            String as = "http://"+IpUtils.getHostIp()+":8080" + a;
             pic.add(as);
         }
 

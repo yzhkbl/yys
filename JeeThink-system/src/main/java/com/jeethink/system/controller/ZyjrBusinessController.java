@@ -43,7 +43,7 @@ public class ZyjrBusinessController extends BaseController
     /**
      * 查询【请填写功能名称】列表
      */
-    @PreAuthorize("@ss.hasPermi('process:business:list')")
+    /*@PreAuthorize("@ss.hasPermi('process:business:list')")*/
     @GetMapping("/list")
     @ApiOperation("查询参数列表")
     public TableDataInfo list(ZyjrBusiness zyjrBusiness)
@@ -66,7 +66,7 @@ public class ZyjrBusinessController extends BaseController
     /**
      * 导出【请填写功能名称】列表
      */
-    @PreAuthorize("@ss.hasPermi('process:business:export')")
+    /*@PreAuthorize("@ss.hasPermi('process:business:export')")*/
     @Log(title = "【请填写功能名称】", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(ZyjrBusiness zyjrBusiness)
@@ -89,7 +89,7 @@ public class ZyjrBusinessController extends BaseController
     /**
      * 新增【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('process:business:add')")
+    /*@PreAuthorize("@ss.hasPermi('process:business:add')")*/
     @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody ZyjrBusiness zyjrBusiness)

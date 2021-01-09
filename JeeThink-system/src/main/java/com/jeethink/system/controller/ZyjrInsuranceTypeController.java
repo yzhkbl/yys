@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.jeethink.common.utils.file.FileUploadUtils;
+import com.jeethink.common.utils.ip.IpUtils;
 import com.jeethink.system.domain.SysFileInfo;
 import com.jeethink.system.mapper.SysFileInfoMapper;
 import io.swagger.annotations.ApiOperation;
@@ -38,7 +39,7 @@ public class ZyjrInsuranceTypeController extends BaseController
     /**
      * 查询insuranceType列表
      */
-    @PreAuthorize("@ss.hasPermi('system:insuranceType:list')")
+    @PreAuthorize("@ss.hasPermi('orginization:insuranceType:list')")
     @GetMapping("/list")
     public TableDataInfo list(ZyjrInsuranceType zyjrInsuranceType)
     {
@@ -50,7 +51,7 @@ public class ZyjrInsuranceTypeController extends BaseController
     /**
      * 导出insuranceType列表
      */
-    @PreAuthorize("@ss.hasPermi('system:insuranceType:export')")
+    @PreAuthorize("@ss.hasPermi('orginization:insuranceType:export')")
     @Log(title = "insuranceType", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(ZyjrInsuranceType zyjrInsuranceType)
@@ -86,7 +87,7 @@ public class ZyjrInsuranceTypeController extends BaseController
         for (int i = 0; i < id.size(); i++) {
             String a = FileUploadUtils.upload(file.get(i));
             SysFileInfo info = new SysFileInfo();
-            String as = "http://192.168.31.82/dev-api" + a;
+            String as = "http://"+ IpUtils.getHostIp()+":8080" + a;
             info.setFilePath(as);
             info.setBaoxian(id.get(i));
             info.setFileName(name.get(i));
@@ -110,7 +111,7 @@ public class ZyjrInsuranceTypeController extends BaseController
     /**
      * 删除insuranceType
      */
-    @PreAuthorize("@ss.hasPermi('system:insuranceType:remove')")
+    @PreAuthorize("@ss.hasPermi('orginization:insuranceType:remove')")
     @Log(title = "insuranceType", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

@@ -36,7 +36,7 @@ public class ZyjrBorrowerController extends BaseController
     /**
      * 查询【请填写功能名称】列表
      */
-    @PreAuthorize("@ss.hasPermi('system:borrower:list')")
+  //  @PreAuthorize("@ss.hasPermi('system:borrower:list')")
     @GetMapping("/list")
     public TableDataInfo list(ZyjrBorrower zyjrBorrower)
     {
@@ -46,6 +46,7 @@ public class ZyjrBorrowerController extends BaseController
     }
 
     /**
+     *
      * 导出【请填写功能名称】列表
      */
     @PreAuthorize("@ss.hasPermi('system:borrower:export')")

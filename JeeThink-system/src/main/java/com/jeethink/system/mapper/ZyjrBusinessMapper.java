@@ -2,6 +2,7 @@ package com.jeethink.system.mapper;
 
 import java.util.List;
 import com.jeethink.system.domain.ZyjrBusiness;
+import com.jeethink.system.domain.ZyjrCard;
 import com.jeethink.system.domain.vo.Bodys;
 import org.springframework.data.repository.query.Param;
 
@@ -62,4 +63,6 @@ public interface ZyjrBusinessMapper
      * @return 结果
      */
     public int deleteZyjrBusinessByIds(Long[] ids);
+
+    ZyjrCard selKaika(String transactionCode);
 }

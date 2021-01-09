@@ -88,6 +88,8 @@ public class ZyjrDaihouLvbenController extends BaseController
     {
         ZyjrDaihou zyjrDaihou = zyjrDaihouMapper.selectZyjrDaihouByT(zyjrDaihouLvben.getDaihou());
         if(zyjrDaihou==null){
+            ZyjrDaihou Daihou2=new ZyjrDaihou();
+            zyjrDaihou=Daihou2;
             zyjrDaihou.setLvben("1");
             zyjrDaihou.setTransactionCode(zyjrDaihouLvben.getDaihou());
             zyjrDaihouMapper.insertZyjrDaihou(zyjrDaihou);

@@ -91,6 +91,8 @@ public class ZyjrDaihouQitaController extends BaseController
 
         ZyjrDaihou Daihou=zyjrDaihouMapper.selectZyjrDaihouByT(zyjrDaihouBaoxian.getDaihou());
         if(Daihou==null){
+            ZyjrDaihou Daihou2=new ZyjrDaihou();
+            Daihou=Daihou2;
             Daihou.setQita("1");
             Daihou.setTransactionCode(zyjrDaihouBaoxian.getDaihou());
             zyjrDaihouMapper.insertZyjrDaihou(Daihou);

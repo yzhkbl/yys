@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.jeethink.common.utils.file.FileUploadUtils;
+import com.jeethink.common.utils.ip.IpUtils;
 import com.jeethink.system.domain.SysFileInfo;
 import com.jeethink.system.mapper.SysFileInfoMapper;
 import io.swagger.annotations.Api;
@@ -98,7 +99,7 @@ public class ZyjrBankController extends BaseController
         for (int i = 0; i < id.size(); i++) {
             String a = FileUploadUtils.upload(file.get(i));
             SysFileInfo info = new SysFileInfo();
-            String as = "http://192.168.31.82/dev-api" + a;
+            String as = "http://"+ IpUtils.getHostIp()+":8080" + a;
             info.setFilePath(as);
             info.setBankId(id.get(i));
             info.setFileName(name.get(i));

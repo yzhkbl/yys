@@ -420,8 +420,7 @@ public class test extends BaseController {
         int a = sysFileInfoMapper.deleteSysFileInfoByPath(path);
         if (a > 0) {
             path=path.substring(36,path.length());
-            /*String[] s = path.split("/");*/
-            System.err.println(paths + "/20" + path);
+
 
             boolean b = FileUtils.deleteFile(paths + "/20" + path);
             if (b) {
@@ -479,6 +478,9 @@ public class test extends BaseController {
             return AjaxResult.success(d,c);
         }
     }
+
+
+
     @ResponseBody
     @GetMapping("jinzhengu")
     public AjaxResult wc(){
@@ -490,6 +492,13 @@ public class test extends BaseController {
             map.put(fileInfo.getFileName(),fileInfo.getFilePath());
         }
         return AjaxResult.success(map);
+    }
+    @PreAuthorize("@ss.hasPermi('dzj')")
+    @ResponseBody
+    @GetMapping("kaika")
+    public AjaxResult kaika(String transactionCode){
+            ZyjrCard z=b.selKaika(transactionCode);
+        return AjaxResult.success("666");
     }
 
 
