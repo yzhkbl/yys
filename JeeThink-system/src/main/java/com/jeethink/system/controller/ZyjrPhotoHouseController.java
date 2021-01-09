@@ -57,7 +57,7 @@ public class ZyjrPhotoHouseController extends BaseController
             infos.setPhotoHouseId(q.getId());
             List<SysFileInfo> sysFileInfos = sysFileInfoMapper.selectSysFileInfoList(infos);
             int a = sysFileInfoMapper.deleteByHouse(q.getId());
-            String paths = "E:/demo/JeeThink-admin/src/main/java/com/jeethink/web/";
+            String paths = "c:/demo";
             //System.err.println(path);
             //int a = sysFileInfoMapper.deleteSysFileInfoByPath(path);
             for (SysFileInfo sysFileInfo : sysFileInfos) {
@@ -72,7 +72,7 @@ public class ZyjrPhotoHouseController extends BaseController
             zyjrPhotoHouse.setUserId(q.getUserId());
             zyjrPhotoHouseService.insertZyjrPhotoHouse(zyjrPhotoHouse);
             List<String> pic = new ArrayList<>();
-            if (q.getPhotoFile() != null) {
+            if (list != null) {
                 for (int i = 0; i < list.size(); i++) {
                     String asd = androidUpload.upload(list.get(i).getFilePath());
                     SysFileInfo info = new SysFileInfo();
@@ -87,7 +87,6 @@ public class ZyjrPhotoHouseController extends BaseController
                     pic.add(as);
                 }
             }
-
             return AjaxResult.success(pic);
         }
         return AjaxResult.error();
