@@ -108,10 +108,10 @@ public class ZyjrAllowBasicsServiceImpl implements IZyjrAllowBasicsService
     }
 
     @Override
-    public Map<String, Object> selectByMap(Long id) {
+    public Map<String, Object> selectByMap(String transactionCode) {
         Map<String,Object> map=new HashMap<>();
-        ZyjrAllowBasics zyjrAllowBasics = zyjrAllowBasicsMapper.selectById(id);
-        if(zyjrAllowBasics==null||id==null){
+        ZyjrDaiqian zyjrAllowBasics = zyjrAllowBasicsMapper.selectByT(transactionCode);
+        if(zyjrAllowBasics==null||transactionCode==null){
             return null;
         }
         ZyjrCar zyjrCar = zyjrCarMapper.selectZyjrCarById(zyjrAllowBasics.getDealersId());

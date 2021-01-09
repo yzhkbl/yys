@@ -61,5 +61,5 @@ public interface IZyjrAllowBasicsService
      */
     public int deleteZyjrAllowBasicsById(Long id);
 
-    Map<String, Object> selectByMap(Long id);
+    Map<String, Object> selectByMap(String id);
 }

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.jeethink.system.domain.ZyjrDaiqian;
+import com.jeethink.system.mapper.ExamineMapper;
 import com.jeethink.system.mapper.ZyjrAllowBasicsMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,8 @@ public class ZyjrAllowBasicsController extends BaseController
     private IZyjrAllowBasicsService zyjrAllowBasicsService;
     @Autowired
     private ZyjrAllowBasicsMapper zyjrAllowBasicsMapper;
+    @Autowired
+    private ExamineMapper examineMapper;
 
     /**
      * 查询【请填写功能名称】列表
@@ -55,13 +59,13 @@ public class ZyjrAllowBasicsController extends BaseController
     public TableDataInfo lists(ZyjrAllowBasics zyjrAllowBasics)
     {
         startPage();
-        List<ZyjrAllowBasics> list = zyjrAllowBasicsMapper.selectAllList(zyjrAllowBasics);
+        List<ZyjrDaiqian> list = examineMapper.selectAllList(zyjrAllowBasics);
         return getDataTable(list);
     }
-    @GetMapping("/get/{id}")
-    public AjaxResult gets(@PathVariable("id") Long id)
+    @GetMapping("/get/{transactionCode}")
+    public AjaxResult gets(@PathVariable("transactionCode") String transactionCode)
     {
-        Map<String,Object> map=zyjrAllowBasicsService.selectByMap(id);
+        Map<String,Object> map=zyjrAllowBasicsService.selectByMap(transactionCode);
         return AjaxResult.success(map);
     }
 

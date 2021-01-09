@@ -2,6 +2,7 @@ package com.jeethink.system.mapper;
 
 import java.util.List;
 import com.jeethink.system.domain.ZyjrAllowBasics;
+import com.jeethink.system.domain.ZyjrDaiqian;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -20,7 +21,7 @@ public interface ZyjrAllowBasicsMapper
      */
     public ZyjrAllowBasics selectZyjrAllowBasicsById(@Param("userId") Long userId, @Param("transactionCode") String transactionCode);
     public ZyjrAllowBasics selectById(Long id);
-    public ZyjrAllowBasics selectByT(String id);
+    public ZyjrDaiqian selectByT(String id);
 
     /**
      * 查询【请填写功能名称】列表
@@ -62,5 +63,5 @@ public interface ZyjrAllowBasicsMapper
      */
     public int deleteZyjrAllowBasicsByIds(Long[] ids);
 
-    List<ZyjrAllowBasics> selectAllList(ZyjrAllowBasics zyjrAllowBasics);
+
 }

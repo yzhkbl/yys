@@ -4,7 +4,31 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jeethink.system.mapper.ExamineMapper">
 
-
+    <resultMap type="com.jeethink.system.domain.ZyjrDaiqian" id="ZyjrAllowBasicsResult2">
+        <result property="id"    column="id"    />
+        <result property="state"    column="state"    />
+        <result property="opinion"    column="opinion"    />
+        <result property="userId"    column="user_id"    />
+        <result property="transactionCode"    column="transaction_code"    />
+        <result property="userName"    column="user_name"    />
+        <result property="carType"    column="car_type"    />
+        <result property="team"    column="team"    />
+        <result property="loanAmount"    column="loan_amount"    />
+        <result property="repaymentTerm"    column="repayment_term"    />
+        <result property="actualPrice"    column="actual_price"    />
+        <result property="carInformation"    column="car_information"    />
+    </resultMap>
+    <select id="selectAllList" parameterType="com.jeethink.system.domain.ZyjrDaiqian" resultMap="ZyjrAllowBasicsResult2">
+        select e.id, e.state, e.opinion, e.user_id, a.transaction_code,
+        b.user_name,c.car_type,c.team,f.loan_amount,f.repayment_term,f.actual_price,c.car_information
+        from zyjr_repeat_opinion a
+        left join zyjr_borrower b on a.transaction_code=b.transaction_code
+        left join zyjr_business c on a.transaction_code=c.transaction_code
+        left join zyjr_allow_basics d on a.transaction_code=d.transaction_code
+        left join zyjr_daiqian e on a.transaction_code=e.transaction_code
+        left join zyjr_car_loan f on a.transaction_code=f.transaction_code
+        where a.approval_type=1
+    </select>
     <insert id="insertBorrower" parameterType="com.jeethink.system.domain.ZyjrBorrower">
         insert into zyjr_borrower
         (id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,obverse_id,obverse_code,obverse_address,

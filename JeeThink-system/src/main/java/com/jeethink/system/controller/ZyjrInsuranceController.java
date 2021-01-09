@@ -69,14 +69,17 @@ public class ZyjrInsuranceController extends BaseController
     public AjaxResult app(@PathVariable("transactionCode") String transactionCode){
         ZyjrInsurance zyjrInsurance = zyjrInsuranceMapper.selectZyjrInsuranceByIds(transactionCode);
         Map<String,Object> map=new HashMap<>();
-        map.put("id",zyjrInsurance.getId());
-        map.put("insuranceCompany",zyjrInsurance.getInsuranceCompany());
-        map.put("money",zyjrInsurance.getMoney());
-        map.put("zyjrCarId",zyjrInsurance.getZyjrCarId());
-        map.put("transactionCode",zyjrInsurance.getTransactionCode());
-        map.put("userId",zyjrInsurance.getUserId());
+        if(zyjrInsurance!=null){
+            map.put("id",zyjrInsurance.getId());
+            map.put("insuranceCompany",zyjrInsurance.getInsuranceCompany());
+            map.put("money",zyjrInsurance.getMoney());
+            map.put("zyjrCarId",zyjrInsurance.getZyjrCarId());
+            map.put("transactionCode",zyjrInsurance.getTransactionCode());
+            map.put("userId",zyjrInsurance.getUserId());
+        }
 
-        return AjaxResult.success("操作成功",zyjrInsurance);
+
+        return AjaxResult.successs("操作成功",zyjrInsurance);
     }
 
     @GetMapping("ceshi/{transactionCode}")

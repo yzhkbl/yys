@@ -131,14 +131,14 @@ public class ZyjrDaiqianAccoutController extends BaseController
     @GetMapping("getAccout/{transactionCode}")
     public AjaxResult apps(@PathVariable("transactionCode") String transactionCode){
 
-        ZyjrAllowBasics a=zyjrAllowBasicsMapper.selectByT(transactionCode);
+        ZyjrDaiqian a=zyjrAllowBasicsMapper.selectByT(transactionCode);
         if(a!=null){
             ZyjrCarAccount zyjrCarAccount=new ZyjrCarAccount();
             zyjrCarAccount.setZyjrCarId(a.getId().toString());
             List<ZyjrCarAccount> c=zyjrCarAccountMapper.selectZyjrCarAccountList(zyjrCarAccount);
             return AjaxResult.success("操作成功",c);
         }
-        return AjaxResult.error();
+        return AjaxResult.success("操作成功",null);
     }
 
     @GetMapping("getInfo/{transactionCode}")

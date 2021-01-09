@@ -9,6 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface ExamineMapper {
+    List<ZyjrDaiqian> selectAllList(ZyjrAllowBasics zyjrAllowBasics);
     ZyjrDaiqian selByDaiqian(String transactionCode);
     int insertDaiqian(ZyjrDaiqian zyjrDaiqian);
     int updateByDaiqian(ZyjrDaiqian zyjrDaiqian);
