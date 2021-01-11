@@ -105,7 +105,7 @@ public class ZyjrDaihouQitaController extends BaseController
         if(zyjrDaihouBaoxian.getPic()!=null){
             JSONArray jsonarray = JSONArray.fromObject(zyjrDaihouBaoxian.getPic());
             System.out.println(jsonarray);
-            List<ZyjrDaihouQita> list = (List)JSONArray.toList(jsonarray, ZyjrDaihouBaoxian.class);
+            List<ZyjrDaihouQita> list = (List)JSONArray.toList(jsonarray, ZyjrDaihouQita.class);
             for (ZyjrDaihouQita daihouBaoxian : list) {
                 daihouBaoxian.setDaihou(Daihou.getId().toString());
                 zyjrDaihouQitaService.insertZyjrDaihouQita(daihouBaoxian);

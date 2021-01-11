@@ -58,7 +58,7 @@ public class ZyjrPhotoLenderController extends BaseController
             infos.setPhotoLenderId(q.getId());
             List<SysFileInfo> sysFileInfos = sysFileInfoMapper.selectSysFileInfoList(infos);
             int a = sysFileInfoMapper.deleteByLender(q.getId());
-            String paths = "c:/demo";
+            String paths = "C:/demo";
             //System.err.println(path);
             //int a = sysFileInfoMapper.deleteSysFileInfoByPath(path);
             for (SysFileInfo sysFileInfo :sysFileInfos) {
@@ -108,9 +108,10 @@ public class ZyjrPhotoLenderController extends BaseController
     public AjaxResult findPhoto(@PathVariable("userId") Long userId,@PathVariable("transactionCode") String transactionCode)
     {
         ZyjrPhotoLender zyjrPhotoLender = zyjrPhotoLenderService.selectZyjrPhotoLenderById(userId, transactionCode);
+        fileInfoDto f = new fileInfoDto();
         if(zyjrPhotoLender != null) {
             List<SysFileInfo> list = sysFileInfoMapper.photoLender(zyjrPhotoLender.getId());
-            fileInfoDto f = new fileInfoDto();
+
             f.setId(zyjrPhotoLender.getId());
             f.setUserId(zyjrPhotoLender.getUserId());
             f.setTransactionCode(zyjrPhotoLender.getTransactionCode());
@@ -118,7 +119,7 @@ public class ZyjrPhotoLenderController extends BaseController
             f.setPhotoFile(list);
             return AjaxResult.success(f);
         }else {
-            return AjaxResult.error();
+            return AjaxResult.success(f);
         }
     }
 

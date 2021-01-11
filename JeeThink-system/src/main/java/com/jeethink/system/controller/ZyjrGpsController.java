@@ -118,7 +118,7 @@ public class ZyjrGpsController extends BaseController
             zyjrDaiqianAccoutMapper.updateZyjrDaiqianAccout(zyjrDaiqianAccout);
         }
         zyjrGpsService.insertZyjrGps(zyjrGps);
-        return  AjaxResult.error();
+        return  AjaxResult.success();
     }
 
     @PostMapping("insert/pic")
@@ -161,11 +161,12 @@ public class ZyjrGpsController extends BaseController
             ZyjrPic zyjrPic=new ZyjrPic();
             zyjrPic.setGpsId(a.getId().toString());
             List<ZyjrPic> b=zyjrPicMapper.selectZyjrPicList(zyjrPic);
-            map.put("Gps",a);
-            map.put("Pic",b);
+            map.put("gps",a);
+            map.put("pic",b);
+            return AjaxResult.success("操作成功",map);
         }
 
-        return AjaxResult.success("操作成功",map);
+        return AjaxResult.success("操作成功",null);
     }
 
     /**

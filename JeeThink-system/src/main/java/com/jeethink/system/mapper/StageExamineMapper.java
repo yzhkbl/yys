@@ -19,6 +19,7 @@ public interface StageExamineMapper {
     ZyjrDetails findByDetails(String transactionCode);
 
 
+    int deleteOpinion(String transactionCode);
     int insertOpinion(ZyjrRepeatOpinion q);
     ZyjrRepeatOpinion findOpinion(String transactionCode);
     List<ZyjrBusiness> list();

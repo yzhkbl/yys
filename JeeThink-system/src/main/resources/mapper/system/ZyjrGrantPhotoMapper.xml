@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrGrantPhotoMapper">
+    
+    <resultMap type="ZyjrGrantPhoto" id="ZyjrGrantPhotoResult">
+        <result property="fileId"    column="file_id"    />
+        <result property="fileName"    column="file_name"    />
+        <result property="filePath"    column="file_path"    />
+        <result property="instalmentsId"    column="instalments_id"    />
+        <result property="imageId"    column="image_id"    />
+        <result property="visitId"    column="visit_id"    />
+    </resultMap>
+
+    <sql id="selectZyjrGrantPhotoVo">
+        select file_id, file_name, file_path, instalments_id, image_id, visit_id from zyjr_grant_photo
+    </sql>
+
+    <select id="selectZyjrGrantPhotoList" parameterType="ZyjrGrantPhoto" resultMap="ZyjrGrantPhotoResult">
+        <include refid="selectZyjrGrantPhotoVo"/>
+        <where>  
+            <if test="fileName != null  and fileName != ''"> and file_name like concat('%', #{fileName}, '%')</if>
+            <if test="filePath != null  and filePath != ''"> and file_path = #{filePath}</if>
+            <if test="instalmentsId != null "> and instalments_id = #{instalmentsId}</if>
+            <if test="imageId != null "> and image_id = #{imageId}</if>
+            <if test="visitId != null "> and visit_id = #{visitId}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrGrantPhotoById" parameterType="Long" resultMap="ZyjrGrantPhotoResult">
+        <include refid="selectZyjrGrantPhotoVo"/>
+        where file_id = #{fileId}
+    </select>
+
+    <select id="findImage" parameterType="Long" resultMap="ZyjrGrantPhotoResult">
+        <include refid="selectZyjrGrantPhotoVo"/>
+        where image_id = #{imageId}
+    </select>
+
+    <select id="findInstalments" parameterType="Long" resultMap="ZyjrGrantPhotoResult">
+        <include refid="selectZyjrGrantPhotoVo"/>
+        where instalments_id = #{instalmentsId}
+    </select>
+
+    <select id="findVisit" parameterType="Long" resultMap="ZyjrGrantPhotoResult">
+        <include refid="selectZyjrGrantPhotoVo"/>
+        where visit_id = #{visitId}
+    </select>
+        
+    <insert id="insertZyjrGrantPhoto" parameterType="ZyjrGrantPhoto" useGeneratedKeys="true" keyProperty="fileId">
+        insert into zyjr_grant_photo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fileName != null">file_name,</if>
+            <if test="filePath != null">file_path,</if>
+            <if test="instalmentsId != null">instalments_id,</if>
+            <if test="imageId != null">image_id,</if>
+            <if test="visitId != null">visit_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fileName != null">#{fileName},</if>
+            <if test="filePath != null">#{filePath},</if>
+            <if test="instalmentsId != null">#{instalmentsId},</if>
+            <if test="imageId != null">#{imageId},</if>
+            <if test="visitId != null">#{visitId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrGrantPhoto" parameterType="ZyjrGrantPhoto">
+        update zyjr_grant_photo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fileName != null">file_name = #{fileName},</if>
+            <if test="filePath != null">file_path = #{filePath},</if>
+            <if test="instalmentsId != null">instalments_id = #{instalmentsId},</if>
+            <if test="imageId != null">image_id = #{imageId},</if>
+            <if test="visitId != null">visit_id = #{visitId},</if>
+        </trim>
+        where file_id = #{fileId}
+    </update>
+
+    <delete id="deleteZyjrGrantPhotoById" parameterType="Long">
+        delete from zyjr_grant_photo where file_id = #{fileId}
+    </delete>
+
+    <delete id="deleteByImage" parameterType="Long">
+        delete from zyjr_grant_photo where image_id = #{imageId}
+    </delete>
+
+    <delete id="deleteByInstalments" parameterType="Long">
+        delete from zyjr_grant_photo where instalments_id = #{instalmentsId}
+    </delete>
+
+    <delete id="deleteByVisit" parameterType="Long">
+        delete from zyjr_grant_photo where visit_id = #{visitId}
+    </delete>
+
+    <delete id="deleteZyjrGrantPhotoByIds" parameterType="String">
+        delete from zyjr_grant_photo where file_id in 
+        <foreach item="fileId" collection="array" open="(" separator="," close=")">
+            #{fileId}
+        </foreach>
+    </delete>
+    
+</mapper>

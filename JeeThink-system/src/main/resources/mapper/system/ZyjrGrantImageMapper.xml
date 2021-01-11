@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrGrantImageMapper">
+    
+    <resultMap type="ZyjrGrantImage" id="ZyjrGrantImageResult">
+        <result property="id"    column="id"    />
+        <result property="transactionCode"    column="transaction_code"    />
+        <result property="userId"    column="user_id"    />
+    </resultMap>
+
+    <sql id="selectZyjrGrantImageVo">
+        select id, transaction_code, user_id from zyjr_grant_image
+    </sql>
+
+    <select id="selectZyjrGrantImageList" parameterType="ZyjrGrantImage" resultMap="ZyjrGrantImageResult">
+        <include refid="selectZyjrGrantImageVo"/>
+        <where>  
+            <if test="transactionCode != null "> and transaction_code = #{transactionCode}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrGrantImageById" resultMap="ZyjrGrantImageResult">
+        <include refid="selectZyjrGrantImageVo"/>
+        where transaction_code = #{transactionCode}
+    </select>
+        
+    <insert id="insertZyjrGrantImage" parameterType="ZyjrGrantImage" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_grant_image
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="transactionCode != null">transaction_code,</if>
+            <if test="userId != null">user_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="transactionCode != null">#{transactionCode},</if>
+            <if test="userId != null">#{userId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrGrantImage" parameterType="ZyjrGrantImage">
+        update zyjr_grant_image
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrGrantImageById" parameterType="Long">
+        delete from zyjr_grant_image where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrGrantImageByIds" parameterType="String">
+        delete from zyjr_grant_image where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

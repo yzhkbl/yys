@@ -37,7 +37,10 @@
         from zyjr_details
         where transaction_code=#{transactionCode}
     </select>
-
+    <delete id="deleteOpinion">
+        delete from zyjr_repeat_opinion
+        where transaction_code=#{transactionCode}
+    </delete>
     <insert id="insertOpinion" parameterType="com.jeethink.system.domain.ZyjrRepeatOpinion">
         insert into zyjr_repeat_opinion
         (advise, approval_type, transaction_code, user_id)
