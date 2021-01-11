@@ -21,4 +21,5 @@ public class carVo {
      * 车商名称
      */
     private String dealerName;
+    private String shopType;
 }
