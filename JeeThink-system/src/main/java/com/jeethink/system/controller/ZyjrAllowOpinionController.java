@@ -22,9 +22,9 @@ import com.jeethink.common.core.page.TableDataInfo;
 
 /**
  * 【请填写功能名称】Controller
- * 
+ *
  * @author jeethink
- * @date 2021-01-11
+ * @date 2021-01-04
  */
 @RestController
 @RequestMapping("/system/opinion")
@@ -61,17 +61,19 @@ public class ZyjrAllowOpinionController extends BaseController
     /**
      * 获取【请填写功能名称】详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:opinion:query')")
-    @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Long id)
-    {
-        return AjaxResult.success(zyjrAllowOpinionService.selectZyjrAllowOpinionById(id));
-    }
 
+
+
+    @GetMapping(value = "/{transactionCode}")
+    public AjaxResult getInfo(@PathVariable("transactionCode") String transactionCode)
+    {
+
+        return AjaxResult.success(zyjrAllowOpinionService.selectZyjrAllowOpinionById(transactionCode));
+    }
     /**
      * 新增【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:opinion:add')")
+    //@PreAuthorize("@ss.hasPermi('system:opinion:add')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody ZyjrAllowOpinion zyjrAllowOpinion)
@@ -95,7 +97,7 @@ public class ZyjrAllowOpinionController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:opinion:remove')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
+    @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
         return toAjax(zyjrAllowOpinionService.deleteZyjrAllowOpinionByIds(ids));

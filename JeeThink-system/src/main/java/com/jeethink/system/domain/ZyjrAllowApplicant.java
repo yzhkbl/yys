@@ -9,7 +9,7 @@ import com.jeethink.common.core.domain.BaseEntity;
  * 【请填写功能名称】对象 zyjr_allow_applicant
  * 
  * @author jeethink
- * @date 2020-12-29
+ * @date 2021-01-11
  */
 public class ZyjrAllowApplicant extends BaseEntity
 {
@@ -25,6 +25,18 @@ public class ZyjrAllowApplicant extends BaseEntity
     /** 现居住时间/年 */
     @Excel(name = "现居住时间/年")
     private String liveTime;
+
+    /** 住宅区 */
+    @Excel(name = "住宅区")
+    private String liveArea;
+
+    /** 住宅市 */
+    @Excel(name = "住宅市")
+    private String liveCity;
+
+    /** 住宅省 */
+    @Excel(name = "住宅省")
+    private String liveProvince;
 
     /** 现居住地址 */
     @Excel(name = "现居住地址")
@@ -142,6 +154,18 @@ public class ZyjrAllowApplicant extends BaseEntity
     @Excel(name = "身份id")
     private Long userId;
 
+    /** 工作区 */
+    @Excel(name = "工作区")
+    private String workArea;
+
+    /** 工作市 */
+    @Excel(name = "工作市")
+    private String workCity;
+
+    /** 工作省 */
+    @Excel(name = "工作省")
+    private String workProvince;
+
     public void setId(Long id) 
     {
         this.id = id;
@@ -168,6 +192,33 @@ public class ZyjrAllowApplicant extends BaseEntity
     public String getLiveTime() 
     {
         return liveTime;
+    }
+    public void setLiveArea(String liveArea) 
+    {
+        this.liveArea = liveArea;
+    }
+
+    public String getLiveArea() 
+    {
+        return liveArea;
+    }
+    public void setLiveCity(String liveCity) 
+    {
+        this.liveCity = liveCity;
+    }
+
+    public String getLiveCity() 
+    {
+        return liveCity;
+    }
+    public void setLiveProvince(String liveProvince) 
+    {
+        this.liveProvince = liveProvince;
+    }
+
+    public String getLiveProvince() 
+    {
+        return liveProvince;
     }
     public void setLiveAddress(String liveAddress) 
     {
@@ -430,6 +481,33 @@ public class ZyjrAllowApplicant extends BaseEntity
     {
         return userId;
     }
+    public void setWorkArea(String workArea) 
+    {
+        this.workArea = workArea;
+    }
+
+    public String getWorkArea() 
+    {
+        return workArea;
+    }
+    public void setWorkCity(String workCity) 
+    {
+        this.workCity = workCity;
+    }
+
+    public String getWorkCity() 
+    {
+        return workCity;
+    }
+    public void setWorkProvince(String workProvince) 
+    {
+        this.workProvince = workProvince;
+    }
+
+    public String getWorkProvince() 
+    {
+        return workProvince;
+    }
 
     @Override
     public String toString() {
@@ -437,6 +515,9 @@ public class ZyjrAllowApplicant extends BaseEntity
             .append("id", getId())
             .append("householdNature", getHouseholdNature())
             .append("liveTime", getLiveTime())
+            .append("liveArea", getLiveArea())
+            .append("liveCity", getLiveCity())
+            .append("liveProvince", getLiveProvince())
             .append("liveAddress", getLiveAddress())
             .append("phoneNumber", getPhoneNumber())
             .append("housePower", getHousePower())
@@ -466,6 +547,9 @@ public class ZyjrAllowApplicant extends BaseEntity
             .append("orderState", getOrderState())
             .append("transactionCode", getTransactionCode())
             .append("userId", getUserId())
+            .append("workArea", getWorkArea())
+            .append("workCity", getWorkCity())
+            .append("workProvince", getWorkProvince())
             .toString();
     }
 }

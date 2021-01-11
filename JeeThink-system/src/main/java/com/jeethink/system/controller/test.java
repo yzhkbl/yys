@@ -556,7 +556,7 @@ public class test extends BaseController {
             }
             zyjrCard.setEdulvl(edulvl);
             zyjrCard.setDrawmode(3);
-      /*      zyjrCard.setHomestat();
+            /*zyjrCard.setHomestat();
             zyjrCard.setHprovince();*/
 
 

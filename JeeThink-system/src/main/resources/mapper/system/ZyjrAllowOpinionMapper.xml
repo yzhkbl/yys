@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jeethink.system.mapper.ZyjrAllowOpinionMapper">
-    
+
     <resultMap type="ZyjrAllowOpinion" id="ZyjrAllowOpinionResult">
         <result property="id"    column="id"    />
         <result property="advise"    column="advise"    />
@@ -18,19 +18,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectZyjrAllowOpinionList" parameterType="ZyjrAllowOpinion" resultMap="ZyjrAllowOpinionResult">
         <include refid="selectZyjrAllowOpinionVo"/>
-        <where>  
+        <where>
             <if test="advise != null  and advise != ''"> and advise = #{advise}</if>
             <if test="approvalType != null "> and approval_type = #{approvalType}</if>
             <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
             <if test="userId != null "> and user_id = #{userId}</if>
         </where>
     </select>
-    
-    <select id="selectZyjrAllowOpinionById" parameterType="Long" resultMap="ZyjrAllowOpinionResult">
+
+    <select id="selectZyjrAllowOpinionById" resultMap="ZyjrAllowOpinionResult">
         <include refid="selectZyjrAllowOpinionVo"/>
-        where id = #{id}
+        where transaction_code = #{transactionCode}
     </select>
-        
+
     <insert id="insertZyjrAllowOpinion" parameterType="ZyjrAllowOpinion" useGeneratedKeys="true" keyProperty="id">
         insert into zyjr_allow_opinion
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -38,13 +38,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="approvalType != null">approval_type,</if>
             <if test="transactionCode != null">transaction_code,</if>
             <if test="userId != null">user_id,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="advise != null">#{advise},</if>
             <if test="approvalType != null">#{approvalType},</if>
             <if test="transactionCode != null">#{transactionCode},</if>
             <if test="userId != null">#{userId},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateZyjrAllowOpinion" parameterType="ZyjrAllowOpinion">
@@ -63,10 +63,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteZyjrAllowOpinionByIds" parameterType="String">
-        delete from zyjr_allow_opinion where id in 
+        delete from zyjr_allow_opinion where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
-    
+
 </mapper>

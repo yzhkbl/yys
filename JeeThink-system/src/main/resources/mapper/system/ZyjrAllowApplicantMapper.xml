@@ -8,6 +8,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="id"    column="id"    />
         <result property="householdNature"    column="household_nature"    />
         <result property="liveTime"    column="live_time"    />
+        <result property="liveArea"    column="live_area"    />
+        <result property="liveCity"    column="live_city"    />
+        <result property="liveProvince"    column="live_province"    />
         <result property="liveAddress"    column="live_address"    />
         <result property="phoneNumber"    column="phone_number"    />
         <result property="housePower"    column="house_power"    />
@@ -37,10 +40,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="orderState"    column="order_state"    />
         <result property="transactionCode"    column="transaction_code"    />
         <result property="userId"    column="user_id"    />
+        <result property="workArea"    column="work_area"    />
+        <result property="workCity"    column="work_city"    />
+        <result property="workProvince"    column="work_province"    />
     </resultMap>
 
     <sql id="selectZyjrAllowApplicantVo">
-        select id, household_nature, live_time, live_address, phone_number, house_power, education, is_license, driver_ship, license_type, unit_name, work_address, unit_phone, unit_nature, industry, position, monthly_income, marriage, card_address, back_address, spouse_name, id_number, permanent_address, phone_no, spouse_education, spouse_unit_name, spouse_work_place, spouse_work_phone, spouse_monthly_income, order_state, transaction_code, user_id from zyjr_allow_applicant
+        select id, household_nature, live_time, live_area, live_city, live_province, live_address, phone_number, house_power, education, is_license, driver_ship, license_type, unit_name, work_address, unit_phone, unit_nature, industry, position, monthly_income, marriage, card_address, back_address, spouse_name, id_number, permanent_address, phone_no, spouse_education, spouse_unit_name, spouse_work_place, spouse_work_phone, spouse_monthly_income, order_state, transaction_code, user_id, work_area, work_city, work_province from zyjr_allow_applicant
     </sql>
 
     <select id="selectZyjrAllowApplicantList" parameterType="ZyjrAllowApplicant" resultMap="ZyjrAllowApplicantResult">
@@ -48,6 +54,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>  
             <if test="householdNature != null  and householdNature != ''"> and household_nature = #{householdNature}</if>
             <if test="liveTime != null  and liveTime != ''"> and live_time = #{liveTime}</if>
+            <if test="liveArea != null  and liveArea != ''"> and live_area = #{liveArea}</if>
+            <if test="liveCity != null  and liveCity != ''"> and live_city = #{liveCity}</if>
+            <if test="liveProvince != null  and liveProvince != ''"> and live_province = #{liveProvince}</if>
             <if test="liveAddress != null  and liveAddress != ''"> and live_address = #{liveAddress}</if>
             <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
             <if test="housePower != null  and housePower != ''"> and house_power = #{housePower}</if>
@@ -77,19 +86,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="orderState != null "> and order_state = #{orderState}</if>
             <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
             <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="workArea != null  and workArea != ''"> and work_area = #{workArea}</if>
+            <if test="workCity != null  and workCity != ''"> and work_city = #{workCity}</if>
+            <if test="workProvince != null  and workProvince != ''"> and work_province = #{workProvince}</if>
         </where>
     </select>
-
-    <select id="selectZyjrAllowApplicantById" resultMap="ZyjrAllowApplicantResult">
+    
+    <select id="selectZyjrAllowApplicantById" parameterType="Long" resultMap="ZyjrAllowApplicantResult">
         <include refid="selectZyjrAllowApplicantVo"/>
-        where user_id = #{userId} and transaction_code=#{transactionCode}
+        where id = #{id}
     </select>
-
+        
     <insert id="insertZyjrAllowApplicant" parameterType="ZyjrAllowApplicant" useGeneratedKeys="true" keyProperty="id">
         insert into zyjr_allow_applicant
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="householdNature != null">household_nature,</if>
             <if test="liveTime != null">live_time,</if>
+            <if test="liveArea != null">live_area,</if>
+            <if test="liveCity != null">live_city,</if>
+            <if test="liveProvince != null">live_province,</if>
             <if test="liveAddress != null">live_address,</if>
             <if test="phoneNumber != null">phone_number,</if>
             <if test="housePower != null">house_power,</if>
@@ -119,10 +134,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="orderState != null">order_state,</if>
             <if test="transactionCode != null">transaction_code,</if>
             <if test="userId != null">user_id,</if>
+            <if test="workArea != null">work_area,</if>
+            <if test="workCity != null">work_city,</if>
+            <if test="workProvince != null">work_province,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="householdNature != null">#{householdNature},</if>
             <if test="liveTime != null">#{liveTime},</if>
+            <if test="liveArea != null">#{liveArea},</if>
+            <if test="liveCity != null">#{liveCity},</if>
+            <if test="liveProvince != null">#{liveProvince},</if>
             <if test="liveAddress != null">#{liveAddress},</if>
             <if test="phoneNumber != null">#{phoneNumber},</if>
             <if test="housePower != null">#{housePower},</if>
@@ -152,6 +173,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="orderState != null">#{orderState},</if>
             <if test="transactionCode != null">#{transactionCode},</if>
             <if test="userId != null">#{userId},</if>
+            <if test="workArea != null">#{workArea},</if>
+            <if test="workCity != null">#{workCity},</if>
+            <if test="workProvince != null">#{workProvince},</if>
          </trim>
     </insert>
 
@@ -160,6 +184,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="householdNature != null">household_nature = #{householdNature},</if>
             <if test="liveTime != null">live_time = #{liveTime},</if>
+            <if test="liveArea != null">live_area = #{liveArea},</if>
+            <if test="liveCity != null">live_city = #{liveCity},</if>
+            <if test="liveProvince != null">live_province = #{liveProvince},</if>
             <if test="liveAddress != null">live_address = #{liveAddress},</if>
             <if test="phoneNumber != null">phone_number = #{phoneNumber},</if>
             <if test="housePower != null">house_power = #{housePower},</if>
@@ -189,8 +216,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="orderState != null">order_state = #{orderState},</if>
             <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
             <if test="userId != null">user_id = #{userId},</if>
+            <if test="workArea != null">work_area = #{workArea},</if>
+            <if test="workCity != null">work_city = #{workCity},</if>
+            <if test="workProvince != null">work_province = #{workProvince},</if>
         </trim>
-        where user_id = #{userId} and transaction_code=#{transactionCode}
+        where id = #{id}
     </update>
 
     <delete id="deleteZyjrAllowApplicantById" parameterType="Long">
