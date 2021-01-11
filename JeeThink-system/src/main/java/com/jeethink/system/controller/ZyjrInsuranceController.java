@@ -79,7 +79,7 @@ public class ZyjrInsuranceController extends BaseController
         }
 
 
-        return AjaxResult.successs("操作成功",zyjrInsurance);
+        return AjaxResult.success("操作成功",zyjrInsurance);
     }
 
     @GetMapping("ceshi/{transactionCode}")

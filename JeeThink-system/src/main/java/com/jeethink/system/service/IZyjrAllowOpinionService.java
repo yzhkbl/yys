@@ -7,17 +7,17 @@ import com.jeethink.system.domain.ZyjrAllowOpinion;
  * 【请填写功能名称】Service接口
  * 
  * @author jeethink
- * @date 2021-01-04
+ * @date 2021-01-11
  */
 public interface IZyjrAllowOpinionService 
 {
     /**
      * 查询【请填写功能名称】
      * 
-     * @param transactionCode 【请填写功能名称】ID
+     * @param id 【请填写功能名称】ID
      * @return 【请填写功能名称】
      */
-    public ZyjrAllowOpinion selectZyjrAllowOpinionById(String transactionCode);
+    public ZyjrAllowOpinion selectZyjrAllowOpinionById(Long id);
 
     /**
      * 查询【请填写功能名称】列表

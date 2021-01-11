@@ -66,6 +66,8 @@ public class test extends BaseController {
     private SysFileInfoMapper sysFileInfoMapper;
     @Autowired
     private RedisCache redisCache;
+    @Autowired
+    private ZyjrAllowApplicantMapper zyjrAllowApplicantMapper;
 
     private static String oCode = "sfzzm";
     private static String pCode = "sfzfm";
@@ -499,7 +501,65 @@ public class test extends BaseController {
     @ResponseBody
     @GetMapping("kaika")
     public AjaxResult kaika(String transactionCode){
-            ZyjrCard z=b.selKaika(transactionCode);
+            ZyjrBusiness business=b.selectById(transactionCode);
+            ZyjrBorrower borrower = o.selectById(transactionCode);
+            ZyjrAllowApplicant applicant=zyjrAllowApplicantMapper.selectById(transactionCode);
+            ZyjrCard zyjrCard=new ZyjrCard();
+            zyjrCard.setCustsort(0);
+            zyjrCard.setCustcode(borrower.getIdCard());
+            zyjrCard.setChnsname(borrower.getUserName());
+            String name="";
+            if(borrower!=null&&borrower.getUserName()!=null){
+               name=Chinese2Pinyin.getPinyin(borrower.getUserName());
+               name=name.substring(0,name.length()-1);
+            }
+            zyjrCard.setEngname(name);
+            Integer sex=null;
+            if(borrower!=null&&borrower.getIdCard()!=null){
+                if (Integer.parseInt(borrower.getIdCard().substring(16).substring(0, 1)) % 2 == 0) {// 判断性别
+                    sex=2;
+                } else {
+                    sex =1;
+                }
+            }
+            zyjrCard.setSex(sex);
+        Integer mrtlstat=null;
+            if(applicant!=null&&applicant.getMarriage()!=null){
+              //String  mrtlstats=applicant.getEducation().substring(0,2);
+                if("未婚".equals(applicant.getMarriage())){
+                    mrtlstat=1;
+                }else if("已婚".equals(applicant.getMarriage())){
+                    mrtlstat=2;
+                }else if("离异".equals(applicant.getMarriage())){
+                    mrtlstat=4;
+                }else if("丧偶".equals(applicant.getMarriage())){
+                    mrtlstat=5;
+                }
+            }
+            zyjrCard.setMrtlstat(mrtlstat);
+            Integer edulvl=null;
+            if(applicant!=null&&applicant.getEducation()!=null){
+                String  Education=applicant.getEducation().substring(0,2);
+                if("初中".equals(Education)){
+                    edulvl=8;
+                }else if("高中".equals(Education)){
+                    edulvl=7;
+                }else if("大专".equals(Education)){
+                    edulvl=4;
+                }else if("本科".equals(Education)){
+                    edulvl=3;
+                }else if("硕士".equals(Education)){
+                    edulvl=2;
+                }else if("博士".equals(Education)){
+                    edulvl=1;
+                }
+            }
+            zyjrCard.setEdulvl(edulvl);
+            zyjrCard.setDrawmode(3);
+      /*      zyjrCard.setHomestat();
+            zyjrCard.setHprovince();*/
+
+
         return AjaxResult.success("666");
     }
 

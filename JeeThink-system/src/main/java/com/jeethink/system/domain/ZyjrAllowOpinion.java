@@ -9,7 +9,7 @@ import com.jeethink.common.core.domain.BaseEntity;
  * 【请填写功能名称】对象 zyjr_allow_opinion
  * 
  * @author jeethink
- * @date 2021-01-04
+ * @date 2021-01-11
  */
 public class ZyjrAllowOpinion extends BaseEntity
 {
@@ -26,8 +26,8 @@ public class ZyjrAllowOpinion extends BaseEntity
     @Excel(name = "审批状态")
     private Integer approvalType;
 
-    /** 订单编号 */
-    @Excel(name = "订单编号")
+    /** 订单状态 */
+    @Excel(name = "订单状态")
     private String transactionCode;
 
     /** 身份识别码 */

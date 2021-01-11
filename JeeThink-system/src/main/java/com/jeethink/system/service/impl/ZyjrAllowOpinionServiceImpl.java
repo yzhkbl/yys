@@ -11,7 +11,7 @@ import com.jeethink.system.service.IZyjrAllowOpinionService;
  * 【请填写功能名称】Service业务层处理
  * 
  * @author jeethink
- * @date 2021-01-04
+ * @date 2021-01-11
  */
 @Service
 public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService 
@@ -22,13 +22,13 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
     /**
      * 查询【请填写功能名称】
      * 
-     * @param transactionCode 【请填写功能名称】ID
+     * @param id 【请填写功能名称】ID
      * @return 【请填写功能名称】
      */
     @Override
-    public ZyjrAllowOpinion selectZyjrAllowOpinionById(String transactionCode)
+    public ZyjrAllowOpinion selectZyjrAllowOpinionById(Long id)
     {
-        return zyjrAllowOpinionMapper.selectZyjrAllowOpinionById(transactionCode);
+        return zyjrAllowOpinionMapper.selectZyjrAllowOpinionById(id);
     }
 
     /**

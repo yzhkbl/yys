@@ -46,14 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="name != null "> and b.user_name like concat('%', #{name}, '%')</if>
         </where>
     </select>
-    
-    <select id="selKaika" parameterType="String" resultMap="ZyjrBusinessResult">
-        select a.id_card custcode
-        form zyjr_business a
-        left join zyjr_borrower b on a.transaction_code=b.transaction_code
-        left join zyjr_
-        where a.transaction_code=#{transactionCode}
-    </select>
+
     <select id="selectZyjrBusinessById" parameterType="Long" resultMap="ZyjrBusinessResult">
         <include refid="selectZyjrBusinessVo"/>
         where id = #{id}
