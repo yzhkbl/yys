@@ -94,7 +94,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="selectZyjrAllowApplicantById" parameterType="Long" resultMap="ZyjrAllowApplicantResult">
         <include refid="selectZyjrAllowApplicantVo"/>
-        where id = #{id}
+        where user_id = #{userId} and transaction_code = #{transactionCode}
     </select>
         
     <insert id="insertZyjrAllowApplicant" parameterType="ZyjrAllowApplicant" useGeneratedKeys="true" keyProperty="id">
@@ -220,7 +220,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="workCity != null">work_city = #{workCity},</if>
             <if test="workProvince != null">work_province = #{workProvince},</if>
         </trim>
-        where id = #{id}
+        where user_id = #{userId} and transaction_code = #{transactionCode}
     </update>
 
     <delete id="deleteZyjrAllowApplicantById" parameterType="Long">
