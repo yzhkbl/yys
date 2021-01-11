@@ -20,6 +20,7 @@ public interface ZyjrAllowApplicantMapper
      * @return 【请填写功能名称】
      */
     public ZyjrAllowApplicant selectZyjrAllowApplicantById(@Param("userId") Long userId, @Param("transactionCode") String transactionCode);
+    public ZyjrAllowApplicant selectById(String transactionCode);
 
     /**
      * 查询【请填写功能名称】列表

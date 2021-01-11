@@ -7,17 +7,17 @@ import com.jeethink.system.domain.ZyjrAllowOpinion;
  * 【请填写功能名称】Mapper接口
  * 
  * @author jeethink
- * @date 2021-01-04
+ * @date 2021-01-11
  */
 public interface ZyjrAllowOpinionMapper 
 {
     /**
      * 查询【请填写功能名称】
      * 
-     * @param transactionCode 【请填写功能名称】ID
+     * @param id 【请填写功能名称】ID
      * @return 【请填写功能名称】
      */
-    public ZyjrAllowOpinion selectZyjrAllowOpinionById(String transactionCode);
+    public ZyjrAllowOpinion selectZyjrAllowOpinionById(Long id);
 
     /**
      * 查询【请填写功能名称】列表
@@ -58,7 +58,4 @@ public interface ZyjrAllowOpinionMapper
      * @return 结果
      */
     public int deleteZyjrAllowOpinionByIds(Long[] ids);
-
-
-    //public int updateOrderState(Long userId,String transactionCode);
 }

@@ -64,5 +64,5 @@ public interface ZyjrBusinessMapper
      */
     public int deleteZyjrBusinessByIds(Long[] ids);
 
-    ZyjrCard selKaika(String transactionCode);
+
 }
