@@ -96,7 +96,7 @@
     </select>
 
     <select id="selectZyjrCarLists" resultType="com.jeethink.system.domain.vo.carVo" >
-        select dealer_name, area, city, bazaar,  id, state,three_car_state,two_car_state,one_car_state,create_by, create_time
+        select dealer_name, area, city, bazaar, shop_type, id, state,three_car_state,two_car_state,one_car_state,create_by, create_time
         from zyjr_car
        where two_car_state="1" and create_by=#{userId}
     </select>

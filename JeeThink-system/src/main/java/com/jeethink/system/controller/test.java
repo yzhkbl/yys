@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.jeethink.common.config.JeeThinkConfig;
 import com.jeethink.common.core.redis.RedisCache;
+import com.jeethink.common.utils.DateUtils;
 import com.jeethink.common.utils.file.FileUploadUtils;
 import com.jeethink.common.utils.file.FileUtils;
 import com.jeethink.common.utils.http.HttpUtils;
@@ -556,11 +557,70 @@ public class test extends BaseController {
             }
             zyjrCard.setEdulvl(edulvl);
             zyjrCard.setDrawmode(3);
-            /*zyjrCard.setHomestat();
-            zyjrCard.setHprovince();*/
+            Integer homestat=null;
+            if(applicant!=null&&applicant.getHousePower()!=null){
+                    if("贷款购房".equals(applicant.getHousePower())){
+                        homestat=2;
+                    }else if("租房".equals(applicant.getHousePower())){
+                        homestat=3;
+                    }else if("全款购房".equals(applicant.getHousePower())||"老家自建房".equals(applicant.getHousePower())){
+                        homestat=1;
+                    }else if("其他".equals(applicant.getHousePower())||"父母房产".equals(applicant.getHousePower())){
+                        homestat=4;
+                    }
 
-
+            }
+            zyjrCard.setHomestat(homestat);
+            zyjrCard.setHprovince(applicant.getLiveProvince());
+            zyjrCard.setHcity(applicant.getLiveCity());
+            zyjrCard.setHcounty(applicant.getLiveArea());
+            zyjrCard.setHaddress(applicant.getLiveAddress());
+           // zyjrCard.setHomezip(applicant.get);
+        String indate="";
+        if(applicant!=null&&applicant.getLiveTime()!=null){
+            Date date=new Date();
+            String a=DateUtils.dateTime(date);
+            int b=Integer.parseInt(a.substring(0,4));
+            indate=String.valueOf(b-Integer.parseInt(applicant.getLiveTime()));
+        }
+            zyjrCard.setIndate(indate);
+            zyjrCard.setMvblno(applicant.getPhoneNumber());
+            zyjrCard.setUnitname(applicant.getUnitName());
+            Integer duty=null;
+            if(applicant!=null&&applicant.getPosition()!=null){
+                String app=applicant.getPosition().substring(0,2);
+                if("厅级".equals(applicant.getPosition())){
+                    duty=3;
+                }else if("县处".equals(applicant.getPosition())){
+                    duty=4;
+                }else if("科级".equals(applicant.getPosition())){
+                    duty=5;
+                }else if("科员".equals(applicant.getPosition())||"其他".equals(applicant.getPosition())){
+                    duty=6;
+                }
+            }
+            zyjrCard.setDuty(duty);
+            String cophozono="";
+            String cophoneno="";
+            if(applicant!=null&&applicant.getUnitPhone()!=null){
+                cophoneno= applicant.getUnitPhone().substring(applicant.getUnitPhone().length()-8);
+                cophozono=applicant.getUnitPhone().substring(0,Integer.valueOf(applicant.getUnitPhone())-cophoneno.length());
+            }
+            zyjrCard.setCophozono(cophozono);
+            zyjrCard.setCophoneno(cophoneno);
+            zyjrCard.setCprovince(applicant.getWorkProvince());
+            zyjrCard.setCcity(applicant.getWorkCity());
+            zyjrCard.setCcounty(applicant.getWorkArea());
+            zyjrCard.setCaddress(applicant.getWorkAddress());
+            //zyjrCard.setCorpzip();
+           // zyjrCard.setJoindate();
+        zyjrCard.sety
         return AjaxResult.success("666");
+    }
+
+    public static void main(String[] args) {
+        String a="123456789";
+        System.err.println(a.substring(a.length()-4));
     }
 
 
