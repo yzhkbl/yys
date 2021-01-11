@@ -1,6 +1,7 @@
 package com.jeethink.system.service.impl;
 
 import com.jeethink.system.domain.*;
+import com.jeethink.system.domain.vo.ZyjrGrant;
 import com.jeethink.system.mapper.*;
 import com.jeethink.system.service.IStageExamineService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,7 +150,9 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     }
 
     @Override
-    public List<ZyjrBusiness> list() {
+    public List<ZyjrGrant> list() {
         return examineDao.list();
     }
+
+
 }

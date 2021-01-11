@@ -70,8 +70,6 @@ public class ZyjrPhotoCarController extends BaseController
                     System.err.println("删除路径"+paths+l);
                     boolean b = FileUtils.deleteFile(paths +l);
                 }
-
-
             }else{
 
                 zyjrPhotoCar.setOrderState(q.getOrderState());

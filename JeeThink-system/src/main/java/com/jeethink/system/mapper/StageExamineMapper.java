@@ -1,6 +1,7 @@
 package com.jeethink.system.mapper;
 
 import com.jeethink.system.domain.*;
+import com.jeethink.system.domain.vo.ZyjrGrant;
 
 import java.util.List;
 
@@ -22,5 +23,10 @@ public interface StageExamineMapper {
     int deleteOpinion(String transactionCode);
     int insertOpinion(ZyjrRepeatOpinion q);
     ZyjrRepeatOpinion findOpinion(String transactionCode);
-    List<ZyjrBusiness> list();
+    List<ZyjrGrant> list();
+
+
+    List<ZyjrGrant> findGrant();
+    int insertGrantOpinion(ZyjrGrantOpinion q);
+    ZyjrGrantOpinion findGrantOpinion(String transactionCode);
 }

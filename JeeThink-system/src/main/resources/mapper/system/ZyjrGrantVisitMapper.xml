@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
     
-    <select id="selectZyjrGrantVisitById" parameterType="Long" resultMap="ZyjrGrantVisitResult">
+    <select id="selectZyjrGrantVisitById" resultMap="ZyjrGrantVisitResult">
         <include refid="selectZyjrGrantVisitVo"/>
         where transaction_code = #{transactionCode}
     </select>

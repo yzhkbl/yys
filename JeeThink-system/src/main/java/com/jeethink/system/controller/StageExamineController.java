@@ -6,6 +6,7 @@ import com.jeethink.common.core.page.TableDataInfo;
 import com.jeethink.system.domain.ZyjrBusiness;
 import com.jeethink.system.domain.ZyjrDetails;
 import com.jeethink.system.domain.ZyjrRepeatOpinion;
+import com.jeethink.system.domain.vo.ZyjrGrant;
 import com.jeethink.system.service.IStageExamineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -56,7 +57,7 @@ public class StageExamineController extends BaseController {
     @RequestMapping("/list")
     public TableDataInfo list(){
         startPage();
-        List<ZyjrBusiness>list = stageExamineService.list();
+        List<ZyjrGrant>list = stageExamineService.list();
         return getDataTable(list);
     }
 }

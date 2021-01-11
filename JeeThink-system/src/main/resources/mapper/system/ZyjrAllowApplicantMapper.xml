@@ -92,7 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
     
-    <select id="selectZyjrAllowApplicantById" parameterType="Long" resultMap="ZyjrAllowApplicantResult">
+    <select id="selectZyjrAllowApplicantById" resultMap="ZyjrAllowApplicantResult">
         <include refid="selectZyjrAllowApplicantVo"/>
         where user_id = #{userId} and transaction_code = #{transactionCode}
     </select>
