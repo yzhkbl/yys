@@ -34,10 +34,10 @@ public interface ExamineMapper {
     int updateFour(Boolean orderState,String transactionCode);*/
     int updateBystates(ZyjrStartPage q);
     int updateByCode(ZyjrStartPage q);
-    int updateOne(@Param("userId") Integer userId, @Param("transactionCode") String transactionCode);
-    int updateTwo(@Param("userId") Integer userId, @Param("transactionCode") String transactionCode);
-    int updateThree(@Param("userId") Integer userId, @Param("transactionCode") String transactionCode);
-    int updateFour(@Param("userId") Integer userId, @Param("transactionCode") String transactionCode);
+    int updateOne(@Param("userId") Integer userId, @Param("transactionCode") String transactionCode,@Param("orderState") Integer orderState);
+    int updateTwo(@Param("userId") Integer userId, @Param("transactionCode") String transactionCode,@Param("orderState") Integer orderState);
+    int updateThree(@Param("userId") Integer userId, @Param("transactionCode") String transactionCode,@Param("orderState") Integer orderState);
+    int updateFour(@Param("userId") Integer userId, @Param("transactionCode") String transactionCode,@Param("orderState") Integer orderState);
     int updateFive(@Param("userId") Integer userId, @Param("transactionCode") String transactionCode);
 
     /**借款人信息查询*/

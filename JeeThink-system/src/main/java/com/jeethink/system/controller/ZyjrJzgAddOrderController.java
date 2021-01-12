@@ -113,13 +113,15 @@ public class ZyjrJzgAddOrderController extends BaseController
         if(zyjrJzgAddOrder.getPic()!=null) {
             JSONArray jsonarray = JSONArray.fromObject(zyjrJzgAddOrder.getPic());
             System.out.println(jsonarray);
-            List<ZyjrPic> list = (List) JSONArray.toList(jsonarray, ZyjrDaihouBaoxian.class);
+            List<ZyjrPic> list = (List) JSONArray.toList(jsonarray, ZyjrPic.class);
             for (ZyjrPic zyjrPic : list) {
                 zyjrPic.setJinzhengu(zyjrJzgAddOrder.getTransactionCode());
                 zyjrPicMapper.insertZyjrPic(zyjrPic);
             }
         }
-        return toAjax(zyjrJzgAddOrderService.insertZyjrJzgAddOrder(zyjrJzgAddOrder));
+        System.err.println(zyjrJzgAddOrder);
+        zyjrJzgAddOrderMapper.insertZyjrJzgAddOrder(zyjrJzgAddOrder);
+        return AjaxResult.success();
     }
 
     @ApiOperation("11111111")

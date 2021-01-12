@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectZyjrBorrowerVo">
-        select id, user_name,encrypt_data,conf, id_card,private_code, bank_card_no, phone_number, issue_authority, start_date, end_date, family_address, obverse_id, obverse_code, obverse_address, obverse_name, back_id, back_code, back_address, back_name, power_id, power_code, power_address, power_name, credit_power, user_id, order_state, create_by, create_time, update_by, update_time ,transaction_code from zyjr_borrower
+        select id,contract_state, user_name,encrypt_data,conf, id_card,private_code, bank_card_no, phone_number, issue_authority, start_date, end_date, family_address, obverse_id, obverse_code, obverse_address, obverse_name, back_id, back_code, back_address, back_name, power_id, power_code, power_address, power_name, credit_power, user_id, order_state, create_by, create_time, update_by, update_time ,transaction_code from zyjr_borrower
     </sql>
 
     <select id="selectZyjrBorrowerList" parameterType="ZyjrBorrower" resultMap="ZyjrBorrowerResult">

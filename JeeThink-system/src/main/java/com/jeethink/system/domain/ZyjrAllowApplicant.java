@@ -54,7 +54,7 @@ public class ZyjrAllowApplicant extends BaseEntity
     @Excel(name = "学历")
     private String education;
 
-    /** 购车状况（1.有 0.无）*/
+    /** 购车状况（0.有 1.无）*/
     private String carstat;
 
     public String getCarstat() {
