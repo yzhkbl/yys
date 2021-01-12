@@ -1,6 +1,7 @@
 package com.jeethink.system.service;
 
 import com.jeethink.system.domain.*;
+import com.jeethink.system.domain.vo.ZyjrGrant;
 
 import java.util.List;
 import java.util.Map;
@@ -25,5 +26,10 @@ public interface IStageExamineService {
 
     int addOpinion(ZyjrRepeatOpinion q);
     ZyjrRepeatOpinion findOpinion(String transactionCode);
-    List<ZyjrBusiness> list();
+    List<ZyjrGrant> list();
+
+
+    int addGrantOpinion(ZyjrGrantOpinion q);
+    ZyjrGrantOpinion findGrantOpinion(String transactionCode);
+    List<ZyjrGrant> grant();
 }

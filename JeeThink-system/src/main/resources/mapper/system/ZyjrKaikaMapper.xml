@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrKaikaMapper">
+    
+    <resultMap type="ZyjrKaika" id="ZyjrKaikaResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="transactionCode"    column="transaction_code"    />
+        <result property="count"    column="count"    />
+    </resultMap>
+
+    <sql id="selectZyjrKaikaVo">
+        select id, user_id, transaction_code, count from zyjr_kaika
+    </sql>
+
+    <select id="selectZyjrKaikaList" parameterType="ZyjrKaika" resultMap="ZyjrKaikaResult">
+        <include refid="selectZyjrKaikaVo"/>
+        <where>  
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
+            <if test="count != null  and count != ''"> and count = #{count}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrKaikaById" parameterType="Long" resultMap="ZyjrKaikaResult">
+        <include refid="selectZyjrKaikaVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrKaika" parameterType="ZyjrKaika" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_kaika
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="transactionCode != null">transaction_code,</if>
+            <if test="count != null">count,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="transactionCode != null">#{transactionCode},</if>
+            <if test="count != null">#{count},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrKaika" parameterType="ZyjrKaika">
+        update zyjr_kaika
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+            <if test="count != null">count = #{count},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrKaikaById" parameterType="Long">
+        delete from zyjr_kaika where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrKaikaByIds" parameterType="String">
+        delete from zyjr_kaika where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

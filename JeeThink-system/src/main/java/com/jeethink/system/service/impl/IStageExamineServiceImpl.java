@@ -1,6 +1,7 @@
 package com.jeethink.system.service.impl;
 
 import com.jeethink.system.domain.*;
+import com.jeethink.system.domain.vo.ZyjrGrant;
 import com.jeethink.system.mapper.*;
 import com.jeethink.system.service.IStageExamineService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,14 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     private ZyjrPhotoLenderMapper zyjrPhotoLenderMapper;
     @Autowired
     private SysFileInfoMapper sysFileInfoMapper;
+    @Autowired
+    private ZyjrGrantImage zyjrGrantImage;
+    @Autowired
+    private ZyjrGrantInstalments zyjrGrantInstalments;
+    @Autowired
+    private ZyjrGrantPhoto zyjrGrantPhoto;
+    @Autowired
+    private ZyjrGrantVisit zyjrGrantVisit;
 
 
     @Override
@@ -149,7 +158,24 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     }
 
     @Override
-    public List<ZyjrBusiness> list() {
+    public List<ZyjrGrant> list() {
         return examineDao.list();
     }
+
+    @Override
+    public int addGrantOpinion(ZyjrGrantOpinion q) {
+        return examineDao.insertGrantOpinion(q);
+    }
+
+    @Override
+    public ZyjrGrantOpinion findGrantOpinion(String transactionCode) {
+        return examineDao.findGrantOpinion(transactionCode);
+    }
+
+    @Override
+    public List<ZyjrGrant> grant() {
+        return examineDao.findGrant();
+    }
+
+
 }

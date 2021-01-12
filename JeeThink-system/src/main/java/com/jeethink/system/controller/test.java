@@ -664,7 +664,8 @@ public class test extends BaseController {
     }
 
     public static void main(String[] args) {
-        Map<Integer,String> map=new LinkedMap();
+        String a="123456789";
+        System.err.println(a.substring(a.length()-4));
     }
 
 

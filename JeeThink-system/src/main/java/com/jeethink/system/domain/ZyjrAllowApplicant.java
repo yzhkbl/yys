@@ -54,6 +54,17 @@ public class ZyjrAllowApplicant extends BaseEntity
     @Excel(name = "学历")
     private String education;
 
+    /** 购车状况（1.有 0.无）*/
+    private String carstat;
+
+    public String getCarstat() {
+        return carstat;
+    }
+
+    public void setCarstat(String carstat) {
+        this.carstat = carstat;
+    }
+
     /** 本人是否有驾驶证 */
     @Excel(name = "本人是否有驾驶证")
     private Integer isLicense;
@@ -539,6 +550,7 @@ public class ZyjrAllowApplicant extends BaseEntity
             .append("idNumber", getIdNumber())
             .append("permanentAddress", getPermanentAddress())
             .append("phoneNo", getPhoneNo())
+                .append("carstat", getCarstat())
             .append("spouseEducation", getSpouseEducation())
             .append("spouseUnitName", getSpouseUnitName())
             .append("spouseWorkPlace", getSpouseWorkPlace())

@@ -52,11 +52,31 @@
         from zyjr_repeat_opinion
         where transaction_code=#{transactionCode}
     </select>
-    <select id="list" resultType="com.jeethink.system.domain.ZyjrBusiness">
-        select a.id, a.team,a.operator,a.update_by,a.false_operator,a.false_operator_id, a.car_information, a.intention_price, a.loan_money, a.repay_period, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name as name,c.approval_type
+    <select id="list" resultType="com.jeethink.system.domain.vo.ZyjrGrant">
+        select a.id, a.team,a.operator,a.update_by,a.false_operator,a.false_operator_id, a.car_information, d.actual_price, d.loan_amount, d.repayment_term, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name as name,c.approval_type
          from zyjr_business a
-         left join zyjr_borrower b on a.transaction_code=b.transaction_code
+         left join zyjr_car_loan d on d.transaction_code=a.transaction_code
+         left join zyjr_borrower b on b.transaction_code=d.transaction_code
          left join zyjr_repeat_opinion c on c.transaction_code=b.transaction_code
          where a.transaction_code in (select transaction_code from zyjr_allow_opinion where approval_type=1 and c.approval_type!=1)
+    </select>
+    <select id="findGrant" resultType="com.jeethink.system.domain.vo.ZyjrGrant">
+        select a.id, a.team,a.operator,a.update_by,a.false_operator,a.false_operator_id, a.car_information, d.actual_price, d.loan_amount, d.repayment_term, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name as name,c.approval_type
+         from zyjr_business a
+         left join zyjr_car_loan d on d.transaction_code=a.transaction_code
+         left join zyjr_borrower b on b.transaction_code=d.transaction_code
+         left join zyjr_grant_opinion c on c.transaction_code=b.transaction_code
+         where a.transaction_code in (select transaction_code from zyjr_repeat_opinion where approval_type=1 and c.approval_type!=1)
+    </select>
+    <insert id="insertGrantOpinion" parameterType="com.jeethink.system.domain.ZyjrGrantOpinion">
+        insert into zyjr_repeat_opinion
+        (advise, approval_type, transaction_code, user_id)
+        values
+        (#{advise},#{approvalType},#{transactionCode},#{userId})
+    </insert>
+    <select id="findGrantOpinion" resultType="com.jeethink.system.domain.ZyjrGrantOpinion">
+        select id, advise, approval_type, transaction_code, user_id
+        from zyjr_grant_opinion
+        where transaction_code=#{transactionCode}
     </select>
 </mapper>
