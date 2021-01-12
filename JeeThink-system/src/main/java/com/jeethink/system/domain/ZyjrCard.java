@@ -136,7 +136,7 @@ public class ZyjrCard extends BaseEntity
 
     /** 本人年收入 */
     @Excel(name = "本人年收入")
-    private Long yearincome;
+    private Double yearincome;
 
     /** 单位性质 */
     @Excel(name = "单位性质")
@@ -464,12 +464,12 @@ public class ZyjrCard extends BaseEntity
     {
         return joindate;
     }
-    public void setYearincome(Long yearincome) 
+    public void setYearincome(Double yearincome)
     {
         this.yearincome = yearincome;
     }
 
-    public Long getYearincome() 
+    public Double getYearincome()
     {
         return yearincome;
     }

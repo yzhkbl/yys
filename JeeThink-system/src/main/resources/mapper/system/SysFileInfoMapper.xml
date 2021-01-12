@@ -32,6 +32,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="photoLenderId != null  and photoLenderId != ''"> and photo_lender_id = #{photoLenderId}</if>
             <if test="photoCreditId != null  and photoCreditId != ''"> and photo_credit_id = #{photoCreditId}</if>
             <if test="photoHouseId != null  and photoHouseId != ''"> and photo_house_id = #{photoHouseId}</if>
+            <if test="bankId != null  and bankId != ''"> and bank_id = #{bankId}</if>
+
         </where>
     </select>
 

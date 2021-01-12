@@ -96,6 +96,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectZyjrAllowApplicantVo"/>
         where user_id = #{userId} and transaction_code = #{transactionCode}
     </select>
+    <select id="selectById" resultMap="ZyjrAllowApplicantResult">
+        <include refid="selectZyjrAllowApplicantVo"/>
+        where transaction_code = #{transactionCode}
+    </select>
         
     <insert id="insertZyjrAllowApplicant" parameterType="ZyjrAllowApplicant" useGeneratedKeys="true" keyProperty="id">
         insert into zyjr_allow_applicant
