@@ -614,7 +614,6 @@ public class test extends BaseController {
             zyjrCard.setCaddress(applicant.getWorkAddress());
             //zyjrCard.setCorpzip();
            // zyjrCard.setJoindate();
-        zyjrCard.sety
         return AjaxResult.success("666");
     }
 

@@ -54,12 +54,12 @@ public class ZyjrGrant extends BaseEntity
     @Excel(name = "订单状态")
     private Integer orderState;
     private String name;//联查用户名
-    private Integer approvalType;
-    private String transactionCode;
+    private Integer approvalType;//审批状态
+    private String transactionCode;//订单号
     private String operator;
     private String falseOperator;
     private String falseOperatorId;
-    private String realAddress;
+    private String realAddress;//真实地址
 
     public Integer getApprovalType() {
         return approvalType;

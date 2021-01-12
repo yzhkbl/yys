@@ -5,6 +5,7 @@ import com.jeethink.common.core.domain.AjaxResult;
 import com.jeethink.common.core.page.TableDataInfo;
 import com.jeethink.system.domain.ZyjrBusiness;
 import com.jeethink.system.domain.ZyjrDetails;
+import com.jeethink.system.domain.ZyjrGrantOpinion;
 import com.jeethink.system.domain.ZyjrRepeatOpinion;
 import com.jeethink.system.domain.vo.ZyjrGrant;
 import com.jeethink.system.service.IStageExamineService;
@@ -58,6 +59,23 @@ public class StageExamineController extends BaseController {
     public TableDataInfo list(){
         startPage();
         List<ZyjrGrant>list = stageExamineService.list();
+        return getDataTable(list);
+    }
+
+    @RequestMapping("/grant/add")
+    public AjaxResult addGrantOpinion(@RequestBody ZyjrGrantOpinion q){
+        return AjaxResult.success(stageExamineService.addGrantOpinion(q));
+    }
+
+    @GetMapping("/grant/find")
+    public AjaxResult findGrantOpinion(String transactionCode){
+        return AjaxResult.success(stageExamineService.findGrantOpinion(transactionCode));
+    }
+
+    @GetMapping("/grant")
+    public TableDataInfo findGrant(){
+        startPage();
+        List<ZyjrGrant>list = stageExamineService.grant();
         return getDataTable(list);
     }
 }

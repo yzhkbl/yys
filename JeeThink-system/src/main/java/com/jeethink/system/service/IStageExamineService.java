@@ -27,4 +27,9 @@ public interface IStageExamineService {
     int addOpinion(ZyjrRepeatOpinion q);
     ZyjrRepeatOpinion findOpinion(String transactionCode);
     List<ZyjrGrant> list();
+
+
+    int addGrantOpinion(ZyjrGrantOpinion q);
+    ZyjrGrantOpinion findGrantOpinion(String transactionCode);
+    List<ZyjrGrant> grant();
 }

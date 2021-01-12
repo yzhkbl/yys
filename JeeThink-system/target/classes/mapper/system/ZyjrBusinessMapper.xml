@@ -49,12 +49,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectZyjrBusinessById" parameterType="Long" resultMap="ZyjrBusinessResult">
         <include refid="selectZyjrBusinessVo"/>
-        where id = #{id}
+        where a.id = #{id}
     </select>
     
     <select id="selectById" parameterType="String" resultMap="ZyjrBusinessResult">
         <include refid="selectZyjrBusinessVo"/>
-        where transaction_code = #{identityId}
+        where a.transaction_code = #{identityId}
     </select>
         
     <insert id="insertZyjrBusiness" parameterType="ZyjrBusiness" useGeneratedKeys="true" keyProperty="id">

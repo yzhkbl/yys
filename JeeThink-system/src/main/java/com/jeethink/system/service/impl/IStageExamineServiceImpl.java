@@ -40,6 +40,14 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     private ZyjrPhotoLenderMapper zyjrPhotoLenderMapper;
     @Autowired
     private SysFileInfoMapper sysFileInfoMapper;
+    @Autowired
+    private ZyjrGrantImage zyjrGrantImage;
+    @Autowired
+    private ZyjrGrantInstalments zyjrGrantInstalments;
+    @Autowired
+    private ZyjrGrantPhoto zyjrGrantPhoto;
+    @Autowired
+    private ZyjrGrantVisit zyjrGrantVisit;
 
 
     @Override
@@ -152,6 +160,21 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     @Override
     public List<ZyjrGrant> list() {
         return examineDao.list();
+    }
+
+    @Override
+    public int addGrantOpinion(ZyjrGrantOpinion q) {
+        return examineDao.insertGrantOpinion(q);
+    }
+
+    @Override
+    public ZyjrGrantOpinion findGrantOpinion(String transactionCode) {
+        return examineDao.findGrantOpinion(transactionCode);
+    }
+
+    @Override
+    public List<ZyjrGrant> grant() {
+        return examineDao.findGrant();
     }
 
 
