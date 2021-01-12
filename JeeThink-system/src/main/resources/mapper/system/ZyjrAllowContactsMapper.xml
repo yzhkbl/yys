@@ -40,6 +40,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectZyjrAllowContactsVo"/>
         where user_id=#{userId} and transaction_code=#{transactionCode}
     </select>
+    <select id="selectById" resultMap="ZyjrAllowContactsResult">
+        <include refid="selectZyjrAllowContactsVo"/>
+        where  transaction_code=#{transactionCode}
+    </select>
         
     <insert id="insertZyjrAllowContacts" parameterType="ZyjrAllowContacts" useGeneratedKeys="true" keyProperty="id">
         insert into zyjr_allow_contacts

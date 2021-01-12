@@ -49,15 +49,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="cstsign"    column="cstsign"    />
         <result property="almebno"    column="almebno"    />
         <result property="outcardno1"    column="outcardno1"    />
-        <result property="createBy"    column="create_by"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="updateBy"    column="update_by"    />
-        <result property="updateTime"    column="update_time"    />
         <result property="transactionCode"    column="transaction_code"    />
     </resultMap>
 
     <sql id="selectZyjrCardVo">
-        select id, custsort, custcode, chnsname, engname, sex, mrtlstat, edulvl, drawmode, drawzono, drawbrno, homestat, hprovince, hcity, hcounty, haddress, homezip, indate, mvblno, email, unitname, duty, cophozono, cophoneno, cprovince, ccity, ccounty, caddress, corpzip, joindate, yearincome, modelcode, occptn, carstat, reltname1, reltship1, reltphzon1, relaphone1, reltmobl1, statdate, primnat, cstsign, almebno, outcardno1, create_by, create_time, update_by, update_time, transaction_code from zyjr_card
+        select id, custsort, custcode, chnsname, engname, sex, mrtlstat, edulvl, drawmode, drawzono, drawbrno, homestat, hprovince, hcity, hcounty, haddress, homezip, indate, mvblno, email, unitname, duty, cophozono, cophoneno, cprovince, ccity, ccounty, caddress, corpzip, joindate, yearincome, modelcode, occptn, carstat, reltname1, reltship1, reltphzon1, relaphone1, reltmobl1, statdate, primnat, cstsign, almebno, outcardno1, transaction_code from zyjr_card
     </sql>
 
     <select id="selectZyjrCardList" parameterType="ZyjrCard" resultMap="ZyjrCardResult">
@@ -165,10 +161,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="cstsign != null">cstsign,</if>
             <if test="almebno != null">almebno,</if>
             <if test="outcardno1 != null">outcardno1,</if>
-            <if test="createBy != null">create_by,</if>
-            <if test="createTime != null">create_time,</if>
-            <if test="updateBy != null">update_by,</if>
-            <if test="updateTime != null">update_time,</if>
+
             <if test="transactionCode != null">transaction_code,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -215,10 +208,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="cstsign != null">#{cstsign},</if>
             <if test="almebno != null">#{almebno},</if>
             <if test="outcardno1 != null">#{outcardno1},</if>
-            <if test="createBy != null">#{createBy},</if>
-            <if test="createTime != null">#{createTime},</if>
-            <if test="updateBy != null">#{updateBy},</if>
-            <if test="updateTime != null">#{updateTime},</if>
+
             <if test="transactionCode != null">#{transactionCode},</if>
          </trim>
     </insert>
@@ -269,10 +259,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="cstsign != null">cstsign = #{cstsign},</if>
             <if test="almebno != null">almebno = #{almebno},</if>
             <if test="outcardno1 != null">outcardno1 = #{outcardno1},</if>
-            <if test="createBy != null">create_by = #{createBy},</if>
-            <if test="createTime != null">create_time = #{createTime},</if>
-            <if test="updateBy != null">update_by = #{updateBy},</if>
-            <if test="updateTime != null">update_time = #{updateTime},</if>
+
             <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
         </trim>
         where id = #{id}

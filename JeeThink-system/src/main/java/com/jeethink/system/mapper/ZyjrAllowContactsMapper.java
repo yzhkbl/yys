@@ -59,4 +59,6 @@ public interface ZyjrAllowContactsMapper
      * @return 结果
      */
     public int deleteZyjrAllowContactsByIds(Long[] ids);
+
+    ZyjrAllowContacts selectById(String transactionCode);
 }

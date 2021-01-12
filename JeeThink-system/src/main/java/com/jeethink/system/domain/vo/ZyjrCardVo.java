@@ -96,7 +96,7 @@ public class ZyjrCardVo {
     private String joindate;
 
     /** 本人年收入 */
-    private Long yearincome;
+    private Double yearincome;
 
     /** 单位性质 */
     private Integer modelcode;

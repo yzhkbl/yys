@@ -1,15 +1,15 @@
 package com.jeethink.system.mapper;
 
 import java.util.List;
-import com.jeethink.system.domain.ZyjrPic;
+import com.jeethink.system.domain.ZyjrKaika;
 
 /**
  * 【请填写功能名称】Mapper接口
  * 
  * @author jeethink
- * @date 2021-01-05
+ * @date 2021-01-12
  */
-public interface ZyjrPicMapper 
+public interface ZyjrKaikaMapper 
 {
     /**
      * 查询【请填写功能名称】
@@ -17,31 +17,31 @@ public interface ZyjrPicMapper
      * @param id 【请填写功能名称】ID
      * @return 【请填写功能名称】
      */
-    public ZyjrPic selectZyjrPicById(Long id);
+    public ZyjrKaika selectZyjrKaikaById(String id);
 
     /**
      * 查询【请填写功能名称】列表
      * 
-     * @param zyjrPic 【请填写功能名称】
+     * @param zyjrKaika 【请填写功能名称】
      * @return 【请填写功能名称】集合
      */
-    public List<ZyjrPic> selectZyjrPicList(ZyjrPic zyjrPic);
+    public List<ZyjrKaika> selectZyjrKaikaList(ZyjrKaika zyjrKaika);
 
     /**
      * 新增【请填写功能名称】
      * 
-     * @param zyjrPic 【请填写功能名称】
+     * @param zyjrKaika 【请填写功能名称】
      * @return 结果
      */
-    public int insertZyjrPic(ZyjrPic zyjrPic);
+    public int insertZyjrKaika(ZyjrKaika zyjrKaika);
 
     /**
      * 修改【请填写功能名称】
      * 
-     * @param zyjrPic 【请填写功能名称】
+     * @param zyjrKaika 【请填写功能名称】
      * @return 结果
      */
-    public int updateZyjrPic(ZyjrPic zyjrPic);
+    public int updateZyjrKaika(ZyjrKaika zyjrKaika);
 
     /**
      * 删除【请填写功能名称】
@@ -49,8 +49,7 @@ public interface ZyjrPicMapper
      * @param id 【请填写功能名称】ID
      * @return 结果
      */
-    public int deleteZyjrPicById(Long id);
-    public int deleteZyjrPicById2(String id);
+    public int deleteZyjrKaikaById(Long id);
 
     /**
      * 批量删除【请填写功能名称】
@@ -58,5 +57,5 @@ public interface ZyjrPicMapper
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    public int deleteZyjrPicByIds(Long[] ids);
+    public int deleteZyjrKaikaByIds(Long[] ids);
 }

@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 
+import com.alibaba.fastjson.JSON;
 import com.jeethink.common.config.JeeThinkConfig;
 import com.jeethink.common.core.redis.RedisCache;
 import com.jeethink.common.utils.DateUtils;
@@ -22,6 +23,7 @@ import com.jeethink.system.util.*;
 import com.rsa.RSASignature;
 import com.rsa.RSAUtil;
 import net.sf.json.JSONObject;
+import org.apache.commons.collections.map.LinkedMap;
 import org.apache.http.entity.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -69,6 +71,8 @@ public class test extends BaseController {
     private RedisCache redisCache;
     @Autowired
     private ZyjrAllowApplicantMapper zyjrAllowApplicantMapper;
+    @Autowired
+    private ZyjrAllowContactsMapper zyjrAllowContactsMapper;
 
     private static String oCode = "sfzzm";
     private static String pCode = "sfzfm";
@@ -498,13 +502,32 @@ public class test extends BaseController {
         }
         return AjaxResult.success(map);
     }
-    @PreAuthorize("@ss.hasPermi('dzj')")
+
+    @ResponseBody
+    @GetMapping("occptn")
+    public AjaxResult zwc(){
+        SysFileInfo sysFileInfo=new SysFileInfo();
+        sysFileInfo.setBankId("99999999");
+        List<SysFileInfo> a=sysFileInfoMapper.selectSysFileInfoList(sysFileInfo);
+        List<OccptnVo>  list=new ArrayList<>();
+        String str= a.get(0).getFilePath();
+        HashMap hashMap = JSON.parseObject(str, HashMap.class);
+        hashMap.forEach((k, v) ->{
+            System.out.println("key:value = " + k + ":" + v);
+            OccptnVo o=new OccptnVo();
+            o.setId(v);
+            o.setOccptn(k);
+            list.add(o);
+        } );
+        return AjaxResult.success("操作成功",list);
+    }
     @ResponseBody
     @GetMapping("kaika")
     public AjaxResult kaika(String transactionCode){
             ZyjrBusiness business=b.selectById(transactionCode);
             ZyjrBorrower borrower = o.selectById(transactionCode);
             ZyjrAllowApplicant applicant=zyjrAllowApplicantMapper.selectById(transactionCode);
+            ZyjrAllowContacts contacts=zyjrAllowContactsMapper.selectById(transactionCode);
             ZyjrCard zyjrCard=new ZyjrCard();
             zyjrCard.setCustsort(0);
             zyjrCard.setCustcode(borrower.getIdCard());
@@ -604,7 +627,7 @@ public class test extends BaseController {
             String cophoneno="";
             if(applicant!=null&&applicant.getUnitPhone()!=null){
                 cophoneno= applicant.getUnitPhone().substring(applicant.getUnitPhone().length()-8);
-                cophozono=applicant.getUnitPhone().substring(0,Integer.valueOf(applicant.getUnitPhone())-cophoneno.length());
+                cophozono=applicant.getUnitPhone().substring(0,applicant.getUnitPhone().length()-cophoneno.length());
             }
             zyjrCard.setCophozono(cophozono);
             zyjrCard.setCophoneno(cophoneno);
@@ -614,7 +637,30 @@ public class test extends BaseController {
             zyjrCard.setCaddress(applicant.getWorkAddress());
             //zyjrCard.setCorpzip();
            // zyjrCard.setJoindate();
-        return AjaxResult.success("666");
+        Double yearincome=0.0;
+        if(applicant!=null&&applicant.getMonthlyIncome()!=null){
+
+            yearincome=Double.valueOf(applicant.getMonthlyIncome())*12.0;
+        }
+            zyjrCard.setYearincome(yearincome);
+        zyjrCard.setModelcode(190);
+        Integer industry=null;
+        if(applicant!=null&&applicant.getIndustry()!=null){
+            industry=Integer.valueOf(applicant.getIndustry());
+        }
+        zyjrCard.setOccptn(industry);
+       // zyjrCard.setCarstat(applicant.get);
+        zyjrCard.setReltname1(contacts.getNameOne());
+        zyjrCard.setReltship1(1);
+        //zyjrCard.setReltphzon1();
+        zyjrCard.setRelaphone1(contacts.getPhoneOne());
+        zyjrCard.setReltmobl1(contacts.getPhoneOne());
+       // zyjrCard.setStatdate();
+        zyjrCard.setPrimnat(156);
+        zyjrCard.setCstsign(1);
+       // zyjrCard.setAlmebno();
+      //  zyjrCard.setOutcardno1();
+        return AjaxResult.success(zyjrCard);
     }
 
     public static void main(String[] args) {
