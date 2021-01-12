@@ -24,9 +24,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
     
-    <select id="selectZyjrKaikaById" parameterType="Long" resultMap="ZyjrKaikaResult">
+    <select id="selectZyjrKaikaById" parameterType="String" resultMap="ZyjrKaikaResult">
         <include refid="selectZyjrKaikaVo"/>
-        where id = #{id}
+        where transaction_code = #{id}
     </select>
         
     <insert id="insertZyjrKaika" parameterType="ZyjrKaika" useGeneratedKeys="true" keyProperty="id">

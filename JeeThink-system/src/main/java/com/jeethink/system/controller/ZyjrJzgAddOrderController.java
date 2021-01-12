@@ -110,16 +110,31 @@ public class ZyjrJzgAddOrderController extends BaseController
     @PostMapping("/insert")
     public AjaxResult addd(ZyjrJzgAddOrder zyjrJzgAddOrder)
     {
+
+        ZyjrJzgAddOrder zyjrJzgAddOrder1 = zyjrJzgAddOrderMapper.selectZyjrJzgAddOrderByTransactionCode(zyjrJzgAddOrder.getTransactionCode());
         if(zyjrJzgAddOrder.getPic()!=null) {
+            zyjrPicMapper.deleteZyjrPicById2(zyjrJzgAddOrder.getTransactionCode());
             JSONArray jsonarray = JSONArray.fromObject(zyjrJzgAddOrder.getPic());
-            System.out.println(jsonarray);
-            List<ZyjrPic> list = (List) JSONArray.toList(jsonarray, ZyjrDaihouBaoxian.class);
+            List<ZyjrPic> list = (List) JSONArray.toList(jsonarray, ZyjrPic.class);
             for (ZyjrPic zyjrPic : list) {
                 zyjrPic.setJinzhengu(zyjrJzgAddOrder.getTransactionCode());
                 zyjrPicMapper.insertZyjrPic(zyjrPic);
             }
         }
-        return toAjax(zyjrJzgAddOrderService.insertZyjrJzgAddOrder(zyjrJzgAddOrder));
+        if(zyjrJzgAddOrder1!=null){
+            zyjrJzgAddOrderService.updateZyjrJzgAddOrder(zyjrJzgAddOrder);
+            return AjaxResult.success();
+        }
+        zyjrJzgAddOrderService.insertZyjrJzgAddOrder(zyjrJzgAddOrder);
+        return AjaxResult.success();
+    }
+
+    @GetMapping("/getPic/{transactionCode}")
+    public AjaxResult as(@PathVariable("transactionCode") String transactionCode){
+        ZyjrPic zyjrPic=new ZyjrPic();
+        zyjrPic.setJinzhengu(transactionCode);
+        List<ZyjrPic> zyjrPics = zyjrPicMapper.selectZyjrPicList(zyjrPic);
+        return AjaxResult.success(zyjrPics);
     }
 
     @ApiOperation("11111111")

@@ -58,7 +58,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteZyjrPicById" parameterType="Long">
-        delete from zyjr_pic where id = #{id}
+        delete from zyjr_pic where gps_id = #{id}
+    </delete>
+    <delete id="deleteZyjrPicById2" parameterType="String">
+        delete from zyjr_pic where jinzhengu = #{id}
     </delete>
 
     <delete id="deleteZyjrPicByIds" parameterType="String">

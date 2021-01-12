@@ -53,7 +53,6 @@ public class ZyjrCardServiceImpl implements IZyjrCardService
     @Override
     public int insertZyjrCard(ZyjrCard zyjrCard)
     {
-        zyjrCard.setCreateTime(DateUtils.getNowDate());
         return zyjrCardMapper.insertZyjrCard(zyjrCard);
     }
 
@@ -66,7 +65,6 @@ public class ZyjrCardServiceImpl implements IZyjrCardService
     @Override
     public int updateZyjrCard(ZyjrCard zyjrCard)
     {
-        zyjrCard.setUpdateTime(DateUtils.getNowDate());
         return zyjrCardMapper.updateZyjrCard(zyjrCard);
     }
 

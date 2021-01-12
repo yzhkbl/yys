@@ -50,6 +50,7 @@ public interface ZyjrPicMapper
      * @return 结果
      */
     public int deleteZyjrPicById(Long id);
+    public int deleteZyjrPicById2(String id);
 
     /**
      * 批量删除【请填写功能名称】

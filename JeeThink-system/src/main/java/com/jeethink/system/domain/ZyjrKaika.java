@@ -57,12 +57,12 @@ public class ZyjrKaika extends BaseEntity
     {
         return transactionCode;
     }
-    public void setCount(String count) 
+    public void setCount(String count)
     {
         this.count = count;
     }
 
-    public String getCount() 
+    public String getCount()
     {
         return count;
     }

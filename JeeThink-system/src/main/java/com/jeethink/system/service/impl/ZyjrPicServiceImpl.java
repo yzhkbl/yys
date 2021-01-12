@@ -85,9 +85,5 @@ public class ZyjrPicServiceImpl implements IZyjrPicService
      * @param id 【请填写功能名称】ID
      * @return 结果
      */
-    @Override
-    public int deleteZyjrPicById(Long id)
-    {
-        return zyjrPicMapper.deleteZyjrPicById(id);
-    }
+
 }

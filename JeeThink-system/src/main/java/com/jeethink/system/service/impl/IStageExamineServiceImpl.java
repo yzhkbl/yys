@@ -40,14 +40,14 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     private ZyjrPhotoLenderMapper zyjrPhotoLenderMapper;
     @Autowired
     private SysFileInfoMapper sysFileInfoMapper;
-    @Autowired
+    /**@Autowired
     private ZyjrGrantImage zyjrGrantImage;
     @Autowired
     private ZyjrGrantInstalments zyjrGrantInstalments;
     @Autowired
     private ZyjrGrantPhoto zyjrGrantPhoto;
     @Autowired
-    private ZyjrGrantVisit zyjrGrantVisit;
+    private ZyjrGrantVisit zyjrGrantVisit;*/
 
 
     @Override

@@ -57,5 +57,6 @@ public interface IZyjrJzgAddOrderService
      * @param id 【请填写功能名称】ID
      * @return 结果
      */
-    public int deleteZyjrJzgAddOrderById(Long id);
+
+
 }

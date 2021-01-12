@@ -11,12 +11,10 @@ import com.jeethink.common.core.domain.BaseEntity;
  * @author jeethink
  * @date 2020-12-30
  */
-public class ZyjrCard extends BaseEntity
+public class ZyjrCard
 {
     private static final long serialVersionUID = 1L;
 
-    /** $column.columnComment */
-    private Long id;
 
     /** 证件类型(0-身份证 1-护照 2-军官证 3-士兵证 4-回乡证 5-临时身份证 6-户口本 7-其他 9-警官证) */
     @Excel(name = "证件类型(0-身份证 1-护照 2-军官证 3-士兵证 4-回乡证 5-临时身份证 6-户口本 7-其他 9-警官证)")
@@ -194,16 +192,7 @@ public class ZyjrCard extends BaseEntity
     @Excel(name = "订单编号")
     private String transactionCode;
 
-    public void setId(Long id) 
-    {
-        this.id = id;
-    }
-
-    public Long getId() 
-    {
-        return id;
-    }
-    public void setCustsort(Integer custsort) 
+    public void setCustsort(Integer custsort)
     {
         this.custsort = custsort;
     }
@@ -603,7 +592,6 @@ public class ZyjrCard extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
             .append("custsort", getCustsort())
             .append("custcode", getCustcode())
             .append("chnsname", getChnsname())
@@ -647,10 +635,7 @@ public class ZyjrCard extends BaseEntity
             .append("cstsign", getCstsign())
             .append("almebno", getAlmebno())
             .append("outcardno1", getOutcardno1())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
+
             .append("transactionCode", getTransactionCode())
             .toString();
     }

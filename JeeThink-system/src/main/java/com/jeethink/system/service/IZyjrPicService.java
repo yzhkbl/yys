@@ -57,5 +57,5 @@ public interface IZyjrPicService
      * @param id 【请填写功能名称】ID
      * @return 结果
      */
-    public int deleteZyjrPicById(Long id);
+
 }

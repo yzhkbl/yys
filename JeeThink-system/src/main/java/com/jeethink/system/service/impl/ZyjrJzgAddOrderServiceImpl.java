@@ -85,9 +85,5 @@ public class ZyjrJzgAddOrderServiceImpl implements IZyjrJzgAddOrderService
      * @param id 【请填写功能名称】ID
      * @return 结果
      */
-    @Override
-    public int deleteZyjrJzgAddOrderById(Long id)
-    {
-        return zyjrJzgAddOrderMapper.deleteZyjrJzgAddOrderById(id);
-    }
+
 }

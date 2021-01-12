@@ -17,7 +17,7 @@ public interface ZyjrKaikaMapper
      * @param id 【请填写功能名称】ID
      * @return 【请填写功能名称】
      */
-    public ZyjrKaika selectZyjrKaikaById(Long id);
+    public ZyjrKaika selectZyjrKaikaById(String id);
 
     /**
      * 查询【请填写功能名称】列表

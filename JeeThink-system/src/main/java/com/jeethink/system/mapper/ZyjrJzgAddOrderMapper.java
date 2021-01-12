@@ -51,7 +51,7 @@ public interface ZyjrJzgAddOrderMapper
      * @param id 【请填写功能名称】ID
      * @return 结果
      */
-    public int deleteZyjrJzgAddOrderById(Long id);
+    public int deleteZyjrJzgAddOrderById(String id);
 
     /**
      * 批量删除【请填写功能名称】
