@@ -115,10 +115,10 @@ public class ExamineServiceImpl implements IExamineService {
         String a = orderCode.getOrderCode();
         //String b = IdUtils.simpleUUID();
         System.err.println(a);
-        examineDao.updateOne(userId,a);
-        examineDao.updateTwo(userId,a);
-        examineDao.updateThree(userId,a);
-        examineDao.updateFour(userId,a);
+        examineDao.updateOne(userId,a,0);
+        examineDao.updateTwo(userId,a,0);
+        examineDao.updateThree(userId,a,0);
+        examineDao.updateFour(userId,a,0);
         //examineDao.updateFive(userId,a);
         return a;
     }
@@ -135,16 +135,14 @@ public class ExamineServiceImpl implements IExamineService {
         startPage.setTransactionCode(q.getTransactionCode());
         startPage.setRealAddress(q.getRealAddress());
         startPage.setCreateTime(new Date());
-        /**if(findByBorrower(q.getUserId()).getCreditPower()==1) {
-            String a = orderCode.getOrderCode();
-            String b = IdUtils.simpleUUID();
-            examineDao.updateOne(q.getUserId(),a);
-            examineDao.updateTwo(q.getUserId(),a);
-            examineDao.updateThree(q.getUserId(),a);
-            examineDao.updateFour(q.getUserId(),a);
-            startPage.setTransactionCode(a);
+
+            examineDao.updateOne(q.getUserId(),q.getTransactionCode(),1);
+            examineDao.updateTwo(q.getUserId(),q.getTransactionCode(),1);
+            examineDao.updateThree(q.getUserId(),q.getTransactionCode(),1);
+            examineDao.updateFour(q.getUserId(),q.getTransactionCode(),1);
+            startPage.setTransactionCode(q.getTransactionCode());
             //examineDao.updateFive(q.getUserId(),a);
-        }*/
+
            return examineDao.insertStart(startPage);
     }
 

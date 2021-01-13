@@ -493,25 +493,25 @@ LEFT JOIN zyjr_daiqian_accout c on d.transaction_code=c.transaction_code where d
     </update>
     <update id="updateOne">
         update zyjr_borrower
-        set order_state=1,
+        set order_state=#{orderState},
         transaction_code=#{transactionCode}
         where order_state=0 and user_id = #{userId}
     </update>
     <update id="updateTwo">
         update zyjr_relation
-        set order_state=1,
+        set order_state=#{orderState},
         transaction_code=#{transactionCode}
         where order_state=0 and user_id = #{userId}
     </update>
     <update id="updateThree">
         update zyjr_guarantee
-        set order_state=1,
+        set order_state=#{orderState},
         transaction_code=#{transactionCode}
         where order_state=0 and user_id = #{userId}
     </update>
     <update id="updateFour">
         update zyjr_business
-        set order_state=1,
+        set order_state=#{orderState},
         transaction_code=#{transactionCode}
         where order_state=0 and user_id = #{userId}
     </update>
