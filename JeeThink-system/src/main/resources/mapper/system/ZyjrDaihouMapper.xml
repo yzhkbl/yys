@@ -15,25 +15,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="qita"    column="qita"    />
         <result property="lvben"    column="lvben"    />
         <result property="tiche"    column="tiche"    />
+        <result property="operator"    column="operator"    />
     </resultMap>
 
     <sql id="selectZyjrDaihouVo">
-        select id, state, opinion, user_id, transaction_code, zhengshu, baoxian, qita, lvben, tiche from zyjr_daihou
+        select id, state, opinion,operator, user_id, transaction_code, zhengshu, baoxian, qita, lvben, tiche from zyjr_daihou
     </sql>
 
     <select id="selectZyjrDaihouList" parameterType="ZyjrDaihou" resultMap="ZyjrDaihouResult">
-        <include refid="selectZyjrDaihouVo"/>
-        <where>  
-            <if test="state != null  and state != ''"> and state = #{state}</if>
-            <if test="opinion != null  and opinion != ''"> and opinion = #{opinion}</if>
-            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
-            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
-            <if test="zhengshu != null  and zhengshu != ''"> and zhengshu = #{zhengshu}</if>
-            <if test="baoxian != null  and baoxian != ''"> and baoxian = #{baoxian}</if>
-            <if test="qita != null  and qita != ''"> and qita = #{qita}</if>
-            <if test="lvben != null  and lvben != ''"> and lvben = #{lvben}</if>
-            <if test="tiche != null  and tiche != ''"> and tiche = #{tiche}</if>
-        </where>
+        select b.id, b.state, b.opinion,b.operator, b.user_id, b.transaction_code, b.zhengshu, b.baoxian, b.qita, b.lvben, b.tiche
+        from zyjr_daiqian a
+        left join zyjr_daihou b on a.transaction_code=b.transaction_code
+        where a.state="1" and b.state!="1" or b.state is null
     </select>
     
     <select id="selectZyjrDaihouById" parameterType="Long" resultMap="ZyjrDaihouResult">
@@ -57,6 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="qita != null">qita,</if>
             <if test="lvben != null">lvben,</if>
             <if test="tiche != null">tiche,</if>
+            <if test="operator != null">operator,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="state != null">#{state},</if>
@@ -68,6 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="qita != null">#{qita},</if>
             <if test="lvben != null">#{lvben},</if>
             <if test="tiche != null">#{tiche},</if>
+            <if test="operator != null">#{operator},</if>
          </trim>
     </insert>
 
@@ -83,7 +78,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="qita != null">qita = #{qita},</if>
             <if test="lvben != null">lvben = #{lvben},</if>
             <if test="tiche != null">tiche = #{tiche},</if>
+            <if test="operator != null">tiche = #{operator},</if>
         </trim>
+        where id = #{id}
+    </update>
+
+    <update id="updateZyjrDaihous" parameterType="ZyjrDaihou">
+        update zyjr_daihou
+      set  user_id=#{userId},operator=#{operator}
         where id = #{id}
     </update>
 

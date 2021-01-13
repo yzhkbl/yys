@@ -1,15 +1,15 @@
 package com.jeethink.system.mapper;
 
 import java.util.List;
-import com.jeethink.system.domain.ZyjrDaihou;
+import com.jeethink.system.domain.ZyjrCailiao;
 
 /**
  * 【请填写功能名称】Mapper接口
  * 
  * @author jeethink
- * @date 2021-01-06
+ * @date 2021-01-13
  */
-public interface ZyjrDaihouMapper 
+public interface ZyjrCailiaoMapper 
 {
     /**
      * 查询【请填写功能名称】
@@ -17,31 +17,31 @@ public interface ZyjrDaihouMapper
      * @param id 【请填写功能名称】ID
      * @return 【请填写功能名称】
      */
-    public ZyjrDaihou selectZyjrDaihouById(Long id);
+    public ZyjrCailiao selectZyjrCailiaoById(Long id);
 
     /**
      * 查询【请填写功能名称】列表
      * 
-     * @param zyjrDaihou 【请填写功能名称】
+     * @param zyjrCailiao 【请填写功能名称】
      * @return 【请填写功能名称】集合
      */
-    public List<ZyjrDaihou> selectZyjrDaihouList(ZyjrDaihou zyjrDaihou);
+    public List<ZyjrCailiao> selectZyjrCailiaoList(ZyjrCailiao zyjrCailiao);
 
     /**
      * 新增【请填写功能名称】
      * 
-     * @param zyjrDaihou 【请填写功能名称】
+     * @param zyjrCailiao 【请填写功能名称】
      * @return 结果
      */
-    public int insertZyjrDaihou(ZyjrDaihou zyjrDaihou);
+    public int insertZyjrCailiao(ZyjrCailiao zyjrCailiao);
 
     /**
      * 修改【请填写功能名称】
      * 
-     * @param zyjrDaihou 【请填写功能名称】
+     * @param zyjrCailiao 【请填写功能名称】
      * @return 结果
      */
-    public int updateZyjrDaihou(ZyjrDaihou zyjrDaihou);
+    public int updateZyjrCailiao(ZyjrCailiao zyjrCailiao);
 
     /**
      * 删除【请填写功能名称】
@@ -49,7 +49,7 @@ public interface ZyjrDaihouMapper
      * @param id 【请填写功能名称】ID
      * @return 结果
      */
-    public int deleteZyjrDaihouById(Long id);
+    public int deleteZyjrCailiaoById(Long id);
 
     /**
      * 批量删除【请填写功能名称】
@@ -57,9 +57,5 @@ public interface ZyjrDaihouMapper
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    public int deleteZyjrDaihouByIds(Long[] ids);
-
-    ZyjrDaihou selectZyjrDaihouByT(String daihou);
-
-    int updateZyjrDaihous(ZyjrDaihou zyjrDaihou);
+    public int deleteZyjrCailiaoByIds(Long[] ids);
 }

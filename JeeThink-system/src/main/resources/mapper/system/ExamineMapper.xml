@@ -19,7 +19,7 @@
         <result property="carInformation"    column="car_information"    />
     </resultMap>
     <select id="selectAllList" parameterType="com.jeethink.system.domain.ZyjrDaiqian" resultMap="ZyjrAllowBasicsResult2">
-        select e.id, e.state, e.opinion, e.user_id, a.transaction_code,
+        select e.id, e.state, e.opinion,e.user_id,e.operator, a.transaction_code,
         b.user_name,c.car_type,c.team,f.loan_amount,f.repayment_term,f.actual_price,c.car_information
         from zyjr_repeat_opinion a
         left join zyjr_borrower b on a.transaction_code=b.transaction_code
@@ -27,7 +27,8 @@
         left join zyjr_allow_basics d on a.transaction_code=d.transaction_code
         left join zyjr_daiqian e on a.transaction_code=e.transaction_code
         left join zyjr_car_loan f on a.transaction_code=f.transaction_code
-        where a.approval_type=1
+        left join zyjr_grant_opinion g on a.transaction_code=g.transaction_code
+        where g.approval_type=1 and e.state!="1" or e.state is null
     </select>
     <insert id="insertBorrower" parameterType="com.jeethink.system.domain.ZyjrBorrower">
         insert into zyjr_borrower
@@ -106,10 +107,12 @@
        where transaction_code=#{transactionCode}
     </select>
     <select id="selectDQ" resultType="com.jeethink.system.domain.vo.DqVo" >
-       select a.state statea,b.state stateb,c.state statec,a.id insurance,b.id gps,c.id daiqian from zyjr_insurance a
-        LEFT JOIN zyjr_gps b on a.transaction_code=b.transaction_code
-        LEFT JOIN zyjr_daiqian_accout c on a.transaction_code=c.transaction_code
-        where a.transaction_code=#{transactionCode}
+
+select a.state statea,b.state stateb,c.state statec,a.id insurance,b.id gps,c.id daiqian
+from zyjr_borrower d
+left join zyjr_insurance a on a.transaction_code=d.transaction_code
+LEFT JOIN zyjr_gps b on d.transaction_code=b.transaction_code
+LEFT JOIN zyjr_daiqian_accout c on d.transaction_code=c.transaction_code where d.transaction_code=#{transactionCode}
     </select>
     <insert id="insertStart" parameterType="com.jeethink.system.domain.ZyjrStartPage">
         insert into zyjr_start_page
@@ -215,6 +218,9 @@
 
     <update id="updateBystates">
         update zyjr_start_page set credit_state=#{creditState} where transaction_code=#{transactionCode} and order_state=1
+    </update>
+    <update id="updateByDaiqians">
+        update zyjr_daiqian set user_id=#{userId},operator=#{operator} where id=#{id}
     </update>
 
     <update id="updateByCode">

@@ -91,8 +91,9 @@ public class ZyjrGpsController extends BaseController
     @PostMapping("update")
     public AjaxResult date(ZyjrGps zyjrGps){
         DqVo dq=examineMapper.selectDQ(zyjrGps.getTransactionCode());
-        if(zyjrGps.getId()!=null){
-            if(dq!=null&&"1".equals(dq.getStatec())&&"1".equals(dq.getStatea())){
+        System.err.println(dq.getGps());
+        if(dq!=null&&dq.getGps()!=null){
+            if("1".equals(dq.getStatec())&&"1".equals(dq.getStatea())){
                 zyjrGps.setState("2");
                 ZyjrInsurance zyjrInsurance=new ZyjrInsurance();
                 zyjrInsurance.setId(dq.getInsurance());
@@ -102,7 +103,9 @@ public class ZyjrGpsController extends BaseController
                 zyjrDaiqianAccout.setId(dq.getDaiqian());
                 zyjrDaiqianAccout.setState("2");
                 zyjrDaiqianAccoutMapper.updateZyjrDaiqianAccout(zyjrDaiqianAccout);
+
             }
+            zyjrGps.setId(dq.getGps());
             zyjrGpsService.updateZyjrGps(zyjrGps);
             return AjaxResult.success();
         }
@@ -147,6 +150,8 @@ public class ZyjrGpsController extends BaseController
 
         return  AjaxResult.success();
     }
+
+
 
     /**
      * 获取【请填写功能名称】详细信息
