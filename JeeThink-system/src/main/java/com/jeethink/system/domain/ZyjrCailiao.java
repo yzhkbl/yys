@@ -6,12 +6,12 @@ import com.jeethink.common.annotation.Excel;
 import com.jeethink.common.core.domain.BaseEntity;
 
 /**
- * 【请填写功能名称】对象 zyjr_daihou
+ * 【请填写功能名称】对象 zyjr_cailiao
  * 
  * @author jeethink
- * @date 2021-01-06
+ * @date 2021-01-13
  */
-public class ZyjrDaihou
+public class ZyjrCailiao extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
@@ -34,36 +34,11 @@ public class ZyjrDaihou
     @Excel(name = "订单号")
     private String transactionCode;
 
-    /** $column.columnComment */
-    @Excel(name = "订单号")
-    private String zhengshu;
-
-    /** $column.columnComment */
-    @Excel(name = "订单号")
-    private String baoxian;
-
-    /** $column.columnComment */
-    @Excel(name = "订单号")
-    private String qita;
-
-    /** $column.columnComment */
-    @Excel(name = "订单号")
-    private String lvben;
-
-    /** $column.columnComment */
-    @Excel(name = "订单号")
-    private String tiche;
+    /** 当前操作人 */
+    @Excel(name = "当前操作人")
     private String operator;
 
-    public String getOperator() {
-        return operator;
-    }
-
-    public void setOperator(String operator) {
-        this.operator = operator;
-    }
-
-    public void setId(Long id)
+    public void setId(Long id) 
     {
         this.id = id;
     }
@@ -108,50 +83,14 @@ public class ZyjrDaihou
     {
         return transactionCode;
     }
-    public void setZhengshu(String zhengshu) 
+    public void setOperator(String operator) 
     {
-        this.zhengshu = zhengshu;
+        this.operator = operator;
     }
 
-    public String getZhengshu() 
+    public String getOperator() 
     {
-        return zhengshu;
-    }
-    public void setBaoxian(String baoxian) 
-    {
-        this.baoxian = baoxian;
-    }
-
-    public String getBaoxian() 
-    {
-        return baoxian;
-    }
-    public void setQita(String qita) 
-    {
-        this.qita = qita;
-    }
-
-    public String getQita() 
-    {
-        return qita;
-    }
-    public void setLvben(String lvben) 
-    {
-        this.lvben = lvben;
-    }
-
-    public String getLvben() 
-    {
-        return lvben;
-    }
-    public void setTiche(String tiche) 
-    {
-        this.tiche = tiche;
-    }
-
-    public String getTiche() 
-    {
-        return tiche;
+        return operator;
     }
 
     @Override
@@ -162,11 +101,7 @@ public class ZyjrDaihou
             .append("opinion", getOpinion())
             .append("userId", getUserId())
             .append("transactionCode", getTransactionCode())
-            .append("zhengshu", getZhengshu())
-            .append("baoxian", getBaoxian())
-            .append("qita", getQita())
-            .append("lvben", getLvben())
-            .append("tiche", getTiche())
+            .append("operator", getOperator())
             .toString();
     }
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.jeethink.system.domain.*;
+import com.jeethink.system.domain.vo.UserVo;
 import com.jeethink.system.mapper.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,8 @@ public class ZyjrDaihouController extends BaseController
     private ZyjrDaihouTicheMapper zyjrDaihouTicheMapper;
     @Autowired
     private ZyjrDaihouZhengshuMapper zyjrDaihouZhengshuMapper;
+    @Autowired
+    private ZyjrDaihouMapper zyjrDaihouMapper;
 
     /**
      * 查询【请填写功能名称】列表
@@ -71,6 +74,20 @@ public class ZyjrDaihouController extends BaseController
         List<ZyjrDaihou> list = zyjrDaihouService.selectZyjrDaihouList(zyjrDaihou);
         ExcelUtil<ZyjrDaihou> util = new ExcelUtil<ZyjrDaihou>(ZyjrDaihou.class);
         return util.exportExcel(list, "daihou");
+    }
+
+    @PostMapping("/get/user")
+    public AjaxResult ajaxResult(@RequestBody UserVo userVo){
+        ZyjrDaihou zyjrDaihou=new ZyjrDaihou();
+            if(userVo!=null){
+                zyjrDaihou.setId(Long.valueOf(userVo.getId()));
+                zyjrDaihou.setUserId(userVo.getUserId());
+                zyjrDaihou.setOperator(userVo.getOperator());
+            }else{
+                zyjrDaihou.setId(Long.valueOf(userVo.getId()));
+            }
+        zyjrDaihouMapper.updateZyjrDaihous(zyjrDaihou);
+         return AjaxResult.success();
     }
 
 

@@ -47,6 +47,15 @@ public class ZyjrDaihouLvben
     private String fujian;
 
     private String daihou;
+    private String pic;
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
 
     public String getDaihou() {
         return daihou;

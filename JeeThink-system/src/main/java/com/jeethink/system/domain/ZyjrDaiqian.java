@@ -17,5 +17,6 @@ public class ZyjrDaiqian {
     private Double actualPrice;
     private Long dealersId;
     private Integer carInformation;
+    private String operator;
 
 }

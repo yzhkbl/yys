@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.jeethink.system.domain.ZyjrDaiqian;
+import com.jeethink.system.domain.vo.UserVo;
 import com.jeethink.system.mapper.ExamineMapper;
 import com.jeethink.system.mapper.ZyjrAllowBasicsMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -67,6 +68,12 @@ public class ZyjrAllowBasicsController extends BaseController
     {
         Map<String,Object> map=zyjrAllowBasicsService.selectByMap(transactionCode);
         return AjaxResult.success(map);
+    }
+    @PostMapping("/get/user")
+    public AjaxResult getuser(@RequestBody UserVo userVo){
+            examineMapper.updateByDaiqians(userVo);
+
+        return AjaxResult.success();
     }
 
 
