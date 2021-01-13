@@ -139,7 +139,7 @@ public class ZyjrGpsController extends BaseController
         zyjrGpsService.insertZyjrGps(zyjrGps);
         JSONArray jsonarray = JSONArray.fromObject(zyjrGps.getPic());
         System.out.println(jsonarray);
-        List<ZyjrPic> list = (List)JSONArray.toList(jsonarray, ZyjrDaihouBaoxian.class);
+        List<ZyjrPic> list = (List)JSONArray.toList(jsonarray, ZyjrPic.class);
         for (ZyjrPic pic : list) {
             pic.setGpsId(zyjrGps.getId().toString() );
             zyjrPicMapper.insertZyjrPic(pic);

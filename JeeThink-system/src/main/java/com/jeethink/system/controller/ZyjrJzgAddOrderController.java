@@ -113,6 +113,7 @@ public class ZyjrJzgAddOrderController extends BaseController
 
         ZyjrJzgAddOrder zyjrJzgAddOrder1 = zyjrJzgAddOrderMapper.selectZyjrJzgAddOrderByTransactionCode(zyjrJzgAddOrder.getTransactionCode());
         if(zyjrJzgAddOrder.getPic()!=null) {
+            System.err.println(zyjrJzgAddOrder.getPic());
             zyjrPicMapper.deleteZyjrPicById2(zyjrJzgAddOrder.getTransactionCode());
             JSONArray jsonarray = JSONArray.fromObject(zyjrJzgAddOrder.getPic());
             List<ZyjrPic> list = (List) JSONArray.toList(jsonarray, ZyjrPic.class);
