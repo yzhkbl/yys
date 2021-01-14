@@ -73,6 +73,8 @@ public class test extends BaseController {
     private ZyjrAllowApplicantMapper zyjrAllowApplicantMapper;
     @Autowired
     private ZyjrAllowContactsMapper zyjrAllowContactsMapper;
+    @Autowired
+    private ZyjrKaikaMapper zyjrKaikaMapper;
 
     private static String oCode = "sfzzm";
     private static String pCode = "sfzfm";
@@ -278,6 +280,22 @@ public class test extends BaseController {
             }
         }
         return AjaxResult.error("错误", result);
+    }
+    @ResponseBody
+    @PostMapping("php")
+    public AjaxResult ss(@RequestBody PhpVo phpVo){
+        String dataPublicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCFZnUVz07wuQfI5kf3uOaaJcpq*W3yQhJnIX2k-EKwKZaSkyuXutk0TXqwT-GXxIQJqmkjLup*HN7H1uF7JMfxl00AnncHB82LqUQKQwf5wcdDTNhvKLQtjRoLE3ry6ARoYHu5AkZPKW7sMM4o*UegPlSr45p4ZsK0iVdjqmgZfwIDAQAB";
+        String signPrivateKey = "MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAKOoelzwAU5Asw9zknkTYGvfZr0Ap6ZDL6NMSNRYZ2maVJd5xOfSRqTkEq1Ne*h2Qe3wCKdxo0SuCVWNjM-nd3af*fb4YcWdlDuHaA1s28I5hZtVp2sbF*nvgdeUwSz-X0hQGcaqVzcTKDH9l2XuMC**OEofyyosU2jvEIGdwqSNAgMBAAECgYAkojvxvc*tApKSbN5mt82nl-RZbmIYt4VcWmEbF0bevqsc1SccdVdW5a7AmE2aNY6AgnCNesR-RS3Vtr-Ech2tVfwMXypJsXN5hq0uyM6iDkE6kFhGL1zui72u9RQJvdB7CsNfEONIaFlX46MUOdF0fR2n-sGLMc1qzpj*L3k6QQJBAOJfQRF6ehE5d1Sm*7q9uObte1ubako89TSGZmCOk-3vpm9CRTey-18Ids98yMNg3Wy53M4oEzjwjdnnulX9PpUCQQC5E-NySYbigVCsO5Tjr*iAA1ykdGIgaRM45s2tvbMLYQdZYhnkPRjSj*Y7I915cp5klQ75T260InPYQqBkb2gZAkEAjRYtKcWZ*s5EL4B7eCHy8gqlTa0JjAd*FCSH-joexq-snX9CQLrRKtvNoPf28L6YgsE8e0jC4kQbROqGWj2iGQJBAKkXVUCBdL7UrsPs26b6PE1YxPdrbYt29Jz0Ic4ulro6t*AuBMHGIDugRRSbO*mNkrEKjlew-s*M*pIGrUuVjWECQQC3qMemXCmqp7lAaSqYy9Rk8HNVgEeDqJfhcIS4SrRH0DSExPE9yfhadaiC4IIYmmK5L*2V3dxIUI7KXbeO*ptz";
+//		String assurerNo = "ceshi001";
+//		String bankType = "ICBC";
+//		String busiCode = "0001";
+//		String platNo = "zajk";
+        String assurerNo = "S36029951";
+        String bankType = "ICBC";
+        String busiCode = phpVo.getBusiCode();
+        String platNo = "zyhzjg";
+        JSONObject jsons = encryptData(phpVo.getJson(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo, phpVo.getOrder());
+        return  AjaxResult.success(jsons);
     }
 
 
@@ -524,6 +542,10 @@ public class test extends BaseController {
     @ResponseBody
     @GetMapping("kaika")
     public AjaxResult kaika(String transactionCode){
+       ZyjrKaika kaika= zyjrKaikaMapper.selectZyjrKaikaById(transactionCode);
+       if(kaika!=null&&kaika.getCount()!=null){
+           return AjaxResult.success("操作成功",kaika.getCount());
+       }
             ZyjrBusiness business=b.selectById(transactionCode);
             ZyjrBorrower borrower = o.selectById(transactionCode);
             ZyjrAllowApplicant applicant=zyjrAllowApplicantMapper.selectById(transactionCode);
@@ -660,8 +682,27 @@ public class test extends BaseController {
         zyjrCard.setCstsign(1);
        // zyjrCard.setAlmebno();
       //  zyjrCard.setOutcardno1();
-        return AjaxResult.success(zyjrCard);
+        JSONObject json2 = new JSONObject().fromObject(zyjrCard);
+        return AjaxResult.success("操作成功",json2.toString());
     }
+
+    @ResponseBody
+    @PostMapping("card")
+    public AjaxResult kaika(@RequestBody ZyjrCard zyjrcard){
+        ZyjrKaika a=zyjrKaikaMapper.selectZyjrKaikaById(zyjrcard.getTransactionCode());
+        JSONObject json2 = new JSONObject().fromObject(zyjrcard);
+        if(a!=null){
+            a.setCount(json2.toString());
+            zyjrKaikaMapper.updateZyjrKaika(a);
+            return  AjaxResult.success();
+        }
+        ZyjrKaika b=new ZyjrKaika();
+        b.setTransactionCode(zyjrcard.getTransactionCode());
+        b.setCount(json2.toString());
+        zyjrKaikaMapper.insertZyjrKaika(b);
+        return  AjaxResult.success();
+    }
+
 
     public static void main(String[] args) {
         String a="123456789";

@@ -66,9 +66,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="selectByT" parameterType="com.jeethink.system.domain.ZyjrDaiqian" resultMap="ZyjrAllowBasicsResult2">
-        select a.transaction_code,b.dealers_id from zyjr_daiqian a
-        left join zyjr_allow_basics b on a.transaction_code=b.transaction_code
-        left join zyjr_car c on b.dealers_id=c.id
+        select a.transaction_code,a.dealers_id,c.id
+        from zyjr_allow_basics a
+        left join zyjr_daiqian b on a.transaction_code=b.transaction_code
+        left join zyjr_car c on a.dealers_id=c.id
         where a.transaction_code=#{transactionCode}
     </select>
         

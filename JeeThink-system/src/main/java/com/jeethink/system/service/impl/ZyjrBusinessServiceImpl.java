@@ -76,7 +76,7 @@ public class ZyjrBusinessServiceImpl implements IZyjrBusinessService
     public int updateZyjrBusiness(ZyjrBusiness zyjrBusiness)
     {
         zyjrBusiness.setUpdateBy(String.valueOf(SecurityUtils.getUserId()));
-        zyjrBusiness.setOperator(SecurityUtils.getUsername());
+        zyjrBusiness.setOperator(SecurityUtils.getNickName());
         return zyjrBusinessMapper.updateZyjrBusiness(zyjrBusiness);
     }
 

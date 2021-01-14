@@ -141,15 +141,28 @@ public class ZyjrDaiqianAccoutController extends BaseController
         return AjaxResult.success("操作成功",null);
     }
 
-    @GetMapping("getInfo/{transactionCode}")
-    public AjaxResult apqp(@PathVariable("transactionCode") String transactionCode){
+    @GetMapping("getInfo/{transactionCode}/{id}")
+    public AjaxResult apqp(@PathVariable("transactionCode") String transactionCode,@PathVariable("id") Long id){
             ZyjrDaiqianAccout a=zyjrDaiqianAccoutService.selectZyjrDaiqianAccoutByIds(transactionCode);
-            ZyjrCarAccount b=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountId());
-            ZyjrCarAccount c=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountOne());
-            Map<String,Object> map=new HashMap<>();
-            map.put("Account",b);
-            map.put("Account2",c);
-        return AjaxResult.success(map);
+            if(a!=null){
+                ZyjrCarAccount b=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountId());
+                ZyjrCarAccount c=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountOne());
+                Map<String,Object> map=new HashMap<>();
+                map.put("Account",b);
+                map.put("Account2",c);
+                return AjaxResult.success(map);
+            }
+            ZyjrDaiqian b=zyjrAllowBasicsMapper.selectByT(transactionCode);
+            if(b!=null){
+                ZyjrCarAccount c=zyjrCarAccountMapper.selectZyjrCarAccountById(b.getDealersId());
+                return AjaxResult.success(c);
+            }
+        if(id!=null){
+            ZyjrCarAccount c=zyjrCarAccountMapper.selectZyjrCarAccountById(id);
+            return AjaxResult.success(c);
+        }
+
+           return AjaxResult.success();
     }
 
 
@@ -157,7 +170,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
 
     @PostMapping("update")
     public AjaxResult insert(ZyjrDaiqianAccout zyjrDaiqianAccout){
-        DqVo a=examineMapper.selectDQ(zyjrDaiqianAccout.getTransactionCode());
+        DqVo a=examineMapper.selectDQ3(zyjrDaiqianAccout.getTransactionCode());
         ZyjrGps gps=new ZyjrGps();
         ZyjrInsurance zyjrInsurance=new ZyjrInsurance();
         if(a!=null){
