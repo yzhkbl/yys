@@ -59,6 +59,8 @@ public interface ExamineMapper {
 
     Linkman selectZyjrCarByLinkman(Long id);
     DqVo selectDQ(String transactionCode);
+    DqVo selectDQ2(String transactionCode);
+    DqVo selectDQ3(String transactionCode);
 
     List<orderVo>findOrder(Long userId);
 

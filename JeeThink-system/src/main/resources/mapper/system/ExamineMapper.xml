@@ -109,10 +109,25 @@
     <select id="selectDQ" resultType="com.jeethink.system.domain.vo.DqVo" >
 
 select a.state statea,b.state stateb,c.state statec,a.id insurance,b.id gps,c.id daiqian
-from zyjr_borrower d
-left join zyjr_insurance a on a.transaction_code=d.transaction_code
-LEFT JOIN zyjr_gps b on d.transaction_code=b.transaction_code
-LEFT JOIN zyjr_daiqian_accout c on d.transaction_code=c.transaction_code where d.transaction_code=#{transactionCode}
+form zyjr_insurance a
+LEFT JOIN zyjr_gps b on a.transaction_code=b.transaction_code
+LEFT JOIN zyjr_daiqian_accout c on a.transaction_code=c.transaction_code where a.transaction_code=#{transactionCode}
+    </select>
+
+    <select id="selectDQ2" resultType="com.jeethink.system.domain.vo.DqVo" >
+
+select a.state statea,b.state stateb,c.state statec,a.id insurance,b.id gps,c.id daiqian
+form zyjr_gps b
+LEFT JOIN zyjr_insurance a on a.transaction_code=b.transaction_code
+LEFT JOIN zyjr_daiqian_accout c on a.transaction_code=c.transaction_code where a.transaction_code=#{transactionCode}
+    </select>
+
+    <select id="selectDQ3" resultType="com.jeethink.system.domain.vo.DqVo" >
+
+select a.state statea,b.state stateb,c.state statec,a.id insurance,b.id gps,c.id daiqian
+form zyjr_daiqian_accout c
+LEFT JOIN zyjr_gps b on a.transaction_code=b.transaction_code
+LEFT JOIN zyjr_daiqian_accout a on a.transaction_code=c.transaction_code where a.transaction_code=#{transactionCode}
     </select>
     <insert id="insertStart" parameterType="com.jeethink.system.domain.ZyjrStartPage">
         insert into zyjr_start_page

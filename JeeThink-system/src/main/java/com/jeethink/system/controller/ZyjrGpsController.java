@@ -126,12 +126,12 @@ public class ZyjrGpsController extends BaseController
 
     @PostMapping("insert/pic")
     public AjaxResult pic(ZyjrGps zyjrGps){
-        DqVo dq=examineMapper.selectDQ(zyjrGps.getTransactionCode());
+        DqVo dq=examineMapper.selectDQ2(zyjrGps.getTransactionCode());
         if(dq!=null&&dq.getGps()!=null){
             zyjrPicMapper.deleteZyjrPicById(dq.getGps());
                 JSONArray jsonarray = JSONArray.fromObject(zyjrGps.getPic());
                 System.out.println(jsonarray);
-                List<ZyjrPic> list = (List)JSONArray.toList(jsonarray, ZyjrDaihouBaoxian.class);
+                List<ZyjrPic> list = (List)JSONArray.toList(jsonarray, ZyjrPic.class);
                 for (ZyjrPic pic : list) {
                     pic.setGpsId(dq.getGps().toString());
                     zyjrPicMapper.insertZyjrPic(pic);
@@ -142,7 +142,7 @@ public class ZyjrGpsController extends BaseController
         zyjrGpsService.insertZyjrGps(zyjrGps);
         JSONArray jsonarray = JSONArray.fromObject(zyjrGps.getPic());
         System.out.println(jsonarray);
-        List<ZyjrPic> list = (List)JSONArray.toList(jsonarray, ZyjrDaihouBaoxian.class);
+        List<ZyjrPic> list = (List)JSONArray.toList(jsonarray, ZyjrPic.class);
         for (ZyjrPic pic : list) {
             pic.setGpsId(zyjrGps.getId().toString() );
             zyjrPicMapper.insertZyjrPic(pic);

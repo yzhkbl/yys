@@ -56,6 +56,8 @@ ZyjrCarController extends BaseController {
     private SysFileInfoMapper sysFileInfoMapper;
     @Autowired
     private ExamineMapper examineMapper;
+    @Autowired
+    private ZyjrCarAccountMapper zyjrCarAccountMapper;
 
 
     /**
@@ -118,8 +120,15 @@ ZyjrCarController extends BaseController {
 
     @GetMapping(value = "/getAccount/{id}")
     public AjaxResult getAccount(@PathVariable("id") Long id) {
-       ZyjrCarAccount zyjrCarAccount= zyjrCarAccountService.selectZyjrCarAccountById(id);
+        ZyjrCarAccount zyjrCarAccounts=new ZyjrCarAccount();
+        zyjrCarAccounts.setZyjrCarId(id.toString());
+        List<ZyjrCarAccount> zyjrCarAccount= zyjrCarAccountService.selectZyjrCarAccountList(zyjrCarAccounts);
+        return AjaxResult.success(zyjrCarAccount);
+    }
 
+    @GetMapping(value = "/getAccountInfo/{id}")
+    public AjaxResult getAccountInfo(@PathVariable("id") String id) {
+        ZyjrCarAccount zyjrCarAccount= zyjrCarAccountMapper.selectZyjrCarAccountByStringId(id);
         return AjaxResult.success(zyjrCarAccount);
     }
 
@@ -297,18 +306,7 @@ a.setType(storeInformation.getType());
         if (zyjrCarAccount == null) {
             return AjaxResult.error("参数没传过来");
         }
-        ZyjrCarAccount zyjrCarAccounts=new ZyjrCarAccount();
-        zyjrCarAccounts.setZyjrCarId(zyjrCarAccount.getZyjrCarId());
-        List<ZyjrCarAccount> zyjrCarAccounts1=zyjrCarAccountService.selectZyjrCarAccountList(zyjrCarAccounts);
-        if(zyjrCarAccounts1.size()>0){
 
-            int size=zyjrCarAccountService.updateZyjrCarAccount(zyjrCarAccount);
-            if (size > 0) {
-                Map<String, Object> map = new HashMap<>();
-                map.put("shopId", zyjrCarAccount.getZyjrCarId());
-                return AjaxResult.success(map);
-            }
-        }
         int ceshi = zyjrCarAccountService.insertZyjrCarAccount(zyjrCarAccount);
         if (ceshi > 0) {
             Map<String, Object> map = new HashMap<>();
@@ -316,7 +314,7 @@ a.setType(storeInformation.getType());
             return AjaxResult.success(map);
         }
 
-        return AjaxResult.error();
+        return AjaxResult.success();
     }
 
     @GetMapping("/delete/{id}")

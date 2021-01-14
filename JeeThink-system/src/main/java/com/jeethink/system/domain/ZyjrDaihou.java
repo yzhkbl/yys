@@ -54,6 +54,78 @@ public class ZyjrDaihou
     @Excel(name = "订单号")
     private String tiche;
     private String operator;
+    private String userName;
+    private String team;
+    private Double loanAmount;
+    private Integer repaymentTerm;
+    private Double actualPrice;
+    private Long dealersId;
+    private Integer carInformation;
+    private String carType;
+
+    public String getCarType() {
+        return carType;
+    }
+
+    public void setCarType(String carType) {
+        this.carType = carType;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getTeam() {
+        return team;
+    }
+
+    public void setTeam(String team) {
+        this.team = team;
+    }
+
+    public Double getLoanAmount() {
+        return loanAmount;
+    }
+
+    public void setLoanAmount(Double loanAmount) {
+        this.loanAmount = loanAmount;
+    }
+
+    public Integer getRepaymentTerm() {
+        return repaymentTerm;
+    }
+
+    public void setRepaymentTerm(Integer repaymentTerm) {
+        this.repaymentTerm = repaymentTerm;
+    }
+
+    public Double getActualPrice() {
+        return actualPrice;
+    }
+
+    public void setActualPrice(Double actualPrice) {
+        this.actualPrice = actualPrice;
+    }
+
+    public Long getDealersId() {
+        return dealersId;
+    }
+
+    public void setDealersId(Long dealersId) {
+        this.dealersId = dealersId;
+    }
+
+    public Integer getCarInformation() {
+        return carInformation;
+    }
+
+    public void setCarInformation(Integer carInformation) {
+        this.carInformation = carInformation;
+    }
 
     public String getOperator() {
         return operator;
