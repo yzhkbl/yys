@@ -131,7 +131,7 @@ public class ZyjrGpsController extends BaseController
             zyjrPicMapper.deleteZyjrPicById(dq.getGps());
                 JSONArray jsonarray = JSONArray.fromObject(zyjrGps.getPic());
                 System.out.println(jsonarray);
-                List<ZyjrPic> list = (List)JSONArray.toList(jsonarray, ZyjrDaihouBaoxian.class);
+                List<ZyjrPic> list = (List)JSONArray.toList(jsonarray, ZyjrPic.class);
                 for (ZyjrPic pic : list) {
                     pic.setGpsId(dq.getGps().toString());
                     zyjrPicMapper.insertZyjrPic(pic);
