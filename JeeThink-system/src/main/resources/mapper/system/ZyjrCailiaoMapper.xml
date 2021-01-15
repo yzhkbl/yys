@@ -18,14 +18,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectZyjrCailiaoList" parameterType="ZyjrCailiao" resultMap="ZyjrCailiaoResult">
-        <include refid="selectZyjrCailiaoVo"/>
-        <where>  
-            <if test="state != null  and state != ''"> and state = #{state}</if>
-            <if test="opinion != null  and opinion != ''"> and opinion = #{opinion}</if>
-            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
-            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
-            <if test="operator != null  and operator != ''"> and operator = #{operator}</if>
-        </where>
+        select a.transaction_code,e.id, e.operator,e.user_id,c.user_name,d.car_type,d.team,f.loan_amount,f.repayment_term,f.actual_price,d.car_information
+        from zyjr_daihou a
+         left join zyjr_cailiao e on a.transaction_code=e.transaction_code
+        left join zyjr_borrower c on a.transaction_code=c.transaction_code
+        left join zyjr_business d on a.transaction_code=d.transaction_code
+        left join zyjr_car_loan f on a.transaction_code=f.transaction_code
+        where a.state="1"
     </select>
     
     <select id="selectZyjrCailiaoById" parameterType="Long" resultMap="ZyjrCailiaoResult">

@@ -15,16 +15,32 @@ public class Test2 {
     private static volatile String tokenId;
     private static MerchantServer ms = new MerchantServer();
     //可以使用正式环境接口地址  LoginApi(正式环境)   SandboxLoginApi(测试环境)
-    private static String loginName="LoginApi";
+    private static String loginName="SandboxLoginApi";//LoginApi
     //接口地址(apiName传以下参数)---
     //	贷前策略地址：strategyApi(正式环境)		SandboxstrategyApi(测试环境)
     //	验证策略地址：verificationApi (正式地址)	SandboxverApi(测试地址)
     //注：1.测试过程可以使用正式地址
     //   2.apiName环境要保持与loginName环境一致,正式都是正式、测试都是测试,不可以交叉使用.
     //   3.在调用测试环境时需要事先联系百融技术并提供apicode及策略编号（策略编号请查看邮件里的策略配置表）
-    private static String apiName= "verificationApi";
+    private static String apiName= "SandboxverApi";//verificationApi
     //验证请使用以下代码
     public static void main(String[] args) {
+        JSONObject jsonData = new JSONObject();
+        JSONObject reqData = new JSONObject();
+        jsonData.put("apiName",apiName);
+        jsonData.put("tokenid","zyrzWEB_67005A073406B38369C9B9B50BFD767B");
+        //验证的策略编号(请查看策略配置表)
+        reqData.put("conf_id","MCP0034436");
+        //请求参数 id cell name (如产品文档有其他必传参数按照产品文档为主)
+        reqData.put("id","411521199801206410");
+        reqData.put("cell","17596567126");
+        reqData.put("name","杨玉山");
+        jsonData.put("reqData",reqData);
+        System.out.println("请求参数:"+jsonData.toString());
+        String result = getBrData(jsonData.toString());
+        System.out.println("返回值:"+result);
+    }
+    public static void ceshis(){
         JSONObject jsonData = new JSONObject();
         JSONObject reqData = new JSONObject();
         jsonData.put("apiName",apiName);

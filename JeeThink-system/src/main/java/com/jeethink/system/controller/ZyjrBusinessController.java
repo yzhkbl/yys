@@ -104,7 +104,11 @@ public class ZyjrBusinessController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody ZyjrBusiness zyjrBusiness)
     {
-        return toAjax(zyjrBusinessService.updateZyjrBusiness(zyjrBusiness));
+        int a=zyjrBusinessService.updateZyjrBusiness(zyjrBusiness);
+        if(a==999){
+
+        }
+        return toAjax(a);
     }
 
     @GetMapping("edit")

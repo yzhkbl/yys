@@ -238,12 +238,17 @@ LEFT JOIN zyjr_daiqian_accout a on a.transaction_code=c.transaction_code where a
         update zyjr_daiqian set user_id=#{userId},operator=#{operator} where id=#{id}
     </update>
 
+
     <update id="updateByCode">
         update zyjr_start_page set private_code=#{privateCode} where transaction_code=#{transactionCode}
     </update>
 
     <update id="updateByDaiqian">
         update zyjr_daiqian set state=#{state},opinion=#{opinion} where transaction_code=#{transactionCode}
+    </update>
+
+    <update id="updateByDaihou">
+         update zyjr_daihou set state=#{state},opinion=#{opinion} where transaction_code=#{transactionCode}
     </update>
 
     <update id="updateRelation">

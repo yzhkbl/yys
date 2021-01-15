@@ -78,6 +78,13 @@ public class test extends BaseController {
     private static String pCode = "sfzfm";
     private static String zCode = "zxsqs";
 
+    @GetMapping("code2")
+    @ResponseBody
+    public AjaxResult fi2nd() {
+        Test2.ceshis();
+    return AjaxResult.success();
+    }
+
     @ApiOperation("查询参数列表")
     @PostMapping("code")
     @ResponseBody

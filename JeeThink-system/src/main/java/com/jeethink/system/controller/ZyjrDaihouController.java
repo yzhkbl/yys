@@ -50,6 +50,10 @@ public class ZyjrDaihouController extends BaseController
     private ZyjrDaihouZhengshuMapper zyjrDaihouZhengshuMapper;
     @Autowired
     private ZyjrDaihouMapper zyjrDaihouMapper;
+    @Autowired
+    private ExamineMapper examineMapper;
+    @Autowired
+    private ZyjrCailiaoMapper zyjrCailiaoMapper;
 
     /**
      * 查询【请填写功能名称】列表
@@ -162,6 +166,22 @@ public class ZyjrDaihouController extends BaseController
     public AjaxResult g(ZyjrDaihou zyjrDaihou)
     {
         return toAjax(zyjrDaihouService.updateZyjrDaihou(zyjrDaihou));
+    }
+
+    @PostMapping("go")
+    public AjaxResult sg(ZyjrDaihou zyjrDaihou)
+    {
+        if(zyjrDaihou!=null&&zyjrDaihou.getState().equals("1")){
+            ZyjrCailiao zyjrCailiao=new ZyjrCailiao();
+            zyjrCailiao.setTransactionCode(zyjrDaihou.getTransactionCode());
+            List<ZyjrCailiao> zyjrCailiaos = zyjrCailiaoMapper.selectZyjrCailiaoList(zyjrCailiao);
+            if(zyjrCailiaos.size()<1){
+                zyjrCailiaoMapper.insertZyjrCailiao(zyjrCailiao);
+            }
+
+        }
+        examineMapper.updateByDaihou(zyjrDaihou);
+        return AjaxResult.success();
     }
 
     /**
