@@ -90,7 +90,6 @@ ZyjrCarController extends BaseController {
 
         List<carVo> list = examineMapper.selectZyjrCarLists(createBy);
 
-        System.err.println(list);
         return AjaxResult.success(list);
     }
 
@@ -248,7 +247,7 @@ a.setType(storeInformation.getType());
                     if (b) {
                         return AjaxResult.success(b);
                     } else {
-                        return AjaxResult.error("路径删除成功，但图片删除失败", b);
+                        return AjaxResult.success("路径删除成功，但图片删除失败", b);
                     }
                 }
             }

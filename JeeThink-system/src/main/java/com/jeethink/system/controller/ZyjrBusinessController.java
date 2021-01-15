@@ -106,7 +106,10 @@ public class ZyjrBusinessController extends BaseController
     {
         int a=zyjrBusinessService.updateZyjrBusiness(zyjrBusiness);
         if(a==999){
-
+            AjaxResult json=new AjaxResult();
+                    json.put("code", 400);
+            json.put("msg", "手慢了，下次再快点！！！");
+        return json;
         }
         return toAjax(a);
     }

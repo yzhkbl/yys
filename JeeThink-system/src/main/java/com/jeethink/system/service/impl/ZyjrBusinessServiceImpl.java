@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.jeethink.common.utils.DateUtils;
 import com.jeethink.common.utils.SecurityUtils;
+import com.jeethink.common.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,17 +76,20 @@ public class ZyjrBusinessServiceImpl implements IZyjrBusinessService
     @Override
     public int updateZyjrBusiness(ZyjrBusiness zyjrBusiness)
     {
-
-        if(zyjrBusiness!=null&&zyjrBusiness.getId()!=null){
             ZyjrBusiness business = zyjrBusinessMapper.selectZyjrBusinessById(zyjrBusiness.getId());
-            if(business!=null&&business.getUpdateBy()!=null){
-                zyjrBusinessMapper.updateZyjrBusiness(zyjrBusiness);
+            if(StringUtils.isNotEmpty(business.getUpdateBy())||business.getUpdateBy()==null){
+                if(zyjrBusiness.getCreateBy().equals(business.getUpdateBy())){
+                    return 1;
+                }
                 return 999;
+            }else{
+                zyjrBusiness.setUpdateBy(String.valueOf(SecurityUtils.getUserId()));
+                zyjrBusiness.setOperator(SecurityUtils.getNickName());
+                return zyjrBusinessMapper.updateZyjrBusiness(zyjrBusiness);
             }
-        }
-        zyjrBusiness.setUpdateBy(String.valueOf(SecurityUtils.getUserId()));
-        zyjrBusiness.setOperator(SecurityUtils.getNickName());
-        return zyjrBusinessMapper.updateZyjrBusiness(zyjrBusiness);
+
+
+
     }
 
     /**

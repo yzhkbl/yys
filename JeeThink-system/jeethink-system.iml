@@ -193,6 +193,5 @@
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-jdbc:2.1.17.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.zaxxer:HikariCP:3.2.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:5.1.18.RELEASE" level="project" />
-    <orderEntry type="library" name="bsApi-3.6.2-shaded" level="project" />
   </component>
 </module>

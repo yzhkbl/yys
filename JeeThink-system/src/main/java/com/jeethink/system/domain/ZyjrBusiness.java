@@ -199,6 +199,8 @@ public class ZyjrBusiness extends BaseEntity
             .append("carType", getCarType())
             .append("userId", getUserId())
             .append("orderState", getOrderState())
+                .append("updateBy",getUpdateBy())
+                .append("createBy",getCreateBy())
                 .append("transactionCode", getTransactionCode())
                 .append("operator",getOperator())
                 .append("falseOperator",getFalseOperator())
