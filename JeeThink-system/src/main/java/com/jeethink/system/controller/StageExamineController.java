@@ -73,7 +73,7 @@ public class StageExamineController extends BaseController {
     }
 
     @GetMapping("/grant")
-    public TableDataInfo findGrant(){
+    public TableDataInfo findGrant(ZyjrGrant q){
         startPage();
         List<ZyjrGrant>list = stageExamineService.grant();
         return getDataTable(list);
@@ -85,7 +85,7 @@ public class StageExamineController extends BaseController {
     }
 
     @GetMapping("/allow")
-    public TableDataInfo findAllow (){
+    public TableDataInfo findAllow (ZyjrGrant q){
         startPage();
         List<ZyjrGrant>list = stageExamineService.findAllow();
         return getDataTable(list);
