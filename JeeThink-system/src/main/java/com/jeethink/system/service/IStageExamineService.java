@@ -32,4 +32,8 @@ public interface IStageExamineService {
     int addGrantOpinion(ZyjrGrantOpinion q);
     ZyjrGrantOpinion findGrantOpinion(String transactionCode);
     List<ZyjrGrant> grant();
+
+    Map<String,Object>findByGrant(String transactionCode);
+
+    List<ZyjrGrant>findAllow();
 }

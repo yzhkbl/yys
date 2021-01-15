@@ -58,8 +58,8 @@
         where id = #{id}
     </update>
 
-    <delete id="deleteZyjrAllowOpinionById" parameterType="Long">
-        delete from zyjr_allow_opinion where id = #{id}
+    <delete id="deleteZyjrAllowOpinionById">
+        delete from zyjr_allow_opinion where transaction_code = #{transactionCode}
     </delete>
 
     <delete id="deleteZyjrAllowOpinionByIds" parameterType="String">

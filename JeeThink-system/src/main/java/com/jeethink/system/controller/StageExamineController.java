@@ -78,4 +78,16 @@ public class StageExamineController extends BaseController {
         List<ZyjrGrant>list = stageExamineService.grant();
         return getDataTable(list);
     }
+
+    @GetMapping("/grant/basic")
+    public AjaxResult findByGrant(String transactionCode){
+        return AjaxResult.success(stageExamineService.findByGrant(transactionCode));
+    }
+
+    @GetMapping("/allow")
+    public TableDataInfo findAllow (){
+        startPage();
+        List<ZyjrGrant>list = stageExamineService.findAllow();
+        return getDataTable(list);
+    }
 }
