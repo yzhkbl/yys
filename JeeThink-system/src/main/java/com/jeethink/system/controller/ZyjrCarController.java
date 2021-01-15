@@ -244,11 +244,7 @@ a.setType(storeInformation.getType());
 
 
                     boolean b = FileUtils.deleteFile(paths + "/20" + path);
-                    if (b) {
-                        return AjaxResult.success();
-                    } else {
-                        return AjaxResult.success("路径删除成功，但图片删除失败");
-                    }
+
                 }
             }
 
