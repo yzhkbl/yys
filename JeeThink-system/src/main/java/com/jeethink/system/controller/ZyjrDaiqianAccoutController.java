@@ -142,7 +142,11 @@ public class ZyjrDaiqianAccoutController extends BaseController
     }
 
     @GetMapping("getInfo/{transactionCode}/{id}")
-    public AjaxResult apqp(@PathVariable("transactionCode") String transactionCode,@PathVariable("id") Long id){
+    public AjaxResult apqp(@PathVariable("transactionCode") String transactionCode,@PathVariable("id") String id){
+        if(id!=null){
+            ZyjrCarAccount c=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(id);
+            return AjaxResult.success(c);
+        }
             ZyjrDaiqianAccout a=zyjrDaiqianAccoutService.selectZyjrDaiqianAccoutByIds(transactionCode);
             if(a!=null){
                 ZyjrCarAccount b=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountId());
@@ -157,10 +161,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
                 ZyjrCarAccount c=zyjrCarAccountMapper.selectZyjrCarAccountById(b.getDealersId());
                 return AjaxResult.success(c);
             }
-        if(id!=null){
-            ZyjrCarAccount c=zyjrCarAccountMapper.selectZyjrCarAccountById(id);
-            return AjaxResult.success(c);
-        }
+
 
            return AjaxResult.success();
     }

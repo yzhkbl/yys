@@ -58,7 +58,7 @@
          left join zyjr_car_loan d on d.transaction_code=a.transaction_code
          left join zyjr_borrower b on b.transaction_code=d.transaction_code
          left join zyjr_repeat_opinion c on c.transaction_code=b.transaction_code
-         where a.transaction_code in (select transaction_code from zyjr_allow_opinion where approval_type=1 and c.approval_type!=1)
+         where a.transaction_code in (select transaction_code from zyjr_allow_opinion where approval_type=1 and c.approval_type!=1 or c.approval_type is null)
     </select>
     <select id="findGrant" resultType="com.jeethink.system.domain.vo.ZyjrGrant">
         select a.id, a.team,a.operator,a.update_by,a.false_operator,a.false_operator_id, a.car_information, d.actual_price, d.loan_amount, d.repayment_term, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name as name,c.approval_type
@@ -78,5 +78,21 @@
         select id, advise, approval_type, transaction_code, user_id
         from zyjr_grant_opinion
         where transaction_code=#{transactionCode}
+    </select>
+    <select id="findByGrant" resultType="com.jeethink.system.domain.vo.GrantVo">
+        select a.user_id,a.transaction_code,a.user_name,a.id_card,a.bank_card_no,a.phone_number,b.fund_side
+        c.actual_price,c.loan_amount,c.repayment_term,c.interest_rate,c.deposit
+         from zyjr_borrower a
+         left join zyjr_start_page b on b.transaction_code=a.transaction_code
+         left join zyjr_car_loan c on c.transaction_code=b.transaction_code
+         where a.transaction_code=#{transaction_code}
+    </select>
+    <select id="findAllow" resultType="com.jeethink.system.domain.vo.ZyjrGrant">
+        SELECT a.id, a.team,a.operator,a.update_by,a.false_operator,a.false_operator_id, a.car_information, d.actual_price, d.loan_amount, d.repayment_term, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name AS NAME,c.approval_type
+         FROM zyjr_business a
+         LEFT JOIN zyjr_borrower b ON b.transaction_code=a.transaction_code
+         LEFT JOIN zyjr_car_loan d ON d.transaction_code=b.transaction_code
+         LEFT JOIN zyjr_allow_opinion c ON c.transaction_code=d.transaction_code
+         WHERE c.approval_type!=1 OR c.approval_type IS NULL
     </select>
 </mapper>

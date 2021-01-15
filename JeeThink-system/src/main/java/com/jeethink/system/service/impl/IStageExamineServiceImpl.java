@@ -40,14 +40,16 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     private ZyjrPhotoLenderMapper zyjrPhotoLenderMapper;
     @Autowired
     private SysFileInfoMapper sysFileInfoMapper;
-    /**@Autowired
-    private ZyjrGrantImage zyjrGrantImage;
     @Autowired
-    private ZyjrGrantInstalments zyjrGrantInstalments;
+    private ZyjrGrantImageMapper zyjrGrantImageMapper;
     @Autowired
-    private ZyjrGrantPhoto zyjrGrantPhoto;
+    private ZyjrGrantInstalmentsMapper zyjrGrantInstalmentsMapper;
     @Autowired
-    private ZyjrGrantVisit zyjrGrantVisit;*/
+    private ZyjrGrantPhotoMapper zyjrGrantPhotoMapper;
+    @Autowired
+    private ZyjrGrantVisitMapper zyjrGrantVisitMapper;
+    @Autowired
+    private ZyjrAllowOpinionMapper zyjrAllowOpinionMapper;
 
 
     @Override
@@ -111,45 +113,56 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         ZyjrPhotoCredit zyjrPhotoCredit = zyjrPhotoCreditMapper.selectZyjrPhotoCreditById(userId, transactionCode);
         ZyjrPhotoHouse zyjrPhotoHouse = zyjrPhotoHouseMapper.selectZyjrPhotoHouseById(userId, transactionCode);
         ZyjrPhotoLender zyjrPhotoLender = zyjrPhotoLenderMapper.selectZyjrPhotoLenderById(userId, transactionCode);
-        if (zyjrPhotoCar != null && zyjrPhotoCredit != null && zyjrPhotoHouse != null && zyjrPhotoLender != null) {
+        List<String> lists=new ArrayList<>();
+        if (zyjrPhotoCar != null) {
             /*map.put("photoCar", sysFileInfoMapper.photoCar(zyjrPhotoCar.getId()));*/
        /*     map.put("photoCredit", sysFileInfoMapper.photoCredit(zyjrPhotoCredit.getId()));
             map.put("photoHouse", sysFileInfoMapper.photoHouse(zyjrPhotoHouse.getId()));
             map.put("photoLender", sysFileInfoMapper.photoLender(zyjrPhotoLender.getId()));*/
 
             List<SysFileInfo> a = sysFileInfoMapper.photoCar(zyjrPhotoCar.getId());
-
-            List<SysFileInfo> b=sysFileInfoMapper.photoCredit(zyjrPhotoCredit.getId());
-            List<SysFileInfo> c=sysFileInfoMapper.photoHouse(zyjrPhotoHouse.getId());
-            List<SysFileInfo> d=sysFileInfoMapper.photoLender(zyjrPhotoLender.getId());
-
-
-            List<String> lists=new ArrayList<>();
-
             for (SysFileInfo sysFileInfo : a) {
                 lists.add(sysFileInfo.getFilePath());
                 map.put(sysFileInfo.getFileName(), sysFileInfo.getFilePath());
             }
-            for (SysFileInfo sysFileInfo : b) {
-                lists.add(sysFileInfo.getFilePath());
-                map.put(sysFileInfo.getFileName(), sysFileInfo.getFilePath());
-            }
-            for (SysFileInfo sysFileInfo : c) {
-                lists.add(sysFileInfo.getFilePath());
-                map.put(sysFileInfo.getFileName(), sysFileInfo.getFilePath());
-            }
-            for (SysFileInfo sysFileInfo : d) {
-                lists.add(sysFileInfo.getFilePath());
-                map.put(sysFileInfo.getFileName(), sysFileInfo.getFilePath());
+        }
+          if(zyjrPhotoCredit!=null){  List<SysFileInfo> b=sysFileInfoMapper.photoCredit(zyjrPhotoCredit.getId());
+              for (SysFileInfo sysFileInfo : b) {
+                  lists.add(sysFileInfo.getFilePath());
+                  map.put(sysFileInfo.getFileName(), sysFileInfo.getFilePath());
+              }
+          }
+           if(zyjrPhotoHouse!=null){
+               List<SysFileInfo> c=sysFileInfoMapper.photoHouse(zyjrPhotoHouse.getId());
+               for (SysFileInfo sysFileInfo : c) {
+                   lists.add(sysFileInfo.getFilePath());
+                   map.put(sysFileInfo.getFileName(), sysFileInfo.getFilePath());
+               }
+           }
+            if(zyjrPhotoLender!=null){
+                List<SysFileInfo> d=sysFileInfoMapper.photoLender(zyjrPhotoLender.getId());
+                for (SysFileInfo sysFileInfo : d) {
+                    lists.add(sysFileInfo.getFilePath());
+                    map.put(sysFileInfo.getFileName(), sysFileInfo.getFilePath());
+                }
             }
             map.put("pic", lists);
-        }
         return map;
     }
 
     @Override
     public int addOpinion(ZyjrRepeatOpinion q) {
-        return examineDao.insertOpinion(q);
+        ZyjrRepeatOpinion zyjrRepeatOpinion = findOpinion(q.getTransactionCode());
+        //if(zyjrRepeatOpinion!=null&&zyjrAllowOpinionMapper.selectZyjrAllowOpinionById(q.getTransactionCode()).getApprovalType()==1){
+
+        //}
+        int count = examineDao.insertOpinion(q);
+        if(zyjrRepeatOpinion!=null&&zyjrRepeatOpinion.getApprovalType()==2){
+            ZyjrAllowOpinion zyjrAllowOpinion = new ZyjrAllowOpinion();
+            zyjrAllowOpinion.setApprovalType(4);
+            zyjrAllowOpinionMapper.updateZyjrAllowOpinion(zyjrAllowOpinion);
+        }
+        return count;
     }
 
     @Override
@@ -177,5 +190,24 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         return examineDao.findGrant();
     }
 
+    @Override
+    public Map<String,Object>findByGrant(String transactionCode){
+        Map<String, Object> map = new HashMap<>();
+        ZyjrGrantImage zyjrGrantImage = zyjrGrantImageMapper.selectZyjrGrantImageById(transactionCode);
+        ZyjrGrantInstalments zyjrGrantInstalments = zyjrGrantInstalmentsMapper.selectZyjrGrantInstalmentsById(transactionCode);
+        ZyjrGrantVisit zyjrGrantVisit = zyjrGrantVisitMapper.selectZyjrGrantVisitById(transactionCode);
+        map.put("basic",examineDao.findByGrant(transactionCode));
+        map.put("image",zyjrGrantPhotoMapper.findImage(zyjrGrantImage.getId()));
+        map.put("instalments",zyjrGrantPhotoMapper.findInstalments(zyjrGrantInstalments.getId()));
+        map.put("visit",zyjrGrantPhotoMapper.findVisit(zyjrGrantVisit.getId()));
+        String 董宗杰 = "董宗杰垃圾";
+        System.err.println(董宗杰);
+        return map;
+    }
+
+    @Override
+    public List<ZyjrGrant> findAllow() {
+        return examineDao.findAllow();
+    }
 
 }

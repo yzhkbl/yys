@@ -25,7 +25,7 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
     /**
      * 查询【请填写功能名称】
      *
-     * @param id 【请填写功能名称】ID
+     * @param transactionCode 【请填写功能名称】ID
      * @return 【请填写功能名称】
      */
     @Override
@@ -55,12 +55,10 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
     @Override
     public int insertZyjrAllowOpinion(ZyjrAllowOpinion zyjrAllowOpinion)
     {   ZyjrAllowOpinion o = selectZyjrAllowOpinionById(zyjrAllowOpinion.getTransactionCode());
-        if(o==null) {
-            return zyjrAllowOpinionMapper.insertZyjrAllowOpinion(zyjrAllowOpinion);
-        }else {
-
-            return zyjrAllowOpinionMapper.updateZyjrAllowOpinion(zyjrAllowOpinion);
+        if(o!=null&&o.getApprovalType()==1) {
+            stageExamineMapper.deleteOpinion(zyjrAllowOpinion.getTransactionCode());
         }
+        return zyjrAllowOpinionMapper.insertZyjrAllowOpinion(zyjrAllowOpinion);
     }
 
     /**
