@@ -398,7 +398,7 @@ public class test extends BaseController {
     @ApiOperation("111111111")
     public AjaxResult testFiles(String file) {
         String a = androidUpload.upload(file);
-        String as = "http://192.168.31.86:8080" + a;
+        String as = "http://114.215.186.186:8080" + a;
         System.err.println(as);
         return AjaxResult.success("操作成功",as);
         //return AjaxResult.success("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3363295869,2467511306&fm=26&gp=0.jpg");
