@@ -78,4 +78,6 @@ public interface ExamineMapper {
     List<CarInfo> findInfo(@Param("brandId") Integer brandId,@Param("groupId") Integer groupId);
 
     int updateByDaiqians(UserVo userVo);
+
+    int updateByDaihou(ZyjrDaihou zyjrDaihou);
 }

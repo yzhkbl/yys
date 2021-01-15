@@ -75,6 +75,14 @@ public class ZyjrBusinessServiceImpl implements IZyjrBusinessService
     @Override
     public int updateZyjrBusiness(ZyjrBusiness zyjrBusiness)
     {
+
+        if(zyjrBusiness!=null&&zyjrBusiness.getId()!=null){
+            ZyjrBusiness business = zyjrBusinessMapper.selectZyjrBusinessById(zyjrBusiness.getId());
+            if(business!=null&&business.getUpdateBy()!=null){
+                zyjrBusinessMapper.updateZyjrBusiness(zyjrBusiness);
+                return 999;
+            }
+        }
         zyjrBusiness.setUpdateBy(String.valueOf(SecurityUtils.getUserId()));
         zyjrBusiness.setOperator(SecurityUtils.getNickName());
         return zyjrBusinessMapper.updateZyjrBusiness(zyjrBusiness);
