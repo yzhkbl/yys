@@ -20,11 +20,9 @@ import com.jeethink.system.domain.vo.*;
 import com.jeethink.system.mapper.*;
 import com.jeethink.system.service.IExamineService;
 import com.jeethink.system.util.*;
-import com.rsa.RSASignature;
-import com.rsa.RSAUtil;
 import net.sf.json.JSONObject;
 import org.apache.commons.collections.map.LinkedMap;
-import org.apache.http.entity.ContentType;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mock.web.MockMultipartFile;
