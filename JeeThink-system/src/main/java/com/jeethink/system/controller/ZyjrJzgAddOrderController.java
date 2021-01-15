@@ -15,8 +15,6 @@ import com.jeethink.system.service.IZyjrJzgAddOrderService;
 import com.jeethink.system.util.HttpClientUtil;
 import com.jeethink.system.util.HttpPostUtil;
 import com.jeethink.system.util.JzgUtil;
-import com.rsa.RSASignature;
-import com.rsa.RSAUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import net.sf.json.JSONArray;
