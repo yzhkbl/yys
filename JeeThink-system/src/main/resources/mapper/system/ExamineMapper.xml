@@ -27,7 +27,7 @@
         left join zyjr_allow_basics d on a.transaction_code=d.transaction_code
         left join zyjr_daiqian e on a.transaction_code=e.transaction_code
         left join zyjr_car_loan f on a.transaction_code=f.transaction_code
-        where g.approval_type=1 and e.state!="1" or e.state is null
+        where a.approval_type=1 and e.state!="1" or e.state is null
     </select>
     <insert id="insertBorrower" parameterType="com.jeethink.system.domain.ZyjrBorrower">
         insert into zyjr_borrower
