@@ -66,7 +66,7 @@ public class ZyjrPhotoCarController extends BaseController
                 //int a = sysFileInfoMapper.deleteSysFileInfoByPath(path);
                 for (SysFileInfo sysFileInfo :sysFileInfos) {
                     String[] s = sysFileInfo.getFilePath().split("//");
-                    String l = sysFileInfo.getFilePath().substring(33);
+                    String l = sysFileInfo.getFilePath().substring(sysFileInfo.getFilePath().indexOf("e"));
                     System.err.println("删除路径"+paths+l);
                     boolean b = FileUtils.deleteFile(paths +l);
                 }
