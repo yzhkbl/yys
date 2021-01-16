@@ -142,32 +142,35 @@ public class ZyjrJzgAddOrderController extends BaseController
 
         ZyjrJzgAddOrder a=zyjrJzgAddOrderMapper.selectZyjrJzgAddOrderByTransactionCode(transactionCode);
         Map<String,String> map=new HashMap<>();
-        map.put("tokenId","177");
-        map.put("programmeId","4");
-        map.put("userId","18686");
-        map.put("orderNum",a.getTransactionCode());
-        map.put("vin",a.getVin());
-        map.put("regionCodeStyle",a.getRegionCodeStyle());
-        map.put("provinceId",a.getProvinceId().toString());
-        map.put("cityId",a.getCityId().toString());
-        map.put("productType",a.getProductType());
-        map.put("imageList",a.getImageList());
-        System.err.println(a.getImageList());
-        map.put("orderName",a.getOrderName());
-        map.put("orderPhone",a.getOrderPhone());
-        map.put("carLicense",a.getCarLicense());
-        map.put("service",a.getService());
-        map.put("engineNum",a.getEngineNum().toString());
-        map.put("recordBrand",a.getRecordBrand());
-        map.put("businessPrice",a.getBusinessPrice().toString());
-        String sign=JzgUtil.getSign(map,"82CF76A1-3C3A-4E0B-9969-1789137982F5");
+        if(a!=null){
+            map.put("tokenId","177");
+            map.put("programmeId","4");
+            map.put("userId","18686");
+            map.put("orderNum",a.getTransactionCode());
+            map.put("vin",a.getVin());
+            map.put("regionCodeStyle",a.getRegionCodeStyle());
+            map.put("provinceId",a.getProvinceId().toString());
+            map.put("cityId",a.getCityId().toString());
+            map.put("productType",a.getProductType());
+            map.put("imageList",a.getImageList());
+            System.err.println(a.getImageList());
+            map.put("orderName",a.getOrderName());
+            map.put("orderPhone",a.getOrderPhone());
+            map.put("carLicense",a.getCarLicense());
+            map.put("service",a.getService());
+            map.put("engineNum",a.getEngineNum().toString());
+            map.put("recordBrand",a.getRecordBrand());
+            map.put("businessPrice",a.getBusinessPrice().toString());
+            String sign=JzgUtil.getSign(map,"82CF76A1-3C3A-4E0B-9969-1789137982F5");
        /* Map<String,Object> maps=new HashMap<>();
         maps.putAll(map);
         maps.put("programmeId",4);
         maps.put("userId",18686);
         maps.put("provinceId",a.getProvinceId());
         maps.put("cityId",a.getCityId());*/
-        map.put("sign",sign);
+            map.put("sign",sign);
+        }
+
       /*  maps.put("businessPrice",a.getBusinessPrice());*/
 
         String results = HttpClientUtil.doPost("http://jcptapi.sandbox.jingzhengu.com/api/online/addOrder", map);

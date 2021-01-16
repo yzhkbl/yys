@@ -236,7 +236,7 @@ a.setType(storeInformation.getType());
             a.setCreateBy(storeInformation.getCreateBy());
             int ceshi = zyjrCarService.insertZyjrCar(a);
             String pics=storeInformation.getPic().substring(1,storeInformation.getPic().length() - 1);
-            String[] pic=pics.split(",");
+            String[] pic=pics.split(", ");
             for (String s : pic) {
               //  String asd=androidUpload.upload(s);
                 SysFileInfo sysFileInfo=new SysFileInfo();
@@ -293,7 +293,7 @@ a.setType(storeInformation.getType());
             a.setCreateBy(storeInformation.getCreateBy());
             int ceshi = zyjrCarService.updateZyjrCar(a);
             String pics=storeInformation.getPic().substring(1,storeInformation.getPic().length() - 1);
-            String[] pic=pics.split(",");
+            String[] pic=pics.split(", ");
             for (String s : pic) {
              //   String asd=androidUpload.upload(s);
                 SysFileInfo sysFileInfo=new SysFileInfo();

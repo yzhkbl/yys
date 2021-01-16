@@ -365,7 +365,7 @@ public class test extends BaseController {
 
 
         }
-        return null;
+        return AjaxResult.success("操作成功",results);
     }
 
 
