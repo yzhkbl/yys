@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.jeethink.system.domain.ZyjrDaiqian;
 import com.jeethink.system.domain.ZyjrDaiqianAccout;
 import com.jeethink.system.domain.ZyjrGps;
 import com.jeethink.system.domain.vo.DqVo;
@@ -108,6 +109,12 @@ public class ZyjrInsuranceController extends BaseController
                 zyjrInsurance.setState("2");
                 zyjrGpsMapper.updateZyjrGps(gps);
                 zyjrDaiqianAccoutMapper.updateZyjrDaiqianAccout(zyjrDaiqianAccout);
+                ZyjrDaiqian daiqian=examineMapper.selByDaiqian(zyjrInsurance.getTransactionCode());
+                if(daiqian!=null){
+
+                }else{
+                    examineMapper.insertDaiqians(zyjrInsurance.getTransactionCode());
+                }
             }
             zyjrInsuranceMapper.updateZyjrInsurance(zyjrInsurance);
             return  AjaxResult.success();
@@ -117,6 +124,12 @@ public class ZyjrInsuranceController extends BaseController
             zyjrInsurance.setState("2");
             zyjrGpsMapper.updateZyjrGps(gps);
             zyjrDaiqianAccoutMapper.updateZyjrDaiqianAccout(zyjrDaiqianAccout);
+            ZyjrDaiqian daiqian=examineMapper.selByDaiqian(zyjrInsurance.getTransactionCode());
+            if(daiqian!=null){
+
+            }else{
+                examineMapper.insertDaiqians(zyjrInsurance.getTransactionCode());
+            }
         }
         zyjrInsuranceMapper.insertZyjrInsurance(zyjrInsurance);
 

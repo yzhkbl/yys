@@ -12,6 +12,7 @@ public interface ExamineMapper {
     List<ZyjrDaiqian> selectAllList(ZyjrAllowBasics zyjrAllowBasics);
     ZyjrDaiqian selByDaiqian(String transactionCode);
     int insertDaiqian(ZyjrDaiqian zyjrDaiqian);
+    int insertDaiqians(String transactionCode);
     int updateByDaiqian(ZyjrDaiqian zyjrDaiqian);
     /**借款人信息添加*/
     int insertBorrower(ZyjrBorrower q);

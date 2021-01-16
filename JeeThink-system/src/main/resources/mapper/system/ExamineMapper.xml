@@ -61,6 +61,12 @@
         values
         (#{state},#{opinion},#{transactionCode})
     </insert>
+    <insert id="insertDaiqians" parameterType="com.jeethink.system.domain.ZyjrDaiqian">
+        insert into zyjr_daiqian
+        (transaction_code)
+        values
+        (#{transactionCode})
+    </insert>
     <insert id="insertBusiness" parameterType="com.jeethink.system.domain.ZyjrBusiness">
         insert into zyjr_business
         (id,team,car_information,intention_price,loan_money,repay_period,car_type,user_id,order_state,transaction_code)
