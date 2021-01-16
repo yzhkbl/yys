@@ -6,10 +6,7 @@ import com.jeethink.common.core.page.TableDataInfo;
 import com.jeethink.system.Helper.ResponseDto;
 import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.orderVo;
-import com.jeethink.system.mapper.ZyjrBorrowerMapper;
-import com.jeethink.system.mapper.ZyjrBusinessMapper;
-import com.jeethink.system.mapper.ZyjrGuaranteeMapper;
-import com.jeethink.system.mapper.ZyjrRelationMapper;
+import com.jeethink.system.mapper.*;
 import com.jeethink.system.service.IExamineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +19,8 @@ import java.util.Map;
 public class ExamineController extends BaseController {
     @Autowired
     private IExamineService examineService;
+    @Autowired
+    private ExamineMapper examineMapper;
     @Autowired
     private test t;
     @Autowired
@@ -172,6 +171,11 @@ public class ExamineController extends BaseController {
     @GetMapping("/info")
     public AjaxResult findInfo(Integer brandId,Integer groupId){
         return AjaxResult.success(examineService.findInfo(brandId, groupId));
+    }
+
+    @GetMapping("/app/code")
+    public AjaxResult findAppCode(){
+        return AjaxResult.success(examineMapper.findAppCode());
     }
 }
 

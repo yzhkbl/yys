@@ -56,7 +56,7 @@ public class StageExamineController extends BaseController {
     }
 
     @RequestMapping("/list")
-    public TableDataInfo list(){
+    public TableDataInfo list(ZyjrGrant q){
         startPage();
         List<ZyjrGrant>list = stageExamineService.list();
         return getDataTable(list);
