@@ -236,7 +236,7 @@ a.setType(storeInformation.getType());
             infos.setId(storeInformation.getId());
             List<SysFileInfo> SysFileInfo=sysFileInfoMapper.selectSysFileInfoList(infos);
             sysFileInfoMapper.deleteSysFileInfoByCarId(storeInformation.getId());
-            if(SysFileInfo!=null){
+            if(SysFileInfo.size()>0){
                 for (SysFileInfo sysFileInfo : SysFileInfo) {
                     String paths = "C:/demo";
                     String path=sysFileInfo.getFilePath();
