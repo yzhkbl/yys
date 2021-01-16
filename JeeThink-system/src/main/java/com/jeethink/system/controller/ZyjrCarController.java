@@ -222,7 +222,7 @@ a.setType(storeInformation.getType());
                 SysFileInfo sysFileInfo=new SysFileInfo();
                 sysFileInfo.setFileName("store");
                 sysFileInfo.setId(a.getId().toString());
-                String as = "http://"+ IpUtils.getHostIp() + asd;
+                String as = "http://114.215.186.186:8080/" + asd;
                 sysFileInfo.setFilePath(as);
                 sysFileInfoMapper.insertSysFileInfo(sysFileInfo);
             }
@@ -279,7 +279,7 @@ a.setType(storeInformation.getType());
                 SysFileInfo sysFileInfo=new SysFileInfo();
                 sysFileInfo.setFileName("store");
                 sysFileInfo.setId(a.getId().toString());
-                String as = "http://"+IpUtils.getHostIp()+":8080" + asd;
+                String as = "http://114.215.186.186:8080" + asd;
                 sysFileInfo.setFilePath(as);
                 sysFileInfoMapper.insertSysFileInfo(sysFileInfo);
             }
@@ -334,7 +334,7 @@ a.setType(storeInformation.getType());
             if (ceshi < 1) {
                 return AjaxResult.error();
             }
-            String as = "http://"+IpUtils.getHostIp()+":8080" + a;
+            String as = "http://114.215.186.186:8080" + a;
             pic.add(as);
         }
 

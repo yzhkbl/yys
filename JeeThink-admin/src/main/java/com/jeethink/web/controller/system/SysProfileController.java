@@ -116,7 +116,7 @@ public class SysProfileController extends BaseController
         {
             LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
             String avatar = FileUploadUtils.uploads(JeeThinkConfig.getAvatarPath(), file);
-            avatar= "http://"+IpUtils.getHostIp() +":8080" +avatar;
+            avatar= "http://114.215.186.186:8080" +avatar;
             if (userService.updateUserAvatar(loginUser.getUsername(), avatar))
             {
                 AjaxResult ajax = AjaxResult.success();
