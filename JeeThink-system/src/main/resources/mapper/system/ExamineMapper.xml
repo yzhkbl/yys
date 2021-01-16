@@ -592,4 +592,8 @@ LEFT JOIN zyjr_daiqian_accout a on a.transaction_code=c.transaction_code where a
         from car_info
         where brand_id=#{brandId} and group_id=#{groupId}
     </select>
+    <select id="findAppCode" resultType="com.jeethink.system.domain.ZyjrApp">
+        select *
+        from zyjr_app
+    </select>
 </mapper>

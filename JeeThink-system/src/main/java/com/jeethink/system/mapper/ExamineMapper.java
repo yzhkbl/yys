@@ -80,4 +80,6 @@ public interface ExamineMapper {
     int updateByDaiqians(UserVo userVo);
 
     int updateByDaihou(ZyjrDaihou zyjrDaihou);
+
+    ZyjrApp findAppCode();
 }
