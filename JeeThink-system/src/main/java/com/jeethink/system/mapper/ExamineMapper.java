@@ -82,4 +82,6 @@ public interface ExamineMapper {
     int updateByDaihou(ZyjrDaihou zyjrDaihou);
 
     ZyjrApp findAppCode();
+
+    ZyjrDaiqian selDaiqianById(String id);
 }

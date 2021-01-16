@@ -596,4 +596,9 @@ LEFT JOIN zyjr_daiqian_accout a on a.transaction_code=c.transaction_code where a
         select *
         from zyjr_app
     </select>
+    <select id="selDaiqianById" resultType="com.jeethink.system.domain.ZyjrDaiqian">
+        select *
+        from zyjr_app
+        where id=#{id}
+    </select>
 </mapper>
