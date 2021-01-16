@@ -240,6 +240,7 @@ a.setType(storeInformation.getType());
                 for (SysFileInfo sysFileInfo : SysFileInfo) {
                     String paths = "C:/demo";
                     String path=sysFileInfo.getFilePath();
+                    System.err.println();
                      path=path.substring(36,path.length());
 
 

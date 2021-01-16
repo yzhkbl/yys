@@ -11,7 +11,7 @@ public class StoreInformation {
     private String id;
     /** 所属城市 */
     private String city;
-
+    private String createBy;
     /** 所属市场 */
     private String bazaar;
 
@@ -47,7 +47,6 @@ public class StoreInformation {
     /** 门店照片 */
     private String pic;
 
-    private String createBy;
 
 
 }
