@@ -58,4 +58,6 @@ public interface ZyjrCailiaoMapper
      * @return 结果
      */
     public int deleteZyjrCailiaoByIds(Long[] ids);
+
+    int updateZyjrCailiaos(ZyjrCailiao zyjrCailiao);
 }
