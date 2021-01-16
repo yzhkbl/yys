@@ -62,7 +62,7 @@ public class ZyjrGrantVisitController extends BaseController
             //int a = sysFileInfoMapper.deleteSysFileInfoByPath(path);
             for (ZyjrGrantPhoto zyjrGrantPhoto :zyjrGrantPhotos) {
                 String[] s = zyjrGrantPhoto.getFilePath().split("//");
-                String l = zyjrGrantPhoto.getFilePath().substring(33);
+                String l = zyjrGrantPhoto.getFilePath().substring(zyjrGrantPhoto.getFilePath().indexOf("e"));
                 System.err.println("删除路径"+paths+l);
                 boolean b = FileUtils.deleteFile(paths +l);
             }
