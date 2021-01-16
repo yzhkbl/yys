@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="repayPeriod"    column="repay_period"    />
         <result property="carType"    column="car_type"    />
         <result property="userId"    column="user_id"    />
+        <result property="updateBy"    column="update_by"    />
         <result property="orderState"    column="order_state"    />
          <result property="name"    column="user_name"    />
         <result property="transactionCode"    column="transaction_code"    />
@@ -23,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectZyjrBusinessVo">
-        select a.id, a.team, a.car_information,a.false_operator,a.false_operator_id, a.intention_price, a.loan_money, a.repay_period,a. car_type,a. user_id, a.order_state,a.transaction_code,b.real_address from zyjr_business a
+        select a.id, a.team, a.car_information,a.false_operator,a.false_operator_id,a.update_by, a.intention_price, a.loan_money, a.repay_period,a. car_type,a. user_id, a.order_state,a.transaction_code,b.real_address from zyjr_business a
         left join zyjr_start_page b on a.transaction_code=b.transaction_code
     </sql>
 
@@ -48,8 +49,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="selectZyjrBusinessById" parameterType="Long" resultMap="ZyjrBusinessResult">
-        <include refid="selectZyjrBusinessVo"/>
-        where a.id = #{id}
+        select * from zyjr_business
+        where id = #{id}
     </select>
     
     <select id="selectById" parameterType="String" resultMap="ZyjrBusinessResult">

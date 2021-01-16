@@ -90,7 +90,6 @@ ZyjrCarController extends BaseController {
 
         List<carVo> list = examineMapper.selectZyjrCarLists(createBy);
 
-        System.err.println(list);
         return AjaxResult.success(list);
     }
 
@@ -223,7 +222,7 @@ a.setType(storeInformation.getType());
                 SysFileInfo sysFileInfo=new SysFileInfo();
                 sysFileInfo.setFileName("store");
                 sysFileInfo.setId(a.getId().toString());
-                String as = "http://"+ IpUtils.getHostIp() + asd;
+                String as = "http://114.215.186.186:8080/" + asd;
                 sysFileInfo.setFilePath(as);
                 sysFileInfoMapper.insertSysFileInfo(sysFileInfo);
             }
@@ -233,11 +232,11 @@ a.setType(storeInformation.getType());
                 return AjaxResult.success(map);
             }
         }else if(storeInformation.getStatus().equals("edit")){
-            SysFileInfo infos=new SysFileInfo();
-            infos.setId(storeInformation.getId());
-            List<SysFileInfo> SysFileInfo=sysFileInfoMapper.selectSysFileInfoList(infos);
-            sysFileInfoMapper.deleteSysFileInfoByCarId(storeInformation.getId());
-            if(SysFileInfo!=null){
+          //  SysFileInfo infos=new SysFileInfo();
+           // infos.setId(storeInformation.getId());
+           // List<SysFileInfo> SysFileInfo=sysFileInfoMapper.selectSysFileInfoList(infos);
+          //  sysFileInfoMapper.deleteSysFileInfoByCarId(storeInformation.getId());
+    /*        if(SysFileInfo.size()>0){
                 for (SysFileInfo sysFileInfo : SysFileInfo) {
                     String paths = "C:/demo";
                     String path=sysFileInfo.getFilePath();
@@ -245,13 +244,9 @@ a.setType(storeInformation.getType());
 
 
                     boolean b = FileUtils.deleteFile(paths + "/20" + path);
-                    if (b) {
-                        return AjaxResult.success(b);
-                    } else {
-                        return AjaxResult.error("路径删除成功，但图片删除失败", b);
-                    }
+
                 }
-            }
+            }*/
 
 
             ZyjrCar a = new ZyjrCar();
@@ -261,7 +256,6 @@ a.setType(storeInformation.getType());
             a.setBazaar(storeInformation.getBazaar());
             a.setShopType(storeInformation.getShopType());
             a.setBusinessType(storeInformation.getBusinessType());
-            System.err.println(storeInformation.getStall());
 
             a.setStall(storeInformation.getStall());
             a.setBusinessNature(storeInformation.getBusinessNature());
@@ -285,7 +279,7 @@ a.setType(storeInformation.getType());
                 SysFileInfo sysFileInfo=new SysFileInfo();
                 sysFileInfo.setFileName("store");
                 sysFileInfo.setId(a.getId().toString());
-                String as = "http://"+IpUtils.getHostIp()+":8080" + asd;
+                String as = "http://114.215.186.186:8080" + asd;
                 sysFileInfo.setFilePath(as);
                 sysFileInfoMapper.insertSysFileInfo(sysFileInfo);
             }
@@ -340,7 +334,7 @@ a.setType(storeInformation.getType());
             if (ceshi < 1) {
                 return AjaxResult.error();
             }
-            String as = "http://"+IpUtils.getHostIp()+":8080" + a;
+            String as = "http://114.215.186.186:8080" + a;
             pic.add(as);
         }
 

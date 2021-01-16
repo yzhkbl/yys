@@ -92,7 +92,7 @@ public class ZyjrCarServiceImpl implements IZyjrCarService
     {
         zyjrCar.setUpdateTime(DateUtils.getNowDate());
 
-       if(zyjrCar.getZyjrCarAccount().size()>0) {
+       if(zyjrCar!=null&&zyjrCar.getZyjrCarAccount()!=null&&zyjrCar.getZyjrCarAccount().size()>0) {
            List<ZyjrCarAccount> zyjrCarAccount = zyjrCar.getZyjrCarAccount();
 
            zyjrCarAccountService.deleteZyjrCarAccountById(zyjrCar.getId());

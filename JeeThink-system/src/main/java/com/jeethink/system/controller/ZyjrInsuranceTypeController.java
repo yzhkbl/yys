@@ -87,7 +87,7 @@ public class ZyjrInsuranceTypeController extends BaseController
         for (int i = 0; i < id.size(); i++) {
             String a = FileUploadUtils.upload(file.get(i));
             SysFileInfo info = new SysFileInfo();
-            String as = "http://"+ IpUtils.getHostIp()+":8080" + a;
+            String as = "http://114.215.186.186:8080" + a;
             info.setFilePath(as);
             info.setBaoxian(id.get(i));
             info.setFileName(name.get(i));
