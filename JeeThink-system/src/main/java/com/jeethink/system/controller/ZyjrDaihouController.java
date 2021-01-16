@@ -169,7 +169,7 @@ public class ZyjrDaihouController extends BaseController
     }
 
     @PostMapping("go")
-    public AjaxResult sg(ZyjrDaihou zyjrDaihou)
+    public AjaxResult sg(@RequestBody ZyjrDaihou zyjrDaihou)
     {
         if(zyjrDaihou!=null&&zyjrDaihou.getState().equals("1")){
             ZyjrCailiao zyjrCailiao=new ZyjrCailiao();
