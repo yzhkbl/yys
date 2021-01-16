@@ -102,10 +102,30 @@ ZyjrCarController extends BaseController {
         info.setFileName("store");
         List<SysFileInfo> aa=sysFileInfoMapper.selectSysFileInfoList(info);
         List<String> path=aa.stream().map(SysFileInfo::getFilePath).collect(Collectors.toList());
-        a.setPic(path);
+       // a.setPic(path);
         List<SysFileInfo> ceshi=new ArrayList<>();
-        a.setSysFileInfo(ceshi);
-        return AjaxResult.success(a);
+      //  a.setSysFileInfo(ceshi);
+        Map<String,Object> map=new HashMap<>();
+        map.put("pic",path);
+        map.put("sysFileInfo",ceshi);
+        map.put("userName",a.getUserName());
+        map.put("gender",a.getGender());
+        map.put("phoneNumber",a.getPhoneNumber());
+        map.put("area",a.getArea());
+        map.put("city",a.getCity());
+        map.put("bazaar",a.getBazaar());
+        map.put("shopType",a.getShopType());
+        map.put("businessType",a.getBusinessType());
+        map.put("stall",a.getStall());
+        map.put("businessNature",a.getBusinessNature());
+        map.put("passengerCar",a.getPassengerCar());
+        map.put("monthDeal",a.getMonthDeal());
+        map.put("monthInstallment",a.getMonthInstallment());
+        map.put("matchAmount",a.getMatchAmount());
+        map.put("detailAddress",a.getDetailAddress());
+        map.put("dealerName",a.getDealerName());
+
+        return AjaxResult.success(map);
     }
 
 
@@ -218,12 +238,12 @@ a.setType(storeInformation.getType());
             String pics=storeInformation.getPic().substring(1,storeInformation.getPic().length() - 1);
             String[] pic=pics.split(",");
             for (String s : pic) {
-                String asd=androidUpload.upload(s);
+              //  String asd=androidUpload.upload(s);
                 SysFileInfo sysFileInfo=new SysFileInfo();
                 sysFileInfo.setFileName("store");
                 sysFileInfo.setId(a.getId().toString());
-                String as = "http://114.215.186.186:8080/" + asd;
-                sysFileInfo.setFilePath(as);
+              //  String as = "http://114.215.186.186:8080/" + asd;
+                sysFileInfo.setFilePath(s);
                 sysFileInfoMapper.insertSysFileInfo(sysFileInfo);
             }
             if (ceshi > 0) {
@@ -275,12 +295,12 @@ a.setType(storeInformation.getType());
             String pics=storeInformation.getPic().substring(1,storeInformation.getPic().length() - 1);
             String[] pic=pics.split(",");
             for (String s : pic) {
-                String asd=androidUpload.upload(s);
+             //   String asd=androidUpload.upload(s);
                 SysFileInfo sysFileInfo=new SysFileInfo();
                 sysFileInfo.setFileName("store");
                 sysFileInfo.setId(a.getId().toString());
-                String as = "http://114.215.186.186:8080" + asd;
-                sysFileInfo.setFilePath(as);
+             //   String as = "http://114.215.186.186:8080" + asd;
+                sysFileInfo.setFilePath(s);
                 sysFileInfoMapper.insertSysFileInfo(sysFileInfo);
             }
             if (ceshi > 0) {

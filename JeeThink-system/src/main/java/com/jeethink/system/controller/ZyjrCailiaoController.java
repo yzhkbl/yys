@@ -1,6 +1,8 @@
 package com.jeethink.system.controller;
 
 import java.util.List;
+
+import com.jeethink.system.mapper.ZyjrCailiaoMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +34,8 @@ public class ZyjrCailiaoController extends BaseController
 {
     @Autowired
     private IZyjrCailiaoService zyjrCailiaoService;
+    @Autowired
+    private ZyjrCailiaoMapper zyjrCailiaoMapper;
 
     /**
      * 查询【请填写功能名称】列表
@@ -56,6 +60,26 @@ public class ZyjrCailiaoController extends BaseController
         List<ZyjrCailiao> list = zyjrCailiaoService.selectZyjrCailiaoList(zyjrCailiao);
         ExcelUtil<ZyjrCailiao> util = new ExcelUtil<ZyjrCailiao>(ZyjrCailiao.class);
         return util.exportExcel(list, "cailiao");
+    }
+
+    @PostMapping("/go")
+    public AjaxResult post(@RequestBody ZyjrCailiao zyjrCailiao){
+        if(zyjrCailiao.getUserId()==null){
+            zyjrCailiaoMapper.updateZyjrCailiaos(zyjrCailiao);
+            return AjaxResult.success();
+        }
+            ZyjrCailiao zyjrCailiao1 = zyjrCailiaoService.selectZyjrCailiaoById(zyjrCailiao.getId());
+            if(zyjrCailiao1!=null&&zyjrCailiao1.getUserId()!=null) {
+                if (zyjrCailiao1.getUserId().equals(zyjrCailiao.getUserId())){
+                    return AjaxResult.success();
+                }
+                AjaxResult json=new AjaxResult();
+                json.put("code",400);
+                json.put("msg", "手慢了，下次再快点！！！");
+                return json;
+            }
+        zyjrCailiaoService.updateZyjrCailiao(zyjrCailiao);
+        return AjaxResult.success();
     }
 
     /**

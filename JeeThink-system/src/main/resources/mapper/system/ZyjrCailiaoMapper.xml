@@ -61,6 +61,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </trim>
         where id = #{id}
     </update>
+    <update id="updateZyjrCailiaos" parameterType="ZyjrCailiao">
+        update zyjr_cailiao
+        set user_id="",operator=""
+        where id = #{id}
+    </update>
 
     <delete id="deleteZyjrCailiaoById" parameterType="Long">
         delete from zyjr_cailiao where id = #{id}

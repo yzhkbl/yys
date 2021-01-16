@@ -77,7 +77,7 @@ public class ZyjrBusinessServiceImpl implements IZyjrBusinessService
     public int updateZyjrBusiness(ZyjrBusiness zyjrBusiness)
     {
             ZyjrBusiness business = zyjrBusinessMapper.selectZyjrBusinessById(zyjrBusiness.getId());
-            if(StringUtils.isNotEmpty(business.getUpdateBy())||business.getUpdateBy()==null){
+            if(StringUtils.isNotEmpty(business.getUpdateBy())){
                 if(zyjrBusiness.getCreateBy().equals(business.getUpdateBy())){
                     return 1;
                 }
