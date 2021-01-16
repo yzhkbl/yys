@@ -232,22 +232,21 @@ a.setType(storeInformation.getType());
                 return AjaxResult.success(map);
             }
         }else if(storeInformation.getStatus().equals("edit")){
-            SysFileInfo infos=new SysFileInfo();
-            infos.setId(storeInformation.getId());
-            List<SysFileInfo> SysFileInfo=sysFileInfoMapper.selectSysFileInfoList(infos);
-            sysFileInfoMapper.deleteSysFileInfoByCarId(storeInformation.getId());
-            if(SysFileInfo.size()>0){
+          //  SysFileInfo infos=new SysFileInfo();
+           // infos.setId(storeInformation.getId());
+           // List<SysFileInfo> SysFileInfo=sysFileInfoMapper.selectSysFileInfoList(infos);
+          //  sysFileInfoMapper.deleteSysFileInfoByCarId(storeInformation.getId());
+    /*        if(SysFileInfo.size()>0){
                 for (SysFileInfo sysFileInfo : SysFileInfo) {
                     String paths = "C:/demo";
                     String path=sysFileInfo.getFilePath();
-                    System.err.println();
                      path=path.substring(36,path.length());
 
 
                     boolean b = FileUtils.deleteFile(paths + "/20" + path);
 
                 }
-            }
+            }*/
 
 
             ZyjrCar a = new ZyjrCar();
@@ -257,7 +256,6 @@ a.setType(storeInformation.getType());
             a.setBazaar(storeInformation.getBazaar());
             a.setShopType(storeInformation.getShopType());
             a.setBusinessType(storeInformation.getBusinessType());
-            System.err.println(storeInformation.getStall());
 
             a.setStall(storeInformation.getStall());
             a.setBusinessNature(storeInformation.getBusinessNature());
