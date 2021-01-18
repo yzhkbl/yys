@@ -110,7 +110,7 @@ public class ZyjrCarLoanController extends BaseController
     public AjaxResult allow(@RequestBody ZyjrCarLoan q){
         ZyjrCarLoan zyjrCarLoan = zyjrCarLoanMapper.selectHandle(q.getTransactionCode());
         if(q.getHandleName()!=null) {
-            if (zyjrCarLoan != null && zyjrCarLoan.getAllowId() != null) {
+            if (zyjrCarLoan != null&&zyjrCarLoan.getAllowId()!=null&&zyjrCarLoan.getAllowId()!=q.getUserId()) {
                 AjaxResult json = new AjaxResult();
                 json.put("code", 400);
                 json.put("msg", "已有操作人");
@@ -134,7 +134,7 @@ public class ZyjrCarLoanController extends BaseController
     @PostMapping("/repeat")
     public AjaxResult repeat(@RequestBody ZyjrCarLoan q){
         ZyjrCarLoan zyjrCarLoan = zyjrCarLoanMapper.selectHandle(q.getTransactionCode());
-        if(q.getHandleName()!=null) {
+        if(q.getHandleName()!=null&&zyjrCarLoan.getRepeatId()!=null&&zyjrCarLoan.getRepeatId()!=q.getUserId()) {
             if (zyjrCarLoan != null && zyjrCarLoan.getRepeatId() != null) {
                 AjaxResult json = new AjaxResult();
                 json.put("code", 400);
@@ -159,7 +159,7 @@ public class ZyjrCarLoanController extends BaseController
     public AjaxResult grant(@RequestBody ZyjrCarLoan q){
         ZyjrCarLoan zyjrCarLoan = zyjrCarLoanMapper.selectHandle(q.getTransactionCode());
         if(q.getHandleName()!=null) {
-            if (zyjrCarLoan != null && zyjrCarLoan.getGrantId() != null) {
+            if (zyjrCarLoan != null && zyjrCarLoan.getGrantId()!=null&&zyjrCarLoan.getGrantId()!=q.getUserId()) {
                 AjaxResult json = new AjaxResult();
                 json.put("code", 400);
                 json.put("msg", "已有操作人");
