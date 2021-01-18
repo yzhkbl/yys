@@ -21,14 +21,13 @@
     <select id="selectAllList" parameterType="com.jeethink.system.domain.ZyjrDaiqian" resultMap="ZyjrAllowBasicsResult2">
         select e.id, e.state, e.opinion,e.user_id,e.operator, a.transaction_code,
         b.user_name,c.car_type,c.team,f.loan_amount,f.repayment_term,f.actual_price,c.car_information
-        from zyjr_repeat_opinion a
+        from zyjr_grant_opinion a
         left join zyjr_borrower b on a.transaction_code=b.transaction_code
         left join zyjr_business c on a.transaction_code=c.transaction_code
         left join zyjr_allow_basics d on a.transaction_code=d.transaction_code
         left join zyjr_daiqian e on a.transaction_code=e.transaction_code
         left join zyjr_car_loan f on a.transaction_code=f.transaction_code
-        left join zyjr_grant_opinion g on a.transaction_code=g.transaction_code
-        where g.approval_type=1 and e.state!="1" or e.state is null
+        where a.approval_type=1 and e.state!="1" or e.state is null
     </select>
     <insert id="insertBorrower" parameterType="com.jeethink.system.domain.ZyjrBorrower">
         insert into zyjr_borrower
@@ -60,6 +59,12 @@
         (state,opinion,transaction_code)
         values
         (#{state},#{opinion},#{transactionCode})
+    </insert>
+    <insert id="insertDaiqians" parameterType="com.jeethink.system.domain.ZyjrDaiqian">
+        insert into zyjr_daiqian
+        (transaction_code)
+        values
+        (#{transactionCode})
     </insert>
     <insert id="insertBusiness" parameterType="com.jeethink.system.domain.ZyjrBusiness">
         insert into zyjr_business
@@ -595,5 +600,10 @@ LEFT JOIN zyjr_daiqian_accout a on a.transaction_code=c.transaction_code where a
     <select id="findAppCode" resultType="com.jeethink.system.domain.ZyjrApp">
         select *
         from zyjr_app
+    </select>
+    <select id="selDaiqianById" resultType="com.jeethink.system.domain.ZyjrDaiqian">
+        select *
+        from zyjr_app
+        where id=#{id}
     </select>
 </mapper>

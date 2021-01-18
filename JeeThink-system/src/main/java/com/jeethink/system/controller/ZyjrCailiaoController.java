@@ -2,6 +2,7 @@ package com.jeethink.system.controller;
 
 import java.util.List;
 
+import com.jeethink.common.utils.StringUtils;
 import com.jeethink.system.mapper.ZyjrCailiaoMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +70,7 @@ public class ZyjrCailiaoController extends BaseController
             return AjaxResult.success();
         }
             ZyjrCailiao zyjrCailiao1 = zyjrCailiaoService.selectZyjrCailiaoById(zyjrCailiao.getId());
-            if(zyjrCailiao1!=null&&zyjrCailiao1.getUserId()!=null) {
+            if(zyjrCailiao1!=null&& StringUtils.isNotEmpty(zyjrCailiao1.getUserId())) {
                 if (zyjrCailiao1.getUserId().equals(zyjrCailiao.getUserId())){
                     return AjaxResult.success();
                 }

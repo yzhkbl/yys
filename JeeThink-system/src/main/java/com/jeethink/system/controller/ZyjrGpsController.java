@@ -103,6 +103,12 @@ public class ZyjrGpsController extends BaseController
                 zyjrDaiqianAccout.setId(dq.getDaiqian());
                 zyjrDaiqianAccout.setState("2");
                 zyjrDaiqianAccoutMapper.updateZyjrDaiqianAccout(zyjrDaiqianAccout);
+                ZyjrDaiqian daiqian=examineMapper.selByDaiqian(zyjrGps.getTransactionCode());
+                if(daiqian!=null){
+
+                }else{
+                    examineMapper.insertDaiqians(zyjrGps.getTransactionCode());
+                }
 
             }
             zyjrGps.setId(dq.getGps());
@@ -119,6 +125,12 @@ public class ZyjrGpsController extends BaseController
             zyjrDaiqianAccout.setId(dq.getDaiqian());
             zyjrDaiqianAccout.setState("2");
             zyjrDaiqianAccoutMapper.updateZyjrDaiqianAccout(zyjrDaiqianAccout);
+            ZyjrDaiqian daiqian=examineMapper.selByDaiqian(zyjrGps.getTransactionCode());
+            if(daiqian!=null){
+
+            }else{
+                examineMapper.insertDaiqians(zyjrGps.getTransactionCode());
+            }
         }
         zyjrGpsService.insertZyjrGps(zyjrGps);
         return  AjaxResult.success();

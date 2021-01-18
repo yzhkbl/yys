@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.jeethink.system.domain.ZyjrDaiqian;
 import com.jeethink.system.domain.ZyjrDaiqianAccout;
 import com.jeethink.system.domain.ZyjrGps;
 import com.jeethink.system.domain.vo.DqVo;
@@ -92,6 +93,7 @@ public class ZyjrInsuranceController extends BaseController
     @PostMapping("update")
     public AjaxResult insert(ZyjrInsurance zyjrInsurance){
         DqVo a=examineMapper.selectDQ(zyjrInsurance.getTransactionCode());
+        ZyjrInsurance zyjrInsurance1 = zyjrInsuranceMapper.selectZyjrInsuranceByIds(zyjrInsurance.getTransactionCode());
         ZyjrGps gps=new ZyjrGps();
         ZyjrDaiqianAccout zyjrDaiqianAccout=new ZyjrDaiqianAccout();
         if(a!=null){
@@ -99,27 +101,39 @@ public class ZyjrInsuranceController extends BaseController
             gps.setState("2");
             zyjrDaiqianAccout.setId(a.getDaiqian());
             zyjrDaiqianAccout.setState("2");
+        }
 
-
-        if(zyjrInsurance.getId()!=null){
+        if(zyjrInsurance1!=null&&zyjrInsurance1.getId()!=null){
             zyjrInsurance.setState("1");
-             if("1".equals(a.getStateb())&&"1".equals(a.getStatec())){
-                 zyjrInsurance.setState("2");
-                 zyjrGpsMapper.updateZyjrGps(gps);
-                 zyjrDaiqianAccoutMapper.updateZyjrDaiqianAccout(zyjrDaiqianAccout);
-             }
+            if(a!=null&&"1".equals(a.getStateb())&&"1".equals(a.getStatec())){
+                zyjrInsurance.setState("2");
+                zyjrGpsMapper.updateZyjrGps(gps);
+                zyjrDaiqianAccoutMapper.updateZyjrDaiqianAccout(zyjrDaiqianAccout);
+                ZyjrDaiqian daiqian=examineMapper.selByDaiqian(zyjrInsurance.getTransactionCode());
+                if(daiqian!=null){
+
+                }else{
+                    examineMapper.insertDaiqians(zyjrInsurance.getTransactionCode());
+                }
+            }
             zyjrInsuranceMapper.updateZyjrInsurance(zyjrInsurance);
-                return  AjaxResult.success();
+            return  AjaxResult.success();
         }
         zyjrInsurance.setState("1");
-        if("1".equals(a.getStateb())&&"1".equals(a.getStatec())){
+        if(a!=null&&"1".equals(a.getStateb())&&"1".equals(a.getStatec())){
             zyjrInsurance.setState("2");
             zyjrGpsMapper.updateZyjrGps(gps);
             zyjrDaiqianAccoutMapper.updateZyjrDaiqianAccout(zyjrDaiqianAccout);
+            ZyjrDaiqian daiqian=examineMapper.selByDaiqian(zyjrInsurance.getTransactionCode());
+            if(daiqian!=null){
+
+            }else{
+                examineMapper.insertDaiqians(zyjrInsurance.getTransactionCode());
+            }
         }
         zyjrInsuranceMapper.insertZyjrInsurance(zyjrInsurance);
-        }
-            return  AjaxResult.success();
+
+        return  AjaxResult.success();
     }
 
 

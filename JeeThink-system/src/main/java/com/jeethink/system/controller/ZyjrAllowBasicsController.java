@@ -71,7 +71,22 @@ public class ZyjrAllowBasicsController extends BaseController
     }
     @PostMapping("/get/user")
     public AjaxResult getuser(@RequestBody UserVo userVo){
+        if(userVo.getUserId()==null){
             examineMapper.updateByDaiqians(userVo);
+
+            return AjaxResult.success();
+        }
+        ZyjrDaiqian zyjrDaiqian = examineMapper.selDaiqianById(userVo.getId());
+        if(zyjrDaiqian!=null&&zyjrDaiqian.getUserId()!=null){
+            if(zyjrDaiqian.getUserId().equals(userVo.getUserId())){
+                return AjaxResult.success();
+            }
+                AjaxResult json=new AjaxResult();
+            json.put("code", 400);
+            json.put("msg", "手慢了，下次再快点！！！");
+            return json;
+        }
+        examineMapper.updateByDaiqians(userVo);
 
         return AjaxResult.success();
     }
