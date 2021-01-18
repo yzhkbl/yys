@@ -60,6 +60,76 @@ public class ZyjrGrant extends BaseEntity
     private String falseOperator;
     private String falseOperatorId;
     private String realAddress;//真实地址
+    private String allowBy;
+    private String repeatBy;
+    private String grantBy;
+    private Long allowId;
+    private Long repeatId;
+    private Long grantId;
+
+    public Long getAllowId() {
+        return allowId;
+    }
+
+    public void setAllowId(Long allowId) {
+        this.allowId = allowId;
+    }
+
+    public Long getRepeatId() {
+        return repeatId;
+    }
+
+    public void setRepeatId(Long repeatId) {
+        this.repeatId = repeatId;
+    }
+
+    public Long getGrantId() {
+        return grantId;
+    }
+
+    public void setGrantId(Long grantId) {
+        this.grantId = grantId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getRealAddress() {
+        return realAddress;
+    }
+
+    public void setRealAddress(String realAddress) {
+        this.realAddress = realAddress;
+    }
+
+    public String getAllowBy() {
+        return allowBy;
+    }
+
+    public void setAllowBy(String allowBy) {
+        this.allowBy = allowBy;
+    }
+
+    public String getRepeatBy() {
+        return repeatBy;
+    }
+
+    public void setRepeatBy(String repeatBy) {
+        this.repeatBy = repeatBy;
+    }
+
+    public String getGrantBy() {
+        return grantBy;
+    }
+
+    public void setGrantBy(String grantBy) {
+        this.grantBy = grantBy;
+    }
 
     public Integer getApprovalType() {
         return approvalType;
@@ -201,6 +271,12 @@ public class ZyjrGrant extends BaseEntity
                 .append("operator",getOperator())
                 .append("falseOperator",getFalseOperator())
                 .append("falseOperatorId",getFalseOperatorId())
+                .append("allowBy",getAllowBy())
+                .append("repeatBy",getRepeatBy())
+                .append("grantBy",getGrantBy())
+                .append("allowId",getAllowId())
+                .append("repeatId",getRepeatId())
+                .append("grantId",getGrantId())
             .toString();
     }
 }

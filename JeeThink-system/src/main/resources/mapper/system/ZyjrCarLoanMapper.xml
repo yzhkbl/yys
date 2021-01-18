@@ -74,6 +74,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectZyjrCarLoanVo"/>
         where user_id = #{userId} and transaction_code=#{transactionCode}
     </select>
+
+    <select id="selectHandle" resultMap="ZyjrCarLoanResult">
+        <include refid="selectZyjrCarLoanVo"/>
+        where transaction_code=#{transactionCode}
+    </select>
         
     <insert id="insertZyjrCarLoan" parameterType="ZyjrCarLoan" useGeneratedKeys="true" keyProperty="id">
         insert into zyjr_car_loan
@@ -166,6 +171,60 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="grantBy != null">grant_by=#{grantBy},</if>
         </trim>
         where user_id = #{userId} and transaction_code=#{transactionCode}
+    </update>
+
+    <update id="updateHandle" parameterType="ZyjrCarLoan">
+        update zyjr_car_loan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="carType != null">car_type = #{carType},</if>
+            <if test="vinCode != null">vin_code = #{vinCode},</if>
+            <if test="brand != null">brand = #{brand},</if>
+            <if test="carSeries != null">car_series = #{carSeries},</if>
+            <if test="carYear != null">car_year = #{carYear},</if>
+            <if test="displacement != null">displacement = #{displacement},</if>
+            <if test="gear != null">gear = #{gear},</if>
+            <if test="style != null">style = #{style},</if>
+            <if test="engineCode != null">engine_code = #{engineCode},</if>
+            <if test="fuelType != null">fuel_type = #{fuelType},</if>
+            <if test="mileage != null">mileage = #{mileage},</if>
+            <if test="startDate != null">start_date = #{startDate},</if>
+            <if test="actualPrice != null">actual_price = #{actualPrice},</if>
+            <if test="loanAmount != null">loan_amount = #{loanAmount},</if>
+            <if test="repaymentTerm != null">repayment_term = #{repaymentTerm},</if>
+            <if test="interestRate != null">interest_rate = #{interestRate},</if>
+            <if test="deposit != null">deposit = #{deposit},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+            <if test="orderState != null">order_state = #{orderState},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="allowId != null">allow_id=#{allowId},</if>
+            <if test="repeatId != null">repeat_id=#{repeatId},</if>
+            <if test="grantId != null">grant_id=#{grantId},</if>
+            <if test="allowBy != null">allow_by=#{allowBy},</if>
+            <if test="repeatBy != null">repeat_by=#{repeatBy},</if>
+            <if test="grantBy != null">grant_by=#{grantBy},</if>
+        </trim>
+        where transaction_code=#{transactionCode}
+    </update>
+
+    <update id="updateAllow" parameterType="ZyjrCarLoan">
+        update zyjr_car_loan
+        set allow_id=#{allowId},
+        allow_by=#{allowBy}
+        where transaction_code=#{transactionCode}
+    </update>
+
+    <update id="updateRepeat" parameterType="ZyjrCarLoan">
+        update zyjr_car_loan
+        set repeat_id=#{repeatId},
+        repeat_by=#{repeatBy}
+        where user_id=#{userId} and transaction_code=#{transactionCode}
+    </update>
+
+    <update id="updateGrant" parameterType="ZyjrCarLoan">
+        update zyjr_car_loan
+        set grant_id=#{grantId},
+        grant_by=#{grantBy}
+        where user_id=#{userId} and transaction_code=#{transactionCode}
     </update>
 
     <delete id="deleteZyjrCarLoanById" parameterType="Long">

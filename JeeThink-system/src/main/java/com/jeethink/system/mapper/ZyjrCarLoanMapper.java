@@ -20,6 +20,7 @@ public interface ZyjrCarLoanMapper
      */
     public ZyjrCarLoan selectZyjrCarLoanById(@Param("userId") Long userId, @Param("transactionCode") String transactionCode);
 
+    public ZyjrCarLoan selectHandle(String transactionCode);
     /**
      * 查询【请填写功能名称】列表
      * 
@@ -43,6 +44,12 @@ public interface ZyjrCarLoanMapper
      * @return 结果
      */
     public int updateZyjrCarLoan(ZyjrCarLoan zyjrCarLoan);
+
+    public int updateHandle(ZyjrCarLoan q);
+
+    public int updateAllow(ZyjrCarLoan q);
+    public int updateRepeat(ZyjrCarLoan q);
+    public int updateGrant(ZyjrCarLoan q);
 
     /**
      * 删除【请填写功能名称】

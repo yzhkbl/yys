@@ -105,6 +105,15 @@ public class ZyjrCarLoan extends BaseEntity
     private String allowBy;
     private String repeatBy;
     private String grantBy;
+    private String handleName;
+
+    public String getHandleName() {
+        return handleName;
+    }
+
+    public void setHandleName(String handleName) {
+        this.handleName = handleName;
+    }
 
     public Long getAllowId() {
         return allowId;
@@ -374,6 +383,7 @@ public class ZyjrCarLoan extends BaseEntity
                 .append("allowBy",getAllowBy())
                 .append("repeatBy",getRepeatBy())
                 .append("grantBy",getGrantBy())
+                .append("handleName",getHandleName())
             .toString();
     }
 }
