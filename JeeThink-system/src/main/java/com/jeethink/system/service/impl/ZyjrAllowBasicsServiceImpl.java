@@ -123,6 +123,7 @@ public class ZyjrAllowBasicsServiceImpl implements IZyjrAllowBasicsService
             ZyjrDaiqianAccout a=zyjrDaiqianAccoutService.selectZyjrDaiqianAccoutByIds(zyjrAllowBasics.getTransactionCode());
             map.put("Account",null);
             map.put("Account2",null);
+            map.put("type",a.getType());
             if(a!=null){
                 ZyjrCarAccount b=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountId());
                 ZyjrCarAccount c=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountOne());
