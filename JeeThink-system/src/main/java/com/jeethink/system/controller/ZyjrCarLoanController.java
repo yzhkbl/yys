@@ -1,6 +1,9 @@
 package com.jeethink.system.controller;
 
 import java.util.List;
+
+import com.jeethink.system.domain.ZyjrBusiness;
+import com.jeethink.system.mapper.ZyjrCarLoanMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +35,8 @@ public class ZyjrCarLoanController extends BaseController
 {
     @Autowired
     private IZyjrCarLoanService zyjrCarLoanService;
+    @Autowired
+    private ZyjrCarLoanMapper zyjrCarLoanMapper;
 
     /**
      * 查询【请填写功能名称】列表
@@ -100,4 +105,77 @@ public class ZyjrCarLoanController extends BaseController
     {
         return toAjax(zyjrCarLoanService.deleteZyjrCarLoanByIds(ids));
     }
+
+    @PostMapping("/allow")
+    public AjaxResult allow(@RequestBody ZyjrCarLoan q){
+        ZyjrCarLoan zyjrCarLoan = zyjrCarLoanMapper.selectHandle(q.getTransactionCode());
+        if(q.getHandleName()!=null) {
+            if (zyjrCarLoan != null && zyjrCarLoan.getAllowId() != null) {
+                AjaxResult json = new AjaxResult();
+                json.put("code", 400);
+                json.put("msg", "已有操作人");
+                return json;
+            } else {
+                ZyjrCarLoan a = new ZyjrCarLoan();
+                a.setAllowId(q.getUserId());
+                a.setAllowBy(q.getHandleName());
+                a.setTransactionCode(q.getTransactionCode());
+                a.setUserId(q.getUserId());
+                return AjaxResult.success(zyjrCarLoanMapper.updateHandle(a));
+            }
+        }else {
+
+            return AjaxResult.success(zyjrCarLoanMapper.updateAllow(q));
+        }
+    }
+
+
+
+    @PostMapping("/repeat")
+    public AjaxResult repeat(@RequestBody ZyjrCarLoan q){
+        ZyjrCarLoan zyjrCarLoan = zyjrCarLoanMapper.selectHandle(q.getTransactionCode());
+        if(q.getHandleName()!=null) {
+            if (zyjrCarLoan != null && zyjrCarLoan.getRepeatId() != null) {
+                AjaxResult json = new AjaxResult();
+                json.put("code", 400);
+                json.put("msg", "已有操作人");
+                return json;
+            } else {
+                ZyjrCarLoan a = new ZyjrCarLoan();
+                a.setRepeatId(q.getUserId());
+                a.setRepeatBy(q.getHandleName());
+                a.setTransactionCode(q.getTransactionCode());
+                a.setUserId(q.getUserId());
+                return AjaxResult.success(zyjrCarLoanMapper.updateHandle(a));
+            }
+        }else {
+
+            return AjaxResult.success(zyjrCarLoanMapper.updateRepeat(q));
+        }
+    }
+
+
+    @PostMapping("/grant")
+    public AjaxResult grant(@RequestBody ZyjrCarLoan q){
+        ZyjrCarLoan zyjrCarLoan = zyjrCarLoanMapper.selectHandle(q.getTransactionCode());
+        if(q.getHandleName()!=null) {
+            if (zyjrCarLoan != null && zyjrCarLoan.getGrantId() != null) {
+                AjaxResult json = new AjaxResult();
+                json.put("code", 400);
+                json.put("msg", "已有操作人");
+                return json;
+            } else {
+                ZyjrCarLoan a = new ZyjrCarLoan();
+                a.setGrantId(q.getUserId());
+                a.setGrantBy(q.getHandleName());
+                a.setTransactionCode(q.getTransactionCode());
+                a.setUserId(q.getUserId());
+                return AjaxResult.success(zyjrCarLoanMapper.updateHandle(a));
+            }
+        }else {
+
+            return AjaxResult.success(zyjrCarLoanMapper.updateGrant(q));
+        }
+    }
+
 }
