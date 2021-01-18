@@ -34,4 +34,5 @@ public interface StageExamineMapper {
     GrantVo findByGrant(String transactionCode);
 
     List<ZyjrGrant>findAllow();
+
 }

@@ -53,7 +53,7 @@
         where transaction_code=#{transactionCode}
     </select>
     <select id="list" resultType="com.jeethink.system.domain.vo.ZyjrGrant">
-        select a.id, a.team,a.operator,a.update_by,a.false_operator,a.false_operator_id, a.car_information, d.actual_price, d.loan_amount, d.repayment_term, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name as name,c.approval_type
+        select a.id, a.team,a.operator,d.repeat_by,a.false_operator,a.false_operator_id, a.car_information, d.actual_price, d.loan_amount, d.repayment_term, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name as name,c.approval_type
          from zyjr_business a
          left join zyjr_car_loan d on d.transaction_code=a.transaction_code
          left join zyjr_borrower b on b.transaction_code=d.transaction_code
@@ -61,7 +61,7 @@
          where a.transaction_code in (select transaction_code from zyjr_allow_opinion where approval_type=1 and c.approval_type!=1 or c.approval_type is null)
     </select>
     <select id="findGrant" resultType="com.jeethink.system.domain.vo.ZyjrGrant">
-        select a.id, a.team,a.operator,a.update_by,a.false_operator,a.false_operator_id, a.car_information, d.actual_price, d.loan_amount, d.repayment_term, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name as name,c.approval_type
+        select a.id, a.team,a.operator,d.grant_by,a.false_operator,a.false_operator_id, a.car_information, d.actual_price, d.loan_amount, d.repayment_term, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name as name,c.approval_type
          from zyjr_business a
          left join zyjr_car_loan d on d.transaction_code=a.transaction_code
          left join zyjr_borrower b on b.transaction_code=d.transaction_code
@@ -69,7 +69,7 @@
          where a.transaction_code in (select transaction_code from zyjr_repeat_opinion where approval_type=1 and c.approval_type!=1 or c.approval_type is null)
     </select>
     <insert id="insertGrantOpinion" parameterType="com.jeethink.system.domain.ZyjrGrantOpinion">
-        insert into zyjr_repeat_opinion
+        insert into zyjr_grant_opinion
         (advise, approval_type, transaction_code, user_id)
         values
         (#{advise},#{approvalType},#{transactionCode},#{userId})
@@ -88,7 +88,7 @@
          where a.transaction_code=#{transaction_code}
     </select>
     <select id="findAllow" resultType="com.jeethink.system.domain.vo.ZyjrGrant">
-        SELECT a.id, a.team,a.operator,a.update_by,a.false_operator,a.false_operator_id, a.car_information, d.actual_price, d.loan_amount, d.repayment_term, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name AS NAME,c.approval_type
+        SELECT a.id, a.team,a.operator,d.allow_by,a.false_operator,a.false_operator_id, a.car_information, d.actual_price, d.loan_amount, d.repayment_term, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name AS NAME,c.approval_type
          FROM zyjr_business a
          LEFT JOIN zyjr_borrower b ON b.transaction_code=a.transaction_code
          LEFT JOIN zyjr_car_loan d ON d.transaction_code=b.transaction_code
