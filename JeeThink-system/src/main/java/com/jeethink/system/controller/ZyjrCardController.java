@@ -125,77 +125,7 @@ public class ZyjrCardController extends BaseController
 
         JSONObject jsons = encryptData(json3.toString(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo, codes);
 
-        JSONObject results = HttpPostUtil.doPostRequestJSON(
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "http://114.55.55.41:18999/bank/route", jsons);
+        JSONObject results = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", jsons);
 
         return AjaxResult.error();
     }

@@ -9,8 +9,10 @@ import java.util.concurrent.TimeUnit;
 
 import com.alibaba.fastjson.JSON;
 import com.jeethink.common.config.JeeThinkConfig;
+import com.jeethink.common.core.domain.entity.SysUser;
 import com.jeethink.common.core.redis.RedisCache;
 import com.jeethink.common.utils.DateUtils;
+import com.jeethink.common.utils.SecurityUtils;
 import com.jeethink.common.utils.file.FileUploadUtils;
 import com.jeethink.common.utils.file.FileUtils;
 import com.jeethink.common.utils.http.HttpUtils;
@@ -19,6 +21,7 @@ import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.*;
 import com.jeethink.system.mapper.*;
 import com.jeethink.system.service.IExamineService;
+import com.jeethink.system.service.ISysUserService;
 import com.jeethink.system.util.*;
 import net.sf.json.JSONObject;
 import org.apache.commons.collections.map.LinkedMap;
@@ -73,6 +76,8 @@ public class test extends BaseController {
     private ZyjrAllowContactsMapper zyjrAllowContactsMapper;
     @Autowired
     private ZyjrKaikaMapper zyjrKaikaMapper;
+    @Autowired
+    private ISysUserService userService;
 
     private static String oCode = "sfzzm";
     private static String pCode = "sfzfm";
@@ -326,7 +331,6 @@ public class test extends BaseController {
             return AjaxResult.success((Object)4);
         }
 
-        System.err.println(codes);
         String dataPublicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCFZnUVz07wuQfI5kf3uOaaJcpq*W3yQhJnIX2k-EKwKZaSkyuXutk0TXqwT-GXxIQJqmkjLup*HN7H1uF7JMfxl00AnncHB82LqUQKQwf5wcdDTNhvKLQtjRoLE3ry6ARoYHu5AkZPKW7sMM4o*UegPlSr45p4ZsK0iVdjqmgZfwIDAQAB";
         String signPrivateKey = "MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAKOoelzwAU5Asw9zknkTYGvfZr0Ap6ZDL6NMSNRYZ2maVJd5xOfSRqTkEq1Ne*h2Qe3wCKdxo0SuCVWNjM-nd3af*fb4YcWdlDuHaA1s28I5hZtVp2sbF*nvgdeUwSz-X0hQGcaqVzcTKDH9l2XuMC**OEofyyosU2jvEIGdwqSNAgMBAAECgYAkojvxvc*tApKSbN5mt82nl-RZbmIYt4VcWmEbF0bevqsc1SccdVdW5a7AmE2aNY6AgnCNesR-RS3Vtr-Ech2tVfwMXypJsXN5hq0uyM6iDkE6kFhGL1zui72u9RQJvdB7CsNfEONIaFlX46MUOdF0fR2n-sGLMc1qzpj*L3k6QQJBAOJfQRF6ehE5d1Sm*7q9uObte1ubako89TSGZmCOk-3vpm9CRTey-18Ids98yMNg3Wy53M4oEzjwjdnnulX9PpUCQQC5E-NySYbigVCsO5Tjr*iAA1ykdGIgaRM45s2tvbMLYQdZYhnkPRjSj*Y7I915cp5klQ75T260InPYQqBkb2gZAkEAjRYtKcWZ*s5EL4B7eCHy8gqlTa0JjAd*FCSH-joexq-snX9CQLrRKtvNoPf28L6YgsE8e0jC4kQbROqGWj2iGQJBAKkXVUCBdL7UrsPs26b6PE1YxPdrbYt29Jz0Ic4ulro6t*AuBMHGIDugRRSbO*mNkrEKjlew-s*M*pIGrUuVjWECQQC3qMemXCmqp7lAaSqYy9Rk8HNVgEeDqJfhcIS4SrRH0DSExPE9yfhadaiC4IIYmmK5L*2V3dxIUI7KXbeO*ptz";
         String assurerNo = "S36029951";
@@ -399,7 +403,6 @@ public class test extends BaseController {
     public AjaxResult testFiles(String file) {
         String a = androidUpload.upload(file);
         String as = "http://114.215.186.186:8080" + a;
-        System.err.println(as);
         return AjaxResult.success("操作成功",as);
         //return AjaxResult.success("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3363295869,2467511306&fm=26&gp=0.jpg");
     }
@@ -447,7 +450,6 @@ public class test extends BaseController {
     @ApiOperation("111111111")
     public AjaxResult delete(String path) {
         String paths = "C:/demo";
-        System.err.println(path);
 
         int a = sysFileInfoMapper.deleteSysFileInfoByPath(path);
         if (a > 0) {
@@ -462,7 +464,6 @@ public class test extends BaseController {
             }
         }
 
-        System.err.println(a);
         return AjaxResult.success(a);
     }
 
@@ -536,7 +537,6 @@ public class test extends BaseController {
         String str= a.get(0).getFilePath();
         HashMap hashMap = JSON.parseObject(str, HashMap.class);
         hashMap.forEach((k, v) ->{
-            System.out.println("key:value = " + k + ":" + v);
             OccptnVo o=new OccptnVo();
             o.setId(v);
             o.setOccptn(k);
@@ -711,8 +711,45 @@ public class test extends BaseController {
 
     public static void main(String[] args) {
         String a="123456789";
-        System.err.println(a.substring(a.length()-4));
     }
+    @ResponseBody
+    @PostMapping("PWD")
+    public AjaxResult pWD(Long userId,String newPassword,String oldPassword){
+        SysUser sysUser = userService.selectUserById(userId);
+        String password=sysUser.getPassword();
+        String userName=sysUser.getUserName();
+        if (!SecurityUtils.matchesPassword(oldPassword, password))
+        {
+            return AjaxResult.error("修改密码失败，旧密码错误");
+        }
+        if (SecurityUtils.matchesPassword(newPassword, password))
+        {
+            return AjaxResult.error("新密码不能与旧密码相同");
+        }
+        if (userService.resetUserPwd(userName, SecurityUtils.encryptPassword(newPassword)) > 0)
+        {
+            // 更新缓存用户密码
+           /* loginUser.getUser().setPassword(SecurityUtils.encryptPassword(newPassword));
+            tokenService.setLoginUser(loginUser);*/
+            return AjaxResult.success();
+        }
+        return AjaxResult.error("修改密码异常，请联系管理员");
+    }
+
+    @ResponseBody
+    @PostMapping("forget")
+    public AjaxResult pWsD(String userName,String newPassword){
+
+        if (userService.resetUserPwd(userName, SecurityUtils.encryptPassword(newPassword)) > 0)
+        {
+            // 更新缓存用户密码
+           /* loginUser.getUser().setPassword(SecurityUtils.encryptPassword(newPassword));
+            tokenService.setLoginUser(loginUser);*/
+            return AjaxResult.success();
+        }
+        return AjaxResult.error("修改密码异常，请联系管理员");
+    }
+
 
 
 }

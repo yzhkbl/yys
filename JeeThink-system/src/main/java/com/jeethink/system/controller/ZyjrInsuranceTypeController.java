@@ -39,7 +39,7 @@ public class ZyjrInsuranceTypeController extends BaseController
     /**
      * 查询insuranceType列表
      */
-    @PreAuthorize("@ss.hasPermi('orginization:insuranceType:list')")
+    @PreAuthorize("@ss.hasPermi('organization:insuranceType:list')")
     @GetMapping("/list")
     public TableDataInfo list(ZyjrInsuranceType zyjrInsuranceType)
     {
@@ -51,7 +51,7 @@ public class ZyjrInsuranceTypeController extends BaseController
     /**
      * 导出insuranceType列表
      */
-    @PreAuthorize("@ss.hasPermi('orginization:insuranceType:export')")
+    @PreAuthorize("@ss.hasPermi('organization:insuranceType:export')")
     @Log(title = "insuranceType", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(ZyjrInsuranceType zyjrInsuranceType)
@@ -111,7 +111,7 @@ public class ZyjrInsuranceTypeController extends BaseController
     /**
      * 删除insuranceType
      */
-    @PreAuthorize("@ss.hasPermi('orginization:insuranceType:remove')")
+    @PreAuthorize("@ss.hasPermi('organization:insuranceType:remove')")
     @Log(title = "insuranceType", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

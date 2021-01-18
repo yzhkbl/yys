@@ -172,6 +172,7 @@ public class ZyjrDaihouController extends BaseController
     public AjaxResult sg(@RequestBody ZyjrDaihou zyjrDaihou)
     {
         if(zyjrDaihou!=null&&zyjrDaihou.getState().equals("1")){
+
             ZyjrCailiao zyjrCailiao=new ZyjrCailiao();
             zyjrCailiao.setTransactionCode(zyjrDaihou.getTransactionCode());
             List<ZyjrCailiao> zyjrCailiaos = zyjrCailiaoMapper.selectZyjrCailiaoList(zyjrCailiao);

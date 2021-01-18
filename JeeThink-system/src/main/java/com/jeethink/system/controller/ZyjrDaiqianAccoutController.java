@@ -70,8 +70,9 @@ public class ZyjrDaiqianAccoutController extends BaseController
         ZyjrDaiqian as=examineMapper.selByDaiqian(zyjrDaiqian.getTransactionCode());
         if(as!=null){
             examineMapper.updateByDaiqian(zyjrDaiqian);
+        }else{
+            examineMapper.insertDaiqian(zyjrDaiqian);
         }
-        examineMapper.insertDaiqian(zyjrDaiqian);
         if(zyjrDaiqian.getState().equals("2")){
             DqVo a=examineMapper.selectDQ(zyjrDaiqian.getTransactionCode());
             ZyjrGps zyjrGps=new ZyjrGps();
