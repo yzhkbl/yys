@@ -99,7 +99,62 @@ public class ZyjrCarLoan extends BaseEntity
     @Excel(name = "身份识别码")
     private Long userId;
 
-    public void setId(Long id) 
+    private Long allowId;
+    private Long repeatId;
+    private Long grantId;
+    private String allowBy;
+    private String repeatBy;
+    private String grantBy;
+
+    public Long getAllowId() {
+        return allowId;
+    }
+
+    public void setAllowId(Long allowId) {
+        this.allowId = allowId;
+    }
+
+    public Long getRepeatId() {
+        return repeatId;
+    }
+
+    public void setRepeatId(Long repeatId) {
+        this.repeatId = repeatId;
+    }
+
+    public Long getGrantId() {
+        return grantId;
+    }
+
+    public void setGrantId(Long grantId) {
+        this.grantId = grantId;
+    }
+
+    public String getAllowBy() {
+        return allowBy;
+    }
+
+    public void setAllowBy(String allowBy) {
+        this.allowBy = allowBy;
+    }
+
+    public String getRepeatBy() {
+        return repeatBy;
+    }
+
+    public void setRepeatBy(String repeatBy) {
+        this.repeatBy = repeatBy;
+    }
+
+    public String getGrantBy() {
+        return grantBy;
+    }
+
+    public void setGrantBy(String grantBy) {
+        this.grantBy = grantBy;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }
@@ -313,6 +368,12 @@ public class ZyjrCarLoan extends BaseEntity
             .append("transactionCode", getTransactionCode())
             .append("orderState", getOrderState())
             .append("userId", getUserId())
+                .append("allowId",getAllowId())
+                .append("repeatId",getRepeatId())
+                .append("grantId",getGrantId())
+                .append("allowBy",getAllowBy())
+                .append("repeatBy",getRepeatBy())
+                .append("grantBy",getGrantBy())
             .toString();
     }
 }
