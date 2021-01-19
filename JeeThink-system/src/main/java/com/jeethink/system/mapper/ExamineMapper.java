@@ -44,9 +44,9 @@ public interface ExamineMapper {
     /**借款人信息查询*/
     ZyjrBorrower findByBorrower(Integer userId);
     /**关联人信息查询*/
-    ZyjrRelation findByRelation(Integer userId);
+    List<ZyjrRelation> findByRelation(Integer userId);
     /**担保人信息查询*/
-    ZyjrGuarantee findByGuarantee(Integer userId);
+    List<ZyjrGuarantee> findByGuarantee(Integer userId);
     /**业务信息查询*/
     ZyjrBusiness findByBusiness(Integer userId);
 
@@ -85,4 +85,10 @@ public interface ExamineMapper {
     ZyjrApp findAppCode();
 
     ZyjrDaiqian selDaiqianById(String id);
+
+    int deleteBusiness(Long userId);
+    int deleteBorrower(Long userId);
+    int deleteRelation(Long userId);
+    int deleteGuarantee(Long userId);
+    int deleteStartPage(Long userId);
 }

@@ -82,14 +82,14 @@ public class ExamineServiceImpl implements IExamineService {
     }
 
     @Override
-    public ZyjrRelation findByRelation(Integer userId) {
-        ZyjrRelation relation = examineDao.findByRelation(userId);
+    public List<ZyjrRelation> findByRelation(Integer userId) {
+        List<ZyjrRelation> relation = examineDao.findByRelation(userId);
         return relation;
     }
 
     @Override
-    public ZyjrGuarantee findByGuarantee(Integer userId) {
-        ZyjrGuarantee guarantee = examineDao.findByGuarantee(userId);
+    public List<ZyjrGuarantee> findByGuarantee(Integer userId) {
+        List<ZyjrGuarantee> guarantee = examineDao.findByGuarantee(userId);
         return guarantee;
     }
 

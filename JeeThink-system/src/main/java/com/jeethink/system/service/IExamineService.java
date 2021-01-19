@@ -16,8 +16,8 @@ public interface IExamineService {
     int addByGuarantee(ZyjrGuarantee q);
     int addByBusiness(ZyjrBusiness q);
     ZyjrBorrower findByBorrower(Integer userId);
-    ZyjrRelation findByRelation(Integer userId);
-    ZyjrGuarantee findByGuarantee(Integer userId);
+    List<ZyjrRelation> findByRelation(Integer userId);
+    List<ZyjrGuarantee> findByGuarantee(Integer userId);
     ZyjrBusiness findByBusiness(Integer userId);
     Map<String,Object> find(Integer userId);
     int addByStart(ZyjrStartPage q);

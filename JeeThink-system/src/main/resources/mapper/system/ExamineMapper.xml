@@ -606,4 +606,25 @@ LEFT JOIN zyjr_daiqian_accout a on a.transaction_code=c.transaction_code where a
         from zyjr_app
         where id=#{id}
     </select>
+
+    <delete id="deleteBusiness">
+        delete from zyjr_business
+        where order_state=0 and user_id=#{userId}
+    </delete>
+    <delete id="deleteBorrower">
+        delete from zyjr_borrower
+        where order_state=0 and user_id=#{userId}
+    </delete>
+    <delete id="deleteRelation">
+        delete from zyjr_relation
+        where order_state=0 and user_id=#{userId}
+    </delete>
+    <delete id="deleteGuarantee">
+        delete from zyjr_guarantee
+        where order_state=0 and user_id=#{userId}
+    </delete>
+    <delete id="deleteStartPage">
+        delete from zyjr_start_page
+        where order_state=0 and user_id=#{userId}
+    </delete>
 </mapper>
