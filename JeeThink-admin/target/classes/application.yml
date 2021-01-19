@@ -32,10 +32,10 @@ server:
     min-spare-threads: 30
 
 # 日志配置
-logging:
-  level:
-    com.jeethink: debug
-    org.springframework: warn
+#logging:
+#  level:
+#    com.jeethink: debug
+#    org.springframework: warn
 
 # Spring配置
 spring:
@@ -101,7 +101,7 @@ token:
   # 令牌密钥
   secret: abcdefghijklmnopqrstuvwxyz
   # 令牌有效期（默认30分钟）
-  expireTime: 10080
+  expireTime: 700
 
 # MyBatis配置
 mybatis:

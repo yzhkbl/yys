@@ -3,6 +3,7 @@ package com.jeethink.system.controller;
 import java.util.List;
 
 import com.jeethink.common.utils.StringUtils;
+import com.jeethink.system.domain.vo.FenqiVo;
 import com.jeethink.system.mapper.ZyjrCailiaoMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +92,13 @@ public class ZyjrCailiaoController extends BaseController
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
         return AjaxResult.success(zyjrCailiaoService.selectZyjrCailiaoById(id));
+    }
+
+    @GetMapping()
+    public AjaxResult getfenqi(String transactionCode){
+                FenqiVo fenqiVo=new FenqiVo();
+
+        return AjaxResult.success();
     }
 
     /**
