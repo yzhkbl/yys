@@ -64,13 +64,13 @@ public class ExamineController extends BaseController {
 
     @RequestMapping("/find/relation")
     public AjaxResult findRelation(Integer userId){
-        ZyjrRelation relation = examineService.findByRelation(userId);
+        List<ZyjrRelation> relation = examineService.findByRelation(userId);
         return AjaxResult.success(relation);
     }
 
     @RequestMapping("/find/guarantee")
     public AjaxResult findGuarantee(Integer userId){
-        ZyjrGuarantee guarantee= examineService.findByGuarantee(userId);
+        List<ZyjrGuarantee> guarantee= examineService.findByGuarantee(userId);
         return AjaxResult.success(guarantee);
     }
 
@@ -176,6 +176,16 @@ public class ExamineController extends BaseController {
     @GetMapping("/app/code")
     public AjaxResult findAppCode(){
         return AjaxResult.success(examineMapper.findAppCode());
+    }
+
+    @PostMapping("/cancel")
+    public AjaxResult cancelOrder(Long userId){
+        examineMapper.deleteBusiness(userId);
+        examineMapper.deleteBorrower(userId);
+        examineMapper.deleteRelation(userId);
+        examineMapper.deleteGuarantee(userId);
+        examineMapper.deleteStartPage(userId);
+        return AjaxResult.success();
     }
 }
 
