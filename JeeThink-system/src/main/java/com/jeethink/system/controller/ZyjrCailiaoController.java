@@ -1,10 +1,16 @@
 package com.jeethink.system.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import com.alibaba.fastjson.JSON;
 import com.jeethink.common.utils.StringUtils;
-import com.jeethink.system.domain.vo.FenqiVo;
+import com.jeethink.system.domain.*;
+import com.jeethink.system.domain.vo.*;
 import com.jeethink.system.mapper.ZyjrCailiaoMapper;
+import com.jeethink.system.mapper.ZyjrCarLoanMapper;
+import com.jeethink.system.mapper.ZyjrJzgAddOrderMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +25,6 @@ import com.jeethink.common.annotation.Log;
 import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
 import com.jeethink.common.enums.BusinessType;
-import com.jeethink.system.domain.ZyjrCailiao;
 import com.jeethink.system.service.IZyjrCailiaoService;
 import com.jeethink.common.utils.poi.ExcelUtil;
 import com.jeethink.common.core.page.TableDataInfo;
@@ -38,6 +43,10 @@ public class ZyjrCailiaoController extends BaseController
     private IZyjrCailiaoService zyjrCailiaoService;
     @Autowired
     private ZyjrCailiaoMapper zyjrCailiaoMapper;
+    @Autowired
+    private ZyjrCarLoanMapper zyjrCarLoanMapper;
+    @Autowired
+    private ZyjrJzgAddOrderMapper zyjrJzgAddOrderMapper;
 
     /**
      * 查询【请填写功能名称】列表
@@ -94,11 +103,43 @@ public class ZyjrCailiaoController extends BaseController
         return AjaxResult.success(zyjrCailiaoService.selectZyjrCailiaoById(id));
     }
 
-    @GetMapping()
+    @GetMapping("fenqi")
     public AjaxResult getfenqi(String transactionCode){
-                FenqiVo fenqiVo=new FenqiVo();
+        ZyjrCarLoan a=zyjrCarLoanMapper.selectHandle(transactionCode);
+        ZyjrJzgAddOrder jzg=zyjrJzgAddOrderMapper.selectZyjrJzgAddOrderByTransactionCode(transactionCode);
 
-        return AjaxResult.success();
+        HashMap hashMap = JSON.parseObject(jzg.getData(),HashMap.class);
+        System.err.println(hashMap.get("Data"));
+        HashMap hashMap1=JSON.parseObject(hashMap.get("Data").toString(),HashMap.class);
+        hashMap1.get("");
+        FenqiVo fenqiVo=new FenqiVo();
+        Pub pub=new Pub();
+        FenqiReq fenqiReq=new FenqiReq();
+        ZyjrCarType2 zyjrCarType2=new ZyjrCarType2();
+        //zyjrCarType2.setCarPrice(a.get);
+        fenqiReq.setCarInfo(zyjrCarType2);
+        ZyjrStagingInformation2 zyjrStagingInformation2=new ZyjrStagingInformation2();
+        fenqiReq.setStageInfo(zyjrStagingInformation2);
+        ZyjrGuaranteeinfo2 zyjrGuaranteeinfo2=new ZyjrGuaranteeinfo2();
+        fenqiReq.setGuaranteeInfo(zyjrGuaranteeinfo2);
+        ZyjrFinanceChargeCardInfo2 zyjrFinanceChargeCardInfo2=new ZyjrFinanceChargeCardInfo2();
+        fenqiReq.setFinanceChargeCardInfo(zyjrFinanceChargeCardInfo2);
+        ZyjrPayMentInfo2 zyjrPayMentInfo2=new ZyjrPayMentInfo2();
+        fenqiReq.setPayMentInfo(zyjrPayMentInfo2);
+        JkrclVo jkrclVo=new JkrclVo();
+        List<MatesVo> mates=new ArrayList<>();
+        MatesVo matesVo=new MatesVo();
+        mates.add(matesVo);
+        List<Materials> materials=new ArrayList<>();
+        Materials materials1=new Materials();
+        materials1.setMates(mates);
+        materials.add(materials1);
+        jkrclVo.setMaterials(materials);
+        fenqiReq.setJKRCL(jkrclVo);
+        fenqiVo.setPub(pub);
+        fenqiVo.setReq(fenqiReq);
+
+        return AjaxResult.success(fenqiVo);
     }
 
     /**

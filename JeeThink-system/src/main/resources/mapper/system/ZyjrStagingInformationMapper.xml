@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrStagingInformationMapper">
+    
+    <resultMap type="ZyjrStagingInformation" id="ZyjrStagingInformationResult">
+        <result property="dealer"    column="dealer"    />
+        <result property="dscode"    column="dscode"    />
+        <result property="contractSfRatio"    column="contract_sf_ratio"    />
+        <result property="repayPeriod"    column="repay_period"    />
+        <result property="marketingArchivesNum"    column="marketing_archives_num"    />
+        <result property="commissionFeeRate"    column="commission_fee_rate"    />
+        <result property="businessModel"    column="business_model"    />
+        <result property="firstMonthMoney"    column="first_month_money"    />
+        <result property="productCode"    column="product_code"    />
+        <result property="willResign"    column="will_resign"    />
+        <result property="repaymentType"    column="repayment_type"    />
+        <result property="stageMoney"    column="stage_money"    />
+        <result property="sfMoney"    column="sf_money"    />
+        <result property="sfProportion"    column="sf_proportion"    />
+        <result property="monthincome"    column="monthincome"    />
+        <result property="monthhomeincome"    column="monthhomeincome"    />
+        <result property="property"    column="property"    />
+        <result property="houseArea"    column="house_area"    />
+        <result property="othdebtbal"    column="othdebtbal"    />
+        <result property="monrepayamt"    column="monrepayamt"    />
+        <result property="insureamt"    column="insureamt"    />
+        <result property="contractLoanMoney"    column="contract_loan_money"    />
+        <result property="loanMoney"    column="loan_money"    />
+        <result property="actualLoanAmount"    column="actual_loan_amount"    />
+        <result property="homeFlag"    column="home_flag"    />
+        <result property="bussFlag"    column="buss_flag"    />
+        <result property="inStdPay"    column="in_std_pay"    />
+        <result property="poundageAmount"    column="poundage_amount"    />
+        <result property="annualInterestRate"    column="annual_interest_rate"    />
+        <result property="id"    column="id"    />
+    </resultMap>
+
+    <sql id="selectZyjrStagingInformationVo">
+        select dealer, dscode, contract_sf_ratio, repay_period, marketing_archives_num, commission_fee_rate, business_model, first_month_money, product_code, will_resign, repayment_type, stage_money, sf_money, sf_proportion, monthincome, monthhomeincome, property, house_area, othdebtbal, monrepayamt, insureamt, contract_loan_money, loan_money, actual_loan_amount, home_flag, buss_flag, in_std_pay, poundage_amount, annual_interest_rate, id from zyjr_staging_information
+    </sql>
+
+    <select id="selectZyjrStagingInformationList" parameterType="ZyjrStagingInformation" resultMap="ZyjrStagingInformationResult">
+        <include refid="selectZyjrStagingInformationVo"/>
+        <where>  
+            <if test="dealer != null  and dealer != ''"> and dealer = #{dealer}</if>
+            <if test="dscode != null  and dscode != ''"> and dscode = #{dscode}</if>
+            <if test="contractSfRatio != null "> and contract_sf_ratio = #{contractSfRatio}</if>
+            <if test="repayPeriod != null "> and repay_period = #{repayPeriod}</if>
+            <if test="marketingArchivesNum != null  and marketingArchivesNum != ''"> and marketing_archives_num = #{marketingArchivesNum}</if>
+            <if test="commissionFeeRate != null  and commissionFeeRate != ''"> and commission_fee_rate = #{commissionFeeRate}</if>
+            <if test="businessModel != null "> and business_model = #{businessModel}</if>
+            <if test="firstMonthMoney != null "> and first_month_money = #{firstMonthMoney}</if>
+            <if test="productCode != null  and productCode != ''"> and product_code = #{productCode}</if>
+            <if test="willResign != null "> and will_resign = #{willResign}</if>
+            <if test="repaymentType != null "> and repayment_type = #{repaymentType}</if>
+            <if test="stageMoney != null "> and stage_money = #{stageMoney}</if>
+            <if test="sfMoney != null "> and sf_money = #{sfMoney}</if>
+            <if test="sfProportion != null "> and sf_proportion = #{sfProportion}</if>
+            <if test="monthincome != null "> and monthincome = #{monthincome}</if>
+            <if test="monthhomeincome != null "> and monthhomeincome = #{monthhomeincome}</if>
+            <if test="property != null "> and property = #{property}</if>
+            <if test="houseArea != null "> and house_area = #{houseArea}</if>
+            <if test="othdebtbal != null "> and othdebtbal = #{othdebtbal}</if>
+            <if test="monrepayamt != null "> and monrepayamt = #{monrepayamt}</if>
+            <if test="insureamt != null "> and insureamt = #{insureamt}</if>
+            <if test="contractLoanMoney != null "> and contract_loan_money = #{contractLoanMoney}</if>
+            <if test="loanMoney != null "> and loan_money = #{loanMoney}</if>
+            <if test="actualLoanAmount != null "> and actual_loan_amount = #{actualLoanAmount}</if>
+            <if test="homeFlag != null  and homeFlag != ''"> and home_flag = #{homeFlag}</if>
+            <if test="bussFlag != null  and bussFlag != ''"> and buss_flag = #{bussFlag}</if>
+            <if test="inStdPay != null "> and in_std_pay = #{inStdPay}</if>
+            <if test="poundageAmount != null "> and poundage_amount = #{poundageAmount}</if>
+            <if test="annualInterestRate != null "> and annual_interest_rate = #{annualInterestRate}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrStagingInformationById" parameterType="Long" resultMap="ZyjrStagingInformationResult">
+        <include refid="selectZyjrStagingInformationVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrStagingInformation" parameterType="ZyjrStagingInformation" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_staging_information
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dealer != null">dealer,</if>
+            <if test="dscode != null">dscode,</if>
+            <if test="contractSfRatio != null">contract_sf_ratio,</if>
+            <if test="repayPeriod != null">repay_period,</if>
+            <if test="marketingArchivesNum != null">marketing_archives_num,</if>
+            <if test="commissionFeeRate != null">commission_fee_rate,</if>
+            <if test="businessModel != null">business_model,</if>
+            <if test="firstMonthMoney != null">first_month_money,</if>
+            <if test="productCode != null">product_code,</if>
+            <if test="willResign != null">will_resign,</if>
+            <if test="repaymentType != null">repayment_type,</if>
+            <if test="stageMoney != null">stage_money,</if>
+            <if test="sfMoney != null">sf_money,</if>
+            <if test="sfProportion != null">sf_proportion,</if>
+            <if test="monthincome != null">monthincome,</if>
+            <if test="monthhomeincome != null">monthhomeincome,</if>
+            <if test="property != null">property,</if>
+            <if test="houseArea != null">house_area,</if>
+            <if test="othdebtbal != null">othdebtbal,</if>
+            <if test="monrepayamt != null">monrepayamt,</if>
+            <if test="insureamt != null">insureamt,</if>
+            <if test="contractLoanMoney != null">contract_loan_money,</if>
+            <if test="loanMoney != null">loan_money,</if>
+            <if test="actualLoanAmount != null">actual_loan_amount,</if>
+            <if test="homeFlag != null">home_flag,</if>
+            <if test="bussFlag != null">buss_flag,</if>
+            <if test="inStdPay != null">in_std_pay,</if>
+            <if test="poundageAmount != null">poundage_amount,</if>
+            <if test="annualInterestRate != null">annual_interest_rate,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dealer != null">#{dealer},</if>
+            <if test="dscode != null">#{dscode},</if>
+            <if test="contractSfRatio != null">#{contractSfRatio},</if>
+            <if test="repayPeriod != null">#{repayPeriod},</if>
+            <if test="marketingArchivesNum != null">#{marketingArchivesNum},</if>
+            <if test="commissionFeeRate != null">#{commissionFeeRate},</if>
+            <if test="businessModel != null">#{businessModel},</if>
+            <if test="firstMonthMoney != null">#{firstMonthMoney},</if>
+            <if test="productCode != null">#{productCode},</if>
+            <if test="willResign != null">#{willResign},</if>
+            <if test="repaymentType != null">#{repaymentType},</if>
+            <if test="stageMoney != null">#{stageMoney},</if>
+            <if test="sfMoney != null">#{sfMoney},</if>
+            <if test="sfProportion != null">#{sfProportion},</if>
+            <if test="monthincome != null">#{monthincome},</if>
+            <if test="monthhomeincome != null">#{monthhomeincome},</if>
+            <if test="property != null">#{property},</if>
+            <if test="houseArea != null">#{houseArea},</if>
+            <if test="othdebtbal != null">#{othdebtbal},</if>
+            <if test="monrepayamt != null">#{monrepayamt},</if>
+            <if test="insureamt != null">#{insureamt},</if>
+            <if test="contractLoanMoney != null">#{contractLoanMoney},</if>
+            <if test="loanMoney != null">#{loanMoney},</if>
+            <if test="actualLoanAmount != null">#{actualLoanAmount},</if>
+            <if test="homeFlag != null">#{homeFlag},</if>
+            <if test="bussFlag != null">#{bussFlag},</if>
+            <if test="inStdPay != null">#{inStdPay},</if>
+            <if test="poundageAmount != null">#{poundageAmount},</if>
+            <if test="annualInterestRate != null">#{annualInterestRate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrStagingInformation" parameterType="ZyjrStagingInformation">
+        update zyjr_staging_information
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dealer != null">dealer = #{dealer},</if>
+            <if test="dscode != null">dscode = #{dscode},</if>
+            <if test="contractSfRatio != null">contract_sf_ratio = #{contractSfRatio},</if>
+            <if test="repayPeriod != null">repay_period = #{repayPeriod},</if>
+            <if test="marketingArchivesNum != null">marketing_archives_num = #{marketingArchivesNum},</if>
+            <if test="commissionFeeRate != null">commission_fee_rate = #{commissionFeeRate},</if>
+            <if test="businessModel != null">business_model = #{businessModel},</if>
+            <if test="firstMonthMoney != null">first_month_money = #{firstMonthMoney},</if>
+            <if test="productCode != null">product_code = #{productCode},</if>
+            <if test="willResign != null">will_resign = #{willResign},</if>
+            <if test="repaymentType != null">repayment_type = #{repaymentType},</if>
+            <if test="stageMoney != null">stage_money = #{stageMoney},</if>
+            <if test="sfMoney != null">sf_money = #{sfMoney},</if>
+            <if test="sfProportion != null">sf_proportion = #{sfProportion},</if>
+            <if test="monthincome != null">monthincome = #{monthincome},</if>
+            <if test="monthhomeincome != null">monthhomeincome = #{monthhomeincome},</if>
+            <if test="property != null">property = #{property},</if>
+            <if test="houseArea != null">house_area = #{houseArea},</if>
+            <if test="othdebtbal != null">othdebtbal = #{othdebtbal},</if>
+            <if test="monrepayamt != null">monrepayamt = #{monrepayamt},</if>
+            <if test="insureamt != null">insureamt = #{insureamt},</if>
+            <if test="contractLoanMoney != null">contract_loan_money = #{contractLoanMoney},</if>
+            <if test="loanMoney != null">loan_money = #{loanMoney},</if>
+            <if test="actualLoanAmount != null">actual_loan_amount = #{actualLoanAmount},</if>
+            <if test="homeFlag != null">home_flag = #{homeFlag},</if>
+            <if test="bussFlag != null">buss_flag = #{bussFlag},</if>
+            <if test="inStdPay != null">in_std_pay = #{inStdPay},</if>
+            <if test="poundageAmount != null">poundage_amount = #{poundageAmount},</if>
+            <if test="annualInterestRate != null">annual_interest_rate = #{annualInterestRate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrStagingInformationById" parameterType="Long">
+        delete from zyjr_staging_information where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrStagingInformationByIds" parameterType="String">
+        delete from zyjr_staging_information where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -107,9 +107,13 @@ public class test extends BaseController {
          */
         ZyjrBusiness business = b.selectById(codes);
         List<spouse> lists = new ArrayList<>();
-        ZyjrRelation relation = r.selectById(codes);
+        ZyjrRelation relation2 =new ZyjrRelation();
+        relation2.setTransactionCode(codes);
+        List<ZyjrRelation> relation=r.selectZyjrRelationList(relation2);
+
         ZyjrBorrower borrowerById = o.selectById(codes);
-        ZyjrGuarantee guarantee = g.selectById(codes);
+        ZyjrGuarantee guarantee2 = new ZyjrGuarantee();
+        List<ZyjrGuarantee> guarantee=g.selectZyjrGuaranteeList(guarantee2);
         /**
          * 现无数据后期该行改为sql查询
          */
@@ -123,47 +127,55 @@ public class test extends BaseController {
         pub.setBankType("ICBC");
         pub.setBusiCode("1001");
         System.out.println(pub);
-        Pics p1 = new Pics();
-        List<Pics> pp = new ArrayList<>();
+      //  Pics p1 = new Pics();
+        //List<Pics> pp = new ArrayList<>();
         List<Pics> lenp = new ArrayList<>();
         List<Pics> guaranteep = new ArrayList<>();
-        spouse sguarantee = new spouse();
-        spouse s = new spouse();
-        if (relation != null) {
-            p1.setPicId(1);
-            p1.setPicCode(oCode);
-            p1.setPicAddress(relation.getObverseAddress());
-            p1.setPicFileName("1.jpg");
-            Pics p2 = new Pics();
-            p2.setPicId(1);
-            p2.setPicCode(pCode);
-            p2.setPicAddress(relation.getBackAddress());
-            p2.setPicFileName("2.jpg");
-		/*Pics p3=new Pics();
-		p3.setPicId(relation.getPowerId());
-		p3.setPicCode(zCode);
-		p3.setPicAddress("http://192.168.31.82:8080"+relation.getPowerAddress());
-		p3.setPicFileName(relation.getPowerName()+".jpg");*/
-            s.setIdCard(relation.getIdCard());
-            s.setIssueAuthority(relation.getIssueAuthority());
-            s.setPhoneNum(relation.getPhoneNumber());
-            s.setBankCardNo(relation.getBankCardNo());
-            s.setUserName(relation.getUserName());
-            String sd = DataUtil.data(relation.getStartDate());
-            s.setStartDate(sd);
-            s.setIsQueryCredit(0);
-            s.setUserRelationship(2);
-            s.setCompany(relation.getCompany());
-            s.setCompanyAddress(relation.getCompanyAddress());
-            s.setYearIncome(relation.getYearIncome());
-            String se = DataUtil.data(relation.getEndDate());
-            s.setEndDate(se);
-            s.setFamilyAddress(relation.getFamilyAddress());
-            pp.add(p1);
-            pp.add(p2);
-            /*pp.add(p3);*/
-            s.setPics(pp);
-            lists.add(s);
+
+
+        if (relation.size()>0) {
+            for (ZyjrRelation zyjrRelation : relation) {
+                spouse s = new spouse();
+                s.setIdCard(zyjrRelation.getIdCard());
+                s.setIssueAuthority(zyjrRelation.getIssueAuthority());
+                s.setPhoneNum(zyjrRelation.getPhoneNumber());
+                s.setBankCardNo(zyjrRelation.getBankCardNo());
+                s.setUserName(zyjrRelation.getUserName());
+                String sd = DataUtil.data(zyjrRelation.getStartDate());
+                s.setStartDate(sd);
+                s.setIsQueryCredit(0);
+                s.setUserRelationship(2);
+                s.setCompany(zyjrRelation.getCompany());
+                s.setCompanyAddress(zyjrRelation.getCompanyAddress());
+                s.setYearIncome(zyjrRelation.getYearIncome());
+                String se = DataUtil.data(zyjrRelation.getEndDate());
+                s.setEndDate(se);
+                s.setFamilyAddress(zyjrRelation.getFamilyAddress());
+                List<Pics> picsList=new ArrayList<>();
+                Pics pics1=new Pics();
+                pics1.setPicId(1);
+                pics1.setPicCode(oCode);
+                pics1.setPicAddress(zyjrRelation.getObverseAddress());
+                pics1.setPicFileName("3.jpg");
+                Pics pics2=new Pics();
+                pics2.setPicId(1);
+                pics2.setPicCode(pCode);
+                pics2.setPicAddress(zyjrRelation.getBackAddress());
+                pics2.setPicFileName("4.jpg");
+                if (borrowerById.getCreditPower() > 0) {
+                    Pics pics3=new Pics();
+                    pics3.setPicId(1);
+                    pics3.setPicCode(zCode);
+                    pics3.setPicAddress(zyjrRelation.getPowerAddress());
+                    pics3.setPicFileName("5.jpg");
+                    picsList.add(pics3);
+                }
+                picsList.add(pics1);
+                picsList.add(pics2);
+                s.setPics(picsList);
+                lists.add(s);
+            }
+
         }
         Pics p4 = new Pics();
         p4.setPicId(1);
@@ -192,42 +204,52 @@ public class test extends BaseController {
         lenp.add(p5);
 
 
-        if (guarantee != null) {
-            Pics p7 = new Pics();
-            p7.setPicId(1);
-            p7.setPicCode(oCode);
-            p7.setPicAddress(guarantee.getPowerAddress());
-            p7.setPicFileName("5.jpg");
-            Pics p8 = new Pics();
-            p8.setPicId(1);
-            p8.setPicCode(pCode);
-            p8.setPicAddress(guarantee.getPowerAddress());
-            p8.setPicFileName("6.jpg");
-		/*	Pics p9=new Pics();
-			p9.setPicId(guarantee.getPowerId());
-			p9.setPicCode(zCode);
-			p9.setPicAddress("http://192.168.31.82:8080"+guarantee.getPowerAddress());
-			p9.setPicFileName(guarantee.getPowerName()+".jpg");*/
-            sguarantee.setIdCard(guarantee.getIdCard());
-            sguarantee.setIssueAuthority(guarantee.getIssueAuthority());
-            sguarantee.setPhoneNum(guarantee.getPhoneNumber());
-            sguarantee.setBankCardNo(guarantee.getBankCardNo());
-            sguarantee.setUserName(guarantee.getUserName());
-            String gsd = DataUtil.data(guarantee.getStartDate());
-            sguarantee.setStartDate(gsd);
-            sguarantee.setIsQueryCredit(0);
-            sguarantee.setUserRelationship(2);
-            sguarantee.setCompany(guarantee.getCompany());
-            sguarantee.setCompanyAddress(guarantee.getCompanyAddress());
-            sguarantee.setYearIncome(guarantee.getYearIncome());
-            String gse = DataUtil.data(guarantee.getEndDate());
-            sguarantee.setEndDate(gse);
-            sguarantee.setFamilyAddress(guarantee.getFamilyAddress());
-            guaranteep.add(p7);
-            guaranteep.add(p8);
-            /*	guaranteep.add(p9);*/
-            sguarantee.setPics(guaranteep);
-            lists.add(sguarantee);
+        if (guarantee .size()>0) {
+
+
+            for (ZyjrGuarantee zyjrGuarantee : guarantee) {
+                spouse g = new spouse();
+                g.setIdCard(zyjrGuarantee.getIdCard());
+                g.setIssueAuthority(zyjrGuarantee.getIssueAuthority());
+                g.setPhoneNum(zyjrGuarantee.getPhoneNumber());
+                g.setBankCardNo(zyjrGuarantee.getBankCardNo());
+                g.setUserName(zyjrGuarantee.getUserName());
+                String gsd = DataUtil.data(zyjrGuarantee.getStartDate());
+                g.setStartDate(gsd);
+                g.setIsQueryCredit(0);
+                g.setUserRelationship(2);
+                g.setCompany(zyjrGuarantee.getCompany());
+                g.setCompanyAddress(zyjrGuarantee.getCompanyAddress());
+                g.setYearIncome(zyjrGuarantee.getYearIncome());
+                String gse = DataUtil.data(zyjrGuarantee.getEndDate());
+                g.setEndDate(gse);
+                g.setFamilyAddress(zyjrGuarantee.getFamilyAddress());
+                Pics p7 = new Pics();
+                p7.setPicId(1);
+                p7.setPicCode(oCode);
+                p7.setPicAddress(zyjrGuarantee.getObverseAddress());
+                p7.setPicFileName("5.jpg");
+                Pics p8 = new Pics();
+                p8.setPicId(1);
+                p8.setPicCode(pCode);
+                p8.setPicAddress(zyjrGuarantee.getBackAddress());
+                p8.setPicFileName("6.jpg");
+                List<Pics> picsList=new ArrayList<>();
+                picsList.add(p7);
+                picsList.add(p8);
+                if (borrowerById.getCreditPower() > 0) {
+                    Pics pics3=new Pics();
+                    pics3.setPicId(1);
+                    pics3.setPicCode(zCode);
+                    pics3.setPicAddress(zyjrGuarantee.getPowerAddress());
+                    pics3.setPicFileName("5.jpg");
+                    picsList.add(pics3);
+                }
+                /*	guaranteep.add(p9);*/
+                g.setPics(guaranteep);
+                lists.add(g);
+            }
+
         }
 
 
@@ -707,6 +729,7 @@ public class test extends BaseController {
         zyjrKaikaMapper.insertZyjrKaika(b);
         return  AjaxResult.success();
     }
+
 
 
     public static void main(String[] args) {

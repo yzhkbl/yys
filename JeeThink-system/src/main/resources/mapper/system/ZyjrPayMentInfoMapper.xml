@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrPayMentInfoMapper">
+    
+    <resultMap type="ZyjrPayMentInfo" id="ZyjrPayMentInfoResult">
+        <result property="payMode"    column="pay_mode"    />
+        <result property="payeeType"    column="payee_type"    />
+        <result property="cooperateAgencyCode"    column="cooperate_agency_code"    />
+        <result property="insuranceAgencyCode"    column="insurance_agency_code"    />
+        <result property="recommendAgencyCode"    column="recommend_agency_code"    />
+        <result property="agencyReceiveMode1"    column="agency_receive_mode1"    />
+        <result property="agencyReceiveAmt1"    column="agency_receive_amt1"    />
+        <result property="agencyReceiveType1"    column="agency_receive_type1"    />
+        <result property="agencyReceiveMode2"    column="agency_receive_mode2"    />
+        <result property="agencyReceiveAmt2"    column="agency_receive_amt2"    />
+        <result property="agencyReceiveType2"    column="agency_receive_type2"    />
+        <result property="id"    column="id"    />
+    </resultMap>
+
+    <sql id="selectZyjrPayMentInfoVo">
+        select pay_mode, payee_type, cooperate_agency_code, insurance_agency_code, recommend_agency_code, agency_receive_mode1, agency_receive_amt1, agency_receive_type1, agency_receive_mode2, agency_receive_amt2, agency_receive_type2, id from zyjr_pay_ment_info
+    </sql>
+
+    <select id="selectZyjrPayMentInfoList" parameterType="ZyjrPayMentInfo" resultMap="ZyjrPayMentInfoResult">
+        <include refid="selectZyjrPayMentInfoVo"/>
+        <where>  
+            <if test="payMode != null "> and pay_mode = #{payMode}</if>
+            <if test="payeeType != null "> and payee_type = #{payeeType}</if>
+            <if test="cooperateAgencyCode != null  and cooperateAgencyCode != ''"> and cooperate_agency_code = #{cooperateAgencyCode}</if>
+            <if test="insuranceAgencyCode != null  and insuranceAgencyCode != ''"> and insurance_agency_code = #{insuranceAgencyCode}</if>
+            <if test="recommendAgencyCode != null  and recommendAgencyCode != ''"> and recommend_agency_code = #{recommendAgencyCode}</if>
+            <if test="agencyReceiveMode1 != null "> and agency_receive_mode1 = #{agencyReceiveMode1}</if>
+            <if test="agencyReceiveAmt1 != null "> and agency_receive_amt1 = #{agencyReceiveAmt1}</if>
+            <if test="agencyReceiveType1 != null "> and agency_receive_type1 = #{agencyReceiveType1}</if>
+            <if test="agencyReceiveMode2 != null "> and agency_receive_mode2 = #{agencyReceiveMode2}</if>
+            <if test="agencyReceiveAmt2 != null "> and agency_receive_amt2 = #{agencyReceiveAmt2}</if>
+            <if test="agencyReceiveType2 != null "> and agency_receive_type2 = #{agencyReceiveType2}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrPayMentInfoById" parameterType="Long" resultMap="ZyjrPayMentInfoResult">
+        <include refid="selectZyjrPayMentInfoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrPayMentInfo" parameterType="ZyjrPayMentInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_pay_ment_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="payMode != null">pay_mode,</if>
+            <if test="payeeType != null">payee_type,</if>
+            <if test="cooperateAgencyCode != null">cooperate_agency_code,</if>
+            <if test="insuranceAgencyCode != null">insurance_agency_code,</if>
+            <if test="recommendAgencyCode != null">recommend_agency_code,</if>
+            <if test="agencyReceiveMode1 != null">agency_receive_mode1,</if>
+            <if test="agencyReceiveAmt1 != null">agency_receive_amt1,</if>
+            <if test="agencyReceiveType1 != null">agency_receive_type1,</if>
+            <if test="agencyReceiveMode2 != null">agency_receive_mode2,</if>
+            <if test="agencyReceiveAmt2 != null">agency_receive_amt2,</if>
+            <if test="agencyReceiveType2 != null">agency_receive_type2,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="payMode != null">#{payMode},</if>
+            <if test="payeeType != null">#{payeeType},</if>
+            <if test="cooperateAgencyCode != null">#{cooperateAgencyCode},</if>
+            <if test="insuranceAgencyCode != null">#{insuranceAgencyCode},</if>
+            <if test="recommendAgencyCode != null">#{recommendAgencyCode},</if>
+            <if test="agencyReceiveMode1 != null">#{agencyReceiveMode1},</if>
+            <if test="agencyReceiveAmt1 != null">#{agencyReceiveAmt1},</if>
+            <if test="agencyReceiveType1 != null">#{agencyReceiveType1},</if>
+            <if test="agencyReceiveMode2 != null">#{agencyReceiveMode2},</if>
+            <if test="agencyReceiveAmt2 != null">#{agencyReceiveAmt2},</if>
+            <if test="agencyReceiveType2 != null">#{agencyReceiveType2},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrPayMentInfo" parameterType="ZyjrPayMentInfo">
+        update zyjr_pay_ment_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="payMode != null">pay_mode = #{payMode},</if>
+            <if test="payeeType != null">payee_type = #{payeeType},</if>
+            <if test="cooperateAgencyCode != null">cooperate_agency_code = #{cooperateAgencyCode},</if>
+            <if test="insuranceAgencyCode != null">insurance_agency_code = #{insuranceAgencyCode},</if>
+            <if test="recommendAgencyCode != null">recommend_agency_code = #{recommendAgencyCode},</if>
+            <if test="agencyReceiveMode1 != null">agency_receive_mode1 = #{agencyReceiveMode1},</if>
+            <if test="agencyReceiveAmt1 != null">agency_receive_amt1 = #{agencyReceiveAmt1},</if>
+            <if test="agencyReceiveType1 != null">agency_receive_type1 = #{agencyReceiveType1},</if>
+            <if test="agencyReceiveMode2 != null">agency_receive_mode2 = #{agencyReceiveMode2},</if>
+            <if test="agencyReceiveAmt2 != null">agency_receive_amt2 = #{agencyReceiveAmt2},</if>
+            <if test="agencyReceiveType2 != null">agency_receive_type2 = #{agencyReceiveType2},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrPayMentInfoById" parameterType="Long">
+        delete from zyjr_pay_ment_info where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrPayMentInfoByIds" parameterType="String">
+        delete from zyjr_pay_ment_info where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

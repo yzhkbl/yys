@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  * @author jeethink
  * @date 2021-01-19
  */
-public class ZyjrStagingInformation2
+public class ZyjrStageInfo2
 {
 
 
