@@ -146,8 +146,8 @@ public class ExamineController extends BaseController {
             return  AjaxResult.success(z);
     }
 
-    @GetMapping(value = "/{userId}")
-    public TableDataInfo findOrder(@PathVariable("userId") Long userId){
+    @GetMapping
+    public TableDataInfo findOrder(Long userId){
         startPage();
         List<orderVo> list = examineService.findOrder(userId);
         return getDataTable(list);
