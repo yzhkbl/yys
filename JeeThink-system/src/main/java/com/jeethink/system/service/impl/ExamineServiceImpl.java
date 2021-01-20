@@ -39,7 +39,7 @@ public class ExamineServiceImpl implements IExamineService {
 
     @Override
     public int addByRelation(ZyjrRelation q) {
-        if(findByRelation(q.getUserId()).size()>0&&q.getOrderState()==null){
+        if(findByRelation(q.getUserId()).size()>0&&q.getOrderState()==0){
             int count = examineDao.updateRelation(q);
             return count;
         } else {
