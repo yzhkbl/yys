@@ -1,6 +1,7 @@
 package com.jeethink.system.service.impl;
 
 import com.jeethink.system.domain.*;
+import com.jeethink.system.domain.vo.ExamineVo;
 import com.jeethink.system.domain.vo.ZyjrGrant;
 import com.jeethink.system.mapper.*;
 import com.jeethink.system.service.IStageExamineService;
@@ -59,14 +60,14 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     }
 
     @Override
-    public ZyjrRelation findByRelation(String transactionCode) {
-        ZyjrRelation relation = examineDao.findByRelation(transactionCode);
+    public List<ZyjrRelation> findByRelation(String transactionCode) {
+        List<ZyjrRelation> relation = examineDao.findByRelation(transactionCode);
         return relation;
     }
 
     @Override
-    public ZyjrGuarantee findByGuarantee(String transactionCode) {
-        ZyjrGuarantee guarantee = examineDao.findByGuarantee(transactionCode);
+    public List<ZyjrGuarantee> findByGuarantee(String transactionCode) {
+        List<ZyjrGuarantee> guarantee = examineDao.findByGuarantee(transactionCode);
         return guarantee;
     }
 
@@ -77,13 +78,17 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     }
 
     @Override
-    public Map<String, Object> find(String transactionCode) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("business", findByBusiness(transactionCode));
+    public ExamineVo find(String transactionCode) {
+        ExamineVo examineVo = new ExamineVo();
+        examineVo.setZyjrBorrower(findByBorrower(transactionCode));
+        examineVo.setZyjrBusiness(findByBusiness(transactionCode));
+        examineVo.setZyjrRelation(findByRelation(transactionCode));
+        examineVo.setZyjrGuarantee(findByGuarantee(transactionCode));
+        /**map.put("business", findByBusiness(transactionCode));
         map.put("borrower", findByBorrower(transactionCode));
         map.put("relation", findByRelation(transactionCode));
-        map.put("guarantee", findByGuarantee(transactionCode));
-        return map;
+        map.put("guarantee", findByGuarantee(transactionCode));*/
+        return examineVo;
     }
 
     @Override

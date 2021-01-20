@@ -7,6 +7,7 @@ import com.jeethink.system.domain.ZyjrBusiness;
 import com.jeethink.system.domain.ZyjrDetails;
 import com.jeethink.system.domain.ZyjrGrantOpinion;
 import com.jeethink.system.domain.ZyjrRepeatOpinion;
+import com.jeethink.system.domain.vo.ExamineVo;
 import com.jeethink.system.domain.vo.ZyjrGrant;
 import com.jeethink.system.service.IStageExamineService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,8 @@ public class StageExamineController extends BaseController {
 
     @RequestMapping("/find")
     public AjaxResult find(String transactionCode){
-        Map<String,Object> list = stageExamineService.find(transactionCode);
-        return AjaxResult.success(list);
+        ExamineVo examineVo = stageExamineService.find(transactionCode);
+        return AjaxResult.success(examineVo);
     }
 
     @RequestMapping("/add/details")
@@ -55,14 +56,14 @@ public class StageExamineController extends BaseController {
         return AjaxResult.success(stageExamineService.findOpinion(transactionCode));
     }
 
-    @RequestMapping("/list")
+    @RequestMapping("/list")//复审列表
     public TableDataInfo list(ZyjrGrant q){
         startPage();
         List<ZyjrGrant>list = stageExamineService.list();
         return getDataTable(list);
     }
 
-    @RequestMapping("/grant/add")
+    @RequestMapping("/grant/add")//授信审批
     public AjaxResult addGrantOpinion(@RequestBody ZyjrGrantOpinion q){
         return AjaxResult.success(stageExamineService.addGrantOpinion(q));
     }
@@ -72,7 +73,7 @@ public class StageExamineController extends BaseController {
         return AjaxResult.success(stageExamineService.findGrantOpinion(transactionCode));
     }
 
-    @GetMapping("/grant")
+    @GetMapping("/grant")//授信列表
     public TableDataInfo findGrant(ZyjrGrant q){
         startPage();
         List<ZyjrGrant>list = stageExamineService.grant();
@@ -84,7 +85,7 @@ public class StageExamineController extends BaseController {
         return AjaxResult.success(stageExamineService.findByGrant(transactionCode));
     }
 
-    @GetMapping("/allow")
+    @GetMapping("/allow")//准入列表
     public TableDataInfo findAllow (ZyjrGrant q){
         startPage();
         List<ZyjrGrant>list = stageExamineService.findAllow();

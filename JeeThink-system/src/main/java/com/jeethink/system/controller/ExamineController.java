@@ -187,5 +187,15 @@ public class ExamineController extends BaseController {
         examineMapper.deleteStartPage(userId);
         return AjaxResult.success();
     }
+
+    @PostMapping("/delete/relation")
+    public AjaxResult deleteRelationById(Long id){
+        return AjaxResult.success(examineMapper.deleteRelationById(id));
+    }
+
+    @PostMapping("/delete/guarantee")
+    public AjaxResult deleteGuaranteeById(Long id){
+        return AjaxResult.success(examineMapper.deleteGuaranteeById(id));
+    }
 }
 
