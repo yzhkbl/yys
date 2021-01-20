@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrMaterialsMapper">
+    
+    <resultMap type="ZyjrMaterials" id="ZyjrMaterialsResult">
+        <result property="materialCode"    column="material_code"    />
+        <result property="materialsType"    column="materials_type"    />
+        <result property="id"    column="id"    />
+    </resultMap>
+
+    <sql id="selectZyjrMaterialsVo">
+        select material_code, materials_type, id from zyjr_materials
+    </sql>
+
+    <select id="selectZyjrMaterialsList" parameterType="ZyjrMaterials" resultMap="ZyjrMaterialsResult">
+        <include refid="selectZyjrMaterialsVo"/>
+        <where>  
+            <if test="materialCode != null  and materialCode != ''"> and material_code = #{materialCode}</if>
+            <if test="materialsType != null  and materialsType != ''"> and materials_type = #{materialsType}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrMaterialsById" parameterType="Long" resultMap="ZyjrMaterialsResult">
+        <include refid="selectZyjrMaterialsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrMaterials" parameterType="ZyjrMaterials" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_materials
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="materialCode != null">material_code,</if>
+            <if test="materialsType != null">materials_type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="materialCode != null">#{materialCode},</if>
+            <if test="materialsType != null">#{materialsType},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrMaterials" parameterType="ZyjrMaterials">
+        update zyjr_materials
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="materialCode != null">material_code = #{materialCode},</if>
+            <if test="materialsType != null">materials_type = #{materialsType},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrMaterialsById" parameterType="Long">
+        delete from zyjr_materials where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrMaterialsByIds" parameterType="String">
+        delete from zyjr_materials where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

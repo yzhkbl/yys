@@ -15,14 +15,14 @@ public class Test2 {
     private static volatile String tokenId;
     private static MerchantServer ms = new MerchantServer();
     //可以使用正式环境接口地址  LoginApi(正式环境)   SandboxLoginApi(测试环境)
-    private static String loginName="SandboxLoginApi";//LoginApi
+    private static String loginName="LoginApi";//LoginApi
     //接口地址(apiName传以下参数)---
     //	贷前策略地址：strategyApi(正式环境)		SandboxstrategyApi(测试环境)
     //	验证策略地址：verificationApi (正式地址)	SandboxverApi(测试地址)
     //注：1.测试过程可以使用正式地址
     //   2.apiName环境要保持与loginName环境一致,正式都是正式、测试都是测试,不可以交叉使用.
     //   3.在调用测试环境时需要事先联系百融技术并提供apicode及策略编号（策略编号请查看邮件里的策略配置表）
-    private static String apiName= "SandboxverApi";//verificationApi
+    private static String apiName= "verificationApi";//verificationApi
     //验证请使用以下代码
     public static void main(String[] args) {
         JSONObject jsonData = new JSONObject();

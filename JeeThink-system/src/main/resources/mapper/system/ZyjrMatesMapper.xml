@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrMatesMapper">
+    
+    <resultMap type="ZyjrMates" id="ZyjrMatesResult">
+        <result property="demandMateId"    column="demand_mate_id"    />
+        <result property="materiaIsPic"    column="materia_is_pic"    />
+        <result property="fileName"    column="file_name"    />
+        <result property="zyjrMaterialsId"    column="zyjr_materials_id"    />
+    </resultMap>
+
+    <sql id="selectZyjrMatesVo">
+        select demand_mate_id, materia_is_pic, file_name, zyjr_materials_id from zyjr_mates
+    </sql>
+
+    <select id="selectZyjrMatesList" parameterType="ZyjrMates" resultMap="ZyjrMatesResult">
+        <include refid="selectZyjrMatesVo"/>
+        <where>  
+            <if test="materiaIsPic != null  and materiaIsPic != ''"> and materia_is_pic = #{materiaIsPic}</if>
+            <if test="fileName != null  and fileName != ''"> and file_name like concat('%', #{fileName}, '%')</if>
+            <if test="zyjrMaterialsId != null  and zyjrMaterialsId != ''"> and zyjr_materials_id = #{zyjrMaterialsId}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrMatesById" parameterType="Long" resultMap="ZyjrMatesResult">
+        <include refid="selectZyjrMatesVo"/>
+        where demand_mate_id = #{demandMateId}
+    </select>
+        
+    <insert id="insertZyjrMates" parameterType="ZyjrMates" useGeneratedKeys="true" keyProperty="demandMateId">
+        insert into zyjr_mates
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="materiaIsPic != null">materia_is_pic,</if>
+            <if test="fileName != null">file_name,</if>
+            <if test="zyjrMaterialsId != null">zyjr_materials_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="materiaIsPic != null">#{materiaIsPic},</if>
+            <if test="fileName != null">#{fileName},</if>
+            <if test="zyjrMaterialsId != null">#{zyjrMaterialsId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrMates" parameterType="ZyjrMates">
+        update zyjr_mates
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="materiaIsPic != null">materia_is_pic = #{materiaIsPic},</if>
+            <if test="fileName != null">file_name = #{fileName},</if>
+            <if test="zyjrMaterialsId != null">zyjr_materials_id = #{zyjrMaterialsId},</if>
+        </trim>
+        where demand_mate_id = #{demandMateId}
+    </update>
+
+    <delete id="deleteZyjrMatesById" parameterType="Long">
+        delete from zyjr_mates where demand_mate_id = #{demandMateId}
+    </delete>
+
+    <delete id="deleteZyjrMatesByIds" parameterType="String">
+        delete from zyjr_mates where demand_mate_id in 
+        <foreach item="demandMateId" collection="array" open="(" separator="," close=")">
+            #{demandMateId}
+        </foreach>
+    </delete>
+    
+</mapper>

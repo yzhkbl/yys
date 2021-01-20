@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrCarTypeMapper">
+    
+    <resultMap type="ZyjrCarType" id="ZyjrCarTypeResult">
+        <result property="id"    column="id"    />
+        <result property="carPrice"    column="car_price"    />
+        <result property="carType"    column="car_type"    />
+        <result property="frameNo"    column="frame_no"    />
+        <result property="engineNo"    column="engine_no"    />
+        <result property="carBrands"    column="car_brands"    />
+        <result property="carSeries"    column="car_series"    />
+        <result property="carSpecs"    column="car_specs"    />
+        <result property="systemCarPrice"    column="system_car_price"    />
+        <result property="licensePlateNo"    column="license_plate_no"    />
+    </resultMap>
+
+    <sql id="selectZyjrCarTypeVo">
+        select id, car_price, car_type, frame_no, engine_no, car_brands, car_series, car_specs, system_car_price, license_plate_no from zyjr_car_type
+    </sql>
+
+    <select id="selectZyjrCarTypeList" parameterType="ZyjrCarType" resultMap="ZyjrCarTypeResult">
+        <include refid="selectZyjrCarTypeVo"/>
+        <where>  
+            <if test="carPrice != null  and carPrice != ''"> and car_price = #{carPrice}</if>
+            <if test="carType != null "> and car_type = #{carType}</if>
+            <if test="frameNo != null  and frameNo != ''"> and frame_no = #{frameNo}</if>
+            <if test="engineNo != null  and engineNo != ''"> and engine_no = #{engineNo}</if>
+            <if test="carBrands != null  and carBrands != ''"> and car_brands = #{carBrands}</if>
+            <if test="carSeries != null  and carSeries != ''"> and car_series = #{carSeries}</if>
+            <if test="carSpecs != null  and carSpecs != ''"> and car_specs = #{carSpecs}</if>
+            <if test="systemCarPrice != null "> and system_car_price = #{systemCarPrice}</if>
+            <if test="licensePlateNo != null  and licensePlateNo != ''"> and license_plate_no = #{licensePlateNo}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrCarTypeById" parameterType="Long" resultMap="ZyjrCarTypeResult">
+        <include refid="selectZyjrCarTypeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrCarType" parameterType="ZyjrCarType" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_car_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="carPrice != null">car_price,</if>
+            <if test="carType != null">car_type,</if>
+            <if test="frameNo != null">frame_no,</if>
+            <if test="engineNo != null">engine_no,</if>
+            <if test="carBrands != null">car_brands,</if>
+            <if test="carSeries != null">car_series,</if>
+            <if test="carSpecs != null">car_specs,</if>
+            <if test="systemCarPrice != null">system_car_price,</if>
+            <if test="licensePlateNo != null">license_plate_no,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="carPrice != null">#{carPrice},</if>
+            <if test="carType != null">#{carType},</if>
+            <if test="frameNo != null">#{frameNo},</if>
+            <if test="engineNo != null">#{engineNo},</if>
+            <if test="carBrands != null">#{carBrands},</if>
+            <if test="carSeries != null">#{carSeries},</if>
+            <if test="carSpecs != null">#{carSpecs},</if>
+            <if test="systemCarPrice != null">#{systemCarPrice},</if>
+            <if test="licensePlateNo != null">#{licensePlateNo},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrCarType" parameterType="ZyjrCarType">
+        update zyjr_car_type
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="carPrice != null">car_price = #{carPrice},</if>
+            <if test="carType != null">car_type = #{carType},</if>
+            <if test="frameNo != null">frame_no = #{frameNo},</if>
+            <if test="engineNo != null">engine_no = #{engineNo},</if>
+            <if test="carBrands != null">car_brands = #{carBrands},</if>
+            <if test="carSeries != null">car_series = #{carSeries},</if>
+            <if test="carSpecs != null">car_specs = #{carSpecs},</if>
+            <if test="systemCarPrice != null">system_car_price = #{systemCarPrice},</if>
+            <if test="licensePlateNo != null">license_plate_no = #{licensePlateNo},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrCarTypeById" parameterType="Long">
+        delete from zyjr_car_type where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrCarTypeByIds" parameterType="String">
+        delete from zyjr_car_type where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

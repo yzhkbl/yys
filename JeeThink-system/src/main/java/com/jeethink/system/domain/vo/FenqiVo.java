@@ -6,4 +6,5 @@ import lombok.Data;
 public class FenqiVo {
     Pub pub;
     FenqiReq req;
+
 }

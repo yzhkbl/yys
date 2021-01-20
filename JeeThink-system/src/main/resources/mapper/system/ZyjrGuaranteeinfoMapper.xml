@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrGuaranteeinfoMapper">
+    
+    <resultMap type="ZyjrGuaranteeinfo" id="ZyjrGuaranteeinfoResult">
+        <result property="encbno"    column="encbno"    />
+        <result property="mortname"    column="mortname"    />
+        <result property="chnsname"    column="chnsname"    />
+        <result property="apprel"    column="apprel"    />
+        <result property="mortltype"    column="mortltype"    />
+        <result property="mortmtype"    column="mortmtype"    />
+        <result property="mortstype"    column="mortstype"    />
+        <result property="mortvalue"    column="mortvalue"    />
+        <result property="mortaddr"    column="mortaddr"    />
+        <result property="encbregdate"    column="encbregdate"    />
+        <result property="encbpreddate"    column="encbpreddate"    />
+        <result property="maxmortrate"    column="maxmortrate"    />
+        <result property="mortbegdate"    column="mortbegdate"    />
+        <result property="mortenddate"    column="mortenddate"    />
+        <result property="mortcontrno"    column="mortcontrno"    />
+        <result property="dbimpno"    column="dbimpno"    />
+        <result property="id"    column="id"    />
+    </resultMap>
+
+    <sql id="selectZyjrGuaranteeinfoVo">
+        select encbno, mortname, chnsname, apprel, mortltype, mortmtype, mortstype, mortvalue, mortaddr, encbregdate, encbpreddate, maxmortrate, mortbegdate, mortenddate, mortcontrno, dbimpno, id from zyjr_guaranteeinfo
+    </sql>
+
+    <select id="selectZyjrGuaranteeinfoList" parameterType="ZyjrGuaranteeinfo" resultMap="ZyjrGuaranteeinfoResult">
+        <include refid="selectZyjrGuaranteeinfoVo"/>
+        <where>  
+            <if test="encbno != null "> and encbno = #{encbno}</if>
+            <if test="mortname != null  and mortname != ''"> and mortname like concat('%', #{mortname}, '%')</if>
+            <if test="chnsname != null  and chnsname != ''"> and chnsname like concat('%', #{chnsname}, '%')</if>
+            <if test="apprel != null "> and apprel = #{apprel}</if>
+            <if test="mortltype != null  and mortltype != ''"> and mortltype = #{mortltype}</if>
+            <if test="mortmtype != null  and mortmtype != ''"> and mortmtype = #{mortmtype}</if>
+            <if test="mortstype != null  and mortstype != ''"> and mortstype = #{mortstype}</if>
+            <if test="mortvalue != null "> and mortvalue = #{mortvalue}</if>
+            <if test="mortaddr != null  and mortaddr != ''"> and mortaddr = #{mortaddr}</if>
+            <if test="encbregdate != null  and encbregdate != ''"> and encbregdate = #{encbregdate}</if>
+            <if test="encbpreddate != null  and encbpreddate != ''"> and encbpreddate = #{encbpreddate}</if>
+            <if test="maxmortrate != null "> and maxmortrate = #{maxmortrate}</if>
+            <if test="mortbegdate != null  and mortbegdate != ''"> and mortbegdate = #{mortbegdate}</if>
+            <if test="mortenddate != null  and mortenddate != ''"> and mortenddate = #{mortenddate}</if>
+            <if test="mortcontrno != null  and mortcontrno != ''"> and mortcontrno = #{mortcontrno}</if>
+            <if test="dbimpno != null  and dbimpno != ''"> and dbimpno = #{dbimpno}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrGuaranteeinfoById" parameterType="Long" resultMap="ZyjrGuaranteeinfoResult">
+        <include refid="selectZyjrGuaranteeinfoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrGuaranteeinfo" parameterType="ZyjrGuaranteeinfo" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_guaranteeinfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="encbno != null">encbno,</if>
+            <if test="mortname != null">mortname,</if>
+            <if test="chnsname != null">chnsname,</if>
+            <if test="apprel != null">apprel,</if>
+            <if test="mortltype != null">mortltype,</if>
+            <if test="mortmtype != null">mortmtype,</if>
+            <if test="mortstype != null">mortstype,</if>
+            <if test="mortvalue != null">mortvalue,</if>
+            <if test="mortaddr != null">mortaddr,</if>
+            <if test="encbregdate != null">encbregdate,</if>
+            <if test="encbpreddate != null">encbpreddate,</if>
+            <if test="maxmortrate != null">maxmortrate,</if>
+            <if test="mortbegdate != null">mortbegdate,</if>
+            <if test="mortenddate != null">mortenddate,</if>
+            <if test="mortcontrno != null">mortcontrno,</if>
+            <if test="dbimpno != null">dbimpno,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="encbno != null">#{encbno},</if>
+            <if test="mortname != null">#{mortname},</if>
+            <if test="chnsname != null">#{chnsname},</if>
+            <if test="apprel != null">#{apprel},</if>
+            <if test="mortltype != null">#{mortltype},</if>
+            <if test="mortmtype != null">#{mortmtype},</if>
+            <if test="mortstype != null">#{mortstype},</if>
+            <if test="mortvalue != null">#{mortvalue},</if>
+            <if test="mortaddr != null">#{mortaddr},</if>
+            <if test="encbregdate != null">#{encbregdate},</if>
+            <if test="encbpreddate != null">#{encbpreddate},</if>
+            <if test="maxmortrate != null">#{maxmortrate},</if>
+            <if test="mortbegdate != null">#{mortbegdate},</if>
+            <if test="mortenddate != null">#{mortenddate},</if>
+            <if test="mortcontrno != null">#{mortcontrno},</if>
+            <if test="dbimpno != null">#{dbimpno},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrGuaranteeinfo" parameterType="ZyjrGuaranteeinfo">
+        update zyjr_guaranteeinfo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="encbno != null">encbno = #{encbno},</if>
+            <if test="mortname != null">mortname = #{mortname},</if>
+            <if test="chnsname != null">chnsname = #{chnsname},</if>
+            <if test="apprel != null">apprel = #{apprel},</if>
+            <if test="mortltype != null">mortltype = #{mortltype},</if>
+            <if test="mortmtype != null">mortmtype = #{mortmtype},</if>
+            <if test="mortstype != null">mortstype = #{mortstype},</if>
+            <if test="mortvalue != null">mortvalue = #{mortvalue},</if>
+            <if test="mortaddr != null">mortaddr = #{mortaddr},</if>
+            <if test="encbregdate != null">encbregdate = #{encbregdate},</if>
+            <if test="encbpreddate != null">encbpreddate = #{encbpreddate},</if>
+            <if test="maxmortrate != null">maxmortrate = #{maxmortrate},</if>
+            <if test="mortbegdate != null">mortbegdate = #{mortbegdate},</if>
+            <if test="mortenddate != null">mortenddate = #{mortenddate},</if>
+            <if test="mortcontrno != null">mortcontrno = #{mortcontrno},</if>
+            <if test="dbimpno != null">dbimpno = #{dbimpno},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrGuaranteeinfoById" parameterType="Long">
+        delete from zyjr_guaranteeinfo where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrGuaranteeinfoByIds" parameterType="String">
+        delete from zyjr_guaranteeinfo where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
