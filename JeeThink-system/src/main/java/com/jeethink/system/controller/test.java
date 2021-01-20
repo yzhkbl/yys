@@ -356,7 +356,7 @@ public class test extends BaseController {
 
         if (results.get("code").equals(0)) {
 
-            if (results.getJSONObject("data").getJSONObject("requestJson").getJSONObject("req").get("transType").equals(4)) {
+            if (results!=null&&results.getJSONObject("data")!=null&&results.getJSONObject("data").getJSONObject("requestJson")!=null&&results.getJSONObject("data").getJSONObject("requestJson").getJSONObject("req").get("transType").equals(4)) {
 
                 int ceshi=examineMapper.updateStarts(codes);
 
@@ -365,7 +365,7 @@ public class test extends BaseController {
 
                 }
             }
-            return AjaxResult.success(results.getJSONObject("data").getJSONObject("requestJson").getJSONObject("req").get("transType"));
+            return AjaxResult.success(results);
 
 
         }
