@@ -1,7 +1,7 @@
 package com.jeethink.system.mapper;
 
 import java.util.List;
-import com.jeethink.system.domain.ZyjrStageInfo;
+import com.jeethink.system.domain.ZyjrStagingInformation;
 
 /**
  * 【请填写功能名称】Mapper接口
@@ -17,31 +17,31 @@ public interface ZyjrStagingInformationMapper
      * @param id 【请填写功能名称】ID
      * @return 【请填写功能名称】
      */
-    public ZyjrStageInfo selectZyjrStagingInformationById(Long id);
+    public ZyjrStagingInformation selectZyjrStagingInformationById(Long id);
 
     /**
      * 查询【请填写功能名称】列表
      * 
-     * @param zyjrStageInfo 【请填写功能名称】
+     * @param zyjrStagingInformation 【请填写功能名称】
      * @return 【请填写功能名称】集合
      */
-    public List<ZyjrStageInfo> selectZyjrStagingInformationList(ZyjrStageInfo zyjrStageInfo);
+    public List<ZyjrStagingInformation> selectZyjrStagingInformationList(ZyjrStagingInformation zyjrStagingInformation);
 
     /**
      * 新增【请填写功能名称】
      * 
-     * @param zyjrStageInfo 【请填写功能名称】
+     * @param zyjrStagingInformation 【请填写功能名称】
      * @return 结果
      */
-    public int insertZyjrStagingInformation(ZyjrStageInfo zyjrStageInfo);
+    public int insertZyjrStagingInformation(ZyjrStagingInformation zyjrStagingInformation);
 
     /**
      * 修改【请填写功能名称】
      * 
-     * @param zyjrStageInfo 【请填写功能名称】
+     * @param zyjrStagingInformation 【请填写功能名称】
      * @return 结果
      */
-    public int updateZyjrStagingInformation(ZyjrStageInfo zyjrStageInfo);
+    public int updateZyjrStagingInformation(ZyjrStagingInformation zyjrStagingInformation);
 
     /**
      * 删除【请填写功能名称】

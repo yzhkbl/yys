@@ -12,7 +12,7 @@ import com.jeethink.common.core.domain.BaseEntity;
  * @author jeethink
  * @date 2021-01-19
  */
-public class ZyjrStageInfo extends BaseEntity
+public class ZyjrStagingInformation extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
