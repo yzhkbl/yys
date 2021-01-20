@@ -91,4 +91,8 @@ public interface ExamineMapper {
     int deleteRelation(Long userId);
     int deleteGuarantee(Long userId);
     int deleteStartPage(Long userId);
+
+
+    int deleteRelationById(Long id);
+    int deleteGuaranteeById(Long id);
 }
