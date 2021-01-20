@@ -353,7 +353,7 @@ LEFT JOIN zyjr_daiqian_accout a on a.transaction_code=c.transaction_code where a
                 transaction_code=#{transactionCode}
             </if>
         </set>
-        where order_state=0 and user_id = #{userId}
+        where id=#{id}
     </update>
     <update id="updateGuarantee">
         update zyjr_guarantee
@@ -449,7 +449,7 @@ LEFT JOIN zyjr_daiqian_accout a on a.transaction_code=c.transaction_code where a
                 transaction_code=#{transactionCode}
             </if>
         </set>
-        where order_state=0 and user_id = #{userId}
+        where id=#{id}
     </update>
     <update id="updateBusiness">
         update zyjr_business

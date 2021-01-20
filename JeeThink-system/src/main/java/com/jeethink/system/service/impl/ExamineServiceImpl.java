@@ -39,7 +39,7 @@ public class ExamineServiceImpl implements IExamineService {
 
     @Override
     public int addByRelation(ZyjrRelation q) {
-        if(findByRelation(q.getUserId()).size()>0&&q.getOrderState()==0){
+        if(q.getId()!=null){
             int count = examineDao.updateRelation(q);
             return count;
         } else {
@@ -51,7 +51,7 @@ public class ExamineServiceImpl implements IExamineService {
 
     @Override
     public int addByGuarantee(ZyjrGuarantee q) {
-        if(findByGuarantee(q.getUserId()).size()>0&&q.getOrderState()==0){
+        if(q.getId()!=null){
             int count = examineDao.updateGuarantee(q);
             return count;
         } else {
