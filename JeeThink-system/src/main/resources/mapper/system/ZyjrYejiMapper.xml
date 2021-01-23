@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrYejiMapper">
+    
+    <resultMap type="ZyjrYeji" id="ZyjrYejiResult">
+        <result property="team"    column="team"    />
+        <result property="area"    column="area"    />
+        <result property="mubiao"    column="mubiao"    />
+        <result property="fangkuan"    column="fangkuan"    />
+        <result property="number"    column="number"    />
+        <result property="id"    column="id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="userId"    column="user_id"    />
+        <result property="transaction"    column="transaction"    />
+        <result property="name"    column="name"    />
+    </resultMap>
+
+    <sql id="selectZyjrYejiVo">
+        select team, area, mubiao, fangkuan, number, id, dept_id, create_by, create_time, update_by, update_time, user_id, transaction, name from zyjr_yeji
+    </sql>
+
+    <select id="selectZyjrYejiList" parameterType="ZyjrYeji" resultMap="ZyjrYejiResult">
+        <include refid="selectZyjrYejiVo"/>
+        <where>  
+            <if test="team != null  and team != ''"> and team = #{team}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="mubiao != null  and mubiao != ''"> and mubiao = #{mubiao}</if>
+            <if test="fangkuan != null  and fangkuan != ''"> and fangkuan = #{fangkuan}</if>
+            <if test="number != null "> and number = #{number}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="transaction != null  and transaction != ''"> and transaction = #{transaction}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrYejiById" parameterType="Long" resultMap="ZyjrYejiResult">
+        <include refid="selectZyjrYejiVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrYeji" parameterType="ZyjrYeji" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_yeji
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="team != null">team,</if>
+            <if test="area != null">area,</if>
+            <if test="mubiao != null">mubiao,</if>
+            <if test="fangkuan != null">fangkuan,</if>
+            <if test="number != null">number,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="transaction != null">transaction,</if>
+            <if test="name != null">name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="team != null">#{team},</if>
+            <if test="area != null">#{area},</if>
+            <if test="mubiao != null">#{mubiao},</if>
+            <if test="fangkuan != null">#{fangkuan},</if>
+            <if test="number != null">#{number},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="transaction != null">#{transaction},</if>
+            <if test="name != null">#{name},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrYeji" parameterType="ZyjrYeji">
+        update zyjr_yeji
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="team != null">team = #{team},</if>
+            <if test="area != null">area = #{area},</if>
+            <if test="mubiao != null">mubiao = #{mubiao},</if>
+            <if test="fangkuan != null">fangkuan = #{fangkuan},</if>
+            <if test="number != null">number = #{number},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="transaction != null">transaction = #{transaction},</if>
+            <if test="name != null">name = #{name},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrYejiById" parameterType="Long">
+        delete from zyjr_yeji where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrYejiByIds" parameterType="String">
+        delete from zyjr_yeji where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

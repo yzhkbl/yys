@@ -1,10 +1,11 @@
 package com.jeethink.system.service.impl;
 
-import com.jeethink.common.core.domain.AjaxResult;
-import com.jeethink.common.utils.uuid.IdUtils;
+import com.jeethink.common.core.domain.entity.SysUser;
 import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.*;
 import com.jeethink.system.mapper.ExamineMapper;
+import com.jeethink.system.mapper.SysUserMapper;
+import com.jeethink.system.mapper.ZyjrYejiMapper;
 import com.jeethink.system.service.IExamineService;
 import com.jeethink.system.util.HttpPostUtil;
 import com.jeethink.system.util.RSASignature;
@@ -23,7 +24,10 @@ import  com.jeethink.system.util.orderCode;
 public class ExamineServiceImpl implements IExamineService {
     @Autowired
     private ExamineMapper examineDao;
-
+   @Autowired
+    private ZyjrYejiMapper zyjrYejiMapper;
+    @Autowired
+    private SysUserMapper sysUserMapper;
 
     @Override
     public int addByBorrower(ZyjrBorrower q) {
@@ -142,6 +146,15 @@ public class ExamineServiceImpl implements IExamineService {
             examineDao.updateFour(q.getUserId(),q.getTransactionCode(),1);
             startPage.setTransactionCode(q.getTransactionCode());
             //examineDao.updateFive(q.getUserId(),a);
+        ZyjrYeji zyjrYeji=new ZyjrYeji();
+        zyjrYeji.setUserId(q.getUserId().toString());
+        zyjrYeji.setArea(q.getBusinessPlace());
+        SysUser a=sysUserMapper.selectUserById(Long.parseLong(q.getUserId().toString()));
+        zyjrYeji.setDeptId(a.getDeptId());
+        zyjrYeji.setName(a.getNickName());
+        zyjrYeji.setTransaction(q.getTransactionCode());
+
+        zyjrYejiMapper.insertZyjrYeji(zyjrYeji);
 
            return examineDao.insertStart(startPage);
     }

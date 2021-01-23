@@ -124,6 +124,7 @@ ZyjrCarController extends BaseController {
         map.put("matchAmount",a.getMatchAmount());
         map.put("detailAddress",a.getDetailAddress());
         map.put("dealerName",a.getDealerName());
+        map.put("state",a.getState());
 
         return AjaxResult.success(map);
     }

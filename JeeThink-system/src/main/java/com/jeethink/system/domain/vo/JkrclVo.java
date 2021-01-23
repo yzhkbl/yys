@@ -7,5 +7,7 @@ import java.util.List;
 @Data
 public class JkrclVo {
     List<Materials> materials;
+    String name;
+    String idCard;
 
 }
