@@ -69,4 +69,14 @@
         </foreach>
     </delete>
 
+    <select id="findAdvise" resultType="com.jeethink.system.domain.vo.OpinionVo">
+        select a.advise as allowOpinion,b.advise as repeatOpinion,c.advise as grantOpinion,d.opinion as daiqianOpinion,e.opinion as daihouOpinion
+        from zyjr_allow_opinion a
+        left join zyjr_repeat_opinion b on b.transaction_code=a.transaction_code
+        left join zyjr_grant_opinion c on c.transaction_code=b.transaction_code
+        left join zyjr_daiqian d on d.transaction_code=c.transaction_code
+        left join zyjr_daihou e on e.transaction_code=d.transaction_code
+        where a.transaction_code=#{transactionCode}
+    </select>
+
 </mapper>

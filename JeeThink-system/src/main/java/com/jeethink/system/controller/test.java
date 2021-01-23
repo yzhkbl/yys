@@ -433,6 +433,7 @@ public class test extends BaseController {
     @ResponseBody
     @ApiOperation("111111111")
     public AjaxResult ceshi(@RequestParam("name") List<String> name, @RequestParam("file") List<MultipartFile> file, @RequestParam("id") List<String> id) throws IOException {
+        System.err.println(name);
         for (int i = 0; i < id.size(); i++) {
             String a = FileUploadUtils.upload(file.get(i));
             SysFileInfo info = new SysFileInfo();

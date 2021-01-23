@@ -197,5 +197,37 @@ public class ExamineController extends BaseController {
     public AjaxResult deleteGuaranteeById(Long id){
         return AjaxResult.success(examineMapper.deleteGuaranteeById(id));
     }
+
+
+    @PostMapping("/add/shangpai")
+    public AjaxResult insertShangpai(ZyjrShangpai q){
+        ZyjrShangpai zyjrShangpai = examineMapper.findShangpai(q.getTransactionCode());
+        if(zyjrShangpai!=null){
+            return AjaxResult.success(examineMapper.updateShangpai(q));
+        }else {
+            return AjaxResult.success(examineMapper.insertShangpai(q));
+        }
+    }
+
+    @GetMapping("/find/shangpai")
+    public AjaxResult findShangpai(String transactionCode){
+        return AjaxResult.success(examineMapper.findShangpai(transactionCode));
+    }
+
+
+    @PostMapping("/add/diya")
+    public AjaxResult insertDiya(ZyjrDiya q){
+        ZyjrDiya zyjrDiya = examineMapper.findDiya(q.getTransactionCode());
+        if(zyjrDiya!=null){
+            return AjaxResult.success(examineMapper.updateDiya(q));
+        }else {
+            return AjaxResult.success(examineMapper.insertDiya(q));
+        }
+    }
+
+    @GetMapping("/find/diya")
+    public AjaxResult findDiya(String transactionCode){
+        return AjaxResult.success(examineMapper.findDiya(transactionCode));
+    }
 }
 
