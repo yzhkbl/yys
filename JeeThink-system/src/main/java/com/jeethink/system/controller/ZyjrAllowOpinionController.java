@@ -1,6 +1,8 @@
 package com.jeethink.system.controller;
 
 import java.util.List;
+
+import com.jeethink.system.mapper.ZyjrAllowOpinionMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +34,8 @@ public class ZyjrAllowOpinionController extends BaseController
 {
     @Autowired
     private IZyjrAllowOpinionService zyjrAllowOpinionService;
+    @Autowired
+    private ZyjrAllowOpinionMapper zyjrAllowOpinionMapper;
 
     /**
      * 查询【请填写功能名称】列表
@@ -61,15 +65,20 @@ public class ZyjrAllowOpinionController extends BaseController
     /**
      * 获取【请填写功能名称】详细信息
      */
-
-
-
     @GetMapping(value = "/{transactionCode}")
     public AjaxResult getInfo(@PathVariable("transactionCode") String transactionCode)
     {
 
         return AjaxResult.success(zyjrAllowOpinionService.selectZyjrAllowOpinionById(transactionCode));
     }
+
+
+    @GetMapping("/advise")
+    public AjaxResult opinion(String transactionCode){
+        return AjaxResult.success(zyjrAllowOpinionMapper.findAdvise(transactionCode));
+    }
+
+
     /**
      * 新增【请填写功能名称】
      */

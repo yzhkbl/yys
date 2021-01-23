@@ -353,7 +353,7 @@ LEFT JOIN zyjr_daiqian_accout a on a.transaction_code=c.transaction_code where a
                 transaction_code=#{transactionCode}
             </if>
         </set>
-        where order_state=0 and user_id = #{userId}
+        where id=#{id}
     </update>
     <update id="updateGuarantee">
         update zyjr_guarantee
@@ -449,7 +449,7 @@ LEFT JOIN zyjr_daiqian_accout a on a.transaction_code=c.transaction_code where a
                 transaction_code=#{transactionCode}
             </if>
         </set>
-        where order_state=0 and user_id = #{userId}
+        where id=#{id}
     </update>
     <update id="updateBusiness">
         update zyjr_business
@@ -481,7 +481,6 @@ LEFT JOIN zyjr_daiqian_accout a on a.transaction_code=c.transaction_code where a
             <if test="orderState != null">
                 order_state = #{orderState}
             </if>
-
         </set>
         where order_state=0 and user_id = #{userId}
     </update>
@@ -506,7 +505,6 @@ LEFT JOIN zyjr_daiqian_accout a on a.transaction_code=c.transaction_code where a
             <if test="transactionCode != null">
                 transaction_code = #{transactionCode},
             </if>
-
         </set>
         where order_state=0 and user_id = #{userId}
     </update>
@@ -547,7 +545,7 @@ LEFT JOIN zyjr_daiqian_accout a on a.transaction_code=c.transaction_code where a
         where order_state=0 and user_id = #{userId}
     </update>
     <select id="findOrder" resultType="com.jeethink.system.domain.vo.orderVo">
-        select a.transaction_code,b.user_name,a.car_information,a.car_type,c.progress,d.create_time
+        select a.transaction_code,b.user_name,a.car_information,a.car_type,c.progress,c.approval_type,d.create_time
         from zyjr_business a
         left join zyjr_borrower b on b.transaction_code=a.transaction_code
         left join zyjr_order_progress c on c.transaction_code=b.transaction_code
@@ -636,4 +634,89 @@ LEFT JOIN zyjr_daiqian_accout a on a.transaction_code=c.transaction_code where a
         delete from zyjr_guarantee
         where id=#{id}
     </delete>
+    <insert id="insertOrderProgress" parameterType="com.jeethink.system.domain.ZyjrOrderProgress">
+        insert into zyjr_order_progress
+        (id,transaction_code,progress,approval_type)
+        values
+        (#{id},#{transactionCode},#{progress},#{approvalType})
+    </insert>
+    <insert id="insertShangpai" parameterType="com.jeethink.system.domain.ZyjrShangpai">
+        insert into zyjr_shangpai
+        (id,registration_url,registration_number,transaction_code)
+        values
+        (#{id},#{registrationUrl},#{registrationNumber},#{transactionCode})
+    </insert>
+    <select id="findShangpai" resultType="com.jeethink.system.domain.ZyjrShangpai">
+        select id,registration_url,registration_number,transaction_code
+        from zyjr_shangpai
+        where transaction_code=#{transactionCode}
+    </select>
+    <insert id="insertDiya" parameterType="com.jeethink.system.domain.ZyjrDiya">
+        insert into zyjr_diya
+        (id,registration_one,registration_two,mortgagee,id_prove,id_code,registration,car_code,mortgage_date,relieve_date,transaction_code)
+        values
+        (#{id},#{registrationOne},#{registrationTwo},#{mortgagee},#{idProve},#{idCode},#{registration},#{carCode},#{mortgageDate},#{relieveDate},#{transactionCode})
+    </insert>
+    <select id="findDiya" resultType="com.jeethink.system.domain.ZyjrDiya">
+        select id,registration_one,registration_two,mortgagee,id_prove,id_code,registration,car_code,mortgage_date,relieve_date,transaction_code
+        from zyjr_diya
+        where transaction_code=#{transactionCode}
+    </select>
+    <update id="updateShangpai">
+        update zyjr_shangpai
+        <set>
+            <if test="id!=null">
+                id=#{id},
+            </if>
+            <if test="registrationUrl!=null">
+                registration_url=#{registrationUrl},
+            </if>
+            <if test="registrationNumber != null">
+                registration_number = #{registrationNumber},
+            </if>
+            <if test="transactionCode != null">
+                transaction_code = #{transactionCode},
+            </if>
+        </set>
+        where transaction_code = #{transactionCode}
+    </update>
+    <update id="updateDiya">
+    update zyjr_start_page
+    <set>
+        <if test="id!=null">
+            id=#{id},
+        </if>
+        <if test="registrationOne!=null">
+            registration_one=#{registrationOne},
+        </if>
+        <if test="registrationTwo != null">
+            registration_two = #{registrationTwo},
+        </if>
+        <if test="mortgagee != null">
+            mortgagee = #{mortgagee},
+        </if>
+        <if test="idProve  != null">
+            id_prove = #{idProve},
+        </if>
+        <if test="idCode  != null">
+            id_code = #{idCode},
+        </if>
+        <if test="registration  != null">
+            registration = #{registration},
+        </if>
+        <if test="carCode  != null">
+            car_code = #{carCode},
+        </if>
+        <if test="mortgageDate  != null">
+            mortgage_date = #{mortgageDate},
+        </if>
+        <if test="relieveDate  != null">
+            relieve_date = #{relieveDate},
+        </if>
+        <if test="transactionCode != null">
+            transaction_code = #{transactionCode},
+        </if>
+        where where transaction_code = #{transactionCode}
+    </set>
+    </update>
 </mapper>

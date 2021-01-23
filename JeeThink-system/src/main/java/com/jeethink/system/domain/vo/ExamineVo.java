@@ -9,10 +9,10 @@ import lombok.Data;
 import java.util.List;
 @Data
 public class ExamineVo {
-    private ZyjrBusiness zyjrBusiness;
-    private ZyjrBorrower zyjrBorrower;
+    private ZyjrBusiness business;
+    private ZyjrBorrower borrower;
     //private ZyjrRelation zyjrRelation;
     //private ZyjrGuarantee zyjrGuarantee;
-    private List<ZyjrRelation> zyjrRelation;
-    private List<ZyjrGuarantee> zyjrGuarantee;
+    private List<ZyjrRelation> relation;
+    private List<ZyjrGuarantee> guarantee;
 }

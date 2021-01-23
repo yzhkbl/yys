@@ -80,10 +80,10 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     @Override
     public ExamineVo find(String transactionCode) {
         ExamineVo examineVo = new ExamineVo();
-        examineVo.setZyjrBorrower(findByBorrower(transactionCode));
-        examineVo.setZyjrBusiness(findByBusiness(transactionCode));
-        examineVo.setZyjrRelation(findByRelation(transactionCode));
-        examineVo.setZyjrGuarantee(findByGuarantee(transactionCode));
+        examineVo.setBorrower(findByBorrower(transactionCode));
+        examineVo.setBusiness(findByBusiness(transactionCode));
+        examineVo.setRelation(findByRelation(transactionCode));
+        examineVo.setGuarantee(findByGuarantee(transactionCode));
         /**map.put("business", findByBusiness(transactionCode));
         map.put("borrower", findByBorrower(transactionCode));
         map.put("relation", findByRelation(transactionCode));

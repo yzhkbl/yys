@@ -18,6 +18,7 @@ public class orderVo {
     private Integer progress;
     /**订单创建时间*/
     private Date createTime;
-    //private Integer approvalType;
+    /**审批状态*/
+    private Integer approvalType;
 
 }

@@ -92,7 +92,16 @@ public interface ExamineMapper {
     int deleteGuarantee(Long userId);
     int deleteStartPage(Long userId);
 
-
     int deleteRelationById(Long id);
     int deleteGuaranteeById(Long id);
+
+    int insertOrderProgress(ZyjrOrderProgress zyjrOrderProgress);
+
+    int insertShangpai (ZyjrShangpai q);
+    int updateShangpai(ZyjrShangpai q);
+    ZyjrShangpai findShangpai(String transactionCode);
+
+    int insertDiya(ZyjrDiya q);
+    int updateDiya(ZyjrDiya q);
+    ZyjrDiya findDiya(String transactionCode);
 }

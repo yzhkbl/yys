@@ -2,6 +2,8 @@ package com.jeethink.system.mapper;
 
 import java.util.List;
 import com.jeethink.system.domain.ZyjrAllowOpinion;
+import com.jeethink.system.domain.vo.OpinionVo;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 【请填写功能名称】Mapper接口
@@ -61,4 +63,6 @@ public interface ZyjrAllowOpinionMapper
 
 
     //public int updateOrderState(Long userId,String transactionCode);
+
+    OpinionVo findAdvise(@Param("transactionCode") String transactionCode);
 }

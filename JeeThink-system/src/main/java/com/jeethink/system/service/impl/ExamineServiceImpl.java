@@ -43,7 +43,7 @@ public class ExamineServiceImpl implements IExamineService {
 
     @Override
     public int addByRelation(ZyjrRelation q) {
-        if(findByRelation(q.getUserId()).size()>0&&q.getOrderState()==0){
+        if(q.getId()!=null){
             int count = examineDao.updateRelation(q);
             return count;
         } else {
@@ -55,7 +55,7 @@ public class ExamineServiceImpl implements IExamineService {
 
     @Override
     public int addByGuarantee(ZyjrGuarantee q) {
-        if(findByGuarantee(q.getUserId()).size()>0&&q.getOrderState()==0){
+        if(q.getId()!=null){
             int count = examineDao.updateGuarantee(q);
             return count;
         } else {
@@ -146,6 +146,10 @@ public class ExamineServiceImpl implements IExamineService {
             examineDao.updateFour(q.getUserId(),q.getTransactionCode(),1);
             startPage.setTransactionCode(q.getTransactionCode());
             //examineDao.updateFive(q.getUserId(),a);
+            ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
+            zyjrOrderProgress.setTransactionCode(q.getTransactionCode());
+            zyjrOrderProgress.setProgress("初审未审批");
+            examineDao.insertOrderProgress(zyjrOrderProgress);
         ZyjrYeji zyjrYeji=new ZyjrYeji();
         zyjrYeji.setUserId(q.getUserId().toString());
         zyjrYeji.setArea(q.getBusinessPlace());
