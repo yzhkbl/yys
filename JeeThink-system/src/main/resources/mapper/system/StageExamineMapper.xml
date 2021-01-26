@@ -95,4 +95,44 @@
          LEFT JOIN zyjr_allow_opinion c ON c.transaction_code=d.transaction_code
          WHERE c.approval_type!=1 OR c.approval_type IS NULL
     </select>
+
+    <select id="findShangpai" resultType="com.jeethink.system.domain.vo.ShangpaiDiyaVo">
+        select a.transaction_code,a.user_name,a.id_card,b.fund_side,c.team,c.car_type,d.submit_state
+        from zyjr_borrower a
+        left join zyjr_start_page b on b.transaction_code=a.transaction_code
+        left join zyjr_business c on c.transaction_code=b.transaction_code
+        left join zyjr_shangpai d on d.transaction_code=c.transaction_code
+        where a.transaction_code in (select transaction_code from zyjr_fangkuan where count is not null)
+    </select>
+    <insert id="insertShangpaiOpinion" parameterType="com.jeethink.system.domain.vo.ZyjrGrant">
+        insert into zyjr_shangpai_opinion
+        (id,advise,approval_type,transaction_code,user_id)
+        values
+        (#{id},#{advise},#{approvalType},#{transactionCode},#{userId})
+    </insert>
+    <select id="findShangpaiOpinion" resultType="com.jeethink.system.domain.ZyjrGrantOpinion">
+        select *
+        from zyjr_shangpai_opinion
+        where transaction_code=#{transactionCode}
+    </select>
+
+    <select id="findDiya" resultType="com.jeethink.system.domain.vo.ShangpaiDiyaVo">
+        select a.transaction_code,a.user_name,a.id_card,b.fund_side,c.team,c.car_type,d.submit_state
+        from zyjr_borrower a
+        left join zyjr_start_page b on b.transaction_code=a.transaction_code
+        left join zyjr_business c on c.transaction_code=b.transaction_code
+        left join zyjr_diya d on d.transaction_code=c.transaction_code
+        where a.transaction_code in (select transaction_code from zyjr_shangpai_opinion where approval_type=1)
+    </select>
+    <insert id="insertDiyaOpinion" parameterType="com.jeethink.system.domain.vo.ZyjrGrant">
+        insert into zyjr_diya_opinion
+        (id,advise,approval_type,transaction_code,user_id)
+        values
+        (#{id},#{advise},#{approvalType},#{transactionCode},#{userId})
+    </insert>
+    <select id="findDiyaOpinion" resultType="com.jeethink.system.domain.ZyjrGrantOpinion">
+        select *
+        from zyjr_diya_opinion
+        where transaction_code=#{transactionCode}
+    </select>
 </mapper>

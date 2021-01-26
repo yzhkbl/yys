@@ -2,6 +2,7 @@ package com.jeethink.system.mapper;
 
 import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.GrantVo;
+import com.jeethink.system.domain.vo.ShangpaiDiyaVo;
 import com.jeethink.system.domain.vo.ZyjrGrant;
 
 import java.util.List;
@@ -35,4 +36,13 @@ public interface StageExamineMapper {
 
     List<ZyjrGrant>findAllow();
 
+    //上牌
+    List<ShangpaiDiyaVo>findShangpai();
+    int insertShangpaiOpinion(ZyjrGrantOpinion q);
+    ZyjrGrantOpinion findShangpaiOpinion(String transactionCode);
+
+    //抵押
+    List<ShangpaiDiyaVo>findDiya();
+    int insertDiyaOpinion(ZyjrGrantOpinion q);
+    ZyjrGrantOpinion findDiyaOpinion(String transactionCode);
 }

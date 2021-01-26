@@ -51,6 +51,10 @@ public interface ZyjrCarLoanMapper
     public int updateRepeat(ZyjrCarLoan q);
     public int updateGrant(ZyjrCarLoan q);
 
+    //public int updateByAllow(ZyjrCarLoan q);
+    //public int updateByRepeat(ZyjrCarLoan q);
+    //public int updateByGrant(ZyjrCarLoan q);
+
     /**
      * 删除【请填写功能名称】
      * 

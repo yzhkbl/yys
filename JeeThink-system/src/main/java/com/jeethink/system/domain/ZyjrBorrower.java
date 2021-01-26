@@ -11,7 +11,7 @@ import com.jeethink.common.core.domain.BaseEntity;
  * @author jeethink
  * @date 2020-12-10
  */
-public class ZyjrBorrower extends BaseEntity
+public class ZyjrBorrower
 {
     private static final long serialVersionUID = 1L;
 
@@ -429,10 +429,10 @@ public class ZyjrBorrower extends BaseEntity
             .append("creditPower", getCreditPower())
             .append("userId", getUserId())
             .append("orderState", getOrderState())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
+            //.append("createBy", getCreateBy())
+            //.append("createTime", getCreateTime())
+            //.append("updateBy", getUpdateBy())
+            //.append("updateTime", getUpdateTime())
             .append("transactionCode", getTransactionCode())
             .append("electronicState",getElectronicState())
             .append("electrpnicAddress",getElectrpnicAddress())

@@ -8,7 +8,9 @@ import com.jeethink.system.domain.ZyjrDetails;
 import com.jeethink.system.domain.ZyjrGrantOpinion;
 import com.jeethink.system.domain.ZyjrRepeatOpinion;
 import com.jeethink.system.domain.vo.ExamineVo;
+import com.jeethink.system.domain.vo.ShangpaiDiyaVo;
 import com.jeethink.system.domain.vo.ZyjrGrant;
+import com.jeethink.system.mapper.StageExamineMapper;
 import com.jeethink.system.service.IStageExamineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,8 @@ import java.util.Map;
 public class StageExamineController extends BaseController {
     @Autowired
     private IStageExamineService stageExamineService;
+    @Autowired
+    private StageExamineMapper stageExamineMapper;
 
     @RequestMapping("/find")
     public AjaxResult find(String transactionCode){
@@ -90,5 +94,39 @@ public class StageExamineController extends BaseController {
         startPage();
         List<ZyjrGrant>list = stageExamineService.findAllow();
         return getDataTable(list);
+    }
+
+    @GetMapping("/shangpai/list")
+    public TableDataInfo findShangpai(){
+        startPage();
+        List<ShangpaiDiyaVo>list = stageExamineMapper.findShangpai();
+        return getDataTable(list);
+    }
+
+    @PostMapping("/add/shangpai/opinion")
+    public AjaxResult insertShangpaiOpinion(@RequestBody ZyjrGrantOpinion q){
+        return AjaxResult.success(stageExamineMapper.insertShangpaiOpinion(q));
+    }
+
+    @GetMapping("/find/shangpai/opinion")
+    public AjaxResult findShangpaiOpinion(String transactionCode){
+        return AjaxResult.success(stageExamineMapper.findShangpaiOpinion(transactionCode));
+    }
+
+    @GetMapping("/diya/list")
+    public TableDataInfo findDiya(){
+        startPage();
+        List<ShangpaiDiyaVo>list = stageExamineMapper.findDiya();
+        return getDataTable(list);
+    }
+
+    @PostMapping("/add/diya/opinion")
+    public AjaxResult insertDiyaOpinion(@RequestBody ZyjrGrantOpinion q){
+        return AjaxResult.success(stageExamineMapper.insertDiyaOpinion(q));
+    }
+
+    @GetMapping("/find/diya/opinion")
+    public AjaxResult findDiyaOpinion(String transactionCode){
+        return AjaxResult.success(stageExamineMapper.findDiyaOpinion(transactionCode));
     }
 }
