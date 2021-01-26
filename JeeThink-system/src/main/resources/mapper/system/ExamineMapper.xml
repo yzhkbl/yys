@@ -68,9 +68,9 @@
     </insert>
     <insert id="insertBusiness" parameterType="com.jeethink.system.domain.ZyjrBusiness">
         insert into zyjr_business
-        (id,team,car_information,intention_price,loan_money,repay_period,car_type,user_id,order_state,transaction_code)
+        (id,team,car_information,intention_price,loan_money,repay_period,car_type,user_id,order_state,transaction_code,create_time)
         values
-        (#{id},#{team},#{carInformation},#{intentionPrice},#{loanMoney},#{repayPeriod},#{carType},#{userId},#{orderState},#{transactionCode})
+        (#{id},#{team},#{carInformation},#{intentionPrice},#{loanMoney},#{repayPeriod},#{carType},#{userId},#{orderState},#{transactionCode},#{create_time})
     </insert>
     <select id="findByBorrower" resultType="com.jeethink.system.domain.ZyjrBorrower">
         select id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,obverse_id,obverse_code,obverse_address,

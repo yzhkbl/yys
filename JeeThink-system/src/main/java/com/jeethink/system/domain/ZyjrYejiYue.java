@@ -34,7 +34,35 @@ public class ZyjrYejiYue extends BaseEntity
     /** ID */
     private Long id;
 
-    public void setTeam(String team) 
+    String fangkuan;
+    String wanchenglv;
+    String junjia;
+
+    public String getJunjia() {
+        return junjia;
+    }
+
+    public void setJunjia(String junjia) {
+        this.junjia = junjia;
+    }
+
+    public String getWanchenglv() {
+        return wanchenglv;
+    }
+
+    public void setWanchenglv(String wanchenglv) {
+        this.wanchenglv = wanchenglv;
+    }
+
+    public String getFangkuan() {
+        return fangkuan;
+    }
+
+    public void setFangkuan(String fangkuan) {
+        this.fangkuan = fangkuan;
+    }
+
+    public void setTeam(String team)
     {
         this.team = team;
     }
@@ -92,6 +120,7 @@ public class ZyjrYejiYue extends BaseEntity
             .append("createTime", getCreateTime())
             .append("updateBy", getUpdateBy())
             .append("updateTime", getUpdateTime())
+            .append("junjia", getJunjia())
             .toString();
     }
 }

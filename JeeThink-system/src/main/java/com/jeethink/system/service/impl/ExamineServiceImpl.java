@@ -67,6 +67,7 @@ public class ExamineServiceImpl implements IExamineService {
 
     @Override
     public int addByBusiness(ZyjrBusiness q) {
+        q.setCreateTime(new Date());
         if(findByBusiness(q.getUserId())!=null&&q.getOrderState()==0){
             int count = examineDao.updateBusiness(q);
             return count;
@@ -157,7 +158,7 @@ public class ExamineServiceImpl implements IExamineService {
         zyjrYeji.setDeptId(a.getDeptId());
         zyjrYeji.setName(a.getNickName());
         zyjrYeji.setTransaction(q.getTransactionCode());
-
+        zyjrYeji.setCreateTime(new Date());
         zyjrYejiMapper.insertZyjrYeji(zyjrYeji);
 
            return examineDao.insertStart(startPage);

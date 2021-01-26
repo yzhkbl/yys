@@ -2,6 +2,7 @@ package com.jeethink.system.controller;
 
 
 import java.io.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 
 import com.alibaba.fastjson.JSON;
 import com.jeethink.common.config.JeeThinkConfig;
+import com.jeethink.common.core.domain.entity.SysDept;
 import com.jeethink.common.core.domain.entity.SysUser;
 import com.jeethink.common.core.redis.RedisCache;
 import com.jeethink.common.utils.DateUtils;
@@ -87,6 +89,8 @@ public class test extends BaseController {
     private ZyjrYejiMapper zyjrYejiMapper;
     @Autowired
     private ZyjrYejiYueMapper zyjrYejiYueMapper;
+    @Autowired
+    private SysDeptMapper sysDeptMapper;
 
 
     private static String oCode = "sfzzm";
@@ -938,11 +942,29 @@ public class test extends BaseController {
         return json;
     }
     @ResponseBody
+    @PostMapping("updataYeji")
+    public AjaxResult ss(ZyjrYejiYue zyjrYejiYue){
+        zyjrYejiYueMapper.updateZyjrYejiYue(zyjrYejiYue);
+       return AjaxResult.success();
+    }
+
+    @ResponseBody
     @PostMapping("getYeji")
-    public AjaxResult cc(@RequestBody DateVo dateVo){
+    public AjaxResult cc(@RequestBody DateVo dateVo) throws ParseException {
         ZyjrYejiYue zyjrYejiYue=new ZyjrYejiYue();
-       // zyjrYejiYue.set
-        zyjrYejiYueMapper.selectZyjrYejiYueList(zyjrYejiYue);
+        zyjrYejiYue.setBeginTime(dateVo.getDate()+"-01");
+        String date2=DataUtil.subMonth(dateVo.getDate()+"-01");
+        zyjrYejiYue.setEndTime(date2);
+        List<ZyjrYejiYue> yejiyue=zyjrYejiYueMapper.selectZyjrYejiYueList(zyjrYejiYue);
+        List<SysDept> dept=sysDeptMapper.selectChildrenDeptById((long)204);
+        if(yejiyue.size()<1){
+            for (SysDept sysDept : dept) {
+                zyjrYejiYue.setTeam(sysDept.getDeptName());
+                zyjrYejiYue.setCreateTime(DateUtils.dateTime("yyyy-MM-dd",dateVo.getDate()+"-01"));
+                zyjrYejiYueMapper.insertZyjrYejiYue(zyjrYejiYue);
+            }
+
+        }
         ZyjrYeji zyjrYeji=new ZyjrYeji();
         String userId=dateVo.getUserId();
         if(dateVo.getUserId()!=null){
@@ -950,40 +972,69 @@ public class test extends BaseController {
         }
         String date=dateVo.getDate();
         zyjrYeji.setBeginTime(date+"-01");
-        int d=Integer.valueOf(date.substring(date.length()-2));
-        int e=Integer.valueOf(date.substring(0,4));
-        if(d!=12){
-
-            d+=1;
-            if(String.valueOf(d).length()<2){
-                date=date.substring(0,5)+"0"+d;
-            }else{
-                date=date.substring(0,5)+d;
-            }
-        }else{
-            d=01;
-           date=String.valueOf(e+1)+"-"+String.valueOf(d);
-        }
-        zyjrYeji.setEndTime(date+"-01");
+        zyjrYeji.setEndTime(date2);
         List<ZyjrYeji> yeji=zyjrYejiMapper.selectZyjrYejiList(zyjrYeji);
-        int a=0;
         double b=0.0;
         double c=0.0;
-        for (ZyjrYeji zyjrYeji1 : yeji) {
-            c+=Double.parseDouble(zyjrYeji1.getMubiao());
-            if(zyjrYeji1.getNumber()==2){
-                ++a;
+        for (ZyjrYejiYue yejiYue : yejiyue) {
+            if(yejiYue!=null&&yejiYue.getMubiao()!=null){
+                c+=Double.parseDouble(yejiYue.getMubiao());
             }
+
+        }
+        for (ZyjrYeji zyjrYeji1 : yeji) {
             if(zyjrYeji1.getFangkuan()!=null){
                 b+=Double.parseDouble(zyjrYeji1.getFangkuan());
             }
         }
         Map<String,Object> map=new HashMap<>();
-        map.put("wanchenglv",(b/c)*100+"%");
+        map.put("wanchenglv",(b/c)*100);
+        if(b==0.0||c==0.0){
+            map.put("wanchenglv",null);
+        }
         map.put("fangkuan",b);
         map.put("mubiao",c);
         map.put("junjian",b/yeji.size());
-        map.put("list",yeji);
+        ZyjrYejiYue zyjrYejiYue2=new ZyjrYejiYue();
+        zyjrYejiYue2.setBeginTime(dateVo.getDate()+"-01");
+        zyjrYejiYue2.setEndTime(date2);
+        List<ZyjrYejiYue> yejiyues=zyjrYejiYueMapper.selectZyjrYejiYueList(zyjrYejiYue2);
+        for (ZyjrYejiYue yejiYue : yejiyues) {
+            Double f=0.0;
+            int jun=0;
+            for (ZyjrYeji zyjrYeji1 : yeji) {
+                if(yejiYue.getTeam().equals(zyjrYeji1.getTeam())&&zyjrYeji1.getFangkuan()!=null){
+                    f+=Double.parseDouble(zyjrYeji1.getFangkuan());
+                }
+                if(yejiYue.getTeam().equals(zyjrYeji1.getTeam())&&zyjrYeji1.getNumber()==2){
+                    ++jun;
+                }
+            }
+            yejiYue.setFangkuan(f.toString());
+            if(yejiYue.getMubiao()!=null&&zyjrYejiYue.getFangkuan()!=null){
+                yejiYue.setWanchenglv((Double.parseDouble(zyjrYejiYue.getFangkuan())/Double.parseDouble(yejiYue.getMubiao()))*100+"%");
+            }else{
+                yejiYue.setWanchenglv(null);
+            }
+
+            yejiYue.setJunjia(String.valueOf(jun));
+        }
+        map.put("list",yejiyues);
+        ZyjrYeji zz=new ZyjrYeji();
+        zz.setBeginTime(date.substring(0,5)+"01-01");
+        zz.setEndTime(date.substring(0,5)+"12-31");
+        List<ZyjrYeji> zyjrYejis = zyjrYejiMapper.selectZyjrYejiList(zz);
+        List<String> year=new ArrayList<>();
+        for (ZyjrYeji zyjrYeji1 : zyjrYejis) {
+                year.add(zyjrYeji1.getFangkuan());
+        }
+        map.put("yearfang",year);
+        ZyjrYejiYue zy=new ZyjrYejiYue();
+        zy.setBeginTime(date.substring(0,5)+"01-01");
+        zy.setEndTime(date.substring(0,5)+"12-31");
+        List<ZyjrYejiYue> zyjrYejiYues = zyjrYejiYueMapper.selectZyjrYejiYueList(zy);
+        List<String> mu=zyjrYejiYues.stream().map(ZyjrYejiYue::getMubiao).collect(Collectors.toList());
+        map.put("yearmu",mu);
         return AjaxResult.success(map);
     }
 

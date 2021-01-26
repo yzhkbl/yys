@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="number != null "> and number = #{number}</if>
             <if test="deptId != null "> and dept_id = #{deptId}</if>
             <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
-            <if test="beginTime != null  and beginTime != ''"> and update_time between  #{beginTime}  and #{endTime} </if>
+            <if test="beginTime != null  and beginTime != ''"> and create_time between  #{beginTime}  and #{endTime} </if>
             <if test="transaction != null  and transaction != ''"> and transaction = #{transaction}</if>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
         </where>
