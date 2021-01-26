@@ -74,13 +74,25 @@ public class ZyjrDaihouBaoxianController extends BaseController
     public AjaxResult getInfo(@PathVariable("transactionCode") String transactionCode)
     {
         ZyjrDaihou Daihou=zyjrDaihouMapper.selectZyjrDaihouByT(transactionCode);
+        AjaxResult json=new AjaxResult();
+        json.put("msg","操作成功");
+        json.put("code",200);
+        json.put("data",null);
+        json.put("state","0");
         if(Daihou!=null){
             ZyjrDaihouBaoxian zyjrDaihouBaoxian=new ZyjrDaihouBaoxian();
             zyjrDaihouBaoxian.setDaihou(Daihou.getId().toString());
             List<ZyjrDaihouBaoxian> zyjrDaihouBaoxians = zyjrDaihouBaoxianService.selectZyjrDaihouBaoxianList(zyjrDaihouBaoxian);
-            return AjaxResult.success(zyjrDaihouBaoxians);
+
+            json.put("data",zyjrDaihouBaoxians);
+            String a=null;
+            if(Daihou.getZhengshu()!=null&&Daihou.getBaoxian()!=null&&Daihou.getQita()!=null&&Daihou.getLvben()!=null&&Daihou.getTiche()!=null){
+                a="1";
+            }
+            json.put("state",a);
+            return json;
         }
-        return AjaxResult.success();
+        return json;
     }
 
     /**

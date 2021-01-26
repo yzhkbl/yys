@@ -2,13 +2,16 @@ package com.jeethink.system.controller;
 
 
 import java.io.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 
 import com.alibaba.fastjson.JSON;
 import com.jeethink.common.config.JeeThinkConfig;
+import com.jeethink.common.core.domain.entity.SysDept;
 import com.jeethink.common.core.domain.entity.SysUser;
 import com.jeethink.common.core.redis.RedisCache;
 import com.jeethink.common.utils.DateUtils;
@@ -78,6 +81,17 @@ public class test extends BaseController {
     private ZyjrKaikaMapper zyjrKaikaMapper;
     @Autowired
     private ISysUserService userService;
+    @Autowired
+    private ZyjrFangkuanMapper zyjrFangkuanMapper;
+    @Autowired
+    private ZyjrFangkuanpicMapper zyjrFangkuanpicMapper;
+    @Autowired
+    private ZyjrYejiMapper zyjrYejiMapper;
+    @Autowired
+    private ZyjrYejiYueMapper zyjrYejiYueMapper;
+    @Autowired
+    private SysDeptMapper sysDeptMapper;
+
 
     private static String oCode = "sfzzm";
     private static String pCode = "sfzfm";
@@ -113,6 +127,7 @@ public class test extends BaseController {
 
         ZyjrBorrower borrowerById = o.selectById(codes);
         ZyjrGuarantee guarantee2 = new ZyjrGuarantee();
+        guarantee2.setTransactionCode(codes);
         List<ZyjrGuarantee> guarantee=g.selectZyjrGuaranteeList(guarantee2);
         /**
          * 现无数据后期该行改为sql查询
@@ -297,7 +312,8 @@ public class test extends BaseController {
         AjaxResult c = AjaxResult.success(a);
         JSONObject json2 = new JSONObject().fromObject(a);
         AjaxResult as = AjaxResult.success(a.toString());
-
+        System.err.println(json2);
+        System.err.println(json2.toString());
         JSONObject json = encryptData(json2.toString(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo, orderNo);
 
         JSONObject result = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", json);
@@ -393,6 +409,20 @@ public class test extends BaseController {
         }
         return AjaxResult.success("操作成功",results);
     }
+
+/*
+    @ApiOperation("kaikai")
+    @GetMapping("okCard")
+    @ResponseBody
+    public AjaxResult find32(String transactionCode) {
+        String codes=transactionCode;
+        ZyjrKaika kaika=zyjrKaikaMapper.selectZyjrKaikaById(transactionCode);
+
+
+
+        return AjaxResult.success("操作成功",results);
+    }
+*/
 
 
     public static JSONObject encryptData(String data, String dataPublicKey, String signPrivateKey, String assurerNo
@@ -588,9 +618,13 @@ public class test extends BaseController {
     public AjaxResult kaika(String transactionCode){
        ZyjrKaika kaika= zyjrKaikaMapper.selectZyjrKaikaById(transactionCode);
        if(kaika!=null&&kaika.getCount()!=null){
-           return AjaxResult.success("操作成功",kaika.getCount());
+           AjaxResult json=new AjaxResult();
+           json.put("msg","操作成功");
+           json.put("code",200);
+           json.put("data",kaika.getCount());
+           json.put("state",1);
+           return json;
        }
-            ZyjrBusiness business=b.selectById(transactionCode);
             ZyjrBorrower borrower = o.selectById(transactionCode);
             ZyjrAllowApplicant applicant=zyjrAllowApplicantMapper.selectById(transactionCode);
             ZyjrAllowContacts contacts=zyjrAllowContactsMapper.selectById(transactionCode);
@@ -609,7 +643,7 @@ public class test extends BaseController {
                 if (Integer.parseInt(borrower.getIdCard().substring(16).substring(0, 1)) % 2 == 0) {// 判断性别
                     sex=2;
                 } else {
-                    sex =1;
+                    sex=1;
                 }
             }
             zyjrCard.setSex(sex);
@@ -727,31 +761,119 @@ public class test extends BaseController {
        // zyjrCard.setAlmebno();
       //  zyjrCard.setOutcardno1();
         JSONObject json2 = new JSONObject().fromObject(zyjrCard);
-        return AjaxResult.success("操作成功",json2.toString());
+        AjaxResult json=new AjaxResult();
+        json.put("msg","操作成功");
+        json.put("code",200);
+        json.put("data",json2.toString());
+        json.put("state",null);
+        return json;
     }
 
     @ResponseBody
     @PostMapping("card")
     public AjaxResult kaika(@RequestBody ZyjrCard zyjrcard){
+        String codes=zyjrcard.getTransactionCode();
         ZyjrKaika a=zyjrKaikaMapper.selectZyjrKaikaById(zyjrcard.getTransactionCode());
         JSONObject json2 = new JSONObject().fromObject(zyjrcard);
         if(a!=null){
             a.setCount(json2.toString());
+            a.setUserId("1");
             zyjrKaikaMapper.updateZyjrKaika(a);
             return  AjaxResult.success();
         }
         ZyjrKaika b=new ZyjrKaika();
         b.setTransactionCode(zyjrcard.getTransactionCode());
         b.setCount(json2.toString());
+        b.setUserId("1");
         zyjrKaikaMapper.insertZyjrKaika(b);
-        return  AjaxResult.success();
+        String dataPublicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCFZnUVz07wuQfI5kf3uOaaJcpq*W3yQhJnIX2k-EKwKZaSkyuXutk0TXqwT-GXxIQJqmkjLup*HN7H1uF7JMfxl00AnncHB82LqUQKQwf5wcdDTNhvKLQtjRoLE3ry6ARoYHu5AkZPKW7sMM4o*UegPlSr45p4ZsK0iVdjqmgZfwIDAQAB";
+        String signPrivateKey = "MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAKOoelzwAU5Asw9zknkTYGvfZr0Ap6ZDL6NMSNRYZ2maVJd5xOfSRqTkEq1Ne*h2Qe3wCKdxo0SuCVWNjM-nd3af*fb4YcWdlDuHaA1s28I5hZtVp2sbF*nvgdeUwSz-X0hQGcaqVzcTKDH9l2XuMC**OEofyyosU2jvEIGdwqSNAgMBAAECgYAkojvxvc*tApKSbN5mt82nl-RZbmIYt4VcWmEbF0bevqsc1SccdVdW5a7AmE2aNY6AgnCNesR-RS3Vtr-Ech2tVfwMXypJsXN5hq0uyM6iDkE6kFhGL1zui72u9RQJvdB7CsNfEONIaFlX46MUOdF0fR2n-sGLMc1qzpj*L3k6QQJBAOJfQRF6ehE5d1Sm*7q9uObte1ubako89TSGZmCOk-3vpm9CRTey-18Ids98yMNg3Wy53M4oEzjwjdnnulX9PpUCQQC5E-NySYbigVCsO5Tjr*iAA1ykdGIgaRM45s2tvbMLYQdZYhnkPRjSj*Y7I915cp5klQ75T260InPYQqBkb2gZAkEAjRYtKcWZ*s5EL4B7eCHy8gqlTa0JjAd*FCSH-joexq-snX9CQLrRKtvNoPf28L6YgsE8e0jC4kQbROqGWj2iGQJBAKkXVUCBdL7UrsPs26b6PE1YxPdrbYt29Jz0Ic4ulro6t*AuBMHGIDugRRSbO*mNkrEKjlew-s*M*pIGrUuVjWECQQC3qMemXCmqp7lAaSqYy9Rk8HNVgEeDqJfhcIS4SrRH0DSExPE9yfhadaiC4IIYmmK5L*2V3dxIUI7KXbeO*ptz";
+        String assurerNo = "S36029951";
+        String bankType = "ICBC";
+        String busiCode = "1003";
+        String platNo = "zyhzjg";
+        //////////////////////////////////
+        Pub pub = new Pub();
+        pub.setBankCode("0180400023");
+        pub.setAssurerNo("S36029951");
+        pub.setPlatNo("zyhzjg");
+        pub.setOrderNo(codes);
+        pub.setProductType(1);
+        pub.setBankType(bankType);
+        pub.setBusiCode("1003");
+        KaikaVo kaikaVo=new KaikaVo();
+        kaikaVo.setPub(pub);
+
+        HashMap hashMap = JSON.parseObject(json2.toString(), HashMap.class);
+        kaikaVo.setReq(hashMap);
+        JSONObject json3 = new JSONObject().fromObject(kaikaVo);
+        System.err.println(json3);
+        JSONObject jsons = encryptData(json3.toString(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo, codes);
+
+        JSONObject results = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", jsons);
+        return  AjaxResult.success("操作成功",results);
+    }
+    @ResponseBody
+    @PostMapping("fangkuan")
+    public AjaxResult kaika(@RequestBody FenqiVo fenqiVo){
+        ZyjrYeji zyjrYeji=new ZyjrYeji();
+        zyjrYeji.setTransaction(fenqiVo.getPub().getOrderNo());
+        zyjrYeji.setFangkuan(fenqiVo.getReq().getStageInfo().getStageMoney().toString());
+        zyjrYeji.setNumber((long)2);
+        zyjrYejiMapper.updateZyjrYeji(zyjrYeji);
+        System.err.println(fenqiVo);
+        ZyjrFangkuanpic zyjrFangkuanpic=new ZyjrFangkuanpic();
+        zyjrFangkuanpic.setTransactionCode(fenqiVo.getPub().getOrderNo());
+        List<ZyjrFangkuanpic> zyjrFangkuanpicList=zyjrFangkuanpicMapper.selectZyjrFangkuanpicList(zyjrFangkuanpic);
+        Set<String> set=zyjrFangkuanpicList.stream().map(ZyjrFangkuanpic::getFileName).collect(Collectors.toSet());
+            for (String s : set) {
+                Materials zyjrMaterials=new Materials();
+                zyjrMaterials.setDownloadMode("1");
+                List<MatesVo> mlist=new ArrayList<>();
+                 List<ZyjrFangkuanpic> data = zyjrFangkuanpicList.stream().filter(a -> a.getFileName().equals(s)).collect(Collectors.toList());
+                 for (ZyjrFangkuanpic datum : data) {
+                     zyjrMaterials.setMaterialCode(datum.getFileName());
+                     zyjrMaterials.setMaterialsType(datum.getType());
+                     MatesVo matesVo=new MatesVo();
+                     int i=datum.getFilePath().lastIndexOf("/");
+                     String name=datum.getFilePath().substring(i+1,datum.getFilePath().length());
+                     matesVo.setFileName(name);
+                     matesVo.setDemandMateId(Integer.parseInt(datum.getId().toString()));
+                     matesVo.setMaterialsPic(datum.getFilePath());
+                     mlist.add(matesVo);
+                 }
+                zyjrMaterials.setMates(mlist);
+                fenqiVo.getReq().getJKRCL().getMaterials().add(zyjrMaterials);
+
+        }
+        String codes=fenqiVo.getPub().getOrderNo();
+        ZyjrFangkuan a=zyjrFangkuanMapper.selectZyjrFangkuanById(fenqiVo.getPub().getOrderNo());
+        JSONObject json2 = new JSONObject().fromObject(fenqiVo);
+        if(a!=null){
+            a.setCount(json2.toString());
+            zyjrFangkuanMapper.updateZyjrFangkuan(a);
+            return  AjaxResult.success();
+        }
+        ZyjrFangkuan b=new ZyjrFangkuan();
+        b.setTransactionCode(fenqiVo.getPub().getOrderNo());
+        b.setCount(json2.toString());
+        zyjrFangkuanMapper.insertZyjrFangkuan(b);
+        String dataPublicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCFZnUVz07wuQfI5kf3uOaaJcpq*W3yQhJnIX2k-EKwKZaSkyuXutk0TXqwT-GXxIQJqmkjLup*HN7H1uF7JMfxl00AnncHB82LqUQKQwf5wcdDTNhvKLQtjRoLE3ry6ARoYHu5AkZPKW7sMM4o*UegPlSr45p4ZsK0iVdjqmgZfwIDAQAB";
+        String signPrivateKey = "MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAKOoelzwAU5Asw9zknkTYGvfZr0Ap6ZDL6NMSNRYZ2maVJd5xOfSRqTkEq1Ne*h2Qe3wCKdxo0SuCVWNjM-nd3af*fb4YcWdlDuHaA1s28I5hZtVp2sbF*nvgdeUwSz-X0hQGcaqVzcTKDH9l2XuMC**OEofyyosU2jvEIGdwqSNAgMBAAECgYAkojvxvc*tApKSbN5mt82nl-RZbmIYt4VcWmEbF0bevqsc1SccdVdW5a7AmE2aNY6AgnCNesR-RS3Vtr-Ech2tVfwMXypJsXN5hq0uyM6iDkE6kFhGL1zui72u9RQJvdB7CsNfEONIaFlX46MUOdF0fR2n-sGLMc1qzpj*L3k6QQJBAOJfQRF6ehE5d1Sm*7q9uObte1ubako89TSGZmCOk-3vpm9CRTey-18Ids98yMNg3Wy53M4oEzjwjdnnulX9PpUCQQC5E-NySYbigVCsO5Tjr*iAA1ykdGIgaRM45s2tvbMLYQdZYhnkPRjSj*Y7I915cp5klQ75T260InPYQqBkb2gZAkEAjRYtKcWZ*s5EL4B7eCHy8gqlTa0JjAd*FCSH-joexq-snX9CQLrRKtvNoPf28L6YgsE8e0jC4kQbROqGWj2iGQJBAKkXVUCBdL7UrsPs26b6PE1YxPdrbYt29Jz0Ic4ulro6t*AuBMHGIDugRRSbO*mNkrEKjlew-s*M*pIGrUuVjWECQQC3qMemXCmqp7lAaSqYy9Rk8HNVgEeDqJfhcIS4SrRH0DSExPE9yfhadaiC4IIYmmK5L*2V3dxIUI7KXbeO*ptz";
+        String assurerNo = "S36029951";
+        String bankType = "ICBC";
+        String busiCode = "1002";
+        String platNo = "zyhzjg";
+        //////////////////////////////////
+        HashMap hashMap = JSON.parseObject(json2.toString(), HashMap.class);
+        JSONObject json3 = new JSONObject().fromObject(hashMap.toString());
+        System.err.println(json3);
+        JSONObject jsons = encryptData(json3.toString(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo, codes);
+
+        JSONObject results = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", jsons);
+        return  AjaxResult.success("操作成功",results);
     }
 
-
-
-    public static void main(String[] args) {
-        String a="123456789";
-    }
     @ResponseBody
     @PostMapping("PWD")
     public AjaxResult pWD(Long userId,String newPassword,String oldPassword){
@@ -790,6 +912,146 @@ public class test extends BaseController {
         return AjaxResult.error("修改密码异常，请联系管理员");
     }
 
+    @ResponseBody
+    @PostMapping("phone")
+    public AjaxResult smsCode(String phone)  {
 
+        int codes=Message.makeAuthCode();
+        //Thread.sleep(100);
+        Integer code=redisCache.getCacheObject(phone);
+        if(code!=null){
+            return AjaxResult.success();
+        }
+        redisCache.setCacheObject(phone,codes,1,TimeUnit.MINUTES);
+
+        Message.a(phone,codes);
+        return AjaxResult.success();
+    }
+    @ResponseBody
+    @PostMapping("phoneCode")
+    public AjaxResult codes(String newPassword,String phone,String code){
+        Integer a=redisCache.getCacheObject(phone);
+        if(a==null){
+            AjaxResult json=new AjaxResult();
+            json.put("msg","验证码过期");
+            json.put("code",501);
+            json.put("data",null);
+            return json;
+        }
+        if(a==Integer.parseInt(code)){
+            SysUser user=new SysUser();
+            user.setPhonenumber(phone);
+            List<SysUser> list=userService.selectUserList(user);
+            if(list.size()>0){
+            String userName=list.get(0).getUserName();
+            if (userService.resetUserPwd(userName, SecurityUtils.encryptPassword(newPassword)) > 0)
+            {
+                return AjaxResult.success();
+            }
+            }
+            return AjaxResult.success("用户未找到");
+        }
+        AjaxResult json=new AjaxResult();
+        json.put("msg","验证码不一致");
+        json.put("code",502);
+        json.put("data",null);
+        return json;
+    }
+    @ResponseBody
+    @PostMapping("updataYeji")
+    public AjaxResult ss(ZyjrYejiYue zyjrYejiYue){
+        zyjrYejiYueMapper.updateZyjrYejiYue(zyjrYejiYue);
+       return AjaxResult.success();
+    }
+
+    @ResponseBody
+    @PostMapping("getYeji")
+    public AjaxResult cc(@RequestBody DateVo dateVo) throws ParseException {
+        ZyjrYejiYue zyjrYejiYue=new ZyjrYejiYue();
+        zyjrYejiYue.setBeginTime(dateVo.getDate()+"-01");
+        String date2=DataUtil.subMonth(dateVo.getDate()+"-01");
+        zyjrYejiYue.setEndTime(date2);
+        List<ZyjrYejiYue> yejiyue=zyjrYejiYueMapper.selectZyjrYejiYueList(zyjrYejiYue);
+        List<SysDept> dept=sysDeptMapper.selectChildrenDeptById((long)204);
+        if(yejiyue.size()<1){
+            for (SysDept sysDept : dept) {
+                zyjrYejiYue.setTeam(sysDept.getDeptName());
+                zyjrYejiYue.setCreateTime(DateUtils.dateTime("yyyy-MM-dd",dateVo.getDate()+"-01"));
+                zyjrYejiYueMapper.insertZyjrYejiYue(zyjrYejiYue);
+            }
+
+        }
+        ZyjrYeji zyjrYeji=new ZyjrYeji();
+        String userId=dateVo.getUserId();
+        if(dateVo.getUserId()!=null){
+            zyjrYeji.setUserId(userId);
+        }
+        String date=dateVo.getDate();
+        zyjrYeji.setBeginTime(date+"-01");
+        zyjrYeji.setEndTime(date2);
+        List<ZyjrYeji> yeji=zyjrYejiMapper.selectZyjrYejiList(zyjrYeji);
+        double b=0.0;
+        double c=0.0;
+        for (ZyjrYejiYue yejiYue : yejiyue) {
+            if(yejiYue!=null&&yejiYue.getMubiao()!=null){
+                c+=Double.parseDouble(yejiYue.getMubiao());
+            }
+
+        }
+        for (ZyjrYeji zyjrYeji1 : yeji) {
+            if(zyjrYeji1.getFangkuan()!=null){
+                b+=Double.parseDouble(zyjrYeji1.getFangkuan());
+            }
+        }
+        Map<String,Object> map=new HashMap<>();
+        map.put("wanchenglv",(b/c)*100);
+        if(b==0.0||c==0.0){
+            map.put("wanchenglv",null);
+        }
+        map.put("fangkuan",b);
+        map.put("mubiao",c);
+        map.put("junjian",b/yeji.size());
+        ZyjrYejiYue zyjrYejiYue2=new ZyjrYejiYue();
+        zyjrYejiYue2.setBeginTime(dateVo.getDate()+"-01");
+        zyjrYejiYue2.setEndTime(date2);
+        List<ZyjrYejiYue> yejiyues=zyjrYejiYueMapper.selectZyjrYejiYueList(zyjrYejiYue2);
+        for (ZyjrYejiYue yejiYue : yejiyues) {
+            Double f=0.0;
+            int jun=0;
+            for (ZyjrYeji zyjrYeji1 : yeji) {
+                if(yejiYue.getTeam().equals(zyjrYeji1.getTeam())&&zyjrYeji1.getFangkuan()!=null){
+                    f+=Double.parseDouble(zyjrYeji1.getFangkuan());
+                }
+                if(yejiYue.getTeam().equals(zyjrYeji1.getTeam())&&zyjrYeji1.getNumber()==2){
+                    ++jun;
+                }
+            }
+            yejiYue.setFangkuan(f.toString());
+            if(yejiYue.getMubiao()!=null&&zyjrYejiYue.getFangkuan()!=null){
+                yejiYue.setWanchenglv((Double.parseDouble(zyjrYejiYue.getFangkuan())/Double.parseDouble(yejiYue.getMubiao()))*100+"%");
+            }else{
+                yejiYue.setWanchenglv(null);
+            }
+
+            yejiYue.setJunjia(String.valueOf(jun));
+        }
+        map.put("list",yejiyues);
+        ZyjrYeji zz=new ZyjrYeji();
+        zz.setBeginTime(date.substring(0,5)+"01-01");
+        zz.setEndTime(date.substring(0,5)+"12-31");
+        List<ZyjrYeji> zyjrYejis = zyjrYejiMapper.selectZyjrYejiList(zz);
+        List<String> year=new ArrayList<>();
+        for (ZyjrYeji zyjrYeji1 : zyjrYejis) {
+                year.add(zyjrYeji1.getFangkuan());
+        }
+        map.put("yearfang",year);
+        ZyjrYejiYue zy=new ZyjrYejiYue();
+        zy.setBeginTime(date.substring(0,5)+"01-01");
+        zy.setEndTime(date.substring(0,5)+"12-31");
+        List<ZyjrYejiYue> zyjrYejiYues = zyjrYejiYueMapper.selectZyjrYejiYueList(zy);
+        List<String> mu=zyjrYejiYues.stream().map(ZyjrYejiYue::getMubiao).collect(Collectors.toList());
+        map.put("yearmu",mu);
+        return AjaxResult.success(map);
+    }
 
 }

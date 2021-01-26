@@ -21,7 +21,7 @@ public class ZyjrCarType extends BaseEntity
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String carPrice;
+    private BigDecimal carPrice;
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
@@ -64,12 +64,12 @@ public class ZyjrCarType extends BaseEntity
     {
         return id;
     }
-    public void setCarPrice(String carPrice) 
+    public void setCarPrice(BigDecimal carPrice)
     {
         this.carPrice = carPrice;
     }
 
-    public String getCarPrice() 
+    public BigDecimal getCarPrice()
     {
         return carPrice;
     }

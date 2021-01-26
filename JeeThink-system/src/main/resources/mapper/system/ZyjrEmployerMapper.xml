@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrEmployerMapper">
+    
+    <resultMap type="ZyjrEmployer" id="ZyjrEmployerResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="code"    column="code"    />
+    </resultMap>
+
+    <sql id="selectZyjrEmployerVo">
+        select id, name, code from zyjr_employer
+    </sql>
+
+    <select id="selectZyjrEmployerList" parameterType="ZyjrEmployer" resultMap="ZyjrEmployerResult">
+        <include refid="selectZyjrEmployerVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrEmployerById" parameterType="Long" resultMap="ZyjrEmployerResult">
+        <include refid="selectZyjrEmployerVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrEmployer" parameterType="ZyjrEmployer" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_employer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="code != null">code,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="code != null">#{code},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrEmployer" parameterType="ZyjrEmployer">
+        update zyjr_employer
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="code != null">code = #{code},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrEmployerById" parameterType="Long">
+        delete from zyjr_employer where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrEmployerByIds" parameterType="String">
+        delete from zyjr_employer where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -23,6 +23,7 @@ public class ZyjrMaterials extends BaseEntity
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
     private String materialsType;
 
+
     /** $column.columnComment */
     private Long id;
 

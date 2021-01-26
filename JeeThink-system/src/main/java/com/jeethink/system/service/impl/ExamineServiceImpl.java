@@ -1,10 +1,11 @@
 package com.jeethink.system.service.impl;
 
-import com.jeethink.common.core.domain.AjaxResult;
-import com.jeethink.common.utils.uuid.IdUtils;
+import com.jeethink.common.core.domain.entity.SysUser;
 import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.*;
 import com.jeethink.system.mapper.ExamineMapper;
+import com.jeethink.system.mapper.SysUserMapper;
+import com.jeethink.system.mapper.ZyjrYejiMapper;
 import com.jeethink.system.service.IExamineService;
 import com.jeethink.system.util.HttpPostUtil;
 import com.jeethink.system.util.RSASignature;
@@ -23,7 +24,10 @@ import  com.jeethink.system.util.orderCode;
 public class ExamineServiceImpl implements IExamineService {
     @Autowired
     private ExamineMapper examineDao;
-
+   @Autowired
+    private ZyjrYejiMapper zyjrYejiMapper;
+    @Autowired
+    private SysUserMapper sysUserMapper;
 
     @Override
     public int addByBorrower(ZyjrBorrower q) {
@@ -63,6 +67,7 @@ public class ExamineServiceImpl implements IExamineService {
 
     @Override
     public int addByBusiness(ZyjrBusiness q) {
+        q.setCreateTime(new Date());
         if(findByBusiness(q.getUserId())!=null&&q.getOrderState()==0){
             int count = examineDao.updateBusiness(q);
             return count;
@@ -146,6 +151,16 @@ public class ExamineServiceImpl implements IExamineService {
             zyjrOrderProgress.setTransactionCode(q.getTransactionCode());
             zyjrOrderProgress.setProgress("初审未审批");
             examineDao.insertOrderProgress(zyjrOrderProgress);
+        ZyjrYeji zyjrYeji=new ZyjrYeji();
+        zyjrYeji.setUserId(q.getUserId().toString());
+        zyjrYeji.setArea(q.getBusinessPlace());
+        SysUser a=sysUserMapper.selectUserById(Long.parseLong(q.getUserId().toString()));
+        zyjrYeji.setDeptId(a.getDeptId());
+        zyjrYeji.setName(a.getNickName());
+        zyjrYeji.setTransaction(q.getTransactionCode());
+        zyjrYeji.setCreateTime(new Date());
+        zyjrYejiMapper.insertZyjrYeji(zyjrYeji);
+
            return examineDao.insertStart(startPage);
     }
 

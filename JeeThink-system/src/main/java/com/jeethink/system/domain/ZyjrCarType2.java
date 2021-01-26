@@ -6,7 +6,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 @Data
 public class ZyjrCarType2 {
-    private String carPrice;
+    private BigDecimal carPrice;
 
     private Integer carType;
 
