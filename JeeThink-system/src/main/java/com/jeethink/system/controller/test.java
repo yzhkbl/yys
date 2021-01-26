@@ -83,6 +83,10 @@ public class test extends BaseController {
     private ZyjrFangkuanMapper zyjrFangkuanMapper;
     @Autowired
     private ZyjrFangkuanpicMapper zyjrFangkuanpicMapper;
+    @Autowired
+    private ZyjrYejiMapper zyjrYejiMapper;
+    @Autowired
+    private ZyjrYejiYueMapper zyjrYejiYueMapper;
 
 
     private static String oCode = "sfzzm";
@@ -119,6 +123,7 @@ public class test extends BaseController {
 
         ZyjrBorrower borrowerById = o.selectById(codes);
         ZyjrGuarantee guarantee2 = new ZyjrGuarantee();
+        guarantee2.setTransactionCode(codes);
         List<ZyjrGuarantee> guarantee=g.selectZyjrGuaranteeList(guarantee2);
         /**
          * 现无数据后期该行改为sql查询
@@ -303,7 +308,8 @@ public class test extends BaseController {
         AjaxResult c = AjaxResult.success(a);
         JSONObject json2 = new JSONObject().fromObject(a);
         AjaxResult as = AjaxResult.success(a.toString());
-
+        System.err.println(json2);
+        System.err.println(json2.toString());
         JSONObject json = encryptData(json2.toString(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo, orderNo);
 
         JSONObject result = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", json);
@@ -790,6 +796,11 @@ public class test extends BaseController {
     @ResponseBody
     @PostMapping("fangkuan")
     public AjaxResult kaika(@RequestBody FenqiVo fenqiVo){
+        ZyjrYeji zyjrYeji=new ZyjrYeji();
+        zyjrYeji.setTransaction(fenqiVo.getPub().getOrderNo());
+        zyjrYeji.setFangkuan(fenqiVo.getReq().getStageInfo().getStageMoney().toString());
+        zyjrYeji.setNumber((long)2);
+        zyjrYejiMapper.updateZyjrYeji(zyjrYeji);
         System.err.println(fenqiVo);
         ZyjrFangkuanpic zyjrFangkuanpic=new ZyjrFangkuanpic();
         zyjrFangkuanpic.setTransactionCode(fenqiVo.getPub().getOrderNo());
@@ -843,13 +854,6 @@ public class test extends BaseController {
         return  AjaxResult.success("操作成功",results);
     }
 
-    public static void main(String[] args) {
-        String  str="1234/22/23.html";
-        int i=str.lastIndexOf("/");
-        String name=str.substring(i+1,str.length());
-        System.err.println(name);
-    }
-
     @ResponseBody
     @PostMapping("PWD")
     public AjaxResult pWD(Long userId,String newPassword,String oldPassword){
@@ -888,6 +892,99 @@ public class test extends BaseController {
         return AjaxResult.error("修改密码异常，请联系管理员");
     }
 
+    @ResponseBody
+    @PostMapping("phone")
+    public AjaxResult smsCode(String phone)  {
 
+        int codes=Message.makeAuthCode();
+        //Thread.sleep(100);
+        Integer code=redisCache.getCacheObject(phone);
+        if(code!=null){
+            return AjaxResult.success();
+        }
+        redisCache.setCacheObject(phone,codes,1,TimeUnit.MINUTES);
+
+        Message.a(phone,codes);
+        return AjaxResult.success();
+    }
+    @ResponseBody
+    @PostMapping("phoneCode")
+    public AjaxResult codes(String newPassword,String phone,String code){
+        Integer a=redisCache.getCacheObject(phone);
+        if(a==null){
+            AjaxResult json=new AjaxResult();
+            json.put("msg","验证码过期");
+            json.put("code",501);
+            json.put("data",null);
+            return json;
+        }
+        if(a==Integer.parseInt(code)){
+            SysUser user=new SysUser();
+            user.setPhonenumber(phone);
+            List<SysUser> list=userService.selectUserList(user);
+            if(list.size()>0){
+            String userName=list.get(0).getUserName();
+            if (userService.resetUserPwd(userName, SecurityUtils.encryptPassword(newPassword)) > 0)
+            {
+                return AjaxResult.success();
+            }
+            }
+            return AjaxResult.success("用户未找到");
+        }
+        AjaxResult json=new AjaxResult();
+        json.put("msg","验证码不一致");
+        json.put("code",502);
+        json.put("data",null);
+        return json;
+    }
+    @ResponseBody
+    @PostMapping("getYeji")
+    public AjaxResult cc(@RequestBody DateVo dateVo){
+        ZyjrYejiYue zyjrYejiYue=new ZyjrYejiYue();
+       // zyjrYejiYue.set
+        zyjrYejiYueMapper.selectZyjrYejiYueList(zyjrYejiYue);
+        ZyjrYeji zyjrYeji=new ZyjrYeji();
+        String userId=dateVo.getUserId();
+        if(dateVo.getUserId()!=null){
+            zyjrYeji.setUserId(userId);
+        }
+        String date=dateVo.getDate();
+        zyjrYeji.setBeginTime(date+"-01");
+        int d=Integer.valueOf(date.substring(date.length()-2));
+        int e=Integer.valueOf(date.substring(0,4));
+        if(d!=12){
+
+            d+=1;
+            if(String.valueOf(d).length()<2){
+                date=date.substring(0,5)+"0"+d;
+            }else{
+                date=date.substring(0,5)+d;
+            }
+        }else{
+            d=01;
+           date=String.valueOf(e+1)+"-"+String.valueOf(d);
+        }
+        zyjrYeji.setEndTime(date+"-01");
+        List<ZyjrYeji> yeji=zyjrYejiMapper.selectZyjrYejiList(zyjrYeji);
+        int a=0;
+        double b=0.0;
+        double c=0.0;
+        for (ZyjrYeji zyjrYeji1 : yeji) {
+            c+=Double.parseDouble(zyjrYeji1.getMubiao());
+            if(zyjrYeji1.getNumber()==2){
+                ++a;
+            }
+            if(zyjrYeji1.getFangkuan()!=null){
+                b+=Double.parseDouble(zyjrYeji1.getFangkuan());
+            }
+        }
+        Map<String,Object> map=new HashMap<>();
+        map.put("wanchenglv",(b/c)*100+"%");
+        map.put("fangkuan",b);
+        map.put("mubiao",c);
+        map.put("junjian",b/yeji.size());
+        map.put("list",yeji);
+        return AjaxResult.success(map);
+    }
 
 }

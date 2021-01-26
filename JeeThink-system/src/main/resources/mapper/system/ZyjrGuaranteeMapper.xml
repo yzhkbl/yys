@@ -70,6 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="creditPower != null  and creditPower != ''"> and credit_power = #{creditPower}</if>
             <if test="peopleShip != null  and peopleShip != ''"> and people_ship = #{peopleShip}</if>
             <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
 
         </where>
     </select>

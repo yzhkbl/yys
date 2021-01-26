@@ -1,6 +1,10 @@
 package com.jeethink.system.controller;
 
 import java.util.List;
+import java.util.Set;
+
+import com.jeethink.common.core.domain.entity.SysDept;
+import com.jeethink.system.mapper.SysDeptMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,17 +36,20 @@ public class ZyjrYejiController extends BaseController
 {
     @Autowired
     private IZyjrYejiService zyjrYejiService;
+    @Autowired
+    private SysDeptMapper sysDeptMapper;
 
     /**
      * 查询【请填写功能名称】列表
      */
-    @PreAuthorize("@ss.hasPermi('system:yeji:list')")
+  //  @PreAuthorize("@ss.hasPermi('system:yeji:list')")
     @GetMapping("/list")
     public TableDataInfo list(ZyjrYeji zyjrYeji)
     {
         startPage();
-        List<ZyjrYeji> list = zyjrYejiService.selectZyjrYejiList(zyjrYeji);
-        return getDataTable(list);
+       // List<ZyjrYeji> list = zyjrYejiService.selectZyjrYejiList(zyjrYeji);
+        List<SysDept> a=sysDeptMapper.selectChildrenDeptById((long)204);
+        return getDataTable(a);
     }
 
     /**
@@ -99,5 +106,12 @@ public class ZyjrYejiController extends BaseController
     public AjaxResult remove(@PathVariable Long[] ids)
     {
         return toAjax(zyjrYejiService.deleteZyjrYejiByIds(ids));
+    }
+
+    public static void main(String[] args) {
+       int a=1;
+        a=2;
+        a=223;
+        System.err.println(a);
     }
 }
