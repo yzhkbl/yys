@@ -53,7 +53,7 @@ public class ZyjrBorrowerServiceImpl implements IZyjrBorrowerService
     @Override
     public int insertZyjrBorrower(ZyjrBorrower zyjrBorrower)
     {
-        zyjrBorrower.setCreateTime(DateUtils.getNowDate());
+        //zyjrBorrower.setCreateTime(DateUtils.getNowDate());
         return zyjrBorrowerMapper.insertZyjrBorrower(zyjrBorrower);
     }
 
@@ -66,7 +66,7 @@ public class ZyjrBorrowerServiceImpl implements IZyjrBorrowerService
     @Override
     public int updateZyjrBorrower(ZyjrBorrower zyjrBorrower)
     {
-        zyjrBorrower.setUpdateTime(DateUtils.getNowDate());
+        //zyjrBorrower.setUpdateTime(DateUtils.getNowDate());
         return zyjrBorrowerMapper.updateZyjrBorrower(zyjrBorrower);
     }
 
