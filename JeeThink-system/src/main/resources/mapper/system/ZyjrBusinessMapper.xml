@@ -14,6 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="carType"    column="car_type"    />
         <result property="userId"    column="user_id"    />
         <result property="updateBy"    column="update_by"    />
+        <result property="createTime"    column="create_time"    />
         <result property="orderState"    column="order_state"    />
          <result property="name"    column="user_name"    />
         <result property="transactionCode"    column="transaction_code"    />
@@ -29,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectZyjrBusinessList" parameterType="ZyjrBusiness" resultMap="ZyjrBusinessResult">
-         select a.id, a.team,a.operator,a.update_by,a.false_operator,a.false_operator_id, a.car_information, a.intention_price, a.loan_money, a.repay_period, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name
+         select a.id, a.team,a.operator,a.update_by,a.create_time,a.false_operator,a.false_operator_id, a.car_information, a.intention_price, a.loan_money, a.repay_period, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name
          from zyjr_business a
          left join zyjr_borrower b on a.transaction_code=b.transaction_code
         <where>
