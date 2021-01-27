@@ -38,7 +38,6 @@ public class ZyjrStartPage extends BaseEntity
     @Excel(name = "订单编号")
     private String transactionCode;
 
-
     private String realAddress;
 
     private String creditState;

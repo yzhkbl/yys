@@ -201,10 +201,14 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         ZyjrGrantImage zyjrGrantImage = zyjrGrantImageMapper.selectZyjrGrantImageById(transactionCode);
         ZyjrGrantInstalments zyjrGrantInstalments = zyjrGrantInstalmentsMapper.selectZyjrGrantInstalmentsById(transactionCode);
         ZyjrGrantVisit zyjrGrantVisit = zyjrGrantVisitMapper.selectZyjrGrantVisitById(transactionCode);
-        map.put("basic",examineDao.findByGrant(transactionCode));
-        map.put("image",zyjrGrantPhotoMapper.findImage(zyjrGrantImage.getId()));
-        map.put("instalments",zyjrGrantPhotoMapper.findInstalments(zyjrGrantInstalments.getId()));
-        map.put("visit",zyjrGrantPhotoMapper.findVisit(zyjrGrantVisit.getId()));
+        if(zyjrGrantImage!=null&&zyjrGrantInstalments!=null) {
+            map.put("basic", examineDao.findByGrant(transactionCode));
+            map.put("image", zyjrGrantPhotoMapper.findImage(zyjrGrantImage.getId()));
+            map.put("instalments", zyjrGrantPhotoMapper.findInstalments(zyjrGrantInstalments.getId()));
+        }
+        if(zyjrGrantVisit!=null) {
+            map.put("visit", zyjrGrantPhotoMapper.findVisit(zyjrGrantVisit.getId()));
+        }
         String 董宗杰 = "董宗杰垃圾";
         System.err.println(董宗杰);
         return map;
