@@ -48,10 +48,10 @@ public interface ZyjrAllowOpinionMapper
     /**
      * 删除【请填写功能名称】
      *
-     * @param id 【请填写功能名称】ID
+     * @param transactionCode 【请填写功能名称】ID
      * @return 结果
      */
-    public int deleteZyjrAllowOpinionById(Long id);
+    public int deleteZyjrAllowOpinionById(String transactionCode);
 
     /**
      * 批量删除【请填写功能名称】
