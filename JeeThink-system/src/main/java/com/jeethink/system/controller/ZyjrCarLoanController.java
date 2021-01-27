@@ -121,7 +121,7 @@ public class ZyjrCarLoanController extends BaseController
                 a.setAllowId(q.getUserId());
                 a.setAllowBy(q.getHandleName());
                 a.setTransactionCode(q.getTransactionCode());
-                a.setUserId(q.getUserId());
+                //a.setUserId(q.getUserId());
                 return AjaxResult.success(zyjrCarLoanMapper.updateAllow(a));
             }
         }else {
@@ -147,7 +147,7 @@ public class ZyjrCarLoanController extends BaseController
                 a.setRepeatId(q.getUserId());
                 a.setRepeatBy(q.getHandleName());
                 a.setTransactionCode(q.getTransactionCode());
-                a.setUserId(q.getUserId());
+                //a.setUserId(q.getUserId());
                 return AjaxResult.success(zyjrCarLoanMapper.updateRepeat(a));
             }
         }else {
@@ -171,7 +171,7 @@ public class ZyjrCarLoanController extends BaseController
                 a.setGrantId(q.getUserId());
                 a.setGrantBy(q.getHandleName());
                 a.setTransactionCode(q.getTransactionCode());
-                a.setUserId(q.getUserId());
+                //a.setUserId(q.getUserId());
                 return AjaxResult.success(zyjrCarLoanMapper.updateGrant(a));
             }
         }else {

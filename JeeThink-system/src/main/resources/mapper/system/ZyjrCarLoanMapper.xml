@@ -217,14 +217,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update zyjr_car_loan
         set repeat_id=#{repeatId},
         repeat_by=#{repeatBy}
-        where user_id=#{userId} and transaction_code=#{transactionCode}
+        where transaction_code=#{transactionCode}
     </update>
 
     <update id="updateGrant" parameterType="ZyjrCarLoan">
         update zyjr_car_loan
         set grant_id=#{grantId},
         grant_by=#{grantBy}
-        where user_id=#{userId} and transaction_code=#{transactionCode}
+        where transaction_code=#{transactionCode}
     </update>
 
     <delete id="deleteZyjrCarLoanById" parameterType="Long">
