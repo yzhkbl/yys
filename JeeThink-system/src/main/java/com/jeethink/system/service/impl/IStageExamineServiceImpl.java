@@ -158,7 +158,6 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     @Override
     public int addOpinion(ZyjrRepeatOpinion q) {
         //if(zyjrRepeatOpinion!=null&&zyjrAllowOpinionMapper.selectZyjrAllowOpinionById(q.getTransactionCode()).getApprovalType()==1){
-
         //}
         int count = examineDao.insertOpinion(q);
         ZyjrRepeatOpinion zyjrRepeatOpinion = findOpinion(q.getTransactionCode());

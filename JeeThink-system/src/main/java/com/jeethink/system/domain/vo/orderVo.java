@@ -10,6 +10,8 @@ public class orderVo {
     private String transactionCode;
     /**客户姓名*/
     private String userName;
+    /**身份证号*/
+    private String idCard;
     /**车辆信息*/
     private Integer carInformation;
     /**业务品种（新车/二手车）*/
