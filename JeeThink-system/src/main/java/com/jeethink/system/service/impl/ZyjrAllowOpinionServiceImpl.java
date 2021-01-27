@@ -55,6 +55,7 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
     @Override
     public int insertZyjrAllowOpinion(ZyjrAllowOpinion zyjrAllowOpinion)
     {   ZyjrAllowOpinion o = selectZyjrAllowOpinionById(zyjrAllowOpinion.getTransactionCode());
+        System.err.println(o);
         if(o!=null&&o.getApprovalType()==1) {
             stageExamineMapper.deleteOpinion(zyjrAllowOpinion.getTransactionCode());
         }

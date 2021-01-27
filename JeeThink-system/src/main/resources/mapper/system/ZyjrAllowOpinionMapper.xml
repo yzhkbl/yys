@@ -55,7 +55,7 @@
             <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
             <if test="userId != null">user_id = #{userId},</if>
         </trim>
-        where id = #{id}
+        where transaction_code = #{transactionCode}
     </update>
 
     <delete id="deleteZyjrAllowOpinionById">
