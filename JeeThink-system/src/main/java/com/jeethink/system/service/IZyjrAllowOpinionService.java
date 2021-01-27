@@ -54,8 +54,8 @@ public interface IZyjrAllowOpinionService
     /**
      * 删除【请填写功能名称】信息
      *
-     * @param id 【请填写功能名称】ID
+     * @param transactionCode 【请填写功能名称】ID
      * @return 结果
      */
-    public int deleteZyjrAllowOpinionById(Long id);
+    public int deleteZyjrAllowOpinionById(String transactionCode);
 }

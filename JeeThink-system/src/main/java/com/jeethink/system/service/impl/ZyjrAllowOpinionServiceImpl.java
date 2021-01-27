@@ -56,8 +56,9 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
     public int insertZyjrAllowOpinion(ZyjrAllowOpinion zyjrAllowOpinion)
     {   ZyjrAllowOpinion o = selectZyjrAllowOpinionById(zyjrAllowOpinion.getTransactionCode());
         System.err.println(o);
-        if(o!=null&&o.getApprovalType()==1) {
+        if(o!=null) {
             stageExamineMapper.deleteOpinion(zyjrAllowOpinion.getTransactionCode());
+            zyjrAllowOpinionMapper.deleteZyjrAllowOpinionById(zyjrAllowOpinion.getTransactionCode());
         }
         return zyjrAllowOpinionMapper.insertZyjrAllowOpinion(zyjrAllowOpinion);
     }
@@ -89,12 +90,12 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
     /**
      * 删除【请填写功能名称】信息
      *
-     * @param id 【请填写功能名称】ID
+     * @param transactionCode 【请填写功能名称】ID
      * @return 结果
      */
     @Override
-    public int deleteZyjrAllowOpinionById(Long id)
+    public int deleteZyjrAllowOpinionById(String transactionCode)
     {
-        return zyjrAllowOpinionMapper.deleteZyjrAllowOpinionById(id);
+        return zyjrAllowOpinionMapper.deleteZyjrAllowOpinionById(transactionCode);
     }
 }
