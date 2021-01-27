@@ -120,6 +120,25 @@ public class ZyjrBorrower
     private String contractState;
     private String conf;
     private String encryptData;
+    private String createBy;
+    private String updateBy;
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
     public void setConf(String conf)
     {
         this.conf = conf;
