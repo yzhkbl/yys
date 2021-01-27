@@ -963,7 +963,7 @@ public class test extends BaseController {
     }
     @ResponseBody
     @PostMapping("updataYeji")
-    public AjaxResult ss(ZyjrYejiYue zyjrYejiYue){
+    public AjaxResult ss(@RequestBody ZyjrYejiYue zyjrYejiYue){
         zyjrYejiYueMapper.updateZyjrYejiYue(zyjrYejiYue);
        return AjaxResult.success();
     }
@@ -1015,6 +1015,9 @@ public class test extends BaseController {
         map.put("fangkuan",b);
         map.put("mubiao",c);
         map.put("junjian",b/yeji.size());
+        if(b==0||yeji.size()==0){
+            map.put("junjian",0);
+        }
         ZyjrYejiYue zyjrYejiYue2=new ZyjrYejiYue();
         zyjrYejiYue2.setBeginTime(dateVo.getDate()+"-01");
         zyjrYejiYue2.setEndTime(date2);
