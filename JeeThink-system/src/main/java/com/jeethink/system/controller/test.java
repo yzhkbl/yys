@@ -591,8 +591,8 @@ public class test extends BaseController {
         HashMap hashMap = JSON.parseObject(str, HashMap.class);
         hashMap.forEach((k, v) ->{
             OccptnVo o=new OccptnVo();
-            o.setId(v);
-            o.setOccptn(k);
+            o.setId(k);
+            o.setOccptn(v);
             list.add(o);
         } );
         return AjaxResult.success("操作成功",list);
