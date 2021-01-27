@@ -1,9 +1,12 @@
 package com.jeethink.system.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jeethink.common.annotation.Excel;
 import com.jeethink.common.core.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
+import java.util.Date;
 
 /**
  * 【请填写功能名称】对象 zyjr_start_page
@@ -11,7 +14,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @author jeethink
  * @date 2020-12-14
  */
-public class ZyjrStartPage extends BaseEntity
+public class ZyjrStartPage
 {
     private static final long serialVersionUID = 1L;
 
@@ -41,7 +44,51 @@ public class ZyjrStartPage extends BaseEntity
     private String realAddress;
 
     private String creditState;
+    /** 创建者 */
+    private String createBy;
 
+    /** 创建时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
+
+    /** 更新者 */
+    private String updateBy;
+
+    /** 更新时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date updateTime;
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
 
     public String getRealAddress() {
         return realAddress;
