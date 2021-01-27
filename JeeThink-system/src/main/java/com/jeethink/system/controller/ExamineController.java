@@ -209,6 +209,18 @@ public class ExamineController extends BaseController {
         }
     }
 
+
+    @PostMapping("/stage/shangpai")
+    public AjaxResult insertStageShangpai(@RequestBody ZyjrShangpai q){
+        ZyjrShangpai zyjrShangpai = examineMapper.findShangpai(q.getTransactionCode());
+        if(zyjrShangpai!=null){
+            return AjaxResult.success(examineMapper.updateShangpai(q));
+        }else {
+            return AjaxResult.success(examineMapper.insertShangpai(q));
+        }
+    }
+
+
     @GetMapping("/find/shangpai")
     public AjaxResult findShangpai(String transactionCode){
         return AjaxResult.success(examineMapper.findShangpai(transactionCode));
@@ -224,6 +236,18 @@ public class ExamineController extends BaseController {
             return AjaxResult.success(examineMapper.insertDiya(q));
         }
     }
+
+
+    @PostMapping("/stage/diya")
+    public AjaxResult insertStageDiya(@RequestBody ZyjrDiya q){
+        ZyjrDiya zyjrDiya = examineMapper.findDiya(q.getTransactionCode());
+        if(zyjrDiya!=null){
+            return AjaxResult.success(examineMapper.updateDiya(q));
+        }else {
+            return AjaxResult.success(examineMapper.insertDiya(q));
+        }
+    }
+
 
     @GetMapping("/find/diya")
     public AjaxResult findDiya(String transactionCode){

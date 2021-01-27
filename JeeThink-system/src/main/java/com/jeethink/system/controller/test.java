@@ -477,6 +477,22 @@ public class test extends BaseController {
         return AjaxResult.success();
     }
 
+    @RequestMapping(value = {"/photo"}, method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation("111111111")
+    public AjaxResult photoStage(@RequestParam("name")String name,@RequestParam("file") MultipartFile file) throws IOException {
+        String l = FileUploadUtils.upload(file);
+        SysFileInfo info = new SysFileInfo();
+        String url = "http://114.215.186.186:8080"+l;
+        System.err.println(url);
+        info.setFilePath(url);
+        //info.setId(name);
+        info.setFileName(name);
+        sysFileInfoMapper.insertSysFileInfo(info);
+        return AjaxResult.success(info);
+    }
+
+
     @RequestMapping(value = {"/ceshi3"}, method = RequestMethod.GET)
     @ApiOperation("111111111")
     public String ceshi3(String transactionCode) {

@@ -642,23 +642,23 @@ LEFT JOIN zyjr_daiqian_accout a on a.transaction_code=c.transaction_code where a
     </insert>
     <insert id="insertShangpai" parameterType="com.jeethink.system.domain.ZyjrShangpai">
         insert into zyjr_shangpai
-        (id,registration_url,registration_number,transaction_code)
+        (id,registration_url,registration_number,transaction_code,submit_state)
         values
-        (#{id},#{registrationUrl},#{registrationNumber},#{transactionCode})
+        (#{id},#{registrationUrl},#{registrationNumber},#{transactionCode},#{submitState})
     </insert>
     <select id="findShangpai" resultType="com.jeethink.system.domain.ZyjrShangpai">
-        select id,registration_url,registration_number,transaction_code
+        select id,registration_url,registration_number,transaction_code,submit_state
         from zyjr_shangpai
         where transaction_code=#{transactionCode}
     </select>
     <insert id="insertDiya" parameterType="com.jeethink.system.domain.ZyjrDiya">
         insert into zyjr_diya
-        (id,registration_one,registration_two,mortgagee,id_prove,id_code,registration,car_code,mortgage_date,relieve_date,transaction_code)
+        (id,registration_one,registration_two,mortgagee,id_prove,id_code,registration,car_code,mortgage_date,relieve_date,transaction_code,submit_state)
         values
-        (#{id},#{registrationOne},#{registrationTwo},#{mortgagee},#{idProve},#{idCode},#{registration},#{carCode},#{mortgageDate},#{relieveDate},#{transactionCode})
+        (#{id},#{registrationOne},#{registrationTwo},#{mortgagee},#{idProve},#{idCode},#{registration},#{carCode},#{mortgageDate},#{relieveDate},#{transactionCode},#{submitState})
     </insert>
     <select id="findDiya" resultType="com.jeethink.system.domain.ZyjrDiya">
-        select id,registration_one,registration_two,mortgagee,id_prove,id_code,registration,car_code,mortgage_date,relieve_date,transaction_code
+        select id,registration_one,registration_two,mortgagee,id_prove,id_code,registration,car_code,mortgage_date,relieve_date,transaction_code,submit_state
         from zyjr_diya
         where transaction_code=#{transactionCode}
     </select>
@@ -676,6 +676,9 @@ LEFT JOIN zyjr_daiqian_accout a on a.transaction_code=c.transaction_code where a
             </if>
             <if test="transactionCode != null">
                 transaction_code = #{transactionCode},
+            </if>
+            <if test="submitState != null">
+                submit_state = #{submitState},
             </if>
         </set>
         where transaction_code = #{transactionCode}
@@ -715,6 +718,9 @@ LEFT JOIN zyjr_daiqian_accout a on a.transaction_code=c.transaction_code where a
         </if>
         <if test="transactionCode != null">
             transaction_code = #{transactionCode},
+        </if>
+        <if test="submitState != null">
+            submit_state = #{submitState},
         </if>
         where where transaction_code = #{transactionCode}
     </set>
