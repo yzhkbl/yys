@@ -393,8 +393,11 @@ public class test extends BaseController {
 
 
         if (results.get("code").equals(0)) {
-
-            if (results!=null&&results.getJSONObject("data")!=null&&results.getJSONObject("data").getJSONObject("requestJson")!=null&&results.getJSONObject("data").getJSONObject("requestJson").getJSONObject("req").get("transType").equals(4)) {
+           // System.err.println(results.getJSONObject("data"));
+            //System.err.println(results.getJSONObject("data").);
+            com.alibaba.fastjson.JSONObject jsonx = JSON.parseObject(results.toString());
+            Object type=jsonx.getJSONObject("data").getJSONObject("requestJson").getJSONObject("req").get("transType");
+            if (type!=null&&Integer.parseInt(type.toString())>4) {
 
                 int ceshi=examineMapper.updateStarts(codes);
 
@@ -403,6 +406,7 @@ public class test extends BaseController {
 
                 }
             }
+
             return AjaxResult.success(results);
 
 
