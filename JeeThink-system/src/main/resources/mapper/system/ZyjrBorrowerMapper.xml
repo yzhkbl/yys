@@ -30,9 +30,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="userId"    column="user_id"    />
         <result property="orderState"    column="order_state"    />
         <result property="createBy"    column="create_by"    />
-        <result property="createTime"    column="create_time"    />
+
         <result property="updateBy"    column="update_by"    />
-        <result property="updateTime"    column="update_time"    />
+
         <result property="transactionCode"    column="transaction_code"    />
         <result property="contractState"    column="contract_state"    />
         <result property="privateCode"    column="private_code"    />
@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectZyjrBorrowerVo">
-        select id,contract_state, user_name,encrypt_data,conf, id_card,private_code, bank_card_no, phone_number, issue_authority, start_date, end_date, family_address, obverse_id, obverse_code, obverse_address, obverse_name, back_id, back_code, back_address, back_name, power_id, power_code, power_address, power_name, credit_power, user_id, order_state, create_by, create_time, update_by, update_time ,transaction_code from zyjr_borrower
+        select id,contract_state, user_name,encrypt_data,conf, id_card,private_code, bank_card_no, phone_number, issue_authority, start_date, end_date, family_address, obverse_id, obverse_code, obverse_address, obverse_name, back_id, back_code, back_address, back_name, power_id, power_code, power_address, power_name, credit_power, user_id, order_state, create_by, update_by, transaction_code from zyjr_borrower
     </sql>
 
     <select id="selectZyjrBorrowerList" parameterType="ZyjrBorrower" resultMap="ZyjrBorrowerResult">
@@ -111,9 +111,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null">user_id,</if>
             <if test="orderState != null">order_state,</if>
             <if test="createBy != null">create_by,</if>
-            <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
-            <if test="updateTime != null">update_time,</if>
             <if test="transactionCode != null">transaction_code,</if>
             <if test="electronicState != null">electronic_state,</if>
             <if test="electrpnicAddress != null">electrpnic_address,</if>
@@ -145,9 +143,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null">#{userId},</if>
             <if test="orderState != null">#{orderState},</if>
             <if test="createBy != null">#{createBy},</if>
-            <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
-            <if test="updateTime != null">#{updateTime},</if>
             <if test="transactionCode != null">#{transactionCode},</if>
             <if test="electronicState != null">#{electronicState},</if>
             <if test="electrpnicAddress != null">#{electrpnicAddress},</if>
@@ -182,9 +178,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="creditPower != null">credit_power = #{creditPower},</if>
             <if test="orderState != null">order_state = #{orderState},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
-            <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>
-            <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="transactionCode != null">transaction_code=#{transactionCode},</if>
             <if test="electronicState != null">electronic_state=#{electronicState},</if>
             <if test="electrpnicAddress != null">electrpnic_address=#{electrpnicAddress},</if>
