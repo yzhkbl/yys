@@ -545,7 +545,7 @@ LEFT JOIN zyjr_daiqian_accout a on a.transaction_code=c.transaction_code where a
         where order_state=0 and user_id = #{userId}
     </update>
     <select id="findOrder" resultType="com.jeethink.system.domain.vo.orderVo">
-        select a.transaction_code,b.user_name,b.id_card,a.car_information,a.car_type,c.progress,c.approval_type,d.create_time
+        select b.transaction_code,b.user_name,b.id_card,a.car_information,a.car_type,c.progress,c.approval_type,d.create_time
         from zyjr_borrower b
         left join zyjr_business a on a.transaction_code=b.transaction_code
         left join zyjr_order_progress c on c.transaction_code=a.transaction_code
