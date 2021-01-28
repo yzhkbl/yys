@@ -19,7 +19,7 @@ public interface ZyjrPhotoCarMapper
      * @return 【请填写功能名称】
      */
     public ZyjrPhotoCar selectZyjrPhotoCarById(@Param("userId") Long userId, @Param("transactionCode") String transactionCode);
-
+    public ZyjrPhotoCar selectByT(String transactionCode);
     /**
      * 查询【请填写功能名称】列表
      * 

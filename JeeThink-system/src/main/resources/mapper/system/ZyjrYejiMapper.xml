@@ -19,10 +19,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="userId"    column="user_id"    />
         <result property="transaction"    column="transaction"    />
         <result property="name"    column="name"    />
+        <result property="date"    column="date"    />
     </resultMap>
 
     <sql id="selectZyjrYejiVo">
-        select team, area, mubiao, fangkuan, number, id, dept_id, create_by, create_time, update_by, update_time, user_id, transaction, name from zyjr_yeji
+        select team, area, mubiao,date, fangkuan, number, id, dept_id, create_by, create_time, update_by, update_time, user_id, transaction, name from zyjr_yeji
     </sql>
 
     <select id="selectZyjrYejiList" parameterType="ZyjrYeji" resultMap="ZyjrYejiResult">
@@ -38,6 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="beginTime != null  and beginTime != ''"> and create_time between  #{beginTime}  and #{endTime} </if>
             <if test="transaction != null  and transaction != ''"> and transaction = #{transaction}</if>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="date != null  and date != ''"> and date like concat('%', #{date}, '%')</if>
         </where>
     </select>
     
@@ -62,6 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null">user_id,</if>
             <if test="transaction != null">transaction,</if>
             <if test="name != null">name,</if>
+            <if test="date != null">date,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="team != null">#{team},</if>
@@ -77,6 +80,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null">#{userId},</if>
             <if test="transaction != null">#{transaction},</if>
             <if test="name != null">#{name},</if>
+            <if test="date != null">#{date},</if>
          </trim>
     </insert>
 
@@ -95,6 +99,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="userId != null">user_id = #{userId},</if>
             <if test="name != null">name = #{name},</if>
+            <if test="date != null">date = #{date},</if>
         </trim>
         where transaction = #{id}
     </update>

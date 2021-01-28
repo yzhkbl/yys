@@ -2,6 +2,7 @@ package com.jeethink.system.mapper;
 
 import java.util.List;
 import com.jeethink.system.domain.ZyjrYejiYue;
+import com.jeethink.system.domain.vo.ZyjrYejiYueVo;
 
 /**
  * 【请填写功能名称】Mapper接口
@@ -26,6 +27,7 @@ public interface ZyjrYejiYueMapper
      * @return 【请填写功能名称】集合
      */
     public List<ZyjrYejiYue> selectZyjrYejiYueList(ZyjrYejiYue zyjrYejiYue);
+    public List<ZyjrYejiYueVo> select(ZyjrYejiYue zyjrYejiYue);
 
     /**
      * 新增【请填写功能名称】

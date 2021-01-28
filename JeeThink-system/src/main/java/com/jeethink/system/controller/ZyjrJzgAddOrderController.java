@@ -8,8 +8,10 @@ import java.util.Map;
 import com.jeethink.common.utils.StringUtils;
 import com.jeethink.common.utils.http.HttpUtils;
 import com.jeethink.system.domain.ZyjrDaihouBaoxian;
+import com.jeethink.system.domain.ZyjrPhotoCar;
 import com.jeethink.system.domain.ZyjrPic;
 import com.jeethink.system.mapper.ZyjrJzgAddOrderMapper;
+import com.jeethink.system.mapper.ZyjrPhotoCarMapper;
 import com.jeethink.system.mapper.ZyjrPicMapper;
 import com.jeethink.system.service.IZyjrJzgAddOrderService;
 import com.jeethink.system.util.HttpClientUtil;
@@ -54,6 +56,8 @@ public class ZyjrJzgAddOrderController extends BaseController
     private ZyjrJzgAddOrderMapper zyjrJzgAddOrderMapper;
     @Autowired
     private ZyjrPicMapper zyjrPicMapper;
+    @Autowired
+    private ZyjrPhotoCarMapper zyjrPhotoCarMapper;
 
     private static final String userId="18686";
     private static final String tokenId="177";
@@ -139,7 +143,7 @@ public class ZyjrJzgAddOrderController extends BaseController
     @ApiOperation("11111111")
     @GetMapping("/ceshi")
     public AjaxResult ad(String transactionCode)  {
-
+        ZyjrPhotoCar c=zyjrPhotoCarMapper.selectByT(transactionCode);
         ZyjrJzgAddOrder a=zyjrJzgAddOrderMapper.selectZyjrJzgAddOrderByTransactionCode(transactionCode);
         Map<String,String> map=new HashMap<>();
         if(a!=null){

@@ -977,11 +977,19 @@ public class test extends BaseController {
         zyjrYejiYue.setEndTime(date2);
         List<ZyjrYejiYue> yejiyue=zyjrYejiYueMapper.selectZyjrYejiYueList(zyjrYejiYue);
         List<SysDept> dept=sysDeptMapper.selectChildrenDeptById((long)204);
-        if(yejiyue.size()<1){
+        if(yejiyue.size()<dept.size()){
             for (SysDept sysDept : dept) {
-                zyjrYejiYue.setTeam(sysDept.getDeptName());
-                zyjrYejiYue.setCreateTime(DateUtils.dateTime("yyyy-MM-dd",dateVo.getDate()+"-01"));
-                zyjrYejiYueMapper.insertZyjrYejiYue(zyjrYejiYue);
+                int a=0;
+                for (ZyjrYejiYue yejiYue : yejiyue) {
+                    if(yejiYue.getTeam().equals(sysDept.getDeptName())){
+                        a+=1;
+                    }
+                }
+                if(a<1){
+                    zyjrYejiYue.setTeam(sysDept.getDeptName());
+                    zyjrYejiYue.setCreateTime(DateUtils.dateTime("yyyy-MM-dd",dateVo.getDate()+"-01"));
+                    zyjrYejiYueMapper.insertZyjrYejiYue(zyjrYejiYue);
+                }
             }
 
         }
@@ -1025,6 +1033,7 @@ public class test extends BaseController {
         for (ZyjrYejiYue yejiYue : yejiyues) {
             Double f=0.0;
             int jun=0;
+            long number=0;
             for (ZyjrYeji zyjrYeji1 : yeji) {
                 if(yejiYue.getTeam().equals(zyjrYeji1.getTeam())&&zyjrYeji1.getFangkuan()!=null){
                     f+=Double.parseDouble(zyjrYeji1.getFangkuan());
@@ -1032,15 +1041,19 @@ public class test extends BaseController {
                 if(yejiYue.getTeam().equals(zyjrYeji1.getTeam())&&zyjrYeji1.getNumber()==2){
                     ++jun;
                 }
+                if(yejiYue.getTeam().equals(zyjrYeji1.getTeam())){
+                    ++number;
+                }
             }
             yejiYue.setFangkuan(f.toString());
-            if(yejiYue.getMubiao()!=null&&zyjrYejiYue.getFangkuan()!=null){
-                yejiYue.setWanchenglv((Double.parseDouble(zyjrYejiYue.getFangkuan())/Double.parseDouble(yejiYue.getMubiao()))*100+"%");
+            if(yejiYue.getMubiao()!=null&&f!=null){
+                yejiYue.setWanchenglv(f/Double.parseDouble(yejiYue.getMubiao())*100+"%");
             }else{
                 yejiYue.setWanchenglv(null);
             }
-
+            yejiYue.setNumber(number);
             yejiYue.setJunjia(String.valueOf(jun));
+            yejiYue.setArea(yeji.get(0).getArea());
         }
         map.put("list",yejiyues);
         ZyjrYeji zz=new ZyjrYeji();
@@ -1055,10 +1068,23 @@ public class test extends BaseController {
         ZyjrYejiYue zy=new ZyjrYejiYue();
         zy.setBeginTime(date.substring(0,5)+"01-01");
         zy.setEndTime(date.substring(0,5)+"12-31");
-        List<ZyjrYejiYue> zyjrYejiYues = zyjrYejiYueMapper.selectZyjrYejiYueList(zy);
-        List<String> mu=zyjrYejiYues.stream().map(ZyjrYejiYue::getMubiao).collect(Collectors.toList());
-        map.put("yearmu",mu);
+        List<ZyjrYejiYueVo> zyjrYejiYues = zyjrYejiYueMapper.select(zy);
+        List<Integer> yearmu=new ArrayList<>();
+        for (int i = 1; i < 13; i++) {
+            Integer a=null;
+            for (ZyjrYejiYueVo yejiYue : zyjrYejiYues) {
+                String s=yejiYue.getCreateTime().substring(5,7);
+                if(Integer.parseInt(s)==i){
+                    a=yejiYue.getC();
+                }
+            }
+            yearmu.add(a);
+        }
+        map.put("yearmu",yearmu);
         return AjaxResult.success(map);
     }
 
+
+
 }
+
