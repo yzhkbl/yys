@@ -159,6 +159,7 @@ public class ExamineServiceImpl implements IExamineService {
         zyjrYeji.setName(a.getNickName());
         zyjrYeji.setTransaction(q.getTransactionCode());
         zyjrYeji.setCreateTime(new Date());
+        zyjrYeji.setTeam(a.getDept().getDeptName());
         zyjrYejiMapper.insertZyjrYeji(zyjrYeji);
 
            return examineDao.insertStart(startPage);

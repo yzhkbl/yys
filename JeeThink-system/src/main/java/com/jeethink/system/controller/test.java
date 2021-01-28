@@ -977,11 +977,19 @@ public class test extends BaseController {
         zyjrYejiYue.setEndTime(date2);
         List<ZyjrYejiYue> yejiyue=zyjrYejiYueMapper.selectZyjrYejiYueList(zyjrYejiYue);
         List<SysDept> dept=sysDeptMapper.selectChildrenDeptById((long)204);
-        if(yejiyue.size()<1){
+        if(yejiyue.size()<dept.size()){
             for (SysDept sysDept : dept) {
-                zyjrYejiYue.setTeam(sysDept.getDeptName());
-                zyjrYejiYue.setCreateTime(DateUtils.dateTime("yyyy-MM-dd",dateVo.getDate()+"-01"));
-                zyjrYejiYueMapper.insertZyjrYejiYue(zyjrYejiYue);
+                int a=0;
+                for (ZyjrYejiYue yejiYue : yejiyue) {
+                    if(yejiYue.getTeam().equals(sysDept.getDeptName())){
+                        a+=1;
+                    }
+                }
+                if(a<1){
+                    zyjrYejiYue.setTeam(sysDept.getDeptName());
+                    zyjrYejiYue.setCreateTime(DateUtils.dateTime("yyyy-MM-dd",dateVo.getDate()+"-01"));
+                    zyjrYejiYueMapper.insertZyjrYejiYue(zyjrYejiYue);
+                }
             }
 
         }
@@ -1025,6 +1033,7 @@ public class test extends BaseController {
         for (ZyjrYejiYue yejiYue : yejiyues) {
             Double f=0.0;
             int jun=0;
+            long number=0;
             for (ZyjrYeji zyjrYeji1 : yeji) {
                 if(yejiYue.getTeam().equals(zyjrYeji1.getTeam())&&zyjrYeji1.getFangkuan()!=null){
                     f+=Double.parseDouble(zyjrYeji1.getFangkuan());
@@ -1032,14 +1041,17 @@ public class test extends BaseController {
                 if(yejiYue.getTeam().equals(zyjrYeji1.getTeam())&&zyjrYeji1.getNumber()==2){
                     ++jun;
                 }
+                if(yejiYue.getTeam().equals(zyjrYeji1.getTeam())){
+                    ++number;
+                }
             }
             yejiYue.setFangkuan(f.toString());
-            if(yejiYue.getMubiao()!=null&&zyjrYejiYue.getFangkuan()!=null){
-                yejiYue.setWanchenglv((Double.parseDouble(zyjrYejiYue.getFangkuan())/Double.parseDouble(yejiYue.getMubiao()))*100+"%");
+            if(yejiYue.getMubiao()!=null&&f!=null){
+                yejiYue.setWanchenglv(f/Double.parseDouble(yejiYue.getMubiao())*100+"%");
             }else{
                 yejiYue.setWanchenglv(null);
             }
-
+            yejiYue.setNumber(number);
             yejiYue.setJunjia(String.valueOf(jun));
         }
         map.put("list",yejiyues);
@@ -1062,3 +1074,4 @@ public class test extends BaseController {
     }
 
 }
+
