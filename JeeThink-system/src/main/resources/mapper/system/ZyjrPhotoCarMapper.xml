@@ -28,6 +28,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectZyjrPhotoCarVo"/>
         where user_id=#{userId} and transaction_code=#{transactionCode}
     </select>
+    <select id="selectByT" resultMap="ZyjrPhotoCarResult">
+        <include refid="selectZyjrPhotoCarVo"/>
+        where  transaction_code=#{transactionCode}
+    </select>
         
     <insert id="insertZyjrPhotoCar" parameterType="ZyjrPhotoCar" useGeneratedKeys="true" keyProperty="id">
         insert into zyjr_photo_car

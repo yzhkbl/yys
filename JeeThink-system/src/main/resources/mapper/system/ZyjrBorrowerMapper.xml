@@ -37,6 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="contractState"    column="contract_state"    />
         <result property="privateCode"    column="private_code"    />
         <result property="encryptData"    column="encrypt_data"    />
+        <result property="conf"    column="conf"    />
     </resultMap>
 
     <sql id="selectZyjrBorrowerVo">
@@ -69,6 +70,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="powerName != null  and powerName != ''"> and power_name like concat('%', #{powerName}, '%')</if>
             <if test="creditPower != null "> and credit_power = #{creditPower}</if>
             <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="conf != null  and conf != ''"> and conf = #{conf}</if>
+            <if test="encryptData != null  and encryptData != ''"> and encrypt_data = #{encryptData}</if>
 
 
         </where>
@@ -184,6 +187,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="electrpnicAddress != null">electrpnic_address=#{electrpnicAddress},</if>
             <if test="contractState != null">contract_state=#{contractState},</if>
             <if test="privateCode != null">private_code=#{privateCode},</if>
+            <if test="encryptData != null">encrypt_data=#{encryptData},</if>
+            <if test="conf != null">conf=#{conf},</if>
         </trim>
         where id = #{id}
     </update>
