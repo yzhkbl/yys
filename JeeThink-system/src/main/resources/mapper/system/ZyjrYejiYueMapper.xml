@@ -16,6 +16,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
+    <resultMap type="ZyjrYejiYueVo" id="ZyjrYejiYueResult2">
+        <result property="c"    column="c"    />
+        <result property="createTime"    column="create_time"    />
+
+    </resultMap>
+
     <sql id="selectZyjrYejiYueVo">
         select team, area, mubiao, number, id, create_by, create_time, update_by, update_time from zyjr_yeji_yue
     </sql>
@@ -34,6 +40,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectZyjrYejiYueById" parameterType="Long" resultMap="ZyjrYejiYueResult">
         <include refid="selectZyjrYejiYueVo"/>
         where id = #{id}
+    </select>
+    <select id="select" parameterType="ZyjrYejiYueVo" resultMap="ZyjrYejiYueResult2">
+        SELECT sum(mubiao) as c,create_time FROM `zyjr_yeji_yue` where create_time between  #{beginTime}  and #{endTime}  GROUP BY create_time
     </select>
         
     <insert id="insertZyjrYejiYue" parameterType="ZyjrYejiYue" useGeneratedKeys="true" keyProperty="id">

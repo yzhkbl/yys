@@ -1,6 +1,7 @@
 package com.jeethink.system.service.impl;
 
 import com.jeethink.common.core.domain.entity.SysUser;
+import com.jeethink.common.utils.DateUtils;
 import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.*;
 import com.jeethink.system.mapper.ExamineMapper;
@@ -160,9 +161,20 @@ public class ExamineServiceImpl implements IExamineService {
         zyjrYeji.setTransaction(q.getTransactionCode());
         zyjrYeji.setCreateTime(new Date());
         zyjrYeji.setTeam(a.getDept().getDeptName());
+        String date=DateUtils.dateTime(new Date());
+
+        Date dates=DateUtils.dateTime("yyyy-MM-dd HH:mm:ss",date.substring(0,7)+"-01 00:00:00");
+        zyjrYeji.setDate(dates);
         zyjrYejiMapper.insertZyjrYeji(zyjrYeji);
 
            return examineDao.insertStart(startPage);
+    }
+
+    public static void main(String[] args) {
+        String date=DateUtils.dateTime(new Date());
+
+        Date dates=DateUtils.dateTime("yyyy-MM-dd HH:mm:ss",date.substring(0,7)+"-01 00:00:00");
+        System.err.println(dates);
     }
 
     @Override

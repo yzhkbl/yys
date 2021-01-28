@@ -1053,6 +1053,7 @@ public class test extends BaseController {
             }
             yejiYue.setNumber(number);
             yejiYue.setJunjia(String.valueOf(jun));
+            yejiYue.setArea(yeji.get(0).getArea());
         }
         map.put("list",yejiyues);
         ZyjrYeji zz=new ZyjrYeji();
@@ -1067,11 +1068,23 @@ public class test extends BaseController {
         ZyjrYejiYue zy=new ZyjrYejiYue();
         zy.setBeginTime(date.substring(0,5)+"01-01");
         zy.setEndTime(date.substring(0,5)+"12-31");
-        List<ZyjrYejiYue> zyjrYejiYues = zyjrYejiYueMapper.selectZyjrYejiYueList(zy);
-        List<String> mu=zyjrYejiYues.stream().map(ZyjrYejiYue::getMubiao).collect(Collectors.toList());
-        map.put("yearmu",mu);
+        List<ZyjrYejiYueVo> zyjrYejiYues = zyjrYejiYueMapper.select(zy);
+        List<Integer> yearmu=new ArrayList<>();
+        for (int i = 1; i < 13; i++) {
+            Integer a=null;
+            for (ZyjrYejiYueVo yejiYue : zyjrYejiYues) {
+                String s=yejiYue.getCreateTime().substring(5,7);
+                if(Integer.parseInt(s)==i){
+                    a=yejiYue.getC();
+                }
+            }
+            yearmu.add(a);
+        }
+        map.put("yearmu",yearmu);
         return AjaxResult.success(map);
     }
+
+
 
 }
 

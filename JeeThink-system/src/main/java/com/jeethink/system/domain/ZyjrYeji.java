@@ -5,6 +5,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.jeethink.common.annotation.Excel;
 import com.jeethink.common.core.domain.BaseEntity;
 
+import java.util.Date;
+
 /**
  * 【请填写功能名称】对象 zyjr_yeji
  * 
@@ -53,8 +55,17 @@ public class ZyjrYeji extends BaseEntity
     /** 名称 */
     @Excel(name = "名称")
     private String name;
+    private Date date;
 
-    public void setTeam(String team) 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setTeam(String team)
     {
         this.team = team;
     }
@@ -159,6 +170,7 @@ public class ZyjrYeji extends BaseEntity
             .append("createTime", getCreateTime())
             .append("updateBy", getUpdateBy())
             .append("updateTime", getUpdateTime())
+            .append("date",getDate())
             .append("userId", getUserId())
             .append("transaction", getTransaction())
             .append("name", getName())
