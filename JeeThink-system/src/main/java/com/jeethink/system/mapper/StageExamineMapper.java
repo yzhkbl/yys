@@ -16,6 +16,8 @@ public interface StageExamineMapper {
     List<ZyjrGuarantee> findByGuarantee(String transactionCode);
     /**业务信息查询*/
     ZyjrBusiness findByBusiness(String transactionCode);
+
+    ZyjrStartPage findByStartPage(String transactionCode);
     /**银行岗信息录入*/
     int insertBank(ZyjrDetails q);
     /**征信详情回显*/
