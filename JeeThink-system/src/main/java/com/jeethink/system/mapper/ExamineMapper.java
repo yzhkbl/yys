@@ -9,6 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface ExamineMapper {
+    List<provinces> selectP();
     List<ZyjrDaiqian> selectAllList(ZyjrAllowBasics zyjrAllowBasics);
     ZyjrDaiqian selByDaiqian(String transactionCode);
     int insertDaiqian(ZyjrDaiqian zyjrDaiqian);
@@ -104,4 +105,6 @@ public interface ExamineMapper {
     int insertDiya(ZyjrDiya q);
     int updateDiya(ZyjrDiya q);
     ZyjrDiya findDiya(String transactionCode);
+
+    List<cities> selectC(String pid);
 }

@@ -16,6 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="lvben"    column="lvben"    />
         <result property="tiche"    column="tiche"    />
         <result property="operator"    column="operator"    />
+        <result property="createTime"    column="create_time"    />
     </resultMap>
 
     <sql id="selectZyjrDaihouVo">
@@ -23,12 +24,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectZyjrDaihouList" parameterType="ZyjrDaihou" resultMap="ZyjrDaihouResult">
-        select b.id, b.state, b.opinion,b.operator, b.user_id, a.transaction_code, c.user_name,d.car_type,d.team,f.loan_amount,f.repayment_term,f.actual_price,d.car_information
+        select b.id,g.create_time,b.state, b.opinion,b.operator, b.user_id, a.transaction_code, c.user_name,d.car_type,d.team,f.loan_amount,f.repayment_term,f.actual_price,d.car_information
         from zyjr_daiqian a
         left join zyjr_daihou b on a.transaction_code=b.transaction_code
         left join zyjr_borrower c on a.transaction_code=c.transaction_code
         left join zyjr_business d on a.transaction_code=d.transaction_code
         left join zyjr_car_loan f on a.transaction_code=f.transaction_code
+        left join zyjr_start_page g on a.transaction_code=g.transaction_code
         where a.state="1" and b.state!="1" or b.state is null
     </select>
     

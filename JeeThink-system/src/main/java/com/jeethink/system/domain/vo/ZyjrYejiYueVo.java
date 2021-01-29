@@ -6,4 +6,5 @@ import lombok.Data;
 public class ZyjrYejiYueVo {
     Integer c;
     String createTime;
+    String date;
 }

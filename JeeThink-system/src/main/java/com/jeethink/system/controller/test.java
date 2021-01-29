@@ -1053,18 +1053,18 @@ public class test extends BaseController {
             }
             yejiYue.setNumber(number);
             yejiYue.setJunjia(String.valueOf(jun));
-            yejiYue.setArea(yeji.get(0).getArea());
+            if(yeji.size()>0){
+                yejiYue.setArea(yeji.get(0).getArea());
+            }
+
         }
         map.put("list",yejiyues);
         ZyjrYeji zz=new ZyjrYeji();
         zz.setBeginTime(date.substring(0,5)+"01-01");
         zz.setEndTime(date.substring(0,5)+"12-31");
-        List<ZyjrYeji> zyjrYejis = zyjrYejiMapper.selectZyjrYejiList(zz);
-        List<String> year=new ArrayList<>();
-        for (ZyjrYeji zyjrYeji1 : zyjrYejis) {
-                year.add(zyjrYeji1.getFangkuan());
-        }
-        map.put("yearfang",year);
+        List<ZyjrYejiYueVo> zyjrYejis = zyjrYejiMapper.selecList(zz);
+        List<Integer> yearmu2=new ArrayList<>();
+
         ZyjrYejiYue zy=new ZyjrYejiYue();
         zy.setBeginTime(date.substring(0,5)+"01-01");
         zy.setEndTime(date.substring(0,5)+"12-31");
@@ -1072,6 +1072,7 @@ public class test extends BaseController {
         List<Integer> yearmu=new ArrayList<>();
         for (int i = 1; i < 13; i++) {
             Integer a=null;
+            Integer aa=null;
             for (ZyjrYejiYueVo yejiYue : zyjrYejiYues) {
                 String s=yejiYue.getCreateTime().substring(5,7);
                 if(Integer.parseInt(s)==i){
@@ -1079,7 +1080,15 @@ public class test extends BaseController {
                 }
             }
             yearmu.add(a);
+            for (ZyjrYejiYueVo zyjrYejiYueVo : zyjrYejis) {
+                String s=zyjrYejiYueVo.getDate().substring(5,7);
+                if(Integer.parseInt(s)==i){
+                    aa=zyjrYejiYueVo.getC();
+                }
+            }
+            yearmu2.add(aa);
         }
+        map.put("yearfang",yearmu2);
         map.put("yearmu",yearmu);
         return AjaxResult.success(map);
     }

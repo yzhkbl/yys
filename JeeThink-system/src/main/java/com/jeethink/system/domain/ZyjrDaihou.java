@@ -62,6 +62,15 @@ public class ZyjrDaihou
     private Long dealersId;
     private Integer carInformation;
     private String carType;
+    String createTime;
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
 
     public String getCarType() {
         return carType;

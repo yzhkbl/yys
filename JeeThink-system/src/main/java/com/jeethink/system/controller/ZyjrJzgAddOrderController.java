@@ -1,18 +1,17 @@
 package com.jeethink.system.controller;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.jeethink.common.utils.StringUtils;
 import com.jeethink.common.utils.http.HttpUtils;
-import com.jeethink.system.domain.ZyjrDaihouBaoxian;
-import com.jeethink.system.domain.ZyjrPhotoCar;
-import com.jeethink.system.domain.ZyjrPic;
-import com.jeethink.system.mapper.ZyjrJzgAddOrderMapper;
-import com.jeethink.system.mapper.ZyjrPhotoCarMapper;
-import com.jeethink.system.mapper.ZyjrPicMapper;
+import com.jeethink.system.domain.*;
+import com.jeethink.system.domain.vo.*;
+import com.jeethink.system.mapper.*;
 import com.jeethink.system.service.IZyjrJzgAddOrderService;
 import com.jeethink.system.util.HttpClientUtil;
 import com.jeethink.system.util.HttpPostUtil;
@@ -35,7 +34,6 @@ import com.jeethink.common.annotation.Log;
 import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
 import com.jeethink.common.enums.BusinessType;
-import com.jeethink.system.domain.ZyjrJzgAddOrder;
 import com.jeethink.common.utils.poi.ExcelUtil;
 import com.jeethink.common.core.page.TableDataInfo;
 
@@ -58,7 +56,12 @@ public class ZyjrJzgAddOrderController extends BaseController
     private ZyjrPicMapper zyjrPicMapper;
     @Autowired
     private ZyjrPhotoCarMapper zyjrPhotoCarMapper;
-
+    @Autowired
+    private SysFileInfoMapper sysFileInfoMapper;
+    @Autowired
+    private ZyjrCarLoanMapper zyjrCarLoanMapper;
+    @Autowired
+    private ExamineMapper examineMapper;
     private static final String userId="18686";
     private static final String tokenId="177";
     private static final String tokenKey="82CF76A1-3C3A-4E0B-9969-1789137982F5";
@@ -140,31 +143,64 @@ public class ZyjrJzgAddOrderController extends BaseController
         return AjaxResult.success(zyjrPics);
     }
 
+    @GetMapping("/get")
+    public AjaxResult sd(String pid){
+        if(pid!=null){
+           List<cities> l= examineMapper.selectC(pid);
+            List<valueVo> list=l.stream().map(provinces -> {
+                valueVo valueVo=new valueVo();
+                valueVo.setLabel(provinces.getCity());
+                valueVo.setValue(provinces.getCityid());
+                return valueVo;
+            }).collect(Collectors.toList());
+            return AjaxResult.success(list);
+        }
+        List<provinces> a=examineMapper.selectP();
+        //Map<String,String> map=a.stream().collect(Collectors.toMap(provinces::getProvince,provinces::getProvinceid));
+        List<valueVo> list=a.stream().map(provinces -> {
+            valueVo valueVo=new valueVo();
+            valueVo.setLabel(provinces.getProvince());
+            valueVo.setValue(provinces.getProvinceid());
+            return valueVo;
+        }).collect(Collectors.toList());
+        return AjaxResult.success(list);
+    }
+
     @ApiOperation("11111111")
-    @GetMapping("/ceshi")
-    public AjaxResult ad(String transactionCode)  {
-        ZyjrPhotoCar c=zyjrPhotoCarMapper.selectByT(transactionCode);
-        ZyjrJzgAddOrder a=zyjrJzgAddOrderMapper.selectZyjrJzgAddOrderByTransactionCode(transactionCode);
+    @PostMapping("/ceshi")
+    public AjaxResult ad(@RequestBody JingVo jingVo)  {
+        ZyjrPhotoCar c=zyjrPhotoCarMapper.selectByT(jingVo.getTransactionCode());
+        List<SysFileInfo> list = sysFileInfoMapper.photoCar(c.getId());
+        ZyjrCarLoan a=zyjrCarLoanMapper.selectHandle(jingVo.getTransactionCode());
         Map<String,String> map=new HashMap<>();
-        if(a!=null){
             map.put("tokenId","177");
-            map.put("programmeId","4");
+            map.put("programmeId","5");
             map.put("userId","18686");
             map.put("orderNum",a.getTransactionCode());
-            map.put("vin",a.getVin());
-            map.put("regionCodeStyle",a.getRegionCodeStyle());
-            map.put("provinceId",a.getProvinceId().toString());
-            map.put("cityId",a.getCityId().toString());
-            map.put("productType",a.getProductType());
-            map.put("imageList",a.getImageList());
-            System.err.println(a.getImageList());
-            map.put("orderName",a.getOrderName());
-            map.put("orderPhone",a.getOrderPhone());
-            map.put("carLicense",a.getCarLicense());
-            map.put("service",a.getService());
-            map.put("engineNum",a.getEngineNum().toString());
-            map.put("recordBrand",a.getRecordBrand());
-            map.put("businessPrice",a.getBusinessPrice().toString());
+            map.put("vin",a.getVinCode());
+            map.put("regionCodeStyle","1");
+            map.put("provinceId",jingVo.getProvinceId());
+            map.put("cityId",jingVo.getCityId());
+            map.put("productType","1");
+            List<jzgVo> jzgvo=new ArrayList<>();
+            for (SysFileInfo sysFileInfo : list) {
+            jzgVo jzg=new jzgVo();
+                jzg.setImageUrl(sysFileInfo.getFilePath());
+            jzg.setPartCode(Integer.parseInt(sysFileInfo.getFileName()));
+            jzgvo.add(jzg);
+            }
+
+        JSONArray json3=new JSONArray().fromObject(jzgvo);
+        System.err.println(json3);
+        System.err.println(json3.toString());
+            map.put("imageList",json3.toString());
+            map.put("orderName",jingVo.getOrderName());
+            map.put("orderPhone",jingVo.getOrderPhone());
+           // map.put("carLicense",a.getCarLicense());
+            //map.put("service",a.getService());
+            map.put("engineNum",a.getEngineCode());
+            map.put("recordBrand",a.getBrand());
+           // map.put("businessPrice",a.getBusinessPrice().toString());
             String sign=JzgUtil.getSign(map,"82CF76A1-3C3A-4E0B-9969-1789137982F5");
        /* Map<String,Object> maps=new HashMap<>();
         maps.putAll(map);
@@ -173,11 +209,14 @@ public class ZyjrJzgAddOrderController extends BaseController
         maps.put("provinceId",a.getProvinceId());
         maps.put("cityId",a.getCityId());*/
             map.put("sign",sign);
-        }
+        System.err.println(map);
 
       /*  maps.put("businessPrice",a.getBusinessPrice());*/
 
         String results = HttpClientUtil.doPost("http://jcptapi.sandbox.jingzhengu.com/api/online/addOrder", map);
+        ZyjrJzgAddOrder zyjrJzgAddOrder=new ZyjrJzgAddOrder();
+        zyjrJzgAddOrder.setTransactionCode(jingVo.getTransactionCode());
+        zyjrJzgAddOrderMapper.insertZyjrJzgAddOrder(zyjrJzgAddOrder);
         return AjaxResult.success(results);
     }
 

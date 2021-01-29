@@ -21,6 +21,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="name"    column="name"    />
         <result property="date"    column="date"    />
     </resultMap>
+    <resultMap type="ZyjrYejiYueVo" id="ZyjrYejiYueResult2">
+        <result property="c"    column="c"    />
+        <result property="date"    column="date"    />
+
+    </resultMap>
 
     <sql id="selectZyjrYejiVo">
         select team, area, mubiao,date, fangkuan, number, id, dept_id, create_by, create_time, update_by, update_time, user_id, transaction, name from zyjr_yeji
@@ -42,7 +47,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="date != null  and date != ''"> and date like concat('%', #{date}, '%')</if>
         </where>
     </select>
-    
+    <select id="selecList" parameterType="ZyjrYejiYueVo" resultMap="ZyjrYejiYueResult2">
+        SELECT sum(fangkuan) as c,date FROM `zyjr_yeji` where date between  #{beginTime}  and #{endTime}  GROUP BY date
+    </select>
     <select id="selectZyjrYejiById" parameterType="Long" resultMap="ZyjrYejiResult">
         <include refid="selectZyjrYejiVo"/>
         where id = #{id}

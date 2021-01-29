@@ -17,17 +17,30 @@
         <result property="repaymentTerm"    column="repayment_term"    />
         <result property="actualPrice"    column="actual_price"    />
         <result property="carInformation"    column="car_information"    />
+        <result property="createTime"    column="create_time"    />
     </resultMap>
     <select id="selectAllList" parameterType="com.jeethink.system.domain.ZyjrDaiqian" resultMap="ZyjrAllowBasicsResult2">
         select e.id, e.state, e.opinion,e.user_id,e.operator, a.transaction_code,
-        b.user_name,c.car_type,c.team,f.loan_amount,f.repayment_term,f.actual_price,c.car_information
+        b.user_name,c.car_type,c.team,f.loan_amount,f.repayment_term,f.actual_price,c.car_information,g.create_time
         from zyjr_grant_opinion a
         left join zyjr_borrower b on a.transaction_code=b.transaction_code
         left join zyjr_business c on a.transaction_code=c.transaction_code
         left join zyjr_allow_basics d on a.transaction_code=d.transaction_code
         left join zyjr_daiqian e on a.transaction_code=e.transaction_code
         left join zyjr_car_loan f on a.transaction_code=f.transaction_code
+          left join zyjr_start_page g on a.transaction_code=g.transaction_code
         where a.approval_type=1 and e.state!="1" or e.state is null
+    </select>
+    <select id="selectP"
+            resultType="com.jeethink.system.domain.vo.provinces">
+        select *
+        from dcc_provinces
+    </select>
+    <select id="selectC"
+            resultType="com.jeethink.system.domain.vo.cities">
+        select *
+        from dcc_cities
+        where provinceid=#{pid}
     </select>
     <insert id="insertBorrower" parameterType="com.jeethink.system.domain.ZyjrBorrower">
         insert into zyjr_borrower

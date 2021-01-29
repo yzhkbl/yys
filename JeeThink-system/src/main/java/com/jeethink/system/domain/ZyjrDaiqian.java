@@ -18,5 +18,6 @@ public class ZyjrDaiqian {
     private Long dealersId;
     private Integer carInformation;
     private String operator;
+    String createTime;
 
 }
