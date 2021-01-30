@@ -169,6 +169,7 @@ public class ZyjrJzgAddOrderController extends BaseController
     @ApiOperation("11111111")
     @PostMapping("/ceshi")
     public AjaxResult ad(@RequestBody JingVo jingVo)  {
+        ZyjrJzgAddOrder jzgorder=zyjrJzgAddOrderMapper.selectZyjrJzgAddOrderByTransactionCode(jingVo.getTransactionCode());
         ZyjrPhotoCar c=zyjrPhotoCarMapper.selectByT(jingVo.getTransactionCode());
         List<SysFileInfo> list = sysFileInfoMapper.photoCar(c.getId());
         ZyjrCarLoan a=zyjrCarLoanMapper.selectHandle(jingVo.getTransactionCode());
@@ -214,10 +215,20 @@ public class ZyjrJzgAddOrderController extends BaseController
       /*  maps.put("businessPrice",a.getBusinessPrice());*/
 
         String results = HttpClientUtil.doPost("http://jcptapi.sandbox.jingzhengu.com/api/online/addOrder", map);
-        ZyjrJzgAddOrder zyjrJzgAddOrder=new ZyjrJzgAddOrder();
-        zyjrJzgAddOrder.setTransactionCode(jingVo.getTransactionCode());
-        zyjrJzgAddOrderMapper.insertZyjrJzgAddOrder(zyjrJzgAddOrder);
-        return AjaxResult.success(results);
+        if(jzgorder!=null){
+            if(jzgorder.getData()!=null){
+                AjaxResult json=new AjaxResult();
+                json.put("code",400);
+                json.put("msg", "操作多次（有记录）！！！");
+                return json;
+            }
+        }else{
+            ZyjrJzgAddOrder zyjrJzgAddOrder=new ZyjrJzgAddOrder();
+            zyjrJzgAddOrder.setUserId((long)66);
+            zyjrJzgAddOrder.setTransactionCode(jingVo.getTransactionCode());
+            zyjrJzgAddOrderMapper.insertZyjrJzgAddOrder(zyjrJzgAddOrder);
+        }
+        return AjaxResult.success();
     }
 
     @ApiOperation("11111111")

@@ -108,11 +108,12 @@ public class ZyjrDaihouLvbenController extends BaseController
             zyjrDaihou.setLvben("1");
             zyjrDaihouMapper.updateZyjrDaihou(zyjrDaihou);
         }
-       /* zyjrDaihouLvbenService.deleteZyjrDaihouLvbenById(zyjrDaihou.getId());
+
         if(zyjrDaihou.getId()!=null){
+            zyjrDaihouLvbenService.deleteZyjrDaihouLvbenById(zyjrDaihou.getId());
             zyjrDaihouLvben.setDaihou(zyjrDaihou.getId().toString());
             zyjrDaihouLvbenService.insertZyjrDaihouLvben(zyjrDaihouLvben);
-        }*/
+        }
         return AjaxResult.success();
     }
 
