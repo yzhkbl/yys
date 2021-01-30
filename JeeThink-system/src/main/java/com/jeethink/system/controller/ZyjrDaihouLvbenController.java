@@ -82,7 +82,6 @@ public class ZyjrDaihouLvbenController extends BaseController
         if(Daihou!=null){
             ZyjrDaihouLvben zyjrDaihouBaoxian=new ZyjrDaihouLvben();
             zyjrDaihouBaoxian.setDaihou(Daihou.getId().toString());
-            List<ZyjrDaihouLvben> zyjrDaihouQitas = zyjrDaihouLvbenService.selectZyjrDaihouLvbenList(zyjrDaihouBaoxian);
             ZyjrDaihouLvben daia=zyjrDaihouLvbenMapper.selectZyjrDaihouLvbenById(Daihou.getId());
             json.put("data",daia);
             String a=null;
@@ -114,8 +113,13 @@ public class ZyjrDaihouLvbenController extends BaseController
         }
 
         if(zyjrDaihou.getId()!=null){
-            zyjrDaihouLvbenService.deleteZyjrDaihouLvbenById(zyjrDaihou.getId());
+            ZyjrDaihouLvben lvben=zyjrDaihouLvbenService.selectZyjrDaihouLvbenById(zyjrDaihou.getId());
             zyjrDaihouLvben.setDaihou(zyjrDaihou.getId().toString());
+            if(lvben!=null){
+                zyjrDaihouLvbenService.updateZyjrDaihouLvben(zyjrDaihouLvben);
+                return AjaxResult.success();
+            }
+
             zyjrDaihouLvbenService.insertZyjrDaihouLvben(zyjrDaihouLvben);
         }
         return AjaxResult.success();
