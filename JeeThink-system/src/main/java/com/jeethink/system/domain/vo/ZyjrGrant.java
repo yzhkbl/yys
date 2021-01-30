@@ -66,6 +66,114 @@ public class ZyjrGrant extends BaseEntity
     private Long allowId;
     private Long repeatId;
     private Long grantId;
+    private String applicant;
+    private String basics;
+    private String contacts;
+    private String carLoan;
+    private String companyGuarantee;
+    private String peopleGuarantee;
+    private String photoCar;
+    private String photoCredit;
+    private String photoHouse;
+    private String photoLender;
+    private String grantImage;
+    private String grantInstalments;
+
+    public String getApplicant() {
+        return applicant;
+    }
+
+    public void setApplicant(String applicant) {
+        this.applicant = applicant;
+    }
+
+    public String getBasics() {
+        return basics;
+    }
+
+    public void setBasics(String basics) {
+        this.basics = basics;
+    }
+
+    public String getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(String contacts) {
+        this.contacts = contacts;
+    }
+
+    public String getCarLoan() {
+        return carLoan;
+    }
+
+    public void setCarLoan(String carLoan) {
+        this.carLoan = carLoan;
+    }
+
+    public String getCompanyGuarantee() {
+        return companyGuarantee;
+    }
+
+    public void setCompanyGuarantee(String companyGuarantee) {
+        this.companyGuarantee = companyGuarantee;
+    }
+
+    public String getPeopleGuarantee() {
+        return peopleGuarantee;
+    }
+
+    public void setPeopleGuarantee(String peopleGuarantee) {
+        this.peopleGuarantee = peopleGuarantee;
+    }
+
+    public String getPhotoCar() {
+        return photoCar;
+    }
+
+    public void setPhotoCar(String photoCar) {
+        this.photoCar = photoCar;
+    }
+
+    public String getPhotoCredit() {
+        return photoCredit;
+    }
+
+    public void setPhotoCredit(String photoCredit) {
+        this.photoCredit = photoCredit;
+    }
+
+    public String getPhotoHouse() {
+        return photoHouse;
+    }
+
+    public void setPhotoHouse(String photoHouse) {
+        this.photoHouse = photoHouse;
+    }
+
+    public String getPhotoLender() {
+        return photoLender;
+    }
+
+    public void setPhotoLender(String photoLender) {
+        this.photoLender = photoLender;
+    }
+
+    public String getGrantImage() {
+        return grantImage;
+    }
+
+    public void setGrantImage(String grantImage) {
+        this.grantImage = grantImage;
+    }
+
+    public String getGrantInstalments() {
+        return grantInstalments;
+    }
+
+    public void setGrantInstalments(String grantInstalments) {
+        this.grantInstalments = grantInstalments;
+    }
 
     public Long getAllowId() {
         return allowId;
