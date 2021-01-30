@@ -73,9 +73,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="type != null">type = #{type},</if>
             <if test="count != null">count = #{count},</if>
             <if test="fujian != null">fujian = #{fujian},</if>
-            <if test="daihou != null">daihou = #{daihou},</if>
+
         </trim>
-        where id = #{id}
+        where daihou = #{daihou}
     </update>
 
     <delete id="deleteZyjrDaihouLvbenById" parameterType="Long">
