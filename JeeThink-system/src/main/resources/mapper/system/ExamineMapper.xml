@@ -697,13 +697,13 @@ LEFT JOIN zyjr_daiqian_accout a on a.transaction_code=c.transaction_code where a
         where transaction_code = #{transactionCode}
     </update>
     <update id="updateDiya">
-    update zyjr_start_page
+    update zyjr_diya
     <set>
         <if test="id!=null">
             id=#{id},
         </if>
         <if test="registrationOne!=null">
-            registration_one=#{registrationOne},
+            registration_one = #{registrationOne},
         </if>
         <if test="registrationTwo != null">
             registration_two = #{registrationTwo},
