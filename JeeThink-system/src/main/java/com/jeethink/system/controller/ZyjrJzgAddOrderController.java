@@ -174,45 +174,42 @@ public class ZyjrJzgAddOrderController extends BaseController
         List<SysFileInfo> list = sysFileInfoMapper.photoCar(c.getId());
         ZyjrCarLoan a=zyjrCarLoanMapper.selectHandle(jingVo.getTransactionCode());
         Map<String,String> map=new HashMap<>();
-            map.put("tokenId","177");
-            map.put("programmeId","5");
-            map.put("userId","18686");
-            map.put("orderNum",a.getTransactionCode());
-            map.put("vin",a.getVinCode());
-            map.put("regionCodeStyle","1");
-            map.put("provinceId",jingVo.getProvinceId());
-            map.put("cityId",jingVo.getCityId());
-            map.put("productType","1");
-            List<jzgVo> jzgvo=new ArrayList<>();
-            for (SysFileInfo sysFileInfo : list) {
+        map.put("tokenId","177");
+        map.put("programmeId","5");
+        map.put("userId","18686");
+        map.put("orderNum",a.getTransactionCode());
+        map.put("vin",a.getVinCode());
+        map.put("regionCodeStyle","1");
+        map.put("provinceId",jingVo.getProvinceId());
+        map.put("cityId",jingVo.getCityId());
+        map.put("productType","1");
+        List<jzgVo> jzgvo=new ArrayList<>();
+        for (SysFileInfo sysFileInfo : list) {
             jzgVo jzg=new jzgVo();
-                jzg.setImageUrl(sysFileInfo.getFilePath());
+            jzg.setImageUrl(sysFileInfo.getFilePath());
             jzg.setPartCode(Integer.parseInt(sysFileInfo.getFileName()));
             jzgvo.add(jzg);
-            }
+        }
 
         JSONArray json3=new JSONArray().fromObject(jzgvo);
-        System.err.println(json3);
-        System.err.println(json3.toString());
-            map.put("imageList",json3.toString());
-            map.put("orderName",jingVo.getOrderName());
-            map.put("orderPhone",jingVo.getOrderPhone());
-           // map.put("carLicense",a.getCarLicense());
-            //map.put("service",a.getService());
-            map.put("engineNum",a.getEngineCode());
-            map.put("recordBrand",a.getBrand());
-           // map.put("businessPrice",a.getBusinessPrice().toString());
-            String sign=JzgUtil.getSign(map,"82CF76A1-3C3A-4E0B-9969-1789137982F5");
+        map.put("imageList",json3.toString());
+        map.put("orderName",jingVo.getOrderName());
+        map.put("orderPhone",jingVo.getOrderPhone());
+        // map.put("carLicense",a.getCarLicense());
+        //map.put("service",a.getService());
+        map.put("engineNum",a.getEngineCode());
+        map.put("recordBrand",a.getBrand());
+        // map.put("businessPrice",a.getBusinessPrice().toString());
+        String sign=JzgUtil.getSign(map,"82CF76A1-3C3A-4E0B-9969-1789137982F5");
        /* Map<String,Object> maps=new HashMap<>();
         maps.putAll(map);
         maps.put("programmeId",4);
         maps.put("userId",18686);
         maps.put("provinceId",a.getProvinceId());
         maps.put("cityId",a.getCityId());*/
-            map.put("sign",sign);
-        System.err.println(map);
+        map.put("sign",sign);
 
-      /*  maps.put("businessPrice",a.getBusinessPrice());*/
+        /*  maps.put("businessPrice",a.getBusinessPrice());*/
 
         String results = HttpClientUtil.doPost("http://jcptapi.sandbox.jingzhengu.com/api/online/addOrder", map);
         if(jzgorder!=null){
@@ -223,12 +220,15 @@ public class ZyjrJzgAddOrderController extends BaseController
                 return json;
             }
         }else{
-            ZyjrJzgAddOrder zyjrJzgAddOrder=new ZyjrJzgAddOrder();
-            zyjrJzgAddOrder.setUserId((long)66);
-            zyjrJzgAddOrder.setTransactionCode(jingVo.getTransactionCode());
-            zyjrJzgAddOrderMapper.insertZyjrJzgAddOrder(zyjrJzgAddOrder);
+            if(results.substring(10,13).equals("100")){
+                ZyjrJzgAddOrder zyjrJzgAddOrder=new ZyjrJzgAddOrder();
+                zyjrJzgAddOrder.setUserId((long)66);
+                zyjrJzgAddOrder.setTransactionCode(jingVo.getTransactionCode());
+                zyjrJzgAddOrderMapper.insertZyjrJzgAddOrder(zyjrJzgAddOrder);
+            }
+
         }
-        return AjaxResult.success();
+        return AjaxResult.success(results.substring(10,13),results.substring(20,results.length()-1));
     }
 
     @ApiOperation("11111111")
