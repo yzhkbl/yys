@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.jeethink.system.domain.ZyjrDaihou;
 import com.jeethink.system.domain.ZyjrDaihouQita;
+import com.jeethink.system.mapper.ZyjrDaihouLvbenMapper;
 import com.jeethink.system.mapper.ZyjrDaihouMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,8 @@ public class ZyjrDaihouLvbenController extends BaseController
     private IZyjrDaihouLvbenService zyjrDaihouLvbenService;
     @Autowired
     private ZyjrDaihouMapper zyjrDaihouMapper;
+    @Autowired
+    private ZyjrDaihouLvbenMapper zyjrDaihouLvbenMapper;
 
     /**
      * 查询【请填写功能名称】列表
@@ -80,7 +83,8 @@ public class ZyjrDaihouLvbenController extends BaseController
             ZyjrDaihouLvben zyjrDaihouBaoxian=new ZyjrDaihouLvben();
             zyjrDaihouBaoxian.setDaihou(Daihou.getId().toString());
             List<ZyjrDaihouLvben> zyjrDaihouQitas = zyjrDaihouLvbenService.selectZyjrDaihouLvbenList(zyjrDaihouBaoxian);
-            json.put("data",zyjrDaihouQitas.get(0));
+            ZyjrDaihouLvben daia=zyjrDaihouLvbenMapper.selectZyjrDaihouLvbenById(Daihou.getId());
+            json.put("data",daia);
             String a=null;
             if(Daihou.getZhengshu()!=null&&Daihou.getBaoxian()!=null&&Daihou.getQita()!=null&&Daihou.getLvben()!=null&&Daihou.getTiche()!=null){
                 a="1";
