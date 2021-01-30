@@ -735,7 +735,7 @@ LEFT JOIN zyjr_daiqian_accout a on a.transaction_code=c.transaction_code where a
         <if test="submitState != null">
             submit_state = #{submitState},
         </if>
-        where where transaction_code = #{transactionCode}
+        where transaction_code = #{transactionCode}
     </set>
     </update>
 </mapper>
