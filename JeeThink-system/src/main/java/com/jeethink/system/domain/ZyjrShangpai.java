@@ -8,5 +8,5 @@ public class ZyjrShangpai {
     private String registrationUrl;
     private String registrationNumber;
     private String transactionCode;
-    private String submitState;
+    private Integer submitState;
 }

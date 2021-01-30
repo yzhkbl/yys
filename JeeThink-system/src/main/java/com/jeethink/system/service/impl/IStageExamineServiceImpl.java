@@ -128,12 +128,12 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         ZyjrPhotoCredit zyjrPhotoCredit = zyjrPhotoCreditMapper.selectZyjrPhotoCreditById(userId, transactionCode);
         ZyjrPhotoHouse zyjrPhotoHouse = zyjrPhotoHouseMapper.selectZyjrPhotoHouseById(userId, transactionCode);
         ZyjrPhotoLender zyjrPhotoLender = zyjrPhotoLenderMapper.selectZyjrPhotoLenderById(userId, transactionCode);
-        if(zyjrAllowApplicant!=null&&zyjrAllowBasics!=null&&zyjrAllowContacts!=null&&zyjrCarLoan!=null&&zyjrPhotoCar!=null&&zyjrPhotoCredit!=null
+        /**if(zyjrAllowApplicant!=null&&zyjrAllowBasics!=null&&zyjrAllowContacts!=null&&zyjrCarLoan!=null&&zyjrPhotoCar!=null&&zyjrPhotoCredit!=null
         &&zyjrPhotoHouse!=null&&zyjrPhotoLender!=null){
             if(zyjrCompanyGuarantee!=null||zyjrPeopleGuarantee!=null) {
                 map.put("stateId", 1);
             }
-        }
+        }*/
         List<String> lists=new ArrayList<>();
         if (zyjrPhotoCar != null) {
             /*map.put("photoCar", sysFileInfoMapper.photoCar(zyjrPhotoCar.getId()));*/
@@ -222,7 +222,8 @@ public class IStageExamineServiceImpl implements IStageExamineService {
             map.put("basic", examineDao.findByGrant(transactionCode));
             map.put("image", zyjrGrantPhotoMapper.findImage(zyjrGrantImage.getId()));
             map.put("instalments", zyjrGrantPhotoMapper.findInstalments(zyjrGrantInstalments.getId()));
-            map.put("stateId",1);
+            //map.put("stateId",1);
+            //System.err.println(111);
         }
         if(zyjrGrantVisit!=null) {
             map.put("visit", zyjrGrantPhotoMapper.findVisit(zyjrGrantVisit.getId()));
@@ -234,6 +235,7 @@ public class IStageExamineServiceImpl implements IStageExamineService {
 
     @Override
     public List<ZyjrGrant> findAllow() {
+
         return examineDao.findAllow();
     }
 

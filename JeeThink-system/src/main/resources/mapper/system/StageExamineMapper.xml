@@ -58,21 +58,35 @@
         where transaction_code=#{transactionCode}
     </select>
     <select id="list" resultType="com.jeethink.system.domain.vo.ZyjrGrant">
-        select distinct b.id, a.team,e.create_time,d.repeat_id,d.repeat_by,a.car_information, d.actual_price, d.loan_amount, d.repayment_term, a.car_type, b.user_id, b.order_state,b.transaction_code,b.user_name as name,c.approval_type
+        select distinct b.id, a.team,e.create_time,d.repeat_id,d.repeat_by,a.car_information, d.actual_price, d.loan_amount, d.repayment_term, a.car_type, b.user_id, b.order_state,b.transaction_code,b.user_name as name,c.approval_type,
+        f.id applicant,g.id basics,h.id contacts,i.id carLoan,j.id companyGuarantee,k.id peopleGuarantee,l.id photoCar,m.id photoCredit,n.id photoHouse,o.id photoLender
          from zyjr_borrower b
          left join zyjr_start_page e on b.transaction_code=e.transaction_code
-         left join zyjr_business a on e.transaction_code=a.transaction_code
-         left join zyjr_car_loan d on a.transaction_code=d.transaction_code
-         left join zyjr_repeat_opinion c on d.transaction_code=c.transaction_code
+         left join zyjr_business a on b.transaction_code=a.transaction_code
+         left join zyjr_car_loan d on b.transaction_code=d.transaction_code
+         left join zyjr_repeat_opinion c on b.transaction_code=c.transaction_code
+         left join zyjr_allow_applicant f on b.transaction_code=f.transaction_code
+         left join zyjr_allow_basics g on b.transaction_code=g.transaction_code
+         left join zyjr_allow_contacts h on b.transaction_code=h.transaction_code
+         left join zyjr_car_loan i on b.transaction_code=i.transaction_code
+         left join zyjr_company_guarantee j on b.transaction_code=j.transaction_code
+         left join zyjr_people_guarantee k on b.transaction_code=k.transaction_code
+         left join zyjr_photo_car l on b.transaction_code=l.transaction_code
+         left join zyjr_photo_credit m on b.transaction_code=m.transaction_code
+         left join zyjr_photo_house n on b.transaction_code=n.transaction_code
+         left join zyjr_photo_lender o on b.transaction_code=o.transaction_code
          where a.transaction_code in (select transaction_code from zyjr_allow_opinion where approval_type=1 and c.approval_type!=1 or c.approval_type is null)
     </select>
     <select id="findGrant" resultType="com.jeethink.system.domain.vo.ZyjrGrant">
-        select distinct b.id, a.team,e.create_time,d.grant_id,d.grant_by,a.car_information, d.actual_price, d.loan_amount, d.repayment_term, a.car_type, b.user_id, b.order_state,b.transaction_code,b.user_name as name,c.approval_type
+        select distinct b.id, a.team,e.create_time,d.grant_id,d.grant_by,a.car_information, d.actual_price, d.loan_amount, d.repayment_term, a.car_type, b.user_id, b.order_state,b.transaction_code,b.user_name as name,c.approval_type,
+        f.id grantImage,g.id grantInstalments
          from zyjr_borrower b
          left join zyjr_start_page e on b.transaction_code=e.transaction_code
-         left join zyjr_business a on e.transaction_code=a.transaction_code
-         left join zyjr_car_loan d on a.transaction_code=d.transaction_code
-         left join zyjr_grant_opinion c on d.transaction_code=c.transaction_code
+         left join zyjr_business a on b.transaction_code=a.transaction_code
+         left join zyjr_car_loan d on b.transaction_code=d.transaction_code
+         left join zyjr_grant_opinion c on b.transaction_code=c.transaction_code
+         left join zyjr_grant_image f on b.transaction_code=f.transaction_code
+         left join zyjr_grant_instalments g on b.transaction_code=g.transaction_code
          where a.transaction_code in (select transaction_code from zyjr_repeat_opinion where approval_type=1 and c.approval_type!=1 or c.approval_type is null)
     </select>
     <insert id="insertGrantOpinion" parameterType="com.jeethink.system.domain.ZyjrGrantOpinion">
@@ -95,12 +109,23 @@
          where a.transaction_code=#{transaction_code}
     </select>
     <select id="findAllow" resultType="com.jeethink.system.domain.vo.ZyjrGrant">
-        SELECT distinct b.id, a.team,e.create_time,d.allow_id,d.allow_by,a.car_information, d.actual_price, d.loan_amount, d.repayment_term, a.car_type, b.user_id, b.order_state,b.transaction_code,b.user_name AS NAME,c.approval_type
+        SELECT distinct b.id, a.team,e.create_time,d.allow_id,d.allow_by,a.car_information, d.actual_price, d.loan_amount, d.repayment_term, a.car_type, b.user_id, b.order_state,b.transaction_code,b.user_name AS NAME,c.approval_type,
+        f.id applicant,g.id basics,h.id contacts,i.id carLoan,j.id companyGuarantee,k.id peopleGuarantee,l.id photoCar,m.id photoCredit,n.id photoHouse,o.id photoLender
          FROM zyjr_borrower b
          left join zyjr_start_page e on b.transaction_code=e.transaction_code
-         left join zyjr_business a on e.transaction_code=a.transaction_code
-         left join zyjr_car_loan d on a.transaction_code=d.transaction_code
-         LEFT JOIN zyjr_allow_opinion c ON d.transaction_code=c.transaction_code
+         left join zyjr_business a on b.transaction_code=a.transaction_code
+         left join zyjr_car_loan d on b.transaction_code=d.transaction_code
+         left join zyjr_allow_opinion c ON b.transaction_code=c.transaction_code
+         left join zyjr_allow_applicant f on b.transaction_code=f.transaction_code
+         left join zyjr_allow_basics g on b.transaction_code=g.transaction_code
+         left join zyjr_allow_contacts h on b.transaction_code=h.transaction_code
+         left join zyjr_car_loan i on b.transaction_code=i.transaction_code
+         left join zyjr_company_guarantee j on b.transaction_code=j.transaction_code
+         left join zyjr_people_guarantee k on b.transaction_code=k.transaction_code
+         left join zyjr_photo_car l on b.transaction_code=l.transaction_code
+         left join zyjr_photo_credit m on b.transaction_code=m.transaction_code
+         left join zyjr_photo_house n on b.transaction_code=n.transaction_code
+         left join zyjr_photo_lender o on b.transaction_code=o.transaction_code
          WHERE c.approval_type!=1 OR c.approval_type IS NULL
     </select>
 
@@ -108,8 +133,8 @@
         select a.transaction_code,a.user_name,a.id_card,b.fund_side,c.team,c.car_type,d.submit_state
         from zyjr_borrower a
         left join zyjr_start_page b on b.transaction_code=a.transaction_code
-        left join zyjr_business c on c.transaction_code=b.transaction_code
-        left join zyjr_shangpai d on d.transaction_code=c.transaction_code
+        left join zyjr_business c on a.transaction_code=b.transaction_code
+        left join zyjr_shangpai d on a.transaction_code=c.transaction_code
         where a.transaction_code in (select transaction_code from zyjr_fangkuan where count is not null)
     </select>
     <insert id="insertShangpaiOpinion" parameterType="com.jeethink.system.domain.vo.ZyjrGrant">
@@ -128,8 +153,8 @@
         select a.transaction_code,a.user_name,a.id_card,b.fund_side,c.team,c.car_type,d.submit_state
         from zyjr_borrower a
         left join zyjr_start_page b on b.transaction_code=a.transaction_code
-        left join zyjr_business c on c.transaction_code=b.transaction_code
-        left join zyjr_diya d on d.transaction_code=c.transaction_code
+        left join zyjr_business c on c.transaction_code=a.transaction_code
+        left join zyjr_diya d on d.transaction_code=a.transaction_code
         where a.transaction_code in (select transaction_code from zyjr_shangpai_opinion where approval_type=1)
     </select>
     <insert id="insertDiyaOpinion" parameterType="com.jeethink.system.domain.vo.ZyjrGrant">
