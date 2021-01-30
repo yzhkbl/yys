@@ -68,7 +68,12 @@ public class ZyjrAllowBasicsServiceImpl implements IZyjrAllowBasicsService
     @Override
     public int insertZyjrAllowBasics(ZyjrAllowBasics zyjrAllowBasics)
     {
-        return zyjrAllowBasicsMapper.insertZyjrAllowBasics(zyjrAllowBasics);
+        ZyjrAllowBasics z = zyjrAllowBasicsMapper.selectZyjrAllowBasicsById(zyjrAllowBasics.getUserId(), zyjrAllowBasics.getTransactionCode());
+        if(z!=null){
+            return zyjrAllowBasicsMapper.updateZyjrAllowBasics(zyjrAllowBasics);
+        }else {
+            return zyjrAllowBasicsMapper.insertZyjrAllowBasics(zyjrAllowBasics);
+        }
     }
 
     /**
