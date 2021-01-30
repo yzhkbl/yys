@@ -84,6 +84,7 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         examineVo.setBusiness(findByBusiness(transactionCode));
         examineVo.setRelation(findByRelation(transactionCode));
         examineVo.setGuarantee(findByGuarantee(transactionCode));
+        examineVo.setStartPage(examineDao.findByStartPage(transactionCode));
         /**map.put("business", findByBusiness(transactionCode));
         map.put("borrower", findByBorrower(transactionCode));
         map.put("relation", findByRelation(transactionCode));
@@ -106,18 +107,33 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     @Override
     public Map<String, Object> findByAllow(Long userId, String transactionCode) {
         Map<String, Object> map = new HashMap<>();
+        map.put("startPage",examineDao.findByStartPage(transactionCode));
+        map.put("business",findByBusiness(transactionCode));
         map.put("borrower", examineDao.findByBorrower(transactionCode));
-        map.put("applicant", zyjrAllowApplicantMapper.selectZyjrAllowApplicantById(userId, transactionCode));
-        map.put("basics", zyjrAllowBasicsMapper.selectZyjrAllowBasicsById(userId, transactionCode));
-        map.put("contacts", zyjrAllowContactsMapper.selectZyjrAllowContactsById(userId, transactionCode));
-        map.put("debtService", zyjrDebtServiceMapper.selectZyjrDebtServiceById(userId, transactionCode));
-        map.put("carLoan", zyjrCarLoanMapper.selectZyjrCarLoanById(userId, transactionCode));
-        map.put("companyGuarantee", zyjrCompanyGuaranteeMapper.selectZyjrCompanyGuaranteeById(userId, transactionCode));
-        map.put("peopleGuarantee", zyjrPeopleGuaranteeMapper.selectZyjrPeopleGuaranteeById(userId, transactionCode));
+        ZyjrAllowApplicant zyjrAllowApplicant = zyjrAllowApplicantMapper.selectZyjrAllowApplicantById(userId, transactionCode);
+        map.put("applicant",zyjrAllowApplicant);
+        ZyjrAllowBasics zyjrAllowBasics = zyjrAllowBasicsMapper.selectZyjrAllowBasicsById(userId, transactionCode);
+        map.put("basics",zyjrAllowBasics);
+        ZyjrAllowContacts zyjrAllowContacts = zyjrAllowContactsMapper.selectZyjrAllowContactsById(userId, transactionCode);
+        map.put("contacts",zyjrAllowContacts);
+        ZyjrDebtService zyjrDebtService = zyjrDebtServiceMapper.selectZyjrDebtServiceById(userId, transactionCode);
+        map.put("debtService",zyjrDebtService);
+        ZyjrCarLoan zyjrCarLoan = zyjrCarLoanMapper.selectZyjrCarLoanById(userId, transactionCode);
+        map.put("carLoan",zyjrCarLoan);
+        ZyjrCompanyGuarantee zyjrCompanyGuarantee = zyjrCompanyGuaranteeMapper.selectZyjrCompanyGuaranteeById(userId, transactionCode);
+        map.put("companyGuarantee",zyjrCompanyGuarantee);
+        ZyjrPeopleGuarantee zyjrPeopleGuarantee = zyjrPeopleGuaranteeMapper.selectZyjrPeopleGuaranteeById(userId, transactionCode);
+        map.put("peopleGuarantee",zyjrPeopleGuarantee);
         ZyjrPhotoCar zyjrPhotoCar = zyjrPhotoCarMapper.selectZyjrPhotoCarById(userId, transactionCode);
         ZyjrPhotoCredit zyjrPhotoCredit = zyjrPhotoCreditMapper.selectZyjrPhotoCreditById(userId, transactionCode);
         ZyjrPhotoHouse zyjrPhotoHouse = zyjrPhotoHouseMapper.selectZyjrPhotoHouseById(userId, transactionCode);
         ZyjrPhotoLender zyjrPhotoLender = zyjrPhotoLenderMapper.selectZyjrPhotoLenderById(userId, transactionCode);
+        if(zyjrAllowApplicant!=null&&zyjrAllowBasics!=null&&zyjrAllowContacts!=null&&zyjrCarLoan!=null&&zyjrPhotoCar!=null&&zyjrPhotoCredit!=null
+        &&zyjrPhotoHouse!=null&&zyjrPhotoLender!=null){
+            if(zyjrCompanyGuarantee!=null||zyjrPeopleGuarantee!=null) {
+                map.put("stateId", 1);
+            }
+        }
         List<String> lists=new ArrayList<>();
         if (zyjrPhotoCar != null) {
             /*map.put("photoCar", sysFileInfoMapper.photoCar(zyjrPhotoCar.getId()));*/
@@ -201,10 +217,12 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         ZyjrGrantImage zyjrGrantImage = zyjrGrantImageMapper.selectZyjrGrantImageById(transactionCode);
         ZyjrGrantInstalments zyjrGrantInstalments = zyjrGrantInstalmentsMapper.selectZyjrGrantInstalmentsById(transactionCode);
         ZyjrGrantVisit zyjrGrantVisit = zyjrGrantVisitMapper.selectZyjrGrantVisitById(transactionCode);
+        //if (zyjrGrantImage!=null&&zyjrGrantInstalments!=null)
         if(zyjrGrantImage!=null&&zyjrGrantInstalments!=null) {
             map.put("basic", examineDao.findByGrant(transactionCode));
             map.put("image", zyjrGrantPhotoMapper.findImage(zyjrGrantImage.getId()));
             map.put("instalments", zyjrGrantPhotoMapper.findInstalments(zyjrGrantInstalments.getId()));
+            map.put("stateId",1);
         }
         if(zyjrGrantVisit!=null) {
             map.put("visit", zyjrGrantPhotoMapper.findVisit(zyjrGrantVisit.getId()));

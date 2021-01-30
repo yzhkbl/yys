@@ -21,6 +21,11 @@
         from zyjr_guarantee
         where order_state=1 and transaction_code=#{transactionCode}
     </select>
+    <select id="findByStartPage" resultType="com.jeethink.system.domain.ZyjrStartPage">
+        select *
+        from zyjr_start_page
+        where order_state=1 and transaction_code=#{transactionCode}
+    </select>
     <select id="findByBusiness" resultType="com.jeethink.system.domain.ZyjrBusiness">
         select a.id, a.team, a.car_information,a.false_operator,a.false_operator_id, a.intention_price, a.loan_money, a.repay_period,a. car_type,a. user_id, a.order_state,a.transaction_code,b.real_address from zyjr_business a
         left join zyjr_start_page b on a.transaction_code=b.transaction_code

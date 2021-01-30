@@ -15,4 +15,5 @@ public class ZyjrDiya {
     private String mortgageDate;
     private String relieveDate;
     private String transactionCode;
+    private String submitState;
 }
