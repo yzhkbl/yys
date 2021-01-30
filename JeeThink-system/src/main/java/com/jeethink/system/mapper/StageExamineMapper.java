@@ -48,5 +48,4 @@ public interface StageExamineMapper {
     int insertDiyaOpinion(ZyjrGrantOpinion q);
     ZyjrGrantOpinion findDiyaOpinion(String transactionCode);
 
-    WriteState findWriteState(String transactionCode);
 }
