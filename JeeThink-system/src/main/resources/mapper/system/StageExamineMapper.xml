@@ -168,4 +168,12 @@
         from zyjr_diya_opinion
         where transaction_code=#{transactionCode}
     </select>
+    <delete id="deleteAllowOpinion">
+        delete from zyjr_allow_opinion
+        where id=#{id}
+    </delete>
+    <delete id="deleteRepeatOpinion">
+        delete from zyjr_grant_opinion
+        where id=#{id}
+    </delete>
 </mapper>

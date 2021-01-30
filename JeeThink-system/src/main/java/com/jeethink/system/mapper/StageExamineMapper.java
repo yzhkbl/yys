@@ -4,6 +4,7 @@ import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.GrantVo;
 import com.jeethink.system.domain.vo.ShangpaiDiyaVo;
 import com.jeethink.system.domain.vo.ZyjrGrant;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -48,4 +49,6 @@ public interface StageExamineMapper {
     int insertDiyaOpinion(ZyjrGrantOpinion q);
     ZyjrGrantOpinion findDiyaOpinion(String transactionCode);
 
+    int deleteAllowOpinion(Long id);
+    int deleteRepeatOpinion(Long id);
 }

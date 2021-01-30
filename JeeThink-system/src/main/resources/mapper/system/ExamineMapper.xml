@@ -561,8 +561,8 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
         select distinct b.transaction_code,b.user_name,b.id_card,a.car_information,a.car_type,c.progress,c.approval_type,d.create_time
         from zyjr_borrower b
         left join zyjr_business a on a.transaction_code=b.transaction_code
-        left join zyjr_order_progress c on c.transaction_code=a.transaction_code
-        left join zyjr_start_page d on d.transaction_code=c.transaction_code
+        left join zyjr_order_progress c on c.transaction_code=b.transaction_code
+        left join zyjr_start_page d on d.transaction_code=b.transaction_code
         where b.user_id=#{userId}
     </select>
 

@@ -129,4 +129,15 @@ public class StageExamineController extends BaseController {
     public AjaxResult findDiyaOpinion(String transactionCode){
         return AjaxResult.success(stageExamineMapper.findDiyaOpinion(transactionCode));
     }
+
+    @PostMapping("/delete/allow/opinion")
+    public AjaxResult deleteAllowOpinion(Long id){
+        return AjaxResult.success(stageExamineMapper.deleteAllowOpinion(id));
+    }
+
+
+    @PostMapping("/delete/grant/opinion")
+    public AjaxResult deleteRepeatOpinion(Long id){
+        return AjaxResult.success(stageExamineMapper.deleteRepeatOpinion(id));
+    }
 }
