@@ -145,7 +145,7 @@ LEFT JOIN zyjr_daiqian_accout c on b.transaction_code=c.transaction_code where b
 select a.state statea,b.state stateb,c.state statec,a.id insurance,b.id gps,c.id daiqian
 FROM zyjr_daiqian_accout c
 LEFT JOIN zyjr_gps b on c.transaction_code=b.transaction_code
-LEFT JOIN zyjr_daiqian_accout a on a.transaction_code=c.transaction_code where a.transaction_code=#{transactionCode}
+LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.transaction_code=#{transactionCode}
     </select>
     <insert id="insertStart" parameterType="com.jeethink.system.domain.ZyjrStartPage">
         insert into zyjr_start_page

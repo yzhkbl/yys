@@ -167,6 +167,13 @@ public class ZyjrDaihouController extends BaseController
     {
         return toAjax(zyjrDaihouService.updateZyjrDaihou(zyjrDaihou));
     }
+    @GetMapping("state")
+    public AjaxResult gg(String transactionCode){
+        ZyjrDaihou a=zyjrDaihouMapper.selectZyjrDaihouByT(transactionCode);
+        a.setState("0");
+        zyjrDaihouMapper.updateZyjrDaihou(a);
+        return AjaxResult.success();
+    }
 
     @PostMapping("go")
     public AjaxResult sg(@RequestBody ZyjrDaihou zyjrDaihou)

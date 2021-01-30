@@ -92,7 +92,7 @@ public class ZyjrInsuranceController extends BaseController
 
     @PostMapping("update")
     public AjaxResult insert(ZyjrInsurance zyjrInsurance){
-        DqVo a=examineMapper.selectDQ(zyjrInsurance.getTransactionCode());
+        DqVo a=examineMapper.selectDQ3(zyjrInsurance.getTransactionCode());
         ZyjrInsurance zyjrInsurance1 = zyjrInsuranceMapper.selectZyjrInsuranceByIds(zyjrInsurance.getTransactionCode());
         ZyjrGps gps=new ZyjrGps();
         ZyjrDaiqianAccout zyjrDaiqianAccout=new ZyjrDaiqianAccout();

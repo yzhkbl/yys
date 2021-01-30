@@ -172,7 +172,8 @@ public class ZyjrDaiqianAccoutController extends BaseController
 
     @PostMapping("update")
     public AjaxResult insert(ZyjrDaiqianAccout zyjrDaiqianAccout){
-        DqVo a=examineMapper.selectDQ3(zyjrDaiqianAccout.getTransactionCode());
+        DqVo a=examineMapper.selectDQ2(zyjrDaiqianAccout.getTransactionCode());
+        ZyjrInsurance ids=zyjrInsuranceMapper.selectZyjrInsuranceByIds(zyjrDaiqianAccout.getTransactionCode());
         ZyjrGps gps=new ZyjrGps();
         ZyjrInsurance zyjrInsurance=new ZyjrInsurance();
         if(a!=null){
@@ -181,7 +182,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
             zyjrInsurance.setId(a.getInsurance());
             zyjrInsurance.setState("2");
         }
-        if(zyjrDaiqianAccout.getId()!=null){
+        if(ids!=null){
             zyjrDaiqianAccout.setState("1");
             if(a!=null&&"1".equals(a.getStateb())&&"1".equals(a.getStatea())){
                 zyjrDaiqianAccout.setState("2");
@@ -199,7 +200,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
             return  AjaxResult.success();
         }
         zyjrDaiqianAccout.setState("1");
-        if(a!=null&&"1".equals(a.getStateb())&&"1".equals(a.getStatec())){
+        if(a!=null&&"1".equals(a.getStateb())&&"1".equals(a.getStatea())){
             zyjrDaiqianAccout.setState("2");
             zyjrGpsMapper.updateZyjrGps(gps);
             zyjrInsuranceMapper.updateZyjrInsurance(zyjrInsurance);

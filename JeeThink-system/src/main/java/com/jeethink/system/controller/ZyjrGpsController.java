@@ -90,8 +90,7 @@ public class ZyjrGpsController extends BaseController
 
     @PostMapping("update")
     public AjaxResult date(ZyjrGps zyjrGps){
-        DqVo dq=examineMapper.selectDQ(zyjrGps.getTransactionCode());
-        System.err.println(dq.getGps());
+        DqVo dq=examineMapper.selectDQ3(zyjrGps.getTransactionCode());
         if(dq!=null&&dq.getGps()!=null){
             if("1".equals(dq.getStatec())&&"1".equals(dq.getStatea())){
                 zyjrGps.setState("2");
