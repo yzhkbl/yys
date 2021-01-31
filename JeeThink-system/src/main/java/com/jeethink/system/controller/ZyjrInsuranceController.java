@@ -92,44 +92,20 @@ public class ZyjrInsuranceController extends BaseController
 
     @PostMapping("update")
     public AjaxResult insert(ZyjrInsurance zyjrInsurance){
-        DqVo a=examineMapper.selectDQ3(zyjrInsurance.getTransactionCode());
         ZyjrInsurance zyjrInsurance1 = zyjrInsuranceMapper.selectZyjrInsuranceByIds(zyjrInsurance.getTransactionCode());
-        ZyjrGps gps=new ZyjrGps();
-        ZyjrDaiqianAccout zyjrDaiqianAccout=new ZyjrDaiqianAccout();
-        if(a!=null){
-            gps.setId(a.getGps());
-            gps.setState("2");
-            zyjrDaiqianAccout.setId(a.getDaiqian());
-            zyjrDaiqianAccout.setState("2");
+        ZyjrDaiqian as=examineMapper.selByDaiqian(zyjrInsurance.getTransactionCode());
+        if(as!=null){
+            as.setInsurance("1");
+            examineMapper.updateByDaiqian2(as);
+        }else{
+            ZyjrDaiqian d=new ZyjrDaiqian();
+            d.setInsurance("1");
+            examineMapper.insertDaiqian2(d);
         }
-
-        if(zyjrInsurance1!=null&&zyjrInsurance1.getId()!=null){
-            zyjrInsurance.setState("1");
-            if(a!=null&&"1".equals(a.getStateb())&&"1".equals(a.getStatec())){
-                zyjrInsurance.setState("2");
-                zyjrGpsMapper.updateZyjrGps(gps);
-                zyjrDaiqianAccoutMapper.updateZyjrDaiqianAccout(zyjrDaiqianAccout);
-                ZyjrDaiqian daiqian=examineMapper.selByDaiqian(zyjrInsurance.getTransactionCode());
-                if(daiqian!=null){
-
-                }else{
-                    examineMapper.insertDaiqians(zyjrInsurance.getTransactionCode());
-                }
-            }
+        if(zyjrInsurance1!=null){
+            zyjrInsurance.setId(zyjrInsurance1.getId());
             zyjrInsuranceMapper.updateZyjrInsurance(zyjrInsurance);
             return  AjaxResult.success();
-        }
-        zyjrInsurance.setState("1");
-        if(a!=null&&"1".equals(a.getStateb())&&"1".equals(a.getStatec())){
-            zyjrInsurance.setState("2");
-            zyjrGpsMapper.updateZyjrGps(gps);
-            zyjrDaiqianAccoutMapper.updateZyjrDaiqianAccout(zyjrDaiqianAccout);
-            ZyjrDaiqian daiqian=examineMapper.selByDaiqian(zyjrInsurance.getTransactionCode());
-            if(daiqian!=null){
-
-            }else{
-                examineMapper.insertDaiqians(zyjrInsurance.getTransactionCode());
-            }
         }
         zyjrInsuranceMapper.insertZyjrInsurance(zyjrInsurance);
 

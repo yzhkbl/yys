@@ -20,7 +20,7 @@
         <result property="createTime"    column="create_time"    />
     </resultMap>
     <select id="selectAllList" parameterType="com.jeethink.system.domain.ZyjrDaiqian" resultMap="ZyjrAllowBasicsResult2">
-        select e.id, e.state, e.opinion,e.user_id,e.operator, a.transaction_code,
+        select e.id,e.gps,e.insurance,e.account, e.state, e.opinion,e.user_id,e.operator, a.transaction_code,
         b.user_name,c.car_type,c.team,f.loan_amount,f.repayment_term,f.actual_price,c.car_information,g.create_time
         from zyjr_grant_opinion a
         left join zyjr_borrower b on a.transaction_code=b.transaction_code
@@ -72,6 +72,12 @@
         (state,opinion,transaction_code)
         values
         (#{state},#{opinion},#{transactionCode})
+    </insert>
+    <insert id="insertDaiqian2" parameterType="com.jeethink.system.domain.ZyjrDaiqian">
+        insert into zyjr_daiqian
+        (gps,insurance,account)
+        values
+        (#{gps},#{insurance},#{account})
     </insert>
     <insert id="insertDaiqians" parameterType="com.jeethink.system.domain.ZyjrDaiqian">
         insert into zyjr_daiqian
@@ -263,6 +269,20 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
 
     <update id="updateByDaiqian">
         update zyjr_daiqian set state=#{state},opinion=#{opinion} where transaction_code=#{transactionCode}
+    </update>
+    <update id="updateByDaiqian2">
+        update zyjr_daiqian
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="state != null">state = #{state},</if>
+            <if test="opinion != null">opinion = #{opinion},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+            <if test="account != null">account = #{account},</if>
+            <if test="insurance != null">insurance = #{insurance},</if>
+            <if test="gps != null">gps = #{gps},</if>
+            <if test="operator != null">tiche = #{operator},</if>
+        </trim>
+        where id=#{id}
     </update>
 
     <update id="updateByDaihou">

@@ -73,36 +73,6 @@ public class ZyjrDaiqianAccoutController extends BaseController
         }else{
             examineMapper.insertDaiqian(zyjrDaiqian);
         }
-        if(zyjrDaiqian.getState().equals("2")){
-            DqVo a=examineMapper.selectDQ(zyjrDaiqian.getTransactionCode());
-            ZyjrGps zyjrGps=new ZyjrGps();
-            zyjrGps.setId(a.getGps());
-            zyjrGps.setState("0");
-            zyjrGpsMapper.updateZyjrGps(zyjrGps);
-            ZyjrInsurance zyjrInsurance=new ZyjrInsurance();
-            zyjrInsurance.setState("0");
-            zyjrInsurance.setId(a.getInsurance());
-            zyjrInsuranceMapper.updateZyjrInsurance(zyjrInsurance);
-            ZyjrDaiqianAccout zyjrDaiqianAccout =new ZyjrDaiqianAccout();
-            zyjrDaiqianAccout.setState("0");
-            zyjrDaiqianAccout.setId(a.getDaiqian());
-            zyjrDaiqianAccoutService.updateZyjrDaiqianAccout(zyjrDaiqianAccout);
-        }else if(zyjrDaiqian.getState().equals("3")){
-            DqVo a=examineMapper.selectDQ(zyjrDaiqian.getTransactionCode());
-            ZyjrGps zyjrGps=new ZyjrGps();
-            zyjrGps.setId(a.getGps());
-            zyjrGps.setState("0");
-            zyjrGpsMapper.updateZyjrGps(zyjrGps);
-            ZyjrInsurance zyjrInsurance=new ZyjrInsurance();
-            zyjrInsurance.setState("0");
-            zyjrInsurance.setId(a.getInsurance());
-            zyjrInsuranceMapper.updateZyjrInsurance(zyjrInsurance);
-            ZyjrDaiqianAccout zyjrDaiqianAccout =new ZyjrDaiqianAccout();
-            zyjrDaiqianAccout.setState("0");
-            zyjrDaiqianAccout.setId(a.getDaiqian());
-            zyjrDaiqianAccoutService.updateZyjrDaiqianAccout(zyjrDaiqianAccout);
-        }
-
         return AjaxResult.success();
     }
 
@@ -172,44 +142,20 @@ public class ZyjrDaiqianAccoutController extends BaseController
 
     @PostMapping("update")
     public AjaxResult insert(ZyjrDaiqianAccout zyjrDaiqianAccout){
-        DqVo a=examineMapper.selectDQ2(zyjrDaiqianAccout.getTransactionCode());
         ZyjrInsurance ids=zyjrInsuranceMapper.selectZyjrInsuranceByIds(zyjrDaiqianAccout.getTransactionCode());
-        ZyjrGps gps=new ZyjrGps();
-        ZyjrInsurance zyjrInsurance=new ZyjrInsurance();
-        if(a!=null){
-            gps.setId(a.getGps());
-            gps.setState("2");
-            zyjrInsurance.setId(a.getInsurance());
-            zyjrInsurance.setState("2");
+        ZyjrDaiqian as=examineMapper.selByDaiqian(zyjrDaiqianAccout.getTransactionCode());
+        if(as!=null){
+            as.setAccount("1");
+            examineMapper.updateByDaiqian2(as);
+        }else{
+            ZyjrDaiqian d=new ZyjrDaiqian();
+            d.setAccount("1");
+            examineMapper.insertDaiqian2(d);
         }
         if(ids!=null){
-            zyjrDaiqianAccout.setState("1");
-            if(a!=null&&"1".equals(a.getStateb())&&"1".equals(a.getStatea())){
-                zyjrDaiqianAccout.setState("2");
-                zyjrGpsMapper.updateZyjrGps(gps);
-                zyjrInsuranceMapper.updateZyjrInsurance(zyjrInsurance);
-                ZyjrDaiqian daiqian=examineMapper.selByDaiqian(zyjrDaiqianAccout.getTransactionCode());
-                if(daiqian!=null){
-
-                }else{
-                    examineMapper.insertDaiqians(zyjrDaiqianAccout.getTransactionCode());
-                }
-            }
+            zyjrDaiqianAccout.setId(ids.getId());
             zyjrDaiqianAccoutMapper.updateZyjrDaiqianAccout(zyjrDaiqianAccout);
-
             return  AjaxResult.success();
-        }
-        zyjrDaiqianAccout.setState("1");
-        if(a!=null&&"1".equals(a.getStateb())&&"1".equals(a.getStatea())){
-            zyjrDaiqianAccout.setState("2");
-            zyjrGpsMapper.updateZyjrGps(gps);
-            zyjrInsuranceMapper.updateZyjrInsurance(zyjrInsurance);
-            ZyjrDaiqian daiqian=examineMapper.selByDaiqian(zyjrDaiqianAccout.getTransactionCode());
-            if(daiqian!=null){
-
-            }else{
-                examineMapper.insertDaiqians(zyjrDaiqianAccout.getTransactionCode());
-            }
         }
         zyjrDaiqianAccoutMapper.insertZyjrDaiqianAccout(zyjrDaiqianAccout);
 

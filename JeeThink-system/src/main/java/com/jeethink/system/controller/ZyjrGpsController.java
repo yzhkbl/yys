@@ -6,10 +6,7 @@ import java.util.Map;
 
 import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.DqVo;
-import com.jeethink.system.mapper.ExamineMapper;
-import com.jeethink.system.mapper.ZyjrDaiqianAccoutMapper;
-import com.jeethink.system.mapper.ZyjrInsuranceMapper;
-import com.jeethink.system.mapper.ZyjrPicMapper;
+import com.jeethink.system.mapper.*;
 import com.jeethink.system.util.androidUpload;
 import net.sf.json.JSONArray;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -50,6 +47,8 @@ public class ZyjrGpsController extends BaseController
     private ZyjrInsuranceMapper zyjrInsuranceMapper;
     @Autowired
     private ZyjrDaiqianAccoutMapper zyjrDaiqianAccoutMapper;
+    @Autowired
+    private ZyjrGpsMapper zyjrGpsMapper;
 
     /**
      * 查询【请填写功能名称】列表
@@ -90,46 +89,20 @@ public class ZyjrGpsController extends BaseController
 
     @PostMapping("update")
     public AjaxResult date(ZyjrGps zyjrGps){
-        DqVo dq=examineMapper.selectDQ3(zyjrGps.getTransactionCode());
-        if(dq!=null&&dq.getGps()!=null){
-            if("1".equals(dq.getStatec())&&"1".equals(dq.getStatea())){
-                zyjrGps.setState("2");
-                ZyjrInsurance zyjrInsurance=new ZyjrInsurance();
-                zyjrInsurance.setId(dq.getInsurance());
-                zyjrInsurance.setState("2");
-                zyjrInsuranceMapper.updateZyjrInsurance(zyjrInsurance);
-                ZyjrDaiqianAccout zyjrDaiqianAccout=new ZyjrDaiqianAccout();
-                zyjrDaiqianAccout.setId(dq.getDaiqian());
-                zyjrDaiqianAccout.setState("2");
-                zyjrDaiqianAccoutMapper.updateZyjrDaiqianAccout(zyjrDaiqianAccout);
-                ZyjrDaiqian daiqian=examineMapper.selByDaiqian(zyjrGps.getTransactionCode());
-                if(daiqian!=null){
-
-                }else{
-                    examineMapper.insertDaiqians(zyjrGps.getTransactionCode());
-                }
-
-            }
-            zyjrGps.setId(dq.getGps());
+        ZyjrDaiqian as=examineMapper.selByDaiqian(zyjrGps.getTransactionCode());
+        ZyjrGps gsp=zyjrGpsMapper.selectZyjrGpsById(zyjrGps.getTransactionCode());
+        if(as!=null){
+            as.setGps("1");
+            examineMapper.updateByDaiqian2(as);
+        }else{
+            ZyjrDaiqian d=new ZyjrDaiqian();
+            d.setGps("1");
+            examineMapper.insertDaiqian2(d);
+        }
+        if(gsp!=null){
+            zyjrGps.setId(gsp.getId());
             zyjrGpsService.updateZyjrGps(zyjrGps);
             return AjaxResult.success();
-        }
-        if(dq!=null&&"1".equals(dq.getStatec())&&"1".equals(dq.getStatea())){
-            zyjrGps.setState("2");
-            ZyjrInsurance zyjrInsurance=new ZyjrInsurance();
-            zyjrInsurance.setId(dq.getInsurance());
-            zyjrInsurance.setState("2");
-            zyjrInsuranceMapper.updateZyjrInsurance(zyjrInsurance);
-            ZyjrDaiqianAccout zyjrDaiqianAccout=new ZyjrDaiqianAccout();
-            zyjrDaiqianAccout.setId(dq.getDaiqian());
-            zyjrDaiqianAccout.setState("2");
-            zyjrDaiqianAccoutMapper.updateZyjrDaiqianAccout(zyjrDaiqianAccout);
-            ZyjrDaiqian daiqian=examineMapper.selByDaiqian(zyjrGps.getTransactionCode());
-            if(daiqian!=null){
-
-            }else{
-                examineMapper.insertDaiqians(zyjrGps.getTransactionCode());
-            }
         }
         zyjrGpsService.insertZyjrGps(zyjrGps);
         return  AjaxResult.success();

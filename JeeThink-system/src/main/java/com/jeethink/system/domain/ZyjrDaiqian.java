@@ -19,5 +19,8 @@ public class ZyjrDaiqian {
     private Integer carInformation;
     private String operator;
     String createTime;
+    String gps;
+    String insurance;
+    String account;
 
 }
