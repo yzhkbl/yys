@@ -100,6 +100,7 @@ public class ZyjrInsuranceController extends BaseController
         }else{
             ZyjrDaiqian d=new ZyjrDaiqian();
             d.setInsurance("1");
+            d.setTransactionCode(zyjrInsurance.getTransactionCode());
             examineMapper.insertDaiqian2(d);
         }
         if(zyjrInsurance1!=null){

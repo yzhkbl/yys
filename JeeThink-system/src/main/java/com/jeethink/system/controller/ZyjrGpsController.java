@@ -97,6 +97,7 @@ public class ZyjrGpsController extends BaseController
         }else{
             ZyjrDaiqian d=new ZyjrDaiqian();
             d.setGps("1");
+            d.setTransactionCode(zyjrGps.getTransactionCode());
             examineMapper.insertDaiqian2(d);
         }
         if(gsp!=null){

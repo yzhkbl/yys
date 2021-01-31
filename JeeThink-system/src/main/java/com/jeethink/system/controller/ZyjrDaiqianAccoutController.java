@@ -150,6 +150,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
         }else{
             ZyjrDaiqian d=new ZyjrDaiqian();
             d.setAccount("1");
+            d.setTransactionCode(zyjrDaiqianAccout.getTransactionCode());
             examineMapper.insertDaiqian2(d);
         }
         if(ids!=null){
