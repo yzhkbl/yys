@@ -142,7 +142,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
 
     @PostMapping("update")
     public AjaxResult insert(ZyjrDaiqianAccout zyjrDaiqianAccout){
-        ZyjrInsurance ids=zyjrInsuranceMapper.selectZyjrInsuranceByIds(zyjrDaiqianAccout.getTransactionCode());
+        ZyjrDaiqianAccout ids=zyjrDaiqianAccoutMapper.selectById(zyjrDaiqianAccout.getTransactionCode());
         ZyjrDaiqian as=examineMapper.selByDaiqian(zyjrDaiqianAccout.getTransactionCode());
         if(as!=null){
             as.setAccount("1");

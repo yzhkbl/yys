@@ -75,9 +75,9 @@
     </insert>
     <insert id="insertDaiqian2" parameterType="com.jeethink.system.domain.ZyjrDaiqian">
         insert into zyjr_daiqian
-        (gps,insurance,account)
+        (gps,insurance,account,transaction_code)
         values
-        (#{gps},#{insurance},#{account})
+        (#{gps},#{insurance},#{account},#{transactionCode})
     </insert>
     <insert id="insertDaiqians" parameterType="com.jeethink.system.domain.ZyjrDaiqian">
         insert into zyjr_daiqian
