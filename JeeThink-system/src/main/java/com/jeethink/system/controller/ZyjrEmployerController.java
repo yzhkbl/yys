@@ -36,7 +36,7 @@ public class ZyjrEmployerController extends BaseController
     /**
      * 查询【请填写功能名称】列表
      */
-    @PreAuthorize("@ss.hasPermi('system:employer:list')")
+    //@PreAuthorize("@ss.hasPermi('organization:employer:list')")
     @GetMapping("/list")
     public TableDataInfo list(ZyjrEmployer zyjrEmployer)
     {
@@ -48,7 +48,7 @@ public class ZyjrEmployerController extends BaseController
     /**
      * 导出【请填写功能名称】列表
      */
-    @PreAuthorize("@ss.hasPermi('system:employer:export')")
+    @PreAuthorize("@ss.hasPermi('organization:employer:export')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(ZyjrEmployer zyjrEmployer)
@@ -61,7 +61,7 @@ public class ZyjrEmployerController extends BaseController
     /**
      * 获取【请填写功能名称】详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:employer:query')")
+    @PreAuthorize("@ss.hasPermi('organization:employer:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -71,7 +71,7 @@ public class ZyjrEmployerController extends BaseController
     /**
      * 新增【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:employer:add')")
+    @PreAuthorize("@ss.hasPermi('organization:employer:add')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody ZyjrEmployer zyjrEmployer)
@@ -82,7 +82,7 @@ public class ZyjrEmployerController extends BaseController
     /**
      * 修改【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:employer:edit')")
+    @PreAuthorize("@ss.hasPermi('organization:employer:edit')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody ZyjrEmployer zyjrEmployer)
@@ -93,7 +93,7 @@ public class ZyjrEmployerController extends BaseController
     /**
      * 删除【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:employer:remove')")
+    @PreAuthorize("@ss.hasPermi('organization:employer:remove')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

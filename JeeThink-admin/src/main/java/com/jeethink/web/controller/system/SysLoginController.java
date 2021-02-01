@@ -88,6 +88,7 @@ public class SysLoginController
                 user.put("remark",users.getRemark());
                 user.put("userId",users.getUserId().toString());
                 user.put("deptId",users.getDeptId().toString());
+                user.put("team",users.getDept().getDeptName());
                 user.put("userName",users.getUserName());
                 user.put("nickName",users.getNickName());
                 user.put("email",users.getEmail());
