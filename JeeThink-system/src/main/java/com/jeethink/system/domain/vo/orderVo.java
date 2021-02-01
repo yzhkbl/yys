@@ -23,4 +23,7 @@ public class orderVo {
     /**审批状态*/
     private Integer approvalType;
 
+    private Integer creditPower;//签约方式
+    private Integer contractState;//签约状态默认0 成功为1 失败为2
+
 }
