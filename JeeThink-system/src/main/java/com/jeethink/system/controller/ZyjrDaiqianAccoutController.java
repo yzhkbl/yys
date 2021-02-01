@@ -109,8 +109,8 @@ public class ZyjrDaiqianAccoutController extends BaseController
             json.put("msg","操作成功");
             json.put("code",200);
             Map<String,Object> map=new HashMap<>();
-            map.put("Account",c);
-            map.put("Account2",d);
+            map.put("account",c);
+            map.put("account2",d);
             json.put("data",map);
             json.put("type",a.getType());
             return json;
@@ -129,8 +129,8 @@ public class ZyjrDaiqianAccoutController extends BaseController
                 ZyjrCarAccount b=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountId());
                 ZyjrCarAccount c=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountOne());
                 Map<String,Object> map=new HashMap<>();
-                map.put("Account",b);
-                map.put("Account2",c);
+                map.put("account",b);
+                map.put("account2",c);
                 return AjaxResult.success(map);
             }
             ZyjrDaiqian b=zyjrAllowBasicsMapper.selectByT(transactionCode);
