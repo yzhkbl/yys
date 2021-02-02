@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.jeethink.system.mapper.ZyjrCardMapper">
     
     <resultMap type="ZyjrCard" id="ZyjrCardResult">
-        <result property="id"    column="id"    />
+
         <result property="custsort"    column="custsort"    />
         <result property="custcode"    column="custcode"    />
         <result property="chnsname"    column="chnsname"    />
@@ -53,7 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectZyjrCardVo">
-        select id, custsort, custcode, chnsname, engname, sex, mrtlstat, edulvl, drawmode, drawzono, drawbrno, homestat, hprovince, hcity, hcounty, haddress, homezip, indate, mvblno, email, unitname, duty, cophozono, cophoneno, cprovince, ccity, ccounty, caddress, corpzip, joindate, yearincome, modelcode, occptn, carstat, reltname1, reltship1, reltphzon1, relaphone1, reltmobl1, statdate, primnat, cstsign, almebno, outcardno1, transaction_code from zyjr_card
+        select  custsort, custcode, chnsname, engname, sex, mrtlstat, edulvl, drawmode, drawzono, drawbrno, homestat, hprovince, hcity, hcounty, haddress, homezip, indate, mvblno, email, unitname, duty, cophozono, cophoneno, cprovince, ccity, ccounty, caddress, corpzip, joindate, yearincome, modelcode, occptn, carstat, reltname1, reltship1, reltphzon1, relaphone1, reltmobl1, statdate, primnat, cstsign, almebno, outcardno1, transaction_code from zyjr_card
     </sql>
 
     <select id="selectZyjrCardList" parameterType="ZyjrCard" resultMap="ZyjrCardResult">
@@ -108,7 +108,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="selectZyjrCardById" parameterType="Long" resultMap="ZyjrCardResult">
         <include refid="selectZyjrCardVo"/>
-        where id = #{id}
+        where transaction_code = #{id}
     </select>
     <select id="selectZyjrCardByTransactionCode" parameterType="String" resultMap="ZyjrCardResult">
         <include refid="selectZyjrCardVo"/>
