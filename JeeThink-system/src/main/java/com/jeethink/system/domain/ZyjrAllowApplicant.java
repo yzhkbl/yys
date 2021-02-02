@@ -177,7 +177,18 @@ public class ZyjrAllowApplicant extends BaseEntity
     @Excel(name = "工作省")
     private String workProvince;
 
-    public void setId(Long id) 
+    /** 现单位入职时间 */
+    private String joindate;
+
+    public String getJoindate() {
+        return joindate;
+    }
+
+    public void setJoindate(String joindate) {
+        this.joindate = joindate;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }
@@ -562,6 +573,7 @@ public class ZyjrAllowApplicant extends BaseEntity
             .append("workArea", getWorkArea())
             .append("workCity", getWorkCity())
             .append("workProvince", getWorkProvince())
+                .append("joindate",getJoindate())
             .toString();
     }
 }
