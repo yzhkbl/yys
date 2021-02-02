@@ -111,4 +111,6 @@ public interface ExamineMapper {
     List<cities> selectC(String pid);
 
     List<orderVo>searchOrder(@Param("search") String search,@Param("userId") Long userId);
+
+    List<String>relationName(String transactionCode);
 }

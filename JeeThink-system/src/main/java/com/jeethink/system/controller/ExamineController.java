@@ -260,5 +260,10 @@ public class ExamineController extends BaseController {
         List<orderVo> list = examineMapper.searchOrder(search,userId);
         return getDataTable(list);
     }
+
+    @GetMapping("/relation/name")
+    public AjaxResult relationName(String transactionCode){
+        return AjaxResult.success(examineMapper.relationName(transactionCode));
+    }
 }
 
