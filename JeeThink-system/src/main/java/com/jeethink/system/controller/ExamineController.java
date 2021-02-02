@@ -253,5 +253,17 @@ public class ExamineController extends BaseController {
     public AjaxResult findDiya(String transactionCode){
         return AjaxResult.success(examineMapper.findDiya(transactionCode));
     }
+
+    @GetMapping("/search/order")
+    public TableDataInfo searchOrder(String search,Long userId){
+        startPage();
+        List<orderVo> list = examineMapper.searchOrder(search,userId);
+        return getDataTable(list);
+    }
+
+    @GetMapping("/relation/name")
+    public AjaxResult relationName(String transactionCode){
+        return AjaxResult.success(examineMapper.relationName(transactionCode));
+    }
 }
 
