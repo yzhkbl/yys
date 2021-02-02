@@ -584,6 +584,7 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
         left join zyjr_order_progress c on c.transaction_code=b.transaction_code
         left join zyjr_start_page d on d.transaction_code=b.transaction_code
         where b.user_id=#{userId}
+        order by d.create_time desc
     </select>
 
     <select id="Borrower" resultType="com.jeethink.system.domain.ZyjrBorrower">

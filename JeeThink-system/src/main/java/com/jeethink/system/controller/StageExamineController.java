@@ -15,6 +15,7 @@ import com.jeethink.system.service.IStageExamineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -93,6 +94,7 @@ public class StageExamineController extends BaseController {
     public TableDataInfo findAllow (ZyjrGrant q){
         startPage();
         List<ZyjrGrant>list = stageExamineService.findAllow();
+        //Collections.reverse(list);
         return getDataTable(list);
     }
 

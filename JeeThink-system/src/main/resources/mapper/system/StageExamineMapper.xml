@@ -76,6 +76,7 @@
          left join zyjr_photo_house n on b.transaction_code=n.transaction_code
          left join zyjr_photo_lender o on b.transaction_code=o.transaction_code
          where a.transaction_code in (select transaction_code from zyjr_allow_opinion where approval_type=1 and c.approval_type!=1 or c.approval_type is null)
+         order by e.create_time desc
     </select>
     <select id="findGrant" resultType="com.jeethink.system.domain.vo.ZyjrGrant">
         select distinct b.id, a.team,e.create_time,d.grant_id,d.grant_by,a.car_information, d.actual_price, d.loan_amount, d.repayment_term, a.car_type, b.user_id, b.order_state,b.transaction_code,b.user_name as name,c.approval_type,
@@ -88,6 +89,7 @@
          left join zyjr_grant_image f on b.transaction_code=f.transaction_code
          left join zyjr_grant_instalments g on b.transaction_code=g.transaction_code
          where a.transaction_code in (select transaction_code from zyjr_repeat_opinion where approval_type=1 and c.approval_type!=1 or c.approval_type is null)
+         order by e.create_time desc
     </select>
     <insert id="insertGrantOpinion" parameterType="com.jeethink.system.domain.ZyjrGrantOpinion">
         insert into zyjr_grant_opinion
@@ -127,6 +129,7 @@
          left join zyjr_photo_house n on b.transaction_code=n.transaction_code
          left join zyjr_photo_lender o on b.transaction_code=o.transaction_code
          WHERE c.approval_type!=1 OR c.approval_type IS NULL
+         order by e.create_time desc
     </select>
 
     <select id="findShangpai" resultType="com.jeethink.system.domain.vo.ShangpaiDiyaVo">
