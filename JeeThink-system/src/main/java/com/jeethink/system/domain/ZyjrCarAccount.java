@@ -58,8 +58,26 @@ public class ZyjrCarAccount
     /** 车商id */
     @Excel(name = "车商id")
     private String zyjrCarId;
+    private String card;
+    private String yingyezhizhao;
 
-    public void setAccountName(String accountName) 
+    public String getCard() {
+        return card;
+    }
+
+    public void setCard(String card) {
+        this.card = card;
+    }
+
+    public String getYingyezhizhao() {
+        return yingyezhizhao;
+    }
+
+    public void setYingyezhizhao(String yingyezhizhao) {
+        this.yingyezhizhao = yingyezhizhao;
+    }
+
+    public void setAccountName(String accountName)
     {
         this.accountName = accountName;
     }

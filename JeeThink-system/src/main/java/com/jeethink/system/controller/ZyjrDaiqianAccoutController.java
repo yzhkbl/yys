@@ -101,13 +101,19 @@ public class ZyjrDaiqianAccoutController extends BaseController
 
     @GetMapping("getAccout/{transactionCode}")
     public AjaxResult apps(@PathVariable("transactionCode") String transactionCode){
-
-        ZyjrDaiqian a=zyjrAllowBasicsMapper.selectByT(transactionCode);
+        ZyjrDaiqianAccout a=zyjrDaiqianAccoutMapper.selectById(transactionCode);
         if(a!=null){
-            ZyjrCarAccount zyjrCarAccount=new ZyjrCarAccount();
-            zyjrCarAccount.setZyjrCarId(a.getId().toString());
-            List<ZyjrCarAccount> c=zyjrCarAccountMapper.selectZyjrCarAccountList(zyjrCarAccount);
-            return AjaxResult.success("操作成功",c);
+            ZyjrCarAccount c=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountId());
+            ZyjrCarAccount d=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountOne());
+            AjaxResult json=new AjaxResult();
+            json.put("msg","操作成功");
+            json.put("code",200);
+            Map<String,Object> map=new HashMap<>();
+            map.put("account",c);
+            map.put("account2",d);
+            json.put("data",map);
+            json.put("type",a.getType());
+            return json;
         }
         return AjaxResult.success("操作成功",null);
     }
@@ -123,8 +129,8 @@ public class ZyjrDaiqianAccoutController extends BaseController
                 ZyjrCarAccount b=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountId());
                 ZyjrCarAccount c=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountOne());
                 Map<String,Object> map=new HashMap<>();
-                map.put("Account",b);
-                map.put("Account2",c);
+                map.put("account",b);
+                map.put("account2",c);
                 return AjaxResult.success(map);
             }
             ZyjrDaiqian b=zyjrAllowBasicsMapper.selectByT(transactionCode);
