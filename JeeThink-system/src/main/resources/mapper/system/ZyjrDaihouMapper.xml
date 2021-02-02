@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         left join zyjr_business d on a.transaction_code=d.transaction_code
         left join zyjr_car_loan f on a.transaction_code=f.transaction_code
         left join zyjr_start_page g on a.transaction_code=g.transaction_code
-        where a.state="1" and (b.state!="1" or b.state is null)
+        where a.state="1" and (b.state!="1" or b.state is null) order by g.create_time desc
     </select>
     
     <select id="selectZyjrDaihouById" parameterType="Long" resultMap="ZyjrDaihouResult">

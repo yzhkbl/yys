@@ -414,6 +414,36 @@ public class test extends BaseController {
         return AjaxResult.success("操作成功",results);
     }
 
+    @GetMapping("getInfo")
+    @ResponseBody
+    public AjaxResult fin(String transactionCode) {
+
+
+        String dataPublicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCFZnUVz07wuQfI5kf3uOaaJcpq*W3yQhJnIX2k-EKwKZaSkyuXutk0TXqwT-GXxIQJqmkjLup*HN7H1uF7JMfxl00AnncHB82LqUQKQwf5wcdDTNhvKLQtjRoLE3ry6ARoYHu5AkZPKW7sMM4o*UegPlSr45p4ZsK0iVdjqmgZfwIDAQAB";
+        String signPrivateKey = "MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAKOoelzwAU5Asw9zknkTYGvfZr0Ap6ZDL6NMSNRYZ2maVJd5xOfSRqTkEq1Ne*h2Qe3wCKdxo0SuCVWNjM-nd3af*fb4YcWdlDuHaA1s28I5hZtVp2sbF*nvgdeUwSz-X0hQGcaqVzcTKDH9l2XuMC**OEofyyosU2jvEIGdwqSNAgMBAAECgYAkojvxvc*tApKSbN5mt82nl-RZbmIYt4VcWmEbF0bevqsc1SccdVdW5a7AmE2aNY6AgnCNesR-RS3Vtr-Ech2tVfwMXypJsXN5hq0uyM6iDkE6kFhGL1zui72u9RQJvdB7CsNfEONIaFlX46MUOdF0fR2n-sGLMc1qzpj*L3k6QQJBAOJfQRF6ehE5d1Sm*7q9uObte1ubako89TSGZmCOk-3vpm9CRTey-18Ids98yMNg3Wy53M4oEzjwjdnnulX9PpUCQQC5E-NySYbigVCsO5Tjr*iAA1ykdGIgaRM45s2tvbMLYQdZYhnkPRjSj*Y7I915cp5klQ75T260InPYQqBkb2gZAkEAjRYtKcWZ*s5EL4B7eCHy8gqlTa0JjAd*FCSH-joexq-snX9CQLrRKtvNoPf28L6YgsE8e0jC4kQbROqGWj2iGQJBAKkXVUCBdL7UrsPs26b6PE1YxPdrbYt29Jz0Ic4ulro6t*AuBMHGIDugRRSbO*mNkrEKjlew-s*M*pIGrUuVjWECQQC3qMemXCmqp7lAaSqYy9Rk8HNVgEeDqJfhcIS4SrRH0DSExPE9yfhadaiC4IIYmmK5L*2V3dxIUI7KXbeO*ptz";
+        String assurerNo = "S36029951";
+        String bankType = "ICBC";
+        String busiCode = "1017";
+        String platNo = "zyhzjg";
+        Pub pub = new Pub();
+        pub.setBankCode("0180400023");
+        pub.setAssurerNo("S36029951");
+        pub.setPlatNo("zyhzjg");
+        pub.setOrderNo(transactionCode);
+        pub.setProductType(1);
+        pub.setBankType(bankType);
+        pub.setBusiCode("1017");
+        ceshi ceshis=new ceshi();
+        ceshis.setPub(pub);
+        JSONObject json3 = new JSONObject().fromObject(ceshis);
+
+        JSONObject jsons = encryptData(json3.toString(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo, transactionCode);
+
+        JSONObject results = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", jsons);
+
+        return AjaxResult.success("操作成功",results);
+    }
+
 /*
     @ApiOperation("kaikai")
     @GetMapping("okCard")
@@ -716,13 +746,13 @@ public class test extends BaseController {
             Integer duty=null;
             if(applicant!=null&&applicant.getPosition()!=null){
                 String app=applicant.getPosition().substring(0,2);
-                if("厅级".equals(applicant.getPosition())){
+                if("厅级".equals(app)){
                     duty=3;
-                }else if("县处".equals(applicant.getPosition())){
+                }else if("县处".equals(app)){
                     duty=4;
-                }else if("科级".equals(applicant.getPosition())){
+                }else if("科级".equals(app)){
                     duty=5;
-                }else if("科员".equals(applicant.getPosition())||"其他".equals(applicant.getPosition())){
+                }else if("科员".equals(app)||"其他".equals(app)){
                     duty=6;
                 }
             }
@@ -759,7 +789,9 @@ public class test extends BaseController {
         //zyjrCard.setReltphzon1();
         zyjrCard.setRelaphone1(contacts.getPhoneOne());
         zyjrCard.setReltmobl1(contacts.getPhoneOne());
-       // zyjrCard.setStatdate();
+        String endDate=borrower.getEndDate();
+        String data=DataUtil.date(endDate);
+        zyjrCard.setStatdate(data);
         zyjrCard.setPrimnat(156);
         zyjrCard.setCstsign(1);
        // zyjrCard.setAlmebno();

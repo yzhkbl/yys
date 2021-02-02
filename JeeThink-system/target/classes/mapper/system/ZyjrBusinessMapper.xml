@@ -46,6 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="falseOperatorId != null "> and a.false_operator_id = #{falseOperatorId}</if>
             <if test="transactionCode != null "> and a.transaction_code like concat('%', #{transactionCode}, '%') </if>
             <if test="name != null "> and b.user_name like concat('%', #{name}, '%')</if>
+              order by a.create_time desc
         </where>
     </select>
 
