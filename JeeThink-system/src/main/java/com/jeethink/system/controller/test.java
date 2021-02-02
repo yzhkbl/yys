@@ -13,6 +13,7 @@ import com.alibaba.fastjson.JSON;
 import com.jeethink.common.config.JeeThinkConfig;
 import com.jeethink.common.core.domain.entity.SysDept;
 import com.jeethink.common.core.domain.entity.SysUser;
+import com.jeethink.common.core.page.TableDataInfo;
 import com.jeethink.common.core.redis.RedisCache;
 import com.jeethink.common.utils.DateUtils;
 import com.jeethink.common.utils.SecurityUtils;
@@ -91,6 +92,8 @@ public class test extends BaseController {
     private ZyjrYejiYueMapper zyjrYejiYueMapper;
     @Autowired
     private SysDeptMapper sysDeptMapper;
+    @Autowired
+    private ZyjrCardMapper zyjrCardMapper;
 
 
     private static String oCode = "sfzzm";
@@ -633,11 +636,9 @@ public class test extends BaseController {
     @ResponseBody
     @GetMapping("occptn")
     public AjaxResult zwc(){
-        SysFileInfo sysFileInfo=new SysFileInfo();
-        sysFileInfo.setBankId("99999999");
-        List<SysFileInfo> a=sysFileInfoMapper.selectSysFileInfoList(sysFileInfo);
         List<OccptnVo>  list=new ArrayList<>();
-        String str= a.get(0).getFilePath();
+        ZyjrCard a=zyjrCardMapper.selectZyjrCardByTransactionCode("1");
+        String str= a.getAlmebno();
         HashMap hashMap = JSON.parseObject(str, HashMap.class);
         hashMap.forEach((k, v) ->{
             OccptnVo o=new OccptnVo();
@@ -1125,7 +1126,14 @@ public class test extends BaseController {
         return AjaxResult.success(map);
     }
 
-
+    @ResponseBody
+    @GetMapping("getHuankuan")
+    public TableDataInfo list(SysFileInfo sysFileInfo)
+    {
+        startPage();
+        List<Huankuan> list=examineMapper.selectHuankuanList();
+        return getDataTable(list);
+    }
 
 }
 

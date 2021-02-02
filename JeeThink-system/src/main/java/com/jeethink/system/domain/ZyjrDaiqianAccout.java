@@ -35,6 +35,15 @@ public class ZyjrDaiqianAccout extends BaseEntity
     private String accountOne;
 
     private String type;
+    String fangkuan;
+
+    public String getFangkuan() {
+        return fangkuan;
+    }
+
+    public void setFangkuan(String fangkuan) {
+        this.fangkuan = fangkuan;
+    }
 
     public String getType() {
         return type;

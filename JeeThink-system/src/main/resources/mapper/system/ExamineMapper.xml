@@ -137,6 +137,15 @@ FROM zyjr_insurance a
 LEFT JOIN zyjr_gps b on a.transaction_code=b.transaction_code
 LEFT JOIN zyjr_daiqian_accout c on a.transaction_code=c.transaction_code where a.transaction_code=#{transactionCode}
     </select>
+    <select id="selectHuankuanList" resultType="com.jeethink.system.domain.vo.Huankuan">
+       select a.transaction_code,a.id,g.create_time, e.operator,e.user_id,c.user_name,d.car_type,d.team,f.loan_amount,f.repayment_term,f.actual_price,d.car_information
+        from zyjr_fangkuan a
+         left join zyjr_cailiao e on a.transaction_code=e.transaction_code
+        left join zyjr_borrower c on a.transaction_code=c.transaction_code
+        left join zyjr_business d on a.transaction_code=d.transaction_code
+        left join zyjr_car_loan f on a.transaction_code=f.transaction_code
+         left join zyjr_start_page g on a.transaction_code=g.transaction_code
+    </select>
 
     <select id="selectDQ2" resultType="com.jeethink.system.domain.vo.DqVo" >
 
