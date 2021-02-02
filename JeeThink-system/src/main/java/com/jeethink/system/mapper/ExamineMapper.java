@@ -109,4 +109,6 @@ public interface ExamineMapper {
     ZyjrDiya findDiya(String transactionCode);
 
     List<cities> selectC(String pid);
+
+    List<orderVo>searchOrder(@Param("search") String search,@Param("userId") Long userId);
 }

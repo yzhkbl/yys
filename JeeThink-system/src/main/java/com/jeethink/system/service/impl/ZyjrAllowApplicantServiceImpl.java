@@ -1,12 +1,16 @@
 package com.jeethink.system.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.jeethink.system.domain.ZyjrAllowApplicant;
+import com.jeethink.system.domain.ZyjrCard;
+import com.jeethink.system.mapper.ZyjrCardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.jeethink.system.mapper.ZyjrAllowApplicantMapper;
 import com.jeethink.system.service.IZyjrAllowApplicantService;
+import com.alibaba.fastjson.JSON;
 
 /**
  * 【请填写功能名称】Service业务层处理
@@ -19,6 +23,8 @@ public class ZyjrAllowApplicantServiceImpl implements IZyjrAllowApplicantService
 {
     @Autowired
     private ZyjrAllowApplicantMapper zyjrAllowApplicantMapper;
+    @Autowired
+    private ZyjrCardMapper zyjrCardMapper;
 
     /**
      * 查询【请填写功能名称】
@@ -29,7 +35,15 @@ public class ZyjrAllowApplicantServiceImpl implements IZyjrAllowApplicantService
     @Override
     public ZyjrAllowApplicant selectZyjrAllowApplicantById(Long userId, String transactionCode)
     {
-        return zyjrAllowApplicantMapper.selectZyjrAllowApplicantById(userId,transactionCode);
+        ZyjrAllowApplicant zyjrAllowApplicant = zyjrAllowApplicantMapper.selectZyjrAllowApplicantById(userId, transactionCode);
+        if(zyjrAllowApplicant.getIndustry()!=null){
+            ZyjrCard a=zyjrCardMapper.selectZyjrCardByTransactionCode("1");
+            String str= a.getAlmebno();
+            HashMap hashMap = JSON.parseObject(str, HashMap.class);
+            Object asd=hashMap.get(Integer.parseInt(zyjrAllowApplicant.getIndustry()));
+            zyjrAllowApplicant.setIndustry(asd.toString());
+        }
+        return zyjrAllowApplicant;
     }
 
     /**

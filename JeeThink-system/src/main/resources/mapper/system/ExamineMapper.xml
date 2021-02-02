@@ -759,4 +759,17 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
     </set>
         where transaction_code = #{transactionCode}
     </update>
+
+    <select id="searchOrder" resultType="com.jeethink.system.domain.vo.orderVo">
+        select distinct b.transaction_code,b.credit_power,b.contract_state,b.user_name,b.id_card,a.car_information,a.car_type,c.progress,c.approval_type,d.create_time
+        from zyjr_borrower b
+        left join zyjr_business a on a.transaction_code=b.transaction_code
+        left join zyjr_order_progress c on c.transaction_code=b.transaction_code
+        left join zyjr_start_page d on d.transaction_code=b.transaction_code
+        where (b.user_name like concat('%', #{search}, '%')
+        or b.id_card like concat('%', #{search}, '%')
+        or b.transaction_code like concat('%', #{search}, '%'))
+        and b.user_id=#{userId}
+        order by d.create_time desc
+    </select>
 </mapper>
