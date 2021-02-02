@@ -29,7 +29,7 @@
         left join zyjr_daiqian e on a.transaction_code=e.transaction_code
         left join zyjr_car_loan f on a.transaction_code=f.transaction_code
           left join zyjr_start_page g on a.transaction_code=g.transaction_code
-        where a.approval_type=1 and (e.state!="1" or e.state is null)
+        where a.approval_type=1 and (e.state!="1" or e.state is null) order by g.create_time desc
     </select>
     <select id="selectP"
             resultType="com.jeethink.system.domain.vo.provinces">
