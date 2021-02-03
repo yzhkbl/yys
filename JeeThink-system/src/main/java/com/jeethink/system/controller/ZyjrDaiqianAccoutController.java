@@ -105,10 +105,12 @@ public class ZyjrDaiqianAccoutController extends BaseController
         if(a!=null){
             ZyjrCarAccount c=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountId());
             ZyjrCarAccount d=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountOne());
+            ZyjrCarAccount e=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getFangkuan());
             AjaxResult json=new AjaxResult();
             json.put("msg","操作成功");
             json.put("code",200);
             Map<String,Object> map=new HashMap<>();
+            map.put("fangkuan",e);
             map.put("account",c);
             map.put("account2",d);
             json.put("data",map);
@@ -118,13 +120,9 @@ public class ZyjrDaiqianAccoutController extends BaseController
         return AjaxResult.success("操作成功",null);
     }
 
-    @GetMapping("getInfo/{transactionCode}/{id}")
-    public AjaxResult apqp(@PathVariable("transactionCode") String transactionCode,@PathVariable("id") String id){
-        if(id!=null){
-            ZyjrCarAccount c=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(id);
-            return AjaxResult.success(c);
-        }
-            ZyjrDaiqianAccout a=zyjrDaiqianAccoutService.selectZyjrDaiqianAccoutByIds(transactionCode);
+    @GetMapping("getInfo/{transactionCode}")
+    public AjaxResult apqp(@PathVariable("transactionCode") String transactionCode){
+          /*  ZyjrDaiqianAccout a=zyjrDaiqianAccoutService.selectZyjrDaiqianAccoutByIds(transactionCode);
             if(a!=null){
                 ZyjrCarAccount b=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountId());
                 ZyjrCarAccount c=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountOne());
@@ -132,15 +130,22 @@ public class ZyjrDaiqianAccoutController extends BaseController
                 map.put("account",b);
                 map.put("account2",c);
                 return AjaxResult.success(map);
-            }
+            }*/
             ZyjrDaiqian b=zyjrAllowBasicsMapper.selectByT(transactionCode);
             if(b!=null){
-                ZyjrCarAccount c=zyjrCarAccountMapper.selectZyjrCarAccountById(b.getDealersId());
+                ZyjrCarAccount zyjrCarAccount=new ZyjrCarAccount();
+                zyjrCarAccount.setZyjrCarId(b.getDealersId().toString());
+                List<ZyjrCarAccount> c=zyjrCarAccountMapper.selectZyjrCarAccountList(zyjrCarAccount);
                 return AjaxResult.success(c);
             }
 
 
            return AjaxResult.success();
+    }
+    @GetMapping("getZhanghu/{id}")
+    public AjaxResult zhanghu(@PathVariable("id") String id){
+        ZyjrCarAccount a=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(id);
+        return  AjaxResult.success(a);
     }
 
 

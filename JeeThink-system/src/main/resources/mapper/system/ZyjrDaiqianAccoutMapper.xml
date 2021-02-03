@@ -11,10 +11,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="type"    column="type"    />
         <result property="accountId"    column="account_id"    />
         <result property="accountOne"    column="account_one"    />
+        <result property="fangkuan"    column="fangkuan"    />
     </resultMap>
 
     <sql id="selectZyjrDaiqianAccoutVo">
-        select id,type, transaction_code, state, account_id, account_one from zyjr_daiqian_accout
+        select id,type,fangkuan, transaction_code, state, account_id, account_one from zyjr_daiqian_accout
     </sql>
 
     <select id="selectZyjrDaiqianAccoutList" parameterType="ZyjrDaiqianAccout" resultMap="ZyjrDaiqianAccoutResult">
@@ -25,6 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="type != null  and type != ''"> and type = #{type}</if>
             <if test="accountId != null  and accountId != ''"> and account_id = #{accountId}</if>
             <if test="accountOne != null  and accountOne != ''"> and account_one = #{accountOne}</if>
+            <if test="fangkuan != null  and fangkuan != ''"> and fangkuan = #{fangkuan}</if>
         </where>
     </select>
     
@@ -46,6 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="type != null">type,</if>
             <if test="accountId != null">account_id,</if>
             <if test="accountOne != null">account_one,</if>
+            <if test="fangkuan != null">fangkuan,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="transactionCode != null">#{transactionCode},</if>
@@ -53,6 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="type != null">#{type},</if>
             <if test="accountId != null">#{accountId},</if>
             <if test="accountOne != null">#{accountOne},</if>
+            <if test="fangkuan != null">#{fangkuan},</if>
          </trim>
     </insert>
 
@@ -64,6 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="type != null">type = #{type},</if>
             <if test="accountId != null">account_id = #{accountId},</if>
             <if test="accountOne != null">account_one = #{accountOne},</if>
+            <if test="fangkuan != null">fangkuan = #{fangkuan},</if>
         </trim>
         where id = #{id}
     </update>

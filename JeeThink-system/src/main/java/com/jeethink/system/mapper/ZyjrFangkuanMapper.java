@@ -2,6 +2,7 @@ package com.jeethink.system.mapper;
 
 import java.util.List;
 import com.jeethink.system.domain.ZyjrFangkuan;
+import com.jeethink.system.domain.vo.Huankuan;
 
 /**
  * 【请填写功能名称】Mapper接口
@@ -58,4 +59,5 @@ public interface ZyjrFangkuanMapper
      * @return 结果
      */
     public int deleteZyjrFangkuanByIds(Long[] ids);
+
 }
