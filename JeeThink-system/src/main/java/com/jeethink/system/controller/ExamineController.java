@@ -265,5 +265,10 @@ public class ExamineController extends BaseController {
     public AjaxResult relationName(String transactionCode){
         return AjaxResult.success(examineMapper.relationName(transactionCode));
     }
+
+    @GetMapping("/relation/id")
+    public AjaxResult relationById(Long id){
+        return AjaxResult.success(examineMapper.findById(id));
+    }
 }
 

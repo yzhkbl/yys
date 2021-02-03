@@ -772,9 +772,14 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
         and b.user_id=#{userId}
         order by d.create_time desc
     </select>
-    <select id="relationName" resultType="java.lang.String">
-        select user_name
+    <select id="relationName" resultType="com.jeethink.system.domain.vo.RelationName">
+        select user_name,id
         from zyjr_relation
         where transaction_code = #{transactionCode}
+    </select>
+    <select id="findById" resultType="com.jeethink.system.domain.ZyjrRelation">
+        select *
+        from zyjr_relation
+        where id=#{id}
     </select>
 </mapper>
