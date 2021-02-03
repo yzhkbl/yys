@@ -112,5 +112,6 @@ public interface ExamineMapper {
 
     List<orderVo>searchOrder(@Param("search") String search,@Param("userId") Long userId);
 
-    List<String>relationName(String transactionCode);
+    List<RelationName>relationName(String transactionCode);
+    ZyjrRelation findById(Long id);
 }
