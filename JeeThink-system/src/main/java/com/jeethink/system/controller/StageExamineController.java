@@ -46,8 +46,8 @@ public class StageExamineController extends BaseController {
 
     @GetMapping("/{userId}/{transactionCode}")
     public AjaxResult findAllow(@PathVariable("userId") Long userId,@PathVariable("transactionCode")String transactionCode){
-        System.err.println(userId);
-        System.err.println(transactionCode);
+      //  System.err.println(userId);
+       // System.err.println(transactionCode);
         return AjaxResult.success(stageExamineService.findByAllow(userId, transactionCode));
     }
 

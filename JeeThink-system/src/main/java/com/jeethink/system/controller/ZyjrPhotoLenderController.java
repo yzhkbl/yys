@@ -50,7 +50,7 @@ public class ZyjrPhotoLenderController extends BaseController
     @ApiOperation("111111111")
     public AjaxResult testFiles(fileInfoVo q) {
         JSONArray jsonarray = JSONArray.fromObject(q.getPhotoFile());
-        System.out.println(jsonarray);
+      //  System.out.println(jsonarray);
         ZyjrPhotoLender zyjrPhotoLender = new ZyjrPhotoLender();
         List<SysFileInfo> list = (List)JSONArray.toList(jsonarray, SysFileInfo.class);
         if (q.getId() != null) {
@@ -64,7 +64,7 @@ public class ZyjrPhotoLenderController extends BaseController
             for (SysFileInfo sysFileInfo :sysFileInfos) {
                 String[] s = sysFileInfo.getFilePath().split("//");
                 String l = sysFileInfo.getFilePath().substring(sysFileInfo.getFilePath().indexOf("e"));
-                System.err.println("删除路径"+paths+l);
+             //   System.err.println("删除路径"+paths+l);
                 boolean b = FileUtils.deleteFile(paths +l);
             }
         } else {

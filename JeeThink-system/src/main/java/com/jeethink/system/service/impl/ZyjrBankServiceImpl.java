@@ -119,7 +119,7 @@ public class ZyjrBankServiceImpl implements IZyjrBankService
             }
 
 
-            System.err.println(list);
+           // System.err.println(list);
             if(list.size()>0){
                 List<ZyjrBankScheme> slist=new ArrayList<>();
                 for (ZyjrBankProduct zyjrBankProduct : list) {
@@ -180,7 +180,7 @@ public class ZyjrBankServiceImpl implements IZyjrBankService
             }
 
 
-            System.err.println(list);
+         //  System.err.println(list);
             if(list.size()>0){
                 List<ZyjrBankScheme> slist=new ArrayList<>();
                 for (ZyjrBankProduct zyjrBankProduct : list) {

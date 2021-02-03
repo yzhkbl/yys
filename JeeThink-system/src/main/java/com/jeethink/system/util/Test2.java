@@ -36,9 +36,9 @@ public class Test2 {
         reqData.put("cell","17596567126");
         reqData.put("name","杨玉山");
         jsonData.put("reqData",reqData);
-        System.out.println("请求参数:"+jsonData.toString());
+       // System.out.println("请求参数:"+jsonData.toString());
         String result = getBrData(jsonData.toString());
-        System.out.println("返回值:"+result);
+       // System.out.println("返回值:"+result);
     }
     public static void ceshis(){
         JSONObject jsonData = new JSONObject();
@@ -52,9 +52,9 @@ public class Test2 {
         reqData.put("cell","17596567126");
         reqData.put("name","杨玉山");
         jsonData.put("reqData",reqData);
-        System.out.println("请求参数:"+jsonData.toString());
+       // System.out.println("请求参数:"+jsonData.toString());
         String result = getBrData(jsonData.toString());
-        System.out.println("返回值:"+result);
+       // System.out.println("返回值:"+result);
     }
 
     public static String conf(String tokenid,String id,String cell,String name){
@@ -69,9 +69,9 @@ public class Test2 {
         reqData.put("cell",cell);
         reqData.put("name",name);
         jsonData.put("reqData",reqData);
-        System.out.println("请求参数:"+jsonData.toString());
+       // System.out.println("请求参数:"+jsonData.toString());
         String result = getBrData(jsonData.toString());
-        System.out.println("返回值:"+result);
+       // System.out.println("返回值:"+result);
         return result;
     }
     //贷前请使用以下代码
@@ -113,7 +113,7 @@ public class Test2 {
                 if(loginJson.containsKey("tokenid")){
                     token = loginJson.getString("tokenid");
                 }else {
-                    System.out.println("返回结果异常，无token!结果为:"+login_res_str);
+                 //   System.out.println("返回结果异常，无token!结果为:"+login_res_str);
                 }
             }
         }catch (Exception e){

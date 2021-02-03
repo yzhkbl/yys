@@ -13,7 +13,7 @@ public class TestD {
         list.add("world");
         //List<Object> a=getDuplicateElements(list.stream());
 
-        System.out.println();
+     //   System.out.println();
     }
 
     public static <T> List<T> getDuplicateElements(Stream<T> stream) {

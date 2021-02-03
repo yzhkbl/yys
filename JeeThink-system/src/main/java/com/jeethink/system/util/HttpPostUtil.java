@@ -41,7 +41,7 @@ public class HttpPostUtil implements Serializable {
             string.setContentType(CONTENT_TYPE);
             post.setEntity(string);
             HttpResponse res = client.execute(post);
-            System.err.println("http status is " + res.getStatusLine().getStatusCode());
+            //System.err.println("http status is " + res.getStatusLine().getStatusCode());
             if (res.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                 HttpEntity entity = res.getEntity();
                 //UTF-8解码返回数据

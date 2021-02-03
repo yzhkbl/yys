@@ -33,9 +33,9 @@ public class androidUpload {
                 String uploadPath = "C:\\demo";//request.getSession().getServletContext().getRealPath("/")
                 //保存文件的路径
                 String filepath =  File.separator + createNewDir();
-                System.out.println("保存文件的路径："+filepath);
+              //  System.out.println("保存文件的路径："+filepath);
                 File destfile = new File(uploadPath + filepath);
-                System.out.println("获取文件上传的真实路径："+uploadPath);
+              //  System.out.println("获取文件上传的真实路径："+uploadPath);
                 if (!destfile.exists()) {
                     destfile.mkdirs();
                 }
@@ -59,7 +59,7 @@ public class androidUpload {
                 fos.close();
                 in.close();
                 String lastpath = filepath + File.separator + fileNameNew;
-                System.out.println("返回图片路径：" + fileNameNew);
+               // System.out.println("返回图片路径：" + fileNameNew);
                 return createNewDir2()+fileNameNew;
 
             } catch (Exception e) {
@@ -90,6 +90,6 @@ public class androidUpload {
     }
 
     public static void main(String[] args) {
-        System.err.println(createNewDir2());
+       // System.err.println(createNewDir2());
     }
 }

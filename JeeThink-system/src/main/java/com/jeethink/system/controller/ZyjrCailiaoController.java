@@ -218,7 +218,7 @@ public class ZyjrCailiaoController extends BaseController
         ZyjrGuaranteeinfo2 zyjrGuaranteeinfo2=new ZyjrGuaranteeinfo2();
         zyjrGuaranteeinfo2.setMortname("汽车");
         zyjrGuaranteeinfo2.setMortltype("002");
-        zyjrGuaranteeinfo2.setMortmtype("002003");
+        zyjrGuaranteeinfo2.setMortmtype("002001");
         zyjrGuaranteeinfo2.setMortstype("002001001");
         fenqiReq.setGuaranteeInfo(zyjrGuaranteeinfo2);
         pub.setOrderNo(transactionCode);
@@ -226,6 +226,8 @@ public class ZyjrCailiaoController extends BaseController
         ZyjrFinanceChargeCardInfo2 zyjrFinanceChargeCardInfo2=new ZyjrFinanceChargeCardInfo2();
         fenqiReq.setFinanceChargeCardInfo(zyjrFinanceChargeCardInfo2);
         ZyjrPayMentInfo2 zyjrPayMentInfo2=new ZyjrPayMentInfo2();
+        List<CocomNos> cocomNos=new ArrayList<>();
+        zyjrPayMentInfo2.setCocomNos(cocomNos);
         fenqiReq.setPayMentInfo(zyjrPayMentInfo2);
 
         JkrclVo JkrclVo=new JkrclVo();

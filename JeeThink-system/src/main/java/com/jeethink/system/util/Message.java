@@ -37,11 +37,11 @@ public class Message {
             request.putQueryParameter("SignName", "中豫融资租赁");
             request.putQueryParameter("TemplateCode", "SMS_210310133");
 
-        System.err.println(code);
+       // System.err.println(code);
             request.putQueryParameter("TemplateParam", "{\"code\":\""+code+"\"}");
             try {
                 CommonResponse response = client.getCommonResponse(request);
-               System.out.println(response.getData());
+             //  System.out.println(response.getData());
             } catch (ServerException e) {
                 e.printStackTrace();
             } catch (ClientException e) {

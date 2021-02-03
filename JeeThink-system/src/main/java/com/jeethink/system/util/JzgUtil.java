@@ -72,7 +72,7 @@ public class JzgUtil {
                 sb.append(Integer.toHexString(index));
             }
         } catch (NoSuchAlgorithmException e) {
-            System.err.println("key:" + key + ", use md5 failed");
+          //  System.err.println("key:" + key + ", use md5 failed");
         }
 
         return sb.toString().toUpperCase();

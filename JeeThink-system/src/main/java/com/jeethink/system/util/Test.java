@@ -70,9 +70,9 @@ public class Test {
         reqData.put("cell",cell);
         reqData.put("name",name);
         jsonData.put("reqData",reqData);
-        System.out.println("请求参数:"+jsonData.toString());
+      //  System.out.println("请求参数:"+jsonData.toString());
         String result = getBrData(jsonData.toString());
-        System.out.println("返回值:"+result);
+       // System.out.println("返回值:"+result);
         return result;
     }
 
@@ -96,7 +96,7 @@ public class Test {
                 if(loginJson.containsKey("tokenid")){
                     token = loginJson.getString("tokenid");
                 }else {
-                    System.out.println("返回结果异常，无token!结果为:"+login_res_str);
+               //     System.out.println("返回结果异常，无token!结果为:"+login_res_str);
                 }
             }
         }catch (Exception e){
