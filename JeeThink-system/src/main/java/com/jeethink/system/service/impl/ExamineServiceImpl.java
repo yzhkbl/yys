@@ -6,6 +6,7 @@ import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.*;
 import com.jeethink.system.mapper.ExamineMapper;
 import com.jeethink.system.mapper.SysUserMapper;
+import com.jeethink.system.mapper.ZyjrAllowApplicantMapper;
 import com.jeethink.system.mapper.ZyjrYejiMapper;
 import com.jeethink.system.service.IExamineService;
 import com.jeethink.system.util.HttpPostUtil;
@@ -29,6 +30,8 @@ public class ExamineServiceImpl implements IExamineService {
     private ZyjrYejiMapper zyjrYejiMapper;
     @Autowired
     private SysUserMapper sysUserMapper;
+    @Autowired
+    private ZyjrAllowApplicantMapper zyjrAllowApplicantMapper;
 
     @Override
     public int addByBorrower(ZyjrBorrower q) {
@@ -148,10 +151,12 @@ public class ExamineServiceImpl implements IExamineService {
             examineDao.updateFour(q.getUserId(),q.getTransactionCode(),1);
             startPage.setTransactionCode(q.getTransactionCode());
             //examineDao.updateFive(q.getUserId(),a);
-            /**ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
+        /**if(findByBorrower(q.getUserId()).getContractState()!=null&&zyjrAllowApplicantMapper.selectById(q.getTransactionCode())==null) {
+            ZyjrOrderProgress zyjrOrderProgress = new ZyjrOrderProgress();
             zyjrOrderProgress.setTransactionCode(q.getTransactionCode());
-            zyjrOrderProgress.setProgress("初审未审批");
-            examineDao.insertOrderProgress(zyjrOrderProgress);*/
+            zyjrOrderProgress.setProgress(1);
+            examineDao.insertOrderProgress(zyjrOrderProgress);
+        }*/
         ZyjrYeji zyjrYeji=new ZyjrYeji();
         zyjrYeji.setUserId(q.getUserId().toString());
         zyjrYeji.setArea(q.getBusinessPlace());
