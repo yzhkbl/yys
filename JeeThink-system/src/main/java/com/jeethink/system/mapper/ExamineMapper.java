@@ -99,6 +99,7 @@ public interface ExamineMapper {
     int deleteGuaranteeById(Long id);
 
     int insertOrderProgress(ZyjrOrderProgress zyjrOrderProgress);
+    int updateOrderProgress(ZyjrOrderProgress zyjrOrderProgress);
 
     int insertShangpai (ZyjrShangpai q);
     int updateShangpai(ZyjrShangpai q);

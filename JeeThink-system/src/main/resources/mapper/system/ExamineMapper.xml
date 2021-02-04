@@ -683,6 +683,18 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
         values
         (#{id},#{transactionCode},#{progress},#{approvalType})
     </insert>
+    <update id="updateOrderProgress">
+        update zyjr_order_progress
+        <set>
+            <if test="progress!=null">
+                progress=#{progress},
+            </if>
+            <if test="approvalType != null">
+                approval_type = #{approvalType},
+            </if>
+        </set>
+        where transaction_code = #{transactionCode}
+    </update>
     <insert id="insertShangpai" parameterType="com.jeethink.system.domain.ZyjrShangpai">
         insert into zyjr_shangpai
         (id,registration_url,registration_number,transaction_code,submit_state)

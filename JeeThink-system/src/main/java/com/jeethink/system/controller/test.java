@@ -95,6 +95,8 @@ public class test extends BaseController {
     @Autowired
     private ZyjrCardMapper zyjrCardMapper;
 
+    @Autowired
+    private ISysUserService iSysUserService;
 
     private static String oCode = "sfzzm";
     private static String pCode = "sfzfm";
@@ -996,6 +998,71 @@ public class test extends BaseController {
     public AjaxResult ss(@RequestBody ZyjrYejiYue zyjrYejiYue){
         zyjrYejiYueMapper.updateZyjrYejiYue(zyjrYejiYue);
        return AjaxResult.success();
+    }
+
+    @ResponseBody
+    @PostMapping("getUserInfo")
+    public AjaxResult ss(String userId) throws ParseException {
+        String a=DateUtils.dateTime(new Date());
+        ZyjrYeji zyjrYeji=new ZyjrYeji();
+        zyjrYeji.setBeginTime(a.substring(0,7)+"-01");
+        String date2=DataUtil.subMonth(a.substring(0,7)+"-01");
+        zyjrYeji.setEndTime(date2);
+        zyjrYeji.setUserId(userId);
+        List<ZyjrYeji> b=zyjrYejiMapper.selectZyjrYejiList(zyjrYeji);
+        Double fang=0.0;
+        if(b.size()>0){
+            for (ZyjrYeji yeji : b) {
+                if(yeji!=null&&yeji.getFangkuan()!=null){
+                    fang+=Double.parseDouble(yeji.getFangkuan());
+                }
+            }
+        }
+        Map<String,Object> map=new HashMap<>();
+        map.put("fangkuan",fang);
+        if(b.size()>0&&fang!=0.0){
+        map.put("junjian",fang/b.size());
+        }else{
+            map.put("junjian",fang);
+        }
+        map.put("junjian",fang/b.size());
+        SysUser user=iSysUserService.selectUserById(Long.parseLong(userId));
+        ZyjrYejiYue zyjrYejiYue=new ZyjrYejiYue();
+        zyjrYejiYue.setBeginTime(a.substring(0,7)+"-01");
+        zyjrYejiYue.setEndTime(date2);
+        zyjrYejiYue.setTeam(user.getDept().getDeptName());
+        List<ZyjrYejiYue> yejiyue=zyjrYejiYueMapper.selectZyjrYejiYueList(zyjrYejiYue);
+        ZyjrYeji zyjrYeji2=new ZyjrYeji();
+        zyjrYeji2.setBeginTime(a.substring(0,7)+"-01");
+        zyjrYeji2.setEndTime(date2);
+        zyjrYeji2.setUserId(userId);
+        zyjrYeji2.setTeam(user.getDept().getDeptName());
+        List<ZyjrYeji> yeji=zyjrYejiMapper.selectZyjrYejiList(zyjrYeji2);
+        Double mubiao=0.0;
+        Double fangkuan=0.0;
+        for (ZyjrYejiYue yejiYue : yejiyue) {
+            if(yejiYue!=null&&yejiYue.getMubiao()!=null){
+                mubiao+=Double.parseDouble(yejiYue.getMubiao());
+            }
+        }
+        for (ZyjrYeji zyjrYeji1 : yeji) {
+            if(zyjrYeji1!=null&&zyjrYeji1.getFangkuan()!=null){
+                fangkuan+=Double.parseDouble(zyjrYeji1.getFangkuan());
+            }
+        }
+        if(mubiao!=0.0&&fangkuan!=0.0){
+            Double gg=(mubiao*100)/(fangkuan*100);
+            map.put("teamKpi",gg.intValue());
+        }else{
+            map.put("teamKpi",0);
+        }
+        map.put("teamMubiao",mubiao);
+        map.put("teamFangkuan",fangkuan);
+        map.put("gerenMubiao",0.0);
+        map.put("gerenFangkuan",fang);
+        map.put("gerenKpi",0);
+        map.put("date",a.substring(5,7));
+        return  AjaxResult.success(map);
     }
 
     @ResponseBody
