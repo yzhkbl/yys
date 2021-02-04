@@ -592,7 +592,7 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
         left join zyjr_business a on a.transaction_code=b.transaction_code
         left join zyjr_order_progress c on c.transaction_code=b.transaction_code
         left join zyjr_start_page d on d.transaction_code=b.transaction_code
-        where b.user_id=#{userId}
+        where b.user_id=#{userId} and b.order_state=1 and a.order_state=1 and d.order_state=1
         order by d.create_time desc
     </select>
 
