@@ -134,7 +134,7 @@ public class ZyjrCarLoanController extends BaseController
 
     @PostMapping("/repeat")
     public AjaxResult repeat(@RequestBody ZyjrCarLoan q){
-        System.err.println(q);
+       // System.err.println(q);
         ZyjrCarLoan zyjrCarLoan = zyjrCarLoanMapper.selectHandle(q.getTransactionCode());
         if(q.getHandleName()!=null) {
             if (zyjrCarLoan != null && zyjrCarLoan.getRepeatId()!=null&&zyjrCarLoan.getRepeatId()!=q.getUserId()) {

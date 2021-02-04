@@ -34,12 +34,5 @@ public class Chinese2Pinyin {
         return t4;
     }
 
-    public static void main(String[] args) {
-        String s = getPinyin("西安电子科技大学");
-        System.out.println(s.substring(0,2));
-        String s1 = getPinyin("西安");
-        System.out.println(s1);
-        String s2 = getPinyin("陈浩");
-        System.out.println(s2);// ChengDu
-    }
+
 }

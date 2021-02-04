@@ -100,7 +100,7 @@ public class ZyjrInsuranceTypeServiceImpl implements IZyjrInsuranceTypeService
             }
 
 
-            System.err.println(list);
+          //  System.err.println(list);
             if(list.size()>0){
                 List<ZyjrBankScheme> slist=new ArrayList<>();
                 for (ZyjrBankProduct zyjrBankProduct : list) {
@@ -152,7 +152,7 @@ public class ZyjrInsuranceTypeServiceImpl implements IZyjrInsuranceTypeService
             }
 
 
-            System.err.println(list);
+           // System.err.println(list);
             if(list.size()>0){
                 List<ZyjrBankScheme> slist=new ArrayList<>();
                 for (ZyjrBankProduct zyjrBankProduct : list) {

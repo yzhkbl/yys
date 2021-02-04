@@ -123,7 +123,7 @@ public class ZyjrBusinessController extends BaseController
     @GetMapping("edit2")
     public AjaxResult edit22(Bodys bodys)
     {
-        System.err.println(bodys);
+       // System.err.println(bodys);
         return toAjax(zyjrBusinessMapper.updateByIds(bodys));
     }
 

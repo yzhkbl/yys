@@ -51,7 +51,7 @@ public class ZyjrGrantImageController extends BaseController
     @ApiOperation("111111111")
     public AjaxResult testFiles(fileInfoVo q) {
         JSONArray jsonarray = JSONArray.fromObject(q.getPhotoFile());
-        System.out.println(jsonarray);
+     //   System.out.println(jsonarray);
         ZyjrGrantImage zyjrGrantImage = new ZyjrGrantImage();
         List<ZyjrGrantPhoto> list = (List)JSONArray.toList(jsonarray, ZyjrGrantPhoto.class);
         if (q.getId() != null) {
@@ -65,7 +65,7 @@ public class ZyjrGrantImageController extends BaseController
             for (ZyjrGrantPhoto zyjrGrantPhoto :zyjrGrantPhotos) {
                 String[] s = zyjrGrantPhoto.getFilePath().split("//");
                 String l = zyjrGrantPhoto.getFilePath().substring(zyjrGrantPhoto.getFilePath().indexOf("e"));
-                System.err.println("删除路径"+paths+l);
+              //  System.err.println("删除路径"+paths+l);
                 boolean b = FileUtils.deleteFile(paths +l);
             }
         } else {

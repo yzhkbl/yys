@@ -188,7 +188,7 @@ ZyjrCarController extends BaseController {
         if (linkman == null&&linkman.getId()!=null) {
             return AjaxResult.error("参数没传过来");
         }
-        System.err.println(linkman);
+      //  System.err.println(linkman);
         ZyjrCar a = zyjrCarService.selectZyjrCarById(linkman.getId());
         a.setRemark(linkman.getRemark());
         a.setUserName(linkman.getUserName());

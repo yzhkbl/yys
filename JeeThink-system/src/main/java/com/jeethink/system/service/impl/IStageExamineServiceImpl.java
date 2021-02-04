@@ -229,7 +229,7 @@ public class IStageExamineServiceImpl implements IStageExamineService {
             map.put("visit", zyjrGrantPhotoMapper.findVisit(zyjrGrantVisit.getId()));
         }
         String 董宗杰 = "董宗杰垃圾";
-        System.err.println(董宗杰);
+      //  System.err.println(董宗杰);
         return map;
     }
 

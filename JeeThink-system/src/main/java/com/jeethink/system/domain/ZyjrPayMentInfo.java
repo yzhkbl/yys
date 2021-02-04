@@ -32,9 +32,6 @@ public class ZyjrPayMentInfo extends BaseEntity
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
     private String insuranceAgencyCode;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String recommendAgencyCode;
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
@@ -98,15 +95,6 @@ public class ZyjrPayMentInfo extends BaseEntity
     public String getInsuranceAgencyCode() 
     {
         return insuranceAgencyCode;
-    }
-    public void setRecommendAgencyCode(String recommendAgencyCode) 
-    {
-        this.recommendAgencyCode = recommendAgencyCode;
-    }
-
-    public String getRecommendAgencyCode() 
-    {
-        return recommendAgencyCode;
     }
     public void setAgencyReceiveMode1(Integer agencyReceiveMode1) 
     {
@@ -179,7 +167,6 @@ public class ZyjrPayMentInfo extends BaseEntity
             .append("payeeType", getPayeeType())
             .append("cooperateAgencyCode", getCooperateAgencyCode())
             .append("insuranceAgencyCode", getInsuranceAgencyCode())
-            .append("recommendAgencyCode", getRecommendAgencyCode())
             .append("agencyReceiveMode1", getAgencyReceiveMode1())
             .append("agencyReceiveAmt1", getAgencyReceiveAmt1())
             .append("agencyReceiveType1", getAgencyReceiveType1())

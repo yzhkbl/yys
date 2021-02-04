@@ -40,6 +40,6 @@ public class Base64Util {
 
     public static void main(String[] args) {
         String s = "调整异常数据";
-        System.err.println(byteToStringBase64(s.getBytes()));
+      //  System.err.println(byteToStringBase64(s.getBytes()));
     }
 }

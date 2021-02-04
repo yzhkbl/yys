@@ -2,10 +2,12 @@ package com.jeethink.system.domain;
 
 import com.jeethink.common.annotation.Excel;
 import com.jeethink.common.core.domain.BaseEntity;
+import com.jeethink.system.domain.vo.CocomNos;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * mentInfo对象 zyjr_pay_ment_info
@@ -33,8 +35,6 @@ public class ZyjrPayMentInfo2
     private String insuranceAgencyCode;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String recommendAgencyCode;
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
@@ -59,8 +59,17 @@ public class ZyjrPayMentInfo2
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
     private Integer agencyReceiveType2;
+    private List<CocomNos> cocomNos;
 
-    public void setPayMode(Integer payMode) 
+    public List<CocomNos> getCocomNos() {
+        return cocomNos;
+    }
+
+    public void setCocomNos(List<CocomNos> cocomNos) {
+        this.cocomNos = cocomNos;
+    }
+
+    public void setPayMode(Integer payMode)
     {
         this.payMode = payMode;
     }
@@ -95,15 +104,6 @@ public class ZyjrPayMentInfo2
     public String getInsuranceAgencyCode() 
     {
         return insuranceAgencyCode;
-    }
-    public void setRecommendAgencyCode(String recommendAgencyCode) 
-    {
-        this.recommendAgencyCode = recommendAgencyCode;
-    }
-
-    public String getRecommendAgencyCode() 
-    {
-        return recommendAgencyCode;
     }
     public void setAgencyReceiveMode1(Integer agencyReceiveMode1) 
     {
@@ -167,7 +167,6 @@ public class ZyjrPayMentInfo2
             .append("payeeType", getPayeeType())
             .append("cooperateAgencyCode", getCooperateAgencyCode())
             .append("insuranceAgencyCode", getInsuranceAgencyCode())
-            .append("recommendAgencyCode", getRecommendAgencyCode())
             .append("agencyReceiveMode1", getAgencyReceiveMode1())
             .append("agencyReceiveAmt1", getAgencyReceiveAmt1())
             .append("agencyReceiveType1", getAgencyReceiveType1())

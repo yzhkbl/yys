@@ -120,7 +120,7 @@ public class ExamineServiceImpl implements IExamineService {
     public String order(Integer userId){
         String a = orderCode.getOrderCode();
         //String b = IdUtils.simpleUUID();
-        System.err.println(a);
+       // System.err.println(a);
         examineDao.updateOne(userId,a,0);
         examineDao.updateTwo(userId,a,0);
         examineDao.updateThree(userId,a,0);
@@ -174,7 +174,7 @@ public class ExamineServiceImpl implements IExamineService {
         String date=DateUtils.dateTime(new Date());
 
         Date dates=DateUtils.dateTime("yyyy-MM-dd HH:mm:ss",date.substring(0,7)+"-01 00:00:00");
-        System.err.println(dates);
+      //  System.err.println(dates);
     }
 
     @Override
@@ -205,10 +205,10 @@ public class ExamineServiceImpl implements IExamineService {
         ok.setPub(pub);
         ok.setReq(okreq);
         JSONObject json3 = new JSONObject().fromObject(ok);
-        System.err.println(json3);
+      //  System.err.println(json3);
         JSONObject jsons = encryptData(json3.toString(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo, codes);
         JSONObject results = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", jsons);
-        System.err.println(results);
+      //  System.err.println(results);
         if (results.get("code").equals(0)) {
             return "ok";
         }

@@ -144,7 +144,7 @@ public class test extends BaseController {
         pub.setProductType(1);
         pub.setBankType("ICBC");
         pub.setBusiCode("1001");
-        System.out.println(pub);
+        //System.out.println(pub);
       //  Pics p1 = new Pics();
         //List<Pics> pp = new ArrayList<>();
         List<Pics> lenp = new ArrayList<>();
@@ -315,8 +315,6 @@ public class test extends BaseController {
         AjaxResult c = AjaxResult.success(a);
         JSONObject json2 = new JSONObject().fromObject(a);
         AjaxResult as = AjaxResult.success(a.toString());
-        System.err.println(json2);
-        System.err.println(json2.toString());
         JSONObject json = encryptData(json2.toString(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo, orderNo);
 
         JSONObject result = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", json);
@@ -500,7 +498,6 @@ public class test extends BaseController {
     @ResponseBody
     @ApiOperation("111111111")
     public AjaxResult ceshi(@RequestParam("name") List<String> name, @RequestParam("file") List<MultipartFile> file, @RequestParam("id") List<String> id) throws IOException {
-        System.err.println(name);
         for (int i = 0; i < id.size(); i++) {
             String a = FileUploadUtils.upload(file.get(i));
             SysFileInfo info = new SysFileInfo();
@@ -521,7 +518,6 @@ public class test extends BaseController {
         String l = FileUploadUtils.upload(file);
         SysFileInfo info = new SysFileInfo();
         String url = "http://114.215.186.186:8080"+l;
-        System.err.println(url);
         info.setFilePath(url);
         //info.setId(name);
         info.setFileName(name);
@@ -844,7 +840,6 @@ public class test extends BaseController {
         HashMap hashMap = JSON.parseObject(json2.toString(), HashMap.class);
         kaikaVo.setReq(hashMap);
         JSONObject json3 = new JSONObject().fromObject(kaikaVo);
-        System.err.println(json3);
         JSONObject jsons = encryptData(json3.toString(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo, codes);
 
         JSONObject results = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", jsons);
@@ -858,10 +853,13 @@ public class test extends BaseController {
         zyjrYeji.setFangkuan(fenqiVo.getReq().getStageInfo().getStageMoney().toString());
         zyjrYeji.setNumber((long)2);
         zyjrYejiMapper.updateZyjrYeji(zyjrYeji);
-        System.err.println(fenqiVo);
         ZyjrFangkuanpic zyjrFangkuanpic=new ZyjrFangkuanpic();
         zyjrFangkuanpic.setTransactionCode(fenqiVo.getPub().getOrderNo());
         List<ZyjrFangkuanpic> zyjrFangkuanpicList=zyjrFangkuanpicMapper.selectZyjrFangkuanpicList(zyjrFangkuanpic);
+        List<Materials> mmlist=new ArrayList<>();
+        JkrclVo jkrclVo=new JkrclVo();
+        jkrclVo.setMaterials(mmlist);
+        fenqiVo.getReq().setJKRCL(jkrclVo);
         Set<String> set=zyjrFangkuanpicList.stream().map(ZyjrFangkuanpic::getFileName).collect(Collectors.toSet());
             for (String s : set) {
                 Materials zyjrMaterials=new Materials();
@@ -904,7 +902,6 @@ public class test extends BaseController {
         //////////////////////////////////
         HashMap hashMap = JSON.parseObject(json2.toString(), HashMap.class);
         JSONObject json3 = new JSONObject().fromObject(hashMap.toString());
-        System.err.println(json3);
         JSONObject jsons = encryptData(json3.toString(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo, codes);
 
         JSONObject results = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", jsons);
@@ -1128,7 +1125,7 @@ public class test extends BaseController {
 
     @ResponseBody
     @GetMapping("getHuankuan")
-    public TableDataInfo list(SysFileInfo sysFileInfo)
+    public TableDataInfo list()
     {
         startPage();
         List<Huankuan> list=examineMapper.selectHuankuanList();

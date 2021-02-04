@@ -1,5 +1,8 @@
 package com.jeethink.system.domain.vo;
 
+import lombok.Data;
+
+@Data
 public class Huankuan {
     private Long id;
     private String userId;

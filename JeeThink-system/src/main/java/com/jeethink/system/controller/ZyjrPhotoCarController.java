@@ -52,8 +52,8 @@ public class ZyjrPhotoCarController extends BaseController
     @ApiOperation("111111111")
     public AjaxResult testFiles(fileInfoVo q){
         JSONArray jsonarray = JSONArray.fromObject(q.getPhotoFile());
-        System.err.println(q);
-        System.out.println(jsonarray);
+       // System.err.println(q);
+       // System.out.println(jsonarray);
         List<SysFileInfo> list = (List)JSONArray.toList(jsonarray, SysFileInfo.class);
         ZyjrPhotoCar zyjrPhotoCar = new ZyjrPhotoCar();
         if(q.getId()!=null){
@@ -67,7 +67,7 @@ public class ZyjrPhotoCarController extends BaseController
                 for (SysFileInfo sysFileInfo :sysFileInfos) {
                     String[] s = sysFileInfo.getFilePath().split("//");
                     String l = sysFileInfo.getFilePath().substring(sysFileInfo.getFilePath().indexOf("e"));
-                    System.err.println("删除路径"+paths+l);
+                //    System.err.println("删除路径"+paths+l);
                     boolean b = FileUtils.deleteFile(paths +l);
                 }
             }else{
@@ -116,7 +116,7 @@ public class ZyjrPhotoCarController extends BaseController
                 pic.add(info.getFilePath());
             }
         }
-        System.err.println(pic);
+       // System.err.println(pic);
         return AjaxResult.success(pic);
 
     }
