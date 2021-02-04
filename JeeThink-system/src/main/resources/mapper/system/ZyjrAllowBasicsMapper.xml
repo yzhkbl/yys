@@ -72,6 +72,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         left join zyjr_car c on a.dealers_id=c.id
         where a.transaction_code=#{transactionCode}
     </select>
+    <select id="selectByT2" parameterType="com.jeethink.system.domain.ZyjrDaiqian" resultMap="ZyjrAllowBasicsResult2">
+        select a.transaction_code,a.dealers_id
+        from zyjr_allow_basics a
+
+        where a.transaction_code=#{transactionCode}
+    </select>
         
     <insert id="insertZyjrAllowBasics" parameterType="ZyjrAllowBasics" useGeneratedKeys="true" keyProperty="id">
         insert into zyjr_allow_basics

@@ -64,4 +64,5 @@ public interface ZyjrAllowBasicsMapper
     public int deleteZyjrAllowBasicsByIds(Long[] ids);
 
 
+    ZyjrDaiqian selectByT2(String transactionCode);
 }

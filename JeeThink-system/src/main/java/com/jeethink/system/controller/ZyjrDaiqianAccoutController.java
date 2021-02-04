@@ -141,7 +141,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
                 map.put("account2",c);
                 return AjaxResult.success(map);
             }*/
-            ZyjrDaiqian b=zyjrAllowBasicsMapper.selectByT(transactionCode);
+            ZyjrDaiqian b=zyjrAllowBasicsMapper.selectByT2(transactionCode);
             if(b!=null){
                 ZyjrCarAccount zyjrCarAccount=new ZyjrCarAccount();
                 zyjrCarAccount.setZyjrCarId(b.getDealersId().toString());
