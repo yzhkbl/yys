@@ -122,6 +122,24 @@ public class ZyjrBorrower
     private String encryptData;
     private String createBy;
     private String updateBy;
+    private String nation;
+    String date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getNation() {
+        return nation;
+    }
+
+    public void setNation(String nation) {
+        this.nation = nation;
+    }
 
     public String getCreateBy() {
         return createBy;
@@ -459,6 +477,7 @@ public class ZyjrBorrower
                 .append("privateCode", getPrivateCode())
                 .append("encryptData",getEncryptData())
                 .append("conf",getConf())
+                .append("nation",getNation())
             .toString();
     }
 }
