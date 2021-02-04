@@ -191,7 +191,7 @@ public class ZyjrDaihouController extends BaseController
 
         }
         examineMapper.updateByDaihou(zyjrDaihou);
-        ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
+       /* ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
         zyjrOrderProgress.setTransactionCode("1");
         zyjrOrderProgress.setApprovalType(Integer.parseInt(zyjrDaihou.getState()));
         if(zyjrDaihou.getState()!=null&&zyjrDaihou.getState().equals(1)){
@@ -200,7 +200,7 @@ public class ZyjrDaihouController extends BaseController
             zyjrOrderProgress.setProgress("贷后审批退回");
         }else if(zyjrDaihou.getState()!=null&&zyjrDaihou.getState().equals(3)){
             zyjrOrderProgress.setProgress("贷后审批拒绝");
-        }
+        }*/
         return AjaxResult.success();
     }
 

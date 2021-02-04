@@ -77,7 +77,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
         zyjrOrderProgress.setTransactionCode("1");
         zyjrOrderProgress.setApprovalType(Integer.parseInt(zyjrDaiqian.getState()));
         if(zyjrDaiqian.getState()!=null&&zyjrDaiqian.getState().equals(1)){
-            zyjrOrderProgress.setProgress("贷前审批通过");
+            zyjrOrderProgress.setProgress("已放款");
         }else if(zyjrDaiqian.getState()!=null&&zyjrDaiqian.getState().equals(2)){
             zyjrOrderProgress.setProgress("贷前审批退回");
         }else if(zyjrDaiqian.getState()!=null&&zyjrDaiqian.getState().equals(3)){
