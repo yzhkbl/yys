@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jeethink.system.mapper.ZyjrCarAccountMapper">
-    
+
     <resultMap type="ZyjrCarAccount" id="ZyjrCarAccountResult">
         <result property="accountName"    column="account_name"    />
         <result property="accountUse"    column="account_use"    />
@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectZyjrCarAccountList" parameterType="ZyjrCarAccount" resultMap="ZyjrCarAccountResult">
         <include refid="selectZyjrCarAccountVo"/>
-        <where>  
+        <where>
             <if test="accountName != null  and accountName != ''"> and account_name like concat('%', #{accountName}, '%')</if>
             <if test="accountUse != null  and accountUse != ''"> and account_use = #{accountUse}</if>
             <if test="accountType != null  and accountType != ''"> and account_type = #{accountType}</if>
@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="yingyezhizhao != null  and yingyezhizhao != ''"> and yingyezhizhao = #{yingyezhizhao}</if>
         </where>
     </select>
-    
+
     <select id="selectZyjrCarAccountById" parameterType="Long" resultMap="ZyjrCarAccountResult">
         <include refid="selectZyjrCarAccountVo"/>
         where zyjr_car_id = #{id}
@@ -68,6 +68,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="zyjrCarId != null">zyjr_car_id = #{zyjrCarId},</if>
         </trim>
         where zyjr_car_id = #{zyjrCarId}
+    </update>
+
+    <update id="updateZyjrCarAccount2" parameterType="ZyjrCarAccount">
+        update zyjr_car_account
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="accountName != null">account_name = #{accountName},</if>
+            <if test="accountUse != null">account_use = #{accountUse},</if>
+            <if test="accountType != null">account_type = #{accountType},</if>
+            <if test="accountNumber != null">account_number = #{accountNumber},</if>
+            <if test="accountLicence != null">account_licence = #{accountLicence},</if>
+            <if test="accountCity != null">account_city = #{accountCity},</if>
+            <if test="accountProvinc != null">account_provinc = #{accountProvinc},</if>
+            <if test="accountSubBranch != null">account_sub_branch = #{accountSubBranch},</if>
+            <if test="card != null">card = #{card},</if>
+            <if test="yingyezhizhao != null">yingyezhizhao = #{yingyezhizhao},</if>
+
+            <if test="zyjrCarId != null">zyjr_car_id = #{zyjrCarId},</if>
+        </trim>
+        where id = #{id}
     </update>
 
     <delete id="deleteZyjrCarAccountById" parameterType="Long">

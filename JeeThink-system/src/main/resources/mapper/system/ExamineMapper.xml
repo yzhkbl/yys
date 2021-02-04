@@ -45,10 +45,10 @@
     <insert id="insertBorrower" parameterType="com.jeethink.system.domain.ZyjrBorrower">
         insert into zyjr_borrower
         (id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,obverse_id,obverse_code,obverse_address,
-        obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,user_id,order_state,transaction_code)
+        obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,user_id,order_state,transaction_code,nation)
         values
         (#{id},#{userName},#{idCard},#{bankCardNo},#{phoneNumber},#{issueAuthority},#{startDate},#{endDate},#{familyAddress},#{obverseId},#{obverseCode},
-        #{obverseAddress},#{obverseName},#{backId},#{backCode},#{backAddress},#{backName},#{powerId},#{powerCode},#{powerAddress},#{powerName},#{creditPower},#{userId},#{orderState},#{transactionCode})
+        #{obverseAddress},#{obverseName},#{backId},#{backCode},#{backAddress},#{backName},#{powerId},#{powerCode},#{powerAddress},#{powerName},#{creditPower},#{userId},#{orderState},#{transactionCode},#{nation})
     </insert>
     <insert id="insertRelation" parameterType="com.jeethink.system.domain.ZyjrRelation">
         insert into zyjr_relation
@@ -259,6 +259,9 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
             </if>
             <if test="transactionCode!=null">
                 transaction_code=#{transactionCode}
+            </if>
+            <if test="nation!=null">
+                nation=#{nation}
             </if>
         </set>
         where order_state=0 and user_id = #{userId}
@@ -683,6 +686,18 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
         values
         (#{id},#{transactionCode},#{progress},#{approvalType})
     </insert>
+    <update id="updateOrderProgress">
+        update zyjr_order_progress
+        <set>
+            <if test="progress!=null">
+                progress=#{progress},
+            </if>
+            <if test="approvalType != null">
+                approval_type = #{approvalType},
+            </if>
+        </set>
+        where transaction_code = #{transactionCode}
+    </update>
     <insert id="insertShangpai" parameterType="com.jeethink.system.domain.ZyjrShangpai">
         insert into zyjr_shangpai
         (id,registration_url,registration_number,transaction_code,submit_state)

@@ -3,12 +3,15 @@ package com.jeethink.system.controller;
 import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
 import com.jeethink.common.core.page.TableDataInfo;
+import com.jeethink.common.utils.DateUtils;
 import com.jeethink.system.Helper.ResponseDto;
 import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.orderVo;
 import com.jeethink.system.mapper.*;
 import com.jeethink.system.service.IExamineService;
+import com.jeethink.system.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.unit.DataUnit;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -59,8 +62,15 @@ public class ExamineController extends BaseController {
     @RequestMapping("/find/borrower")
     public AjaxResult findBorrower(Integer userId){
         ZyjrBorrower borrower = examineService.findByBorrower(userId);
+        if(borrower!=null&&borrower.getIdCard()!=null){
+
+            String date=DataUtil.data(borrower.getIdCard().substring(6,14));
+            borrower.setDate(date);
+        }
         return AjaxResult.success(borrower);
     }
+
+
 
     @RequestMapping("/find/relation")
     public AjaxResult findRelation(Integer userId){

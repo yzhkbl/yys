@@ -102,9 +102,9 @@ ZyjrCarController extends BaseController {
         info.setFileName("store");
         List<SysFileInfo> aa=sysFileInfoMapper.selectSysFileInfoList(info);
         List<String> path=aa.stream().map(SysFileInfo::getFilePath).collect(Collectors.toList());
-       // a.setPic(path);
+        // a.setPic(path);
         List<SysFileInfo> ceshi=new ArrayList<>();
-      //  a.setSysFileInfo(ceshi);
+        //  a.setSysFileInfo(ceshi);
         Map<String,Object> map=new HashMap<>();
         map.put("pic",path);
         map.put("sysFileInfo",ceshi);
@@ -188,7 +188,7 @@ ZyjrCarController extends BaseController {
         if (linkman == null&&linkman.getId()!=null) {
             return AjaxResult.error("参数没传过来");
         }
-      //  System.err.println(linkman);
+        //  System.err.println(linkman);
         ZyjrCar a = zyjrCarService.selectZyjrCarById(linkman.getId());
         a.setRemark(linkman.getRemark());
         a.setUserName(linkman.getUserName());
@@ -239,11 +239,11 @@ ZyjrCarController extends BaseController {
             String pics=storeInformation.getPic().substring(1,storeInformation.getPic().length() - 1);
             String[] pic=pics.split(", ");
             for (String s : pic) {
-              //  String asd=androidUpload.upload(s);
+                //  String asd=androidUpload.upload(s);
                 SysFileInfo sysFileInfo=new SysFileInfo();
                 sysFileInfo.setFileName("store");
                 sysFileInfo.setId(a.getId().toString());
-              //  String as = "http://114.215.186.186:8080/" + asd;
+                //  String as = "http://114.215.186.186:8080/" + asd;
                 sysFileInfo.setFilePath(s);
                 sysFileInfoMapper.insertSysFileInfo(sysFileInfo);
             }
@@ -253,10 +253,10 @@ ZyjrCarController extends BaseController {
                 return AjaxResult.success(map);
             }
         }else if(storeInformation.getStatus().equals("edit")){
-          //  SysFileInfo infos=new SysFileInfo();
-           // infos.setId(storeInformation.getId());
-           // List<SysFileInfo> SysFileInfo=sysFileInfoMapper.selectSysFileInfoList(infos);
-          //  sysFileInfoMapper.deleteSysFileInfoByCarId(storeInformation.getId());
+            //  SysFileInfo infos=new SysFileInfo();
+            // infos.setId(storeInformation.getId());
+            // List<SysFileInfo> SysFileInfo=sysFileInfoMapper.selectSysFileInfoList(infos);
+            //  sysFileInfoMapper.deleteSysFileInfoByCarId(storeInformation.getId());
     /*        if(SysFileInfo.size()>0){
                 for (SysFileInfo sysFileInfo : SysFileInfo) {
                     String paths = "C:/demo";
@@ -296,11 +296,11 @@ ZyjrCarController extends BaseController {
             String pics=storeInformation.getPic().substring(1,storeInformation.getPic().length() - 1);
             String[] pic=pics.split(", ");
             for (String s : pic) {
-             //   String asd=androidUpload.upload(s);
+                //   String asd=androidUpload.upload(s);
                 SysFileInfo sysFileInfo=new SysFileInfo();
                 sysFileInfo.setFileName("store");
                 sysFileInfo.setId(a.getId().toString());
-             //   String as = "http://114.215.186.186:8080" + asd;
+                //   String as = "http://114.215.186.186:8080" + asd;
                 sysFileInfo.setFilePath(s);
                 sysFileInfoMapper.insertSysFileInfo(sysFileInfo);
             }
@@ -321,7 +321,13 @@ ZyjrCarController extends BaseController {
         if (zyjrCarAccount == null) {
             return AjaxResult.error("参数没传过来");
         }
-
+        System.err.println(zyjrCarAccount);
+        if(zyjrCarAccount.getId()!=null){
+            zyjrCarAccountMapper.updateZyjrCarAccount2(zyjrCarAccount);
+            Map<String, Object> map = new HashMap<>();
+            map.put("shopId", zyjrCarAccount.getZyjrCarId());
+            return AjaxResult.success(map);
+        }
         int ceshi = zyjrCarAccountService.insertZyjrCarAccount(zyjrCarAccount);
         if (ceshi > 0) {
             Map<String, Object> map = new HashMap<>();
@@ -329,6 +335,11 @@ ZyjrCarController extends BaseController {
             return AjaxResult.success(map);
         }
 
+        return AjaxResult.success();
+    }
+    @GetMapping("del/{id}")
+    public AjaxResult delete(@PathVariable("id") Long id) {
+        int ceshi = zyjrCarAccountMapper.deleteZyjrCarAccountById(id);
         return AjaxResult.success();
     }
 

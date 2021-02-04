@@ -27,7 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 【请填写功能名称】Controller
- * 
+ *
  * @author jeethink
  * @date 2021-01-15
  */
@@ -85,16 +85,16 @@ public class ZyjrCailiaoController extends BaseController
             zyjrCailiaoMapper.updateZyjrCailiaos(zyjrCailiao);
             return AjaxResult.success();
         }
-            ZyjrCailiao zyjrCailiao1 = zyjrCailiaoService.selectZyjrCailiaoById(zyjrCailiao.getId());
-            if(zyjrCailiao1!=null&& StringUtils.isNotEmpty(zyjrCailiao1.getUserId())) {
-                if (zyjrCailiao1.getUserId().equals(zyjrCailiao.getUserId())){
-                    return AjaxResult.success();
-                }
-                AjaxResult json=new AjaxResult();
-                json.put("code",400);
-                json.put("msg", "手慢了，下次再快点！！！");
-                return json;
+        ZyjrCailiao zyjrCailiao1 = zyjrCailiaoService.selectZyjrCailiaoById(zyjrCailiao.getId());
+        if(zyjrCailiao1!=null&& StringUtils.isNotEmpty(zyjrCailiao1.getUserId())) {
+            if (zyjrCailiao1.getUserId().equals(zyjrCailiao.getUserId())){
+                return AjaxResult.success();
             }
+            AjaxResult json=new AjaxResult();
+            json.put("code",400);
+            json.put("msg", "手慢了，下次再快点！！！");
+            return json;
+        }
         zyjrCailiaoService.updateZyjrCailiao(zyjrCailiao);
         return AjaxResult.success();
     }
@@ -112,14 +112,14 @@ public class ZyjrCailiaoController extends BaseController
     @RequestMapping(value = {"/ceshi2"}, method = RequestMethod.POST)
     public AjaxResult ceshi(@RequestParam("type") String type,@RequestParam("code") String code, @RequestParam("file") MultipartFile file, @RequestParam("id") String id) throws IOException {
 
-            String a = FileUploadUtils.upload(file);
-            ZyjrFangkuanpic info = new ZyjrFangkuanpic();
-            String as = "http://114.215.186.186:8080"+ a;
-            info.setFilePath(as);
-            info.setTransactionCode(id);
-            info.setFileName(code);
-            info.setType(type);
-            zyjrFangkuanpicMapper.insertZyjrFangkuanpic(info);
+        String a = FileUploadUtils.upload(file);
+        ZyjrFangkuanpic info = new ZyjrFangkuanpic();
+        String as = "http://114.215.186.186:8080"+ a;
+        info.setFilePath(as);
+        info.setTransactionCode(id);
+        info.setFileName(code);
+        info.setType(type);
+        zyjrFangkuanpicMapper.insertZyjrFangkuanpic(info);
 
 
         return AjaxResult.success();
@@ -153,10 +153,10 @@ public class ZyjrCailiaoController extends BaseController
         pub.setBusiCode("1002");
         FenqiReq fenqiReq=new FenqiReq();
         ZyjrCarType2 zyjrCarType2=new ZyjrCarType2();
+        if(jzg!=null){
+            HashMap hashMap = JSON.parseObject(jzg.getData(),HashMap.class);
 
-        HashMap hashMap = JSON.parseObject(jzg.getData(),HashMap.class);
-        // System.err.println(hashMap.get("Data"));
-        if(hashMap!=null){
+            // System.err.println(hashMap.get("Data"));
             //车辆价格
             zyjrCarType2.setCarPrice(a.getActualPrice());
             HashMap hashMap1=JSON.parseObject(hashMap.get("Data").toString(),HashMap.class);
@@ -198,7 +198,7 @@ public class ZyjrCailiaoController extends BaseController
             //分期金额
             zyjrStagingInformation2.setStageMoney(a.getLoanAmount());
             //首月还款金额
-        //    zyjrStagingInformation2.setFirstMonthMoney();
+            //    zyjrStagingInformation2.setFirstMonthMoney();
             //还款期限
             zyjrStagingInformation2.setRepayPeriod(Integer.parseInt(a.getRepaymentTerm().toString()));
             //营销档案编号
@@ -267,7 +267,7 @@ public class ZyjrCailiaoController extends BaseController
 
         }
         JSONObject json2 = new JSONObject().fromObject(fenqiVo);
-       // Json
+        // Json
         AjaxResult json=new AjaxResult();
         json.put("msg",b.getIntentionPrice());
         json.put("code",200);
@@ -303,7 +303,7 @@ public class ZyjrCailiaoController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:cailiao:remove')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
+    @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
         return toAjax(zyjrCailiaoService.deleteZyjrCailiaoByIds(ids));

@@ -45,6 +45,13 @@ public class ZyjrEmployerController extends BaseController
         return getDataTable(list);
     }
 
+    @GetMapping("/lists")
+    public AjaxResult lists()
+    {
+        List<ZyjrEmployer> list = zyjrEmployerService.selectZyjrEmployerList(null);
+        return AjaxResult.success(list);
+    }
+
     /**
      * 导出【请填写功能名称】列表
      */
