@@ -73,18 +73,16 @@ public class ZyjrDaiqianAccoutController extends BaseController
         }else{
             examineMapper.insertDaiqian(zyjrDaiqian);
         }
-        ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
-        zyjrOrderProgress.setTransactionCode("1");
-        zyjrOrderProgress.setApprovalType(Integer.parseInt(zyjrDaiqian.getState()));
+
         if(zyjrDaiqian.getState()!=null&&zyjrDaiqian.getState().equals(1)){
+            ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
+            zyjrOrderProgress.setTransactionCode(zyjrDaiqian.getTransactionCode());
+            zyjrOrderProgress.setApprovalType(4);
             zyjrOrderProgress.setProgress("已放款");
-        }else if(zyjrDaiqian.getState()!=null&&zyjrDaiqian.getState().equals(2)){
-            zyjrOrderProgress.setProgress("贷前审批退回");
-        }else if(zyjrDaiqian.getState()!=null&&zyjrDaiqian.getState().equals(3)){
-            zyjrOrderProgress.setProgress("贷前审批拒绝");
+            examineMapper.updateOrderProgress(zyjrOrderProgress);
         }
 
-        examineMapper.updateOrderProgress(zyjrOrderProgress);
+
         return AjaxResult.success();
     }
 
