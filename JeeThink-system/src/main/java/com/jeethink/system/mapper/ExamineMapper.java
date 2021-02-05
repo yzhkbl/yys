@@ -59,7 +59,7 @@ public interface ExamineMapper {
     ZyjrStartPage findByStarts(String transactionCode);
 
     int updateStarts(String transactionCode);
-    List<carVo> selectZyjrCarLists(String userId);
+    List<carVo> selectZyjrCarLists(@Param("userId")String userId,@Param("pid")String pid);
 
     Linkman selectZyjrCarByLinkman(Long id);
     DqVo selectDQ(String transactionCode);

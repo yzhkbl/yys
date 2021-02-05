@@ -2,63 +2,58 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jeethink.system.mapper.ZyjrEmployerMapper">
+<mapper namespace="com.jeethink.system.mapper.ZyjrCarParentMapper">
     
-    <resultMap type="ZyjrEmployer" id="ZyjrEmployerResult">
+    <resultMap type="ZyjrCarParent" id="ZyjrCarParentResult">
         <result property="id"    column="id"    />
         <result property="name"    column="name"    />
-        <result property="code"    column="code"    />
         <result property="lilv"    column="lilv"    />
     </resultMap>
 
-    <sql id="selectZyjrEmployerVo">
-        select id, name,lilv, code from zyjr_employer
+    <sql id="selectZyjrCarParentVo">
+        select id, name, lilv from zyjr_car_parent
     </sql>
 
-    <select id="selectZyjrEmployerList" parameterType="ZyjrEmployer" resultMap="ZyjrEmployerResult">
-        <include refid="selectZyjrEmployerVo"/>
+    <select id="selectZyjrCarParentList" parameterType="ZyjrCarParent" resultMap="ZyjrCarParentResult">
+        <include refid="selectZyjrCarParentVo"/>
         <where>  
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
-            <if test="code != null  and code != ''"> and code = #{code}</if>
             <if test="lilv != null  and lilv != ''"> and lilv = #{lilv}</if>
         </where>
     </select>
     
-    <select id="selectZyjrEmployerById" parameterType="Long" resultMap="ZyjrEmployerResult">
-        <include refid="selectZyjrEmployerVo"/>
+    <select id="selectZyjrCarParentById" parameterType="Long" resultMap="ZyjrCarParentResult">
+        <include refid="selectZyjrCarParentVo"/>
         where id = #{id}
     </select>
         
-    <insert id="insertZyjrEmployer" parameterType="ZyjrEmployer" useGeneratedKeys="true" keyProperty="id">
-        insert into zyjr_employer
+    <insert id="insertZyjrCarParent" parameterType="ZyjrCarParent" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_car_parent
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="name != null">name,</if>
-            <if test="code != null">code,</if>
             <if test="lilv != null">lilv,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name != null">#{name},</if>
-            <if test="code != null">#{code},</if>
             <if test="lilv != null">#{lilv},</if>
          </trim>
     </insert>
 
-    <update id="updateZyjrEmployer" parameterType="ZyjrEmployer">
-        update zyjr_employer
+    <update id="updateZyjrCarParent" parameterType="ZyjrCarParent">
+        update zyjr_car_parent
         <trim prefix="SET" suffixOverrides=",">
             <if test="name != null">name = #{name},</if>
-            <if test="code != null">code = #{code},</if>
             <if test="lilv != null">lilv = #{lilv},</if>
         </trim>
         where id = #{id}
     </update>
 
-    <delete id="deleteZyjrEmployerById" parameterType="Long">
-        delete from zyjr_employer where id = #{id}
+    <delete id="deleteZyjrCarParentById" parameterType="Long">
+        delete from zyjr_car_parent where id = #{id}
     </delete>
 
-    <delete id="deleteZyjrEmployerByIds" parameterType="String">
-        delete from zyjr_employer where id in 
+    <delete id="deleteZyjrCarParentByIds" parameterType="String">
+        delete from zyjr_car_parent where id in 
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

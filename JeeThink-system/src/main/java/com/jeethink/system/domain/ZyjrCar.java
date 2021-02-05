@@ -108,6 +108,15 @@ public class ZyjrCar extends BaseEntity
     private List<ZyjrCarAccount> zyjrCarAccount;
 
     private String type;
+    String pid;
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
 
     public String getType() {
         return type;

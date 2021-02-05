@@ -12,10 +12,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="accountId"    column="account_id"    />
         <result property="accountOne"    column="account_one"    />
         <result property="fangkuan"    column="fangkuan"    />
+        <result property="bazaar"    column="bazaar"    />
+        <result property="carid"    column="carid"    />
+        <result property="carname"    column="carname"    />
+        <result property="shenpitype"    column="shenpitype"    />
+        <result property="chanpintype"    column="chanpintype"    />
+        <result property="daikuanchuanpin"    column="daikuanchuanpin"    />
     </resultMap>
 
     <sql id="selectZyjrDaiqianAccoutVo">
-        select id,type,fangkuan, transaction_code, state, account_id, account_one from zyjr_daiqian_accout
+        select id,type,fangkuan,bazaar,carid,carname,shenpitype,daikuanchuanpin,chanpintype, transaction_code, state, account_id, account_one from zyjr_daiqian_accout
     </sql>
 
     <select id="selectZyjrDaiqianAccoutList" parameterType="ZyjrDaiqianAccout" resultMap="ZyjrDaiqianAccoutResult">
@@ -27,6 +33,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="accountId != null  and accountId != ''"> and account_id = #{accountId}</if>
             <if test="accountOne != null  and accountOne != ''"> and account_one = #{accountOne}</if>
             <if test="fangkuan != null  and fangkuan != ''"> and fangkuan = #{fangkuan}</if>
+            <if test="bazaar != null  and bazaar != ''"> and bazaar = #{bazaar}</if>
+            <if test="carid != null  and carid != ''"> and carid = #{carid}</if>
+            <if test="carname != null  and carname != ''"> and carname = #{carname}</if>
+            <if test="shenpitype != null  and shenpitype != ''"> and shenpitype = #{shenpitype}</if>
+            <if test="chanpintype != null  and chanpintype != ''"> and chanpintype = #{chanpintype}</if>
+            <if test="daikuanchuanpin != null  and daikuanchuanpin != ''"> and daikuanchuanpin = #{daikuanchuanpin}</if>
         </where>
     </select>
     
@@ -49,6 +61,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="accountId != null">account_id,</if>
             <if test="accountOne != null">account_one,</if>
             <if test="fangkuan != null">fangkuan,</if>
+            <if test="bazaar != null">bazaar,</if>
+            <if test="carid != null">carid,</if>
+            <if test="carname != null">carname,</if>
+            <if test="shenpitype != null">shenpitype,</if>
+            <if test="chanpintype != null">chanpintype,</if>
+            <if test="daikuanchuanpin != null">daikuanchuanpin,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="transactionCode != null">#{transactionCode},</if>
@@ -57,6 +75,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="accountId != null">#{accountId},</if>
             <if test="accountOne != null">#{accountOne},</if>
             <if test="fangkuan != null">#{fangkuan},</if>
+            <if test="bazaar != null">#{bazaar},</if>
+            <if test="carid != null">#{carid},</if>
+            <if test="carname != null">#{carname},</if>
+            <if test="shenpitype != null">#{shenpitype},</if>
+            <if test="chanpintype != null">#{chanpintype},</if>
+            <if test="daikuanchuanpin != null">#{daikuanchuanpin},</if>
          </trim>
     </insert>
 
@@ -69,6 +93,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="accountId != null">account_id = #{accountId},</if>
             <if test="accountOne != null">account_one = #{accountOne},</if>
             <if test="fangkuan != null">fangkuan = #{fangkuan},</if>
+            <if test="bazaar != null">bazaar = #{bazaar},</if>
+            <if test="carid != null">carid = #{carid},</if>
+            <if test="carname != null">carname = #{carname},</if>
+            <if test="shenpitype != null">shenpitype = #{shenpitype},</if>
+            <if test="chanpintype != null">chanpintype = #{chanpintype},</if>
+            <if test="daikuanchuanpin != null">daikuanchuanpin = #{daikuanchuanpin},</if>
         </trim>
         where id = #{id}
     </update>

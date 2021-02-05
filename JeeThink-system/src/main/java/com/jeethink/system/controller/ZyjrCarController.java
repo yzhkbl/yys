@@ -86,9 +86,9 @@ ZyjrCarController extends BaseController {
     }
 
     @GetMapping("/lists")
-    public AjaxResult lists(String createBy) {
+    public AjaxResult lists(String createBy,String pid) {
 
-        List<carVo> list = examineMapper.selectZyjrCarLists(createBy);
+        List<carVo> list = examineMapper.selectZyjrCarLists(createBy,pid);
 
         return AjaxResult.success(list);
     }
