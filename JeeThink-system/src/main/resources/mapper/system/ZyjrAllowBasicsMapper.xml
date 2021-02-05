@@ -19,6 +19,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="orderState"    column="order_state"    />
         <result property="daiqian.userName"    column="user_name"    />
         <result property="daiqian.carType"    column="car_type"    />
+        <result property="productType"    column="product_type"    />
+        <result property="loanProduct"    column="loan_product"    />
     </resultMap>
     <resultMap type="com.jeethink.system.domain.ZyjrDaiqian" id="ZyjrAllowBasicsResult2">
         <result property="id"    column="id"    />
@@ -37,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
     <sql id="selectZyjrAllowBasicsVo">
-        select id, approval_type, dealers_id, dealer_stores, plate_type, market, store, operate, more_info, user_id, transaction_code, order_state from zyjr_allow_basics
+        select id, approval_type, dealers_id, dealer_stores, plate_type, market, store, operate, more_info, user_id, transaction_code, order_state,loan_product,product_type from zyjr_allow_basics
     </sql>
 
     <select id="selectZyjrAllowBasicsList" parameterType="ZyjrAllowBasics" resultMap="ZyjrAllowBasicsResult">
@@ -52,6 +54,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null "> and user_id = #{userId}</if>
             <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
             <if test="orderState != null "> and order_state = #{orderState}</if>
+            <if test="productType != null "> and product_type = #{productType}</if>
+            <if test="loanProduct != null "> and loan_product = #{loanProduct}</if>
         </where>
     </select>
 
@@ -93,6 +97,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null">user_id,</if>
             <if test="transactionCode != null">transaction_code,</if>
             <if test="orderState != null">order_state,</if>
+            <if test="productType != null">product_type,</if>
+            <if test="loanProduct != null">loan_product,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="approvalType != null">#{approvalType},</if>
@@ -106,6 +112,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null">#{userId},</if>
             <if test="transactionCode != null">#{transactionCode},</if>
             <if test="orderState != null">#{orderState},</if>
+            <if test="productType != null">#{productType},</if>
+            <if test="loanProduct != null">#{loanProduct},</if>
          </trim>
     </insert>
 
@@ -123,6 +131,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null">user_id = #{userId},</if>
             <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
             <if test="orderState != null">order_state = #{orderState},</if>
+            <if test="productType != null">product_type = #{productType},</if>
+            <if test="loanProduct != null">loan_product = #{loanProduct},</if>
         </trim>
         where user_id=#{userId} and transaction_code=#{transactionCode}
     </update>

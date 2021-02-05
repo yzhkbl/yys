@@ -6,6 +6,6 @@ import lombok.Data;
 public class ZyjrOrderProgress {
     private Long id;
     private String transactionCode;
-    private String progress;
+    private Integer progress;
     private Integer approvalType;
 }
