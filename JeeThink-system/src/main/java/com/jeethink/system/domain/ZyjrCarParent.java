@@ -11,7 +11,7 @@ import com.jeethink.common.core.domain.BaseEntity;
  * @author jeethink
  * @date 2021-02-05
  */
-public class ZyjrCarParent extends BaseEntity
+public class ZyjrCarParent
 {
     private static final long serialVersionUID = 1L;
 
