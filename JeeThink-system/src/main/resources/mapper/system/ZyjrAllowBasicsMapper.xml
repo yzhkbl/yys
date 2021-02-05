@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
     <sql id="selectZyjrAllowBasicsVo">
-        select id, approval_type, dealers_id, dealer_stores, plate_type, market, store, operate, more_info, user_id, transaction_code, order_state，loan_product,product_type from zyjr_allow_basics
+        select id, approval_type, dealers_id, dealer_stores, plate_type, market, store, operate, more_info, user_id, transaction_code, order_state,loan_product,product_type from zyjr_allow_basics
     </sql>
 
     <select id="selectZyjrAllowBasicsList" parameterType="ZyjrAllowBasics" resultMap="ZyjrAllowBasicsResult">
