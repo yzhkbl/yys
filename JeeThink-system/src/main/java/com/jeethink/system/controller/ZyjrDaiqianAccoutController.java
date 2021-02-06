@@ -130,27 +130,12 @@ public class ZyjrDaiqianAccoutController extends BaseController
         return AjaxResult.success("操作成功",null);
     }
 
-    @GetMapping("getInfo/{transactionCode}")
-    public AjaxResult apqp(@PathVariable("transactionCode") String transactionCode){
-          /*  ZyjrDaiqianAccout a=zyjrDaiqianAccoutService.selectZyjrDaiqianAccoutByIds(transactionCode);
-            if(a!=null){
-                ZyjrCarAccount b=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountId());
-                ZyjrCarAccount c=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountOne());
-                Map<String,Object> map=new HashMap<>();
-                map.put("account",b);
-                map.put("account2",c);
-                return AjaxResult.success(map);
-            }*/
-            ZyjrDaiqian b=zyjrAllowBasicsMapper.selectByT2(transactionCode);
-            if(b!=null){
+    @GetMapping("getInfo/{id}")
+    public AjaxResult apqp(@PathVariable("id") String id){
                 ZyjrCarAccount zyjrCarAccount=new ZyjrCarAccount();
-                zyjrCarAccount.setZyjrCarId(b.getDealersId().toString());
+                zyjrCarAccount.setZyjrCarId(id);
                 List<ZyjrCarAccount> c=zyjrCarAccountMapper.selectZyjrCarAccountList(zyjrCarAccount);
                 return AjaxResult.success(c);
-            }
-
-
-           return AjaxResult.success();
     }
     @GetMapping("getZhanghu/{id}")
     public AjaxResult zhanghu(@PathVariable("id") String id){
