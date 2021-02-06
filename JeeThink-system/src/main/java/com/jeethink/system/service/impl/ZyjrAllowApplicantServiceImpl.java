@@ -39,6 +39,7 @@ public class ZyjrAllowApplicantServiceImpl implements IZyjrAllowApplicantService
     {
         ZyjrAllowApplicant zyjrAllowApplicant = zyjrAllowApplicantMapper.selectZyjrAllowApplicantById(userId, transactionCode);
         if(zyjrAllowApplicant==null) {
+            zyjrAllowApplicant = new ZyjrAllowApplicant();
             ZyjrBorrower zyjrBorrower = examineMapper.Borrower(transactionCode);
             ZyjrRelation zyjrRelation = examineMapper.Relation(transactionCode);
             ZyjrGuarantee zyjrGuarantee = examineMapper.Guarantee(transactionCode);
