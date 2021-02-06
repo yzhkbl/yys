@@ -1,5 +1,6 @@
 package com.jeethink.system.domain;
 
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.jeethink.common.annotation.Excel;
@@ -11,6 +12,7 @@ import com.jeethink.common.core.domain.BaseEntity;
  * @author jeethink
  * @date 2021-01-11
  */
+@Data
 public class ZyjrAllowApplicant extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -179,6 +181,12 @@ public class ZyjrAllowApplicant extends BaseEntity
 
     /** 现单位入职时间 */
     private String joindate;
+
+    private Integer familiesNumber;     //家庭人数
+    private String sourceIncome;        //主要收入来源
+    private String familyAddress;       //籍贯
+    private String spouseFamilyAddress; //配偶籍贯
+
 
     public String getJoindate() {
         return joindate;

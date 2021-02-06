@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrCommonApplicantMapper">
+    
+    <resultMap type="ZyjrCommonApplicant" id="ZyjrCommonApplicantResult">
+        <result property="id"    column="id"    />
+        <result property="peopleShip"    column="people_ship"    />
+        <result property="cardAddress"    column="card_address"    />
+        <result property="backAddress"    column="back_address"    />
+        <result property="debtName"    column="debt_name"    />
+        <result property="idCard"    column="id_card"    />
+        <result property="education"    column="education"    />
+        <result property="nowPlace"    column="now_place"    />
+        <result property="phoneNumber"    column="phone_number"    />
+        <result property="nowWork"    column="now_work"    />
+        <result property="workPlace"    column="work_place"    />
+        <result property="companyPhone"    column="company_phone"    />
+        <result property="companyNature"    column="company_nature"    />
+        <result property="monthlyIncome"    column="monthly_income"    />
+        <result property="userId"    column="user_id"    />
+        <result property="transactionCode"    column="transaction_code"    />
+        <result property="orderState"    column="order_state"    />
+        <result property="marriage"    column="marriage"    />
+        <result property="sourceIncome"    column="source_income"    />
+        <result property="positiveAddress"    column="positive_address"    />
+        <result property="versoAddress"    column="verso_address"    />
+        <result property="spouseName"    column="spouse_name"    />
+        <result property="idNumber"    column="id_number"    />
+        <result property="permanentAddress"    column="permanent_address"    />
+        <result property="phoneNo"    column="phone_no"    />
+        <result property="spouseEducation"    column="spouse_education"    />
+        <result property="spouseUnitName"    column="spouse_unit_name"    />
+        <result property="spouseWorkPlace"    column="spouse_work_place"    />
+        <result property="spouseWorkPhone"    column="spouse_work_phone"    />
+        <result property="spouseMonthlyIncome"    column="spouse_monthly_income"    />
+    </resultMap>
+
+    <sql id="selectZyjrCommonApplicantVo">
+        select id, people_ship, card_address, back_address, debt_name, id_card, education, now_place, phone_number, now_work, work_place, company_phone, company_nature, monthly_income, user_id, transaction_code, order_state, marriage, source_income, positive_address, verso_address, spouse_name, id_number, permanent_address, phone_no, spouse_education, spouse_unit_name, spouse_work_place, spouse_work_phone, spouse_monthly_income from zyjr_common_applicant
+    </sql>
+
+    <select id="selectZyjrCommonApplicantList" parameterType="ZyjrCommonApplicant" resultMap="ZyjrCommonApplicantResult">
+        <include refid="selectZyjrCommonApplicantVo"/>
+        <where>  
+            <if test="peopleShip != null  and peopleShip != ''"> and people_ship = #{peopleShip}</if>
+            <if test="cardAddress != null  and cardAddress != ''"> and card_address = #{cardAddress}</if>
+            <if test="backAddress != null  and backAddress != ''"> and back_address = #{backAddress}</if>
+            <if test="debtName != null  and debtName != ''"> and debt_name like concat('%', #{debtName}, '%')</if>
+            <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
+            <if test="education != null  and education != ''"> and education = #{education}</if>
+            <if test="nowPlace != null  and nowPlace != ''"> and now_place = #{nowPlace}</if>
+            <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
+            <if test="nowWork != null  and nowWork != ''"> and now_work = #{nowWork}</if>
+            <if test="workPlace != null  and workPlace != ''"> and work_place = #{workPlace}</if>
+            <if test="companyPhone != null  and companyPhone != ''"> and company_phone = #{companyPhone}</if>
+            <if test="companyNature != null  and companyNature != ''"> and company_nature = #{companyNature}</if>
+            <if test="monthlyIncome != null  and monthlyIncome != ''"> and monthly_income = #{monthlyIncome}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
+            <if test="orderState != null "> and order_state = #{orderState}</if>
+            <if test="marriage != null  and marriage != ''"> and marriage = #{marriage}</if>
+            <if test="sourceIncome != null  and sourceIncome != ''"> and source_income = #{sourceIncome}</if>
+            <if test="positiveAddress != null  and positiveAddress != ''"> and positive_address = #{positiveAddress}</if>
+            <if test="versoAddress != null  and versoAddress != ''"> and verso_address = #{versoAddress}</if>
+            <if test="spouseName != null  and spouseName != ''"> and spouse_name like concat('%', #{spouseName}, '%')</if>
+            <if test="idNumber != null  and idNumber != ''"> and id_number = #{idNumber}</if>
+            <if test="permanentAddress != null  and permanentAddress != ''"> and permanent_address = #{permanentAddress}</if>
+            <if test="phoneNo != null  and phoneNo != ''"> and phone_no = #{phoneNo}</if>
+            <if test="spouseEducation != null  and spouseEducation != ''"> and spouse_education = #{spouseEducation}</if>
+            <if test="spouseUnitName != null  and spouseUnitName != ''"> and spouse_unit_name like concat('%', #{spouseUnitName}, '%')</if>
+            <if test="spouseWorkPlace != null  and spouseWorkPlace != ''"> and spouse_work_place = #{spouseWorkPlace}</if>
+            <if test="spouseWorkPhone != null  and spouseWorkPhone != ''"> and spouse_work_phone = #{spouseWorkPhone}</if>
+            <if test="spouseMonthlyIncome != null  and spouseMonthlyIncome != ''"> and spouse_monthly_income = #{spouseMonthlyIncome}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrCommonApplicantById" resultMap="ZyjrCommonApplicantResult">
+        <include refid="selectZyjrCommonApplicantVo"/>
+        where transaction_code = #{transactionCode}
+    </select>
+        
+    <insert id="insertZyjrCommonApplicant" parameterType="ZyjrCommonApplicant" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_common_applicant
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="peopleShip != null">people_ship,</if>
+            <if test="cardAddress != null">card_address,</if>
+            <if test="backAddress != null">back_address,</if>
+            <if test="debtName != null">debt_name,</if>
+            <if test="idCard != null">id_card,</if>
+            <if test="education != null">education,</if>
+            <if test="nowPlace != null">now_place,</if>
+            <if test="phoneNumber != null">phone_number,</if>
+            <if test="nowWork != null">now_work,</if>
+            <if test="workPlace != null">work_place,</if>
+            <if test="companyPhone != null">company_phone,</if>
+            <if test="companyNature != null">company_nature,</if>
+            <if test="monthlyIncome != null">monthly_income,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="transactionCode != null">transaction_code,</if>
+            <if test="orderState != null">order_state,</if>
+            <if test="marriage != null">marriage,</if>
+            <if test="sourceIncome != null">source_income,</if>
+            <if test="positiveAddress != null">positive_address,</if>
+            <if test="versoAddress != null">verso_address,</if>
+            <if test="spouseName != null">spouse_name,</if>
+            <if test="idNumber != null">id_number,</if>
+            <if test="permanentAddress != null">permanent_address,</if>
+            <if test="phoneNo != null">phone_no,</if>
+            <if test="spouseEducation != null">spouse_education,</if>
+            <if test="spouseUnitName != null">spouse_unit_name,</if>
+            <if test="spouseWorkPlace != null">spouse_work_place,</if>
+            <if test="spouseWorkPhone != null">spouse_work_phone,</if>
+            <if test="spouseMonthlyIncome != null">spouse_monthly_income,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="peopleShip != null">#{peopleShip},</if>
+            <if test="cardAddress != null">#{cardAddress},</if>
+            <if test="backAddress != null">#{backAddress},</if>
+            <if test="debtName != null">#{debtName},</if>
+            <if test="idCard != null">#{idCard},</if>
+            <if test="education != null">#{education},</if>
+            <if test="nowPlace != null">#{nowPlace},</if>
+            <if test="phoneNumber != null">#{phoneNumber},</if>
+            <if test="nowWork != null">#{nowWork},</if>
+            <if test="workPlace != null">#{workPlace},</if>
+            <if test="companyPhone != null">#{companyPhone},</if>
+            <if test="companyNature != null">#{companyNature},</if>
+            <if test="monthlyIncome != null">#{monthlyIncome},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="transactionCode != null">#{transactionCode},</if>
+            <if test="orderState != null">#{orderState},</if>
+            <if test="marriage != null">#{marriage},</if>
+            <if test="sourceIncome != null">#{sourceIncome},</if>
+            <if test="positiveAddress != null">#{positiveAddress},</if>
+            <if test="versoAddress != null">#{versoAddress},</if>
+            <if test="spouseName != null">#{spouseName},</if>
+            <if test="idNumber != null">#{idNumber},</if>
+            <if test="permanentAddress != null">#{permanentAddress},</if>
+            <if test="phoneNo != null">#{phoneNo},</if>
+            <if test="spouseEducation != null">#{spouseEducation},</if>
+            <if test="spouseUnitName != null">#{spouseUnitName},</if>
+            <if test="spouseWorkPlace != null">#{spouseWorkPlace},</if>
+            <if test="spouseWorkPhone != null">#{spouseWorkPhone},</if>
+            <if test="spouseMonthlyIncome != null">#{spouseMonthlyIncome},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrCommonApplicant" parameterType="ZyjrCommonApplicant">
+        update zyjr_common_applicant
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="peopleShip != null">people_ship = #{peopleShip},</if>
+            <if test="cardAddress != null">card_address = #{cardAddress},</if>
+            <if test="backAddress != null">back_address = #{backAddress},</if>
+            <if test="debtName != null">debt_name = #{debtName},</if>
+            <if test="idCard != null">id_card = #{idCard},</if>
+            <if test="education != null">education = #{education},</if>
+            <if test="nowPlace != null">now_place = #{nowPlace},</if>
+            <if test="phoneNumber != null">phone_number = #{phoneNumber},</if>
+            <if test="nowWork != null">now_work = #{nowWork},</if>
+            <if test="workPlace != null">work_place = #{workPlace},</if>
+            <if test="companyPhone != null">company_phone = #{companyPhone},</if>
+            <if test="companyNature != null">company_nature = #{companyNature},</if>
+            <if test="monthlyIncome != null">monthly_income = #{monthlyIncome},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+            <if test="orderState != null">order_state = #{orderState},</if>
+            <if test="marriage != null">marriage = #{marriage},</if>
+            <if test="sourceIncome != null">source_income = #{sourceIncome},</if>
+            <if test="positiveAddress != null">positive_address = #{positiveAddress},</if>
+            <if test="versoAddress != null">verso_address = #{versoAddress},</if>
+            <if test="spouseName != null">spouse_name = #{spouseName},</if>
+            <if test="idNumber != null">id_number = #{idNumber},</if>
+            <if test="permanentAddress != null">permanent_address = #{permanentAddress},</if>
+            <if test="phoneNo != null">phone_no = #{phoneNo},</if>
+            <if test="spouseEducation != null">spouse_education = #{spouseEducation},</if>
+            <if test="spouseUnitName != null">spouse_unit_name = #{spouseUnitName},</if>
+            <if test="spouseWorkPlace != null">spouse_work_place = #{spouseWorkPlace},</if>
+            <if test="spouseWorkPhone != null">spouse_work_phone = #{spouseWorkPhone},</if>
+            <if test="spouseMonthlyIncome != null">spouse_monthly_income = #{spouseMonthlyIncome},</if>
+        </trim>
+        where transaction_code = #{transactionCode}
+    </update>
+
+    <delete id="deleteZyjrCommonApplicantById" parameterType="Long">
+        delete from zyjr_common_applicant where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrCommonApplicantByIds" parameterType="String">
+        delete from zyjr_common_applicant where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
