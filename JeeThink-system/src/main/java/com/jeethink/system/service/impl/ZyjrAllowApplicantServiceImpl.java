@@ -3,8 +3,8 @@ package com.jeethink.system.service.impl;
 import java.util.HashMap;
 import java.util.List;
 
-import com.jeethink.system.domain.ZyjrAllowApplicant;
-import com.jeethink.system.domain.ZyjrCard;
+import com.jeethink.system.domain.*;
+import com.jeethink.system.mapper.ExamineMapper;
 import com.jeethink.system.mapper.ZyjrCardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +25,8 @@ public class ZyjrAllowApplicantServiceImpl implements IZyjrAllowApplicantService
     private ZyjrAllowApplicantMapper zyjrAllowApplicantMapper;
     @Autowired
     private ZyjrCardMapper zyjrCardMapper;
+    @Autowired
+    private ExamineMapper examineMapper;
 
     /**
      * 查询【请填写功能名称】
@@ -36,6 +38,33 @@ public class ZyjrAllowApplicantServiceImpl implements IZyjrAllowApplicantService
     public ZyjrAllowApplicant selectZyjrAllowApplicantById(Long userId, String transactionCode)
     {
         ZyjrAllowApplicant zyjrAllowApplicant = zyjrAllowApplicantMapper.selectZyjrAllowApplicantById(userId, transactionCode);
+        ZyjrBorrower zyjrBorrower = examineMapper.Borrower(transactionCode);
+        ZyjrRelation zyjrRelation = examineMapper.Relation(transactionCode);
+        ZyjrGuarantee zyjrGuarantee = examineMapper.Guarantee(transactionCode);
+        zyjrAllowApplicant.setFamilyAddress(zyjrBorrower.getFamilyAddress());
+        zyjrAllowApplicant.setPhoneNumber(zyjrBorrower.getPhoneNumber());
+        if(zyjrRelation!=null&&zyjrRelation.getPeopleShip().equals("配偶")){
+            zyjrAllowApplicant.setCardAddress(zyjrRelation.getObverseAddress());
+            zyjrAllowApplicant.setBackAddress(zyjrRelation.getBackAddress());
+            zyjrAllowApplicant.setSpouseName(zyjrRelation.getUserName());
+            zyjrAllowApplicant.setIdNumber(zyjrRelation.getIdCard());
+            zyjrAllowApplicant.setPhoneNo(zyjrRelation.getPhoneNumber());
+            zyjrAllowApplicant.setSpouseFamilyAddress(zyjrRelation.getFamilyAddress());
+            zyjrAllowApplicant.setSpouseUnitName(zyjrRelation.getCompany());
+            zyjrAllowApplicant.setSpouseWorkPlace(zyjrRelation.getCompanyAddress());
+            zyjrAllowApplicant.setMarriage("已婚");
+        }
+        if(zyjrGuarantee!=null&&zyjrGuarantee.getPeopleShip().equals("配偶")){
+            zyjrAllowApplicant.setCardAddress(zyjrGuarantee.getObverseAddress());
+            zyjrAllowApplicant.setBackAddress(zyjrGuarantee.getBackAddress());
+            zyjrAllowApplicant.setSpouseName(zyjrGuarantee.getUserName());
+            zyjrAllowApplicant.setIdNumber(zyjrGuarantee.getIdCard());
+            zyjrAllowApplicant.setPhoneNo(zyjrGuarantee.getPhoneNumber());
+            zyjrAllowApplicant.setSpouseFamilyAddress(zyjrGuarantee.getFamilyAddress());
+            zyjrAllowApplicant.setSpouseUnitName(zyjrGuarantee.getCompany());
+            zyjrAllowApplicant.setSpouseWorkPlace(zyjrGuarantee.getCompanyAddress());
+            zyjrAllowApplicant.setMarriage("已婚");
+        }
         if(zyjrAllowApplicant!=null&&zyjrAllowApplicant.getIndustry()!=null){
             ZyjrCard a=zyjrCardMapper.selectZyjrCardByTransactionCode("1");
             String str= a.getAlmebno();
