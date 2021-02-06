@@ -41,7 +41,7 @@ public class ZyjrDaiqianAccout extends BaseEntity
     private String carname;
     private String shenpitype;
     private String chanpintype;
-    private String daikuanchuanpin;
+    private String daikuanchanpin;
 
     public String getShenpitype() {
         return shenpitype;
@@ -59,12 +59,12 @@ public class ZyjrDaiqianAccout extends BaseEntity
         this.chanpintype = chanpintype;
     }
 
-    public String getDaikuanchuanpin() {
-        return daikuanchuanpin;
+    public String getDaikuanchanpin() {
+        return daikuanchanpin;
     }
 
-    public void setDaikuanchuanpin(String daikuanchuanpin) {
-        this.daikuanchuanpin = daikuanchuanpin;
+    public void setDaikuanchanpin(String daikuanchanpin) {
+        this.daikuanchanpin = daikuanchanpin;
     }
 
     public String getBazaar() {

@@ -17,11 +17,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="carname"    column="carname"    />
         <result property="shenpitype"    column="shenpitype"    />
         <result property="chanpintype"    column="chanpintype"    />
-        <result property="daikuanchuanpin"    column="daikuanchuanpin"    />
+        <result property="daikuanchanpin"    column="daikuanchanpin"    />
     </resultMap>
 
     <sql id="selectZyjrDaiqianAccoutVo">
-        select id,type,fangkuan,bazaar,carid,carname,shenpitype,daikuanchuanpin,chanpintype, transaction_code, state, account_id, account_one from zyjr_daiqian_accout
+        select id,type,fangkuan,bazaar,carid,carname,shenpitype,daikuanchanpin,chanpintype, transaction_code, state, account_id, account_one from zyjr_daiqian_accout
     </sql>
 
     <select id="selectZyjrDaiqianAccoutList" parameterType="ZyjrDaiqianAccout" resultMap="ZyjrDaiqianAccoutResult">
@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="carname != null  and carname != ''"> and carname = #{carname}</if>
             <if test="shenpitype != null  and shenpitype != ''"> and shenpitype = #{shenpitype}</if>
             <if test="chanpintype != null  and chanpintype != ''"> and chanpintype = #{chanpintype}</if>
-            <if test="daikuanchuanpin != null  and daikuanchuanpin != ''"> and daikuanchuanpin = #{daikuanchuanpin}</if>
+            <if test="daikuanchanpin != null  and daikuanchanpin != ''"> and daikuanchanpin = #{daikuanchanpin}</if>
         </where>
     </select>
     
@@ -66,7 +66,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="carname != null">carname,</if>
             <if test="shenpitype != null">shenpitype,</if>
             <if test="chanpintype != null">chanpintype,</if>
-            <if test="daikuanchuanpin != null">daikuanchuanpin,</if>
+            <if test="daikuanchanpin != null">daikuanchanpin,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="transactionCode != null">#{transactionCode},</if>
@@ -80,7 +80,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="carname != null">#{carname},</if>
             <if test="shenpitype != null">#{shenpitype},</if>
             <if test="chanpintype != null">#{chanpintype},</if>
-            <if test="daikuanchuanpin != null">#{daikuanchuanpin},</if>
+            <if test="daikuanchanpin != null">#{daikuanchanpin},</if>
          </trim>
     </insert>
 
@@ -98,7 +98,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="carname != null">carname = #{carname},</if>
             <if test="shenpitype != null">shenpitype = #{shenpitype},</if>
             <if test="chanpintype != null">chanpintype = #{chanpintype},</if>
-            <if test="daikuanchuanpin != null">daikuanchuanpin = #{daikuanchuanpin},</if>
+            <if test="daikuanchanpin != null">daikuanchanpin = #{daikuanchanpin},</if>
         </trim>
         where id = #{id}
     </update>
