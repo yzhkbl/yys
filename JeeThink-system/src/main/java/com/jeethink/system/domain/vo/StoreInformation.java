@@ -46,6 +46,7 @@ public class StoreInformation {
 
     /** 门店照片 */
     private String pic;
+    private String pid;
 
 
 

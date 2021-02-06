@@ -6,16 +6,16 @@ import com.jeethink.common.annotation.Excel;
 import com.jeethink.common.core.domain.BaseEntity;
 
 /**
- * 【请填写功能名称】对象 zyjr_employer
+ * 【请填写功能名称】对象 zyjr_car_parent
  * 
  * @author jeethink
- * @date 2021-01-20
+ * @date 2021-02-05
  */
-public class ZyjrEmployer
+public class ZyjrCarParent
 {
     private static final long serialVersionUID = 1L;
 
-    /** $column.columnComment */
+    /** ID */
     private Long id;
 
     /** $column.columnComment */
@@ -24,18 +24,9 @@ public class ZyjrEmployer
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String code;
-    String lilv;
+    private String lilv;
 
-    public String getLilv() {
-        return lilv;
-    }
-
-    public void setLilv(String lilv) {
-        this.lilv = lilv;
-    }
-
-    public void setId(Long id)
+    public void setId(Long id) 
     {
         this.id = id;
     }
@@ -53,14 +44,14 @@ public class ZyjrEmployer
     {
         return name;
     }
-    public void setCode(String code) 
+    public void setLilv(String lilv) 
     {
-        this.code = code;
+        this.lilv = lilv;
     }
 
-    public String getCode() 
+    public String getLilv() 
     {
-        return code;
+        return lilv;
     }
 
     @Override
@@ -68,7 +59,7 @@ public class ZyjrEmployer
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
             .append("name", getName())
-            .append("code", getCode())
+            .append("lilv", getLilv())
             .toString();
     }
 }

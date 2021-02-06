@@ -10,12 +10,14 @@ import com.jeethink.common.utils.file.FileUtils;
 import com.jeethink.common.utils.ip.IpUtils;
 import com.jeethink.system.domain.SysFileInfo;
 import com.jeethink.system.domain.ZyjrCarAccount;
+import com.jeethink.system.domain.ZyjrCarParent;
 import com.jeethink.system.domain.vo.Linkman;
 import com.jeethink.system.domain.vo.StoreInformation;
 import com.jeethink.system.domain.vo.carVo;
 import com.jeethink.system.mapper.ExamineMapper;
 import com.jeethink.system.mapper.SysFileInfoMapper;
 import com.jeethink.system.mapper.ZyjrCarAccountMapper;
+import com.jeethink.system.mapper.ZyjrCarParentMapper;
 import com.jeethink.system.service.IZyjrCarAccountService;
 import com.jeethink.system.util.androidUpload;
 import io.swagger.annotations.Api;
@@ -58,6 +60,8 @@ ZyjrCarController extends BaseController {
     private ExamineMapper examineMapper;
     @Autowired
     private ZyjrCarAccountMapper zyjrCarAccountMapper;
+    @Autowired
+    private ZyjrCarParentMapper zyjrCarParentMapper;
 
 
     /**
@@ -86,9 +90,16 @@ ZyjrCarController extends BaseController {
     }
 
     @GetMapping("/lists")
-    public AjaxResult lists(String createBy) {
+    public AjaxResult lists(String createBy,String pid) {
 
         List<carVo> list = examineMapper.selectZyjrCarLists(createBy);
+
+        return AjaxResult.success(list);
+    }
+    @GetMapping("/pid/lists")
+    public AjaxResult listss(@RequestParam("userId") String createBy,@RequestParam("pid") String pid) {
+
+        List<carVo> list = examineMapper.selectZyjrCarListss(createBy,pid);
 
         return AjaxResult.success(list);
     }
@@ -212,6 +223,10 @@ ZyjrCarController extends BaseController {
     public AjaxResult linkman2(StoreInformation storeInformation) {
         if (storeInformation == null) {
             return AjaxResult.error("参数没传过来");
+        }
+        if(storeInformation.getPid()==null&&storeInformation.getBazaar()!=null){
+            ZyjrCarParent zyjrCarParent=new ZyjrCarParent();
+            zyjrCarParentMapper.insertZyjrCarParent(zyjrCarParent);
         }
         if(storeInformation.getStatus().equals("add")){
 

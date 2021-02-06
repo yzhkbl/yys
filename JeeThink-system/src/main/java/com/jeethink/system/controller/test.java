@@ -697,11 +697,7 @@ public class test extends BaseController {
             Integer edulvl=null;
             if(applicant!=null&&applicant.getEducation()!=null){
                 String  Education=applicant.getEducation().substring(0,2);
-                if("初中".equals(Education)){
-                    edulvl=8;
-                }else if("高中".equals(Education)){
-                    edulvl=7;
-                }else if("大专".equals(Education)){
+                 if("专科".equals(Education)){
                     edulvl=4;
                 }else if("本科".equals(Education)){
                     edulvl=3;
@@ -745,7 +741,7 @@ public class test extends BaseController {
             Integer duty=null;
             if(applicant!=null&&applicant.getPosition()!=null){
                 String app=applicant.getPosition().substring(0,2);
-                if("厅级".equals(app)){
+                if("厅局".equals(app)){
                     duty=3;
                 }else if("县处".equals(app)){
                     duty=4;
@@ -776,7 +772,28 @@ public class test extends BaseController {
             yearincome=Double.valueOf(applicant.getMonthlyIncome())*12.0;
         }
             zyjrCard.setYearincome(yearincome);
-        zyjrCard.setModelcode(190);
+        Integer modelcode=190;
+        if(applicant!=null&&applicant.getUnitNature()!=null){
+            String a=applicant.getUnitNature();
+            if(a.equals("国有经济")){
+                modelcode=10;
+            }else if(a.equals("集体经济")){
+                modelcode=20;
+            }else if(a.equals("私营")){
+                modelcode=60;
+            }else if(a.equals("民营")){
+                modelcode=110;
+            }else if(a.equals("股份合作")){
+                modelcode=90;
+            }else if(a.equals("其他股份制")){
+                modelcode=100;
+            }else if(a.equals("外资")){
+                modelcode=80;
+            }else if(a.equals("其他")){
+                modelcode=190;
+            }
+        }
+        zyjrCard.setModelcode(modelcode);
         Integer industry=null;
         if(applicant!=null&&applicant.getIndustry()!=null){
             industry=Integer.valueOf(applicant.getIndustry());

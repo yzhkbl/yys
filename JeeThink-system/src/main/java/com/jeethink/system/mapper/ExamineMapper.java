@@ -115,4 +115,6 @@ public interface ExamineMapper {
 
     List<RelationName>relationName(String transactionCode);
     ZyjrRelation findById(Long id);
+
+    List<carVo> selectZyjrCarListss(String createBy, String pid);
 }

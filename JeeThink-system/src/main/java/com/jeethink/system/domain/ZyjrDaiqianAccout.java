@@ -35,7 +35,61 @@ public class ZyjrDaiqianAccout extends BaseEntity
     private String accountOne;
 
     private String type;
-    String fangkuan;
+    private String fangkuan;
+    private String bazaar;
+    private String carid;
+    private String carname;
+    private String shenpitype;
+    private String chanpintype;
+    private String daikuanchanpin;
+
+    public String getShenpitype() {
+        return shenpitype;
+    }
+
+    public void setShenpitype(String shenpitype) {
+        this.shenpitype = shenpitype;
+    }
+
+    public String getChanpintype() {
+        return chanpintype;
+    }
+
+    public void setChanpintype(String chanpintype) {
+        this.chanpintype = chanpintype;
+    }
+
+    public String getDaikuanchanpin() {
+        return daikuanchanpin;
+    }
+
+    public void setDaikuanchanpin(String daikuanchanpin) {
+        this.daikuanchanpin = daikuanchanpin;
+    }
+
+    public String getBazaar() {
+        return bazaar;
+    }
+
+    public void setBazaar(String bazaar) {
+        this.bazaar = bazaar;
+    }
+
+    public String getCarid() {
+        return carid;
+    }
+
+    public void setCarid(String carid) {
+        this.carid = carid;
+    }
+
+    public String getCarname() {
+        return carname;
+    }
+
+    public void setCarname(String carname) {
+        this.carname = carname;
+    }
 
     public String getFangkuan() {
         return fangkuan;
