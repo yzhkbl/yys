@@ -130,6 +130,23 @@ public class ZyjrDaiqianAccoutController extends BaseController
         return AjaxResult.success("操作成功",null);
     }
 
+    @GetMapping("tijiao")
+    public AjaxResult tijiao(String transactionCode){
+        ZyjrDaiqian a=examineMapper.selByDaiqian(transactionCode);
+        if(a!=null&&a.getGps()!=null&&a.getAccount()!=null&&a.getInsurance()!=null){
+            ZyjrGps zyjrGps = zyjrGpsMapper.selectZyjrGpsById(transactionCode);
+            zyjrGps.setState("2");
+            zyjrGpsMapper.updateZyjrGps(zyjrGps);
+            ZyjrDaiqianAccout zyjrDaiqianAccout = zyjrDaiqianAccoutMapper.selectById(transactionCode);
+            zyjrDaiqianAccout.setState("2");
+            zyjrDaiqianAccoutMapper.updateZyjrDaiqianAccout(zyjrDaiqianAccout);
+            ZyjrInsurance zyjrInsurance = zyjrInsuranceMapper.selectZyjrInsuranceByIds(transactionCode);
+            zyjrInsurance.setState("2");
+            zyjrInsuranceMapper.updateZyjrInsurance(zyjrInsurance);
+        }
+        return AjaxResult.success();
+    }
+
     @GetMapping("getInfo/{id}")
     public AjaxResult apqp(@PathVariable("id") String id){
                 ZyjrCarAccount zyjrCarAccount=new ZyjrCarAccount();
