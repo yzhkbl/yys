@@ -32,10 +32,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="allowBy"    column="allow_by"    />
         <result property="repeatBy"    column="repeat_by"    />
         <result property="grantBy"    column="grant_by"    />
+        <result property="sellerName"    column="seller_name"    />
+        <result property="sellerId"    column="seller_id"    />
+        <result property="sellerCode"    column="seller_code"    />
+        <result property="approvalType"    column="approval_type"    />
+        <result property="productType"    column="product_type"    />
+        <result property="loanProduct"    column="loan_product"    />
     </resultMap>
 
     <sql id="selectZyjrCarLoanVo">
-        select id, car_type, vin_code, brand, car_series, car_year, displacement, gear, style, engine_code, fuel_type, mileage, start_date, actual_price, loan_amount, repayment_term, interest_rate, deposit, transaction_code, order_state, user_id ,allow_id,repeat_id,grant_id,allow_by,repeat_by,grant_id from zyjr_car_loan
+        select id, car_type, vin_code, brand, car_series, car_year, displacement, gear, style, engine_code, fuel_type,
+        mileage, start_date, actual_price, loan_amount, repayment_term, interest_rate, deposit, transaction_code, order_state,
+        user_id ,allow_id,repeat_id,grant_id,allow_by,repeat_by,grant_id,seller_name,seller_id,seller_code,approval_type,product_type,loan_product
+        from zyjr_car_loan
     </sql>
 
     <select id="selectZyjrCarLoanList" parameterType="ZyjrCarLoan" resultMap="ZyjrCarLoanResult">
@@ -67,6 +76,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="allowBy != null  and allowBy != ''"> and allow_by = #{allowBy}</if>
             <if test="repeatBy != null  and repeatBy != ''"> and repeat_by = #{repeatBy}</if>
             <if test="grantBy != null  and grantBy != ''"> and grant_by = #{grantBy}</if>
+            <if test="sellerName != null and sellerName != ''"> and seller_name = #{sellerName}</if>
+            <if test="sellerId != null and sellerId != ''"> and seller_id = #{sellerId}</if>
+            <if test="sellerCode != null and sellerCode != ''"> and seller_code = #{sellerCode}</if>
+            <if test="approvalType != null  and approvalType != ''"> and approval_type = #{approvalType}</if>
+            <if test="productType != null  and productType != ''"> and product_type = #{productType}</if>
+            <if test="loanProduct != null  and loanProduct != ''"> and loan_product = #{loanProduct}</if>
         </where>
     </select>
     
@@ -109,6 +124,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="allowBy != null">allow_by,</if>
             <if test="repeatBy != null">repeat_by,</if>
             <if test="grantBy != null">grant_by,</if>
+            <if test="sellerName != null">seller_name,</if>
+            <if test="sellerId != null">seller_id,</if>
+            <if test="sellerCode != null">seller_code,</if>
+            <if test="approvalType != null">approval_type,</if>
+            <if test="productType != null">product_type,</if>
+            <if test="loanProduct != null">loan_product,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="carType != null">#{carType},</if>
@@ -137,6 +158,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="allowBy != null">#{allowBy},</if>
             <if test="repeatBy != null">#{repeatBy},</if>
             <if test="grantBy != null">#{grantBy},</if>
+            <if test="sellerName != null">#{sellerName},</if>
+            <if test="sellerId != null">#{sellerId},</if>
+            <if test="sellerCode != null">#{sellerCode},</if>
+            <if test="approvalType != null">#{approvalType},</if>
+            <if test="productType != null">#{productType},</if>
+            <if test="loanProduct != null">#{loanProduct},</if>
          </trim>
     </insert>
 
@@ -169,6 +196,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="allowBy != null">allow_by=#{allowBy},</if>
             <if test="repeatBy != null">repeat_by=#{repeatBy},</if>
             <if test="grantBy != null">grant_by=#{grantBy},</if>
+            <if test="sellerName != null">seller_name=#{sellerName},</if>
+            <if test="sellerId != null">seller_id=#{sellerId},</if>
+            <if test="sellerCode != null">seller_code=#{sellerCode},</if>
+            <if test="approvalType != null">approval_type=#{approvalType},</if>
+            <if test="productType != null">product_type=#{productType},</if>
+            <if test="loanProduct != null">loan_product=#{loanProduct},</if>
         </trim>
         where user_id = #{userId} and transaction_code=#{transactionCode}
     </update>
@@ -202,6 +235,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="allowBy != null">allow_by=#{allowBy},</if>
             <if test="repeatBy != null">repeat_by=#{repeatBy},</if>
             <if test="grantBy != null">grant_by=#{grantBy},</if>
+            <if test="sellerName != null">seller_name=#{sellerName},</if>
+            <if test="sellerId != null">seller_id=#{sellerId},</if>
+            <if test="sellerCode != null">seller_code=#{sellerCode},</if>
+            <if test="approvalType != null">approval_type=#{approvalType},</if>
+            <if test="productType != null">product_type=#{productType},</if>
+            <if test="loanProduct != null">loan_product=#{loanProduct},</if>
         </trim>
         where transaction_code=#{transactionCode}
     </update>

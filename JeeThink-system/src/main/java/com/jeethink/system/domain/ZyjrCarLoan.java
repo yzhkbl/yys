@@ -1,6 +1,8 @@
 package com.jeethink.system.domain;
 
 import java.math.BigDecimal;
+
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.jeethink.common.annotation.Excel;
@@ -12,6 +14,7 @@ import com.jeethink.common.core.domain.BaseEntity;
  * @author jeethink
  * @date 2020-12-30
  */
+@Data
 public class ZyjrCarLoan extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -107,6 +110,13 @@ public class ZyjrCarLoan extends BaseEntity
     private String grantBy;
     private String handleName;
     private BigDecimal loanMoney;//意向贷款金额
+
+    private String sellerName;  //卖方姓名
+    private String sellerId;    //卖方身份证号
+    private String sellerCode;  //卖方车牌号
+    private String approvalType;//审批类型
+    private String productType; //产品类型
+    private String loanProduct; //贷款产品
 
     public BigDecimal getLoanMoney() {
         return loanMoney;
