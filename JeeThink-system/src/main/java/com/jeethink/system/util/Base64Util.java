@@ -1,5 +1,6 @@
 package com.jeethink.system.util;
 
+import com.jeethink.common.utils.sign.Md5Utils;
 import org.apache.commons.codec.binary.Base64;
 
 public class Base64Util {
@@ -38,8 +39,5 @@ public class Base64Util {
         }
     }
 
-    public static void main(String[] args) {
-        String s = "调整异常数据";
-      //  System.err.println(byteToStringBase64(s.getBytes()));
-    }
+
 }

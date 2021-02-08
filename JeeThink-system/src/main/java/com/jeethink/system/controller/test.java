@@ -2,15 +2,15 @@ package com.jeethink.system.controller;
 
 
 import java.io.*;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.text.Collator;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-
-
 import com.alibaba.fastjson.JSON;
-import com.jeethink.common.config.JeeThinkConfig;
 import com.jeethink.common.core.domain.entity.SysDept;
 import com.jeethink.common.core.domain.entity.SysUser;
 import com.jeethink.common.core.page.TableDataInfo;
@@ -20,37 +20,25 @@ import com.jeethink.common.utils.SecurityUtils;
 import com.jeethink.common.utils.file.FileUploadUtils;
 import com.jeethink.common.utils.file.FileUtils;
 import com.jeethink.common.utils.http.HttpUtils;
-import com.jeethink.common.utils.ip.IpUtils;
 import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.*;
 import com.jeethink.system.mapper.*;
 import com.jeethink.system.service.IExamineService;
 import com.jeethink.system.service.ISysUserService;
 import com.jeethink.system.util.*;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import org.apache.commons.collections.map.LinkedMap;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
-
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.w3c.dom.html.HTMLFormElement;
-import sun.misc.BASE64Decoder;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.swing.text.html.HTML;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 
 @Controller
@@ -97,10 +85,13 @@ public class test extends BaseController {
 
     @Autowired
     private ISysUserService iSysUserService;
+    @Autowired
+    private ZyjrCarLoanMapper zyjrCarLoanMapper;
 
     private static String oCode = "sfzzm";
     private static String pCode = "sfzfm";
     private static String zCode = "zxsqs";
+
 
     @GetMapping("code2")
     @ResponseBody
@@ -113,14 +104,10 @@ public class test extends BaseController {
     @PostMapping("code")
     @ResponseBody
     public AjaxResult find(String codes) {
-	/*	ZyjrBorrower byBorrower = examineMapper.findByBorrower(userId);
-		ZyjrBusiness byBusiness = examineMapper.findByBusiness(userId);
-		String codes=byBorrower.getTransactionCode();*/
         if (codes == null) {
             return AjaxResult.error("编号为空");
         }
         selVO a = new selVO();
-        /*List<Object> a=new ArrayList<>();*/
         /**
          * 现id写死
          */
@@ -446,21 +433,6 @@ public class test extends BaseController {
 
         return AjaxResult.success("操作成功",results);
     }
-
-/*
-    @ApiOperation("kaikai")
-    @GetMapping("okCard")
-    @ResponseBody
-    public AjaxResult find32(String transactionCode) {
-        String codes=transactionCode;
-        ZyjrKaika kaika=zyjrKaikaMapper.selectZyjrKaikaById(transactionCode);
-
-
-
-        return AjaxResult.success("操作成功",results);
-    }
-*/
-
 
     public static JSONObject encryptData(String data, String dataPublicKey, String signPrivateKey, String assurerNo
             , String bankType, String busiCode, String platNo, String orderNo) {
@@ -1159,7 +1131,12 @@ public class test extends BaseController {
                 if(yejiYue.getTeam().equals(zyjrYeji1.getTeam())&&zyjrYeji1.getFangkuan()!=null){
                     f+=Double.parseDouble(zyjrYeji1.getFangkuan());
                 }
-                if(yejiYue.getTeam().equals(zyjrYeji1.getTeam())&&zyjrYeji1.getNumber()==2){
+                if(yejiYue
+                        .
+                        getTeam()
+                        .
+                                equals(zyjrYeji1.getTeam())
+                        &&zyjrYeji1!=null&&zyjrYeji1.getNumber()!=null&&zyjrYeji1.getNumber()==2){
                     ++jun;
                 }
                 if(yejiYue.getTeam().equals(zyjrYeji1.getTeam())){
@@ -1222,6 +1199,124 @@ public class test extends BaseController {
         List<Huankuan> list=examineMapper.selectHuankuanList();
         return getDataTable(list);
     }
+
+    @ResponseBody
+    @GetMapping("hetong")
+    public AjaxResult hetong(String transactionCode){
+        ZyjrBorrower a=o.selectById(transactionCode);
+        ZyjrRelation c=r.selectById(transactionCode);
+        ZyjrGuarantee d=g.selectById(transactionCode);
+        ZyjrAllowContacts e=zyjrAllowContactsMapper.selectById(transactionCode);
+        ZyjrAllowApplicant b=zyjrAllowApplicantMapper.selectById(transactionCode);
+        ZyjrCarLoan f=zyjrCarLoanMapper.selectHandle(transactionCode);
+
+        Map<String,Object> map=new HashMap<>();
+        map.put("jiekuanren",a);
+        map.put("zhudairen",b);
+        map.put("guanlianren",c);
+        map.put("danbaoren",d);
+        map.put("xinxi",e);
+        map.put("chedai",f);
+        return AjaxResult.success(map);
+    }
+    @ResponseBody
+    @GetMapping("brand")
+    public AjaxResult s() throws NoSuchPaddingException, BadPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, UnsupportedEncodingException, InvalidKeyException, InvalidKeySpecException {
+        Date date=new Date();
+        String sequenceId =DateUtils.parseDateToStr("yyyy-MM-dd HH:mm:ss",date);
+        String key="uld6wydiSpLVPTfjtz4cQoWF";
+        JzgList list=new JzgList();
+        list.setVehicleClassification(0);
+        list.setProduceStatus(0);
+        list.setIsEstimate(0);
+        list.setIncludeElectrombile(1);
+        JSONObject json3 = new JSONObject().fromObject(list);
+        String body=EncryptUtil.BASE64Encrypt(EncryptUtil.DES3Encrypt(key,json3.toString()));
+        String a=EncryptUtil.BASE64Encrypt(EncryptUtil.MD5(sequenceId+"352"+""+body+key));
+        JzgMap jzgMap=new JzgMap();
+        jzgMap.setSequenceId(sequenceId);
+//        jzgMap.setSequenceId(String.valueOf(System.currentTimeMillis()));
+        jzgMap.setPartnerId("352");
+        jzgMap.setOperate("");
+        jzgMap.setSign(a);
+        jzgMap.setBody(body);
+        JSONObject c = new JSONObject().fromObject(jzgMap);
+        Map<String,String> map=new HashMap<>();
+        map.put("json",c.toString());
+        String results = HttpClientUtil.doPost("http://nvapi.jingzhengu.com/external/getMakeByAll", map);
+        HashMap hashMap = JSON.parseObject(results, HashMap.class);
+        String gg=EncryptUtil.DES3Decrypt(EncryptUtil.BASE64Decrypt(hashMap.get("body").toString()),key);
+        JSONArray jsonarray = JSONArray.fromObject(gg);
+        // System.out.println(jsonarray);
+        List<JsonList> lists = (List)JSONArray.toList(jsonarray, JsonList.class);
+        for (JsonList jsonList : lists) {
+            jsonList.setImgUrl(jsonList.getImgUrl().replace("{0}","1"));
+        }
+        Comparator comparator = Collator.getInstance(Locale.CHINA);
+        Collections.sort(lists, new Comparator<JsonList>() {
+            public int compare(JsonList o1, JsonList o2) {
+                return comparator.compare(o1.getGroupName(), o2.getGroupName());
+            }
+        });
+        return AjaxResult.success("操作成功",lists);
+    }
+
+    @ResponseBody
+    @GetMapping("cartype")
+    public AjaxResult ssss(Long makeId) throws NoSuchPaddingException, BadPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, UnsupportedEncodingException, InvalidKeyException, InvalidKeySpecException {
+        String sequenceId =DateUtils.parseDateToStr("yyyy-MM-dd HH:mm:ss",new Date());
+        String key="uld6wydiSpLVPTfjtz4cQoWF";
+        JzgList2 list=new JzgList2();
+        list.setMakeId(makeId);
+        JSONObject json3 = new JSONObject().fromObject(list);
+        String body=EncryptUtil.BASE64Encrypt(EncryptUtil.DES3Encrypt(key,json3.toString()));
+        String a=EncryptUtil.BASE64Encrypt(EncryptUtil.MD5(sequenceId+"352"+""+body+key));
+        JzgMap jzgMap=new JzgMap();
+        jzgMap.setSequenceId(sequenceId);
+        jzgMap.setPartnerId("352");
+        jzgMap.setOperate("");
+        jzgMap.setSign(a);
+        jzgMap.setBody(body);
+        JSONObject c = new JSONObject().fromObject(jzgMap);
+        Map<String,String> map=new HashMap<>();
+        map.put("json",c.toString());
+        String results = HttpClientUtil.doPost("http://nvapi.jingzhengu.com/external/getModels", map);
+        HashMap hashMap = JSON.parseObject(results, HashMap.class);
+        String gg=EncryptUtil.DES3Decrypt(EncryptUtil.BASE64Decrypt (hashMap.get("body").toString()),key);
+        JSONArray jsonarray = JSONArray.fromObject(gg);
+        List<JsonList2> lists = (List)JSONArray.toList(jsonarray, JsonList2.class);
+
+        return AjaxResult.success(lists);
+    }
+
+    @ResponseBody
+    @GetMapping("series")
+    public AjaxResult series(Long modelId) throws NoSuchPaddingException, BadPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, UnsupportedEncodingException, InvalidKeyException, InvalidKeySpecException {
+        String sequenceId =DateUtils.parseDateToStr("yyyy-MM-dd HH:mm:ss",new Date());
+        String key="uld6wydiSpLVPTfjtz4cQoWF";
+        JzgList3 list=new JzgList3();
+        list.setModelId(modelId);
+        JSONObject json3 = new JSONObject().fromObject(list);
+        String body=EncryptUtil.BASE64Encrypt(EncryptUtil.DES3Encrypt(key,json3.toString()));
+        String a=EncryptUtil.BASE64Encrypt(EncryptUtil.MD5(sequenceId+"352"+""+body+key));
+        JzgMap jzgMap=new JzgMap();
+        jzgMap.setSequenceId(sequenceId);
+        jzgMap.setPartnerId("352");
+        jzgMap.setOperate("");
+        jzgMap.setSign(a);
+        jzgMap.setBody(body);
+        JSONObject c = new JSONObject().fromObject(jzgMap);
+        Map<String,String> map=new HashMap<>();
+        map.put("json",c.toString());
+        String results = HttpClientUtil.doPost("http://nvapi.jingzhengu.com/external/getStyles", map);
+        HashMap hashMap = JSON.parseObject(results, HashMap.class);
+        String gg=EncryptUtil.DES3Decrypt(EncryptUtil.BASE64Decrypt (hashMap.get("body").toString()),key);
+        JSONArray jsonarray = JSONArray.fromObject(gg);
+        List<JsonList3> lists = (List)JSONArray.toList(jsonarray, JsonList3.class);
+
+        return AjaxResult.success(lists);
+    }
+
 
 }
 
