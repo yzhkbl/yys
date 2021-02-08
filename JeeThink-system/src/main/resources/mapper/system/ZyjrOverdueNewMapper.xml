@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrOverdueNewMapper">
+    
+    <resultMap type="ZyjrOverdueNew" id="ZyjrOverdueNewResult">
+        <result property="id"    column="id"    />
+        <result property="borrower"    column="borrower"    />
+        <result property="idCard"    column="id_card"    />
+        <result property="phoneNumber"    column="phone_number"    />
+        <result property="bankCard"    column="bank_card"    />
+        <result property="shouldStages"    column="should_stages"    />
+        <result property="repaymentDate"    column="repayment_date"    />
+        <result property="byStages"    column="by_stages"    />
+        <result property="loanAmount"    column="loan_amount"    />
+        <result property="repaymentAmount"    column="repayment_amount"    />
+        <result property="lateFee"    column="late_fee"    />
+        <result property="overdueAmount"    column="overdue_amount"    />
+        <result property="cumulative"    column="cumulative"    />
+        <result property="surcharge"    column="surcharge"    />
+        <result property="continuity"    column="continuity"    />
+        <result property="transactionCode"    column="transaction_code"    />
+    </resultMap>
+
+    <sql id="selectZyjrOverdueNewVo">
+        select id, borrower, id_card, phone_number, bank_card, should_stages, repayment_date, by_stages, loan_amount, repayment_amount, late_fee, overdue_amount, cumulative, surcharge, continuity, transaction_code from zyjr_overdue_new
+    </sql>
+
+    <select id="selectZyjrOverdueNewList" parameterType="ZyjrOverdueNew" resultMap="ZyjrOverdueNewResult">
+        <include refid="selectZyjrOverdueNewVo"/>
+        <where>  
+            <if test="borrower != null  and borrower != ''"> and borrower = #{borrower}</if>
+            <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
+            <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
+            <if test="bankCard != null  and bankCard != ''"> and bank_card = #{bankCard}</if>
+            <if test="shouldStages != null "> and should_stages = #{shouldStages}</if>
+            <if test="repaymentDate != null  and repaymentDate != ''"> and repayment_date = #{repaymentDate}</if>
+            <if test="byStages != null "> and by_stages = #{byStages}</if>
+            <if test="loanAmount != null "> and loan_amount = #{loanAmount}</if>
+            <if test="repaymentAmount != null "> and repayment_amount = #{repaymentAmount}</if>
+            <if test="lateFee != null "> and late_fee = #{lateFee}</if>
+            <if test="overdueAmount != null "> and overdue_amount = #{overdueAmount}</if>
+            <if test="cumulative != null "> and cumulative = #{cumulative}</if>
+            <if test="surcharge != null "> and surcharge = #{surcharge}</if>
+            <if test="continuity != null "> and continuity = #{continuity}</if>
+            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrOverdueNewById" resultMap="ZyjrOverdueNewResult">
+        <include refid="selectZyjrOverdueNewVo"/>
+        where transaction_code = #{transactionCode}
+    </select>
+        
+    <insert id="insertZyjrOverdueNew" parameterType="ZyjrOverdueNew" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_overdue_new
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="borrower != null">borrower,</if>
+            <if test="idCard != null">id_card,</if>
+            <if test="phoneNumber != null">phone_number,</if>
+            <if test="bankCard != null">bank_card,</if>
+            <if test="shouldStages != null">should_stages,</if>
+            <if test="repaymentDate != null">repayment_date,</if>
+            <if test="byStages != null">by_stages,</if>
+            <if test="loanAmount != null">loan_amount,</if>
+            <if test="repaymentAmount != null">repayment_amount,</if>
+            <if test="lateFee != null">late_fee,</if>
+            <if test="overdueAmount != null">overdue_amount,</if>
+            <if test="cumulative != null">cumulative,</if>
+            <if test="surcharge != null">surcharge,</if>
+            <if test="continuity != null">continuity,</if>
+            <if test="transactionCode != null">transaction_code,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="borrower != null">#{borrower},</if>
+            <if test="idCard != null">#{idCard},</if>
+            <if test="phoneNumber != null">#{phoneNumber},</if>
+            <if test="bankCard != null">#{bankCard},</if>
+            <if test="shouldStages != null">#{shouldStages},</if>
+            <if test="repaymentDate != null">#{repaymentDate},</if>
+            <if test="byStages != null">#{byStages},</if>
+            <if test="loanAmount != null">#{loanAmount},</if>
+            <if test="repaymentAmount != null">#{repaymentAmount},</if>
+            <if test="lateFee != null">#{lateFee},</if>
+            <if test="overdueAmount != null">#{overdueAmount},</if>
+            <if test="cumulative != null">#{cumulative},</if>
+            <if test="surcharge != null">#{surcharge},</if>
+            <if test="continuity != null">#{continuity},</if>
+            <if test="transactionCode != null">#{transactionCode},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrOverdueNew" parameterType="ZyjrOverdueNew">
+        update zyjr_overdue_new
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="borrower != null">borrower = #{borrower},</if>
+            <if test="idCard != null">id_card = #{idCard},</if>
+            <if test="phoneNumber != null">phone_number = #{phoneNumber},</if>
+            <if test="bankCard != null">bank_card = #{bankCard},</if>
+            <if test="shouldStages != null">should_stages = #{shouldStages},</if>
+            <if test="repaymentDate != null">repayment_date = #{repaymentDate},</if>
+            <if test="byStages != null">by_stages = #{byStages},</if>
+            <if test="loanAmount != null">loan_amount = #{loanAmount},</if>
+            <if test="repaymentAmount != null">repayment_amount = #{repaymentAmount},</if>
+            <if test="lateFee != null">late_fee = #{lateFee},</if>
+            <if test="overdueAmount != null">overdue_amount = #{overdueAmount},</if>
+            <if test="cumulative != null">cumulative = #{cumulative},</if>
+            <if test="surcharge != null">surcharge = #{surcharge},</if>
+            <if test="continuity != null">continuity = #{continuity},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+        </trim>
+        where transaction_code = #{transactionCode}
+    </update>
+
+    <delete id="deleteZyjrOverdueNewById" parameterType="Long">
+        delete from zyjr_overdue_new where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrOverdueNewByIds" parameterType="String">
+        delete from zyjr_overdue_new where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="findOverdue" resultType="com.jeethink.system.domain.ZyjrOverdueNew">
+        select *
+        from zyjr_overdue_new
+        where transaction_code = #{transactionCode}
+    </select>
+    <select id="findBorrower" resultType="com.jeethink.system.domain.vo.BorrowerVo">
+        select a.phone_number,a.live_address,a.unit_name,a.work_address,a.unit_phone,
+        b.name_one,b.phone_one,b.name_two,b.phone_two,
+        c.car_series,c.car_type,c.actual_price,c.loan_amount,c.vin_code,c.engine_code
+        from zyjr_allow_applicant a
+        left join zyjr_allow_contacts b on a.transaction_code=b.transaction_code
+        left join zyjr_car_loan c on a.transaction_code=c.transaction_code
+        where a.transaction_code=#{transactionCode}
+    </select>
+</mapper>
