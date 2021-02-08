@@ -8,10 +8,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="id"    column="id"    />
         <result property="transactionCode"    column="transaction_code"    />
         <result property="userId"    column="user_id"    />
+        <result property="orderState"    column="order_state"    />
     </resultMap>
 
     <sql id="selectZyjrGrantInstalmentsVo">
-        select id, transaction_code, user_id from zyjr_grant_instalments
+        select id, transaction_code, user_id ,order_state from zyjr_grant_instalments
     </sql>
 
     <select id="selectZyjrGrantInstalmentsList" parameterType="ZyjrGrantInstalments" resultMap="ZyjrGrantInstalmentsResult">
@@ -32,10 +33,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="transactionCode != null">transaction_code,</if>
             <if test="userId != null">user_id,</if>
+            <if test="orderState != null">order_state,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="transactionCode != null">#{transactionCode},</if>
             <if test="userId != null">#{userId},</if>
+            <if test="orderState != null">#{orderState},</if>
          </trim>
     </insert>
 
@@ -44,6 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
             <if test="userId != null">user_id = #{userId},</if>
+            <if test="orderState != null">order_state = #{orderState},</if>
         </trim>
         where id = #{id}
     </update>

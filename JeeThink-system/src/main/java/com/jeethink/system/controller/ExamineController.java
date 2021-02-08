@@ -3,15 +3,12 @@ package com.jeethink.system.controller;
 import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
 import com.jeethink.common.core.page.TableDataInfo;
-import com.jeethink.common.utils.DateUtils;
-import com.jeethink.system.Helper.ResponseDto;
 import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.orderVo;
 import com.jeethink.system.mapper.*;
 import com.jeethink.system.service.IExamineService;
 import com.jeethink.system.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.unit.DataUnit;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -279,6 +276,37 @@ public class ExamineController extends BaseController {
     @GetMapping("/relation/id")
     public AjaxResult relationById(Long id){
         return AjaxResult.success(examineMapper.findById(id));
+    }
+
+
+    @PostMapping("/add/fundSide")
+    public AjaxResult insertFundSide(ZyjrFundSide zyjrFundSide){
+        return AjaxResult.success(examineMapper.insertFundSide(zyjrFundSide));
+    }
+
+    @GetMapping("/find/fundSide")
+    public AjaxResult findFundSide(String transactionCode){
+        return AjaxResult.success(examineMapper.findFundSide(transactionCode));
+    }
+
+    @PostMapping("/add/allow/state")
+    public AjaxResult addAllowState(ZyjrSubmitStateAllow q){
+        return AjaxResult.success(examineMapper.addAllowState(q));
+    }
+
+    @PostMapping("/add/grant/state")
+    public AjaxResult addGrantState(ZyjrSubmitStateGrant q){
+        return AjaxResult.success(examineMapper.addGrantState(q));
+    }
+
+    @GetMapping("/find/allowList")
+    public AjaxResult allowList(String transactionCode){
+        return AjaxResult.success(examineMapper.allowList(transactionCode));
+    }
+
+    @GetMapping("/find/grantList")
+    public AjaxResult grantList(String transactionCode){
+        return AjaxResult.success(examineMapper.grantList(transactionCode));
     }
 }
 

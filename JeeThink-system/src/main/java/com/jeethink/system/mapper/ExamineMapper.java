@@ -117,4 +117,13 @@ public interface ExamineMapper {
     ZyjrRelation findById(Long id);
 
     List<carVo> selectZyjrCarListss(@Param("userId") String createBy, @Param("pid") String pid);
+
+    int addAllowState(ZyjrSubmitStateAllow q);
+    int addGrantState(ZyjrSubmitStateGrant q);
+
+    AllowStateVo allowList(String transactionCode);
+    GrantStateVo grantList(String transactionCode);
+
+    int insertFundSide(ZyjrFundSide zyjrFundSide);
+    ZyjrFundSide findFundSide(String transactionCode);
 }

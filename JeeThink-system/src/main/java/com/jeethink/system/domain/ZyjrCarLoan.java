@@ -106,6 +106,15 @@ public class ZyjrCarLoan extends BaseEntity
     private String repeatBy;
     private String grantBy;
     private String handleName;
+    private BigDecimal loanMoney;//意向贷款金额
+
+    public BigDecimal getLoanMoney() {
+        return loanMoney;
+    }
+
+    public void setLoanMoney(BigDecimal loanMoney) {
+        this.loanMoney = loanMoney;
+    }
 
     public String getHandleName() {
         return handleName;
@@ -384,6 +393,7 @@ public class ZyjrCarLoan extends BaseEntity
                 .append("repeatBy",getRepeatBy())
                 .append("grantBy",getGrantBy())
                 .append("handleName",getHandleName())
+                .append("loanMoney",getLoanMoney())
             .toString();
     }
 }

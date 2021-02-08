@@ -1,6 +1,9 @@
 package com.jeethink.system.service.impl;
 
 import java.util.List;
+
+import com.jeethink.system.domain.ZyjrBusiness;
+import com.jeethink.system.mapper.ExamineMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.jeethink.system.mapper.ZyjrCarLoanMapper;
@@ -18,6 +21,8 @@ public class ZyjrCarLoanServiceImpl implements IZyjrCarLoanService
 {
     @Autowired
     private ZyjrCarLoanMapper zyjrCarLoanMapper;
+    @Autowired
+    private ExamineMapper examineMapper;
 
     /**
      * 查询【请填写功能名称】
@@ -28,6 +33,9 @@ public class ZyjrCarLoanServiceImpl implements IZyjrCarLoanService
     @Override
     public ZyjrCarLoan selectZyjrCarLoanById(Long userId,String transactionCode)
     {
+        ZyjrCarLoan c = zyjrCarLoanMapper.selectZyjrCarLoanById(userId,transactionCode);
+        ZyjrBusiness zyjrBusiness = examineMapper.Business(transactionCode);
+        c.setLoanMoney(zyjrBusiness.getLoanMoney());
         return zyjrCarLoanMapper.selectZyjrCarLoanById(userId, transactionCode);
     }
 

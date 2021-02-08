@@ -6,36 +6,27 @@ import com.jeethink.common.annotation.Excel;
 import com.jeethink.common.core.domain.BaseEntity;
 
 /**
- * 【请填写功能名称】对象 zyjr_grant_visit
+ * 【请填写功能名称】对象 zyjr_submit_state_grant
  * 
  * @author jeethink
- * @date 2021-01-09
+ * @date 2021-02-07
  */
-public class ZyjrGrantVisit extends BaseEntity
+public class ZyjrSubmitStateGrant extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
     /** $column.columnComment */
     private Long id;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 订单编号 */
+    @Excel(name = "订单编号")
     private String transactionCode;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long userId;
-    private Long orderState;
+    /** 授信提交状态 */
+    @Excel(name = "授信提交状态")
+    private Integer submitState;
 
-    public Long getOrderState() {
-        return orderState;
-    }
-
-    public void setOrderState(Long orderState) {
-        this.orderState = orderState;
-    }
-
-    public void setId(Long id)
+    public void setId(Long id) 
     {
         this.id = id;
     }
@@ -53,14 +44,14 @@ public class ZyjrGrantVisit extends BaseEntity
     {
         return transactionCode;
     }
-    public void setUserId(Long userId) 
+    public void setSubmitState(Integer submitState) 
     {
-        this.userId = userId;
+        this.submitState = submitState;
     }
 
-    public Long getUserId() 
+    public Integer getSubmitState() 
     {
-        return userId;
+        return submitState;
     }
 
     @Override
@@ -68,8 +59,7 @@ public class ZyjrGrantVisit extends BaseEntity
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
             .append("transactionCode", getTransactionCode())
-            .append("userId", getUserId())
-                .append("orderState",getOrderState())
+            .append("submitState", getSubmitState())
             .toString();
     }
 }
