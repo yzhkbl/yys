@@ -811,4 +811,54 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
         from zyjr_relation
         where id=#{id}
     </select>
+    <select id="findFundSide" resultType="com.jeethink.system.domain.ZyjrFundSide">
+        select *
+        from zyjr_fund_side
+        where transaction_code = #{transactionCode}
+    </select>
+    <insert id="insertFundSide" parameterType="com.jeethink.system.domain.ZyjrFundSide">
+        insert into zyjr_fund_side
+        (id,side_name,transaction_code)
+        values
+        (#{id},#{sideName},#{transactionCode})
+    </insert>
+    <insert id="addAllowState" parameterType="com.jeethink.system.domain.ZyjrSubmitStateAllow">
+        insert into zyjr_submit_state_allow
+        (id,transaction_code,submit_state)
+        values
+        (#{id},#{transactionCode},#{submitState})
+    </insert>
+    <insert id="addGrantState" parameterType="com.jeethink.system.domain.ZyjrSubmitStateGrant">
+        insert into zyjr_submit_state_grant
+        (id,transaction_code,submit_state)
+        values
+        (#{id},#{transactionCode},#{submitState})
+    </insert>
+    <select id="allowList" resultType="com.jeethink.system.domain.vo.AllowStateVo">
+        select a.order_state shenqingren,b.order_state cheliang,c.order_state zijinfang,d.order_state jinjilianxiren,
+        a.transaction_code,e.submit_state
+        from zyjr_allow_applicant a
+        left join zyjr_car_loan b on a.transaction_code=b.transaction_code
+        left join zyjr_fund_side c on a.transaction_code=c.transaction_code
+        left join zyjr_allow_contacts d on a.transaction_code=d.transaction_code
+        left join zyjr_submit_state_allow e on a.transaction_code=e.transaction_code
+        where a.transaction_code=#{transactionCode}
+    </select>
+    <select id="grantList" resultType="com.jeethink.system.domain.vo.GrantStateVo">
+        select a.order_state fenqizongjine,b.order_state yingxiangziliao,c.order_state jiafangzhaopian,
+        a.transaction_code,e.submitState,f.order_state cheliangzhaopian,g.order_state zichantupian,h.order_state qitaziliao,
+        i.order_state zhengxin,j.order_state buchongxinxi,k.loan_amount,l.submit_state
+        from zyjr_grant_instalments a
+        left join zyjr_grant_image b on a.transaction_code=b.transaction_code
+        left join zyjr_grant_visit c on a.transaction_code=c.transaction_code
+        left join zyjr_submit_state_allow e on a.transaction_code=e.transaction_code
+        left join zyjr_photo_car f on a.transaction_code=f.transaction_code
+        left join zyjr_photo_house g on a.transaction_code=g.transaction_code
+        left join zyjr_photo_lender h on a.transaction_code=h.transaction_code
+        left join zyjr_photo_credit i on a.transaction_code=i.transaction_code
+        left join zyjr_photo_lender j on a.transaction_code=j.transaction_code
+        left join zyjr_car_loan k on a.transaction_code=k.transaction_code
+        left join zyjr_submit_state_grant l on a.transaction_code=l.transaction_code
+        where a.transaction_code=#{transactionCode}
+    </select>
 </mapper>

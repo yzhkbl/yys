@@ -26,7 +26,17 @@ public class ZyjrGrantImage extends BaseEntity
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
     private Long userId;
 
-    public void setId(Long id) 
+    private Integer orderState;
+
+    public Integer getOrderState() {
+        return orderState;
+    }
+
+    public void setOrderState(Integer orderState) {
+        this.orderState = orderState;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }
@@ -60,6 +70,7 @@ public class ZyjrGrantImage extends BaseEntity
             .append("id", getId())
             .append("transactionCode", getTransactionCode())
             .append("userId", getUserId())
+                .append("orderState",getOrderState())
             .toString();
     }
 }
