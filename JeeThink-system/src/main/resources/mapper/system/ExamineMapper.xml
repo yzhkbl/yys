@@ -846,7 +846,7 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
     </select>
     <select id="grantList" resultType="com.jeethink.system.domain.vo.GrantStateVo">
         select a.order_state fenqizongjine,b.order_state yingxiangziliao,c.order_state jiafangzhaopian,
-        a.transaction_code,e.submitState,f.order_state cheliangzhaopian,g.order_state zichantupian,h.order_state qitaziliao,
+        a.transaction_code,e.submit_state,f.order_state cheliangzhaopian,g.order_state zichantupian,h.order_state qitaziliao,
         i.order_state zhengxin,j.order_state buchongxinxi,k.loan_amount,l.submit_state
         from zyjr_grant_instalments a
         left join zyjr_grant_image b on a.transaction_code=b.transaction_code
