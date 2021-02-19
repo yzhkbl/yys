@@ -186,6 +186,20 @@ public class ZyjrDaihouController extends BaseController
         zyjrDaihouMapper.updateZyjrDaihou(a);
         return AjaxResult.success();
     }
+    @GetMapping("state2")
+    public AjaxResult ggg(String transactionCode){
+        ZyjrDaihou as=zyjrDaihouMapper.selectZyjrDaihouByT(transactionCode);
+        Map<String,Object> map=new HashMap<>();
+        if(as!=null){
+            map.put("zhengshu",as.getZhengshu());
+            map.put("tiche",as.getTiche());
+            map.put("qita",as.getQita());
+            map.put("lvben",as.getLvben());
+            map.put("baoxian",as.getBaoxian());
+            return AjaxResult.success(map);
+        }
+        return AjaxResult.success(map);
+    }
 
     @PostMapping("go")
     public AjaxResult sg(@RequestBody ZyjrDaihou zyjrDaihou)
