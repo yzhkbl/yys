@@ -104,11 +104,11 @@ public class ZyjrDaihouBaoxianController extends BaseController
         if(Daihou==null){
             ZyjrDaihou Daihou2=new ZyjrDaihou();
             Daihou=Daihou2;
-            Daihou.setBaoxian("1");
+            Daihou.setBaoxian(zyjrDaihouBaoxian.getState());
             Daihou.setTransactionCode(zyjrDaihouBaoxian.getDaihou());
             zyjrDaihouMapper.insertZyjrDaihou(Daihou);
         }else{
-            Daihou.setBaoxian("1");
+            Daihou.setBaoxian(zyjrDaihouBaoxian.getState());
             zyjrDaihouMapper.updateZyjrDaihou(Daihou);
         }
 

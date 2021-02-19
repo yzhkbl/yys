@@ -101,11 +101,11 @@ public class ZyjrDaihouTicheController extends BaseController
         if(Daihou==null){
             ZyjrDaihou Daihou2=new ZyjrDaihou();
             Daihou=Daihou2;
-            Daihou.setTiche("1");
+            Daihou.setTiche(zyjrDaihouBaoxian.getState());
             Daihou.setTransactionCode(zyjrDaihouBaoxian.getDaihou());
             zyjrDaihouMapper.insertZyjrDaihou(Daihou);
         }else{
-            Daihou.setTiche("1");
+            Daihou.setTiche(zyjrDaihouBaoxian.getState());
             zyjrDaihouMapper.updateZyjrDaihou(Daihou);
         }
 

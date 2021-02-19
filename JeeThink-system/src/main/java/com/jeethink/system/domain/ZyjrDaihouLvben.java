@@ -48,6 +48,15 @@ public class ZyjrDaihouLvben
 
     private String daihou;
     private String pic;
+    String state;
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
 
     public String getPic() {
         return pic;

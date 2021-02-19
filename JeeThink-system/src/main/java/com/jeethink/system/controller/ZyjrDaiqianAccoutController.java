@@ -174,11 +174,8 @@ public class ZyjrDaiqianAccoutController extends BaseController
     @GetMapping("state")
     public AjaxResult state(String transactionCode){
         ZyjrDaiqian as=examineMapper.selByDaiqian(transactionCode);
-        Map<String,Object> map=new HashMap<>();
-        map.put("gps",as.getGps());;
-        map.put("zhanghu",as.getAccount());;
-        map.put("baoxian",as.getInsurance());;
-        return AjaxResult.success(map);
+
+        return AjaxResult.success(as);
     }
 
 

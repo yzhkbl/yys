@@ -100,11 +100,11 @@ public class ZyjrDaihouLvbenController extends BaseController
         if(zyjrDaihou==null){
             ZyjrDaihou Daihou2=new ZyjrDaihou();
             zyjrDaihou=Daihou2;
-            zyjrDaihou.setLvben("1");
+            zyjrDaihou.setLvben(zyjrDaihouLvben.getState());
             zyjrDaihou.setTransactionCode(zyjrDaihouLvben.getDaihou());
             zyjrDaihouMapper.insertZyjrDaihou(zyjrDaihou);
         }else{
-            zyjrDaihou.setLvben("1");
+            zyjrDaihou.setLvben(zyjrDaihouLvben.getState());
             zyjrDaihouMapper.updateZyjrDaihou(zyjrDaihou);
         }
 
