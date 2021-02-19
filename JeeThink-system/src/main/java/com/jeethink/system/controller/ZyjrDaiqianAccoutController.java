@@ -171,6 +171,15 @@ public class ZyjrDaiqianAccoutController extends BaseController
         return  AjaxResult.success(a);
     }
 
+    @GetMapping("state")
+    public AjaxResult state(String transactionCode){
+        ZyjrDaiqian as=examineMapper.selByDaiqian(transactionCode);
+        Map<String,Object> map=new HashMap<>();
+        map.put("gps",as.getGps());;
+        map.put("zhanghu",as.getAccount());;
+        map.put("baoxian",as.getInsurance());;
+        return AjaxResult.success(map);
+    }
 
 
 
@@ -179,11 +188,11 @@ public class ZyjrDaiqianAccoutController extends BaseController
         ZyjrDaiqianAccout ids=zyjrDaiqianAccoutMapper.selectById(zyjrDaiqianAccout.getTransactionCode());
         ZyjrDaiqian as=examineMapper.selByDaiqian(zyjrDaiqianAccout.getTransactionCode());
         if(as!=null){
-            as.setAccount("1");
+            as.setAccount(zyjrDaiqianAccout.getState());
             examineMapper.updateByDaiqian2(as);
         }else{
             ZyjrDaiqian d=new ZyjrDaiqian();
-            d.setAccount("1");
+            d.setAccount(zyjrDaiqianAccout.getState());
             d.setTransactionCode(zyjrDaiqianAccout.getTransactionCode());
             examineMapper.insertDaiqian2(d);
         }

@@ -92,11 +92,11 @@ public class ZyjrGpsController extends BaseController
         ZyjrDaiqian as=examineMapper.selByDaiqian(zyjrGps.getTransactionCode());
         ZyjrGps gsp=zyjrGpsMapper.selectZyjrGpsById(zyjrGps.getTransactionCode());
         if(as!=null){
-            as.setGps("1");
+            as.setGps(zyjrGps.getState());
             examineMapper.updateByDaiqian2(as);
         }else{
             ZyjrDaiqian d=new ZyjrDaiqian();
-            d.setGps("1");
+            d.setGps(zyjrGps.getState());
             d.setTransactionCode(zyjrGps.getTransactionCode());
             examineMapper.insertDaiqian2(d);
         }

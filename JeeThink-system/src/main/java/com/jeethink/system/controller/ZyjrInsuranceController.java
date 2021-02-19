@@ -103,11 +103,11 @@ public class ZyjrInsuranceController extends BaseController
         ZyjrInsurance zyjrInsurance1 = zyjrInsuranceMapper.selectZyjrInsuranceByIds(zyjrInsurance.getTransactionCode());
         ZyjrDaiqian as=examineMapper.selByDaiqian(zyjrInsurance.getTransactionCode());
         if(as!=null){
-            as.setInsurance("1");
+            as.setInsurance(zyjrInsurance.getState());
             examineMapper.updateByDaiqian2(as);
         }else{
             ZyjrDaiqian d=new ZyjrDaiqian();
-            d.setInsurance("1");
+            d.setInsurance(zyjrInsurance.getState());
             d.setTransactionCode(zyjrInsurance.getTransactionCode());
             examineMapper.insertDaiqian2(d);
         }
