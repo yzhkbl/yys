@@ -117,6 +117,7 @@ public class ZyjrCarLoan extends BaseEntity
     private String approvalType;//审批类型
     private String productType; //产品类型
     private String loanProduct; //贷款产品
+    private String loanState;
 
     public BigDecimal getLoanMoney() {
         return loanMoney;
