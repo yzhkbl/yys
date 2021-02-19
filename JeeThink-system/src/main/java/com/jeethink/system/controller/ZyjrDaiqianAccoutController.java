@@ -125,15 +125,8 @@ public class ZyjrDaiqianAccoutController extends BaseController
             map.put("account2",d);
             json.put("data",map);
             json.put("type",a.getType());
-            if(daiqian!=null){
-                json.put("state",daiqian.getAccount());
-            }else{
-                json.put("state","0");
-            }
-
             return json;
         }
-        json.put("state","0");
         json.put("data",null);
         return json;
     }
@@ -174,8 +167,14 @@ public class ZyjrDaiqianAccoutController extends BaseController
     @GetMapping("state")
     public AjaxResult state(String transactionCode){
         ZyjrDaiqian as=examineMapper.selByDaiqian(transactionCode);
-
-        return AjaxResult.success(as);
+        Map<String,Object> map=new HashMap<>();
+        if(as!=null){
+        map.put("gps",as.getGps());
+        map.put("zhanghu",as.getAccount());
+        map.put("baoxian",as.getInsurance());
+            return AjaxResult.success(map);
+        }
+        return AjaxResult.success(map);
     }
 
 

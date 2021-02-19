@@ -83,11 +83,7 @@ public class ZyjrInsuranceController extends BaseController
         json.put("msg","操作成功");
         json.put("code",200);
         json.put("data",zyjrInsurance);
-        if(daiqian!=null){
-            json.put("state",daiqian.getGps());
-        }else{
-            json.put("state","0");
-        }
+
         return json;
     }
 

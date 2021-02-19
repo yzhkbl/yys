@@ -158,14 +158,10 @@ public class ZyjrGpsController extends BaseController
             map.put("gps",a);
             map.put("pic",b);
 
-            if(daiqian!=null){
-                json.put("state",daiqian.getGps());
-            }else{
-                json.put("state","0");
-            }
+
             return json;
         }
-        json.put("state","0");
+
         json.put("data",null);
         return json;
     }
