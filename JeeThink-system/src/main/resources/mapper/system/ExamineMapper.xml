@@ -836,7 +836,7 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
     </insert>
     <select id="allowList" resultType="com.jeethink.system.domain.vo.AllowStateVo">
         select a.order_state shenqingren,b.order_state cheliang,c.order_state zijinfang,d.order_state jinjilianxiren,
-        a.transaction_code,e.submit_state
+        a.transaction_code,e.submit_state,b.loan_state daikuan
         from zyjr_allow_applicant a
         left join zyjr_car_loan b on a.transaction_code=b.transaction_code
         left join zyjr_fund_side c on a.transaction_code=c.transaction_code
