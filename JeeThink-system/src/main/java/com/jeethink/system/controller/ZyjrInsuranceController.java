@@ -69,7 +69,7 @@ public class ZyjrInsuranceController extends BaseController
     @GetMapping("getCar/{transactionCode}")
     public AjaxResult app(@PathVariable("transactionCode") String transactionCode){
         ZyjrInsurance zyjrInsurance = zyjrInsuranceMapper.selectZyjrInsuranceByIds(transactionCode);
-        Map<String,Object> map=new HashMap<>();
+   /*     Map<String,Object> map=new HashMap<>();
         if(zyjrInsurance!=null){
             map.put("id",zyjrInsurance.getId());
             map.put("insuranceCompany",zyjrInsurance.getInsuranceCompany());
@@ -77,10 +77,18 @@ public class ZyjrInsuranceController extends BaseController
             map.put("zyjrCarId",zyjrInsurance.getZyjrCarId());
             map.put("transactionCode",zyjrInsurance.getTransactionCode());
             map.put("userId",zyjrInsurance.getUserId());
+        }*/
+        ZyjrDaiqian daiqian=examineMapper.selByDaiqian(transactionCode);
+        AjaxResult json=new AjaxResult();
+        json.put("msg","操作成功");
+        json.put("code",200);
+        json.put("data",zyjrInsurance);
+        if(daiqian!=null){
+            json.put("state",daiqian.getGps());
+        }else{
+            json.put("state","0");
         }
-
-
-        return AjaxResult.success("操作成功",zyjrInsurance);
+        return json;
     }
 
     @GetMapping("ceshi/{transactionCode}")

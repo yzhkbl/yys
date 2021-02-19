@@ -74,13 +74,12 @@ public class ZyjrDaiqianAccoutController extends BaseController
             examineMapper.insertDaiqian(zyjrDaiqian);
         }
 
-        /**if(zyjrDaiqian.getState()!=null&&zyjrDaiqian.getState().equals(1)){
-            ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
-            zyjrOrderProgress.setTransactionCode(zyjrDaiqian.getTransactionCode());
-            zyjrOrderProgress.setApprovalType(4);
-            zyjrOrderProgress.setProgress("已放款");
-            examineMapper.updateOrderProgress(zyjrOrderProgress);
-        }*/
+        if(as!=null&&zyjrDaiqian.getState()!=null&&zyjrDaiqian.getState().equals("2")){
+            as.setGps("2");
+            as.setInsurance("2");
+            as.setAccount("2");
+            examineMapper.updateByDaiqian2(as);
+        }
 
 
         return AjaxResult.success();
@@ -111,30 +110,40 @@ public class ZyjrDaiqianAccoutController extends BaseController
 
     @GetMapping("getAccout/{transactionCode}")
     public AjaxResult apps(@PathVariable("transactionCode") String transactionCode){
+        ZyjrDaiqian daiqian=examineMapper.selByDaiqian(transactionCode);
         ZyjrDaiqianAccout a=zyjrDaiqianAccoutMapper.selectById(transactionCode);
+        AjaxResult json=new AjaxResult();
+        json.put("msg","操作成功");
+        json.put("code",200);
         if(a!=null){
             ZyjrCarAccount c=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountId());
             ZyjrCarAccount d=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountOne());
             ZyjrCarAccount e=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getFangkuan());
-            AjaxResult json=new AjaxResult();
-            json.put("msg","操作成功");
-            json.put("code",200);
             Map<String,Object> map=new HashMap<>();
             map.put("fangkuan",e);
             map.put("account",c);
             map.put("account2",d);
             json.put("data",map);
             json.put("type",a.getType());
+            if(daiqian!=null){
+                json.put("state",daiqian.getAccount());
+            }else{
+                json.put("state","0");
+            }
+
             return json;
         }
-        return AjaxResult.success("操作成功",null);
+        json.put("state","0");
+        json.put("data",null);
+        return json;
     }
 
     @GetMapping("tijiao")
     public AjaxResult tijiao(String transactionCode){
         ZyjrDaiqian a=examineMapper.selByDaiqian(transactionCode);
         if(a!=null&&a.getGps()!=null&&a.getAccount()!=null&&a.getInsurance()!=null){
-            ZyjrGps zyjrGps = zyjrGpsMapper.selectZyjrGpsById(transactionCode);
+            return AjaxResult.success();
+            /*ZyjrGps zyjrGps = zyjrGpsMapper.selectZyjrGpsById(transactionCode);
             zyjrGps.setState("2");
             zyjrGpsMapper.updateZyjrGps(zyjrGps);
             ZyjrDaiqianAccout zyjrDaiqianAccout = zyjrDaiqianAccoutMapper.selectById(transactionCode);
@@ -142,9 +151,11 @@ public class ZyjrDaiqianAccoutController extends BaseController
             zyjrDaiqianAccoutMapper.updateZyjrDaiqianAccout(zyjrDaiqianAccout);
             ZyjrInsurance zyjrInsurance = zyjrInsuranceMapper.selectZyjrInsuranceByIds(transactionCode);
             zyjrInsurance.setState("2");
-            zyjrInsuranceMapper.updateZyjrInsurance(zyjrInsurance);
+            zyjrInsuranceMapper.updateZyjrInsurance(zyjrInsurance);*/
+        }else{
+            return AjaxResult.success("提交失败，您的信息未填完整,请完善信息！");
         }
-        return AjaxResult.success();
+
     }
 
     @GetMapping("getInfo/{id}")
@@ -189,12 +200,12 @@ public class ZyjrDaiqianAccoutController extends BaseController
     /**
      * 获取【请填写功能名称】详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:accout:query')")
+ /*   @PreAuthorize("@ss.hasPermi('system:accout:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
         return AjaxResult.success(zyjrDaiqianAccoutService.selectZyjrDaiqianAccoutById(id));
-    }
+    }*/
 
     /**
      * 新增【请填写功能名称】

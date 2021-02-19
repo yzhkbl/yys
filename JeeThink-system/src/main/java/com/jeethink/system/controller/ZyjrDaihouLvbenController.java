@@ -84,11 +84,7 @@ public class ZyjrDaihouLvbenController extends BaseController
             zyjrDaihouBaoxian.setDaihou(Daihou.getId().toString());
             ZyjrDaihouLvben daia=zyjrDaihouLvbenMapper.selectZyjrDaihouLvbenById(Daihou.getId());
             json.put("data",daia);
-            String a=null;
-            if(Daihou.getZhengshu()!=null&&Daihou.getBaoxian()!=null&&Daihou.getQita()!=null&&Daihou.getLvben()!=null&&Daihou.getTiche()!=null){
-                a="1";
-            }
-            json.put("state",a);
+            json.put("state",Daihou.getLvben());
             return json;
         }
         return json;

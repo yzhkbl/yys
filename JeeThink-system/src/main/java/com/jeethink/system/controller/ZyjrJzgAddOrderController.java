@@ -217,7 +217,7 @@ public class ZyjrJzgAddOrderController extends BaseController
             if(jzgorder.getData()!=null){
                 AjaxResult json=new AjaxResult();
                 json.put("code",400);
-                json.put("msg", "操作多次（有记录）！！！");
+                json.put("msg", "操作多次！");
                 return json;
             }
         }else{

@@ -82,11 +82,7 @@ public class ZyjrDaihouQitaController extends BaseController
             zyjrDaihouBaoxian.setDaihou(Daihou.getId().toString());
             List<ZyjrDaihouQita> zyjrDaihouQitas = zyjrDaihouQitaService.selectZyjrDaihouQitaList(zyjrDaihouBaoxian);
             json.put("data",zyjrDaihouQitas);
-            String a=null;
-            if(Daihou.getZhengshu()!=null&&Daihou.getBaoxian()!=null&&Daihou.getQita()!=null&&Daihou.getLvben()!=null&&Daihou.getTiche()!=null){
-                a="1";
-            }
-            json.put("state",a);
+            json.put("state",Daihou.getQita());
             return json;
         }
         return json;

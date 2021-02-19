@@ -145,18 +145,29 @@ public class ZyjrGpsController extends BaseController
     @GetMapping(value = "/{transactionCode}")
     public AjaxResult getInfo(@PathVariable("transactionCode") String transactionCode)
     {
+        ZyjrDaiqian daiqian=examineMapper.selByDaiqian(transactionCode);
         Map<String,Object> map=new HashMap<>();
         ZyjrGps a=zyjrGpsService.selectZyjrGpsById(transactionCode);
+        AjaxResult json=new AjaxResult();
+        json.put("msg","操作成功");
+        json.put("code",200);
         if(a!=null){
             ZyjrPic zyjrPic=new ZyjrPic();
             zyjrPic.setGpsId(a.getId().toString());
             List<ZyjrPic> b=zyjrPicMapper.selectZyjrPicList(zyjrPic);
             map.put("gps",a);
             map.put("pic",b);
-            return AjaxResult.success("操作成功",map);
-        }
 
-        return AjaxResult.success("操作成功",null);
+            if(daiqian!=null){
+                json.put("state",daiqian.getGps());
+            }else{
+                json.put("state","0");
+            }
+            return json;
+        }
+        json.put("state","0");
+        json.put("data",null);
+        return json;
     }
 
     /**
