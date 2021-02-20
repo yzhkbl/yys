@@ -92,11 +92,11 @@ public class ZyjrGpsController extends BaseController
         ZyjrDaiqian as=examineMapper.selByDaiqian(zyjrGps.getTransactionCode());
         ZyjrGps gsp=zyjrGpsMapper.selectZyjrGpsById(zyjrGps.getTransactionCode());
         if(as!=null){
-            as.setGps("1");
+            as.setGps(zyjrGps.getState());
             examineMapper.updateByDaiqian2(as);
         }else{
             ZyjrDaiqian d=new ZyjrDaiqian();
-            d.setGps("1");
+            d.setGps(zyjrGps.getState());
             d.setTransactionCode(zyjrGps.getTransactionCode());
             examineMapper.insertDaiqian2(d);
         }
@@ -145,18 +145,25 @@ public class ZyjrGpsController extends BaseController
     @GetMapping(value = "/{transactionCode}")
     public AjaxResult getInfo(@PathVariable("transactionCode") String transactionCode)
     {
+        ZyjrDaiqian daiqian=examineMapper.selByDaiqian(transactionCode);
         Map<String,Object> map=new HashMap<>();
         ZyjrGps a=zyjrGpsService.selectZyjrGpsById(transactionCode);
+        AjaxResult json=new AjaxResult();
+        json.put("msg","操作成功");
+        json.put("code",200);
         if(a!=null){
             ZyjrPic zyjrPic=new ZyjrPic();
             zyjrPic.setGpsId(a.getId().toString());
             List<ZyjrPic> b=zyjrPicMapper.selectZyjrPicList(zyjrPic);
             map.put("gps",a);
             map.put("pic",b);
-            return AjaxResult.success("操作成功",map);
+
+
+            return json;
         }
 
-        return AjaxResult.success("操作成功",null);
+        json.put("data",null);
+        return json;
     }
 
     /**

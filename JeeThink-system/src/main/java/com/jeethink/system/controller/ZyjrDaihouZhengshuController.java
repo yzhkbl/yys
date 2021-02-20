@@ -83,11 +83,7 @@ public class ZyjrDaihouZhengshuController extends BaseController
             zyjrDaihouBaoxian.setDaihou(Daihou.getId().toString());
             List<ZyjrDaihouZhengshu> zyjrDaihouTiches = zyjrDaihouZhengshuService.selectZyjrDaihouZhengshuList(zyjrDaihouBaoxian);
             json.put("data",zyjrDaihouTiches);
-            String a=null;
-            if(Daihou.getZhengshu()!=null&&Daihou.getBaoxian()!=null&&Daihou.getQita()!=null&&Daihou.getLvben()!=null&&Daihou.getTiche()!=null){
-                a="1";
-            }
-            json.put("state",a);
+            json.put("state",Daihou.getZhengshu());
             return json;
         }
         return json;
@@ -105,11 +101,11 @@ public class ZyjrDaihouZhengshuController extends BaseController
         if(Daihou==null){
             ZyjrDaihou Daihou2=new ZyjrDaihou();
             Daihou=Daihou2;
-            Daihou.setZhengshu("1");
+            Daihou.setZhengshu(zyjrDaihouBaoxian.getState());
             Daihou.setTransactionCode(zyjrDaihouBaoxian.getDaihou());
             zyjrDaihouMapper.insertZyjrDaihou(Daihou);
         }else{
-            Daihou.setZhengshu("1");
+            Daihou.setZhengshu(zyjrDaihouBaoxian.getState());
             zyjrDaihouMapper.updateZyjrDaihou(Daihou);
         }
 

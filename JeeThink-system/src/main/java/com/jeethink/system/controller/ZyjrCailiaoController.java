@@ -11,7 +11,6 @@ import com.jeethink.common.utils.file.FileUploadUtils;
 import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.*;
 import com.jeethink.system.mapper.*;
-import io.swagger.annotations.ApiOperation;
 import net.sf.json.JSONObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -308,6 +307,8 @@ public class ZyjrCailiaoController extends BaseController
     {
         return toAjax(zyjrCailiaoService.deleteZyjrCailiaoByIds(ids));
     }
+
+
 
 
 }

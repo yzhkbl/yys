@@ -94,6 +94,16 @@ public class ZyjrDaihouController extends BaseController
          return AjaxResult.success();
     }
 
+    @GetMapping("tijiao")
+    public AjaxResult tijiao(String transactionCode){
+        ZyjrDaihou zyjrDaihou = zyjrDaihouMapper.selectZyjrDaihouByT(transactionCode);
+        if(zyjrDaihou!=null&&zyjrDaihou.getTiche()!=null&&zyjrDaihou.getLvben()!=null&&zyjrDaihou.getQita()!=null&&zyjrDaihou.getBaoxian()!=null&&zyjrDaihou.getZhengshu()!=null){
+            return AjaxResult.success();
+        }else{
+            return AjaxResult.success("提交失败，您的信息未填完整,请完善信息！");
+        }
+    }
+
 
 
     /**
@@ -176,6 +186,20 @@ public class ZyjrDaihouController extends BaseController
         zyjrDaihouMapper.updateZyjrDaihou(a);
         return AjaxResult.success();
     }
+    @GetMapping("state2")
+    public AjaxResult ggg(String transactionCode){
+        ZyjrDaihou as=zyjrDaihouMapper.selectZyjrDaihouByT(transactionCode);
+        Map<String,Object> map=new HashMap<>();
+        if(as!=null){
+            map.put("zhengshu",as.getZhengshu());
+            map.put("tiche",as.getTiche());
+            map.put("qita",as.getQita());
+            map.put("lvben",as.getLvben());
+            map.put("baoxian",as.getBaoxian());
+            return AjaxResult.success(map);
+        }
+        return AjaxResult.success(map);
+    }
 
     @PostMapping("go")
     public AjaxResult sg(@RequestBody ZyjrDaihou zyjrDaihou)
@@ -191,16 +215,16 @@ public class ZyjrDaihouController extends BaseController
 
         }
         examineMapper.updateByDaihou(zyjrDaihou);
-       /* ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
-        zyjrOrderProgress.setTransactionCode("1");
-        zyjrOrderProgress.setApprovalType(Integer.parseInt(zyjrDaihou.getState()));
-        if(zyjrDaihou.getState()!=null&&zyjrDaihou.getState().equals(1)){
-            zyjrOrderProgress.setProgress("贷后审批通过");
-        }else if(zyjrDaihou.getState()!=null&&zyjrDaihou.getState().equals(2)){
-            zyjrOrderProgress.setProgress("贷后审批退回");
-        }else if(zyjrDaihou.getState()!=null&&zyjrDaihou.getState().equals(3)){
-            zyjrOrderProgress.setProgress("贷后审批拒绝");
-        }*/
+
+        if(zyjrDaihou!=null&&zyjrDaihou.getState().equals("2")){
+            ZyjrDaihou zyjrDaihou2=zyjrDaihouMapper.selectZyjrDaihouByT(zyjrDaihou.getTransactionCode());
+            zyjrDaihou2.setZhengshu("2");
+            zyjrDaihou2.setTiche("2");
+            zyjrDaihou2.setBaoxian("2");
+            zyjrDaihou2.setLvben("2");
+            zyjrDaihou2.setQita("2");
+            zyjrDaihouMapper.updateZyjrDaihou(zyjrDaihou2);
+        }
         return AjaxResult.success();
     }
 
