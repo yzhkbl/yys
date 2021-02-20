@@ -481,7 +481,6 @@ public class test extends BaseController {
             info.setFileName(name.get(i));
             sysFileInfoMapper.insertSysFileInfo(info);
         }
-
         return AjaxResult.success();
     }
 
