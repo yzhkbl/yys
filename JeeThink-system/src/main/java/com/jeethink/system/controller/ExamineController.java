@@ -281,7 +281,8 @@ public class ExamineController extends BaseController {
 
     @PostMapping("/add/fundSide")
     public AjaxResult insertFundSide(ZyjrFundSide zyjrFundSide){
-        return AjaxResult.success(examineMapper.insertFundSide(zyjrFundSide));
+        examineMapper.insertFundSide(zyjrFundSide);
+        return AjaxResult.success();
     }
 
     @GetMapping("/find/fundSide")
