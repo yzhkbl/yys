@@ -113,7 +113,7 @@ public class ZyjrGpsController extends BaseController
     public AjaxResult pic(ZyjrGps zyjrGps){
         ZyjrDaiqian as=examineMapper.selByDaiqian(zyjrGps.getTransactionCode());
         as.setGpsPic(zyjrGps.getStatePic());
-        examineMapper.updateByDaiqian(as);
+        examineMapper.updateByDaiqian2(as);
         DqVo dq=examineMapper.selectDQ2(zyjrGps.getTransactionCode());
         if(dq!=null&&dq.getGps()!=null){
             zyjrPicMapper.deleteZyjrPicById(dq.getGps());

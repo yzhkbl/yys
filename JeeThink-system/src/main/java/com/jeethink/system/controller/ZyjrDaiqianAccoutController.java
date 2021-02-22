@@ -136,7 +136,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
         ZyjrDaiqian a=examineMapper.selByDaiqian(transactionCode);
         if(a!=null&&a.getGps()!=null&&a.getAccount()!=null&&a.getInsurance()!=null&&a.getGpsPic()!=null){
             a.setState("1");
-            examineMapper.updateByDaiqian(a);
+            examineMapper.updateByDaiqian2(a);
             return AjaxResult.success();
         }else{
             return AjaxResult.success("提交失败，您的信息未填完整,请完善信息！");
