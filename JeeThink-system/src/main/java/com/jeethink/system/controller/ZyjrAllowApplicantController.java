@@ -23,7 +23,7 @@ import com.jeethink.common.core.page.TableDataInfo;
 
 /**
  * 【请填写功能名称】Controller
- * 
+ *
  * @author jeethink
  * @date 2020-12-22
  */
@@ -79,7 +79,16 @@ public class ZyjrAllowApplicantController extends BaseController
     //@RequestMapping("/add")
     public AjaxResult add(ZyjrAllowApplicant zyjrAllowApplicant)
     {
-        return toAjax(zyjrAllowApplicantService.insertZyjrAllowApplicant(zyjrAllowApplicant));
+        System.err.println("111111");
+        System.err.println(zyjrAllowApplicant);
+        int a=zyjrAllowApplicantService.insertZyjrAllowApplicant(zyjrAllowApplicant);
+        AjaxResult json=new AjaxResult();
+        json.put("msg","保存失败");
+        json.put("code",200);
+        if(a>0){
+            json.put("msg","保存成功");
+        }
+        return json;
     }
 
     /**
@@ -98,7 +107,7 @@ public class ZyjrAllowApplicantController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:applicant:remove')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
+    @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
         return toAjax(zyjrAllowApplicantService.deleteZyjrAllowApplicantByIds(ids));

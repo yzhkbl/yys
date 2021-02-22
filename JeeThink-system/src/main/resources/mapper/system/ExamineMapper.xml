@@ -648,7 +648,7 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
         where brand_id=#{brandId} and group_id=#{groupId}
     </select>
     <select id="findAppCode" resultType="com.jeethink.system.domain.ZyjrApp">
-        select * from zyjr_app order by id desc
+        select * from zyjr_app order by id desc limit 1
     </select>
     <select id="selDaiqianById" resultType="com.jeethink.system.domain.ZyjrDaiqian">
         select *
