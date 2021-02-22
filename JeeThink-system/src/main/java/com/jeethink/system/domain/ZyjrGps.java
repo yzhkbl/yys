@@ -70,6 +70,15 @@ public class ZyjrGps
     private String yuanjingPic;
     private String jinjingPic;
     private String pic;
+    String statePic;
+
+    public String getStatePic() {
+        return statePic;
+    }
+
+    public void setStatePic(String statePic) {
+        this.statePic = statePic;
+    }
 
     public String getBianhaoPic() {
         return bianhaoPic;

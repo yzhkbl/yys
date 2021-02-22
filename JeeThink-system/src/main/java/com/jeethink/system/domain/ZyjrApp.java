@@ -7,4 +7,6 @@ public class ZyjrApp {
     private Long id;
     private Integer versionCode;
     private String downloadUrl;
+    private String name;
+    private String content;
 }

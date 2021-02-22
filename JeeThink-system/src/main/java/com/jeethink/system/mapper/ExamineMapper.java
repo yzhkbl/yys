@@ -102,6 +102,7 @@ public interface ExamineMapper {
     int updateOrderProgress(ZyjrOrderProgress zyjrOrderProgress);
 
     int insertShangpai (ZyjrShangpai q);
+    int insertZyjrApp (ZyjrApp zyjrApp);
     int updateShangpai(ZyjrShangpai q);
     ZyjrShangpai findShangpai(String transactionCode);
 

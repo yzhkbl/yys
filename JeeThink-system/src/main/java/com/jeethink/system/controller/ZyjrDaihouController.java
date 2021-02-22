@@ -98,6 +98,8 @@ public class ZyjrDaihouController extends BaseController
     public AjaxResult tijiao(String transactionCode){
         ZyjrDaihou zyjrDaihou = zyjrDaihouMapper.selectZyjrDaihouByT(transactionCode);
         if(zyjrDaihou!=null&&zyjrDaihou.getTiche()!=null&&zyjrDaihou.getLvben()!=null&&zyjrDaihou.getQita()!=null&&zyjrDaihou.getBaoxian()!=null&&zyjrDaihou.getZhengshu()!=null){
+            zyjrDaihou.setState("1");
+            zyjrDaihouMapper.updateZyjrDaihou(zyjrDaihou);
             return AjaxResult.success();
         }else{
             return AjaxResult.success("提交失败，您的信息未填完整,请完善信息！");

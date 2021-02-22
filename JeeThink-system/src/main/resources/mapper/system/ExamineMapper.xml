@@ -297,6 +297,7 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
             <if test="account != null">account = #{account},</if>
             <if test="insurance != null">insurance = #{insurance},</if>
             <if test="gps != null">gps = #{gps},</if>
+            <if test="gpsPic != null">gps_pic = #{gpsPic},</if>
             <if test="operator != null">operator = #{operator},</if>
         </trim>
         where id=#{id}
@@ -708,6 +709,12 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
         (id,registration_url,registration_number,transaction_code,submit_state)
         values
         (#{id},#{registrationUrl},#{registrationNumber},#{transactionCode},#{submitState})
+    </insert>
+    <insert id="insertZyjrApp" parameterType="com.jeethink.system.domain.ZyjrDaiqian">
+        insert into zyjr_app
+        (version_code,download_url,name,content)
+        values
+        (#{versionCode},#{downloadUrl},#{name},#{content})
     </insert>
     <select id="findShangpai" resultType="com.jeethink.system.domain.ZyjrShangpai">
         select id,registration_url,registration_number,transaction_code,submit_state
