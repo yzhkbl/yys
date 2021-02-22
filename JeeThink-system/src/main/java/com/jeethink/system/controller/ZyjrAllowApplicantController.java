@@ -84,9 +84,10 @@ public class ZyjrAllowApplicantController extends BaseController
         int a=zyjrAllowApplicantService.insertZyjrAllowApplicant(zyjrAllowApplicant);
         AjaxResult json=new AjaxResult();
         json.put("msg","保存失败");
-        json.put("code",200);
+        json.put("code",201);
         if(a>0){
             json.put("msg","保存成功");
+            json.put("code",200);
         }
         return json;
     }
