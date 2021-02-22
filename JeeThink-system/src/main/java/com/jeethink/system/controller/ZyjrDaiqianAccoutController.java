@@ -134,17 +134,10 @@ public class ZyjrDaiqianAccoutController extends BaseController
     @GetMapping("tijiao")
     public AjaxResult tijiao(String transactionCode){
         ZyjrDaiqian a=examineMapper.selByDaiqian(transactionCode);
-        if(a!=null&&a.getGps()!=null&&a.getAccount()!=null&&a.getInsurance()!=null){
+        if(a!=null&&a.getGps()!=null&&a.getAccount()!=null&&a.getInsurance()!=null&&a.getGpsPic()!=null){
+            a.setState("1");
+            examineMapper.updateByDaiqian(a);
             return AjaxResult.success();
-            /*ZyjrGps zyjrGps = zyjrGpsMapper.selectZyjrGpsById(transactionCode);
-            zyjrGps.setState("2");
-            zyjrGpsMapper.updateZyjrGps(zyjrGps);
-            ZyjrDaiqianAccout zyjrDaiqianAccout = zyjrDaiqianAccoutMapper.selectById(transactionCode);
-            zyjrDaiqianAccout.setState("2");
-            zyjrDaiqianAccoutMapper.updateZyjrDaiqianAccout(zyjrDaiqianAccout);
-            ZyjrInsurance zyjrInsurance = zyjrInsuranceMapper.selectZyjrInsuranceByIds(transactionCode);
-            zyjrInsurance.setState("2");
-            zyjrInsuranceMapper.updateZyjrInsurance(zyjrInsurance);*/
         }else{
             return AjaxResult.success("提交失败，您的信息未填完整,请完善信息！");
         }
@@ -170,6 +163,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
         Map<String,Object> map=new HashMap<>();
         if(as!=null){
         map.put("gps",as.getGps());
+        map.put("gpsPic",as.getGpsPic());
         map.put("zhanghu",as.getAccount());
         map.put("baoxian",as.getInsurance());
             return AjaxResult.success(map);

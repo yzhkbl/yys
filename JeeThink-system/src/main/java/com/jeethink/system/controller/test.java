@@ -484,6 +484,21 @@ public class test extends BaseController {
         return AjaxResult.success();
     }
 
+    @RequestMapping(value = {"zhengshi"}, method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation("111111111")
+    public AjaxResult ceshi(@RequestParam("name") String name, @RequestParam("file") MultipartFile file, @RequestParam("code") Integer code , @RequestParam("content") String content) throws IOException {
+            String a = FileUploadUtils.upload(file);
+            String as = "http://114.215.186.186:8080"+ a;
+            ZyjrApp zyjrApp=new ZyjrApp();
+            zyjrApp.setContent(content);
+            zyjrApp.setDownloadUrl(as);
+            zyjrApp.setName(name);
+            zyjrApp.setVersionCode(code);
+            examineMapper.insertZyjrApp(zyjrApp);
+        return AjaxResult.success();
+    }
+
     @RequestMapping(value = {"/photo"}, method = RequestMethod.POST)
     @ResponseBody
     @ApiOperation("111111111")
