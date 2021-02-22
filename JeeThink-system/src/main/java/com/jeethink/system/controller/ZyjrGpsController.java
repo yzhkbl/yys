@@ -161,7 +161,7 @@ public class ZyjrGpsController extends BaseController
             List<ZyjrPic> b=zyjrPicMapper.selectZyjrPicList(zyjrPic);
             map.put("gps",a);
             map.put("pic",b);
-
+            json.put("data",map);
 
             return json;
         }
