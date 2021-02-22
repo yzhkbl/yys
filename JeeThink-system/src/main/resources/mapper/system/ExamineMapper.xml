@@ -824,10 +824,25 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
     </select>
     <insert id="insertFundSide" parameterType="com.jeethink.system.domain.ZyjrFundSide">
         insert into zyjr_fund_side
-        (id,side_name,transaction_code)
+        (id,side_name,transaction_code,order_state)
         values
-        (#{id},#{sideName},#{transactionCode})
+        (#{id},#{sideName},#{transactionCode},#{orderState})
     </insert>
+    <update id="updateFundSide" parameterType="com.jeethink.system.domain.ZyjrFundSide">
+        update zyjr_fund_side
+        <set>
+            <if test="sideName != null">
+                side_name = #{sideName},
+            </if>
+            <if test="transactionCode!=null">
+                transaction_code=#{transactionCode},
+            </if>
+            <if test="orderState != null">
+                order_state = #{orderState},
+            </if>
+        </set>
+        where transaction_code = #{transactionCode}
+    </update>
     <insert id="addAllowState" parameterType="com.jeethink.system.domain.ZyjrSubmitStateAllow">
         insert into zyjr_submit_state_allow
         (id,transaction_code,submit_state)
