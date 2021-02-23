@@ -49,6 +49,10 @@ public class ZyjrDaiqianAccoutController extends BaseController
     private ZyjrGpsMapper zyjrGpsMapper;
     @Autowired
     private ZyjrInsuranceMapper zyjrInsuranceMapper;
+    @Autowired
+    private ZyjrGrantImageMapper zyjrGrantImageMapper;
+    @Autowired
+    private ZyjrGrantInstalmentsMapper zyjrGrantInstalmentsMapper;
 
     /**
      * 查询【请填写功能名称】列表
@@ -136,7 +140,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
         ZyjrDaiqian a=examineMapper.selByDaiqian(transactionCode);
         if(a!=null&&a.getGps()!=null&&a.getAccount()!=null&&a.getInsurance()!=null&&a.getGpsPic()!=null){
             a.setState("1");
-            examineMapper.updateByDaiqian(a);
+            examineMapper.updateByDaiqian2(a);
             return AjaxResult.success();
         }else{
             return AjaxResult.success("提交失败，您的信息未填完整,请完善信息！");
@@ -161,6 +165,19 @@ public class ZyjrDaiqianAccoutController extends BaseController
     public AjaxResult state(String transactionCode){
         ZyjrDaiqian as=examineMapper.selByDaiqian(transactionCode);
         Map<String,Object> map=new HashMap<>();
+        ZyjrGrantImage zyjrGrantImage = zyjrGrantImageMapper.selectZyjrGrantImageById(transactionCode);
+        if(zyjrGrantImage!=null&&zyjrGrantImage.getOrderState()!=null){
+            map.put("yingxiang",zyjrGrantImage.getOrderState().toString());
+        }else{
+            map.put("yingxiang",null);
+        }
+        ZyjrGrantInstalments zyjrGrantInstalments = zyjrGrantInstalmentsMapper.selectZyjrGrantInstalmentsById(transactionCode);
+        if(zyjrGrantInstalments!=null&&zyjrGrantInstalments.getOrderState()!=null){
+            map.put("fenqi",zyjrGrantInstalments.getOrderState().toString());
+        }else{
+            map.put("fenqi",null);
+        }
+
         if(as!=null){
         map.put("gps",as.getGps());
         map.put("gpsPic",as.getGpsPic());
@@ -168,6 +185,10 @@ public class ZyjrDaiqianAccoutController extends BaseController
         map.put("baoxian",as.getInsurance());
             return AjaxResult.success(map);
         }
+        map.put("gps",null);
+        map.put("gpsPic",null);
+        map.put("zhanghu",null);
+        map.put("baoxian",null);
         return AjaxResult.success(map);
     }
 
