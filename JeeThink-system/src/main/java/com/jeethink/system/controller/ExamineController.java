@@ -34,26 +34,26 @@ public class ExamineController extends BaseController {
 
     @RequestMapping("/add/borrower")
     public AjaxResult addBorrower(ZyjrBorrower q){
-        examineService.addByBorrower(q);
-        return AjaxResult.success();
+
+        return toAjax(examineService.addByBorrower(q));
     }
 
     @RequestMapping("/add/relation")
     public AjaxResult addRelation(ZyjrRelation q){
-        examineService.addByRelation(q);
-        return AjaxResult.success();
+
+        return toAjax(examineService.addByRelation(q));
     }
 
     @RequestMapping("/add/guarantee")
     public AjaxResult addGuarantee(ZyjrGuarantee q){
-        examineService.addByGuarantee(q);
-        return AjaxResult.success();
+
+        return toAjax(examineService.addByGuarantee(q));
     }
 
     @RequestMapping("/add/business")
     public AjaxResult addBusiness(ZyjrBusiness q){
-        examineService.addByBusiness(q);
-        return AjaxResult.success();
+
+        return toAjax(examineService.addByBusiness(q));
     }
 
     @RequestMapping("/find/borrower")
@@ -210,9 +210,9 @@ public class ExamineController extends BaseController {
     public AjaxResult insertShangpai(ZyjrShangpai q){
         ZyjrShangpai zyjrShangpai = examineMapper.findShangpai(q.getTransactionCode());
         if(zyjrShangpai!=null){
-            return AjaxResult.success(examineMapper.updateShangpai(q));
+            return toAjax(examineMapper.updateShangpai(q));
         }else {
-            return AjaxResult.success(examineMapper.insertShangpai(q));
+            return toAjax(examineMapper.insertShangpai(q));
         }
     }
 
@@ -221,9 +221,9 @@ public class ExamineController extends BaseController {
     public AjaxResult insertStageShangpai(@RequestBody ZyjrShangpai q){
         ZyjrShangpai zyjrShangpai = examineMapper.findShangpai(q.getTransactionCode());
         if(zyjrShangpai!=null){
-            return AjaxResult.success(examineMapper.updateShangpai(q));
+            return toAjax(examineMapper.updateShangpai(q));
         }else {
-            return AjaxResult.success(examineMapper.insertShangpai(q));
+            return toAjax(examineMapper.insertShangpai(q));
         }
     }
 
@@ -238,9 +238,9 @@ public class ExamineController extends BaseController {
     public AjaxResult insertDiya(ZyjrDiya q){
         ZyjrDiya zyjrDiya = examineMapper.findDiya(q.getTransactionCode());
         if(zyjrDiya!=null){
-            return AjaxResult.success(examineMapper.updateDiya(q));
+            return toAjax(examineMapper.updateDiya(q));
         }else {
-            return AjaxResult.success(examineMapper.insertDiya(q));
+            return toAjax(examineMapper.insertDiya(q));
         }
     }
 
@@ -249,9 +249,9 @@ public class ExamineController extends BaseController {
     public AjaxResult insertStageDiya(@RequestBody ZyjrDiya q){
         ZyjrDiya zyjrDiya = examineMapper.findDiya(q.getTransactionCode());
         if(zyjrDiya!=null){
-            return AjaxResult.success(examineMapper.updateDiya(q));
+            return toAjax(examineMapper.updateDiya(q));
         }else {
-            return AjaxResult.success(examineMapper.insertDiya(q));
+            return toAjax(examineMapper.insertDiya(q));
         }
     }
 
@@ -282,9 +282,9 @@ public class ExamineController extends BaseController {
     @PostMapping("/add/fundSide")
     public AjaxResult insertFundSide(ZyjrFundSide zyjrFundSide){
         if(examineMapper.findFundSide(zyjrFundSide.getTransactionCode())!=null){
-            return AjaxResult.success(examineMapper.updateFundSide(zyjrFundSide));
+            return toAjax(examineMapper.updateFundSide(zyjrFundSide));
         }else {
-            return AjaxResult.success(examineMapper.insertFundSide(zyjrFundSide));
+            return toAjax(examineMapper.insertFundSide(zyjrFundSide));
         }
         //return AjaxResult.success();
     }
@@ -296,12 +296,12 @@ public class ExamineController extends BaseController {
 
     @PostMapping("/add/allow/state")
     public AjaxResult addAllowState(ZyjrSubmitStateAllow q){
-        return AjaxResult.success(examineMapper.addAllowState(q));
+        return toAjax(examineMapper.addAllowState(q));
     }
 
     @PostMapping("/add/grant/state")
     public AjaxResult addGrantState(ZyjrSubmitStateGrant q){
-        return AjaxResult.success(examineMapper.addGrantState(q));
+        return toAjax(examineMapper.addGrantState(q));
     }
 
     @GetMapping("/find/allowList")
