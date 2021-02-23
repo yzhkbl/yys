@@ -101,23 +101,14 @@
          where a.transaction_code=#{transaction_code}
     </select>
     <select id="findAllow" resultType="com.jeethink.system.domain.vo.ZyjrGrant">
-        SELECT distinct b.id, a.team,e.create_time,d.allow_id,d.allow_by,a.car_information, d.actual_price, d.loan_amount, d.repayment_term, a.car_type, b.user_id, b.order_state,b.transaction_code,b.user_name AS NAME,c.approval_type,
-        f.id applicant,g.id basics,h.id contacts,i.id carLoan,j.id companyGuarantee,k.id peopleGuarantee,l.id photoCar,m.id photoCredit,n.id photoHouse,o.id photoLender
+        SELECT distinct b.id, a.team,e.create_time,d.allow_id,d.allow_by,a.car_information, d.actual_price, d.loan_amount, d.repayment_term,
+         a.car_type, b.user_id, b.order_state,b.transaction_code,b.user_name AS NAME,c.approval_type,f.submit_state
          FROM zyjr_borrower b
          left join zyjr_start_page e on b.transaction_code=e.transaction_code
          left join zyjr_business a on b.transaction_code=a.transaction_code
          left join zyjr_car_loan d on b.transaction_code=d.transaction_code
          left join zyjr_allow_opinion c ON b.transaction_code=c.transaction_code
-         left join zyjr_allow_applicant f on b.transaction_code=f.transaction_code
-         left join zyjr_allow_basics g on b.transaction_code=g.transaction_code
-         left join zyjr_allow_contacts h on b.transaction_code=h.transaction_code
-         left join zyjr_car_loan i on b.transaction_code=i.transaction_code
-         left join zyjr_company_guarantee j on b.transaction_code=j.transaction_code
-         left join zyjr_people_guarantee k on b.transaction_code=k.transaction_code
-         left join zyjr_photo_car l on b.transaction_code=l.transaction_code
-         left join zyjr_photo_credit m on b.transaction_code=m.transaction_code
-         left join zyjr_photo_house n on b.transaction_code=n.transaction_code
-         left join zyjr_photo_lender o on b.transaction_code=o.transaction_code
+         left join zyjr_submit_state_allow f on b.transaction_code=f.transaction_code
          WHERE c.approval_type!=1 OR c.approval_type IS NULL
          order by e.create_time desc
     </select>

@@ -36,7 +36,7 @@ public class ZyjrCarLoanServiceImpl implements IZyjrCarLoanService
         ZyjrCarLoan c = zyjrCarLoanMapper.selectZyjrCarLoanById(userId,transactionCode);
         if(c!=null) {
             ZyjrBusiness zyjrBusiness = examineMapper.Business(transactionCode);
-            c.setLoanMoney(zyjrBusiness.getLoanMoney());
+            c.setIntentionPrice(zyjrBusiness.getIntentionPrice());
         }
         return c;
     }
