@@ -139,7 +139,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
     public AjaxResult tijiao(String transactionCode){
         ZyjrDaiqian a=examineMapper.selByDaiqian(transactionCode);
         if(a!=null&&a.getGps()!=null&&a.getAccount()!=null&&a.getInsurance()!=null&&a.getGpsPic()!=null){
-            a.setState("1");
+            a.setTijiao("1");
             examineMapper.updateByDaiqian2(a);
             return AjaxResult.success();
         }else{
@@ -183,12 +183,14 @@ public class ZyjrDaiqianAccoutController extends BaseController
         map.put("gpsPic",as.getGpsPic());
         map.put("zhanghu",as.getAccount());
         map.put("baoxian",as.getInsurance());
+        map.put("tijiao",as.getTijiao());
             return AjaxResult.success(map);
         }
         map.put("gps",null);
         map.put("gpsPic",null);
         map.put("zhanghu",null);
         map.put("baoxian",null);
+        map.put("tijiao",null);
         return AjaxResult.success(map);
     }
 

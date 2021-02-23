@@ -298,6 +298,7 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
             <if test="insurance != null">insurance = #{insurance},</if>
             <if test="gps != null">gps = #{gps},</if>
             <if test="gpsPic != null">gps_pic = #{gpsPic},</if>
+            <if test="tijiao != null">tijiao = #{tijiao},</if>
             <if test="operator != null">operator = #{operator},</if>
         </trim>
         where id=#{id}

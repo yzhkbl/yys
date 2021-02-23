@@ -98,7 +98,7 @@ public class ZyjrDaihouController extends BaseController
     public AjaxResult tijiao(String transactionCode){
         ZyjrDaihou zyjrDaihou = zyjrDaihouMapper.selectZyjrDaihouByT(transactionCode);
         if(zyjrDaihou!=null&&zyjrDaihou.getTiche()!=null&&zyjrDaihou.getLvben()!=null&&zyjrDaihou.getQita()!=null&&zyjrDaihou.getBaoxian()!=null&&zyjrDaihou.getZhengshu()!=null){
-            zyjrDaihou.setState("1");
+            zyjrDaihou.setTijiao("1");
             zyjrDaihouMapper.updateZyjrDaihou(zyjrDaihou);
             return AjaxResult.success();
         }else{
@@ -198,8 +198,15 @@ public class ZyjrDaihouController extends BaseController
             map.put("qita",as.getQita());
             map.put("lvben",as.getLvben());
             map.put("baoxian",as.getBaoxian());
+            map.put("tijiao",as.getTijiao());
             return AjaxResult.success(map);
         }
+        map.put("zhengshu",null);
+        map.put("tiche",null);
+        map.put("qita",null);
+        map.put("lvben",null);
+        map.put("baoxian",null);
+        map.put("tijiao",null);
         return AjaxResult.success(map);
     }
 

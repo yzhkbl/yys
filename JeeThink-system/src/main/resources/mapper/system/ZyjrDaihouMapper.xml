@@ -83,6 +83,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="qita != null">qita = #{qita},</if>
             <if test="lvben != null">lvben = #{lvben},</if>
             <if test="tiche != null">tiche = #{tiche},</if>
+            <if test="tijiao != null">tijiao = #{tijiao},</if>
             <if test="operator != null">tiche = #{operator},</if>
         </trim>
         where id = #{id}
