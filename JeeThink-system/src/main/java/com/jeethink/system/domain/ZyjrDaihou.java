@@ -63,6 +63,15 @@ public class ZyjrDaihou
     private Integer carInformation;
     private String carType;
     String createTime;
+    String tijiao;
+
+    public String getTijiao() {
+        return tijiao;
+    }
+
+    public void setTijiao(String tijiao) {
+        this.tijiao = tijiao;
+    }
 
     public String getCreateTime() {
         return createTime;

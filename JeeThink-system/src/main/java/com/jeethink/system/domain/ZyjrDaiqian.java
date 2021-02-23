@@ -23,5 +23,6 @@ public class ZyjrDaiqian {
     String insurance;
     String account;
     String gpsPic;
+    String tijiao;
 
 }
