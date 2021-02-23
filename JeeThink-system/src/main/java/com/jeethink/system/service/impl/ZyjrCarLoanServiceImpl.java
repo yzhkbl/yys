@@ -62,7 +62,7 @@ public class ZyjrCarLoanServiceImpl implements IZyjrCarLoanService
     @Override
     public int insertZyjrCarLoan(ZyjrCarLoan zyjrCarLoan)
     {
-        if(selectZyjrCarLoanById(zyjrCarLoan.getUserId(),zyjrCarLoan.getTransactionCode())==null){
+        if(zyjrCarLoanMapper.selectZyjrCarLoanById(zyjrCarLoan.getUserId(),zyjrCarLoan.getTransactionCode())==null){
             return zyjrCarLoanMapper.insertZyjrCarLoan(zyjrCarLoan);
         }else {
             return zyjrCarLoanMapper.updateZyjrCarLoan(zyjrCarLoan);
