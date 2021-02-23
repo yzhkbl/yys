@@ -66,7 +66,8 @@ public class ZyjrGrant extends BaseEntity
     private Long allowId;
     private Long repeatId;
     private Long grantId;
-    private String applicant;
+    private Integer submitState;
+    /**private String applicant;
     private String basics;
     private String contacts;
     private String carLoan;
@@ -77,9 +78,9 @@ public class ZyjrGrant extends BaseEntity
     private String photoHouse;
     private String photoLender;
     private String grantImage;
-    private String grantInstalments;
+    private String grantInstalments;*/
 
-    public String getApplicant() {
+   /** public String getApplicant() {
         return applicant;
     }
 
@@ -386,5 +387,5 @@ public class ZyjrGrant extends BaseEntity
                 .append("repeatId",getRepeatId())
                 .append("grantId",getGrantId())
             .toString();
-    }
+    }*/
 }
