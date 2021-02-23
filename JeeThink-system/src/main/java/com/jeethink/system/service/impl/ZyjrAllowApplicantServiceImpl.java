@@ -98,7 +98,7 @@ public class ZyjrAllowApplicantServiceImpl implements IZyjrAllowApplicantService
      */
     @Override
     public int insertZyjrAllowApplicant(ZyjrAllowApplicant zyjrAllowApplicant) {
-        if(selectZyjrAllowApplicantById(zyjrAllowApplicant.getUserId(),zyjrAllowApplicant.getTransactionCode())==null) {
+        if(zyjrAllowApplicantMapper.selectZyjrAllowApplicantById(zyjrAllowApplicant.getUserId(),zyjrAllowApplicant.getTransactionCode())==null) {
             return zyjrAllowApplicantMapper.insertZyjrAllowApplicant(zyjrAllowApplicant);
         }else{
             return zyjrAllowApplicantMapper.updateZyjrAllowApplicant(zyjrAllowApplicant);

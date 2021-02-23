@@ -7,4 +7,5 @@ public class ZyjrFundSide {
     private Long id;
     private String sideName;
     private String transactionCode;
+    private Integer orderState;
 }

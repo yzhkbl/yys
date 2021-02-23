@@ -127,4 +127,5 @@ public interface ExamineMapper {
 
     int insertFundSide(ZyjrFundSide zyjrFundSide);
     ZyjrFundSide findFundSide(String transactionCode);
+    int updateFundSide(ZyjrFundSide zyjrFundSide);
 }

@@ -281,7 +281,12 @@ public class ExamineController extends BaseController {
 
     @PostMapping("/add/fundSide")
     public AjaxResult insertFundSide(ZyjrFundSide zyjrFundSide){
-        return AjaxResult.success(examineMapper.insertFundSide(zyjrFundSide));
+        if(examineMapper.findFundSide(zyjrFundSide.getTransactionCode())!=null){
+            return AjaxResult.success(examineMapper.updateFundSide(zyjrFundSide));
+        }else {
+            return AjaxResult.success(examineMapper.insertFundSide(zyjrFundSide));
+        }
+        //return AjaxResult.success();
     }
 
     @GetMapping("/find/fundSide")
