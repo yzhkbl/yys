@@ -30,4 +30,10 @@ public class fileInfoVo {
 
     /**图片list*/
     private String photoFile;
+
+    private String carPhoto;
+    private String creditPhoto;
+    private String housePhoto;
+    private String lenderPhoto;
+    private String visitPhoto;
 }

@@ -52,8 +52,6 @@ public class ZyjrPhotoCarController extends BaseController
     @ApiOperation("111111111")
     public AjaxResult testFiles(fileInfoVo q){
         JSONArray jsonarray = JSONArray.fromObject(q.getPhotoFile());
-       // System.err.println(q);
-       // System.out.println(jsonarray);
         List<SysFileInfo> list = (List)JSONArray.toList(jsonarray, SysFileInfo.class);
         ZyjrPhotoCar zyjrPhotoCar = new ZyjrPhotoCar();
         if(q.getId()!=null){
