@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.jeethink.common.core.domain.AjaxResult;
+import com.jeethink.system.controller.ZyjrGrantImageController;
+import com.jeethink.system.controller.ZyjrGrantInstalmentsController;
 import com.jeethink.system.domain.*;
 import com.jeethink.system.mapper.*;
 import com.jeethink.system.service.IZyjrDaiqianAccoutService;
@@ -34,6 +37,10 @@ public class ZyjrAllowBasicsServiceImpl implements IZyjrAllowBasicsService
     private ZyjrInsuranceMapper zyjrInsuranceMapper;
     @Autowired
     private IZyjrDaiqianAccoutService zyjrDaiqianAccoutService;
+    @Autowired
+    private ZyjrGrantImageController zyjrGrantImageController;
+    @Autowired
+    private ZyjrGrantInstalmentsController zyjrGrantInstalmentsController;
 
     /**
      * 查询【请填写功能名称】
@@ -148,7 +155,10 @@ public class ZyjrAllowBasicsServiceImpl implements IZyjrAllowBasicsService
         }
         ZyjrInsurance zyjrInsurance = zyjrInsuranceMapper.selectZyjrInsuranceByIds(zyjrAllowBasics.getTransactionCode());
         map.put("Insurance",zyjrInsurance);
-
+        AjaxResult photo = zyjrGrantImageController.findPhoto(transactionCode);
+        map.put("photo",photo.get("data"));
+        AjaxResult photo1 = zyjrGrantInstalmentsController.findPhoto(transactionCode);
+        map.put("photo2",photo1.get("data"));
         return map;
     }
 }

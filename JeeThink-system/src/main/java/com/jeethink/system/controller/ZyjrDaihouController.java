@@ -232,6 +232,8 @@ public class ZyjrDaihouController extends BaseController
             zyjrDaihou2.setBaoxian("2");
             zyjrDaihou2.setLvben("2");
             zyjrDaihou2.setQita("2");
+            zyjrDaihou2.setTijiao("0");
+            zyjrDaihou2.setState("2");
             zyjrDaihouMapper.updateZyjrDaihou(zyjrDaihou2);
         }
         return AjaxResult.success();
