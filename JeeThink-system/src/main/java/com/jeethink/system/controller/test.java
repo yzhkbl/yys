@@ -82,7 +82,6 @@ public class test extends BaseController {
     private SysDeptMapper sysDeptMapper;
     @Autowired
     private ZyjrCardMapper zyjrCardMapper;
-
     @Autowired
     private ISysUserService iSysUserService;
     @Autowired
@@ -974,6 +973,35 @@ public class test extends BaseController {
         return AjaxResult.success();
     }
     @ResponseBody
+    @PostMapping("phone2")
+    public AjaxResult smsCode2(String phone,String code)  {
+        Integer a=redisCache.getCacheObject(phone);
+        if(a==null){
+            AjaxResult json=new AjaxResult();
+            json.put("msg","验证码过期");
+            json.put("code",501);
+            json.put("data",null);
+            return json;
+        }
+        if(a==Integer.parseInt(code)){
+            return AjaxResult.success();
+        }
+        AjaxResult json=new AjaxResult();
+        json.put("msg","验证码不一致");
+        json.put("code",502);
+        json.put("data",null);
+        return json;
+    }
+    @ResponseBody
+    @PostMapping("selectH")
+    public AjaxResult smsCsode(String phone)  {
+        ZyjrAllowApplicant z=new ZyjrAllowApplicant();
+        z.setPhoneNumber(phone);
+        List<ZyjrAllowApplicant> zyjrAllowApplicants = zyjrAllowApplicantMapper.selectZyjrAllowApplicantList(z);
+        return AjaxResult.success(zyjrAllowApplicants);
+    }
+
+    @ResponseBody
     @PostMapping("phoneCode")
     public AjaxResult codes(String newPassword,String phone,String code){
         Integer a=redisCache.getCacheObject(phone);
@@ -1330,6 +1358,7 @@ public class test extends BaseController {
 
         return AjaxResult.success(lists);
     }
+
 
 
 }

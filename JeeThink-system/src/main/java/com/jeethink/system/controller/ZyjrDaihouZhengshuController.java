@@ -6,6 +6,7 @@ import com.jeethink.system.domain.ZyjrDaihou;
 import com.jeethink.system.domain.ZyjrDaihouBaoxian;
 import com.jeethink.system.domain.ZyjrDaihouTiche;
 import com.jeethink.system.mapper.ZyjrDaihouMapper;
+import com.jeethink.system.service.IZyjrDaihouBaoxianService;
 import net.sf.json.JSONArray;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,8 @@ public class ZyjrDaihouZhengshuController extends BaseController
     private IZyjrDaihouZhengshuService zyjrDaihouZhengshuService;
     @Autowired
     private ZyjrDaihouMapper zyjrDaihouMapper;
+    @Autowired
+    private IZyjrDaihouBaoxianService zyjrDaihouBaoxianService;
 
     /**
      * 查询【请填写功能名称】列表
@@ -78,12 +81,19 @@ public class ZyjrDaihouZhengshuController extends BaseController
         json.put("code",200);
         json.put("data",null);
         json.put("state","0");
+        json.put("data2",null);
         if(Daihou!=null){
             ZyjrDaihouZhengshu zyjrDaihouBaoxian=new ZyjrDaihouZhengshu();
             zyjrDaihouBaoxian.setDaihou(Daihou.getId().toString());
             List<ZyjrDaihouZhengshu> zyjrDaihouTiches = zyjrDaihouZhengshuService.selectZyjrDaihouZhengshuList(zyjrDaihouBaoxian);
             json.put("data",zyjrDaihouTiches);
             json.put("state",Daihou.getZhengshu());
+            ZyjrDaihouBaoxian zyjrDaihouBaoxian2=new ZyjrDaihouBaoxian();
+            zyjrDaihouBaoxian2.setDaihou(Daihou.getId().toString());
+            List<ZyjrDaihouBaoxian> zyjrDaihouBaoxians = zyjrDaihouBaoxianService.selectZyjrDaihouBaoxianList(zyjrDaihouBaoxian2);
+
+            json.put("data2",zyjrDaihouBaoxians);
+
             return json;
         }
         return json;
@@ -97,6 +107,7 @@ public class ZyjrDaihouZhengshuController extends BaseController
     public AjaxResult add( ZyjrDaihouZhengshu zyjrDaihouBaoxian)
     {
 
+
         ZyjrDaihou Daihou=zyjrDaihouMapper.selectZyjrDaihouByT(zyjrDaihouBaoxian.getDaihou());
         if(Daihou==null){
             ZyjrDaihou Daihou2=new ZyjrDaihou();
@@ -108,7 +119,16 @@ public class ZyjrDaihouZhengshuController extends BaseController
             Daihou.setZhengshu(zyjrDaihouBaoxian.getState());
             zyjrDaihouMapper.updateZyjrDaihou(Daihou);
         }
-
+        zyjrDaihouBaoxianService.deleteZyjrDaihouBaoxianById(Daihou.getId());
+        if(zyjrDaihouBaoxian.getPic2()!=null) {
+            JSONArray jsonarray2 = JSONArray.fromObject(zyjrDaihouBaoxian.getPic2());
+            // System.out.println(jsonarray);
+            List<ZyjrDaihouBaoxian> list2 = (List) JSONArray.toList(jsonarray2, ZyjrDaihouBaoxian.class);
+            for (ZyjrDaihouBaoxian daihouBaoxian : list2) {
+                daihouBaoxian.setDaihou(Daihou.getId().toString());
+                zyjrDaihouBaoxianService.insertZyjrDaihouBaoxian(daihouBaoxian);
+            }
+        }
         zyjrDaihouZhengshuService.deleteZyjrDaihouZhengshuById(Daihou.getId());
         if(zyjrDaihouBaoxian.getPic()!=null){
             JSONArray jsonarray = JSONArray.fromObject(zyjrDaihouBaoxian.getPic());

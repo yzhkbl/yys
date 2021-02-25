@@ -31,7 +31,16 @@ public class ZyjrDaihouZhengshu
     private String daihou;
 
     private String pic;
+    String pic2;
     String state;
+
+    public String getPic2() {
+        return pic2;
+    }
+
+    public void setPic2(String pic2) {
+        this.pic2 = pic2;
+    }
 
     public String getState() {
         return state;
