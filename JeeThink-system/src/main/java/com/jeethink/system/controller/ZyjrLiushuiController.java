@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jeethink.common.utils.file.FileUtils;
-import com.jeethink.system.domain.ZyjrGrantInstalments;
 import com.jeethink.system.domain.ZyjrGrantPhoto;
+import com.jeethink.system.domain.ZyjrGrantVisit;
 import com.jeethink.system.domain.vo.GrantPhoto;
 import com.jeethink.system.domain.vo.fileInfoVo;
 import com.jeethink.system.mapper.ZyjrGrantPhotoMapper;
@@ -25,8 +25,8 @@ import com.jeethink.common.annotation.Log;
 import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
 import com.jeethink.common.enums.BusinessType;
-import com.jeethink.system.domain.ZyjrGrantVisit;
-import com.jeethink.system.service.IZyjrGrantVisitService;
+import com.jeethink.system.domain.ZyjrLiushui;
+import com.jeethink.system.service.IZyjrLiushuiService;
 import com.jeethink.common.utils.poi.ExcelUtil;
 import com.jeethink.common.core.page.TableDataInfo;
 
@@ -34,44 +34,44 @@ import com.jeethink.common.core.page.TableDataInfo;
  * 【请填写功能名称】Controller
  * 
  * @author jeethink
- * @date 2021-01-09
+ * @date 2021-02-25
  */
 @RestController
-@RequestMapping("/system/visit")
-public class ZyjrGrantVisitController extends BaseController
+@RequestMapping("/system/liushui")
+public class ZyjrLiushuiController extends BaseController
 {
     @Autowired
-    private IZyjrGrantVisitService zyjrGrantVisitService;
+    private IZyjrLiushuiService zyjrLiushuiService;
     @Autowired
     private ZyjrGrantPhotoMapper zyjrGrantPhotoMapper;
 
     @PostMapping("/pic")
     @ApiOperation("111111111")
     public AjaxResult testFiles(fileInfoVo q) {
-        JSONArray jsonarray = JSONArray.fromObject(q.getVisitPhoto());
-       // System.out.println(jsonarray);
-        ZyjrGrantVisit zyjrGrantVisit = new ZyjrGrantVisit();
+        JSONArray jsonarray = JSONArray.fromObject(q.getLiushuiPhoto());
+        // System.out.println(jsonarray);
+        ZyjrLiushui zyjrLiushui = new ZyjrLiushui();
         List<ZyjrGrantPhoto> list = (List)JSONArray.toList(jsonarray, ZyjrGrantPhoto.class);
         if (q.getVisitId() != null) {
             ZyjrGrantPhoto infos = new ZyjrGrantPhoto();
-            infos.setVisitId(q.getVisitId());
+            infos.setLiushuiId(q.getVisitId());
             List<ZyjrGrantPhoto> zyjrGrantPhotos = zyjrGrantPhotoMapper.selectZyjrGrantPhotoList(infos);
-            int a = zyjrGrantPhotoMapper.deleteByVisit(q.getVisitId());
+            int a = zyjrGrantPhotoMapper.deleteByLiushui(q.getLiushuiId());
             String paths = "C:/demo";
             //System.err.println(path);
             //int a = sysFileInfoMapper.deleteSysFileInfoByPath(path);
             for (ZyjrGrantPhoto zyjrGrantPhoto :zyjrGrantPhotos) {
                 String[] s = zyjrGrantPhoto.getFilePath().split("//");
                 String l = zyjrGrantPhoto.getFilePath().substring(zyjrGrantPhoto.getFilePath().indexOf("e"));
-               // System.err.println("删除路径"+paths+l);
+                // System.err.println("删除路径"+paths+l);
                 boolean b = FileUtils.deleteFile(paths +l);
             }
         } else {
 
             //zyjrPhotoHouse.setOrderState(q.getOrderState());
-            zyjrGrantVisit.setTransactionCode(q.getTransactionCode());
-            zyjrGrantVisit.setUserId(q.getUserId());
-            zyjrGrantVisitService.insertZyjrGrantVisit(zyjrGrantVisit);
+            zyjrLiushui.setTransactionCode(q.getTransactionCode());
+            zyjrLiushui.setUserId(q.getUserId());
+            zyjrLiushuiService.insertZyjrLiushui(zyjrLiushui);
 
         }
         List<String> pic = new ArrayList<>();
@@ -81,10 +81,10 @@ public class ZyjrGrantVisitController extends BaseController
                 ZyjrGrantPhoto info = new ZyjrGrantPhoto();
                 //String as = "http://192.168.31.86:8080" + asd;
                 info.setFilePath(list.get(i).getFilePath());
-                if(q.getVisitId()!=null){
-                    info.setVisitId(q.getVisitId());
+                if(q.getLiushuiId()!=null){
+                    info.setLiushuiId(q.getLiushuiId());
                 }else{
-                    info.setVisitId(zyjrGrantVisit.getId());
+                    info.setLiushuiId(zyjrLiushui.getId());
                 }
                 info.setFileName(list.get(i).getFileName());
                 int ceshi = zyjrGrantPhotoMapper.insertZyjrGrantPhoto(info);
@@ -104,14 +104,14 @@ public class ZyjrGrantVisitController extends BaseController
     @GetMapping(value = "/{transactionCode}")
     public GrantPhoto findPhoto(@PathVariable("transactionCode") String transactionCode)
     {
-        ZyjrGrantVisit zyjrGrantVisit = zyjrGrantVisitService.selectZyjrGrantVisitById(transactionCode);
+        ZyjrLiushui zyjrLiushui = zyjrLiushuiService.selectZyjrLiushuiById(transactionCode);
         GrantPhoto f = new GrantPhoto();
-        if(zyjrGrantVisit != null) {
-            List<ZyjrGrantPhoto> list = zyjrGrantPhotoMapper.findVisit(zyjrGrantVisit.getId());
+        if(zyjrLiushui != null) {
+            List<ZyjrGrantPhoto> list = zyjrGrantPhotoMapper.findLiushui(zyjrLiushui.getId());
 
-            f.setId(zyjrGrantVisit.getId());
-            f.setUserId(zyjrGrantVisit.getUserId());
-            f.setTransactionCode(zyjrGrantVisit.getTransactionCode());
+            f.setId(zyjrLiushui.getId());
+            f.setUserId(zyjrLiushui.getUserId());
+            f.setTransactionCode(zyjrLiushui.getTransactionCode());
             //f.setOrderState(zyjrPhotoHouse.getOrderState());
             f.setPhotoFile(list);
             return f;
@@ -121,74 +121,71 @@ public class ZyjrGrantVisitController extends BaseController
     }
 
 
-
-
-
     /**
      * 查询【请填写功能名称】列表
      */
-    @PreAuthorize("@ss.hasPermi('system:visit:list')")
+    @PreAuthorize("@ss.hasPermi('system:liushui:list')")
     @GetMapping("/list")
-    public TableDataInfo list(ZyjrGrantVisit zyjrGrantVisit)
+    public TableDataInfo list(ZyjrLiushui zyjrLiushui)
     {
         startPage();
-        List<ZyjrGrantVisit> list = zyjrGrantVisitService.selectZyjrGrantVisitList(zyjrGrantVisit);
+        List<ZyjrLiushui> list = zyjrLiushuiService.selectZyjrLiushuiList(zyjrLiushui);
         return getDataTable(list);
     }
 
     /**
      * 导出【请填写功能名称】列表
      */
-    @PreAuthorize("@ss.hasPermi('system:visit:export')")
+    @PreAuthorize("@ss.hasPermi('system:liushui:export')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
-    public AjaxResult export(ZyjrGrantVisit zyjrGrantVisit)
+    public AjaxResult export(ZyjrLiushui zyjrLiushui)
     {
-        List<ZyjrGrantVisit> list = zyjrGrantVisitService.selectZyjrGrantVisitList(zyjrGrantVisit);
-        ExcelUtil<ZyjrGrantVisit> util = new ExcelUtil<ZyjrGrantVisit>(ZyjrGrantVisit.class);
-        return util.exportExcel(list, "visit");
+        List<ZyjrLiushui> list = zyjrLiushuiService.selectZyjrLiushuiList(zyjrLiushui);
+        ExcelUtil<ZyjrLiushui> util = new ExcelUtil<ZyjrLiushui>(ZyjrLiushui.class);
+        return util.exportExcel(list, "liushui");
     }
 
     /**
      * 获取【请填写功能名称】详细信息
 
-    @PreAuthorize("@ss.hasPermi('system:visit:query')")
+    @PreAuthorize("@ss.hasPermi('system:liushui:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
-        return AjaxResult.success(zyjrGrantVisitService.selectZyjrGrantVisitById(id));
+        return AjaxResult.success(zyjrLiushuiService.selectZyjrLiushuiById(id));
     }*/
 
     /**
      * 新增【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:visit:add')")
+    @PreAuthorize("@ss.hasPermi('system:liushui:add')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody ZyjrGrantVisit zyjrGrantVisit)
+    public AjaxResult add(@RequestBody ZyjrLiushui zyjrLiushui)
     {
-        return toAjax(zyjrGrantVisitService.insertZyjrGrantVisit(zyjrGrantVisit));
+        return toAjax(zyjrLiushuiService.insertZyjrLiushui(zyjrLiushui));
     }
 
     /**
      * 修改【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:visit:edit')")
+    @PreAuthorize("@ss.hasPermi('system:liushui:edit')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody ZyjrGrantVisit zyjrGrantVisit)
+    public AjaxResult edit(@RequestBody ZyjrLiushui zyjrLiushui)
     {
-        return toAjax(zyjrGrantVisitService.updateZyjrGrantVisit(zyjrGrantVisit));
+        return toAjax(zyjrLiushuiService.updateZyjrLiushui(zyjrLiushui));
     }
 
     /**
      * 删除【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:visit:remove')")
+    @PreAuthorize("@ss.hasPermi('system:liushui:remove')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
-        return toAjax(zyjrGrantVisitService.deleteZyjrGrantVisitByIds(ids));
+        return toAjax(zyjrLiushuiService.deleteZyjrLiushuiByIds(ids));
     }
 }

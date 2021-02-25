@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jeethink.common.utils.file.FileUtils;
+import com.jeethink.system.Helper.BizException;
 import com.jeethink.system.domain.SysFileInfo;
 import com.jeethink.system.domain.ZyjrPhotoCar;
 import com.jeethink.system.domain.vo.fileInfoDto;
@@ -49,15 +50,15 @@ public class ZyjrPhotoLenderController extends BaseController
     @PostMapping("/pic")
     @ApiOperation("111111111")
     public AjaxResult testFiles(fileInfoVo q) {
-        JSONArray jsonarray = JSONArray.fromObject(q.getPhotoFile());
+        JSONArray jsonarray = JSONArray.fromObject(q.getLenderPhoto());
       //  System.out.println(jsonarray);
         ZyjrPhotoLender zyjrPhotoLender = new ZyjrPhotoLender();
         List<SysFileInfo> list = (List)JSONArray.toList(jsonarray, SysFileInfo.class);
-        if (q.getId() != null) {
+        if (q.getLenderId() != null) {
             SysFileInfo infos = new SysFileInfo();
-            infos.setPhotoLenderId(q.getId());
+            infos.setPhotoLenderId(q.getLenderId());
             List<SysFileInfo> sysFileInfos = sysFileInfoMapper.selectSysFileInfoList(infos);
-            int a = sysFileInfoMapper.deleteByLender(q.getId());
+            int a = sysFileInfoMapper.deleteByLender(q.getLenderId());
             String paths = "C:/demo";
             //System.err.println(path);
             //int a = sysFileInfoMapper.deleteSysFileInfoByPath(path);
@@ -76,14 +77,14 @@ public class ZyjrPhotoLenderController extends BaseController
 
         }
         List<String> pic = new ArrayList<>();
-        if (q.getPhotoFile() != null) {
+        if (q.getLenderPhoto() != null) {
             for (int i = 0; i < list.size(); i++) {
                 //String asd = androidUpload.upload(list.get(i).getFilePath());
                 SysFileInfo info = new SysFileInfo();
                 //String as = "http://192.168.31.86:8080" + asd;
                 info.setFilePath(list.get(i).getFilePath());
-                if(q.getId()!=null){
-                    info.setPhotoLenderId(q.getId());
+                if(q.getLenderId()!=null){
+                    info.setPhotoLenderId(q.getLenderId());
                 }else{
                     info.setPhotoLenderId(zyjrPhotoLender.getId());
                 }
@@ -105,7 +106,7 @@ public class ZyjrPhotoLenderController extends BaseController
     /**图片信息回显*/
     //@PreAuthorize("@ss.hasPermi('system:car:query')")
     @GetMapping(value = "/{userId}/{transactionCode}")
-    public AjaxResult findPhoto(@PathVariable("userId") Long userId,@PathVariable("transactionCode") String transactionCode)
+    public fileInfoDto findPhoto(@PathVariable("userId") Long userId,@PathVariable("transactionCode") String transactionCode)
     {
         ZyjrPhotoLender zyjrPhotoLender = zyjrPhotoLenderService.selectZyjrPhotoLenderById(userId, transactionCode);
         fileInfoDto f = new fileInfoDto();
@@ -117,9 +118,9 @@ public class ZyjrPhotoLenderController extends BaseController
             f.setTransactionCode(zyjrPhotoLender.getTransactionCode());
             f.setOrderState(zyjrPhotoLender.getOrderState());
             f.setPhotoFile(list);
-            return AjaxResult.success(f);
+            return f;
         }else {
-            return AjaxResult.success(f);
+            return f;
         }
     }
 

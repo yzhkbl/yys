@@ -1,5 +1,6 @@
 package com.jeethink.system.domain;
 
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.jeethink.common.annotation.Excel;
@@ -11,6 +12,7 @@ import com.jeethink.common.core.domain.BaseEntity;
  * @author jeethink
  * @date 2021-01-09
  */
+@Data
 public class ZyjrGrantPhoto extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -37,6 +39,8 @@ public class ZyjrGrantPhoto extends BaseEntity
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
     private Long visitId;
+
+    private Long liushuiId;
 
     public void setFileId(Long fileId) 
     {

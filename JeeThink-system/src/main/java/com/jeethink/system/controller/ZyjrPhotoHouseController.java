@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jeethink.common.utils.file.FileUtils;
+import com.jeethink.system.Helper.BizException;
 import com.jeethink.system.domain.SysFileInfo;
 import com.jeethink.system.domain.ZyjrPhotoCredit;
 import com.jeethink.system.domain.vo.fileInfoDto;
@@ -49,15 +50,15 @@ public class ZyjrPhotoHouseController extends BaseController
     @PostMapping("/pic")
     @ApiOperation("111111111")
     public AjaxResult testFiles(fileInfoVo q) {
-        JSONArray jsonarray = JSONArray.fromObject(q.getPhotoFile());
+        JSONArray jsonarray = JSONArray.fromObject(q.getHousePhoto());
       //  System.out.println(jsonarray);
         ZyjrPhotoHouse zyjrPhotoHouse = new ZyjrPhotoHouse();
         List<SysFileInfo> list = (List)JSONArray.toList(jsonarray, SysFileInfo.class);
-        if (q.getId() != null) {
+        if (q.getHouseId() != null) {
             SysFileInfo infos = new SysFileInfo();
-            infos.setPhotoHouseId(q.getId());
+            infos.setPhotoHouseId(q.getHouseId());
             List<SysFileInfo> sysFileInfos = sysFileInfoMapper.selectSysFileInfoList(infos);
-            int a = sysFileInfoMapper.deleteByHouse(q.getId());
+            int a = sysFileInfoMapper.deleteByHouse(q.getHouseId());
             String paths = "C:/demo";
             //System.err.println(path);
             //int a = sysFileInfoMapper.deleteSysFileInfoByPath(path);
@@ -82,8 +83,8 @@ public class ZyjrPhotoHouseController extends BaseController
                 SysFileInfo info = new SysFileInfo();
                 //String as = "http://192.168.31.86:8080" + asd;
                 info.setFilePath(list.get(i).getFilePath());
-                if(q.getId()!=null){
-                    info.setPhotoHouseId(q.getId());
+                if(q.getHouseId()!=null){
+                    info.setPhotoHouseId(q.getHouseId());
                 }else{
                     info.setPhotoHouseId(zyjrPhotoHouse.getId());
                 }
@@ -102,7 +103,7 @@ public class ZyjrPhotoHouseController extends BaseController
     /**图片信息回显*/
     //@PreAuthorize("@ss.hasPermi('system:car:query')")
     @GetMapping(value = "/{userId}/{transactionCode}")
-    public AjaxResult findPhoto(@PathVariable("userId") Long userId,@PathVariable("transactionCode") String transactionCode)
+    public fileInfoDto findPhoto(@PathVariable("userId") Long userId,@PathVariable("transactionCode") String transactionCode)
     {
         ZyjrPhotoHouse zyjrPhotoHouse = zyjrPhotoHouseService.selectZyjrPhotoHouseById(userId, transactionCode);
         fileInfoDto f = new fileInfoDto();
@@ -114,9 +115,9 @@ public class ZyjrPhotoHouseController extends BaseController
             f.setTransactionCode(zyjrPhotoHouse.getTransactionCode());
             f.setOrderState(zyjrPhotoHouse.getOrderState());
             f.setPhotoFile(list);
-            return AjaxResult.success(f);
+            return f;
         }else {
-            return AjaxResult.success(f);
+            return f;
         }
     }
 

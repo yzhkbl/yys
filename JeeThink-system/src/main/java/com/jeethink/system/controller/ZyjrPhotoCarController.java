@@ -51,14 +51,14 @@ public class ZyjrPhotoCarController extends BaseController
     @PostMapping("/pic")
     @ApiOperation("111111111")
     public AjaxResult testFiles(fileInfoVo q){
-        JSONArray jsonarray = JSONArray.fromObject(q.getPhotoFile());
+        JSONArray jsonarray = JSONArray.fromObject(q.getCarPhoto());
         List<SysFileInfo> list = (List)JSONArray.toList(jsonarray, SysFileInfo.class);
         ZyjrPhotoCar zyjrPhotoCar = new ZyjrPhotoCar();
-        if(q.getId()!=null){
+        if(q.getCarId()!=null){
                 SysFileInfo infos=new SysFileInfo();
-                infos.setPhotoCarId(q.getId());
+                infos.setPhotoCarId(q.getCarId());
                 List<SysFileInfo> sysFileInfos = sysFileInfoMapper.selectSysFileInfoList(infos);
-                int a = sysFileInfoMapper.deleteSysFileInfoByPhotoCarId(q.getId());
+                int a = sysFileInfoMapper.deleteSysFileInfoByPhotoCarId(q.getCarId());
                 String paths = "C:/demo";
                 //System.err.println(path);
                 //int a = sysFileInfoMapper.deleteSysFileInfoByPath(path);
@@ -100,8 +100,8 @@ public class ZyjrPhotoCarController extends BaseController
                 SysFileInfo info = new SysFileInfo();
                 //String as = "http://"+ IpUtils.getHostIp()+":8080" + asd;
                 info.setFilePath(list.get(i).getFilePath());
-                if(q.getId()!=null){
-                    info.setPhotoCarId(q.getId());
+                if(q.getCarId()!=null){
+                    info.setPhotoCarId(q.getCarId());
                 }else{
                     info.setPhotoCarId(zyjrPhotoCar.getId());
                 }
@@ -157,22 +157,24 @@ public class ZyjrPhotoCarController extends BaseController
     /**图片信息回显*/
     //@PreAuthorize("@ss.hasPermi('system:car:query')")
     @GetMapping(value = "/{userId}/{transactionCode}")
-    public AjaxResult findPhoto(@PathVariable("userId") Long userId,@PathVariable("transactionCode") String transactionCode)
+    public fileInfoDto findPhoto(@PathVariable("userId") Long userId,@PathVariable("transactionCode") String transactionCode)
     {
         ZyjrPhotoCar zyjrPhotoCar = zyjrPhotoCarService.selectZyjrPhotoCarById(userId, transactionCode);
+        fileInfoDto f = new fileInfoDto();
         if(zyjrPhotoCar != null) {
             List<SysFileInfo> list = sysFileInfoMapper.photoCar(zyjrPhotoCar.getId());
-            fileInfoDto f = new fileInfoDto();
+
             f.setId(zyjrPhotoCar.getId());
             f.setUserId(zyjrPhotoCar.getUserId());
             f.setTransactionCode(zyjrPhotoCar.getTransactionCode());
             f.setOrderState(zyjrPhotoCar.getOrderState());
             f.setPhotoFile(list);
-            return AjaxResult.success(f);
+            return f;
         }else {
-            return AjaxResult.error();
+            return f;
         }
     }
+
 
 
     /**
