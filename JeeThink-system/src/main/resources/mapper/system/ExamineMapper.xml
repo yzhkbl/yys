@@ -20,7 +20,7 @@
         <result property="createTime"    column="create_time"    />
     </resultMap>
     <select id="selectAllList" parameterType="com.jeethink.system.domain.ZyjrDaiqian" resultMap="ZyjrAllowBasicsResult2">
-        select e.id,e.gps,e.insurance,e.account, e.state, e.opinion,e.user_id,e.operator, a.transaction_code,
+        select e.id,e.gps,e.insurance,e.account,e.tijiao, e.state, e.opinion,e.user_id,e.operator, a.transaction_code,
         b.user_name,c.car_type,c.team,f.loan_amount,f.repayment_term,f.actual_price,c.car_information,g.create_time
         from zyjr_grant_opinion a
         left join zyjr_borrower b on a.transaction_code=b.transaction_code
