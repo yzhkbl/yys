@@ -151,9 +151,9 @@ public class ZyjrDaihouController extends BaseController
 
 
             map.put("baoxian",bb);
-            map.put("lvben",c);
+            /*map.put("lvben",c);
             map.put("tiche",dd);
-            map.put("qita",ee);
+            map.put("qita",ee);*/
             map.put("zhengshu",ff);
         }
 
