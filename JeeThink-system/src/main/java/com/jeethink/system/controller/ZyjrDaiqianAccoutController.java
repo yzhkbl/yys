@@ -82,7 +82,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
             as.setGps("2");
             as.setInsurance("2");
             as.setAccount("2");
-            as.setTijiao("2");
+            as.setTijiao("0");
             as.setState("2");
             as.setGpsPic("2");
             examineMapper.updateByDaiqian2(as);
