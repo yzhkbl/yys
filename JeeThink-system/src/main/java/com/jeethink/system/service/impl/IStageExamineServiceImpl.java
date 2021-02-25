@@ -6,6 +6,7 @@ import com.jeethink.system.domain.vo.ExamineVo;
 import com.jeethink.system.domain.vo.ZyjrGrant;
 import com.jeethink.system.mapper.*;
 import com.jeethink.system.service.IStageExamineService;
+import com.jeethink.system.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -87,7 +88,13 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     @Override
     public ExamineVo find(String transactionCode) {
         ExamineVo examineVo = new ExamineVo();
-        examineVo.setBorrower(findByBorrower(transactionCode));
+        ZyjrBorrower borrower=findByBorrower(transactionCode);
+        if(borrower!=null&&borrower.getIdCard()!=null){
+
+            String date= DataUtil.data(borrower.getIdCard().substring(6,14));
+            borrower.setDate(date);
+        }
+        examineVo.setBorrower(borrower);
         examineVo.setBusiness(findByBusiness(transactionCode));
         examineVo.setRelation(findByRelation(transactionCode));
         examineVo.setGuarantee(findByGuarantee(transactionCode));
