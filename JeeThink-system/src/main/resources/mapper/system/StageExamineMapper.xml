@@ -5,7 +5,7 @@
 <mapper namespace="com.jeethink.system.mapper.StageExamineMapper">
     <select id="findByBorrower" resultType="com.jeethink.system.domain.ZyjrBorrower">
         select id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,obverse_id,obverse_code,obverse_address,
-        obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,user_id,order_state,transaction_code
+        obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,user_id,order_state,transaction_code,nation
         from zyjr_borrower
         where order_state=1 and transaction_code=#{transactionCode}
     </select>
