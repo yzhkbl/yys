@@ -86,8 +86,8 @@ public class StageExamineController extends BaseController {
     }
 
     @GetMapping("/grant/basic")
-    public AjaxResult findByGrant(String transactionCode){
-        return AjaxResult.success(stageExamineService.findByGrant(transactionCode));
+    public AjaxResult findByGrant(Long userId,String transactionCode){
+        return AjaxResult.success(stageExamineService.findByGrant(userId,transactionCode));
     }
 
     @GetMapping("/allow")//准入列表

@@ -119,6 +119,11 @@ public class ZyjrCarLoan extends BaseEntity
     private String loanProduct; //贷款产品
     private String loanState;
 
+    private String cheliangleixing; //车辆类型
+    private String chepaileixing;   //车牌类型
+    private String yongtu;          //用途
+    private String cheliangyanse;   //车辆颜色
+
     public BigDecimal getIntentionPrice() {
         return intentionPrice;
     }
