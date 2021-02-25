@@ -51,4 +51,8 @@ public interface StageExamineMapper {
 
     int deleteAllowOpinion(Long id);
     int deleteRepeatOpinion(Long id);
+
+
+    int addSupplement(ZyjrSupplement q);
+    ZyjrSupplement findSupplement(String transactionCode);
 }
