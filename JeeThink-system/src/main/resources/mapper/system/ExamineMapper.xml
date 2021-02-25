@@ -36,6 +36,12 @@
         select *
         from dcc_provinces
     </select>
+    <select id="selectRegion"
+            resultType="com.jeethink.system.domain.vo.Region">
+        select *
+        from t_sys_region
+        where region_name=#{regionName} and level=#{level}
+    </select>
     <select id="selectC"
             resultType="com.jeethink.system.domain.vo.cities">
         select *

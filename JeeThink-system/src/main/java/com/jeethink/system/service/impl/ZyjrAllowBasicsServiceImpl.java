@@ -139,8 +139,11 @@ public class ZyjrAllowBasicsServiceImpl implements IZyjrAllowBasicsService
             if(a!=null){
                 ZyjrCarAccount b=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountId());
                 ZyjrCarAccount c=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getAccountOne());
+                ZyjrCarAccount e=zyjrCarAccountMapper.selectZyjrCarAccountByStringId(a.getFangkuan());
                 map.put("Account",b);
                 map.put("Account2",c);
+                map.put("fangkuan",e);
+
             }
 
         }

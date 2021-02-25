@@ -9,6 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface ExamineMapper {
+    List<Region> selectRegion(Region r);
     List<provinces> selectP();
     List<ZyjrDaiqian> selectAllList(ZyjrAllowBasics zyjrAllowBasics);
     ZyjrDaiqian selByDaiqian(String transactionCode);
