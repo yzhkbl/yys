@@ -39,12 +39,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="productType"    column="product_type"    />
         <result property="loanProduct"    column="loan_product"    />
         <result property="loanState"    column="loan_state"    />
+        <result property="cheliangleixing"    column="cheliangleixing"    />
+        <result property="chepaileixing"    column="chepaileixing"    />
+        <result property="yongtu"    column="yongtu"    />
+        <result property="cheliangyanse"    column="cheliangyanse"    />
     </resultMap>
 
     <sql id="selectZyjrCarLoanVo">
         select id, car_type, vin_code, brand, car_series, car_year, displacement, gear, style, engine_code, fuel_type,
         mileage, start_date, actual_price, loan_amount, repayment_term, interest_rate, deposit, transaction_code, order_state,
-        user_id ,allow_id,repeat_id,grant_id,allow_by,repeat_by,grant_id,seller_name,seller_id,seller_code,approval_type,product_type,loan_product,loan_state
+        user_id ,allow_id,repeat_id,grant_id,allow_by,repeat_by,grant_id,seller_name,seller_id,seller_code,approval_type,
+        product_type,loan_product,loan_state,cheliangleixing,chepaileixing,yongtu,cheliangyanse
         from zyjr_car_loan
     </sql>
 
@@ -84,6 +89,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="productType != null  and productType != ''"> and product_type = #{productType}</if>
             <if test="loanProduct != null  and loanProduct != ''"> and loan_product = #{loanProduct}</if>
             <if test="loanState != null"> and loan_state = #{loanState}</if>
+            <if test="cheliangleixing != null  and cheliangleixing != ''"> and cheliangleixing = #{cheliangleixing}</if>
+            <if test="chepaileixing != null  and chepaileixing != ''"> and chepaileixing = #{chepaileixing}</if>
+            <if test="yongtu != null  and yongtu != ''"> and yongtu = #{yongtu}</if>
+            <if test="cheliangyanse != null and cheliangyanse != ''"> and cheliangyanse = #{cheliangyanse}</if>
         </where>
     </select>
     
@@ -133,6 +142,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="productType != null">product_type,</if>
             <if test="loanProduct != null">loan_product,</if>
             <if test="loanState != null">loan_state,</if>
+            <if test="cheliangleixing != null">cheliangleixing,</if>
+            <if test="chepaileixing != null">chepaileixing,</if>
+            <if test="yongtu != null">yongtu,</if>
+            <if test="cheliangyanse != null">cheliangyanse,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="carType != null">#{carType},</if>
@@ -168,6 +181,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="productType != null">#{productType},</if>
             <if test="loanProduct != null">#{loanProduct},</if>
             <if test="loanState != null">#{loanState},</if>
+            <if test="cheliangleixing != null">#{cheliangleixing},</if>
+            <if test="chepaileixing != null">#{chepaileixing},</if>
+            <if test="yongtu != null">#{yongtu},</if>
+            <if test="cheliangyanse != null">#{cheliangyanse},</if>
          </trim>
     </insert>
 
@@ -207,6 +224,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="productType != null">product_type=#{productType},</if>
             <if test="loanProduct != null">loan_product=#{loanProduct},</if>
             <if test="loanState != null">loan_state=#{loanState},</if>
+            <if test="cheliangleixing != null">cheliangleixing=#{cheliangleixing},</if>
+            <if test="chepaileixing != null">chepaileixing=#{chepaileixing},</if>
+            <if test="yongtu != null">yongtu=#{yongtu},</if>
+            <if test="cheliangyanse != null">cheliangyanse=#{cheliangyanse},</if>
         </trim>
         where user_id = #{userId} and transaction_code=#{transactionCode}
     </update>
@@ -247,6 +268,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="productType != null">product_type=#{productType},</if>
             <if test="loanProduct != null">loan_product=#{loanProduct},</if>
             <if test="loanState != null">loan_state=#{loanState},</if>
+            <if test="cheliangleixing != null">cheliangleixing=#{cheliangleixing},</if>
+            <if test="chepaileixing != null">chepaileixing=#{chepaileixing},</if>
+            <if test="yongtu != null">yongtu=#{yongtu},</if>
+            <if test="cheliangyanse != null">cheliangyanse=#{cheliangyanse},</if>
         </trim>
         where transaction_code=#{transactionCode}
     </update>

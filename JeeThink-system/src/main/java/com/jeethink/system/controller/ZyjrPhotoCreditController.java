@@ -51,7 +51,7 @@ public class ZyjrPhotoCreditController extends BaseController
     @PostMapping("/pic")
     @ApiOperation("111111111")
     public AjaxResult testFiles(fileInfoVo q) {
-        JSONArray jsonarray = JSONArray.fromObject(q.getCarPhoto());
+        JSONArray jsonarray = JSONArray.fromObject(q.getCreditPhoto());
        // System.err.println(q);
      //   System.err.println(jsonarray);
 

@@ -1,5 +1,6 @@
 package com.jeethink.system.service.impl;
 
+import com.jeethink.system.controller.ExamineController;
 import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.ExamineVo;
 import com.jeethink.system.domain.vo.ZyjrGrant;
@@ -51,6 +52,12 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     private ZyjrGrantVisitMapper zyjrGrantVisitMapper;
     @Autowired
     private ZyjrAllowOpinionMapper zyjrAllowOpinionMapper;
+    @Autowired
+    private ExamineMapper examineMapper;
+    @Autowired
+    private ZyjrCommonApplicantMapper zyjrCommonApplicantMapper;
+    @Autowired
+    private ExamineController examineController;
 
 
     @Override
@@ -112,36 +119,39 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         map.put("borrower", examineDao.findByBorrower(transactionCode));
         ZyjrAllowApplicant zyjrAllowApplicant = zyjrAllowApplicantMapper.selectZyjrAllowApplicantById(userId, transactionCode);
         map.put("applicant",zyjrAllowApplicant);
-        ZyjrAllowBasics zyjrAllowBasics = zyjrAllowBasicsMapper.selectZyjrAllowBasicsById(userId, transactionCode);
-        map.put("basics",zyjrAllowBasics);
+        //ZyjrAllowBasics zyjrAllowBasics = zyjrAllowBasicsMapper.selectZyjrAllowBasicsById(userId, transactionCode);
+        //map.put("basics",zyjrAllowBasics);
         ZyjrAllowContacts zyjrAllowContacts = zyjrAllowContactsMapper.selectZyjrAllowContactsById(userId, transactionCode);
         map.put("contacts",zyjrAllowContacts);
-        ZyjrDebtService zyjrDebtService = zyjrDebtServiceMapper.selectZyjrDebtServiceById(userId, transactionCode);
-        map.put("debtService",zyjrDebtService);
+        //ZyjrDebtService zyjrDebtService = zyjrDebtServiceMapper.selectZyjrDebtServiceById(userId, transactionCode);
+        //map.put("debtService",zyjrDebtService);
         ZyjrCarLoan zyjrCarLoan = zyjrCarLoanMapper.selectZyjrCarLoanById(userId, transactionCode);
         map.put("carLoan",zyjrCarLoan);
-        ZyjrCompanyGuarantee zyjrCompanyGuarantee = zyjrCompanyGuaranteeMapper.selectZyjrCompanyGuaranteeById(userId, transactionCode);
-        map.put("companyGuarantee",zyjrCompanyGuarantee);
-        ZyjrPeopleGuarantee zyjrPeopleGuarantee = zyjrPeopleGuaranteeMapper.selectZyjrPeopleGuaranteeById(userId, transactionCode);
-        map.put("peopleGuarantee",zyjrPeopleGuarantee);
-        ZyjrPhotoCar zyjrPhotoCar = zyjrPhotoCarMapper.selectZyjrPhotoCarById(userId, transactionCode);
-        ZyjrPhotoCredit zyjrPhotoCredit = zyjrPhotoCreditMapper.selectZyjrPhotoCreditById(userId, transactionCode);
-        ZyjrPhotoHouse zyjrPhotoHouse = zyjrPhotoHouseMapper.selectZyjrPhotoHouseById(userId, transactionCode);
-        ZyjrPhotoLender zyjrPhotoLender = zyjrPhotoLenderMapper.selectZyjrPhotoLenderById(userId, transactionCode);
+
+        ZyjrFundSide zyjrFundSide = examineMapper.findFundSide(transactionCode);
+        map.put("fundSide",zyjrFundSide);
+        //ZyjrCompanyGuarantee zyjrCompanyGuarantee = zyjrCompanyGuaranteeMapper.selectZyjrCompanyGuaranteeById(userId, transactionCode);
+        //map.put("companyGuarantee",zyjrCompanyGuarantee);
+        //ZyjrPeopleGuarantee zyjrPeopleGuarantee = zyjrPeopleGuaranteeMapper.selectZyjrPeopleGuaranteeById(userId, transactionCode);
+        //map.put("peopleGuarantee",zyjrPeopleGuarantee);
+        //ZyjrPhotoCar zyjrPhotoCar = zyjrPhotoCarMapper.selectZyjrPhotoCarById(userId, transactionCode);
+        //ZyjrPhotoCredit zyjrPhotoCredit = zyjrPhotoCreditMapper.selectZyjrPhotoCreditById(userId, transactionCode);
+        //ZyjrPhotoHouse zyjrPhotoHouse = zyjrPhotoHouseMapper.selectZyjrPhotoHouseById(userId, transactionCode);
+        //ZyjrPhotoLender zyjrPhotoLender = zyjrPhotoLenderMapper.selectZyjrPhotoLenderById(userId, transactionCode);
         /**if(zyjrAllowApplicant!=null&&zyjrAllowBasics!=null&&zyjrAllowContacts!=null&&zyjrCarLoan!=null&&zyjrPhotoCar!=null&&zyjrPhotoCredit!=null
         &&zyjrPhotoHouse!=null&&zyjrPhotoLender!=null){
             if(zyjrCompanyGuarantee!=null||zyjrPeopleGuarantee!=null) {
                 map.put("stateId", 1);
             }
         }*/
-        List<String> lists=new ArrayList<>();
+        /**List<String> lists=new ArrayList<>();
         if (zyjrPhotoCar != null) {
             /*map.put("photoCar", sysFileInfoMapper.photoCar(zyjrPhotoCar.getId()));*/
        /*     map.put("photoCredit", sysFileInfoMapper.photoCredit(zyjrPhotoCredit.getId()));
             map.put("photoHouse", sysFileInfoMapper.photoHouse(zyjrPhotoHouse.getId()));
             map.put("photoLender", sysFileInfoMapper.photoLender(zyjrPhotoLender.getId()));*/
 
-            List<SysFileInfo> a = sysFileInfoMapper.photoCar(zyjrPhotoCar.getId());
+            /**List<SysFileInfo> a = sysFileInfoMapper.photoCar(zyjrPhotoCar.getId());
             for (SysFileInfo sysFileInfo : a) {
                 lists.add(sysFileInfo.getFilePath());
                 map.put(sysFileInfo.getFileName(), sysFileInfo.getFilePath());
@@ -167,7 +177,7 @@ public class IStageExamineServiceImpl implements IStageExamineService {
                     map.put(sysFileInfo.getFileName(), sysFileInfo.getFilePath());
                 }
             }
-            map.put("pic", lists);
+            map.put("pic", lists);*/
         return map;
     }
 
@@ -212,9 +222,18 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     }
 
     @Override
-    public Map<String,Object>findByGrant(String transactionCode){
-        Map<String, Object> map = new HashMap<>();
-        ZyjrGrantImage zyjrGrantImage = zyjrGrantImageMapper.selectZyjrGrantImageById(transactionCode);
+    public Map<String,Object>findByGrant(Long userId,String transactionCode){
+        //Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = examineController.findPhoto(userId,transactionCode);
+        ZyjrDebtService zyjrDebtService = zyjrDebtServiceMapper.selectZyjrDebtServiceById(userId, transactionCode);
+        map.put("debtService",zyjrDebtService);
+        ZyjrCompanyGuarantee zyjrCompanyGuarantee = zyjrCompanyGuaranteeMapper.selectZyjrCompanyGuaranteeById(userId, transactionCode);
+        map.put("companyGuarantee",zyjrCompanyGuarantee);
+        ZyjrPeopleGuarantee zyjrPeopleGuarantee = zyjrPeopleGuaranteeMapper.selectZyjrPeopleGuaranteeById(userId, transactionCode);
+        map.put("peopleGuarantee",zyjrPeopleGuarantee);
+        ZyjrCommonApplicant zyjrCommonApplicant = zyjrCommonApplicantMapper.selectZyjrCommonApplicantById(transactionCode);
+
+        /**ZyjrGrantImage zyjrGrantImage = zyjrGrantImageMapper.selectZyjrGrantImageById(transactionCode);
         ZyjrGrantInstalments zyjrGrantInstalments = zyjrGrantInstalmentsMapper.selectZyjrGrantInstalmentsById(transactionCode);
         ZyjrGrantVisit zyjrGrantVisit = zyjrGrantVisitMapper.selectZyjrGrantVisitById(transactionCode);
         //if (zyjrGrantImage!=null&&zyjrGrantInstalments!=null)
@@ -229,7 +248,9 @@ public class IStageExamineServiceImpl implements IStageExamineService {
             map.put("visit", zyjrGrantPhotoMapper.findVisit(zyjrGrantVisit.getId()));
         }
         String 董宗杰 = "董宗杰垃圾";
-      //  System.err.println(董宗杰);
+      //System.err.println(董宗杰);*/
+
+
         return map;
     }
 

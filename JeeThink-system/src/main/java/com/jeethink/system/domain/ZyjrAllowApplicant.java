@@ -186,6 +186,7 @@ public class ZyjrAllowApplicant extends BaseEntity
     private String sourceIncome;        //主要收入来源
     private String familyAddress;       //籍贯
     private String spouseFamilyAddress; //配偶籍贯
+    private Integer sfgtsqr;    //是否共同申请人
 
 
     public String getJoindate() {
