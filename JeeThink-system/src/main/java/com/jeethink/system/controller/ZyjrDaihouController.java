@@ -227,11 +227,7 @@ public class ZyjrDaihouController extends BaseController
 
         if(zyjrDaihou!=null&&zyjrDaihou.getState().equals("2")){
             ZyjrDaihou zyjrDaihou2=zyjrDaihouMapper.selectZyjrDaihouByT(zyjrDaihou.getTransactionCode());
-            zyjrDaihou2.setZhengshu("2");
-            zyjrDaihou2.setTiche("2");
-            zyjrDaihou2.setBaoxian("2");
-            zyjrDaihou2.setLvben("2");
-            zyjrDaihou2.setQita("2");
+
             zyjrDaihou2.setTijiao("0");
             zyjrDaihou2.setState("2");
             zyjrDaihouMapper.updateZyjrDaihou(zyjrDaihou2);
