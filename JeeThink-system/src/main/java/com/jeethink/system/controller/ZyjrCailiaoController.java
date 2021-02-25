@@ -52,6 +52,8 @@ public class ZyjrCailiaoController extends BaseController
     private ZyjrFangkuanpicMapper zyjrFangkuanpicMapper;
     @Autowired
     private ZyjrFangkuanMapper zyjrFangkuanMapper;
+    @Autowired
+    private ExamineMapper examineMapper;
 
     /**
      * 查询【请填写功能名称】列表
@@ -122,6 +124,14 @@ public class ZyjrCailiaoController extends BaseController
 
 
         return AjaxResult.success();
+    }
+    @GetMapping("demaxiya")
+    public AjaxResult gg(){
+        Region region=new Region();
+        region.setLevel(1);
+        region.setRegionName("北京市");
+        List<Region> a=examineMapper.selectRegion(region);
+        return AjaxResult.success(a);
     }
 
     @GetMapping("fenqi")
