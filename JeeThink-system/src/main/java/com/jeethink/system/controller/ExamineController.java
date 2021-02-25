@@ -4,6 +4,9 @@ import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
 import com.jeethink.common.core.page.TableDataInfo;
 import com.jeethink.system.domain.*;
+import com.jeethink.system.domain.vo.GrantPhoto;
+import com.jeethink.system.domain.vo.fileInfoDto;
+import com.jeethink.system.domain.vo.fileInfoVo;
 import com.jeethink.system.domain.vo.orderVo;
 import com.jeethink.system.mapper.*;
 import com.jeethink.system.service.IExamineService;
@@ -11,6 +14,8 @@ import com.jeethink.system.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +36,18 @@ public class ExamineController extends BaseController {
     private ZyjrRelationMapper zyjrRelationMapper;
     @Autowired
     private ZyjrGuaranteeMapper zyjrGuaranteeMapper;
+    @Autowired
+    private ZyjrPhotoCarController zyjrPhotoCarController;
+    @Autowired
+    private ZyjrPhotoCreditController zyjrPhotoCreditController;
+    @Autowired
+    private ZyjrPhotoHouseController zyjrPhotoHouseController;
+    @Autowired
+    private ZyjrPhotoLenderController zyjrPhotoLenderController;
+    @Autowired
+    private ZyjrGrantVisitController zyjrGrantVisitController;
+    @Autowired
+    private ZyjrLiushuiController zyjrLiushuiController;
 
     @RequestMapping("/add/borrower")
     public AjaxResult addBorrower(ZyjrBorrower q){
@@ -313,5 +330,60 @@ public class ExamineController extends BaseController {
     public AjaxResult grantList(String transactionCode){
         return AjaxResult.success(examineMapper.grantList(transactionCode));
     }
+
+    @PostMapping("/total/photo")
+    public AjaxResult photoTotal(fileInfoVo q){
+        Map<String,Object>map = new HashMap<>();
+        if(q.getCarPhoto()!=null) {
+            AjaxResult a = zyjrPhotoCarController.testFiles(q);
+            map.put("car",a);
+        }
+        if(q.getCreditPhoto()!=null) {
+            AjaxResult b = zyjrPhotoCreditController.testFiles(q);
+            map.put("credit",b);
+        }
+        if(q.getHousePhoto()!=null) {
+            AjaxResult c = zyjrPhotoHouseController.testFiles(q);
+            map.put("house",c);
+        }
+        if(q.getLenderPhoto()!=null) {
+            AjaxResult d = zyjrPhotoLenderController.testFiles(q);
+            map.put("qita",d);
+        }
+        if(q.getVisitPhoto()!=null) {
+            AjaxResult e = zyjrGrantVisitController.testFiles(q);
+            map.put("visit",e);
+        }
+        if(q.getLiushuiPhoto()!=null){
+            AjaxResult f = zyjrLiushuiController.testFiles(q);
+            map.put("liushui",f);
+        }
+        return AjaxResult.success(map);
+    }
+
+
+    @GetMapping("/find/photo")
+    public AjaxResult findPhoto(Long userId,String transactionCode){
+        fileInfoDto a = zyjrPhotoCarController.findPhoto(userId, transactionCode);
+        fileInfoDto b = zyjrPhotoCreditController.findPhoto(userId,transactionCode);
+        fileInfoDto c = zyjrPhotoHouseController.findPhoto(userId, transactionCode);
+        fileInfoDto d = zyjrPhotoLenderController.findPhoto(userId, transactionCode);
+        GrantPhoto e = zyjrGrantVisitController.findPhoto(transactionCode);
+        GrantPhoto f = zyjrLiushuiController.findPhoto(transactionCode);
+        ZyjrBorrower zyjrBorrower = examineMapper.Borrower(transactionCode);
+        List<String>list = new ArrayList<>();
+        list.add(0,zyjrBorrower.getObverseAddress());
+        list.add(1,zyjrBorrower.getBackAddress());
+        Map<String,Object>map = new HashMap<>();
+        map.put("car",a);
+        map.put("credit",b);
+        map.put("house",c);
+        map.put("qita",d);
+        map.put("visit",e);
+        map.put("liushui",f);
+        map.put("borrower",list);
+        return AjaxResult.success(map);
+    }
+
 }
 

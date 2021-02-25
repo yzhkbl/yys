@@ -69,4 +69,7 @@ public interface ZyjrGrantPhotoMapper
 
     public int deleteByVisit(Long visitId);
     List<ZyjrGrantPhoto> findVisit(@Param("visitId") Long visitId);
+
+    public int deleteByLiushui(Long visitId);
+    List<ZyjrGrantPhoto> findLiushui(@Param("liushuiId") Long liushuiId);
 }

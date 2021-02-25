@@ -11,10 +11,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="instalmentsId"    column="instalments_id"    />
         <result property="imageId"    column="image_id"    />
         <result property="visitId"    column="visit_id"    />
+        <result property="liushuiId"    column="liushui_id"    />
     </resultMap>
 
     <sql id="selectZyjrGrantPhotoVo">
-        select file_id, file_name, file_path, instalments_id, image_id, visit_id from zyjr_grant_photo
+        select file_id, file_name, file_path, instalments_id, image_id, visit_id ,liushui_id from zyjr_grant_photo
     </sql>
 
     <select id="selectZyjrGrantPhotoList" parameterType="ZyjrGrantPhoto" resultMap="ZyjrGrantPhotoResult">
@@ -25,6 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="instalmentsId != null "> and instalments_id = #{instalmentsId}</if>
             <if test="imageId != null "> and image_id = #{imageId}</if>
             <if test="visitId != null "> and visit_id = #{visitId}</if>
+            <if test="liushuiId != null "> and liushui_id = #{liushuiId}</if>
         </where>
     </select>
     
@@ -47,6 +49,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectZyjrGrantPhotoVo"/>
         where visit_id = #{visitId}
     </select>
+
+    <select id="findLiushui" parameterType="Long" resultMap="ZyjrGrantPhotoResult">
+        <include refid="selectZyjrGrantPhotoVo"/>
+        where liushui_id = #{liushuiId}
+    </select>
         
     <insert id="insertZyjrGrantPhoto" parameterType="ZyjrGrantPhoto" useGeneratedKeys="true" keyProperty="fileId">
         insert into zyjr_grant_photo
@@ -56,6 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="instalmentsId != null">instalments_id,</if>
             <if test="imageId != null">image_id,</if>
             <if test="visitId != null">visit_id,</if>
+            <if test="liushuiId != null">liushui_id,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="fileName != null">#{fileName},</if>
@@ -63,6 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="instalmentsId != null">#{instalmentsId},</if>
             <if test="imageId != null">#{imageId},</if>
             <if test="visitId != null">#{visitId},</if>
+            <if test="liushuiId != null">#{liushuiId},</if>
          </trim>
     </insert>
 
@@ -74,6 +83,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="instalmentsId != null">instalments_id = #{instalmentsId},</if>
             <if test="imageId != null">image_id = #{imageId},</if>
             <if test="visitId != null">visit_id = #{visitId},</if>
+            <if test="liushuiId != null">liushui_id = #{liushuiId},</if>
         </trim>
         where file_id = #{fileId}
     </update>
@@ -92,6 +102,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <delete id="deleteByVisit" parameterType="Long">
         delete from zyjr_grant_photo where visit_id = #{visitId}
+    </delete>
+
+    <delete id="deleteByLiushui" parameterType="Long">
+        delete from zyjr_grant_photo where liushui_id = #{liushuiId}
     </delete>
 
     <delete id="deleteZyjrGrantPhotoByIds" parameterType="String">

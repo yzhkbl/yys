@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrLiushuiMapper">
+    
+    <resultMap type="ZyjrLiushui" id="ZyjrLiushuiResult">
+        <result property="id"    column="id"    />
+        <result property="orderState"    column="order_state"    />
+        <result property="userId"    column="user_id"    />
+        <result property="transactionCode"    column="transaction_code"    />
+    </resultMap>
+
+    <sql id="selectZyjrLiushuiVo">
+        select id, order_state, user_id, transaction_code from zyjr_liushui
+    </sql>
+
+    <select id="selectZyjrLiushuiList" parameterType="ZyjrLiushui" resultMap="ZyjrLiushuiResult">
+        <include refid="selectZyjrLiushuiVo"/>
+        <where>  
+            <if test="orderState != null "> and order_state = #{orderState}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrLiushuiById" resultMap="ZyjrLiushuiResult">
+        <include refid="selectZyjrLiushuiVo"/>
+        where transaction_code = #{transactionCode}
+    </select>
+        
+    <insert id="insertZyjrLiushui" parameterType="ZyjrLiushui" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_liushui
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderState != null">order_state,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="transactionCode != null">transaction_code,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderState != null">#{orderState},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="transactionCode != null">#{transactionCode},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrLiushui" parameterType="ZyjrLiushui">
+        update zyjr_liushui
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderState != null">order_state = #{orderState},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrLiushuiById" parameterType="Long">
+        delete from zyjr_liushui where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrLiushuiByIds" parameterType="String">
+        delete from zyjr_liushui where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
