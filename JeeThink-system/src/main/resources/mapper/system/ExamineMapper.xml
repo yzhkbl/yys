@@ -408,7 +408,7 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
                 order_state=#{orderState},
             </if>
             <if test="transactionCode!=null">
-                transaction_code=#{transactionCode}
+                transaction_code=#{transactionCode},
             </if>
         </set>
         where id=#{id}
@@ -504,7 +504,7 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
                 order_state=#{orderState},
             </if>
             <if test="transactionCode!=null">
-                transaction_code=#{transactionCode}
+                transaction_code=#{transactionCode},
             </if>
         </set>
         where id=#{id}
@@ -537,7 +537,7 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
                 user_id = #{userId},
             </if>
             <if test="orderState != null">
-                order_state = #{orderState}
+                order_state = #{orderState},
             </if>
         </set>
         where order_state=0 and user_id = #{userId}

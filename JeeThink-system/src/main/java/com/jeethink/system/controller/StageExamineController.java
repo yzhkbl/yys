@@ -3,10 +3,7 @@ package com.jeethink.system.controller;
 import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
 import com.jeethink.common.core.page.TableDataInfo;
-import com.jeethink.system.domain.ZyjrBusiness;
-import com.jeethink.system.domain.ZyjrDetails;
-import com.jeethink.system.domain.ZyjrGrantOpinion;
-import com.jeethink.system.domain.ZyjrRepeatOpinion;
+import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.ExamineVo;
 import com.jeethink.system.domain.vo.ShangpaiDiyaVo;
 import com.jeethink.system.domain.vo.ZyjrGrant;
@@ -141,5 +138,15 @@ public class StageExamineController extends BaseController {
     @PostMapping("/delete/grant/opinion")
     public AjaxResult deleteRepeatOpinion(Long id){
         return AjaxResult.success(stageExamineMapper.deleteRepeatOpinion(id));
+    }
+
+    @PostMapping("/add/supplement")
+    public AjaxResult addSupplement(@RequestBody ZyjrSupplement q){
+        return toAjax(stageExamineMapper.addSupplement(q));
+    }
+
+    @GetMapping("/find/supplement")
+    public AjaxResult findSupplement(String transactionCode){
+        return AjaxResult.success(stageExamineMapper.findSupplement(transactionCode));
     }
 }
