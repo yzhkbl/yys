@@ -239,7 +239,7 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         ZyjrPeopleGuarantee zyjrPeopleGuarantee = zyjrPeopleGuaranteeMapper.selectZyjrPeopleGuaranteeById(userId, transactionCode);
         map.put("peopleGuarantee",zyjrPeopleGuarantee);
         ZyjrCommonApplicant zyjrCommonApplicant = zyjrCommonApplicantMapper.selectZyjrCommonApplicantById(transactionCode);
-
+        map.put("common",zyjrCommonApplicant);
         /**ZyjrGrantImage zyjrGrantImage = zyjrGrantImageMapper.selectZyjrGrantImageById(transactionCode);
         ZyjrGrantInstalments zyjrGrantInstalments = zyjrGrantInstalmentsMapper.selectZyjrGrantInstalmentsById(transactionCode);
         ZyjrGrantVisit zyjrGrantVisit = zyjrGrantVisitMapper.selectZyjrGrantVisitById(transactionCode);
