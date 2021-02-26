@@ -1358,7 +1358,20 @@ public class test extends BaseController {
 
         return AjaxResult.success(lists);
     }
+    @ResponseBody
+    @PostMapping("inform")
+    public AjaxResult a(Inform inform){
+        System.err.println(inform);
+        AjaxResult json=new AjaxResult();
+        json.put("msg","success");
+        json.put("code",0);
+        DataVo dataVo=new DataVo();
+        dataVo.setMsg("通知成功");
+        dataVo.setCode(1);
+        json.put("data",dataVo);
 
+        return json;
+    }
 
 
 }

@@ -131,14 +131,14 @@ public class ZyjrDaihouController extends BaseController
             zyjrDaihouTiche.setDaihou(a.getId().toString());
             List<ZyjrDaihouTiche> d=zyjrDaihouTicheMapper.selectZyjrDaihouTicheList(zyjrDaihouTiche);
             for (ZyjrDaihouTiche daihouBaoxian : d) {
-                map.put(daihouBaoxian.getFileName(),daihouBaoxian.getFilePath());
+             //   map.put(daihouBaoxian.getFileName(),daihouBaoxian.getFilePath());
             }
             List<String> dd=d.stream().map(ZyjrDaihouTiche::getFilePath).collect(Collectors.toList());
             ZyjrDaihouQita qita=new ZyjrDaihouQita();
             qita.setDaihou(a.getId().toString());
             List<ZyjrDaihouQita> e=zyjrDaihouQitaMapper.selectZyjrDaihouQitaList(qita);
             for (ZyjrDaihouQita daihouBaoxian : e) {
-                map.put(daihouBaoxian.getFileName(),daihouBaoxian.getFilePath());
+            //    map.put(daihouBaoxian.getFileName(),daihouBaoxian.getFilePath());
             }
             List<String> ee=e.stream().map(ZyjrDaihouQita::getFilePath).collect(Collectors.toList());
             ZyjrDaihouZhengshu zyjrDaihouZhengshu=new ZyjrDaihouZhengshu();
