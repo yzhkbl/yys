@@ -397,7 +397,7 @@ public class test extends BaseController {
                     zyjrOrderProgress.setTransactionCode(codes);
                     zyjrOrderProgress.setApprovalType(1);
                     zyjrOrderProgress.setProgress(1);
-                    examineMapper.insertOrderProgress(zyjrOrderProgress);
+                    examineMapper.updateOrderProgress(zyjrOrderProgress);
                     return AjaxResult.success((Object)4);
 
                 }
