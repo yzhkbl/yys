@@ -23,10 +23,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="userId"    column="user_id"    />
         <result property="transactionCode"    column="transaction_code"    />
         <result property="orderState"    column="order_state"    />
+        <result property="sourceIncome"    column="source_income"    />
     </resultMap>
 
     <sql id="selectZyjrDebtServiceVo">
-        select id, is_debt, people_ship, card_address, back_address, debt_name, id_card, education, now_place, phone_number, now_work, work_place, company_phone, company_nature, monthly_income, user_id, transaction_code, order_state from zyjr_debt_service
+        select id, is_debt, people_ship, card_address, back_address, debt_name, id_card, education, now_place, phone_number, now_work, work_place, company_phone, company_nature, monthly_income, user_id, transaction_code, order_state,source_income from zyjr_debt_service
     </sql>
 
     <select id="selectZyjrDebtServiceList" parameterType="ZyjrDebtService" resultMap="ZyjrDebtServiceResult">
@@ -49,6 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null "> and user_id = #{userId}</if>
             <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
             <if test="orderState != null "> and order_state = #{orderState}</if>
+            <if test="sourceIncome != null  and sourceIncome != ''"> and source_income = #{sourceIncome}</if>
         </where>
     </select>
     
@@ -81,6 +83,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null">user_id,</if>
             <if test="transactionCode != null">transaction_code,</if>
             <if test="orderState != null">order_state,</if>
+            <if test="sourceIncome != null">source_income,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="isDebt != null">#{isDebt},</if>
@@ -100,6 +103,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null">#{userId},</if>
             <if test="transactionCode != null">#{transactionCode},</if>
             <if test="orderState != null">#{orderState},</if>
+            <if test="sourceIncome != null">#{sourceIncome},</if>
          </trim>
     </insert>
 
@@ -123,6 +127,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null">user_id = #{userId},</if>
             <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
             <if test="orderState != null">order_state = #{orderState},</if>
+            <if test="sourceIncome != null">source_income = #{sourceIncome},</if>
         </trim>
         where user_id = #{userId} and transaction_code=#{transactionCode}
     </update>
