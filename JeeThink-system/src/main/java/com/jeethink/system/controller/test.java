@@ -86,6 +86,8 @@ public class test extends BaseController {
     private ISysUserService iSysUserService;
     @Autowired
     private ZyjrCarLoanMapper zyjrCarLoanMapper;
+    @Autowired
+    private ZyjrDebtServiceMapper zyjrDebtServiceMapper;
 
     private static String oCode = "sfzzm";
     private static String pCode = "sfzfm";
@@ -429,8 +431,19 @@ public class test extends BaseController {
         JSONObject jsons = encryptData(json3.toString(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo, transactionCode);
 
         JSONObject results = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", jsons);
+        ZyjrStartPage byStarts = examineMapper.findByStarts(transactionCode);
+        ZyjrBorrower zyjrBorrower = o.selectById(transactionCode);
+        ZyjrCarLoan zyjrCarLoan = zyjrCarLoanMapper.selectHandle(transactionCode);
+        AjaxResult json=new AjaxResult();
+        json.put("msg","操作成功");
+        json.put("code",200);
+        json.put("data",results);
+        json.put("date",byStarts.getCreateTime());
+        json.put("username",zyjrBorrower.getUserName());
+        json.put("bankcode",zyjrBorrower.getBackCode());
+        json.put("daikuanjine",zyjrCarLoan.getLoanAmount());
 
-        return AjaxResult.success("操作成功",results);
+        return json;
     }
 
     public static JSONObject encryptData(String data, String dataPublicKey, String signPrivateKey, String assurerNo
@@ -1251,7 +1264,7 @@ public class test extends BaseController {
         ZyjrAllowContacts e=zyjrAllowContactsMapper.selectById(transactionCode);
         ZyjrAllowApplicant b=zyjrAllowApplicantMapper.selectById(transactionCode);
         ZyjrCarLoan f=zyjrCarLoanMapper.selectHandle(transactionCode);
-
+        ZyjrDebtService zyjrDebtService = zyjrDebtServiceMapper.selectZyjrDebtServiceById2(transactionCode);
         Map<String,Object> map=new HashMap<>();
         map.put("jiekuanren",a);
         map.put("zhudairen",b);
@@ -1259,6 +1272,7 @@ public class test extends BaseController {
         map.put("danbaoren",d);
         map.put("xinxi",e);
         map.put("chedai",f);
+        map.put("gongchangren",zyjrDebtService);
         return AjaxResult.success(map);
     }
     @ResponseBody

@@ -60,4 +60,6 @@ public interface ZyjrDebtServiceMapper
      * @return 结果
      */
     public int deleteZyjrDebtServiceByIds(Long[] ids);
+
+    ZyjrDebtService selectZyjrDebtServiceById2(String transactionCode);
 }
