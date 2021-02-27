@@ -117,6 +117,7 @@ public interface ExamineMapper {
 
     List<RelationName>relationName(String transactionCode);
     ZyjrRelation findById(Long id);
+    Bairong selectBairong(Bairong b);
 
     List<carVo> selectZyjrCarListss(@Param("userId") String createBy, @Param("pid") String pid);
 
@@ -137,4 +138,6 @@ public interface ExamineMapper {
 
     List<ZyjrRelation> findRe(String transactionCode);
     List<ZyjrGuarantee> findGu(String transactionCode);
+
+    int updateByBairong(Bairong borrower);
 }

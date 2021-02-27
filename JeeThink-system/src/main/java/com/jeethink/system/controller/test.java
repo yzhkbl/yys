@@ -583,16 +583,14 @@ public class test extends BaseController {
         return AjaxResult.success(c[7]);
     }
 
-    @RequestMapping(value = {"/getByMelting"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/getByMelting"}, method = RequestMethod.POST)
     @ResponseBody
     @ApiOperation("getByMelting")
-    public AjaxResult ceshi6(String id) {
-        if(id==null){
-            AjaxResult.error("没接收到参数");
-        }
-       ZyjrBorrower borrower=o.selectById(id);
-        if(borrower.getConf()!=null){
-            return AjaxResult.success(borrower.getEncryptData(),borrower.getConf());
+    public AjaxResult ceshi6(@RequestBody Bairong borrower) {
+
+       Bairong b=examineMapper.selectBairong(borrower);
+        if(b!=null&&b.getConf()!=null){
+            return AjaxResult.success(b.getEncryptData(),b.getConf());
         }
         String aa=redisCache.getCacheObject("getByMelting");
         if(aa!=null){
@@ -600,7 +598,7 @@ public class test extends BaseController {
            String d=Test.getStrategy(aa,borrower.getIdCard(),borrower.getPhoneNumber(),borrower.getUserName());
             borrower.setConf(c);
             borrower.setEncryptData(d);
-            o.updateZyjrBorrower(borrower);
+            examineMapper.updateByBairong(borrower);
             return AjaxResult.success(d,c);
         }else{
             String t=Test.getTokenId();
@@ -609,7 +607,7 @@ public class test extends BaseController {
             String d=Test.getStrategy(t,borrower.getIdCard(),borrower.getPhoneNumber(),borrower.getUserName());
             borrower.setConf(c);
             borrower.setEncryptData(d);
-            o.updateZyjrBorrower(borrower);
+            examineMapper.updateByBairong(borrower);
             return AjaxResult.success(d,c);
         }
     }
@@ -1013,6 +1011,7 @@ public class test extends BaseController {
         List<ZyjrAllowApplicant> zyjrAllowApplicants = zyjrAllowApplicantMapper.selectZyjrAllowApplicantList(z);
         return AjaxResult.success(zyjrAllowApplicants);
     }
+
 
     @ResponseBody
     @PostMapping("phoneCode")
