@@ -2,6 +2,7 @@ package com.jeethink.system.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.jeethink.system.domain.*;
 import com.jeethink.system.mapper.ExamineMapper;
@@ -41,11 +42,14 @@ public class ZyjrAllowApplicantServiceImpl implements IZyjrAllowApplicantService
         if(zyjrAllowApplicant==null) {
             zyjrAllowApplicant = new ZyjrAllowApplicant();
             ZyjrBorrower zyjrBorrower = examineMapper.Borrower(transactionCode);
-            ZyjrRelation zyjrRelation = examineMapper.Relation(transactionCode);
-            ZyjrGuarantee zyjrGuarantee = examineMapper.Guarantee(transactionCode);
+            List<ZyjrRelation> r = examineMapper.findRe(transactionCode);
+            List<ZyjrRelation> data = r.stream().filter(a -> a.getPeopleShip().equals("配偶")).collect(Collectors.toList());
+            List<ZyjrGuarantee> g = examineMapper.findGu(transactionCode);
+            List<ZyjrGuarantee> gu = g.stream().filter(a -> a.getPeopleShip().equals("配偶")).collect(Collectors.toList());
             zyjrAllowApplicant.setFamilyAddress(zyjrBorrower.getFamilyAddress());
             zyjrAllowApplicant.setPhoneNumber(zyjrBorrower.getPhoneNumber());
-            if (zyjrRelation != null && zyjrRelation.getPeopleShip().equals("配偶")) {
+            if (data.size()>0) {
+                ZyjrRelation zyjrRelation=data.get(0);
                 zyjrAllowApplicant.setCardAddress(zyjrRelation.getObverseAddress());
                 zyjrAllowApplicant.setBackAddress(zyjrRelation.getBackAddress());
                 zyjrAllowApplicant.setSpouseName(zyjrRelation.getUserName());
@@ -56,7 +60,8 @@ public class ZyjrAllowApplicantServiceImpl implements IZyjrAllowApplicantService
                 zyjrAllowApplicant.setSpouseWorkPlace(zyjrRelation.getCompanyAddress());
                 zyjrAllowApplicant.setMarriage("已婚");
             }
-            if (zyjrGuarantee != null && zyjrGuarantee.getPeopleShip().equals("配偶")) {
+            if (gu.size()>0) {
+                ZyjrGuarantee zyjrGuarantee = gu.get(0);
                 zyjrAllowApplicant.setCardAddress(zyjrGuarantee.getObverseAddress());
                 zyjrAllowApplicant.setBackAddress(zyjrGuarantee.getBackAddress());
                 zyjrAllowApplicant.setSpouseName(zyjrGuarantee.getUserName());

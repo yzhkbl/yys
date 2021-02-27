@@ -246,8 +246,17 @@ public class ExamineServiceImpl implements IExamineService {
         Map<String,Object>map = new HashMap<>();
         map.put("business",examineDao.Business(transactionCode));
         map.put("borrower",examineDao.Borrower(transactionCode));
-        map.put("relation",examineDao.Relation(transactionCode));
-        map.put("guarantee",examineDao.Guarantee(transactionCode));
+        List<ZyjrRelation> r = examineDao.findRe(transactionCode);
+        if(r.size()>0) {
+            map.put("relation", r.get(0));
+        }else {
+            map.put("relation", null);
+        }
+        List<ZyjrGuarantee> g = examineDao.findGu(transactionCode);
+        map.put("guarantee", null);
+        if(g.size()>0) {
+            map.put("guarantee", g.get(0));
+        }
         map.put("start",examineDao.Start(transactionCode));
         return map;
     }

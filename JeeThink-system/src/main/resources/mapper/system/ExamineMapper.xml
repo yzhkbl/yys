@@ -889,4 +889,14 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
         left join zyjr_submit_state_grant l on a.transaction_code=l.transaction_code
         where a.transaction_code=#{transactionCode}
     </select>
+    <select id="findRe" resultType="com.jeethink.system.domain.ZyjrRelation">
+        select *
+        from zyjr_relation
+        where transaction_code=#{transactionCode}
+    </select>
+    <select id="findGu" resultType="com.jeethink.system.domain.ZyjrGuarantee">
+        select *
+        from zyjr_guarantee
+        where transaction_code=#{transactionCode}
+    </select>
 </mapper>
