@@ -113,6 +113,11 @@ public class ExamineController extends BaseController {
     @RequestMapping("/add/start")
     public AjaxResult addByStart(ZyjrStartPage q){
         examineService.addByStart(q);
+        ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
+        zyjrOrderProgress.setTransactionCode(q.getTransactionCode());
+        zyjrOrderProgress.setApprovalType(0);
+        zyjrOrderProgress.setProgress(0);
+        examineMapper.insertOrderProgress(zyjrOrderProgress);
         return AjaxResult.success();
     }
 
@@ -313,6 +318,11 @@ public class ExamineController extends BaseController {
 
     @PostMapping("/add/allow/state")
     public AjaxResult addAllowState(ZyjrSubmitStateAllow q){
+        ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
+        zyjrOrderProgress.setTransactionCode(q.getTransactionCode());
+        zyjrOrderProgress.setApprovalType(2);
+        zyjrOrderProgress.setProgress(2);
+        examineMapper.updateOrderProgress(zyjrOrderProgress);
         if(examineMapper.findAllowState(q.getTransactionCode())!=null){
             return toAjax(examineMapper.updateAllowState(q));
         }else {
@@ -322,6 +332,11 @@ public class ExamineController extends BaseController {
 
     @PostMapping("/add/grant/state")
     public AjaxResult addGrantState(ZyjrSubmitStateGrant q){
+        ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
+        zyjrOrderProgress.setTransactionCode(q.getTransactionCode());
+        zyjrOrderProgress.setApprovalType(3);
+        zyjrOrderProgress.setProgress(3);
+        examineMapper.updateOrderProgress(zyjrOrderProgress);
         if(examineMapper.findGrantState(q.getTransactionCode())!=null){
             return toAjax(examineMapper.updateGrantState(q));
         }else {

@@ -77,6 +77,13 @@ public class ZyjrDaiqianAccoutController extends BaseController
         }else{
             examineMapper.insertDaiqian(zyjrDaiqian);
         }
+        if(as!=null&&zyjrDaiqian.getState()!=null&&zyjrDaiqian.getState().equals("1")){
+            ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
+            zyjrOrderProgress.setTransactionCode(zyjrDaiqian.getTransactionCode());
+            zyjrOrderProgress.setApprovalType(4);
+            zyjrOrderProgress.setProgress(4);
+            examineMapper.updateOrderProgress(zyjrOrderProgress);
+        }
 
         if(as!=null&&zyjrDaiqian.getState()!=null&&zyjrDaiqian.getState().equals("2")){
             as.setGps("2");

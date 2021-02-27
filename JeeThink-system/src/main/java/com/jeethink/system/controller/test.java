@@ -393,6 +393,11 @@ public class test extends BaseController {
                 int ceshi=examineMapper.updateStarts(codes);
 
                 if(ceshi>0){
+                    ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
+                    zyjrOrderProgress.setTransactionCode(codes);
+                    zyjrOrderProgress.setApprovalType(1);
+                    zyjrOrderProgress.setProgress(1);
+                    examineMapper.insertOrderProgress(zyjrOrderProgress);
                     return AjaxResult.success((Object)4);
 
                 }
@@ -863,6 +868,11 @@ public class test extends BaseController {
     @ResponseBody
     @PostMapping("fangkuan")
     public AjaxResult kaika(@RequestBody FenqiVo fenqiVo){
+        ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
+        zyjrOrderProgress.setTransactionCode(fenqiVo.getPub().getOrderNo());
+        zyjrOrderProgress.setApprovalType(5);
+        zyjrOrderProgress.setProgress(5);
+        examineMapper.updateOrderProgress(zyjrOrderProgress);
         ZyjrYeji zyjrYeji=new ZyjrYeji();
         zyjrYeji.setTransaction(fenqiVo.getPub().getOrderNo());
         zyjrYeji.setFangkuan(fenqiVo.getReq().getStageInfo().getStageMoney().toString());

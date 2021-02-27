@@ -1,13 +1,15 @@
 package com.jeethink.system.util;
 
+/*
 import com.alibaba.fastjson.JSON;
 import com.baidu.techain.sdk.model.*;
 import com.baidu.techain.sdk.push.IPushClient;
 import com.baidu.techain.sdk.push.PushClient;
 import com.baidu.techain.sdk.model.Message;
+*/
 
 public class PushMessageByPushIdTest {
-    public static void main(String[] args) {
+  /*  public static void main(String[] args) {
 
         String APPKEY = "Hh5r2rtTTSAEWg7DAgbM3zGpIuUEvnH1";
         String MASTERSECRET = "03j3WGwK1CWkSsbicussk9mwFMRngUGy";
@@ -52,5 +54,5 @@ public class PushMessageByPushIdTest {
             System.out.println(JSON.toJSONString(result));
         }
         return result.toString();
-    }
+    }*/
 }
