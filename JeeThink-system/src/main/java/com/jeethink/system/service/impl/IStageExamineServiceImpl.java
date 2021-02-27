@@ -194,11 +194,17 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         //}
         int count = examineDao.insertOpinion(q);
         ZyjrRepeatOpinion zyjrRepeatOpinion = findOpinion(q.getTransactionCode());
-        if(zyjrRepeatOpinion!=null&&zyjrRepeatOpinion.getApprovalType()==2){
+        if(zyjrRepeatOpinion!=null&&zyjrRepeatOpinion.getApprovalType()==2) {
             ZyjrAllowOpinion zyjrAllowOpinion = new ZyjrAllowOpinion();
             zyjrAllowOpinion.setTransactionCode(q.getTransactionCode());
             zyjrAllowOpinion.setApprovalType(4);
             zyjrAllowOpinionMapper.updateZyjrAllowOpinion(zyjrAllowOpinion);
+        }
+        if(q.getApprovalType()==2){
+            ZyjrSubmitStateAllow zyjrSubmitStateAllow = new ZyjrSubmitStateAllow();
+            zyjrSubmitStateAllow.setSubmitState(0);
+            zyjrSubmitStateAllow.setTransactionCode(q.getTransactionCode());
+            examineMapper.updateAllowState(zyjrSubmitStateAllow);
         }
         return count;
     }
@@ -215,6 +221,12 @@ public class IStageExamineServiceImpl implements IStageExamineService {
 
     @Override
     public int addGrantOpinion(ZyjrGrantOpinion q) {
+        if(q.getApprovalType()==2){
+            ZyjrSubmitStateGrant zyjrSubmitStateGrant = new ZyjrSubmitStateGrant();
+            zyjrSubmitStateGrant.setSubmitState(0);
+            zyjrSubmitStateGrant.setTransactionCode(q.getTransactionCode());
+            examineMapper.updateGrantState(zyjrSubmitStateGrant);
+        }
         return examineDao.insertGrantOpinion(q);
     }
 
