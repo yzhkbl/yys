@@ -408,5 +408,10 @@ public class ExamineController extends BaseController {
         return AjaxResult.success(map);
     }
 
+
+    @GetMapping("/approval")
+    public AjaxResult opinion(String transactionCode){
+        return AjaxResult.success(examineMapper.findApType(transactionCode));
+    }
 }
 

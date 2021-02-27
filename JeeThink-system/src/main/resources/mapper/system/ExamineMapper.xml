@@ -931,4 +931,13 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
         from zyjr_guarantee
         where transaction_code=#{transactionCode}
     </select>
+    <select id="findApType" resultType="com.jeethink.system.domain.vo.OpinionVo">
+        select a.approval_type as allowOpinion,b.approval_type as repeatOpinion,c.approval_type as grantOpinion,d.state as daiqianOpinion,e.state as daihouOpinion
+        from zyjr_allow_opinion a
+        left join zyjr_repeat_opinion b on b.transaction_code=a.transaction_code
+        left join zyjr_grant_opinion c on c.transaction_code=b.transaction_code
+        left join zyjr_daiqian d on d.transaction_code=c.transaction_code
+        left join zyjr_daihou e on e.transaction_code=d.transaction_code
+        where a.transaction_code=#{transactionCode}
+    </select>
 </mapper>

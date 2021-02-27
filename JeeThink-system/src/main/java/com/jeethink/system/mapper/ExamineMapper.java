@@ -140,4 +140,6 @@ public interface ExamineMapper {
     List<ZyjrGuarantee> findGu(String transactionCode);
 
     int updateByBairong(Bairong borrower);
+
+    OpinionVo findApType(@Param("transactionCode") String transactionCode);
 }

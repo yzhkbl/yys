@@ -124,6 +124,8 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         map.put("startPage",examineDao.findByStartPage(transactionCode));
         map.put("business",findByBusiness(transactionCode));
         map.put("borrower", examineDao.findByBorrower(transactionCode));
+        map.put("relation",examineDao.findByRelation(transactionCode));
+        map.put("guarantee",examineDao.findByGuarantee(transactionCode));
         ZyjrAllowApplicant zyjrAllowApplicant = zyjrAllowApplicantMapper.selectZyjrAllowApplicantById(userId, transactionCode);
         map.put("applicant",zyjrAllowApplicant);
         //ZyjrAllowBasics zyjrAllowBasics = zyjrAllowBasicsMapper.selectZyjrAllowBasicsById(userId, transactionCode);
