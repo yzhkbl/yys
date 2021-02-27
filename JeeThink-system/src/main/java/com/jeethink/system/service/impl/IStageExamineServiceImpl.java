@@ -200,12 +200,7 @@ public class IStageExamineServiceImpl implements IStageExamineService {
             zyjrAllowOpinion.setApprovalType(4);
             zyjrAllowOpinionMapper.updateZyjrAllowOpinion(zyjrAllowOpinion);
         }
-        if(q.getApprovalType()==2){
-            ZyjrSubmitStateAllow zyjrSubmitStateAllow = new ZyjrSubmitStateAllow();
-            zyjrSubmitStateAllow.setSubmitState(0);
-            zyjrSubmitStateAllow.setTransactionCode(q.getTransactionCode());
-            examineMapper.updateAllowState(zyjrSubmitStateAllow);
-        }
+
         return count;
     }
 

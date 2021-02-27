@@ -2,6 +2,8 @@ package com.jeethink.system.service.impl;
 
 import java.util.List;
 
+import com.jeethink.system.domain.ZyjrSubmitStateAllow;
+import com.jeethink.system.mapper.ExamineMapper;
 import com.jeethink.system.mapper.StageExamineMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,8 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
     private ZyjrAllowOpinionMapper zyjrAllowOpinionMapper;
     @Autowired
     private StageExamineMapper stageExamineMapper;
+    @Autowired
+    private ExamineMapper examineMapper;
     /**
      * 查询【请填写功能名称】
      *
@@ -59,6 +63,12 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
         if(o!=null) {
             stageExamineMapper.deleteOpinion(zyjrAllowOpinion.getTransactionCode());
             zyjrAllowOpinionMapper.deleteZyjrAllowOpinionById(zyjrAllowOpinion.getTransactionCode());
+        }
+        if(zyjrAllowOpinion.getApprovalType()==2){
+            ZyjrSubmitStateAllow zyjrSubmitStateAllow = new ZyjrSubmitStateAllow();
+            zyjrSubmitStateAllow.setSubmitState(0);
+            zyjrSubmitStateAllow.setTransactionCode(zyjrAllowOpinion.getTransactionCode());
+            examineMapper.updateAllowState(zyjrSubmitStateAllow);
         }
         return zyjrAllowOpinionMapper.insertZyjrAllowOpinion(zyjrAllowOpinion);
     }
