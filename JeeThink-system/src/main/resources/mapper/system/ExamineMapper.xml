@@ -856,12 +856,32 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
         values
         (#{id},#{transactionCode},#{submitState})
     </insert>
+    <update id="updateAllowState" parameterType="com.jeethink.system.domain.ZyjrSubmitStateAllow">
+        update zyjr_submit_state_allow
+        set submit_state=#{submitState}
+        where transaction_code = #{transactionCode}
+    </update>
+    <select id="findAllowState" resultType="com.jeethink.system.domain.ZyjrSubmitStateAllow">
+        select *
+        from zyjr_submit_state_allow
+        where transaction_code = #{transactionCode}
+    </select>
     <insert id="addGrantState" parameterType="com.jeethink.system.domain.ZyjrSubmitStateGrant">
         insert into zyjr_submit_state_grant
         (id,transaction_code,submit_state)
         values
         (#{id},#{transactionCode},#{submitState})
     </insert>
+    <update id="updateGrantState" parameterType="com.jeethink.system.domain.ZyjrSubmitStateAllow">
+        update zyjr_submit_state_grant
+        set submit_state=#{submitState}
+        where transaction_code = #{transactionCode}
+    </update>
+    <select id="findGrantState" resultType="com.jeethink.system.domain.ZyjrSubmitStateGrant">
+        select *
+        from zyjr_submit_state_grant
+        where transaction_code = #{transactionCode}
+    </select>
     <select id="allowList" resultType="com.jeethink.system.domain.vo.AllowStateVo">
         select a.order_state shenqingren,b.order_state cheliang,c.order_state zijinfang,d.order_state jinjilianxiren,
         a.transaction_code,e.submit_state,b.loan_state daikuan
@@ -888,5 +908,15 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
         left join zyjr_car_loan k on a.transaction_code=k.transaction_code
         left join zyjr_submit_state_grant l on a.transaction_code=l.transaction_code
         where a.transaction_code=#{transactionCode}
+    </select>
+    <select id="findRe" resultType="com.jeethink.system.domain.ZyjrRelation">
+        select *
+        from zyjr_relation
+        where transaction_code=#{transactionCode}
+    </select>
+    <select id="findGu" resultType="com.jeethink.system.domain.ZyjrGuarantee">
+        select *
+        from zyjr_guarantee
+        where transaction_code=#{transactionCode}
     </select>
 </mapper>

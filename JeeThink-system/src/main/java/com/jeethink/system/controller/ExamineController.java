@@ -313,12 +313,20 @@ public class ExamineController extends BaseController {
 
     @PostMapping("/add/allow/state")
     public AjaxResult addAllowState(ZyjrSubmitStateAllow q){
-        return toAjax(examineMapper.addAllowState(q));
+        if(examineMapper.findAllowState(q.getTransactionCode())!=null){
+            return toAjax(examineMapper.updateAllowState(q));
+        }else {
+            return toAjax(examineMapper.addAllowState(q));
+        }
     }
 
     @PostMapping("/add/grant/state")
     public AjaxResult addGrantState(ZyjrSubmitStateGrant q){
-        return toAjax(examineMapper.addGrantState(q));
+        if(examineMapper.findGrantState(q.getTransactionCode())!=null){
+            return toAjax(examineMapper.updateGrantState(q));
+        }else {
+            return toAjax(examineMapper.addGrantState(q));
+        }
     }
 
     @GetMapping("/find/allowList")

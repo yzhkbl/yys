@@ -121,12 +121,20 @@ public interface ExamineMapper {
     List<carVo> selectZyjrCarListss(@Param("userId") String createBy, @Param("pid") String pid);
 
     int addAllowState(ZyjrSubmitStateAllow q);
+    int updateAllowState(ZyjrSubmitStateAllow q);
+    ZyjrSubmitStateAllow findAllowState(String transactionCode);
     int addGrantState(ZyjrSubmitStateGrant q);
+    int updateGrantState(ZyjrSubmitStateGrant q);
+    ZyjrSubmitStateGrant findGrantState(String transactionCode);
 
     AllowStateVo allowList(String transactionCode);
     GrantStateVo grantList(String transactionCode);
 
+
     int insertFundSide(ZyjrFundSide zyjrFundSide);
     ZyjrFundSide findFundSide(String transactionCode);
     int updateFundSide(ZyjrFundSide zyjrFundSide);
+
+    List<ZyjrRelation> findRe(String transactionCode);
+    List<ZyjrGuarantee> findGu(String transactionCode);
 }
