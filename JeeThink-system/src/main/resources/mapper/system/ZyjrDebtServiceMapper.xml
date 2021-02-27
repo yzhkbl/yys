@@ -56,6 +56,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectZyjrDebtServiceVo"/>
         where user_id = #{userId} and transaction_code=#{transactionCode}
     </select>
+    <select id="selectZyjrDebtServiceById2" resultMap="ZyjrDebtServiceResult">
+        <include refid="selectZyjrDebtServiceVo"/>
+        where  transaction_code=#{transactionCode}
+    </select>
         
     <insert id="insertZyjrDebtService" parameterType="ZyjrDebtService" useGeneratedKeys="true" keyProperty="id">
         insert into zyjr_debt_service
