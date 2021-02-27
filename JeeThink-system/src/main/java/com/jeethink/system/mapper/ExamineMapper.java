@@ -137,4 +137,6 @@ public interface ExamineMapper {
 
     List<ZyjrRelation> findRe(String transactionCode);
     List<ZyjrGuarantee> findGu(String transactionCode);
+
+    OpinionVo findApType(@Param("transactionCode") String transactionCode);
 }
