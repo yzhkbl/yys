@@ -1,13 +1,15 @@
 package com.jeethink.system.util;
 
+/*
 import com.alibaba.fastjson.JSON;
 import com.baidu.techain.sdk.model.*;
 import com.baidu.techain.sdk.push.IPushClient;
 import com.baidu.techain.sdk.push.PushClient;
 import com.baidu.techain.sdk.model.Message;
+*/
 
 public class PushMessageByPushIdTest {
-    public static void main(String[] args) {
+  /*  public static void main(String[] args) {
 
         String APPKEY = "Hh5r2rtTTSAEWg7DAgbM3zGpIuUEvnH1";
         String MASTERSECRET = "03j3WGwK1CWkSsbicussk9mwFMRngUGy";
@@ -30,7 +32,7 @@ public class PushMessageByPushIdTest {
         }
     }
 
-    public static String tongzhi(String id,String t,String b) {
+    public static String tongzhi(String id,String name,String t,String b) {
 
         String APPKEY = "Hh5r2rtTTSAEWg7DAgbM3zGpIuUEvnH1";
         String MASTERSECRET = "03j3WGwK1CWkSsbicussk9mwFMRngUGy";
@@ -40,7 +42,7 @@ public class PushMessageByPushIdTest {
         //构建通知栏消息
         Notification notification = new Notification.Builder().
                 title("中豫金融").
-                content("您的订单："+t+"在"+b+"退回了").
+                content("您的客户:"+name+"(订单号："+t+")在"+b+"退回了！请及时查看！").
                 build();
 
         msg.setMessageType(0); //设置消息类型为通知栏消息
@@ -52,5 +54,5 @@ public class PushMessageByPushIdTest {
             System.out.println(JSON.toJSONString(result));
         }
         return result.toString();
-    }
+    }*/
 }

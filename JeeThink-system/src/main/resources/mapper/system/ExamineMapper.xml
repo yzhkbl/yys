@@ -801,6 +801,13 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
     </set>
         where transaction_code = #{transactionCode}
     </update>
+    <insert id="updateByBairong">
+             insert into zyjr_bairong
+        (id_card,phone_number,user_name,conf,encrypt_data)
+        values
+        (#{idCard},#{phoneNumber},#{userName},#{conf},#{encryptData})
+
+    </insert>
 
     <select id="searchOrder" resultType="com.jeethink.system.domain.vo.orderVo">
         select distinct b.transaction_code,b.credit_power,b.contract_state,b.user_name,b.id_card,a.car_information,a.car_type,c.progress,c.approval_type,d.create_time
@@ -823,6 +830,11 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
         select *
         from zyjr_relation
         where id=#{id}
+    </select>
+    <select id="selectBairong" resultType="com.jeethink.system.domain.vo.Bairong">
+        select *
+        from zyjr_bairong
+        where user_name=#{userName} and phone_number=#{phoneNumber} and id_card=#{idCard}
     </select>
     <select id="findFundSide" resultType="com.jeethink.system.domain.ZyjrFundSide">
         select *
