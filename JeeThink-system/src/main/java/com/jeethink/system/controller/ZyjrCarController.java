@@ -224,14 +224,16 @@ ZyjrCarController extends BaseController {
         if (storeInformation == null) {
             return AjaxResult.error("参数没传过来");
         }
+        ZyjrCar a = new ZyjrCar();
         if(storeInformation.getPid()==null&&storeInformation.getBazaar()!=null){
             ZyjrCarParent zyjrCarParent=new ZyjrCarParent();
             zyjrCarParent.setName(storeInformation.getBazaar());
             zyjrCarParentMapper.insertZyjrCarParent(zyjrCarParent);
+            a.setPid(zyjrCarParent.getId().toString());
         }
         if(storeInformation.getStatus().equals("add")){
 
-            ZyjrCar a = new ZyjrCar();
+
             a.setArea(storeInformation.getArea());
             a.setCity(storeInformation.getCity());
             a.setBazaar(storeInformation.getBazaar());
@@ -286,7 +288,7 @@ ZyjrCarController extends BaseController {
             }*/
 
 
-            ZyjrCar a = new ZyjrCar();
+            // ZyjrCar a = new ZyjrCar();
             a.setId(Long.parseLong(storeInformation.getId()));
             a.setArea(storeInformation.getArea());
             a.setCity(storeInformation.getCity());
