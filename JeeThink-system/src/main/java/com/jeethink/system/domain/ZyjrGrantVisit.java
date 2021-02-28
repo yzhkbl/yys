@@ -25,13 +25,13 @@ public class ZyjrGrantVisit extends BaseEntity
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
     private Long userId;
-    private Long orderState;
+    private Integer orderState;
 
-    public Long getOrderState() {
+    public Integer getOrderState() {
         return orderState;
     }
 
-    public void setOrderState(Long orderState) {
+    public void setOrderState(Integer orderState) {
         this.orderState = orderState;
     }
 

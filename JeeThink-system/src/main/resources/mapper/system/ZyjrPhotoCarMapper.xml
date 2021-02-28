@@ -54,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
             <if test="orderState != null">order_state = #{orderState},</if>
         </trim>
-        where user_id=#{userId} and transaction_code=#{transactionCode}
+        where transaction_code=#{transactionCode}
     </update>
 
     <delete id="deleteZyjrPhotoCarById" parameterType="Long">

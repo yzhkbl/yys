@@ -68,6 +68,10 @@ public class ZyjrPhotoHouseController extends BaseController
                // System.err.println("删除路径"+paths+l);
                 boolean b = FileUtils.deleteFile(paths +l);
             }
+            zyjrPhotoHouse.setOrderState(q.getOrderState());
+            zyjrPhotoHouse.setTransactionCode(q.getTransactionCode());
+            zyjrPhotoHouse.setUserId(q.getUserId());
+            zyjrPhotoHouseService.updateZyjrPhotoHouse(zyjrPhotoHouse);
         } else {
 
             zyjrPhotoHouse.setOrderState(q.getOrderState());
