@@ -66,9 +66,13 @@ public class ZyjrLiushuiController extends BaseController
                 // System.err.println("删除路径"+paths+l);
                 boolean b = FileUtils.deleteFile(paths +l);
             }
+            zyjrLiushui.setOrderState(q.getOrderState());
+            zyjrLiushui.setTransactionCode(q.getTransactionCode());
+            zyjrLiushui.setUserId(q.getUserId());
+            zyjrLiushuiService.updateZyjrLiushui(zyjrLiushui);
         } else {
 
-            //zyjrPhotoHouse.setOrderState(q.getOrderState());
+            zyjrLiushui.setOrderState(q.getOrderState());
             zyjrLiushui.setTransactionCode(q.getTransactionCode());
             zyjrLiushui.setUserId(q.getUserId());
             zyjrLiushuiService.insertZyjrLiushui(zyjrLiushui);

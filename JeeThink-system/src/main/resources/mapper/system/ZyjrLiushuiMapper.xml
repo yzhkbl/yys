@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null">user_id = #{userId},</if>
             <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
         </trim>
-        where id = #{id}
+        where transaction_code = #{transactionCode}
     </update>
 
     <delete id="deleteZyjrLiushuiById" parameterType="Long">

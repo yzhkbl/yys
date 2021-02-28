@@ -68,6 +68,10 @@ public class ZyjrPhotoLenderController extends BaseController
              //   System.err.println("删除路径"+paths+l);
                 boolean b = FileUtils.deleteFile(paths +l);
             }
+            zyjrPhotoLender.setOrderState(q.getOrderState());
+            zyjrPhotoLender.setTransactionCode(q.getTransactionCode());
+            zyjrPhotoLender.setUserId(q.getUserId());
+            zyjrPhotoLenderService.updateZyjrPhotoLender(zyjrPhotoLender);
         } else {
 
             zyjrPhotoLender.setOrderState(q.getOrderState());
