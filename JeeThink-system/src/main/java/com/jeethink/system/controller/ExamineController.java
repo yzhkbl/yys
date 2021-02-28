@@ -176,9 +176,9 @@ public class ExamineController extends BaseController {
     }
 
     @GetMapping
-    public TableDataInfo findOrder(Long userId){
+    public TableDataInfo findOrder(Long userId,Integer progress){
         startPage();
-        List<orderVo> list = examineService.findOrder(userId);
+        List<orderVo> list = examineService.findOrder(userId,progress);
         return getDataTable(list);
     }
 
