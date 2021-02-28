@@ -53,6 +53,8 @@ public class ZyjrDaiqianAccoutController extends BaseController
     private ZyjrGrantImageMapper zyjrGrantImageMapper;
     @Autowired
     private ZyjrGrantInstalmentsMapper zyjrGrantInstalmentsMapper;
+    @Autowired
+    private ZyjrCarMapper zyjrCarMapper;
 
     /**
      * 查询【请填写功能名称】列表
@@ -147,6 +149,10 @@ public class ZyjrDaiqianAccoutController extends BaseController
             json.put("type",a.getType());
             json.put("bazaar",a.getBazaar());
             json.put("carname",a.getCarname());
+            if(a.getCarid()!=null){
+                ZyjrCar zyjrCar = zyjrCarMapper.selectZyjrCarById(Long.parseLong(a.getCarid()));
+                json.put("carname",zyjrCar.getDealerName());
+            }
             return json;
         }
         json.put("data",null);
