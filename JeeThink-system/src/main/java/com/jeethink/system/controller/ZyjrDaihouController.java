@@ -94,10 +94,10 @@ public class ZyjrDaihouController extends BaseController
          return AjaxResult.success();
     }
 
-    @GetMapping("tijiao")
+    @PostMapping("tijiao")
     public AjaxResult tijiao(String transactionCode){
         ZyjrDaihou zyjrDaihou = zyjrDaihouMapper.selectZyjrDaihouByT(transactionCode);
-        if(zyjrDaihou!=null&&zyjrDaihou.getTiche()!=null&&zyjrDaihou.getLvben()!=null&&zyjrDaihou.getQita()!=null&&zyjrDaihou.getBaoxian()!=null&&zyjrDaihou.getZhengshu()!=null){
+        if(zyjrDaihou!=null&&zyjrDaihou.getZhengshu()!=null){
             zyjrDaihou.setTijiao("1");
             zyjrDaihouMapper.updateZyjrDaihou(zyjrDaihou);
             return AjaxResult.success();
