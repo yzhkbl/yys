@@ -45,11 +45,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateZyjrGrantImage" parameterType="ZyjrGrantImage">
         update zyjr_grant_image
         <trim prefix="SET" suffixOverrides=",">
-            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
             <if test="userId != null">user_id = #{userId},</if>
             <if test="orderState != null">order_state = #{orderState},</if>
         </trim>
-        where id = #{id}
+        where transaction_code = #{transactionCode}
     </update>
 
     <delete id="deleteZyjrGrantImageById" parameterType="Long">
