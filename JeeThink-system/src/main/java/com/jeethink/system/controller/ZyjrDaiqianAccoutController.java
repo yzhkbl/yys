@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.DqVo;
+import com.jeethink.system.domain.vo.GrantPhoto;
 import com.jeethink.system.mapper.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,8 @@ public class ZyjrDaiqianAccoutController extends BaseController
     private ZyjrGrantInstalmentsMapper zyjrGrantInstalmentsMapper;
     @Autowired
     private ZyjrCarMapper zyjrCarMapper;
+    @Autowired
+    private ZyjrGrantPhotoMapper zyjrGrantPhotoMapper;
 
     /**
      * 查询【请填写功能名称】列表
@@ -191,13 +194,34 @@ public class ZyjrDaiqianAccoutController extends BaseController
         Map<String,Object> map=new HashMap<>();
         ZyjrGrantImage zyjrGrantImage = zyjrGrantImageMapper.selectZyjrGrantImageById(transactionCode);
         if(zyjrGrantImage!=null&&zyjrGrantImage.getOrderState()!=null){
-            map.put("yingxiang",zyjrGrantImage.getOrderState().toString());
+            GrantPhoto f = new GrantPhoto();
+            if(zyjrGrantImage != null) {
+                List<ZyjrGrantPhoto> list = zyjrGrantPhotoMapper.findImage(zyjrGrantImage.getId());
+
+                f.setId(zyjrGrantImage.getId());
+                f.setUserId(zyjrGrantImage.getUserId());
+                f.setTransactionCode(zyjrGrantImage.getTransactionCode());
+                //f.setOrderState(zyjrPhotoHouse.getOrderState());
+                f.setPhotoFile(list);
+                map.put("yingxiang",f);
+            }
         }else{
             map.put("yingxiang",null);
         }
         ZyjrGrantInstalments zyjrGrantInstalments = zyjrGrantInstalmentsMapper.selectZyjrGrantInstalmentsById(transactionCode);
         if(zyjrGrantInstalments!=null&&zyjrGrantInstalments.getOrderState()!=null){
-            map.put("fenqi",zyjrGrantInstalments.getOrderState().toString());
+            GrantPhoto f = new GrantPhoto();
+            if(zyjrGrantInstalments != null) {
+                List<ZyjrGrantPhoto> list = zyjrGrantPhotoMapper.findInstalments(zyjrGrantInstalments.getId());
+
+                f.setId(zyjrGrantInstalments.getId());
+                f.setUserId(zyjrGrantInstalments.getUserId());
+                f.setTransactionCode(zyjrGrantInstalments.getTransactionCode());
+                //f.setOrderState(zyjrPhotoHouse.getOrderState());
+                f.setPhotoFile(list);
+                map.put("fenqi",f);
+            }
+
         }else{
             map.put("fenqi",null);
         }
