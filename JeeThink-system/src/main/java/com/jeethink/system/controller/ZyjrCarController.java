@@ -226,6 +226,7 @@ ZyjrCarController extends BaseController {
         }
         if(storeInformation.getPid()==null&&storeInformation.getBazaar()!=null){
             ZyjrCarParent zyjrCarParent=new ZyjrCarParent();
+            zyjrCarParent.setName(storeInformation.getBazaar());
             zyjrCarParentMapper.insertZyjrCarParent(zyjrCarParent);
         }
         if(storeInformation.getStatus().equals("add")){

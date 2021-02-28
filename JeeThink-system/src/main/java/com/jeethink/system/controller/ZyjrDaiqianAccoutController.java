@@ -145,6 +145,8 @@ public class ZyjrDaiqianAccoutController extends BaseController
             map.put("account2",d);
             json.put("data",map);
             json.put("type",a.getType());
+            json.put("bazaar",a.getBazaar());
+            json.put("carname",a.getCarname());
             return json;
         }
         json.put("data",null);
