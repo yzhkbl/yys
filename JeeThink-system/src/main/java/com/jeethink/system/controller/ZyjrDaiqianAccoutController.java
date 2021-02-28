@@ -151,7 +151,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
         return json;
     }
 
-    @GetMapping("tijiao")
+    @PostMapping("tijiao")
     public AjaxResult tijiao(String transactionCode){
         ZyjrDaiqian a=examineMapper.selByDaiqian(transactionCode);
         if(a!=null&&a.getGps()!=null&&a.getAccount()!=null&&a.getInsurance()!=null&&a.getGpsPic()!=null){

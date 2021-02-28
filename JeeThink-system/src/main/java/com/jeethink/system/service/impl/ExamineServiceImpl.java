@@ -236,8 +236,8 @@ public class ExamineServiceImpl implements IExamineService {
     }
 
     @Override
-    public List<orderVo> findOrder(Long userId){
-        return examineDao.findOrder(userId);
+    public List<orderVo> findOrder(Long userId,Integer progress){
+        return examineDao.findOrder(userId,progress);
     }
 
 

@@ -27,7 +27,7 @@ public interface IExamineService {
     String okPurchase(String codes);
     ZyjrStartPage findByStart(Integer userId);
 
-    List<orderVo> findOrder(Long userId);
+    List<orderVo> findOrder(Long userId,Integer progress);
 
     Map<String,Object> findExamine(String transactionCode);
 
