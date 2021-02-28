@@ -194,34 +194,13 @@ public class ZyjrDaiqianAccoutController extends BaseController
         Map<String,Object> map=new HashMap<>();
         ZyjrGrantImage zyjrGrantImage = zyjrGrantImageMapper.selectZyjrGrantImageById(transactionCode);
         if(zyjrGrantImage!=null&&zyjrGrantImage.getOrderState()!=null){
-            GrantPhoto f = new GrantPhoto();
-            if(zyjrGrantImage != null) {
-                List<ZyjrGrantPhoto> list = zyjrGrantPhotoMapper.findImage(zyjrGrantImage.getId());
-
-                f.setId(zyjrGrantImage.getId());
-                f.setUserId(zyjrGrantImage.getUserId());
-                f.setTransactionCode(zyjrGrantImage.getTransactionCode());
-                //f.setOrderState(zyjrPhotoHouse.getOrderState());
-                f.setPhotoFile(list);
-                map.put("yingxiang",f);
-            }
+                map.put("yingxiang",zyjrGrantImage.getOrderState());
         }else{
             map.put("yingxiang",null);
         }
         ZyjrGrantInstalments zyjrGrantInstalments = zyjrGrantInstalmentsMapper.selectZyjrGrantInstalmentsById(transactionCode);
         if(zyjrGrantInstalments!=null&&zyjrGrantInstalments.getOrderState()!=null){
-            GrantPhoto f = new GrantPhoto();
-            if(zyjrGrantInstalments != null) {
-                List<ZyjrGrantPhoto> list = zyjrGrantPhotoMapper.findInstalments(zyjrGrantInstalments.getId());
-
-                f.setId(zyjrGrantInstalments.getId());
-                f.setUserId(zyjrGrantInstalments.getUserId());
-                f.setTransactionCode(zyjrGrantInstalments.getTransactionCode());
-                //f.setOrderState(zyjrPhotoHouse.getOrderState());
-                f.setPhotoFile(list);
-                map.put("fenqi",f);
-            }
-
+                map.put("fenqi",zyjrGrantInstalments.getOrderState());
         }else{
             map.put("fenqi",null);
         }

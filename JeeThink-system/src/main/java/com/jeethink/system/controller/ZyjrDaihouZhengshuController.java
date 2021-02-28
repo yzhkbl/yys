@@ -81,8 +81,10 @@ public class ZyjrDaihouZhengshuController extends BaseController
         json.put("code",200);
         json.put("data",null);
         json.put("state","0");
+        json.put("state2","0");
         json.put("data2",null);
         if(Daihou!=null){
+            json.put("state2",Daihou.getTijiao());
             ZyjrDaihouZhengshu zyjrDaihouBaoxian=new ZyjrDaihouZhengshu();
             zyjrDaihouBaoxian.setDaihou(Daihou.getId().toString());
             List<ZyjrDaihouZhengshu> zyjrDaihouTiches = zyjrDaihouZhengshuService.selectZyjrDaihouZhengshuList(zyjrDaihouBaoxian);

@@ -68,9 +68,13 @@ public class ZyjrGrantImageController extends BaseController
               //  System.err.println("删除路径"+paths+l);
                 boolean b = FileUtils.deleteFile(paths +l);
             }
+            zyjrGrantImage.setOrderState(q.getOrderState());
+            zyjrGrantImage.setTransactionCode(q.getTransactionCode());
+            zyjrGrantImage.setUserId(q.getUserId());
+            zyjrGrantImageService.updateZyjrGrantImage(zyjrGrantImage);
         } else {
 
-            //zyjrPhotoHouse.setOrderState(q.getOrderState());
+            zyjrGrantImage.setOrderState(q.getOrderState());
             zyjrGrantImage.setTransactionCode(q.getTransactionCode());
             zyjrGrantImage.setUserId(q.getUserId());
             zyjrGrantImageService.insertZyjrGrantImage(zyjrGrantImage);
