@@ -25,5 +25,6 @@ public class orderVo {
 
     private Integer creditPower;//签约方式
     private Integer contractState;//签约状态默认0 成功为1 失败为2
+    private String mianqian;
 
 }
