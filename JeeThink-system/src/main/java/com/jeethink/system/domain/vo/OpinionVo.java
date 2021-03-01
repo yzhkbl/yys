@@ -10,4 +10,10 @@ public class OpinionVo {
     private String daiqianOpinion;
     private String daihouOpinion;
     private String transactionCode;
+
+    private String chushen;   //初审
+    private String zhongshen;   //终审
+    private String shouxin;     //授信
+    private String daiqian;     //贷前
+    private String daihou;      //贷后
 }
