@@ -851,8 +851,12 @@ public class test extends BaseController {
     @PostMapping("mianqian")
     public AjaxResult mianqian(String transactionCode){
         ZyjrBorrower zyjrBorrower = o.selectById(transactionCode);
+
         if(zyjrBorrower!=null){
             String a = Mianqian.post(zyjrBorrower.getUserName(), zyjrBorrower.getIdCard());
+            zyjrBorrower.setMianqian("1");
+            zyjrBorrower.setMianqiandata(a);
+            o.updateZyjrBorrower(zyjrBorrower);
             String[] split = a.split(",");
 
             String[] split2 = split[0].split(":");
@@ -870,10 +874,11 @@ public class test extends BaseController {
     public AjaxResult jzg(String transactionCode){
         ZyjrJzgAddOrder a=zyjrJzgAddOrderMapper.selectZyjrJzgAddOrderByTransactionCode(transactionCode);
         if(a!=null&&a.getData()!=null&&a.getData().split(":")[1].split(",")[0].equals("100")) {
-            return  AjaxResult.success("操作成功",a.getData());
+            return  AjaxResult.success("操作成功",a.getData().split("AppAssessmentReportH5")[1].split(",")[0]);
         }
         return AjaxResult.success();
     }
+
 
     @ResponseBody
     @PostMapping("card")
