@@ -17,7 +17,7 @@ public class orderVo {
     /**业务品种（新车/二手车）*/
     private Integer carType;
     /**订单流程进度*/
-    private String progress;
+    private Integer progress;
     /**订单创建时间*/
     private Date createTime;
     /**审批状态*/
