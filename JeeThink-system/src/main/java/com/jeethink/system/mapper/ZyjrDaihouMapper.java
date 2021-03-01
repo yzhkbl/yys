@@ -42,6 +42,7 @@ public interface ZyjrDaihouMapper
      * @return 结果
      */
     public int updateZyjrDaihou(ZyjrDaihou zyjrDaihou);
+    public int updateZyjrDaihou2(ZyjrDaihou zyjrDaihou);
 
     /**
      * 删除【请填写功能名称】

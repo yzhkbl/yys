@@ -29,7 +29,7 @@ import com.jeethink.common.core.page.TableDataInfo;
 
 /**
  * 【请填写功能名称】Controller
- * 
+ *
  * @author jeethink
  * @date 2021-01-06
  */
@@ -119,8 +119,8 @@ public class ZyjrDaihouZhengshuController extends BaseController
             zyjrDaihouMapper.insertZyjrDaihou(Daihou);
         }else{
             Daihou.setZhengshu(zyjrDaihouBaoxian.getState());
-            Daihou.setTransactionCode(zyjrDaihouBaoxian.getState());
-            zyjrDaihouMapper.updateZyjrDaihou(Daihou);
+            Daihou.setTransactionCode(zyjrDaihouBaoxian.getDaihou());
+            zyjrDaihouMapper.updateZyjrDaihou2(Daihou);
         }
         zyjrDaihouBaoxianService.deleteZyjrDaihouBaoxianById(Daihou.getId());
         if(zyjrDaihouBaoxian.getPic2()!=null) {
@@ -135,7 +135,7 @@ public class ZyjrDaihouZhengshuController extends BaseController
         zyjrDaihouZhengshuService.deleteZyjrDaihouZhengshuById(Daihou.getId());
         if(zyjrDaihouBaoxian.getPic()!=null){
             JSONArray jsonarray = JSONArray.fromObject(zyjrDaihouBaoxian.getPic());
-           // System.out.println(jsonarray);
+            // System.out.println(jsonarray);
             List<ZyjrDaihouZhengshu> list = (List)JSONArray.toList(jsonarray, ZyjrDaihouZhengshu.class);
             for (ZyjrDaihouZhengshu daihouBaoxian : list) {
                 daihouBaoxian.setDaihou(Daihou.getId().toString());
@@ -163,7 +163,7 @@ public class ZyjrDaihouZhengshuController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:zhengshu:remove')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
+    @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
         return toAjax(zyjrDaihouZhengshuService.deleteZyjrDaihouZhengshuByIds(ids));
