@@ -26,6 +26,7 @@ import com.jeethink.system.mapper.*;
 import com.jeethink.system.service.IExamineService;
 import com.jeethink.system.service.ISysUserService;
 import com.jeethink.system.util.*;
+import com.jeethink.system.util.Mianqian;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +89,8 @@ public class test extends BaseController {
     private ZyjrCarLoanMapper zyjrCarLoanMapper;
     @Autowired
     private ZyjrDebtServiceMapper zyjrDebtServiceMapper;
+    @Autowired
+    private ZyjrJzgAddOrderMapper zyjrJzgAddOrderMapper;
 
     private static String oCode = "sfzzm";
     private static String pCode = "sfzfm";
@@ -842,6 +845,34 @@ public class test extends BaseController {
         json.put("data",json2.toString());
         json.put("state",null);
         return json;
+    }
+
+    @ResponseBody
+    @PostMapping("mianqian")
+    public AjaxResult mianqian(String transactionCode){
+        ZyjrBorrower zyjrBorrower = o.selectById(transactionCode);
+        if(zyjrBorrower!=null){
+            String a = Mianqian.post(zyjrBorrower.getUserName(), zyjrBorrower.getIdCard());
+            String[] split = a.split(",");
+
+            String[] split2 = split[0].split(":");
+            if(split2[0].equals(0)){
+                return AjaxResult.success(split2[0]);
+            }
+          return AjaxResult.success(a);
+        }
+
+        return AjaxResult.success();
+    }
+
+    @ResponseBody
+    @PostMapping("jzgInfor")
+    public AjaxResult jzg(String transactionCode){
+        ZyjrJzgAddOrder a=zyjrJzgAddOrderMapper.selectZyjrJzgAddOrderByTransactionCode(transactionCode);
+        if(a!=null&&a.getData()!=null&&a.getData().split(":")[1].split(",")[0].equals("100")) {
+            return  AjaxResult.success("操作成功",a.getData());
+        }
+        return AjaxResult.success();
     }
 
     @ResponseBody

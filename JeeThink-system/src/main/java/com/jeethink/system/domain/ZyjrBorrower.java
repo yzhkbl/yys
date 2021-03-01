@@ -124,6 +124,24 @@ public class ZyjrBorrower
     private String updateBy;
     private String nation;
     String date;
+    String mianqian;
+    String mianqiandata;
+
+    public String getMianqian() {
+        return mianqian;
+    }
+
+    public void setMianqian(String mianqian) {
+        this.mianqian = mianqian;
+    }
+
+    public String getMianqiandata() {
+        return mianqiandata;
+    }
+
+    public void setMianqiandata(String mianqiandata) {
+        this.mianqiandata = mianqiandata;
+    }
 
     public String getDate() {
         return date;
