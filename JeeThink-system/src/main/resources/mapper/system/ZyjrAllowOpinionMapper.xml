@@ -70,12 +70,14 @@
     </delete>
 
     <select id="findAdvise" resultType="com.jeethink.system.domain.vo.OpinionVo">
-        select a.advise as allowOpinion,b.advise as repeatOpinion,c.advise as grantOpinion,d.opinion as daiqianOpinion,e.opinion as daihouOpinion
+        select a.advise as allowOpinion,b.advise as repeatOpinion,c.advise as grantOpinion,d.opinion as daiqianOpinion,e.opinion as daihouOpinion,
+        f.allow_by as chushen,f.repeat_by zhongshen,f.grant_by shouxin,d.operator daiqian,e.operator daihou
         from zyjr_allow_opinion a
-        left join zyjr_repeat_opinion b on b.transaction_code=a.transaction_code
-        left join zyjr_grant_opinion c on c.transaction_code=b.transaction_code
-        left join zyjr_daiqian d on d.transaction_code=c.transaction_code
-        left join zyjr_daihou e on e.transaction_code=d.transaction_code
+        left join zyjr_repeat_opinion b on a.transaction_code=b.transaction_code
+        left join zyjr_grant_opinion c on a.transaction_code=c.transaction_code
+        left join zyjr_daiqian d on a.transaction_code=d.transaction_code
+        left join zyjr_daihou e on a.transaction_code=e.transaction_code
+        left join zyjr_car_loan f on a.transaction_code=f.transaction_code
         where a.transaction_code=#{transactionCode}
     </select>
 
