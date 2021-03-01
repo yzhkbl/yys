@@ -574,6 +574,28 @@ public class test extends BaseController {
         return AjaxResult.success(a);
     }
 
+    @RequestMapping(value = {"/delete2"}, method = RequestMethod.GET)
+    @ResponseBody
+    @ApiOperation("111111111")
+    public AjaxResult delete2(String path) {
+        String paths = "C:/demo";
+
+        int a = sysFileInfoMapper.deleteSysFileInfoByPath(path);
+        if (a > 0) {
+            path=path.substring(36,path.length());
+
+            System.err.println(paths + "/" + path);
+            boolean b = FileUtils.deleteFile(paths + "/" + path);
+            if (b) {
+                return AjaxResult.success();
+            } else {
+                return AjaxResult.error("路径删除成功，但图片删除失败", b);
+            }
+        }
+
+        return AjaxResult.success();
+    }
+
     @RequestMapping(value = {"/getByToken"}, method = RequestMethod.GET)
     @ResponseBody
     @ApiOperation("getByToken")

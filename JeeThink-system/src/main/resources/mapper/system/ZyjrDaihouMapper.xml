@@ -89,6 +89,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
+    <update id="updateZyjrDaihou2" parameterType="ZyjrDaihou">
+        update zyjr_daihou
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="state != null">state = #{state},</if>
+            <if test="opinion != null">opinion = #{opinion},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="zhengshu != null">zhengshu = #{zhengshu},</if>
+            <if test="baoxian != null">baoxian = #{baoxian},</if>
+            <if test="qita != null">qita = #{qita},</if>
+            <if test="lvben != null">lvben = #{lvben},</if>
+            <if test="tiche != null">tiche = #{tiche},</if>
+            <if test="tijiao != null">tijiao = #{tijiao},</if>
+            <if test="operator != null">tiche = #{operator},</if>
+        </trim>
+        where transaction_code = #{transactionCode}
+    </update>
+
     <update id="updateZyjrDaihous" parameterType="ZyjrDaihou">
         update zyjr_daihou
       set  user_id=#{userId},operator=#{operator}

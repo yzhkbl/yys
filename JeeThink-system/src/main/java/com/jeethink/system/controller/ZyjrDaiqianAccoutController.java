@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.DqVo;
+import com.jeethink.system.domain.vo.GrantPhoto;
 import com.jeethink.system.mapper.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ import com.jeethink.common.core.page.TableDataInfo;
 
 /**
  * 【请填写功能名称】Controller
- * 
+ *
  * @author jeethink
  * @date 2021-01-05
  */
@@ -55,6 +56,8 @@ public class ZyjrDaiqianAccoutController extends BaseController
     private ZyjrGrantInstalmentsMapper zyjrGrantInstalmentsMapper;
     @Autowired
     private ZyjrCarMapper zyjrCarMapper;
+    @Autowired
+    private ZyjrGrantPhotoMapper zyjrGrantPhotoMapper;
 
     /**
      * 查询【请填写功能名称】列表
@@ -174,10 +177,10 @@ public class ZyjrDaiqianAccoutController extends BaseController
 
     @GetMapping("getInfo/{id}")
     public AjaxResult apqp(@PathVariable("id") String id){
-                ZyjrCarAccount zyjrCarAccount=new ZyjrCarAccount();
-                zyjrCarAccount.setZyjrCarId(id);
-                List<ZyjrCarAccount> c=zyjrCarAccountMapper.selectZyjrCarAccountList(zyjrCarAccount);
-                return AjaxResult.success(c);
+        ZyjrCarAccount zyjrCarAccount=new ZyjrCarAccount();
+        zyjrCarAccount.setZyjrCarId(id);
+        List<ZyjrCarAccount> c=zyjrCarAccountMapper.selectZyjrCarAccountList(zyjrCarAccount);
+        return AjaxResult.success(c);
     }
     @GetMapping("getZhanghu/{id}")
     public AjaxResult zhanghu(@PathVariable("id") String id){
@@ -191,23 +194,24 @@ public class ZyjrDaiqianAccoutController extends BaseController
         Map<String,Object> map=new HashMap<>();
         ZyjrGrantImage zyjrGrantImage = zyjrGrantImageMapper.selectZyjrGrantImageById(transactionCode);
         if(zyjrGrantImage!=null&&zyjrGrantImage.getOrderState()!=null){
-            map.put("yingxiang",zyjrGrantImage.getOrderState().toString());
+            map.put("yingxiang",zyjrGrantImage.getOrderState());
         }else{
             map.put("yingxiang",null);
         }
         ZyjrGrantInstalments zyjrGrantInstalments = zyjrGrantInstalmentsMapper.selectZyjrGrantInstalmentsById(transactionCode);
         if(zyjrGrantInstalments!=null&&zyjrGrantInstalments.getOrderState()!=null){
-            map.put("fenqi",zyjrGrantInstalments.getOrderState().toString());
+            map.put("fenqi",zyjrGrantInstalments.getOrderState());
         }else{
             map.put("fenqi",null);
         }
-
+        map.put("submit",null);
         if(as!=null){
-        map.put("gps",as.getGps());
-        map.put("gpsPic",as.getGpsPic());
-        map.put("zhanghu",as.getAccount());
-        map.put("baoxian",as.getInsurance());
-        map.put("tijiao",as.getTijiao());
+            map.put("submit",as.getTijiao());
+            map.put("gps",as.getGps());
+            map.put("gpsPic",as.getGpsPic());
+            map.put("zhanghu",as.getAccount());
+            map.put("baoxian",as.getInsurance());
+            map.put("tijiao",as.getTijiao());
             return AjaxResult.success(map);
         }
         map.put("gps",null);
@@ -280,7 +284,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:accout:remove')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
+    @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
         return toAjax(zyjrDaiqianAccoutService.deleteZyjrDaiqianAccoutByIds(ids));

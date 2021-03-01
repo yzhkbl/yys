@@ -16,12 +16,12 @@ import com.jeethink.system.service.IZyjrAllowBasicsService;
 
 /**
  * 【请填写功能名称】Service业务层处理
- * 
+ *
  * @author jeethink
  * @date 2020-12-22
  */
 @Service
-public class ZyjrAllowBasicsServiceImpl implements IZyjrAllowBasicsService 
+public class ZyjrAllowBasicsServiceImpl implements IZyjrAllowBasicsService
 {
     @Autowired
     private ZyjrAllowBasicsMapper zyjrAllowBasicsMapper;
@@ -41,10 +41,12 @@ public class ZyjrAllowBasicsServiceImpl implements IZyjrAllowBasicsService
     private ZyjrGrantImageController zyjrGrantImageController;
     @Autowired
     private ZyjrGrantInstalmentsController zyjrGrantInstalmentsController;
+    @Autowired
+    private ExamineMapper examineMapper;
 
     /**
      * 查询【请填写功能名称】
-     * 
+     *
      * @param userId 【请填写功能名称】ID
      * @return 【请填写功能名称】
      */
@@ -56,7 +58,7 @@ public class ZyjrAllowBasicsServiceImpl implements IZyjrAllowBasicsService
 
     /**
      * 查询【请填写功能名称】列表
-     * 
+     *
      * @param zyjrAllowBasics 【请填写功能名称】
      * @return 【请填写功能名称】
      */
@@ -68,7 +70,7 @@ public class ZyjrAllowBasicsServiceImpl implements IZyjrAllowBasicsService
 
     /**
      * 新增【请填写功能名称】
-     * 
+     *
      * @param zyjrAllowBasics 【请填写功能名称】
      * @return 结果
      */
@@ -85,7 +87,7 @@ public class ZyjrAllowBasicsServiceImpl implements IZyjrAllowBasicsService
 
     /**
      * 修改【请填写功能名称】
-     * 
+     *
      * @param zyjrAllowBasics 【请填写功能名称】
      * @return 结果
      */
@@ -97,7 +99,7 @@ public class ZyjrAllowBasicsServiceImpl implements IZyjrAllowBasicsService
 
     /**
      * 批量删除【请填写功能名称】
-     * 
+     *
      * @param ids 需要删除的【请填写功能名称】ID
      * @return 结果
      */
@@ -109,7 +111,7 @@ public class ZyjrAllowBasicsServiceImpl implements IZyjrAllowBasicsService
 
     /**
      * 删除【请填写功能名称】信息
-     * 
+     *
      * @param id 【请填写功能名称】ID
      * @return 结果
      */
@@ -122,17 +124,14 @@ public class ZyjrAllowBasicsServiceImpl implements IZyjrAllowBasicsService
     @Override
     public Map<String, Object> selectByMap(String transactionCode) {
         Map<String,Object> map=new HashMap<>();
-        ZyjrDaiqian zyjrAllowBasics = zyjrAllowBasicsMapper.selectByT(transactionCode);
-        if(zyjrAllowBasics==null||transactionCode==null){
-            return null;
-        }
-        ZyjrCar zyjrCar = zyjrCarMapper.selectZyjrCarById(zyjrAllowBasics.getDealersId());
+        ZyjrDaiqianAccout zd=zyjrDaiqianAccoutService.selectZyjrDaiqianAccoutByIds(transactionCode);
+        ZyjrCar zyjrCar = zyjrCarMapper.selectZyjrCarById(Long.parseLong(zd.getCarid()));
         ZyjrCarAccount z=new ZyjrCarAccount();
         if(zyjrCar!=null&&zyjrCar.getId()!=null){
           /*  z.setZyjrCarId(zyjrCar.getId().toString());
             List<ZyjrCarAccount> zyjrCarAccounts = zyjrCarAccountMapper.selectZyjrCarAccountList(z);
             map.put("Account",zyjrCarAccounts);*/
-            ZyjrDaiqianAccout a=zyjrDaiqianAccoutService.selectZyjrDaiqianAccoutByIds(zyjrAllowBasics.getTransactionCode());
+            ZyjrDaiqianAccout a=zyjrDaiqianAccoutService.selectZyjrDaiqianAccoutByIds(transactionCode);
             map.put("Account",null);
             map.put("Account2",null);
             map.put("type",a.getType());
@@ -147,21 +146,24 @@ public class ZyjrAllowBasicsServiceImpl implements IZyjrAllowBasicsService
             }
 
         }
-        ZyjrGps zyjrGps = zyjrGpsMapper.selectZyjrGpsById(zyjrAllowBasics.getTransactionCode());
+        ZyjrGps zyjrGps = zyjrGpsMapper.selectZyjrGpsById(transactionCode);
 
-            map.put("Gps",zyjrGps);
+        map.put("Gps",zyjrGps);
         if(zyjrGps!=null){
             ZyjrPic pic=new ZyjrPic();
             pic.setGpsId(zyjrGps.getId().toString());
             List<ZyjrPic> zyjrPics = zyjrPicMapper.selectZyjrPicList(pic);
             map.put("pic",zyjrPics);
         }
-        ZyjrInsurance zyjrInsurance = zyjrInsuranceMapper.selectZyjrInsuranceByIds(zyjrAllowBasics.getTransactionCode());
+        ZyjrInsurance zyjrInsurance = zyjrInsuranceMapper.selectZyjrInsuranceByIds(transactionCode);
         map.put("Insurance",zyjrInsurance);
         AjaxResult photo = zyjrGrantImageController.findPhoto(transactionCode);
         map.put("photo",photo.get("data"));
         AjaxResult photo1 = zyjrGrantInstalmentsController.findPhoto(transactionCode);
         map.put("photo2",photo1.get("data"));
+        map.put("carname",zyjrCar.getDealerName());
+        map.put("bazaar",zd.getBazaar());
+
         return map;
     }
 }
