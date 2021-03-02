@@ -217,7 +217,7 @@ public class ZyjrDaihouController extends BaseController
 
             ZyjrCailiao zyjrCailiao=new ZyjrCailiao();
             zyjrCailiao.setTransactionCode(zyjrDaihou.getTransactionCode());
-            List<ZyjrCailiao> zyjrCailiaos = zyjrCailiaoMapper.selectZyjrCailiaoList(zyjrCailiao);
+            List<ZyjrCailiao> zyjrCailiaos = zyjrCailiaoMapper.selectZyjrCailiaoList2(zyjrCailiao);
             if(zyjrCailiaos.size()<1){
                 zyjrCailiaoMapper.insertZyjrCailiao(zyjrCailiao);
             }

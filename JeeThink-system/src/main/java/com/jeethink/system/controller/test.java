@@ -848,7 +848,7 @@ public class test extends BaseController {
     }
 
     @ResponseBody
-    @PostMapping("mianqian")
+    @GetMapping("mianqian")
     public AjaxResult mianqian(String transactionCode){
         ZyjrBorrower zyjrBorrower = o.selectById(transactionCode);
 
@@ -876,6 +876,14 @@ public class test extends BaseController {
         if(a!=null&&a.getData()!=null&&a.getData().split(":")[1].split(",")[0].equals("100")) {
             return  AjaxResult.success("操作成功",a.getData().split("AppAssessmentReportH5")[1].split(",")[0]);
         }
+        return AjaxResult.success();
+    }
+    @ResponseBody
+    @GetMapping("demaxiya")
+    public AjaxResult jzsg(){
+        WebSocket webSocket=new WebSocket();
+        webSocket.sendMessage("董总杰是辣鸡！！重复董总杰辣鸡！");
+
         return AjaxResult.success();
     }
 

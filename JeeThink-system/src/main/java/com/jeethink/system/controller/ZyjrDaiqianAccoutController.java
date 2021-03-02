@@ -101,9 +101,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
             ZyjrGrantImage zyjrGrantImage = zyjrGrantImageMapper.selectZyjrGrantImageById(zyjrDaiqian.getTransactionCode());
             zyjrGrantImage.setOrderState(2);
             zyjrGrantImageMapper.updateZyjrGrantImage(zyjrGrantImage);
-            ZyjrGrantInstalments zyjrGrantInstalments = zyjrGrantInstalmentsMapper.selectZyjrGrantInstalmentsById(zyjrDaiqian.getTransactionCode());
-            zyjrGrantInstalments.setOrderState(2);
-            zyjrGrantInstalmentsMapper.updateZyjrGrantInstalments(zyjrGrantInstalments);
+
         }
 
 
@@ -198,12 +196,8 @@ public class ZyjrDaiqianAccoutController extends BaseController
         }else{
             map.put("yingxiang",null);
         }
-        ZyjrGrantInstalments zyjrGrantInstalments = zyjrGrantInstalmentsMapper.selectZyjrGrantInstalmentsById(transactionCode);
-        if(zyjrGrantInstalments!=null&&zyjrGrantInstalments.getOrderState()!=null){
-            map.put("fenqi",zyjrGrantInstalments.getOrderState());
-        }else{
+
             map.put("fenqi",null);
-        }
         map.put("submit",null);
         if(as!=null){
             map.put("submit",as.getTijiao());
