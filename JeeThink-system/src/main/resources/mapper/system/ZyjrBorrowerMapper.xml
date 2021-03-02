@@ -31,9 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="orderState"    column="order_state"    />
         <result property="createBy"    column="create_by"    />
         <result property="nation"    column="nation"    />
-
         <result property="updateBy"    column="update_by"    />
-
         <result property="transactionCode"    column="transaction_code"    />
         <result property="contractState"    column="contract_state"    />
         <result property="privateCode"    column="private_code"    />
@@ -41,10 +39,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="conf"    column="conf"    />
         <result property="mianqian"    column="mianqian"    />
         <result property="mianqiandata"    column="mianqiandata"    />
+        <result property="gender"    column="gender"    />
     </resultMap>
 
     <sql id="selectZyjrBorrowerVo">
-        select id,contract_state,nation,mianqian,mianqiandata, user_name,encrypt_data,conf, id_card,private_code, bank_card_no, phone_number, issue_authority, start_date, end_date, family_address, obverse_id, obverse_code, obverse_address, obverse_name, back_id, back_code, back_address, back_name, power_id, power_code, power_address, power_name, credit_power, user_id, order_state, create_by, update_by, transaction_code from zyjr_borrower
+        select id,contract_state,nation,mianqian,mianqiandata, user_name,encrypt_data,conf, id_card,private_code, bank_card_no,
+         phone_number, issue_authority, start_date, end_date, family_address, obverse_id, obverse_code, obverse_address, obverse_name,
+          back_id, back_code, back_address, back_name, power_id, power_code, power_address, power_name, credit_power, user_id, order_state,
+           create_by, update_by, transaction_code ,gender
+           from zyjr_borrower
     </sql>
 
     <select id="selectZyjrBorrowerList" parameterType="ZyjrBorrower" resultMap="ZyjrBorrowerResult">
@@ -78,8 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="nation != null  and nation != ''"> and nation = #{nation}</if>
             <if test="mianqian != null  and mianqian != ''"> and mianqian = #{mianqian}</if>
             <if test="mianqiandata != null  and mianqiandata != ''"> and mianqiandata = #{mianqiandata}</if>
-
-
+            <if test="gender != null  and gender != ''"> and gender = #{gender}</if>
         </where>
     </select>
     
@@ -129,6 +131,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="nation != null">nation,</if>
             <if test="mianqian != null">mianqian,</if>
             <if test="mianqiandata != null">mianqiandata,</if>
+            <if test="gender != null">gender,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userName != null">#{userName},</if>
@@ -164,6 +167,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="nation != null">#{nation},</if>
             <if test="mianqian != null">#{mianqian},</if>
             <if test="mianqiandata != null">#{mianqiandata},</if>
+            <if test="gender != null">#{gender},</if>
          </trim>
     </insert>
 
@@ -204,6 +208,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="nation != null">nation=#{nation},</if>
             <if test="mianqian != null">mianqian=#{mianqian},</if>
             <if test="mianqiandata != null">mianqiandata=#{mianqiandata},</if>
+            <if test="gender != null">gender=#{gender},</if>
         </trim>
         where id = #{id}
     </update>

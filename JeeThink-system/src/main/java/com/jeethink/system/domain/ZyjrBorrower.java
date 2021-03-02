@@ -123,6 +123,7 @@ public class ZyjrBorrower
     private String createBy;
     private String updateBy;
     private String nation;
+    private String gender;
     String date;
     String mianqian;
     String mianqiandata;
