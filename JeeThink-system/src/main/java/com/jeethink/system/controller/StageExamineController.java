@@ -142,7 +142,11 @@ public class StageExamineController extends BaseController {
 
     @PostMapping("/add/supplement")
     public AjaxResult addSupplement(@RequestBody ZyjrSupplement q){
-        return toAjax(stageExamineMapper.addSupplement(q));
+        if(stageExamineMapper.findSupplement(q.getTransactionCode())!=null){
+            return toAjax(stageExamineMapper.updateSupplement(q));
+        }else {
+            return toAjax(stageExamineMapper.addSupplement(q));
+        }
     }
 
     @GetMapping("/find/supplement")

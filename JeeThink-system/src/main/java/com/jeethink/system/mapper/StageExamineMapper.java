@@ -54,5 +54,6 @@ public interface StageExamineMapper {
 
 
     int addSupplement(ZyjrSupplement q);
+    int updateSupplement(ZyjrSupplement q);
     ZyjrSupplement findSupplement(String transactionCode);
 }

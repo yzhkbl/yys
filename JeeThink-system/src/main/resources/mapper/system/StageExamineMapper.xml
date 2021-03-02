@@ -166,6 +166,13 @@
         values
         (#{id},#{gongchangren},#{gtsqr},#{danbaoren},#{transactionCode})
     </insert>
+    <update id="updateSupplement" parameterType="com.jeethink.system.domain.ZyjrSupplement">
+        update zyjr_supplement
+        set gongchangren=#{gongchangren},
+        gtsqr=#{gtsqr},
+        danbaoren=#{danbaoren},
+        where transaction_code=#{transactionCode}
+    </update>
     <select id="findSupplement" resultType="com.jeethink.system.domain.ZyjrSupplement">
         select id,gongchangren,gtsqr,danbaoren,transaction_code
         from zyjr_supplement
