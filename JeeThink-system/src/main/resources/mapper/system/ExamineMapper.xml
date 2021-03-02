@@ -931,4 +931,12 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
         left join zyjr_daihou e on e.transaction_code=d.transaction_code
         where a.transaction_code=#{transactionCode}
     </select>
+    <select id="findSubmit" resultType="com.jeethink.system.domain.vo.SubmitVo">
+        select a.submit_state zhunru,b.submit_state shouxin,c.tijiao daiqian,d.tijiao daihou
+        from zyjr_submit_state_allow a
+        left join zyjr_submit_state_grant b on a.transaction_code=b.transaction_code
+        left join zyjr_daiqian c on a.transaction_code=c.transaction_code
+        left join zyjr_daihou d on a.transaction_code=d.transaction_code
+        where a.transaction_code=#{transactionCode}
+    </select>
 </mapper>

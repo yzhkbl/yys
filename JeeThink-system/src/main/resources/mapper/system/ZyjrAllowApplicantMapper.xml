@@ -50,12 +50,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="familyAddress"    column="family_address"    />
         <result property="spouseFamilyAddress"    column="spouse_family_address"    />
         <result property="sfgtsqr"    column="sfgtsqr"    />
+        <result property="spouseUnitNature"    column="spouse_unit_nature"    />
+        <result property="spouseProvince"    column="spouse_province"    />
+        <result property="spouseCity"    column="spouse_city"    />
+        <result property="spouseArea"    column="spouse_area"    />
+        <result property="spouseSourceIncome"    column="spouse_source_income"    />
+        <result property="spouseAddress"    column="spouse_address"    />
     </resultMap>
 
     <sql id="selectZyjrAllowApplicantVo">
         select id, household_nature, live_time, live_area, live_city, live_province, live_address, phone_number, house_power, education, carstat, is_license, driver_ship, license_type, unit_name, work_address, unit_phone,
         unit_nature, industry, position, monthly_income, marriage, card_address, back_address, spouse_name, id_number, permanent_address, phone_no, spouse_education, spouse_unit_name, spouse_work_place, spouse_work_phone,
-        spouse_monthly_income, order_state, transaction_code, user_id, work_area, work_city, work_province,joindate,families_number,source_income,family_address,spouse_family_address,sfgtsqr
+        spouse_monthly_income, order_state, transaction_code, user_id, work_area, work_city, work_province,joindate,families_number,source_income,family_address,spouse_family_address,sfgtsqr,spouse_unit_nature,spouse_province,
+        spouse_city,spouse_area,spouse_source_income,spouse_address
         from zyjr_allow_applicant
     </sql>
 
@@ -165,6 +172,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="familyAddress != null">family_address,</if>
             <if test="spouseFamilyAddress != null">spouse_family_address,</if>
             <if test="sfgtsqr != null">sfgtsqr,</if>
+            <if test="spouseUnitNature != null">spouse_unit_nature,</if>
+            <if test="spouseProvince != null">spouse_province,</if>
+            <if test="spouseCity != null">spouse_city,</if>
+            <if test="spouseArea != null">spouse_area,</if>
+            <if test="spouseSourceIncome != null">spouse_source_income,</if>
+            <if test="spouseAddress != null">spouse_address,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="householdNature != null">#{householdNature},</if>
@@ -211,6 +224,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="familyAddress != null">#{familyAddress},</if>
             <if test="spouseFamilyAddress != null">#{spouseFamilyAddress},</if>
             <if test="sfgtsqr != null">#{sfgtsqr},</if>
+            <if test="spouseUnitNature != null">#{spouseUnitNature},</if>
+            <if test="spouseProvince != null">#{spouseProvince},</if>
+            <if test="spouseCity != null">#{spouseCity},</if>
+            <if test="spouseArea != null">#{spouseArea},</if>
+            <if test="spouseSourceIncome != null">#{spouseSourceIncome},</if>
+            <if test="spouseAddress != null">#{spouseAddress},</if>
          </trim>
     </insert>
 
@@ -261,6 +280,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="familyAddress != null">family_address = #{familyAddress},</if>
             <if test="spouseFamilyAddress != null">spouse_family_address = #{spouseFamilyAddress},</if>
             <if test="sfgtsqr != null">sfgtsqr = #{sfgtsqr},</if>
+            <if test="spouseUnitNature != null">spouse_unit_nature = #{spouseUnitNature},</if>
+            <if test="spouseProvince != null">spouse_province = #{spouseProvince},</if>
+            <if test="spouseCity != null">spouse_city = #{spouseCity},</if>
+            <if test="spouseArea != null">spouse_area = #{spouseArea},</if>
+            <if test="spouseSourceIncome != null">spouse_source_income = #{spouseSourceIncome},</if>
+            <if test="spouseAddress != null">spouse_address = #{spouseAddress},</if>
         </trim>
         where user_id = #{userId} and transaction_code = #{transactionCode}
     </update>

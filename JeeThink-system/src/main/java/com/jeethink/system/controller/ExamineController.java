@@ -413,5 +413,10 @@ public class ExamineController extends BaseController {
     public AjaxResult opinion(String transactionCode){
         return AjaxResult.success(examineMapper.findApType(transactionCode));
     }
+
+    @GetMapping("/total/submit")
+    public AjaxResult findSubmit(String transactionCode){
+        return AjaxResult.success(examineMapper.findSubmit(transactionCode));
+    }
 }
 

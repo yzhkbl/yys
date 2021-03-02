@@ -188,6 +188,13 @@ public class ZyjrAllowApplicant extends BaseEntity
     private String spouseFamilyAddress; //配偶籍贯
     private Integer sfgtsqr;    //是否共同申请人
 
+    private String spouseUnitNature;    //配偶工作单位性质
+    private String spouseProvince;      //配偶现居住省
+    private String spouseCity;          //配偶现居住市
+    private String spouseArea;          //配偶现居住区
+    private String spouseSourceIncome;  //配偶主要收入来源
+    private String spouseAddress;       //配偶现居住详细地址
+
 
     public String getJoindate() {
         return joindate;

@@ -142,4 +142,6 @@ public interface ExamineMapper {
     int updateByBairong(Bairong borrower);
 
     OpinionVo findApType(@Param("transactionCode") String transactionCode);
+
+    SubmitVo findSubmit(String transactionCode);
 }
