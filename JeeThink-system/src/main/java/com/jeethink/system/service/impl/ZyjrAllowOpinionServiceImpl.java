@@ -1,16 +1,18 @@
 package com.jeethink.system.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.jeethink.common.core.domain.entity.SysUser;
 import com.jeethink.common.utils.DateUtils;
+import com.jeethink.system.domain.ZyjrBorrower;
 import com.jeethink.system.domain.ZyjrSubmitStateAllow;
-import com.jeethink.system.mapper.ExamineMapper;
-import com.jeethink.system.mapper.StageExamineMapper;
+import com.jeethink.system.mapper.*;
+import com.jeethink.system.util.PushMessageByPushIdTest;
 import com.jeethink.system.util.WebSocket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.jeethink.system.mapper.ZyjrAllowOpinionMapper;
 import com.jeethink.system.domain.ZyjrAllowOpinion;
 import com.jeethink.system.service.IZyjrAllowOpinionService;
 
@@ -29,6 +31,10 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
     private StageExamineMapper stageExamineMapper;
     @Autowired
     private ExamineMapper examineMapper;
+    @Autowired
+    private ZyjrBorrowerMapper zyjrBorrowerMapper;
+    @Autowired
+    private SysUserMapper sysUserMapper;
     /**
      * 查询【请填写功能名称】
      *
@@ -62,6 +68,7 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
     @Override
     public int insertZyjrAllowOpinion(ZyjrAllowOpinion zyjrAllowOpinion)
     {   ZyjrAllowOpinion o = selectZyjrAllowOpinionById(zyjrAllowOpinion.getTransactionCode());
+        ZyjrBorrower zyjrBorrower = zyjrBorrowerMapper.selectById(zyjrAllowOpinion.getTransactionCode());
         //System.err.println(o);
         if(o!=null) {
             stageExamineMapper.deleteOpinion(zyjrAllowOpinion.getTransactionCode());
@@ -72,10 +79,18 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
             zyjrSubmitStateAllow.setSubmitState(0);
             zyjrSubmitStateAllow.setTransactionCode(zyjrAllowOpinion.getTransactionCode());
             examineMapper.updateAllowState(zyjrSubmitStateAllow);
+            List<String> stringsList = sysUserMapper.selectId("9");
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrAllowOpinion.getTransactionCode(),"初审退回",stringsList);
         }else if(zyjrAllowOpinion.getApprovalType()==1){
+
             WebSocket webSocket=new WebSocket();
             String date= DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS,new Date()).substring(11,19);
             webSocket.sendMessage("终审来新单了,"+date+",终审,"+zyjrAllowOpinion.getTransactionCode()+"");
+            List<String> stringsList = sysUserMapper.selectId("9");
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrAllowOpinion.getTransactionCode(),"初审通过",stringsList);
+        }else if(zyjrAllowOpinion.getApprovalType()==3){
+            List<String> stringsList = sysUserMapper.selectId("9");
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrAllowOpinion.getTransactionCode(),"初审拒绝",stringsList);
         }
         return zyjrAllowOpinionMapper.insertZyjrAllowOpinion(zyjrAllowOpinion);
     }

@@ -10,6 +10,7 @@ import com.jeethink.common.utils.DateUtils;
 import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.UserVo;
 import com.jeethink.system.mapper.*;
+import com.jeethink.system.util.PushMessageByPushIdTest;
 import com.jeethink.system.util.WebSocket;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,10 @@ public class ZyjrDaihouController extends BaseController
     private ExamineMapper examineMapper;
     @Autowired
     private ZyjrCailiaoMapper zyjrCailiaoMapper;
+    @Autowired
+    private ZyjrBorrowerMapper zyjrBorrowerMapper;
+    @Autowired
+    private SysUserMapper sysUserMapper;
 
     /**
      * 查询【请填写功能名称】列表
@@ -219,6 +224,7 @@ public class ZyjrDaihouController extends BaseController
     @PostMapping("go")
     public AjaxResult sg(@RequestBody ZyjrDaihou zyjrDaihou)
     {
+        ZyjrBorrower zyjrBorrower = zyjrBorrowerMapper.selectById(zyjrDaihou.getTransactionCode());
         if(zyjrDaihou!=null&&zyjrDaihou.getState().equals("1")){
 
             ZyjrCailiao zyjrCailiao=new ZyjrCailiao();
@@ -227,6 +233,8 @@ public class ZyjrDaihouController extends BaseController
             if(zyjrCailiaos.size()<1){
                 zyjrCailiaoMapper.insertZyjrCailiao(zyjrCailiao);
             }
+            List<String> stringsList = sysUserMapper.selectId("11");
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaihou.getTransactionCode(),"贷前通过",stringsList);
 
         }
         examineMapper.updateByDaihou(zyjrDaihou);
@@ -237,6 +245,11 @@ public class ZyjrDaihouController extends BaseController
             zyjrDaihou2.setTijiao("0");
             zyjrDaihou2.setState("2");
             zyjrDaihouMapper.updateZyjrDaihou(zyjrDaihou2);
+            List<String> stringsList = sysUserMapper.selectId("11");
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaihou.getTransactionCode(),"贷前退回",stringsList);
+        }else if(zyjrDaihou!=null&&zyjrDaihou.getState().equals("3")){
+            List<String> stringsList = sysUserMapper.selectId("11");
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaihou.getTransactionCode(),"贷前拒绝",stringsList);
         }
         return AjaxResult.success();
     }

@@ -24,7 +24,7 @@ public class PushMessageByPushIdTest {
                 title("中豫金融").
                 content("您的客户:+name+(订单号+t+)在+b+退回了！请及时查看！").
                 action(new Action.Builder().
-                        actionType(9).
+                        actionType(6).
                         build()).
                 build();
         Aps aps=new Aps();
@@ -40,7 +40,7 @@ public class PushMessageByPushIdTest {
         }
     }
 
-    public static String tongzhi(String id,String name,String t,String b,List<String> pushIds) {
+    public static String tongzhi(String name,String t,String b,List<String> pushIds) {
 
         String APPKEY = "Hh5r2rtTTSAEWg7DAgbM3zGpIuUEvnH1";
         String MASTERSECRET = "03j3WGwK1CWkSsbicussk9mwFMRngUGy";
@@ -49,9 +49,9 @@ public class PushMessageByPushIdTest {
         Message msg = new Message();
         Notification notification = new Notification.Builder().
                 title("中豫金融").
-                content("您的客户:+name+(订单号+t+)在+b+退回了！请及时查看！").
+                content("您的客户:"+name+"(订单号"+t+")在"+b+"退回了！请及时查看！").
                 action(new Action.Builder().
-                        actionType(9).
+                        actionType(6).
                         build()).
                 build();
 

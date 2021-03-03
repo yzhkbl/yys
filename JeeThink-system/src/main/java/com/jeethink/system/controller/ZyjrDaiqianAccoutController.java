@@ -10,6 +10,7 @@ import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.DqVo;
 import com.jeethink.system.domain.vo.GrantPhoto;
 import com.jeethink.system.mapper.*;
+import com.jeethink.system.util.PushMessageByPushIdTest;
 import com.jeethink.system.util.WebSocket;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +62,10 @@ public class ZyjrDaiqianAccoutController extends BaseController
     private ZyjrCarMapper zyjrCarMapper;
     @Autowired
     private ZyjrGrantPhotoMapper zyjrGrantPhotoMapper;
-
+    @Autowired
+    private SysUserMapper sysUserMapper;
+    @Autowired
+    private ZyjrBorrowerMapper zyjrBorrowerMapper;
     /**
      * 查询【请填写功能名称】列表
      */
@@ -78,7 +82,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
     @PostMapping("/no")
     public AjaxResult li(@RequestBody ZyjrDaiqian zyjrDaiqian)
     {
-
+        ZyjrBorrower zyjrBorrower = zyjrBorrowerMapper.selectById(zyjrDaiqian.getTransactionCode());
         ZyjrDaiqian as=examineMapper.selByDaiqian(zyjrDaiqian.getTransactionCode());
         if(as!=null){
             examineMapper.updateByDaiqian(zyjrDaiqian);
@@ -91,9 +95,9 @@ public class ZyjrDaiqianAccoutController extends BaseController
             zyjrOrderProgress.setApprovalType(4);
             zyjrOrderProgress.setProgress(4);
             examineMapper.updateOrderProgress(zyjrOrderProgress);
-        }
-
-        if(as!=null&&zyjrDaiqian.getState()!=null&&zyjrDaiqian.getState().equals("2")){
+            List<String> stringsList = sysUserMapper.selectId("11");
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaiqian.getTransactionCode(),"贷前通过",stringsList);
+        }else if(as!=null&&zyjrDaiqian.getState()!=null&&zyjrDaiqian.getState().equals("2")){
             as.setGps("2");
             as.setInsurance("2");
             as.setAccount("2");
@@ -104,7 +108,12 @@ public class ZyjrDaiqianAccoutController extends BaseController
             ZyjrGrantImage zyjrGrantImage = zyjrGrantImageMapper.selectZyjrGrantImageById(zyjrDaiqian.getTransactionCode());
             zyjrGrantImage.setOrderState(2);
             zyjrGrantImageMapper.updateZyjrGrantImage(zyjrGrantImage);
+            List<String> stringsList = sysUserMapper.selectId("11");
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaiqian.getTransactionCode(),"贷前退回",stringsList);
 
+        }else if(as!=null&&zyjrDaiqian.getState()!=null&&zyjrDaiqian.getState().equals("3")){
+            List<String> stringsList = sysUserMapper.selectId("11");
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaiqian.getTransactionCode(),"贷前拒绝",stringsList);
         }
 
 

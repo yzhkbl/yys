@@ -2,6 +2,8 @@ package com.jeethink.system.controller;
 
 import java.util.List;
 
+import com.jeethink.common.core.domain.entity.SysUser;
+import com.jeethink.system.mapper.SysUserMapper;
 import com.jeethink.system.mapper.ZyjrAllowOpinionMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,8 @@ public class ZyjrAllowOpinionController extends BaseController
     private IZyjrAllowOpinionService zyjrAllowOpinionService;
     @Autowired
     private ZyjrAllowOpinionMapper zyjrAllowOpinionMapper;
+    @Autowired
+    SysUserMapper sysUserMapper;
 
     /**
      * 查询【请填写功能名称】列表
@@ -47,6 +51,12 @@ public class ZyjrAllowOpinionController extends BaseController
         startPage();
         List<ZyjrAllowOpinion> list = zyjrAllowOpinionService.selectZyjrAllowOpinionList(zyjrAllowOpinion);
         return getDataTable(list);
+    }
+
+    @GetMapping("de")
+    public  AjaxResult ss(){
+        List<String> stringList = sysUserMapper.selectId("1");
+        return AjaxResult.success(stringList);
     }
 
     /**
