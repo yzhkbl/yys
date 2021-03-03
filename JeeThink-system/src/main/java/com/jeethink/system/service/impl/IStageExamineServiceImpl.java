@@ -8,6 +8,7 @@ import com.jeethink.system.domain.vo.ZyjrGrant;
 import com.jeethink.system.mapper.*;
 import com.jeethink.system.service.IStageExamineService;
 import com.jeethink.system.util.DataUtil;
+import com.jeethink.system.util.PushMessageByPushIdTest;
 import com.jeethink.system.util.WebSocket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,6 +59,8 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     private ZyjrCommonApplicantMapper zyjrCommonApplicantMapper;
     @Autowired
     private ExamineController examineController;
+    @Autowired
+    private SysUserMapper sysUserMapper;
 
 
     @Override
@@ -195,6 +198,7 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         //}
         int count = examineDao.insertOpinion(q);
         ZyjrRepeatOpinion zyjrRepeatOpinion = findOpinion(q.getTransactionCode());
+        ZyjrBorrower zyjrBorrower = examineDao.findByBorrower(q.getTransactionCode());
         if(zyjrRepeatOpinion!=null&&zyjrRepeatOpinion.getApprovalType()==2) {
             ZyjrAllowOpinion zyjrAllowOpinion = new ZyjrAllowOpinion();
             zyjrAllowOpinion.setTransactionCode(q.getTransactionCode());
@@ -205,6 +209,11 @@ public class IStageExamineServiceImpl implements IStageExamineService {
             String date= DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS,new Date()).substring(11,19);
             webSocket.sendMessage("终审已通过,"+date+",贷前资料审核,"+q.getTransactionCode()+"");
 
+            List<String> stringsList = sysUserMapper.selectId("10");
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),q.getTransactionCode(),"初审通过",stringsList);
+        }else {
+            List<String> stringsList = sysUserMapper.selectId("10");
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),q.getTransactionCode(),"初审拒绝",stringsList);
         }
 
         return count;
