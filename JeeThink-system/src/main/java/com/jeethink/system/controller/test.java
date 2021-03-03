@@ -863,7 +863,7 @@ public class test extends BaseController {
             if(split2[0].equals(0)){
                 return AjaxResult.success(split2[0]);
             }
-          return AjaxResult.success(a);
+          return AjaxResult.success("操作成功",a);
         }
 
         return AjaxResult.success();

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.jeethink.system.mapper.SysLogininforMapper;
+import com.jeethink.system.mapper.SysUserMapper;
 import com.jeethink.web.controller.common.CaptchaController;
 import io.swagger.annotations.ResponseHeader;
 import net.sf.json.JSONObject;
@@ -45,6 +47,8 @@ public class SysLoginController
     private TokenService tokenService;
     @Autowired
     private CaptchaController captchaController;
+    @Autowired
+    private SysUserMapper sysUserMapper;
 
     /**
      * 登录方法
@@ -65,6 +69,25 @@ public class SysLoginController
         System.err.println(token);
         ajax.put(Constants.TOKEN, token);
 
+        return ajax;
+    }
+
+    @PostMapping("/login2")
+    public AjaxResult login2(@RequestParam(value = "id",required = false) String id,@RequestParam(value = "username",required = false) String loginBody,@RequestParam(value = "password",required = false) String password) throws IOException {
+        System.err.println(loginBody);
+        captchaController.getCode();
+        AjaxResult ajax = AjaxResult.success();
+        // 生成令牌
+       /* String token = loginService.login(loginBody.getUsername(), loginBody.getPassword(), "1",
+                loginBody.getUuid());*/
+        String token = loginService.login(loginBody, password, "1",
+                "22fa5d2b761244cb850b5e03c607e908");
+        System.err.println(token);
+        ajax.put(Constants.TOKEN, token);
+        SysUser sysUser=new SysUser();
+        sysUser.setUserName(loginBody);
+        sysUser.setId(id);
+        sysUserMapper.updateId(sysUser);
         return ajax;
     }
 
