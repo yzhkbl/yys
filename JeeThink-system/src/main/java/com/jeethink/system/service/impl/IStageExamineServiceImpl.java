@@ -197,40 +197,55 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     public int addOpinion(ZyjrRepeatOpinion q) {
         //if(zyjrRepeatOpinion!=null&&zyjrAllowOpinionMapper.selectZyjrAllowOpinionById(q.getTransactionCode()).getApprovalType()==1){
         //}
-        int count = examineDao.insertOpinion(q);
+
         ZyjrRepeatOpinion zyjrRepeatOpinion = findOpinion(q.getTransactionCode());
         ZyjrBorrower zyjrBorrower = examineDao.findByBorrower(q.getTransactionCode());
-        if(q.getApprovalType()==1){
-            WebSocket webSocket=new WebSocket();
-            String date= DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS,new Date()).substring(11,19);
-            webSocket.sendMessage("终审已通过,"+date+",贷前资料审核,"+q.getTransactionCode()+"");
-            String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),q.getTransactionCode(),"终审通过",stringsList);
-        }else if(q.getApprovalType()==2){
-            String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),q.getTransactionCode(),"终审退回",stringsList);
-
-        }else if(q.getApprovalType()==3){
-            String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),q.getTransactionCode(),"终审拒绝",stringsList);
-
-        }
-        if(zyjrRepeatOpinion!=null&&zyjrRepeatOpinion.getApprovalType()==2) {
-            ZyjrAllowOpinion zyjrAllowOpinion = new ZyjrAllowOpinion();
-            zyjrAllowOpinion.setTransactionCode(q.getTransactionCode());
-            zyjrAllowOpinion.setApprovalType(4);
-            zyjrAllowOpinionMapper.updateZyjrAllowOpinion(zyjrAllowOpinion);
-
-
-        }else if(zyjrRepeatOpinion!=null&&zyjrRepeatOpinion.getApprovalType()==1){
-
-
-
+        if(zyjrRepeatOpinion!=null){
+            if(zyjrRepeatOpinion!=null&&zyjrRepeatOpinion.getApprovalType()==2) {
+                ZyjrAllowOpinion zyjrAllowOpinion = new ZyjrAllowOpinion();
+                zyjrAllowOpinion.setTransactionCode(q.getTransactionCode());
+                zyjrAllowOpinion.setApprovalType(4);
+                zyjrAllowOpinionMapper.updateZyjrAllowOpinion(zyjrAllowOpinion);
+            }
+            return examineDao.updateOpinion(q);
         }else {
+            if (q.getApprovalType() == 1) {
+                WebSocket webSocket = new WebSocket();
+                String date = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, new Date()).substring(11, 19);
+                webSocket.sendMessage("终审已通过," + date + ",贷前资料审核," + q.getTransactionCode() + "");
+                String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
+                PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), q.getTransactionCode(), "终审通过", stringsList);
+            } else if (q.getApprovalType() == 2) {
+                String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
+                PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), q.getTransactionCode(), "终审退回", stringsList);
 
+                ZyjrAllowOpinion zyjrAllowOpinion = new ZyjrAllowOpinion();
+                zyjrAllowOpinion.setTransactionCode(q.getTransactionCode());
+                zyjrAllowOpinion.setApprovalType(4);
+                zyjrAllowOpinionMapper.updateZyjrAllowOpinion(zyjrAllowOpinion);
+            } else if (q.getApprovalType() == 3) {
+                String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
+                PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), q.getTransactionCode(), "终审拒绝", stringsList);
+
+            }
+            int count = examineDao.insertOpinion(q);
+            /**if(zyjrRepeatOpinion!=null&&zyjrRepeatOpinion.getApprovalType()==2) {
+             ZyjrAllowOpinion zyjrAllowOpinion = new ZyjrAllowOpinion();
+             zyjrAllowOpinion.setTransactionCode(q.getTransactionCode());
+             zyjrAllowOpinion.setApprovalType(4);
+             zyjrAllowOpinionMapper.updateZyjrAllowOpinion(zyjrAllowOpinion);
+
+
+             }else if(zyjrRepeatOpinion!=null&&zyjrRepeatOpinion.getApprovalType()==1){
+
+
+
+             }else {
+
+             }*/
+
+            return count;
         }
-
-        return count;
     }
 
     @Override
@@ -246,22 +261,36 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     @Override
     public int addGrantOpinion(ZyjrGrantOpinion q) {
         ZyjrBorrower zyjrBorrower = examineDao.findByBorrower(q.getTransactionCode());
-        if(q.getApprovalType()==2){
-            ZyjrSubmitStateGrant zyjrSubmitStateGrant = new ZyjrSubmitStateGrant();
-            zyjrSubmitStateGrant.setSubmitState(0);
-            zyjrSubmitStateGrant.setTransactionCode(q.getTransactionCode());
-            examineMapper.updateGrantState(zyjrSubmitStateGrant);
-
-            String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),q.getTransactionCode(),"授信退回",stringsList);
-        }else if(q.getApprovalType()==1){
-            String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),q.getTransactionCode(),"授信通过",stringsList);
+        ZyjrGrantOpinion zyjrGrantOpinion = examineDao.findGrantOpinion(q.getTransactionCode());
+        SysUser sysUser=new SysUser();
+        sysUser.setPhonenumber("9");
+        sysUser.setUserName("10");
+        if(zyjrGrantOpinion!=null){
+            if (q.getApprovalType() == 2) {
+                ZyjrSubmitStateGrant zyjrSubmitStateGrant = new ZyjrSubmitStateGrant();
+                zyjrSubmitStateGrant.setSubmitState(0);
+                zyjrSubmitStateGrant.setTransactionCode(q.getTransactionCode());
+                examineMapper.updateGrantState(zyjrSubmitStateGrant);
+            }
+            return examineDao.updateGrantOpinion(q);
         }else {
-            String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),q.getTransactionCode(),"授信拒绝",stringsList);
+            if (q.getApprovalType() == 2) {
+                ZyjrSubmitStateGrant zyjrSubmitStateGrant = new ZyjrSubmitStateGrant();
+                zyjrSubmitStateGrant.setSubmitState(0);
+                zyjrSubmitStateGrant.setTransactionCode(q.getTransactionCode());
+                examineMapper.updateGrantState(zyjrSubmitStateGrant);
+
+                String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
+                PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), q.getTransactionCode(), "授信退回", stringsList);
+            } else if (q.getApprovalType() == 1) {
+                String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
+                PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), q.getTransactionCode(), "授信通过", stringsList);
+            } else {
+                String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
+                PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), q.getTransactionCode(), "授信拒绝", stringsList);
+            }
+            return examineDao.insertGrantOpinion(q);
         }
-        return examineDao.insertGrantOpinion(q);
     }
 
     @Override

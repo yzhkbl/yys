@@ -27,12 +27,14 @@ public interface StageExamineMapper {
 
     int deleteOpinion(String transactionCode);
     int insertOpinion(ZyjrRepeatOpinion q);
+    int updateOpinion(ZyjrRepeatOpinion q);
     ZyjrRepeatOpinion findOpinion(String transactionCode);
     List<ZyjrGrant> list();
 
 
     List<ZyjrGrant> findGrant();
     int insertGrantOpinion(ZyjrGrantOpinion q);
+    int updateGrantOpinion(ZyjrGrantOpinion q);
     ZyjrGrantOpinion findGrantOpinion(String transactionCode);
 
     GrantVo findByGrant(String transactionCode);
