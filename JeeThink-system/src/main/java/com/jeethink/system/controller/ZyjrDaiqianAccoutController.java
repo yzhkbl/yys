@@ -1,13 +1,16 @@
 package com.jeethink.system.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.jeethink.common.utils.DateUtils;
 import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.DqVo;
 import com.jeethink.system.domain.vo.GrantPhoto;
 import com.jeethink.system.mapper.*;
+import com.jeethink.system.util.WebSocket;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -166,6 +169,9 @@ public class ZyjrDaiqianAccoutController extends BaseController
         if(a!=null&&a.getGps()!=null&&a.getAccount()!=null&&a.getInsurance()!=null&&a.getGpsPic()!=null){
             a.setTijiao("1");
             examineMapper.updateByDaiqian2(a);
+            WebSocket webSocket=new WebSocket();
+            String date= DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS,new Date()).substring(11,19);
+            webSocket.sendMessage("贷前来新单了,"+date+",贷前,"+transactionCode+"");
             return AjaxResult.success();
         }else{
             return AjaxResult.success("提交失败，您的信息未填完整,请完善信息！");

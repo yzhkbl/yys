@@ -878,14 +878,6 @@ public class test extends BaseController {
         }
         return AjaxResult.success();
     }
-    @ResponseBody
-    @GetMapping("demaxiya")
-    public AjaxResult jzsg(){
-        WebSocket webSocket=new WebSocket();
-        webSocket.sendMessage("董总杰是辣鸡！！重复董总杰辣鸡！");
-
-        return AjaxResult.success();
-    }
 
 
     @ResponseBody
