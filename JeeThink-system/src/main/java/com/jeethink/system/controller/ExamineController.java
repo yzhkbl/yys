@@ -3,6 +3,7 @@ package com.jeethink.system.controller;
 import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
 import com.jeethink.common.core.page.TableDataInfo;
+import com.jeethink.common.utils.DateUtils;
 import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.GrantPhoto;
 import com.jeethink.system.domain.vo.fileInfoDto;
@@ -11,13 +12,11 @@ import com.jeethink.system.domain.vo.orderVo;
 import com.jeethink.system.mapper.*;
 import com.jeethink.system.service.IExamineService;
 import com.jeethink.system.util.DataUtil;
+import com.jeethink.system.util.WebSocket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/examine")
@@ -118,6 +117,9 @@ public class ExamineController extends BaseController {
         zyjrOrderProgress.setApprovalType(0);
         zyjrOrderProgress.setProgress(0);
         examineMapper.insertOrderProgress(zyjrOrderProgress);
+        WebSocket webSocket=new WebSocket();
+        String date=DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS,new Date()).substring(11,19);
+        webSocket.sendMessage("秒批来新单了,"+date+",银行岗,"+q.getTransactionCode()+"");
         return AjaxResult.success();
     }
 
@@ -323,6 +325,9 @@ public class ExamineController extends BaseController {
         zyjrOrderProgress.setApprovalType(2);
         zyjrOrderProgress.setProgress(2);
         examineMapper.updateOrderProgress(zyjrOrderProgress);
+        WebSocket webSocket=new WebSocket();
+        String date=DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS,new Date()).substring(11,19);
+        webSocket.sendMessage("初审来新单了,"+date+",初审"+q.getTransactionCode()+"");
         if(examineMapper.findAllowState(q.getTransactionCode())!=null){
             return toAjax(examineMapper.updateAllowState(q));
         }else {
@@ -337,6 +342,9 @@ public class ExamineController extends BaseController {
         zyjrOrderProgress.setApprovalType(3);
         zyjrOrderProgress.setProgress(3);
         examineMapper.updateOrderProgress(zyjrOrderProgress);
+        WebSocket webSocket=new WebSocket();
+        String date=DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS,new Date()).substring(11,19);
+        webSocket.sendMessage("授信来新单了,"+date+",初终,"+q.getTransactionCode()+"");
         if(examineMapper.findGrantState(q.getTransactionCode())!=null){
             return toAjax(examineMapper.updateGrantState(q));
         }else {

@@ -848,7 +848,7 @@ public class test extends BaseController {
     }
 
     @ResponseBody
-    @PostMapping("mianqian")
+    @GetMapping("mianqian")
     public AjaxResult mianqian(String transactionCode){
         ZyjrBorrower zyjrBorrower = o.selectById(transactionCode);
 

@@ -1,5 +1,6 @@
 package com.jeethink.system.service.impl;
 
+import com.jeethink.common.utils.DateUtils;
 import com.jeethink.system.controller.ExamineController;
 import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.ExamineVo;
@@ -7,13 +8,11 @@ import com.jeethink.system.domain.vo.ZyjrGrant;
 import com.jeethink.system.mapper.*;
 import com.jeethink.system.service.IStageExamineService;
 import com.jeethink.system.util.DataUtil;
+import com.jeethink.system.util.WebSocket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class IStageExamineServiceImpl implements IStageExamineService {
@@ -201,6 +200,11 @@ public class IStageExamineServiceImpl implements IStageExamineService {
             zyjrAllowOpinion.setTransactionCode(q.getTransactionCode());
             zyjrAllowOpinion.setApprovalType(4);
             zyjrAllowOpinionMapper.updateZyjrAllowOpinion(zyjrAllowOpinion);
+        }else if(zyjrRepeatOpinion!=null&&zyjrRepeatOpinion.getApprovalType()==1){
+            WebSocket webSocket=new WebSocket();
+            String date= DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS,new Date()).substring(11,19);
+            webSocket.sendMessage("终审已通过,"+date+",贷前资料审核,"+q.getTransactionCode()+"");
+
         }
 
         return count;

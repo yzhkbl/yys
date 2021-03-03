@@ -26,6 +26,7 @@ public interface ZyjrCailiaoMapper
      * @return 【请填写功能名称】集合
      */
     public List<ZyjrCailiao> selectZyjrCailiaoList(ZyjrCailiao zyjrCailiao);
+    public List<ZyjrCailiao> selectZyjrCailiaoList2(ZyjrCailiao zyjrCailiao);
 
     /**
      * 新增【请填写功能名称】

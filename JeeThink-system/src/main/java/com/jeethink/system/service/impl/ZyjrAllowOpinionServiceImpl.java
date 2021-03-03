@@ -1,10 +1,13 @@
 package com.jeethink.system.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
+import com.jeethink.common.utils.DateUtils;
 import com.jeethink.system.domain.ZyjrSubmitStateAllow;
 import com.jeethink.system.mapper.ExamineMapper;
 import com.jeethink.system.mapper.StageExamineMapper;
+import com.jeethink.system.util.WebSocket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.jeethink.system.mapper.ZyjrAllowOpinionMapper;
@@ -69,6 +72,10 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
             zyjrSubmitStateAllow.setSubmitState(0);
             zyjrSubmitStateAllow.setTransactionCode(zyjrAllowOpinion.getTransactionCode());
             examineMapper.updateAllowState(zyjrSubmitStateAllow);
+        }else if(zyjrAllowOpinion.getApprovalType()==1){
+            WebSocket webSocket=new WebSocket();
+            String date= DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS,new Date()).substring(11,19);
+            webSocket.sendMessage("终审来新单了,"+date+",终审,"+zyjrAllowOpinion.getTransactionCode()+"");
         }
         return zyjrAllowOpinionMapper.insertZyjrAllowOpinion(zyjrAllowOpinion);
     }

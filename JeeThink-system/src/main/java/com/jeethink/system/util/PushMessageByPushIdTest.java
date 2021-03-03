@@ -1,18 +1,18 @@
 package com.jeethink.system.util;
 
-/*
+
 import com.alibaba.fastjson.JSON;
 import com.baidu.techain.sdk.model.*;
 import com.baidu.techain.sdk.push.IPushClient;
 import com.baidu.techain.sdk.push.PushClient;
 import com.baidu.techain.sdk.model.Message;
-*/
+
 
 public class PushMessageByPushIdTest {
-  /*  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-        String APPKEY = "Hh5r2rtTTSAEWg7DAgbM3zGpIuUEvnH1";
-        String MASTERSECRET = "03j3WGwK1CWkSsbicussk9mwFMRngUGy";
+        String APPKEY = "700000915";//Hh5r2rtTTSAEWg7DAgbM3zGpIuUEvnH1
+        String MASTERSECRET = "9c40ea76859eaea61820a4e3fa3713f7";
         IPushClient pushClient = new PushClient(APPKEY, MASTERSECRET);
 
         Message msg = new Message();
@@ -26,7 +26,7 @@ public class PushMessageByPushIdTest {
         msg.setNotification(notification);
         //向设备id为"123"的设备发送消息
         PushResult<MessageResult> result = pushClient.
-                pushMessageByPushId(msg, "123");
+                pushMessageByPushId(msg, "4217131127188736474");
         if (result != null) {
             System.out.println(JSON.toJSONString(result));
         }
@@ -54,5 +54,5 @@ public class PushMessageByPushIdTest {
             System.out.println(JSON.toJSONString(result));
         }
         return result.toString();
-    }*/
+    }
 }

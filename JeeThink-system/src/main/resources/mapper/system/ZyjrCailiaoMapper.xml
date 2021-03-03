@@ -28,6 +28,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          left join zyjr_start_page g on a.transaction_code=g.transaction_code
         where a.state="1"
     </select>
+
+    <select id="selectZyjrCailiaoList2" parameterType="ZyjrCailiao" resultMap="ZyjrCailiaoResult">
+        select a.transaction_code,e.id,g.create_time, e.operator,e.user_id,c.user_name,d.car_type,d.team,f.loan_amount,f.repayment_term,f.actual_price,d.car_information
+        from zyjr_daihou a
+         left join zyjr_cailiao e on a.transaction_code=e.transaction_code
+        left join zyjr_borrower c on a.transaction_code=c.transaction_code
+        left join zyjr_business d on a.transaction_code=d.transaction_code
+        left join zyjr_car_loan f on a.transaction_code=f.transaction_code
+         left join zyjr_start_page g on a.transaction_code=g.transaction_code
+        where a.state="1" and a.transaction_code=#{transactionCode}
+    </select>
     
     <select id="selectZyjrCailiaoById" parameterType="Long" resultMap="ZyjrCailiaoResult">
         <include refid="selectZyjrCailiaoVo"/>
