@@ -110,7 +110,7 @@ public class ExamineController extends BaseController {
         return AjaxResult.success(find);
     }
 
-    @RequestMapping("/add/start")
+    @RequestMapping("/add/start")   //秒批提交
     public AjaxResult addByStart(ZyjrStartPage q){
         examineService.addByStart(q);
         ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
@@ -127,7 +127,7 @@ public class ExamineController extends BaseController {
         return AjaxResult.success(startPage);
     }
 
-    @RequestMapping("/order")
+    @RequestMapping("/order")   //插入订单号
     public AjaxResult order(Integer userId){
         String orderCode = examineService.order(userId);
         AjaxResult ajaxResult = t.find(orderCode);
@@ -175,7 +175,7 @@ public class ExamineController extends BaseController {
             return  AjaxResult.success(z);
     }
 
-    @GetMapping
+    @GetMapping     //app端全部订单
     public TableDataInfo findOrder(Long userId,Integer progress){
         startPage();
         List<orderVo> list = examineService.findOrder(userId,progress);
@@ -207,7 +207,7 @@ public class ExamineController extends BaseController {
         return AjaxResult.success(examineMapper.findAppCode());
     }
 
-    @PostMapping("/cancel")
+    @PostMapping("/cancel")     //取消订单
     public AjaxResult cancelOrder(Long userId){
         examineMapper.deleteBusiness(userId);
         examineMapper.deleteBorrower(userId);
