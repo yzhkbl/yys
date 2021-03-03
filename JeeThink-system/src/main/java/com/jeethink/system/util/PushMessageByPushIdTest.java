@@ -42,27 +42,25 @@ public class PushMessageByPushIdTest {
 
     public static String tongzhi(String name,String t,String b,List<String> pushIds) {
 
-        String APPKEY = "Hh5r2rtTTSAEWg7DAgbM3zGpIuUEvnH1";
-        String MASTERSECRET = "03j3WGwK1CWkSsbicussk9mwFMRngUGy";
+        String APPKEY = "700000915";//Hh5r2rtTTSAEWg7DAgbM3zGpIuUEvnH1
+        String MASTERSECRET = "9c40ea76859eaea61820a4e3fa3713f7";
         IPushClient pushClient = new PushClient(APPKEY, MASTERSECRET);
 
         Message msg = new Message();
         Notification notification = new Notification.Builder().
                 title("中豫金融").
-                content("您的客户:"+name+"(订单号"+t+")在"+b+"退回了！请及时查看！").
+                content("您的客户:"+name+"(订单号"+t+")在"+b+"了！请及时查看！").
                 action(new Action.Builder().
                         actionType(6).
                         build()).
                 build();
-
+        Aps aps=new Aps();
+        aps.setSound("是");
+        msg.setAps(aps);
         msg.setMessageType(0); //设置消息类型为通知栏消息
         msg.setNotification(notification);
         PushResult<MessageResult> result = pushClient.
                 pushMessageByPushIds(msg, pushIds);
-        if (result != null) {
-            System.out.println(JSON.toJSONString(result));
-        }
-
         return result.toString();
     }
 }
