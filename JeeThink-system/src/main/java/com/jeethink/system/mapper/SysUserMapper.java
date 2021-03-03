@@ -28,6 +28,7 @@ public interface SysUserMapper
      */
     public SysUser selectUserByUserName(String userName);
     List<String> selectId(String role);
+    List<String> selectId2(SysUser sysUser);
 
     /**
      * 通过用户ID查询用户
