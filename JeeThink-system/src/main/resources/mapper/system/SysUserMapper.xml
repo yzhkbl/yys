@@ -155,6 +155,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		</set>
  		where user_id = #{userId}
 	</update>
+	<update id="updateId" parameterType="SysUser">
+		update sys_user set id=#{id} where user_name=#{userName}
+	</update>
 	
 	<update id="updateUserStatus" parameterType="SysUser">
  		update sys_user set status = #{status} where user_id = #{userId}
