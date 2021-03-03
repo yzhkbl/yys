@@ -40,7 +40,7 @@ public class PushMessageByPushIdTest {
         }
     }
 
-    public static String tongzhi(String name,String t,String b,List<String> pushIds) {
+    public static String tongzhi(String name,String t,String b,String pushIds) {
 
         String APPKEY = "700000915";//Hh5r2rtTTSAEWg7DAgbM3zGpIuUEvnH1
         String MASTERSECRET = "9c40ea76859eaea61820a4e3fa3713f7";
@@ -60,7 +60,7 @@ public class PushMessageByPushIdTest {
         msg.setMessageType(0); //设置消息类型为通知栏消息
         msg.setNotification(notification);
         PushResult<MessageResult> result = pushClient.
-                pushMessageByPushIds(msg, pushIds);
+                pushMessageByPushId(msg, pushIds);
         return result.toString();
     }
 }

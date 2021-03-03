@@ -53,11 +53,6 @@ public class ZyjrAllowOpinionController extends BaseController
         return getDataTable(list);
     }
 
-    @GetMapping("de")
-    public  AjaxResult ss(){
-        List<String> stringList = sysUserMapper.selectId("1");
-        return AjaxResult.success(stringList);
-    }
 
     /**
      * 导出【请填写功能名称】列表

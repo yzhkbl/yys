@@ -233,7 +233,7 @@ public class ZyjrDaihouController extends BaseController
             if(zyjrCailiaos.size()<1){
                 zyjrCailiaoMapper.insertZyjrCailiao(zyjrCailiao);
             }
-            List<String> stringsList = sysUserMapper.selectId("11");
+            String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
             PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaihou.getTransactionCode(),"贷前通过",stringsList);
 
         }
@@ -245,10 +245,10 @@ public class ZyjrDaihouController extends BaseController
             zyjrDaihou2.setTijiao("0");
             zyjrDaihou2.setState("2");
             zyjrDaihouMapper.updateZyjrDaihou(zyjrDaihou2);
-            List<String> stringsList = sysUserMapper.selectId("11");
+            String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
             PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaihou.getTransactionCode(),"贷前退回",stringsList);
         }else if(zyjrDaihou!=null&&zyjrDaihou.getState().equals("3")){
-            List<String> stringsList = sysUserMapper.selectId("11");
+            String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
             PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaihou.getTransactionCode(),"贷前拒绝",stringsList);
         }
         return AjaxResult.success();

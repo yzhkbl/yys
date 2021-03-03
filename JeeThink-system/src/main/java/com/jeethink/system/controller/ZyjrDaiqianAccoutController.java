@@ -99,7 +99,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
             zyjrOrderProgress.setApprovalType(4);
             zyjrOrderProgress.setProgress(4);
             examineMapper.updateOrderProgress(zyjrOrderProgress);
-            List<String> stringsList = sysUserMapper.selectId2(sysUser);
+            String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
             PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaiqian.getTransactionCode(),"贷前通过",stringsList);
         }else if(as!=null&&zyjrDaiqian.getState()!=null&&zyjrDaiqian.getState().equals("2")){
             as.setGps("2");
@@ -112,11 +112,11 @@ public class ZyjrDaiqianAccoutController extends BaseController
             ZyjrGrantImage zyjrGrantImage = zyjrGrantImageMapper.selectZyjrGrantImageById(zyjrDaiqian.getTransactionCode());
             zyjrGrantImage.setOrderState(2);
             zyjrGrantImageMapper.updateZyjrGrantImage(zyjrGrantImage);
-            List<String> stringsList = sysUserMapper.selectId2(sysUser);
+            String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
             PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaiqian.getTransactionCode(),"贷前退回",stringsList);
 
         }else if(as!=null&&zyjrDaiqian.getState()!=null&&zyjrDaiqian.getState().equals("3")){
-            List<String> stringsList = sysUserMapper.selectId2(sysUser);
+            String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
             PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaiqian.getTransactionCode(),"贷前拒绝",stringsList);
         }
 
