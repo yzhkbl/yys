@@ -96,6 +96,15 @@ public class SysUser extends BaseEntity
     {
 
     }
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public SysUser(Long userId)
     {

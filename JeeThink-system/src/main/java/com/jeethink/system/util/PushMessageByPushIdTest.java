@@ -22,8 +22,10 @@ public class PushMessageByPushIdTest {
         //构建通知栏消息
         Notification notification = new Notification.Builder().
                 title("中豫金融").
-                content("您的订单：xxxxxxxxxxx" +
-                        "退回至xxxxxx。").
+                content("您的客户:+name+(订单号+t+)在+b+退回了！请及时查看！").
+                action(new Action.Builder().
+                        actionType(9).
+                        build()).
                 build();
         Aps aps=new Aps();
         aps.setSound("是");
@@ -45,13 +47,16 @@ public class PushMessageByPushIdTest {
         IPushClient pushClient = new PushClient(APPKEY, MASTERSECRET);
 
         Message msg = new Message();
-        Transmission transmission = new Transmission.Builder().
+        Notification notification = new Notification.Builder().
                 title("中豫金融").
-                content("您的客户:"+name+"(订单号："+t+")在"+b+"退回了！请及时查看！").
+                content("您的客户:+name+(订单号+t+)在+b+退回了！请及时查看！").
+                action(new Action.Builder().
+                        actionType(9).
+                        build()).
                 build();
-        msg.setMessageType(0); //设置消息类型为通知栏消息
-        msg.setTransmission(transmission);
 
+        msg.setMessageType(0); //设置消息类型为通知栏消息
+        msg.setNotification(notification);
         PushResult<MessageResult> result = pushClient.
                 pushMessageByPushIds(msg, pushIds);
         if (result != null) {
