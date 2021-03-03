@@ -1,5 +1,6 @@
 package com.jeethink.system.service.impl;
 
+import com.jeethink.common.core.domain.entity.SysUser;
 import com.jeethink.common.utils.DateUtils;
 import com.jeethink.system.controller.ExamineController;
 import com.jeethink.system.domain.*;
@@ -199,24 +200,34 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         int count = examineDao.insertOpinion(q);
         ZyjrRepeatOpinion zyjrRepeatOpinion = findOpinion(q.getTransactionCode());
         ZyjrBorrower zyjrBorrower = examineDao.findByBorrower(q.getTransactionCode());
+        if(q.getApprovalType()==1){
+            WebSocket webSocket=new WebSocket();
+            String date= DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS,new Date()).substring(11,19);
+            webSocket.sendMessage("终审已通过,"+date+",贷前资料审核,"+q.getTransactionCode()+"");
+            List<String> stringsList = sysUserMapper.selectId("10");
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),q.getTransactionCode(),"终审通过",stringsList);
+        }else if(q.getApprovalType()==2){
+            List<String> stringsList = sysUserMapper.selectId("10");
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),q.getTransactionCode(),"终审退回",stringsList);
+
+        }else if(q.getApprovalType()==3){
+            List<String> stringsList = sysUserMapper.selectId("10");
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),q.getTransactionCode(),"终审拒绝",stringsList);
+
+        }
         if(zyjrRepeatOpinion!=null&&zyjrRepeatOpinion.getApprovalType()==2) {
             ZyjrAllowOpinion zyjrAllowOpinion = new ZyjrAllowOpinion();
             zyjrAllowOpinion.setTransactionCode(q.getTransactionCode());
             zyjrAllowOpinion.setApprovalType(4);
             zyjrAllowOpinionMapper.updateZyjrAllowOpinion(zyjrAllowOpinion);
 
-            List<String> stringsList = sysUserMapper.selectId("10");
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),q.getTransactionCode(),"终审退回",stringsList);
-        }else if(zyjrRepeatOpinion!=null&&zyjrRepeatOpinion.getApprovalType()==1){
-            WebSocket webSocket=new WebSocket();
-            String date= DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS,new Date()).substring(11,19);
-            webSocket.sendMessage("终审已通过,"+date+",贷前资料审核,"+q.getTransactionCode()+"");
 
-            List<String> stringsList = sysUserMapper.selectId("10");
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),q.getTransactionCode(),"终审通过",stringsList);
+        }else if(zyjrRepeatOpinion!=null&&zyjrRepeatOpinion.getApprovalType()==1){
+
+
+
         }else {
-            List<String> stringsList = sysUserMapper.selectId("10");
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),q.getTransactionCode(),"终审拒绝",stringsList);
+
         }
 
         return count;
@@ -235,19 +246,22 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     @Override
     public int addGrantOpinion(ZyjrGrantOpinion q) {
         ZyjrBorrower zyjrBorrower = examineDao.findByBorrower(q.getTransactionCode());
+        SysUser sysUser=new SysUser();
+        sysUser.setPhonenumber("9");
+        sysUser.setUserName("10");
         if(q.getApprovalType()==2){
             ZyjrSubmitStateGrant zyjrSubmitStateGrant = new ZyjrSubmitStateGrant();
             zyjrSubmitStateGrant.setSubmitState(0);
             zyjrSubmitStateGrant.setTransactionCode(q.getTransactionCode());
             examineMapper.updateGrantState(zyjrSubmitStateGrant);
 
-            List<String> stringsList = sysUserMapper.selectId("9");
+            List<String> stringsList = sysUserMapper.selectId2(sysUser);
             PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),q.getTransactionCode(),"授信退回",stringsList);
         }else if(q.getApprovalType()==1){
-            List<String> stringsList = sysUserMapper.selectId("9");
+            List<String> stringsList = sysUserMapper.selectId2(sysUser);
             PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),q.getTransactionCode(),"授信通过",stringsList);
         }else {
-            List<String> stringsList = sysUserMapper.selectId("9");
+            List<String> stringsList = sysUserMapper.selectId2(sysUser);
             PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),q.getTransactionCode(),"授信拒绝",stringsList);
         }
         return examineDao.insertGrantOpinion(q);
