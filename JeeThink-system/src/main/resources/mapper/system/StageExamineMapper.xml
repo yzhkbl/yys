@@ -52,6 +52,13 @@
         values
         (#{advise},#{approvalType},#{transactionCode},#{userId})
     </insert>
+    <update id="updateOpinion" parameterType="com.jeethink.system.domain.ZyjrRepeatOpinion">
+        update zyjr_repeat_opinion
+        set advise=#{advise},
+        approval_type=#{approvalType},
+        where transaction_code=#{transactionCode}
+    </update>
+
     <select id="findOpinion" resultType="com.jeethink.system.domain.ZyjrRepeatOpinion">
         select id, advise, approval_type, transaction_code, user_id
         from zyjr_repeat_opinion
@@ -87,6 +94,12 @@
         values
         (#{advise},#{approvalType},#{transactionCode},#{userId})
     </insert>
+    <update id="updateGrantOpinion" parameterType="com.jeethink.system.domain.ZyjrGrantOpinion">
+        update zyjr_grant_opinion
+        set advise=#{advise},
+        approval_type=#{approvalType},
+        where transaction_code=#{transactionCode}
+    </update>
     <select id="findGrantOpinion" resultType="com.jeethink.system.domain.ZyjrGrantOpinion">
         select id, advise, approval_type, transaction_code, user_id
         from zyjr_grant_opinion
