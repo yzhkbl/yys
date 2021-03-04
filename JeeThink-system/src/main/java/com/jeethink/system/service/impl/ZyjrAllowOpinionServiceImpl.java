@@ -68,7 +68,9 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
      */
     @Override
     public int insertZyjrAllowOpinion(ZyjrAllowOpinion zyjrAllowOpinion)
-    {   ZyjrAllowOpinion o = selectZyjrAllowOpinionById(zyjrAllowOpinion.getTransactionCode());
+    {
+        String date = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, new Date()).substring(11, 19);
+        ZyjrAllowOpinion o = selectZyjrAllowOpinionById(zyjrAllowOpinion.getTransactionCode());
         ZyjrBorrower zyjrBorrower = zyjrBorrowerMapper.selectById(zyjrAllowOpinion.getTransactionCode());
         String date2 = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, new Date());
         //System.err.println(o);
@@ -87,7 +89,7 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
         } else if (zyjrAllowOpinion.getApprovalType() == 1) {
 
             WebSocket webSocket = new WebSocket();
-            String date = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, new Date()).substring(11, 19);
+            //String date = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, new Date()).substring(11, 19);
             webSocket.sendMessage("终审来新单了," + date + ",终审," + zyjrAllowOpinion.getTransactionCode() + "");
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
             PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), zyjrAllowOpinion.getTransactionCode(), "初审通过", stringsList);
@@ -128,7 +130,9 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
                 String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
                 PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), zyjrAllowOpinion.getTransactionCode(), "初审拒绝", stringsList);
             }*/
-            return zyjrAllowOpinionMapper.insertZyjrAllowOpinion(zyjrAllowOpinion);
+            ZyjrAllowOpinion i = zyjrAllowOpinion;
+            i.setAdvise(zyjrAllowOpinion.getAdvise()+";"+date2);
+            return zyjrAllowOpinionMapper.insertZyjrAllowOpinion(i);
         }
 
     }
