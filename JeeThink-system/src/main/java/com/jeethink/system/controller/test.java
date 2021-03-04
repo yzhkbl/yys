@@ -1454,11 +1454,11 @@ public class test extends BaseController {
     }
     @ResponseBody
     @PostMapping("inform")
-    public AjaxResult a(Inform inform){
+    public AjaxResult a(@RequestBody Inform inform){
         System.err.println(inform);
-        if(inform.getReq().getTransType()==1){
+        if(inform!=null&&inform.getReq()!=null&&inform.getReq().getTransType()!=null&&inform.getReq().getTransType()==1){
             examineMapper.updateStarts2(inform.getPub().getOrderNo());
-        }else if(inform.getReq().getTransType()==4){
+        }else if(inform!=null&&inform.getReq()!=null&&inform.getReq().getTransType()!=null&&inform.getReq().getTransType()==4){
             examineMapper.updateStarts(inform.getPub().getOrderNo());
         }
         AjaxResult json=new AjaxResult();

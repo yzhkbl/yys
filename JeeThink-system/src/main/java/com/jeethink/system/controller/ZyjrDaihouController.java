@@ -224,6 +224,10 @@ public class ZyjrDaihouController extends BaseController
     @PostMapping("go")
     public AjaxResult sg(@RequestBody ZyjrDaihou zyjrDaihou)
     {
+        if(zyjrDaihou.getOpinion()!=null){
+            String date = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, new Date());
+            zyjrDaihou.setOpinion(zyjrDaihou.getOpinion()+";"+date);
+        }
         ZyjrBorrower zyjrBorrower = zyjrBorrowerMapper.selectById(zyjrDaihou.getTransactionCode());
         if(zyjrDaihou!=null&&zyjrDaihou.getState().equals("1")){
 
