@@ -83,6 +83,10 @@ public class ZyjrDaiqianAccoutController extends BaseController
     @PostMapping("/no")
     public AjaxResult li(@RequestBody ZyjrDaiqian zyjrDaiqian)
     {
+        if(zyjrDaiqian.getOpinion()!=null){
+            String date = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, new Date());
+            zyjrDaiqian.setOpinion(zyjrDaiqian.getOpinion()+";"+date);
+        }
         ZyjrBorrower zyjrBorrower = zyjrBorrowerMapper.selectById(zyjrDaiqian.getTransactionCode());
         ZyjrDaiqian as=examineMapper.selByDaiqian(zyjrDaiqian.getTransactionCode());
         if(as!=null){
