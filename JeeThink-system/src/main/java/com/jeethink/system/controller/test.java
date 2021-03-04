@@ -878,7 +878,7 @@ public class test extends BaseController {
         );
         String upload = FileUploadUtils.upload(file);
         System.err.println(upload);
-        return AjaxResult.success("操作成功","114.215.186.186:8080"+upload);
+        return AjaxResult.success("操作成功","http://114.215.186.186:8080"+upload);
 
     }
 
