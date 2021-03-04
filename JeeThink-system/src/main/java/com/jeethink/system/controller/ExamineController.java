@@ -403,8 +403,10 @@ public class ExamineController extends BaseController {
         GrantPhoto f = zyjrLiushuiController.findPhoto(transactionCode);
         ZyjrBorrower zyjrBorrower = examineMapper.Borrower(transactionCode);
         List<String>list = new ArrayList<>();
-        list.add(0,zyjrBorrower.getObverseAddress());
-        list.add(1,zyjrBorrower.getBackAddress());
+        if(zyjrBorrower!=null) {
+            list.add(0, zyjrBorrower.getObverseAddress());
+            list.add(1, zyjrBorrower.getBackAddress());
+        }
         Map<String,Object>map = new HashMap<>();
         map.put("car",a);
         map.put("credit",b);
