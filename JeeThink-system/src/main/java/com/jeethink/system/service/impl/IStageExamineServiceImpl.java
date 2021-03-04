@@ -200,9 +200,11 @@ public class IStageExamineServiceImpl implements IStageExamineService {
 
         ZyjrRepeatOpinion zyjrRepeatOpinion = findOpinion(q.getTransactionCode());
         ZyjrBorrower zyjrBorrower = examineDao.findByBorrower(q.getTransactionCode());
+        String date = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, new Date()).substring(11, 19);
+        String date2 = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, new Date());
         if (q.getApprovalType() == 1) {
             WebSocket webSocket = new WebSocket();
-            String date = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, new Date()).substring(11, 19);
+            //String date = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, new Date()).substring(11, 19);
             webSocket.sendMessage("终审已通过," + date + ",贷前资料审核," + q.getTransactionCode() + "");
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
             PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), q.getTransactionCode(), "终审通过", stringsList);
@@ -227,11 +229,11 @@ public class IStageExamineServiceImpl implements IStageExamineService {
                 zyjrAllowOpinionMapper.updateZyjrAllowOpinion(zyjrAllowOpinion);
             }*/
             ZyjrRepeatOpinion i = q;
-            i.setAdvise(q.getAdvise()+";"+new Date());
+            i.setAdvise(q.getAdvise()+";"+date2);
             return examineDao.updateOpinion(i);
         }else {
             ZyjrRepeatOpinion i = q;
-            i.setAdvise(q.getAdvise()+";"+new Date());
+            i.setAdvise(q.getAdvise()+";"+date2);
             int count = examineDao.insertOpinion(i);
             /**if(zyjrRepeatOpinion!=null&&zyjrRepeatOpinion.getApprovalType()==2) {
              ZyjrAllowOpinion zyjrAllowOpinion = new ZyjrAllowOpinion();
@@ -269,6 +271,8 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         SysUser sysUser=new SysUser();
         sysUser.setPhonenumber("9");
         sysUser.setUserName("10");
+        String date = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, new Date()).substring(11, 19);
+        String date2 = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, new Date());
         if (q.getApprovalType() == 2) {
             ZyjrSubmitStateGrant zyjrSubmitStateGrant = new ZyjrSubmitStateGrant();
             zyjrSubmitStateGrant.setSubmitState(0);
@@ -292,11 +296,11 @@ public class IStageExamineServiceImpl implements IStageExamineService {
                 examineMapper.updateGrantState(zyjrSubmitStateGrant);
             }*/
             ZyjrGrantOpinion i = q;
-            i.setAdvise(q.getAdvise()+";"+new Date());
+            i.setAdvise(q.getAdvise()+";"+date2);
             return examineDao.updateGrantOpinion(i);
         }else {
             ZyjrGrantOpinion i = q;
-            i.setAdvise(q.getAdvise()+";"+new Date());
+            i.setAdvise(q.getAdvise()+";"+date2);
             return examineDao.insertGrantOpinion(i);
         }
     }
