@@ -70,7 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="powerName != null  and powerName != ''"> and power_name like concat('%', #{powerName}, '%')</if>
             <if test="creditPower != null "> and credit_power = #{creditPower}</if>
             <if test="peopleShip != null  and peopleShip != ''"> and people_ship = #{peopleShip}</if>
-
+            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
             <if test="businessRole != null "> and business_role = #{businessRole}</if>
         </where>
 

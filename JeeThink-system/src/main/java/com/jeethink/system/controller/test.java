@@ -543,7 +543,7 @@ public class test extends BaseController {
         ZyjrBorrower a = o.selectById(transactionCode);
         a.setContractState("1");
          o.updateZyjrBorrower(a);
-         examineService.okPurchase(transactionCode);
+         //examineService.okPurchase(transactionCode);
         return "index";
     }
 
@@ -873,9 +873,12 @@ public class test extends BaseController {
     }
     @ResponseBody
     @PostMapping("pdf")
-    public AjaxResult pdf(MultipartFile file) throws IOException {
+    public AjaxResult pdf(@RequestParam(name = "file",required = false) MultipartFile file) throws IOException {
+        System.err.println(file
+        );
         String upload = FileUploadUtils.upload(file);
-        return AjaxResult.success(upload);
+        System.err.println(upload);
+        return AjaxResult.success("操作成功","192.168.31.82:8080"+upload);
 
     }
 
