@@ -10,6 +10,7 @@ import com.jeethink.common.utils.DateUtils;
 import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.DqVo;
 import com.jeethink.system.domain.vo.GrantPhoto;
+import com.jeethink.system.domain.vo.Xiaoxi;
 import com.jeethink.system.mapper.*;
 import com.jeethink.system.util.PushMessageByPushIdTest;
 import com.jeethink.system.util.WebSocket;
@@ -83,8 +84,9 @@ public class ZyjrDaiqianAccoutController extends BaseController
     @PostMapping("/no")
     public AjaxResult li(@RequestBody ZyjrDaiqian zyjrDaiqian)
     {
+        String date = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, new Date());
         if(zyjrDaiqian.getOpinion()!=null){
-            String date = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, new Date());
+
             zyjrDaiqian.setOpinion(zyjrDaiqian.getOpinion()+";"+date);
         }
         ZyjrBorrower zyjrBorrower = zyjrBorrowerMapper.selectById(zyjrDaiqian.getTransactionCode());
@@ -105,6 +107,11 @@ public class ZyjrDaiqianAccoutController extends BaseController
             examineMapper.updateOrderProgress(zyjrOrderProgress);
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
             PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaiqian.getTransactionCode(),"贷前通过",stringsList);
+            Xiaoxi xiaoxi=new Xiaoxi();
+            xiaoxi.setCode(zyjrDaiqian.getTransactionCode());
+            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"贷前通过了！(订单号"+zyjrDaiqian.getTransactionCode()+")");
+            xiaoxi.setDate(date);
+            examineMapper.insertXiaoxi(xiaoxi);
         }else if(as!=null&&zyjrDaiqian.getState()!=null&&zyjrDaiqian.getState().equals("2")){
             as.setGps("2");
             as.setInsurance("2");
@@ -118,10 +125,19 @@ public class ZyjrDaiqianAccoutController extends BaseController
             zyjrGrantImageMapper.updateZyjrGrantImage(zyjrGrantImage);
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
             PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaiqian.getTransactionCode(),"贷前退回",stringsList);
-
+            Xiaoxi xiaoxi=new Xiaoxi();
+            xiaoxi.setCode(zyjrDaiqian.getTransactionCode());
+            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"贷前退回了！(订单号"+zyjrDaiqian.getTransactionCode()+")");
+            xiaoxi.setDate(date);
+            examineMapper.insertXiaoxi(xiaoxi);
         }else if(as!=null&&zyjrDaiqian.getState()!=null&&zyjrDaiqian.getState().equals("3")){
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
             PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaiqian.getTransactionCode(),"贷前拒绝",stringsList);
+            Xiaoxi xiaoxi=new Xiaoxi();
+            xiaoxi.setCode(zyjrDaiqian.getTransactionCode());
+            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"贷前拒绝了！(订单号"+zyjrDaiqian.getTransactionCode()+")");
+            xiaoxi.setDate(date);
+            examineMapper.insertXiaoxi(xiaoxi);
         }
 
 
