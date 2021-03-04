@@ -317,6 +317,9 @@ public class test extends BaseController {
             borrowerById.setTransactionCode(codes);
             borrowerById.setPrivateCode(result.getJSONObject("data").get("estageOrderNo").toString());
             int ceshi = o.updateZyjrBorrower(borrowerById);
+            if(borrowerById.getCreditPower()<1){
+                find2(codes);
+            }
             if (ceshi > 0) {
                 return AjaxResult.success();
             }
