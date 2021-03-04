@@ -70,6 +70,24 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
     {   ZyjrAllowOpinion o = selectZyjrAllowOpinionById(zyjrAllowOpinion.getTransactionCode());
         ZyjrBorrower zyjrBorrower = zyjrBorrowerMapper.selectById(zyjrAllowOpinion.getTransactionCode());
         //System.err.println(o);
+        if (zyjrAllowOpinion.getApprovalType() == 2) {
+            /**ZyjrSubmitStateAllow zyjrSubmitStateAllow = new ZyjrSubmitStateAllow();
+             zyjrSubmitStateAllow.setSubmitState(0);
+             zyjrSubmitStateAllow.setTransactionCode(zyjrAllowOpinion.getTransactionCode());
+             examineMapper.updateAllowState(zyjrSubmitStateAllow);*/
+            String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), zyjrAllowOpinion.getTransactionCode(), "初审退回", stringsList);
+        } else if (zyjrAllowOpinion.getApprovalType() == 1) {
+
+            WebSocket webSocket = new WebSocket();
+            String date = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, new Date()).substring(11, 19);
+            webSocket.sendMessage("终审来新单了," + date + ",终审," + zyjrAllowOpinion.getTransactionCode() + "");
+            String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), zyjrAllowOpinion.getTransactionCode(), "初审通过", stringsList);
+        } else if (zyjrAllowOpinion.getApprovalType() == 3) {
+            String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), zyjrAllowOpinion.getTransactionCode(), "初审拒绝", stringsList);
+        }
         if(o!=null) {
             stageExamineMapper.deleteOpinion(zyjrAllowOpinion.getTransactionCode());
             zyjrAllowOpinionMapper.deleteZyjrAllowOpinionById(zyjrAllowOpinion.getTransactionCode());
@@ -80,9 +98,9 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
                 zyjrSubmitStateAllow.setSubmitState(0);
                 zyjrSubmitStateAllow.setTransactionCode(zyjrAllowOpinion.getTransactionCode());
                 examineMapper.updateAllowState(zyjrSubmitStateAllow);
-                String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
-                PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), zyjrAllowOpinion.getTransactionCode(), "初审退回", stringsList);
-            } else if (zyjrAllowOpinion.getApprovalType() == 1) {
+                //String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
+                //PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), zyjrAllowOpinion.getTransactionCode(), "初审退回", stringsList);
+            } /**else if (zyjrAllowOpinion.getApprovalType() == 1) {
 
                 WebSocket webSocket = new WebSocket();
                 String date = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, new Date()).substring(11, 19);
@@ -92,9 +110,10 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
             } else if (zyjrAllowOpinion.getApprovalType() == 3) {
                 String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
                 PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), zyjrAllowOpinion.getTransactionCode(), "初审拒绝", stringsList);
-            }
+            }*/
             return zyjrAllowOpinionMapper.insertZyjrAllowOpinion(zyjrAllowOpinion);
         }
+
     }
 
     /**
