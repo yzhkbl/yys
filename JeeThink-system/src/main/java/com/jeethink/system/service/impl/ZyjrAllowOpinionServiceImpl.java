@@ -85,6 +85,7 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
             xiaoxi.setCode(zyjrAllowOpinion.getTransactionCode());
             xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在初审退回了！(订单号"+zyjrAllowOpinion.getTransactionCode()+")");
             xiaoxi.setDate(date2);
+            xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);
         } else if (zyjrAllowOpinion.getApprovalType() == 1) {
 
@@ -97,6 +98,7 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
             xiaoxi.setCode(zyjrAllowOpinion.getTransactionCode());
             xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在初审通过了！(订单号"+zyjrAllowOpinion.getTransactionCode()+")");
             xiaoxi.setDate(date2);
+            xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);
         } else if (zyjrAllowOpinion.getApprovalType() == 3) {
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
@@ -105,6 +107,7 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
             xiaoxi.setCode(zyjrAllowOpinion.getTransactionCode());
             xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在初审拒绝了！(订单号"+zyjrAllowOpinion.getTransactionCode()+")");
             xiaoxi.setDate(date2);
+            xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);
         }
         if(o!=null) {

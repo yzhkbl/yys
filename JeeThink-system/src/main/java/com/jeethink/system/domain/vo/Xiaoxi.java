@@ -8,4 +8,5 @@ public class Xiaoxi {
     String code;
     String data;
     String date;
+    String user;
 }

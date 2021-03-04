@@ -111,6 +111,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
             xiaoxi.setCode(zyjrDaiqian.getTransactionCode());
             xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"贷前通过了！(订单号"+zyjrDaiqian.getTransactionCode()+")");
             xiaoxi.setDate(date);
+            xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);
         }else if(as!=null&&zyjrDaiqian.getState()!=null&&zyjrDaiqian.getState().equals("2")){
             as.setGps("2");
@@ -129,6 +130,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
             xiaoxi.setCode(zyjrDaiqian.getTransactionCode());
             xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"贷前退回了！(订单号"+zyjrDaiqian.getTransactionCode()+")");
             xiaoxi.setDate(date);
+            xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);
         }else if(as!=null&&zyjrDaiqian.getState()!=null&&zyjrDaiqian.getState().equals("3")){
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
@@ -137,6 +139,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
             xiaoxi.setCode(zyjrDaiqian.getTransactionCode());
             xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"贷前拒绝了！(订单号"+zyjrDaiqian.getTransactionCode()+")");
             xiaoxi.setDate(date);
+            xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);
         }
 

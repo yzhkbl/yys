@@ -213,6 +213,7 @@ public class IStageExamineServiceImpl implements IStageExamineService {
             xiaoxi.setCode(q.getTransactionCode());
             xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在终审通过了！(订单号"+q.getTransactionCode()+")");
             xiaoxi.setDate(date2);
+            xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);
         } else if (q.getApprovalType() == 2) {
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
@@ -226,6 +227,7 @@ public class IStageExamineServiceImpl implements IStageExamineService {
             xiaoxi.setCode(q.getTransactionCode());
             xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在终审退回了！(订单号"+q.getTransactionCode()+")");
             xiaoxi.setDate(date2);
+            xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);
         } else if (q.getApprovalType() == 3) {
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
@@ -234,6 +236,7 @@ public class IStageExamineServiceImpl implements IStageExamineService {
             xiaoxi.setCode(q.getTransactionCode());
             xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在终审拒绝了！(订单号"+q.getTransactionCode()+")");
             xiaoxi.setDate(date2);
+            xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);
 
         }
@@ -297,12 +300,30 @@ public class IStageExamineServiceImpl implements IStageExamineService {
 
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
             PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), q.getTransactionCode(), "授信退回", stringsList);
+            Xiaoxi xiaoxi=new Xiaoxi();
+            xiaoxi.setCode(q.getTransactionCode());
+            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在授信退回了！(订单号"+q.getTransactionCode()+")");
+            xiaoxi.setDate(date2);
+            xiaoxi.setUser(zyjrBorrower.getUserId().toString());
+            examineMapper.insertXiaoxi(xiaoxi);
         } else if (q.getApprovalType() == 1) {
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
             PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), q.getTransactionCode(), "授信通过", stringsList);
+            Xiaoxi xiaoxi=new Xiaoxi();
+            xiaoxi.setCode(q.getTransactionCode());
+            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在授信通过了！(订单号"+q.getTransactionCode()+")");
+            xiaoxi.setDate(date2);
+            xiaoxi.setUser(zyjrBorrower.getUserId().toString());
+            examineMapper.insertXiaoxi(xiaoxi);
         } else {
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
             PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), q.getTransactionCode(), "授信拒绝", stringsList);
+            Xiaoxi xiaoxi=new Xiaoxi();
+            xiaoxi.setCode(q.getTransactionCode());
+            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在授信拒绝了！(订单号"+q.getTransactionCode()+")");
+            xiaoxi.setDate(date2);
+            xiaoxi.setUser(zyjrBorrower.getUserId().toString());
+            examineMapper.insertXiaoxi(xiaoxi);
         }
         if(zyjrGrantOpinion!=null){
             /**if (q.getApprovalType() == 2) {

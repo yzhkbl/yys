@@ -883,6 +883,13 @@ public class test extends BaseController {
     }
 
     @ResponseBody
+    @PostMapping("userlist")
+    public AjaxResult sss(String userId){
+
+        return AjaxResult.success();
+    }
+
+    @ResponseBody
     @PostMapping("jzgInfor")
     public AjaxResult jzg(String transactionCode){
         ZyjrJzgAddOrder a=zyjrJzgAddOrderMapper.selectZyjrJzgAddOrderByTransactionCode(transactionCode);
