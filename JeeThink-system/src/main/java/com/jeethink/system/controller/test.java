@@ -885,8 +885,8 @@ public class test extends BaseController {
     @ResponseBody
     @PostMapping("userlist")
     public AjaxResult sss(String userId){
-
-        return AjaxResult.success();
+        List<Xiaoxi> list=examineMapper.selByUserId(userId);
+        return AjaxResult.success(list);
     }
 
     @ResponseBody

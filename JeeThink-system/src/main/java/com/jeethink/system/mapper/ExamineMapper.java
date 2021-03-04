@@ -110,6 +110,7 @@ public interface ExamineMapper {
     ZyjrShangpai findShangpai(String transactionCode);
     int insertXiaoxi(Xiaoxi xiaoxi);
     int insertDiya(ZyjrDiya q);
+    List<Xiaoxi> selByUserId(String userId);
     int updateDiya(ZyjrDiya q);
     ZyjrDiya findDiya(String transactionCode);
 
