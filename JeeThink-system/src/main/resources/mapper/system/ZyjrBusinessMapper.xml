@@ -30,12 +30,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectZyjrBusinessList" parameterType="ZyjrBusiness" resultMap="ZyjrBusinessResult">
-         select a.id, a.team,a.operator,a.update_by,c.create_time,a.false_operator,a.false_operator_id, a.car_information, a.intention_price, a.loan_money, a.repay_period, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name
+         select a.id, a.team,a.operator,a.update_by,c.create_time,c.credit_state,a.false_operator,a.false_operator_id, a.car_information, a.intention_price, a.loan_money, a.repay_period, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name
          from zyjr_business a
          left join zyjr_borrower b on a.transaction_code=b.transaction_code
          left join zyjr_start_page c on a.transaction_code=c.transaction_code
         <where>
-            a.order_state = 1
+            a.order_state = 1 and c.credit_state is null
+            <if test="team != null  and team != ''"> and a.team like concat('%', #{team}, '%') </if>
+            <if test="carInformation != null "> and a.car_information like concat('%', #{carInformation}, '%') </if>
+            <if test="intentionPrice != null "> and a.intention_price like concat('%', #{intentionPrice}, '%') </if>
+            <if test="loanMoney != null "> and a.loan_money like concat('%', #{loanMoney}, '%') </if>
+            <if test="repayPeriod != null "> and a.repay_period like concat('%', #{repayPeriod}, '%') </if>
+            <if test="carType != null "> and a.car_type like concat('%', #{carType}, '%') </if>
+            <if test="userId != null  and userId != ''"> and a.userId = #{userId}</if>
+            <if test="falseOperator != null "> and a.false_operator like concat('%', #{falseOperator}, '%') </if>
+            <if test="falseOperatorId != null "> and a.false_operator_id = #{falseOperatorId}</if>
+            <if test="transactionCode != null "> and a.transaction_code like concat('%', #{transactionCode}, '%') </if>
+            <if test="name != null "> and b.user_name like concat('%', #{name}, '%')</if>
+              order by a.create_time desc
+        </where>
+    </select>
+    <select id="selectZyjrBusinessjujueList" parameterType="ZyjrBusiness" resultMap="ZyjrBusinessResult">
+         select a.id, a.team,a.operator,a.update_by,c.create_time,c.credit_state,a.false_operator,a.false_operator_id, a.car_information, a.intention_price, a.loan_money, a.repay_period, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name
+         from zyjr_business a
+         left join zyjr_borrower b on a.transaction_code=b.transaction_code
+         left join zyjr_start_page c on a.transaction_code=c.transaction_code
+        <where>
+            a.order_state = 1 and c.credit_state = 2
+            <if test="team != null  and team != ''"> and a.team like concat('%', #{team}, '%') </if>
+            <if test="carInformation != null "> and a.car_information like concat('%', #{carInformation}, '%') </if>
+            <if test="intentionPrice != null "> and a.intention_price like concat('%', #{intentionPrice}, '%') </if>
+            <if test="loanMoney != null "> and a.loan_money like concat('%', #{loanMoney}, '%') </if>
+            <if test="repayPeriod != null "> and a.repay_period like concat('%', #{repayPeriod}, '%') </if>
+            <if test="carType != null "> and a.car_type like concat('%', #{carType}, '%') </if>
+            <if test="userId != null  and userId != ''"> and a.userId = #{userId}</if>
+            <if test="falseOperator != null "> and a.false_operator like concat('%', #{falseOperator}, '%') </if>
+            <if test="falseOperatorId != null "> and a.false_operator_id = #{falseOperatorId}</if>
+            <if test="transactionCode != null "> and a.transaction_code like concat('%', #{transactionCode}, '%') </if>
+            <if test="name != null "> and b.user_name like concat('%', #{name}, '%')</if>
+              order by a.create_time desc
+        </where>
+    </select>
+    <select id="selectZyjrBusinesstongguoList" parameterType="ZyjrBusiness" resultMap="ZyjrBusinessResult">
+         select a.id, a.team,a.operator,a.update_by,c.create_time,c.credit_state,a.false_operator,a.false_operator_id, a.car_information, a.intention_price, a.loan_money, a.repay_period, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name
+         from zyjr_business a
+         left join zyjr_borrower b on a.transaction_code=b.transaction_code
+         left join zyjr_start_page c on a.transaction_code=c.transaction_code
+        <where>
+            a.order_state = 1 and c.credit_state = 1
             <if test="team != null  and team != ''"> and a.team like concat('%', #{team}, '%') </if>
             <if test="carInformation != null "> and a.car_information like concat('%', #{carInformation}, '%') </if>
             <if test="intentionPrice != null "> and a.intention_price like concat('%', #{intentionPrice}, '%') </if>

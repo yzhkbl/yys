@@ -65,4 +65,7 @@ public interface ZyjrBusinessMapper
     public int deleteZyjrBusinessByIds(Long[] ids);
 
 
+    List<ZyjrBusiness> selectZyjrBusinessjujueList(ZyjrBusiness zyjrBusiness);
+
+    List<ZyjrBusiness> selectZyjrBusinesstongguoList(ZyjrBusiness zyjrBusiness);
 }

@@ -572,6 +572,11 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
         set credit_state="1"
         where  transaction_code = #{transactionCode}
     </update>
+    <update id="updateStarts2">
+        update zyjr_start_page
+        set credit_state="2"
+        where  transaction_code = #{transactionCode}
+    </update>
     <update id="updateOne">
         update zyjr_borrower
         set order_state=#{orderState},
