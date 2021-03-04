@@ -226,10 +226,13 @@ public class IStageExamineServiceImpl implements IStageExamineService {
                 zyjrAllowOpinion.setApprovalType(4);
                 zyjrAllowOpinionMapper.updateZyjrAllowOpinion(zyjrAllowOpinion);
             }*/
-            return examineDao.updateOpinion(q);
+            ZyjrRepeatOpinion i = q;
+            i.setAdvise(q.getAdvise()+";"+new Date());
+            return examineDao.updateOpinion(i);
         }else {
-
-            int count = examineDao.insertOpinion(q);
+            ZyjrRepeatOpinion i = q;
+            i.setAdvise(q.getAdvise()+";"+new Date());
+            int count = examineDao.insertOpinion(i);
             /**if(zyjrRepeatOpinion!=null&&zyjrRepeatOpinion.getApprovalType()==2) {
              ZyjrAllowOpinion zyjrAllowOpinion = new ZyjrAllowOpinion();
              zyjrAllowOpinion.setTransactionCode(q.getTransactionCode());
@@ -288,10 +291,13 @@ public class IStageExamineServiceImpl implements IStageExamineService {
                 zyjrSubmitStateGrant.setTransactionCode(q.getTransactionCode());
                 examineMapper.updateGrantState(zyjrSubmitStateGrant);
             }*/
-            return examineDao.updateGrantOpinion(q);
+            ZyjrGrantOpinion i = q;
+            i.setAdvise(q.getAdvise()+";"+new Date());
+            return examineDao.updateGrantOpinion(i);
         }else {
-
-            return examineDao.insertGrantOpinion(q);
+            ZyjrGrantOpinion i = q;
+            i.setAdvise(q.getAdvise()+";"+new Date());
+            return examineDao.insertGrantOpinion(i);
         }
     }
 

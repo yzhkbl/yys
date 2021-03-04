@@ -111,7 +111,9 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
                 String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
                 PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), zyjrAllowOpinion.getTransactionCode(), "初审拒绝", stringsList);
             }*/
-            return zyjrAllowOpinionMapper.insertZyjrAllowOpinion(zyjrAllowOpinion);
+            ZyjrAllowOpinion i = zyjrAllowOpinion;
+            i.setAdvise(zyjrAllowOpinion.getAdvise()+";"+new Date());
+            return zyjrAllowOpinionMapper.insertZyjrAllowOpinion(i);
         }
 
     }
