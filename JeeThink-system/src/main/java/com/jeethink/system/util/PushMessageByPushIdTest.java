@@ -49,7 +49,7 @@ public class PushMessageByPushIdTest {
         Message msg = new Message();
         Notification notification = new Notification.Builder().
                 title("中豫金融").
-                content("您的客户:"+name+"(订单号"+t+")在"+b+"了！请及时查看！").
+                content("您的客户:"+name+"在"+b+"了！(订单号"+t+")").
                 action(new Action.Builder().
                         actionType(6).
                         build()).

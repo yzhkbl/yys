@@ -63,6 +63,7 @@ public interface ExamineMapper {
     int updateStarts2(String transactionCode);
     List<carVo> selectZyjrCarLists(String userId);
 
+
     Linkman selectZyjrCarByLinkman(Long id);
     DqVo selectDQ(String transactionCode);
     DqVo selectDQ2(String transactionCode);
@@ -107,7 +108,7 @@ public interface ExamineMapper {
     int insertZyjrApp (ZyjrApp zyjrApp);
     int updateShangpai(ZyjrShangpai q);
     ZyjrShangpai findShangpai(String transactionCode);
-
+    int insertXiaoxi(Xiaoxi xiaoxi);
     int insertDiya(ZyjrDiya q);
     int updateDiya(ZyjrDiya q);
     ZyjrDiya findDiya(String transactionCode);

@@ -739,6 +739,12 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
         values
         (#{id},#{registrationOne},#{registrationTwo},#{mortgagee},#{idProve},#{idCode},#{registration},#{carCode},#{mortgageDate},#{relieveDate},#{transactionCode},#{submitState})
     </insert>
+    <insert id="insertXiaoxi" parameterType="com.jeethink.system.domain.vo.Xiaoxi">
+        insert into zyjr_xiaoxi
+        (code,data,date,user)
+        values
+        (#{code},#{data},#{date},#{user})
+    </insert>
     <select id="findDiya" resultType="com.jeethink.system.domain.ZyjrDiya">
         select id,registration_one,registration_two,mortgagee,id_prove,id_code,registration,car_code,mortgage_date,relieve_date,transaction_code,submit_state
         from zyjr_diya
