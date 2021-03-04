@@ -868,6 +868,13 @@ public class test extends BaseController {
 
         return AjaxResult.success();
     }
+    @ResponseBody
+    @PostMapping("pdf")
+    public AjaxResult pdf(MultipartFile file) throws IOException {
+        String upload = FileUploadUtils.upload(file);
+        return AjaxResult.success(upload);
+
+    }
 
     @ResponseBody
     @PostMapping("jzgInfor")
@@ -1443,6 +1450,11 @@ public class test extends BaseController {
     @PostMapping("inform")
     public AjaxResult a(Inform inform){
         System.err.println(inform);
+        if(inform.getReq().getTransType()==1){
+            examineMapper.updateStarts2(inform.getPub().getOrderNo());
+        }else if(inform.getReq().getTransType()==4){
+            examineMapper.updateStarts(inform.getPub().getOrderNo());
+        }
         AjaxResult json=new AjaxResult();
         json.put("msg","success");
         json.put("code",0);

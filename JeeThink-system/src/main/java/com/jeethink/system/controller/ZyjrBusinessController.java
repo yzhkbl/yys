@@ -53,6 +53,23 @@ public class ZyjrBusinessController extends BaseController
         return getDataTable(list);
     }
 
+    @GetMapping("/jujuelist")
+    @ApiOperation("查询参数列表")
+    public TableDataInfo lists(ZyjrBusiness zyjrBusiness)
+    {
+        startPage();
+        List<ZyjrBusiness> list = zyjrBusinessMapper.selectZyjrBusinessjujueList(zyjrBusiness);
+        return getDataTable(list);
+    }
+ @GetMapping("/tongguolist")
+    @ApiOperation("查询参数列表")
+    public TableDataInfo listss(ZyjrBusiness zyjrBusiness)
+    {
+        startPage();
+        List<ZyjrBusiness> list = zyjrBusinessMapper.selectZyjrBusinesstongguoList(zyjrBusiness);
+        return getDataTable(list);
+    }
+
 
     
 /*    @GetMapping("/info")
