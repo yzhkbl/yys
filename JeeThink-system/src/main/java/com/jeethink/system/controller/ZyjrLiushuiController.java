@@ -52,9 +52,9 @@ public class ZyjrLiushuiController extends BaseController
         // System.out.println(jsonarray);
         ZyjrLiushui zyjrLiushui = new ZyjrLiushui();
         List<ZyjrGrantPhoto> list = (List)JSONArray.toList(jsonarray, ZyjrGrantPhoto.class);
-        if (q.getVisitId() != null) {
+        if (q.getLiushuiId() != null) {
             ZyjrGrantPhoto infos = new ZyjrGrantPhoto();
-            infos.setLiushuiId(q.getVisitId());
+            infos.setLiushuiId(q.getLiushuiId());
             List<ZyjrGrantPhoto> zyjrGrantPhotos = zyjrGrantPhotoMapper.selectZyjrGrantPhotoList(infos);
             int a = zyjrGrantPhotoMapper.deleteByLiushui(q.getLiushuiId());
             String paths = "C:/demo";
