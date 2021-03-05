@@ -878,7 +878,7 @@ public class test extends BaseController {
         );
         String upload = FileUploadUtils.upload(file);
         System.err.println(upload);
-        return AjaxResult.success("操作成功","114.215.186.186:8080"+upload);
+        return AjaxResult.success("操作成功","http://114.215.186.186:8080"+upload);
 
     }
 
@@ -1467,6 +1467,11 @@ public class test extends BaseController {
             examineMapper.updateStarts2(inform.getPub().getOrderNo());
         }else if(inform!=null&&inform.getReq()!=null&&inform.getReq().getTransType()!=null&&inform.getReq().getTransType()==4){
             examineMapper.updateStarts(inform.getPub().getOrderNo());
+            ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
+            zyjrOrderProgress.setTransactionCode(inform.getPub().getOrderNo());
+            zyjrOrderProgress.setApprovalType(1);
+            zyjrOrderProgress.setProgress(1);
+            examineMapper.updateOrderProgress(zyjrOrderProgress);
         }
         AjaxResult json=new AjaxResult();
         json.put("msg","success");

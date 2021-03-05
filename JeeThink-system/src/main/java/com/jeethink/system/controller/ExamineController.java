@@ -183,6 +183,47 @@ public class ExamineController extends BaseController {
         List<orderVo> list = examineService.findOrder(userId,progress);
         return getDataTable(list);
     }
+    @GetMapping("qianyuelist")     //app端全部订单
+    public TableDataInfo findOrder2(Long userId){
+        startPage();
+        List<orderVo> list = examineMapper.findOrder2(userId);
+        return getDataTable(list);
+    }
+
+    @GetMapping("userCount")
+    public AjaxResult count(Integer userId){
+        int a=0;
+        int b=0;
+        int c=0;
+        int d=0;
+        int e=0;
+        int f=0;
+        List<ZyjrOrderProgress> zyjrBorrowers = zyjrBorrowerMapper.selectZyjrBorrowerList2(userId);
+        for (ZyjrOrderProgress zyjrBorrower : zyjrBorrowers) {
+            if(zyjrBorrower.getProgress()==0){
+                ++a;
+            }else if(zyjrBorrower.getProgress()==1){
+                ++b;
+            }else if(zyjrBorrower.getProgress()==2){
+                ++c;
+            }else if(zyjrBorrower.getProgress()==3){
+                ++d;
+            }else if(zyjrBorrower.getProgress()==4){
+                ++e;
+            }else if(zyjrBorrower.getProgress()==5){
+                ++f;
+            }
+        }
+        Map<String,Integer> map=new HashMap<>();
+        map.put("a",a);
+        map.put("b",b);
+        map.put("c",c);
+        map.put("d",d);
+        map.put("e",e);
+        map.put("f",f);
+        map.put("g",f);
+        return AjaxResult.success(map);
+    }
 
     @GetMapping("/total")
     public AjaxResult findExamine(String transactionCode){

@@ -2,6 +2,7 @@ package com.jeethink.system.mapper;
 
 import java.util.List;
 import com.jeethink.system.domain.ZyjrBorrower;
+import com.jeethink.system.domain.ZyjrOrderProgress;
 
 /**
  * 【请填写功能名称】Mapper接口
@@ -59,4 +60,6 @@ public interface ZyjrBorrowerMapper
      * @return 结果
      */
     public int deleteZyjrBorrowerByIds(Integer[] ids);
+
+    List<ZyjrOrderProgress> selectZyjrBorrowerList2(Integer userId);
 }
