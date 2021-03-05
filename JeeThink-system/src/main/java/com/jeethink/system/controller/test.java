@@ -1467,6 +1467,11 @@ public class test extends BaseController {
             examineMapper.updateStarts2(inform.getPub().getOrderNo());
         }else if(inform!=null&&inform.getReq()!=null&&inform.getReq().getTransType()!=null&&inform.getReq().getTransType()==4){
             examineMapper.updateStarts(inform.getPub().getOrderNo());
+            ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
+            zyjrOrderProgress.setTransactionCode(inform.getPub().getOrderNo());
+            zyjrOrderProgress.setApprovalType(1);
+            zyjrOrderProgress.setProgress(1);
+            examineMapper.updateOrderProgress(zyjrOrderProgress);
         }
         AjaxResult json=new AjaxResult();
         json.put("msg","success");

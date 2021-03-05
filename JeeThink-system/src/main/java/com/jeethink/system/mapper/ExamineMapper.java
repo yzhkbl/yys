@@ -69,7 +69,8 @@ public interface ExamineMapper {
     DqVo selectDQ2(String transactionCode);
     DqVo selectDQ3(String transactionCode);
     List<Huankuan> selectHuankuanList();
-    List<orderVo>findOrder(@Param("userId") Long userId,@Param("progress") Integer progress);
+    List<orderVo> findOrder(@Param("userId") Long userId,@Param("progress") Integer progress);
+    List<orderVo> findOrder2(Long userId);
 
 
 
