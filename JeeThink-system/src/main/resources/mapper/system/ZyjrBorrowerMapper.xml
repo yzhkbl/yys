@@ -89,6 +89,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectZyjrBorrowerVo"/>
         where id = #{id}
     </select>
+    <select id="selectZyjrBorrowerList2" parameterType="Integer" resultType="com.jeethink.system.domain.ZyjrOrderProgress">
+        select a.*
+        from zyjr_order_progress a
+        left join zyjr_borrower b on a.transaction_code=b.transaction_code
+        where b.user_id=#{userId}
+    </select>
     
     <select id="selectById" parameterType="String" resultMap="ZyjrBorrowerResult">
         <include refid="selectZyjrBorrowerVo"/>
