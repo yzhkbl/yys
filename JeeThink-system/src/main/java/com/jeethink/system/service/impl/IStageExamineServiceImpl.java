@@ -63,6 +63,8 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     private ExamineController examineController;
     @Autowired
     private SysUserMapper sysUserMapper;
+    @Autowired
+    private ZyjrLiushuiMapper zyjrLiushuiMapper;
 
 
     @Override
@@ -147,24 +149,27 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         //map.put("companyGuarantee",zyjrCompanyGuarantee);
         //ZyjrPeopleGuarantee zyjrPeopleGuarantee = zyjrPeopleGuaranteeMapper.selectZyjrPeopleGuaranteeById(userId, transactionCode);
         //map.put("peopleGuarantee",zyjrPeopleGuarantee);
-        //ZyjrPhotoCar zyjrPhotoCar = zyjrPhotoCarMapper.selectZyjrPhotoCarById(userId, transactionCode);
-        //ZyjrPhotoCredit zyjrPhotoCredit = zyjrPhotoCreditMapper.selectZyjrPhotoCreditById(userId, transactionCode);
-        //ZyjrPhotoHouse zyjrPhotoHouse = zyjrPhotoHouseMapper.selectZyjrPhotoHouseById(userId, transactionCode);
-        //ZyjrPhotoLender zyjrPhotoLender = zyjrPhotoLenderMapper.selectZyjrPhotoLenderById(userId, transactionCode);
+        ZyjrPhotoCar zyjrPhotoCar = zyjrPhotoCarMapper.selectZyjrPhotoCarById(userId, transactionCode);
+        ZyjrPhotoCredit zyjrPhotoCredit = zyjrPhotoCreditMapper.selectZyjrPhotoCreditById(userId, transactionCode);
+        ZyjrPhotoHouse zyjrPhotoHouse = zyjrPhotoHouseMapper.selectZyjrPhotoHouseById(userId, transactionCode);
+        ZyjrPhotoLender zyjrPhotoLender = zyjrPhotoLenderMapper.selectZyjrPhotoLenderById(userId, transactionCode);
+        ZyjrLiushui zyjrLiushui = zyjrLiushuiMapper.selectZyjrLiushuiById(transactionCode);
+        map.put("liushui",zyjrGrantPhotoMapper.findLiushui(zyjrLiushui.getId()));
+        map.put("house",sysFileInfoMapper.photoHouse(zyjrPhotoHouse.getId()));
         /**if(zyjrAllowApplicant!=null&&zyjrAllowBasics!=null&&zyjrAllowContacts!=null&&zyjrCarLoan!=null&&zyjrPhotoCar!=null&&zyjrPhotoCredit!=null
         &&zyjrPhotoHouse!=null&&zyjrPhotoLender!=null){
             if(zyjrCompanyGuarantee!=null||zyjrPeopleGuarantee!=null) {
                 map.put("stateId", 1);
             }
         }*/
-        /**List<String> lists=new ArrayList<>();
+        List<String> lists=new ArrayList<>();
         if (zyjrPhotoCar != null) {
             /*map.put("photoCar", sysFileInfoMapper.photoCar(zyjrPhotoCar.getId()));*/
        /*     map.put("photoCredit", sysFileInfoMapper.photoCredit(zyjrPhotoCredit.getId()));
             map.put("photoHouse", sysFileInfoMapper.photoHouse(zyjrPhotoHouse.getId()));
             map.put("photoLender", sysFileInfoMapper.photoLender(zyjrPhotoLender.getId()));*/
 
-            /**List<SysFileInfo> a = sysFileInfoMapper.photoCar(zyjrPhotoCar.getId());
+            List<SysFileInfo> a = sysFileInfoMapper.photoCar(zyjrPhotoCar.getId());
             for (SysFileInfo sysFileInfo : a) {
                 lists.add(sysFileInfo.getFilePath());
                 map.put(sysFileInfo.getFileName(), sysFileInfo.getFilePath());
@@ -176,13 +181,13 @@ public class IStageExamineServiceImpl implements IStageExamineService {
                   map.put(sysFileInfo.getFileName(), sysFileInfo.getFilePath());
               }
           }
-           if(zyjrPhotoHouse!=null){
+           /**if(zyjrPhotoHouse!=null){
                List<SysFileInfo> c=sysFileInfoMapper.photoHouse(zyjrPhotoHouse.getId());
                for (SysFileInfo sysFileInfo : c) {
                    lists.add(sysFileInfo.getFilePath());
                    map.put(sysFileInfo.getFileName(), sysFileInfo.getFilePath());
                }
-           }
+           }*/
             if(zyjrPhotoLender!=null){
                 List<SysFileInfo> d=sysFileInfoMapper.photoLender(zyjrPhotoLender.getId());
                 for (SysFileInfo sysFileInfo : d) {
@@ -190,7 +195,8 @@ public class IStageExamineServiceImpl implements IStageExamineService {
                     map.put(sysFileInfo.getFileName(), sysFileInfo.getFilePath());
                 }
             }
-            map.put("pic", lists);*/
+
+            map.put("pic", lists);
         return map;
     }
 

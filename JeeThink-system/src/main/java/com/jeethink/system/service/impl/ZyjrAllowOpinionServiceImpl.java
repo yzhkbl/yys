@@ -113,7 +113,9 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
         if(o!=null) {
             stageExamineMapper.deleteOpinion(zyjrAllowOpinion.getTransactionCode());
             zyjrAllowOpinionMapper.deleteZyjrAllowOpinionById(zyjrAllowOpinion.getTransactionCode());
-            return 2;
+            ZyjrAllowOpinion i = zyjrAllowOpinion;
+            i.setAdvise(zyjrAllowOpinion.getAdvise()+";"+date2);
+            return zyjrAllowOpinionMapper.insertZyjrAllowOpinion(i);
         }else {
             if (zyjrAllowOpinion.getApprovalType() == 2) {
                 ZyjrSubmitStateAllow zyjrSubmitStateAllow = new ZyjrSubmitStateAllow();
