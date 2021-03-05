@@ -208,6 +208,11 @@ public class ZyjrDaiqianAccoutController extends BaseController
             WebSocket webSocket=new WebSocket();
             String date= DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS,new Date()).substring(11,19);
             webSocket.sendMessage("贷前来新单了,"+date+",贷前,"+transactionCode+"");
+            ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
+            zyjrOrderProgress.setTransactionCode(transactionCode);
+            zyjrOrderProgress.setApprovalType(99);
+            zyjrOrderProgress.setProgress(99);
+            examineMapper.updateOrderProgress(zyjrOrderProgress);
             return AjaxResult.success();
         }else{
             return AjaxResult.success("提交失败，您的信息未填完整,请完善信息！");

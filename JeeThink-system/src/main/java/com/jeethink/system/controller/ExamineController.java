@@ -198,21 +198,22 @@ public class ExamineController extends BaseController {
         int d=0;
         int e=0;
         int f=0;
+
         List<ZyjrOrderProgress> zyjrBorrowers = zyjrBorrowerMapper.selectZyjrBorrowerList2(userId);
         for (ZyjrOrderProgress zyjrBorrower : zyjrBorrowers) {
             if(zyjrBorrower.getProgress()==0){
-                ++a;
-            }else if(zyjrBorrower.getProgress()==1){
-                ++b;
-            }else if(zyjrBorrower.getProgress()==2){
-                ++c;
-            }else if(zyjrBorrower.getProgress()==3){
-                ++d;
-            }else if(zyjrBorrower.getProgress()==4){
-                ++e;
-            }else if(zyjrBorrower.getProgress()==5){
-                ++f;
-            }
+            ++a;
+        }else if(zyjrBorrower.getProgress()==1){
+            ++b;
+        }else if(zyjrBorrower.getProgress()==2){
+            ++c;
+        }else if(zyjrBorrower.getProgress()==3){
+            ++d;
+        }else if(zyjrBorrower.getProgress()==4){
+            ++e;
+        }else if(zyjrBorrower.getProgress()==5){
+            ++f;
+        }
         }
         Map<String,Integer> map=new HashMap<>();
         map.put("a",a);
@@ -378,11 +379,6 @@ public class ExamineController extends BaseController {
 
     @PostMapping("/add/grant/state")
     public AjaxResult addGrantState(ZyjrSubmitStateGrant q){
-        ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
-        zyjrOrderProgress.setTransactionCode(q.getTransactionCode());
-        zyjrOrderProgress.setApprovalType(3);
-        zyjrOrderProgress.setProgress(3);
-        examineMapper.updateOrderProgress(zyjrOrderProgress);
         WebSocket webSocket=new WebSocket();
         String date=DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS,new Date()).substring(11,19);
         webSocket.sendMessage("授信来新单了,"+date+",初终,"+q.getTransactionCode()+"");

@@ -543,6 +543,11 @@ public class test extends BaseController {
         ZyjrBorrower a = o.selectById(transactionCode);
         a.setContractState("1");
          o.updateZyjrBorrower(a);
+        ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
+        zyjrOrderProgress.setTransactionCode(transactionCode);
+        zyjrOrderProgress.setApprovalType(99);
+        zyjrOrderProgress.setProgress(99);
+        examineMapper.updateOrderProgress(zyjrOrderProgress);
          //examineService.okPurchase(transactionCode);
         return "index";
     }
@@ -1008,12 +1013,6 @@ public class test extends BaseController {
         JSONObject jsons = encryptData(json3.toString(), dataPublicKey, signPrivateKey, assurerNo, bankType, busiCode, platNo, codes);
 
         JSONObject results = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", jsons);
-
-            /**ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
-            zyjrOrderProgress.setTransactionCode(fenqiVo.getPub().getOrderNo());
-            zyjrOrderProgress.setApprovalType(5);
-            zyjrOrderProgress.setProgress("未抵押");
-            examineMapper.updateOrderProgress(zyjrOrderProgress);*/
 
         return  AjaxResult.success("操作成功",results);
     }

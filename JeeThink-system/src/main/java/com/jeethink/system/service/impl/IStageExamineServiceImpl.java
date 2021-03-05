@@ -307,6 +307,11 @@ public class IStageExamineServiceImpl implements IStageExamineService {
             xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);
         } else if (q.getApprovalType() == 1) {
+            ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
+            zyjrOrderProgress.setTransactionCode(q.getTransactionCode());
+            zyjrOrderProgress.setApprovalType(3);
+            zyjrOrderProgress.setProgress(3);
+            examineMapper.updateOrderProgress(zyjrOrderProgress);
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
             PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), q.getTransactionCode(), "授信通过", stringsList);
             Xiaoxi xiaoxi=new Xiaoxi();
