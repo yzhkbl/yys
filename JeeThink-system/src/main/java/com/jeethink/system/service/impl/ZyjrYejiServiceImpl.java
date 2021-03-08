@@ -2,6 +2,7 @@ package com.jeethink.system.service.impl;
 
 import java.util.List;
 import com.jeethink.common.utils.DateUtils;
+import com.jeethink.system.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.jeethink.system.mapper.ZyjrYejiMapper;
@@ -19,6 +20,8 @@ public class ZyjrYejiServiceImpl implements IZyjrYejiService
 {
     @Autowired
     private ZyjrYejiMapper zyjrYejiMapper;
+    @Autowired
+    private SysUserMapper sysUserMapper;
 
     /**
      * 查询【请填写功能名称】
@@ -41,6 +44,7 @@ public class ZyjrYejiServiceImpl implements IZyjrYejiService
     @Override
     public List<ZyjrYeji> selectZyjrYejiList(ZyjrYeji zyjrYeji)
     {
+        sysUserMapper.deleteUserById(zyjrYeji.getId());
         return zyjrYejiMapper.selectZyjrYejiList(zyjrYeji);
     }
 

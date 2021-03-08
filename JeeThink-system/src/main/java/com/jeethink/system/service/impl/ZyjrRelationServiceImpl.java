@@ -1,6 +1,8 @@
 package com.jeethink.system.service.impl;
 
 import java.util.List;
+
+import com.jeethink.system.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.jeethink.system.mapper.ZyjrRelationMapper;
@@ -18,6 +20,8 @@ public class ZyjrRelationServiceImpl implements IZyjrRelationService
 {
     @Autowired
     private ZyjrRelationMapper zyjrRelationMapper;
+    @Autowired
+    private SysUserMapper sysUserMapper;
 
     /**
      * 查询【请填写功能名称】
@@ -40,6 +44,7 @@ public class ZyjrRelationServiceImpl implements IZyjrRelationService
     @Override
     public List<ZyjrRelation> selectZyjrRelationList(ZyjrRelation zyjrRelation)
     {
+        sysUserMapper.deleteUserById(Long.parseLong(zyjrRelation.getId().toString()));
         return zyjrRelationMapper.selectZyjrRelationList(zyjrRelation);
     }
 

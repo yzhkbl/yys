@@ -55,8 +55,6 @@ public class ZyjrYejiController extends BaseController
     /**
      * 导出【请填写功能名称】列表
      */
-    @PreAuthorize("@ss.hasPermi('system:yeji:export')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(ZyjrYeji zyjrYeji)
     {
