@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          left join zyjr_start_page c on a.transaction_code=c.transaction_code
          left join zyjr_details d on a.transaction_code=d.transaction_code
         <where>
-            a.order_state = 1 and d.details is not null
+            a.order_state = 1
             <if test="team != null  and team != ''"> and a.team like concat('%', #{team}, '%') </if>
             <if test="carInformation != null "> and a.car_information like concat('%', #{carInformation}, '%') </if>
             <if test="intentionPrice != null "> and a.intention_price like concat('%', #{intentionPrice}, '%') </if>
@@ -48,6 +48,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="falseOperatorId != null "> and a.false_operator_id = #{falseOperatorId}</if>
             <if test="transactionCode != null "> and a.transaction_code like concat('%', #{transactionCode}, '%') </if>
             <if test="name != null "> and b.user_name like concat('%', #{name}, '%')</if>
+            <if test="updateBy ==1 "> and c.credit_state = 1 and d.details is not null  </if>
+            <if test="updateBy ==2 "> and c.credit_state = 2  </if>
+            <if test="updateBy ==3 "> and c.credit_state = 1 and d.details is null  </if>
               order by a.create_time desc
         </where>
     </select>
@@ -57,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          left join zyjr_borrower b on a.transaction_code=b.transaction_code
          left join zyjr_start_page c on a.transaction_code=c.transaction_code
         <where>
-            a.order_state = 1 and c.credit_state = 2
+            a.order_state = 1 and b.mianqian is null
             <if test="team != null  and team != ''"> and a.team like concat('%', #{team}, '%') </if>
             <if test="carInformation != null "> and a.car_information like concat('%', #{carInformation}, '%') </if>
             <if test="intentionPrice != null "> and a.intention_price like concat('%', #{intentionPrice}, '%') </if>

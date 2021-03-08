@@ -1,7 +1,10 @@
 package com.jeethink.system.controller;
 
 
+import com.jeethink.system.domain.ZyjrBorrower;
+import com.jeethink.system.mapper.ZyjrBorrowerMapper;
 import net.sf.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,13 +24,12 @@ import java.io.*;
 
 @Controller
 public class test2 {
+    @Autowired
+    private ZyjrBorrowerMapper zyjrBorrowerMapper;
 
     @RequestMapping("/pullSignReport")
-
     @ResponseBody
-
     @EscapeLogin
-
     public ApiResponse pullSignReport(HttpServletRequest request) throws IOException{
         String requestData = HttpPostUtil.getRequestData(request);
 
@@ -61,6 +63,15 @@ public class test2 {
                 JSONObject pub = JSONObject.fromObject(date.get("pub"));
                 JSONObject req = JSONObject.fromObject(date.get("req"));
                 System.out.println(pub.toString()+">>>>>>>"+req.toString());
+                ZyjrBorrower zyjrBorrower = zyjrBorrowerMapper.selectById(pub.get("orderNo").toString());
+                if(req.get("status")!=null&&req.get("status").equals("2")){
+                    zyjrBorrower.setMianqian("1");
+                    zyjrBorrowerMapper.updateZyjrBorrower(zyjrBorrower);
+                }else if(req.get("status")!=null&&req.get("status").equals("3")){
+                    zyjrBorrower.setMianqian("2");
+                    zyjrBorrowerMapper.updateZyjrBorrower(zyjrBorrower);
+                }
+
             }
 
         }else{
