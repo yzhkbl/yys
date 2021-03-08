@@ -217,9 +217,9 @@ public class ExamineController extends BaseController {
         }
         Map<String,Integer> map=new HashMap<>();
         map.put("a",a);
-        map.put("b",b);
+        map.put("b",d);
         map.put("c",c);
-        map.put("d",d);
+        map.put("d",b);
         map.put("e",e);
         map.put("f",f);
         map.put("g",f);
