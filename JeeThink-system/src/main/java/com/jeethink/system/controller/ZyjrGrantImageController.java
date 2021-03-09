@@ -51,14 +51,20 @@ public class ZyjrGrantImageController extends BaseController
     @ApiOperation("111111111")
     public AjaxResult testFiles(fileInfoVo q) {
         JSONArray jsonarray = JSONArray.fromObject(q.getPhotoFile());
+        JSONArray carpic = JSONArray.fromObject(q.getCarpic());
+        JSONArray icbc = JSONArray.fromObject(q.getIcbc());
      //   System.out.println(jsonarray);
         ZyjrGrantImage zyjrGrantImage = new ZyjrGrantImage();
         List<ZyjrGrantPhoto> list = (List)JSONArray.toList(jsonarray, ZyjrGrantPhoto.class);
+        List<ZyjrGrantPhoto> list2 = (List)JSONArray.toList(carpic, ZyjrGrantPhoto.class);
+        List<ZyjrGrantPhoto> list3 = (List)JSONArray.toList(icbc, ZyjrGrantPhoto.class);
         if (q.getId() != null) {
             ZyjrGrantPhoto infos = new ZyjrGrantPhoto();
             infos.setImageId(q.getId());
             List<ZyjrGrantPhoto> zyjrGrantPhotos = zyjrGrantPhotoMapper.selectZyjrGrantPhotoList(infos);
-            int a = zyjrGrantPhotoMapper.deleteByImage(q.getId());
+            zyjrGrantPhotoMapper.deleteByImage(q.getId());
+            zyjrGrantPhotoMapper.deleteByImage2(q.getId());
+            zyjrGrantPhotoMapper.deleteByImage3(q.getId());
             String paths = "C:/demo";
             //System.err.println(path);
             //int a = sysFileInfoMapper.deleteSysFileInfoByPath(path);
@@ -100,6 +106,44 @@ public class ZyjrGrantImageController extends BaseController
                 pic.add(info.getFilePath());
             }
         }
+        if (list2 != null) {
+            for (int i = 0; i < list2.size(); i++) {
+                //String asd = androidUpload.upload(list.get(i).getFilePath());
+                ZyjrGrantPhoto info = new ZyjrGrantPhoto();
+                //String as = "http://192.168.31.86:8080" + asd;
+                info.setFilePath(list2.get(i).getFilePath());
+                if(q.getId()!=null){
+                    info.setImageId(q.getId());
+                }else{
+                    info.setImageId(zyjrGrantImage.getId());
+                }
+                info.setFileName(list2.get(i).getFileName());
+                int ceshi = zyjrGrantPhotoMapper.insertZyjrGrantPhoto2(info);
+                if (ceshi < 1) {
+                    return AjaxResult.error();
+                }
+                pic.add(info.getFilePath());
+            }
+        }
+        if (list3 != null) {
+            for (int i = 0; i < list3.size(); i++) {
+                //String asd = androidUpload.upload(list.get(i).getFilePath());
+                ZyjrGrantPhoto info = new ZyjrGrantPhoto();
+                //String as = "http://192.168.31.86:8080" + asd;
+                info.setFilePath(list3.get(i).getFilePath());
+                if(q.getId()!=null){
+                    info.setImageId(q.getId());
+                }else{
+                    info.setImageId(zyjrGrantImage.getId());
+                }
+                info.setFileName(list3.get(i).getFileName());
+                int ceshi = zyjrGrantPhotoMapper.insertZyjrGrantPhoto3(info);
+                if (ceshi < 1) {
+                    return AjaxResult.error();
+                }
+                pic.add(info.getFilePath());
+            }
+        }
         return AjaxResult.success(pic);
     }
 
@@ -111,6 +155,8 @@ public class ZyjrGrantImageController extends BaseController
     public AjaxResult findPhoto(@PathVariable("transactionCode") String transactionCode)
     {
         ZyjrGrantImage zyjrGrantImage = zyjrGrantImageService.selectZyjrGrantImageById(transactionCode);
+        ZyjrGrantImage icbc = zyjrGrantImageService.selectZyjrGrantImageById2(transactionCode);
+        ZyjrGrantImage carpic = zyjrGrantImageService.selectZyjrGrantImageById3(transactionCode);
         GrantPhoto f = new GrantPhoto();
         if(zyjrGrantImage != null) {
             List<ZyjrGrantPhoto> list = zyjrGrantPhotoMapper.findImage(zyjrGrantImage.getId());

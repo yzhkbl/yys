@@ -66,7 +66,7 @@ public class ZyjrGps
     @Excel(name = "状态")
     private String state;
     private String remark;
-    private String bianhaoPic;
+    private String bianhao;
     private String yuanjingPic;
     private String jinjingPic;
     private String pic;
@@ -80,12 +80,12 @@ public class ZyjrGps
         this.statePic = statePic;
     }
 
-    public String getBianhaoPic() {
-        return bianhaoPic;
+    public String getBianhao() {
+        return bianhao;
     }
 
-    public void setBianhaoPic(String bianhaoPic) {
-        this.bianhaoPic = bianhaoPic;
+    public void setBianhao(String bianhao) {
+        this.bianhao = bianhao;
     }
 
     public String getYuanjingPic() {

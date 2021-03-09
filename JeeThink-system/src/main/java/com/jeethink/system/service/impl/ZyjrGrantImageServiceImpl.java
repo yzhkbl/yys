@@ -30,6 +30,16 @@ public class ZyjrGrantImageServiceImpl implements IZyjrGrantImageService
     {
         return zyjrGrantImageMapper.selectZyjrGrantImageById(transactionCode);
     }
+    @Override
+    public ZyjrGrantImage selectZyjrGrantImageById2(String transactionCode)
+    {
+        return zyjrGrantImageMapper.selectZyjrGrantImageById2(transactionCode);
+    }
+    @Override
+    public ZyjrGrantImage selectZyjrGrantImageById3(String transactionCode)
+    {
+        return zyjrGrantImageMapper.selectZyjrGrantImageById3(transactionCode);
+    }
 
     /**
      * 查询【请填写功能名称】列表

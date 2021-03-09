@@ -24,4 +24,6 @@ public class GrantPhoto {
 
     /**图片list*/
     private List<ZyjrGrantPhoto> photoFile;
+    private List<ZyjrGrantPhoto> icbc;
+    private List<ZyjrGrantPhoto> carpic;
 }

@@ -32,9 +32,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         left join zyjr_car_loan f on a.transaction_code=f.transaction_code
         left join zyjr_start_page g on a.transaction_code=g.transaction_code
         <where>
-            a.state="1" and (b.state!="1" or b.state is null)
+
             <if test="createTime != null  and createTime != ''"> and c.user_name like concat('%', #{createTime}, '%') </if>
-            <if test="state != null  and state != ''"> and b.state=#{state}  </if>
+            <if test="state ==1 ">and b.state is not null and (b.state !=2 and b.state!=3)   </if>
+            <if test="state ==2"> and b.state is not null and (b.state !=1 and b.state!=3)  </if>
+            <if test="state ==3 "> and b.state is not null and (b.state !=2 and b.state!=1)  </if>
+            <if test="state ==null "> a.state="1" and (b.state!="1" or b.state is  null)  </if>
         </where>
          order by g.create_time desc
     </select>

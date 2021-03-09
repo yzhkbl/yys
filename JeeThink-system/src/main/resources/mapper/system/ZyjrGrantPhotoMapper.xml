@@ -73,6 +73,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="visitId != null">#{visitId},</if>
             <if test="liushuiId != null">#{liushuiId},</if>
          </trim>
+    </insert><insert id="insertZyjrGrantPhoto2" parameterType="ZyjrGrantPhoto" useGeneratedKeys="true" keyProperty="fileId">
+        insert into zyjr_carpic
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fileName != null">file_name,</if>
+            <if test="filePath != null">file_path,</if>
+            <if test="instalmentsId != null">instalments_id,</if>
+            <if test="imageId != null">image_id,</if>
+            <if test="visitId != null">visit_id,</if>
+            <if test="liushuiId != null">liushui_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fileName != null">#{fileName},</if>
+            <if test="filePath != null">#{filePath},</if>
+            <if test="instalmentsId != null">#{instalmentsId},</if>
+            <if test="imageId != null">#{imageId},</if>
+            <if test="visitId != null">#{visitId},</if>
+            <if test="liushuiId != null">#{liushuiId},</if>
+         </trim>
+    </insert><insert id="insertZyjrGrantPhoto3" parameterType="ZyjrGrantPhoto" useGeneratedKeys="true" keyProperty="fileId">
+        insert into zyjr_icbc
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fileName != null">file_name,</if>
+            <if test="filePath != null">file_path,</if>
+            <if test="instalmentsId != null">instalments_id,</if>
+            <if test="imageId != null">image_id,</if>
+            <if test="visitId != null">visit_id,</if>
+            <if test="liushuiId != null">liushui_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fileName != null">#{fileName},</if>
+            <if test="filePath != null">#{filePath},</if>
+            <if test="instalmentsId != null">#{instalmentsId},</if>
+            <if test="imageId != null">#{imageId},</if>
+            <if test="visitId != null">#{visitId},</if>
+            <if test="liushuiId != null">#{liushuiId},</if>
+         </trim>
     </insert>
 
     <update id="updateZyjrGrantPhoto" parameterType="ZyjrGrantPhoto">
@@ -94,6 +130,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <delete id="deleteByImage" parameterType="Long">
         delete from zyjr_grant_photo where image_id = #{imageId}
+    </delete>
+    <delete id="deleteByImage2" parameterType="Long">
+        delete from zyjr_carpic where image_id = #{imageId}
+    </delete>
+    <delete id="deleteByImage3" parameterType="Long">
+        delete from zyjr_icbc where image_id = #{imageId}
     </delete>
 
     <delete id="deleteByInstalments" parameterType="Long">

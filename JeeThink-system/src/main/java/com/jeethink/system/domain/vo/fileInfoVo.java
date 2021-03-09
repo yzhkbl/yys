@@ -41,4 +41,6 @@ public class fileInfoVo {
     private String lenderPhoto;     //其他资料list
     private String visitPhoto;      //家访list
     private String liushuiPhoto;    //流水list
+    String icbc;
+    String carpic;
 }

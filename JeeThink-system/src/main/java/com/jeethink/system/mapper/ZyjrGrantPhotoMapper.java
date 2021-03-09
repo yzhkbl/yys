@@ -36,7 +36,8 @@ public interface ZyjrGrantPhotoMapper
      * @return 结果
      */
     public int insertZyjrGrantPhoto(ZyjrGrantPhoto zyjrGrantPhoto);
-
+    int insertZyjrGrantPhoto2(ZyjrGrantPhoto info);
+    int insertZyjrGrantPhoto3(ZyjrGrantPhoto info);
     /**
      * 修改【请填写功能名称】
      * 
@@ -62,6 +63,8 @@ public interface ZyjrGrantPhotoMapper
     public int deleteZyjrGrantPhotoByIds(Long[] fileIds);
 
     public int deleteByImage(Long imageId);
+    int deleteByImage2(Long id);
+    int deleteByImage3(Long id);
     List<ZyjrGrantPhoto> findImage(@Param("imageId") Long imageId);
 
     public int deleteByInstalments(Long instalmentsId);
@@ -72,4 +75,7 @@ public interface ZyjrGrantPhotoMapper
 
     public int deleteByLiushui(Long visitId);
     List<ZyjrGrantPhoto> findLiushui(@Param("liushuiId") Long liushuiId);
+
+
+
 }

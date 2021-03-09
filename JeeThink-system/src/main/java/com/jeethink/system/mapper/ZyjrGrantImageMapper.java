@@ -58,4 +58,7 @@ public interface ZyjrGrantImageMapper
      * @return 结果
      */
     public int deleteZyjrGrantImageByIds(Long[] ids);
+
+    ZyjrGrantImage selectZyjrGrantImageById3(String transactionCode);
+    ZyjrGrantImage selectZyjrGrantImageById2(String transactionCode);
 }

@@ -27,6 +27,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectZyjrGrantImageVo"/>
         where transaction_code = #{transactionCode}
     </select>
+    <select id="selectZyjrGrantImageById2" resultType="com.jeethink.system.domain.ZyjrGrantImage">
+        select id, transaction_code, user_id ,order_state from zyjr_icbc
+        where transaction_code = #{transactionCode}
+    </select>
+    <select id="selectZyjrGrantImageById3" resultType="com.jeethink.system.domain.ZyjrGrantImage">
+        select id, transaction_code, user_id ,order_state from zyjr_carpic
+        where transaction_code = #{transactionCode}
+    </select>
         
     <insert id="insertZyjrGrantImage" parameterType="ZyjrGrantImage" useGeneratedKeys="true" keyProperty="id">
         insert into zyjr_grant_image

@@ -19,20 +19,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="userId"    column="user_id"    />
         <result property="transactionCode"    column="transaction_code"    />
         <result property="state"    column="state"    />
-        <result property="bianhaoPic"    column="bianhao_pic"    />
+        <result property="bianhao"    column="bianhao"    />
         <result property="yuanjingPic"    column="yuanjing_pic"    />
         <result property="jinjingPic"    column="jinjing_pic"    />
     </resultMap>
 
     <sql id="selectZyjrGpsVo">
-        select id, zyjr_car_id, Industry_wired,bianhao_pic,yuanjing_pic,jinjing_pic, Industry_wireless, zhengzhou_wired, zhengzhou_wireless, linkman, location, address, personnel, remark, user_id, transaction_code, state from zyjr_gps
+        select id, zyjr_car_id, Industry_wired,bianhao,yuanjing_pic,jinjing_pic, Industry_wireless, zhengzhou_wired, zhengzhou_wireless, linkman, location, address, personnel, remark, user_id, transaction_code, state from zyjr_gps
     </sql>
 
     <select id="selectZyjrGpsList" parameterType="ZyjrGps" resultMap="ZyjrGpsResult">
         <include refid="selectZyjrGpsVo"/>
         <where>  
             <if test="zyjrCarId != null  and zyjrCarId != ''"> and zyjr_car_id = #{zyjrCarId}</if>
-            <if test="bianhaoPic != null  and bianhaoPic != ''"> and bianhao_pic = #{bianhaoPic}</if>
+            <if test="bianhao != null  and bianhao != ''"> and bianhao = #{bianhao}</if>
             <if test="yuanjingPic != null  and yuanjingPic != ''"> and yuanjing_pic = #{yuanjingPic}</if>
             <if test="jinjingPic != null  and jinjingPic != ''"> and jinjing_pic = #{jinjingPic}</if>
             <if test="industryWired != null  and industryWired != ''"> and Industry_wired = #{industryWired}</if>
@@ -57,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insertZyjrGps" parameterType="ZyjrGps" useGeneratedKeys="true" keyProperty="id">
         insert into zyjr_gps
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="bianhaoPic != null">bianhao_pic,</if>
+            <if test="bianhao != null">bianhao,</if>
             <if test="yuanjingPic != null">yuanjing_pic,</if>
             <if test="jinjingPic != null">jinjing_pic,</if>
             <if test="zyjrCarId != null">zyjr_car_id,</if>
@@ -75,7 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="state != null">state,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="bianhaoPic != null">#{bianhaoPic},</if>
+            <if test="bianhao != null">#{bianhao},</if>
             <if test="yuanjingPic != null">#{yuanjingPic},</if>
             <if test="jinjingPic != null">#{jinjingPic},</if>
             <if test="zyjrCarId != null">#{zyjrCarId},</if>
@@ -98,7 +98,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update zyjr_gps
         <trim prefix="SET" suffixOverrides=",">
             <if test="zyjrCarId != null">zyjr_car_id = #{zyjrCarId},</if>
-            <if test="bianhaoPic != null">bianhao_pic = #{bianhaoPic},</if>
+            <if test="bianhao != null">bianhao_pic = #{bianhao},</if>
             <if test="yuanjingPic != null">yuanjing_pic = #{yuanjingPic},</if>
             <if test="jinjingPic != null">jinjing_pic = #{jinjingPic},</if>
             <if test="industryWired != null and industryWired != ''">Industry_wired = #{industryWired},</if>

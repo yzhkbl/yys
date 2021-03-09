@@ -18,6 +18,8 @@ public interface IZyjrGrantImageService
      * @return 【请填写功能名称】
      */
     public ZyjrGrantImage selectZyjrGrantImageById(String transactionCode);
+    ZyjrGrantImage selectZyjrGrantImageById2(String transactionCode);
+    ZyjrGrantImage selectZyjrGrantImageById3(String transactionCode);
 
     /**
      * 查询【请填写功能名称】列表
@@ -58,4 +60,6 @@ public interface IZyjrGrantImageService
      * @return 结果
      */
     public int deleteZyjrGrantImageById(Long id);
+
+
 }
