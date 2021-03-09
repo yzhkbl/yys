@@ -110,6 +110,7 @@ public class ZyjrCarLoan extends BaseEntity
     private String grantBy;
     private String handleName;
     private BigDecimal intentionPrice;//意向价格
+    private String gpsCost;
 
     private String sellerName;  //卖方姓名
     private String sellerId;    //卖方身份证号

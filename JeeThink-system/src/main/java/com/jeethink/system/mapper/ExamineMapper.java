@@ -120,16 +120,20 @@ public interface ExamineMapper {
 
     List<orderVo>searchOrder(@Param("search") String search,@Param("userId") Long userId);
 
-    List<RelationName>relationName(String transactionCode);
+    List<RelationName>relationName(String transactionCode);//补充关联人的列表
     ZyjrRelation findById(Long id);
+
+    List<RelationName>guName(String transactionCode);//补充担保人的列表
+    //ZyjrRelation findByGu(Long id);
+
     Bairong selectBairong(Bairong b);
 
     List<carVo> selectZyjrCarListss(@Param("userId") String createBy, @Param("pid") String pid);
 
-    int addAllowState(ZyjrSubmitStateAllow q);
+    int addAllowState(ZyjrSubmitStateAllow q);//准入提交
     int updateAllowState(ZyjrSubmitStateAllow q);
     ZyjrSubmitStateAllow findAllowState(String transactionCode);
-    int addGrantState(ZyjrSubmitStateGrant q);
+    int addGrantState(ZyjrSubmitStateGrant q);//授信提交
     int updateGrantState(ZyjrSubmitStateGrant q);
     ZyjrSubmitStateGrant findGrantState(String transactionCode);
 

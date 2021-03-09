@@ -874,6 +874,11 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
         from zyjr_relation
         where id=#{id}
     </select>
+    <select id="guName" resultType="com.jeethink.system.domain.vo.RelationName">
+        select user_name,id
+        from zyjr_guarantee
+        where transaction_code = #{transactionCode}
+    </select>
     <select id="selectBairong" resultType="com.jeethink.system.domain.vo.Bairong">
         select *
         from zyjr_bairong

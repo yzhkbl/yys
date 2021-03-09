@@ -59,9 +59,9 @@ public class StageExamineController extends BaseController {
     }
 
     @RequestMapping("/list")//复审列表
-    public TableDataInfo list(ZyjrGrant q){
+    public TableDataInfo list(String name,Integer approvalType){
         startPage();
-        List<ZyjrGrant>list = stageExamineService.list();
+        List<ZyjrGrant>list = stageExamineService.list(name,approvalType);
         return getDataTable(list);
     }
 
@@ -76,9 +76,9 @@ public class StageExamineController extends BaseController {
     }
 
     @GetMapping("/grant")//授信列表
-    public TableDataInfo findGrant(ZyjrGrant q){
+    public TableDataInfo findGrant(String name,Integer approvalType){
         startPage();
-        List<ZyjrGrant>list = stageExamineService.grant();
+        List<ZyjrGrant>list = stageExamineService.grant(name,approvalType);
         return getDataTable(list);
     }
 
@@ -88,9 +88,9 @@ public class StageExamineController extends BaseController {
     }
 
     @GetMapping("/allow")//准入列表
-    public TableDataInfo findAllow (ZyjrGrant q){
+    public TableDataInfo findAllow (String name,Integer approvalType){
         startPage();
-        List<ZyjrGrant>list = stageExamineService.findAllow();
+        List<ZyjrGrant>list = stageExamineService.findAllow(name,approvalType);
         //Collections.reverse(list);
         return getDataTable(list);
     }

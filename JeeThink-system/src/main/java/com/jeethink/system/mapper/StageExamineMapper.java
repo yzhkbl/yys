@@ -29,17 +29,17 @@ public interface StageExamineMapper {
     int insertOpinion(ZyjrRepeatOpinion q);
     int updateOpinion(ZyjrRepeatOpinion q);
     ZyjrRepeatOpinion findOpinion(String transactionCode);
-    List<ZyjrGrant> list();
+    List<ZyjrGrant> list(@Param("name") String name,@Param("approvalType") Integer approvalType);
 
 
-    List<ZyjrGrant> findGrant();
+    List<ZyjrGrant> findGrant(@Param("name") String name,@Param("approvalType") Integer approvalType);
     int insertGrantOpinion(ZyjrGrantOpinion q);
     int updateGrantOpinion(ZyjrGrantOpinion q);
     ZyjrGrantOpinion findGrantOpinion(String transactionCode);
 
     GrantVo findByGrant(String transactionCode);
 
-    List<ZyjrGrant>findAllow();
+    List<ZyjrGrant>findAllow(@Param("name") String name,@Param("approvalType") Integer approvalType);
 
     //上牌
     List<ShangpaiDiyaVo>findShangpai();
