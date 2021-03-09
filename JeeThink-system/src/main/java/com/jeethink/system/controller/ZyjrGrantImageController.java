@@ -155,17 +155,20 @@ public class ZyjrGrantImageController extends BaseController
     public AjaxResult findPhoto(@PathVariable("transactionCode") String transactionCode)
     {
         ZyjrGrantImage zyjrGrantImage = zyjrGrantImageService.selectZyjrGrantImageById(transactionCode);
-        ZyjrGrantImage icbc = zyjrGrantImageService.selectZyjrGrantImageById2(transactionCode);
-        ZyjrGrantImage carpic = zyjrGrantImageService.selectZyjrGrantImageById3(transactionCode);
         GrantPhoto f = new GrantPhoto();
         if(zyjrGrantImage != null) {
             List<ZyjrGrantPhoto> list = zyjrGrantPhotoMapper.findImage(zyjrGrantImage.getId());
+            List<ZyjrGrantPhoto> list2 = zyjrGrantPhotoMapper.findImage2(zyjrGrantImage.getId());
+            List<ZyjrGrantPhoto> list3 = zyjrGrantPhotoMapper.findImage3(zyjrGrantImage.getId());
+
 
             f.setId(zyjrGrantImage.getId());
             f.setUserId(zyjrGrantImage.getUserId());
             f.setTransactionCode(zyjrGrantImage.getTransactionCode());
             //f.setOrderState(zyjrPhotoHouse.getOrderState());
             f.setPhotoFile(list);
+            f.setCarpic(list2);
+            f.setIcbc(list3);
             return AjaxResult.success(f);
         }else {
             return AjaxResult.success(f);

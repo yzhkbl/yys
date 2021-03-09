@@ -39,6 +39,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectZyjrGrantPhotoVo"/>
         where image_id = #{imageId}
     </select>
+    <select id="findImage2" parameterType="Long" resultMap="ZyjrGrantPhotoResult">
+       select file_id, file_name, file_path, instalments_id, image_id, visit_id ,liushui_id from zyjr_carpic
+        where image_id = #{imageId}
+    </select>
+    <select id="findImage3" parameterType="Long" resultMap="ZyjrGrantPhotoResult">
+        select file_id, file_name, file_path, instalments_id, image_id, visit_id ,liushui_id from zyjr_icbc
+        where image_id = #{imageId}
+    </select>
 
     <select id="findInstalments" parameterType="Long" resultMap="ZyjrGrantPhotoResult">
         <include refid="selectZyjrGrantPhotoVo"/>

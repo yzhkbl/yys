@@ -66,6 +66,8 @@ public interface ZyjrGrantPhotoMapper
     int deleteByImage2(Long id);
     int deleteByImage3(Long id);
     List<ZyjrGrantPhoto> findImage(@Param("imageId") Long imageId);
+    List<ZyjrGrantPhoto> findImage2(@Param("imageId") Long imageId);
+    List<ZyjrGrantPhoto> findImage3(@Param("imageId") Long imageId);
 
     public int deleteByInstalments(Long instalmentsId);
     List<ZyjrGrantPhoto> findInstalments(@Param("instalmentsId") Long instalmentsId);
