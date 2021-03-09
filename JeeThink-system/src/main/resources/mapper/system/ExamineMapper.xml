@@ -28,8 +28,13 @@
         left join zyjr_allow_basics d on a.transaction_code=d.transaction_code
         left join zyjr_daiqian e on a.transaction_code=e.transaction_code
         left join zyjr_car_loan f on a.transaction_code=f.transaction_code
-          left join zyjr_start_page g on a.transaction_code=g.transaction_code
-        where a.approval_type=1 and (e.state!="1" or e.state is null) order by g.create_time desc
+        left join zyjr_start_page g on a.transaction_code=g.transaction_code
+        <where>
+         a.approval_type=1 and (e.state!="1" or e.state is null)
+            <if test="createTime != null  and createTime != ''"> and b.user_name like concat('%', #{createTime}, '%') </if>
+            <if test="state != null  and state != ''"> and e.state=#{state}  </if>
+        </where>
+         order by g.create_time desc
     </select>
     <select id="selectP"
             resultType="com.jeethink.system.domain.vo.provinces">
@@ -627,7 +632,15 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
          and b.contract_state = 0
         order by d.create_time desc
     </select>
-
+    <select id="findOrder3" resultType="com.jeethink.system.domain.vo.orderVo">
+        select distinct b.transaction_code,b.mianqian,b.credit_power,b.contract_state,b.user_name,b.id_card,a.car_information,a.car_type,c.progress,c.approval_type,d.create_time,d.credit_state
+        from zyjr_borrower b
+        left join zyjr_business a on a.transaction_code=b.transaction_code
+        left join zyjr_order_progress c on c.transaction_code=b.transaction_code
+        left join zyjr_start_page d on d.transaction_code=b.transaction_code
+        where b.user_id=#{userId} and b.order_state=1 and a.order_state=1 and d.order_state=1 and b.mianqian is null
+        order by d.create_time desc
+    </select>
     <select id="Borrower" resultType="com.jeethink.system.domain.ZyjrBorrower">
         select id,user_name,id_card,bank_card_no,phone_number,issue_authority,start_date,end_date,family_address,obverse_id,obverse_code,obverse_address,
         obverse_name,back_id,back_code,back_address,back_name,power_id,power_code,power_address,power_name,credit_power,user_id,order_state,transaction_code,nation

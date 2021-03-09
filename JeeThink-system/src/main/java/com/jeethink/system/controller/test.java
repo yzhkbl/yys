@@ -692,9 +692,18 @@ public class test extends BaseController {
            json.put("state",1);
            return json;
        }
-            ZyjrBorrower borrower = o.selectById(transactionCode);
+       Region region=new Region();
+       Region region2=new Region();
+
+        ZyjrBorrower borrower = o.selectById(transactionCode);
             ZyjrAllowApplicant applicant=zyjrAllowApplicantMapper.selectById(transactionCode);
             ZyjrAllowContacts contacts=zyjrAllowContactsMapper.selectById(transactionCode);
+        region.setRegionName(applicant.getLiveCity());
+        region2.setRegionName(applicant.getWorkCity());
+        region.setLevel(2);
+        region2.setLevel(2);
+        List<Region> regions = examineMapper.selectRegion(region);
+        List<Region> danwei = examineMapper.selectRegion(region2);
             ZyjrCard zyjrCard=new ZyjrCard();
             zyjrCard.setCustsort(0);
             zyjrCard.setCustcode(borrower.getIdCard());
@@ -761,7 +770,10 @@ public class test extends BaseController {
             zyjrCard.setHcity(applicant.getLiveCity());
             zyjrCard.setHcounty(applicant.getLiveArea());
             zyjrCard.setHaddress(applicant.getLiveAddress());
-           // zyjrCard.setHomezip(applicant.get);
+            if(regions.size()>0){
+                zyjrCard.setHomezip(regions.get(0).getPostCode());
+            }
+        zyjrCard.setHomezip(null);
         String indate="";
         if(applicant!=null&&applicant.getLiveTime()!=null){
             Date date=new Date();
@@ -798,7 +810,10 @@ public class test extends BaseController {
             zyjrCard.setCcity(applicant.getWorkCity());
             zyjrCard.setCcounty(applicant.getWorkArea());
             zyjrCard.setCaddress(applicant.getWorkAddress());
-            //zyjrCard.setCorpzip();
+            if(danwei.size()>0){
+                zyjrCard.setCorpzip(danwei.get(0).getPostCode());
+            }
+            zyjrCard.setCorpzip(null);
            // zyjrCard.setJoindate();
         Double yearincome=0.0;
         if(applicant!=null&&applicant.getMonthlyIncome()!=null){

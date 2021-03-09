@@ -183,6 +183,12 @@ public class ExamineController extends BaseController {
         List<orderVo> list = examineService.findOrder(userId,progress);
         return getDataTable(list);
     }
+    @GetMapping("mianqianlist")     //app端全部订单
+    public TableDataInfo findOrders(Long userId){
+        startPage();
+        List<orderVo> list = examineService.findOrder3(userId);
+        return getDataTable(list);
+    }
     @GetMapping("qianyuelist")     //app端全部订单
     public TableDataInfo findOrder2(Long userId){
         startPage();
@@ -198,6 +204,14 @@ public class ExamineController extends BaseController {
         int d=0;
         int e=0;
         int f=0;
+        ZyjrBorrower zyjrBorrower2=new ZyjrBorrower();
+        zyjrBorrower2.setUserId(userId);
+        List<ZyjrBorrower> z=zyjrBorrowerMapper.selectZyjrBorrowerList(zyjrBorrower2);
+        for (ZyjrBorrower zyjrBorrower : z) {
+            if(zyjrBorrower.getMianqian()==null){
+                ++e;
+            }
+        }
 
         List<ZyjrOrderProgress> zyjrBorrowers = zyjrBorrowerMapper.selectZyjrBorrowerList2(userId);
         for (ZyjrOrderProgress zyjrBorrower : zyjrBorrowers) {
@@ -209,8 +223,6 @@ public class ExamineController extends BaseController {
             ++c;
         }else if(zyjrBorrower.getProgress()==3){
             ++d;
-        }else if(zyjrBorrower.getProgress()==4){
-            ++e;
         }else if(zyjrBorrower.getProgress()==5){
             ++f;
         }

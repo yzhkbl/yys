@@ -57,7 +57,7 @@ public class ZyjrAllowBasicsController extends BaseController
     }
 
     @GetMapping("/lists")
-    public TableDataInfo lists(ZyjrAllowBasics zyjrAllowBasics)
+    public TableDataInfo lists(ZyjrDaiqian zyjrAllowBasics)
     {
         startPage();
         List<ZyjrDaiqian> list = examineMapper.selectAllList(zyjrAllowBasics);
