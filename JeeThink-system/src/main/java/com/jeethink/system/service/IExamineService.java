@@ -28,6 +28,7 @@ public interface IExamineService {
     ZyjrStartPage findByStart(Integer userId);
 
     List<orderVo> findOrder(Long userId,Integer progress);
+    List<orderVo> findOrder3(Long userId);
 
     Map<String,Object> findExamine(String transactionCode);
 
@@ -35,4 +36,6 @@ public interface IExamineService {
     List<CarSeriseGroup> findGroup();
     List<CarSeries> findSeries(Integer brandId);
     List<CarInfo> findInfo(Integer brandId,Integer groupId);
+
+
 }

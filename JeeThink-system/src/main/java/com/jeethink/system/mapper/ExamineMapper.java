@@ -11,7 +11,7 @@ import java.util.List;
 public interface ExamineMapper {
     List<Region> selectRegion(Region r);
     List<provinces> selectP();
-    List<ZyjrDaiqian> selectAllList(ZyjrAllowBasics zyjrAllowBasics);
+    List<ZyjrDaiqian> selectAllList(ZyjrDaiqian zyjrAllowBasics);
     ZyjrDaiqian selByDaiqian(String transactionCode);
     int insertDaiqian(ZyjrDaiqian zyjrDaiqian);
     int insertDaiqian2(ZyjrDaiqian zyjrDaiqian);
@@ -71,6 +71,7 @@ public interface ExamineMapper {
     List<Huankuan> selectHuankuanList();
     List<orderVo> findOrder(@Param("userId") Long userId,@Param("progress") Integer progress);
     List<orderVo> findOrder2(Long userId);
+    List<orderVo> findOrder3(Long userId);
 
 
 
@@ -148,4 +149,6 @@ public interface ExamineMapper {
     OpinionVo findApType(@Param("transactionCode") String transactionCode);
 
     SubmitVo findSubmit(String transactionCode);
+
+
 }

@@ -183,6 +183,12 @@ public class ExamineController extends BaseController {
         List<orderVo> list = examineService.findOrder(userId,progress);
         return getDataTable(list);
     }
+    @GetMapping("mianqianlist")     //app端全部订单
+    public TableDataInfo findOrders(Long userId){
+        startPage();
+        List<orderVo> list = examineService.findOrder3(userId);
+        return getDataTable(list);
+    }
     @GetMapping("qianyuelist")     //app端全部订单
     public TableDataInfo findOrder2(Long userId){
         startPage();
