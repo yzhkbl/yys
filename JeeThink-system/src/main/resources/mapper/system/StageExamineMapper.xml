@@ -73,7 +73,12 @@
          left join zyjr_car_loan d on b.transaction_code=d.transaction_code
          left join zyjr_repeat_opinion c on b.transaction_code=c.transaction_code
          left join zyjr_submit_state_allow f on b.transaction_code=f.transaction_code
-         where a.transaction_code in (select transaction_code from zyjr_allow_opinion where approval_type=1 and c.approval_type!=1 or c.approval_type is null)
+         where
+        <if test="approvalType ==null"> a.transaction_code in (select transaction_code from zyjr_allow_opinion where approval_type=1 and c.approval_type!=1 or c.approval_type is null)  </if>
+        <if test="name != null and name != ''">
+            AND b.user_name like concat('%', #{name}, '%')
+        </if>
+        <if test="approvalType !=null"> c.approval_type=#{approvalType}  </if>
          order by e.create_time desc
     </select>
     <select id="findGrant" resultType="com.jeethink.system.domain.vo.ZyjrGrant">
@@ -85,7 +90,12 @@
          left join zyjr_car_loan d on b.transaction_code=d.transaction_code
          left join zyjr_grant_opinion c on b.transaction_code=c.transaction_code
          left join zyjr_submit_state_grant f on b.transaction_code=f.transaction_code
-         where a.transaction_code in (select transaction_code from zyjr_repeat_opinion where approval_type=1 and c.approval_type!=1 or c.approval_type is null)
+         where
+        <if test="approvalType ==null"> a.transaction_code in (select transaction_code from zyjr_repeat_opinion where approval_type=1 and c.approval_type!=1 or c.approval_type is null)  </if>
+        <if test="name != null and name != ''">
+            AND b.user_name like concat('%', #{name}, '%')
+        </if>
+        <if test="approvalType !=null"> c.approval_type=#{approvalType}  </if>
          order by e.create_time desc
     </select>
     <insert id="insertGrantOpinion" parameterType="com.jeethink.system.domain.ZyjrGrantOpinion">
@@ -122,7 +132,12 @@
          left join zyjr_car_loan d on b.transaction_code=d.transaction_code
          left join zyjr_allow_opinion c ON b.transaction_code=c.transaction_code
          left join zyjr_submit_state_allow f on b.transaction_code=f.transaction_code
-         WHERE c.approval_type!=1 OR c.approval_type IS NULL
+         WHERE
+        <if test="approvalType ==null"> (c.approval_type!=1 OR c.approval_type IS NULL)  </if>
+        <if test="name != null and name != ''">
+            AND b.user_name like concat('%', #{name}, '%')
+        </if>
+        <if test="approvalType !=null"> c.approval_type=#{approvalType}  </if>
          order by e.create_time desc
     </select>
 

@@ -63,7 +63,7 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
     /**
      * 新增【请填写功能名称】
      *
-     * @param zyjrAllowOpinion 【请填写功能名称】
+     * @param zyjrAllowOpinion 初审审批（插入）
      * @return 结果
      */
     @Override

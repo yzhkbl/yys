@@ -285,8 +285,8 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     }
 
     @Override
-    public List<ZyjrGrant> list() {
-        return examineDao.list();
+    public List<ZyjrGrant> list(String name,Integer approvalType) {
+        return examineDao.list(name,approvalType);
     }
 
     @Override
@@ -359,8 +359,8 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     }
 
     @Override
-    public List<ZyjrGrant> grant() {
-        return examineDao.findGrant();
+    public List<ZyjrGrant> grant(String name,Integer approvalType) {
+        return examineDao.findGrant(name,approvalType);
     }
 
     @Override
@@ -397,9 +397,9 @@ public class IStageExamineServiceImpl implements IStageExamineService {
     }
 
     @Override
-    public List<ZyjrGrant> findAllow() {
+    public List<ZyjrGrant> findAllow(String name,Integer approvalType) {
 
-        return examineDao.findAllow();
+        return examineDao.findAllow(name,approvalType);
     }
 
 }

@@ -27,14 +27,14 @@ public interface IStageExamineService {
 
     int addOpinion(ZyjrRepeatOpinion q);
     ZyjrRepeatOpinion findOpinion(String transactionCode);
-    List<ZyjrGrant> list();
+    List<ZyjrGrant> list(String name,Integer approvalType);
 
 
     int addGrantOpinion(ZyjrGrantOpinion q);
     ZyjrGrantOpinion findGrantOpinion(String transactionCode);
-    List<ZyjrGrant> grant();
+    List<ZyjrGrant> grant(String name,Integer approvalType);
 
     Map<String,Object>findByGrant(Long userId,String transactionCode);
 
-    List<ZyjrGrant>findAllow();
+    List<ZyjrGrant>findAllow(String name,Integer approvalType);
 }
