@@ -89,9 +89,9 @@
     </insert>
     <insert id="insertDaiqian2" parameterType="com.jeethink.system.domain.ZyjrDaiqian">
         insert into zyjr_daiqian
-        (gps,insurance,account,transaction_code)
+        (gps,insurance,account,transaction_code,cardno)
         values
-        (#{gps},#{insurance},#{account},#{transactionCode})
+        (#{gps},#{insurance},#{account},#{transactionCode},#{cardno})
     </insert>
     <insert id="insertDaiqians" parameterType="com.jeethink.system.domain.ZyjrDaiqian">
         insert into zyjr_daiqian
@@ -314,6 +314,7 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
             <if test="gpsPic != null">gps_pic = #{gpsPic},</if>
             <if test="tijiao != null">tijiao = #{tijiao},</if>
             <if test="operator != null">operator = #{operator},</if>
+            <if test="cardno != null">cardno = #{cardno},</if>
         </trim>
         where id=#{id}
     </update>

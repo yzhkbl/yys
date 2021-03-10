@@ -24,5 +24,6 @@ public class ZyjrDaiqian {
     String account;
     String gpsPic;
     String tijiao;
+    String cardno;
 
 }
