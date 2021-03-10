@@ -81,7 +81,7 @@ public class ZyjrPhotoHouseController extends BaseController
 
         }
         List<String> pic = new ArrayList<>();
-        if (list != null) {
+        if (q.getHousePhoto() != null) {
             for (int i = 0; i < list.size(); i++) {
                 //String asd = androidUpload.upload(list.get(i).getFilePath());
                 SysFileInfo info = new SysFileInfo();

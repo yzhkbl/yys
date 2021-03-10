@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrGrantMapper">
+    
+    <resultMap type="ZyjrGrant2" id="ZyjrGrantResult">
+        <result property="id"    column="id"    />
+        <result property="policyType"    column="policy_type"    />
+        <result property="insuranceCompany"    column="insurance_company"    />
+        <result property="insuranceAmount"    column="insurance_amount"    />
+        <result property="policyCode"    column="policy_code"    />
+        <result property="mortgageCity"    column="mortgage_city"    />
+        <result property="mortgageChannel"    column="mortgage_channel"    />
+        <result property="transactionCode"    column="transaction_code"    />
+    </resultMap>
+
+    <sql id="selectZyjrGrantVo">
+        select id, policy_type, insurance_company, insurance_amount, policy_code, mortgage_city, mortgage_channel, transaction_code from zyjr_grant
+    </sql>
+
+    <select id="selectZyjrGrantList" parameterType="ZyjrGrant2" resultMap="ZyjrGrantResult">
+        <include refid="selectZyjrGrantVo"/>
+        <where>  
+            <if test="policyType != null  and policyType != ''"> and policy_type = #{policyType}</if>
+            <if test="insuranceCompany != null  and insuranceCompany != ''"> and insurance_company = #{insuranceCompany}</if>
+            <if test="insuranceAmount != null  and insuranceAmount != ''"> and insurance_amount = #{insuranceAmount}</if>
+            <if test="policyCode != null  and policyCode != ''"> and policy_code = #{policyCode}</if>
+            <if test="mortgageCity != null  and mortgageCity != ''"> and mortgage_city = #{mortgageCity}</if>
+            <if test="mortgageChannel != null  and mortgageChannel != ''"> and mortgage_channel = #{mortgageChannel}</if>
+            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrGrantById" resultMap="ZyjrGrantResult">
+        <include refid="selectZyjrGrantVo"/>
+        where transaction_code = #{transactionCode}
+    </select>
+        
+    <insert id="insertZyjrGrant" parameterType="ZyjrGrant2" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_grant
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="policyType != null">policy_type,</if>
+            <if test="insuranceCompany != null">insurance_company,</if>
+            <if test="insuranceAmount != null">insurance_amount,</if>
+            <if test="policyCode != null">policy_code,</if>
+            <if test="mortgageCity != null">mortgage_city,</if>
+            <if test="mortgageChannel != null">mortgage_channel,</if>
+            <if test="transactionCode != null">transaction_code,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="policyType != null">#{policyType},</if>
+            <if test="insuranceCompany != null">#{insuranceCompany},</if>
+            <if test="insuranceAmount != null">#{insuranceAmount},</if>
+            <if test="policyCode != null">#{policyCode},</if>
+            <if test="mortgageCity != null">#{mortgageCity},</if>
+            <if test="mortgageChannel != null">#{mortgageChannel},</if>
+            <if test="transactionCode != null">#{transactionCode},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrGrant" parameterType="ZyjrGrant2">
+        update zyjr_grant
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="policyType != null">policy_type = #{policyType},</if>
+            <if test="insuranceCompany != null">insurance_company = #{insuranceCompany},</if>
+            <if test="insuranceAmount != null">insurance_amount = #{insuranceAmount},</if>
+            <if test="policyCode != null">policy_code = #{policyCode},</if>
+            <if test="mortgageCity != null">mortgage_city = #{mortgageCity},</if>
+            <if test="mortgageChannel != null">mortgage_channel = #{mortgageChannel},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrGrantById" parameterType="Long">
+        delete from zyjr_grant where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrGrantByIds" parameterType="String">
+        delete from zyjr_grant where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

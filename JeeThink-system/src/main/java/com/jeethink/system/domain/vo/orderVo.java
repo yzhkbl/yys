@@ -27,5 +27,6 @@ public class orderVo {
     private Integer contractState;//签约状态默认0 成功为1 失败为2
     private String mianqian;
     private String creditState;     //征信是否通过
+    private String phoneNumber;
 
 }
