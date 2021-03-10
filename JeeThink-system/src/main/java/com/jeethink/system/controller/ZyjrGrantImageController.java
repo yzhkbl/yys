@@ -87,7 +87,7 @@ public class ZyjrGrantImageController extends BaseController
 
         }
         List<String> pic = new ArrayList<>();
-        if (list != null) {
+        if (list.size()>0) {
             for (int i = 0; i < list.size(); i++) {
                 //String asd = androidUpload.upload(list.get(i).getFilePath());
                 ZyjrGrantPhoto info = new ZyjrGrantPhoto();
@@ -106,7 +106,7 @@ public class ZyjrGrantImageController extends BaseController
                 pic.add(info.getFilePath());
             }
         }
-        if (list2 != null) {
+        if (list2.size()>0) {
             for (int i = 0; i < list2.size(); i++) {
                 //String asd = androidUpload.upload(list.get(i).getFilePath());
                 ZyjrGrantPhoto info = new ZyjrGrantPhoto();
@@ -125,7 +125,7 @@ public class ZyjrGrantImageController extends BaseController
                 pic.add(info.getFilePath());
             }
         }
-        if (list3 != null) {
+        if (list3.size()>0) {
             for (int i = 0; i < list3.size(); i++) {
                 //String asd = androidUpload.upload(list.get(i).getFilePath());
                 ZyjrGrantPhoto info = new ZyjrGrantPhoto();

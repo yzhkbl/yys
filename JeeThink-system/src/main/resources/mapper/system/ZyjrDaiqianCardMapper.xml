@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrDaiqianCardMapper">
+    
+    <resultMap type="ZyjrDaiqianCard" id="ZyjrDaiqianCardResult">
+        <result property="id"    column="id"    />
+        <result property="pic"    column="pic"    />
+        <result property="cardNo"    column="card_no"    />
+        <result property="code"    column="code"    />
+        <result property="state"    column="state"    />
+        <result property="transactionCode"    column="transaction_code"    />
+    </resultMap>
+
+    <sql id="selectZyjrDaiqianCardVo">
+        select id, pic, card_no, code, transaction_code,state from zyjr_daiqian_card
+    </sql>
+
+    <select id="selectZyjrDaiqianCardList" parameterType="ZyjrDaiqianCard" resultMap="ZyjrDaiqianCardResult">
+        <include refid="selectZyjrDaiqianCardVo"/>
+        <where>  
+            <if test="pic != null  and pic != ''"> and pic = #{pic}</if>
+            <if test="cardNo != null  and cardNo != ''"> and card_no = #{cardNo}</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="state != null  and state != ''"> and state = #{state}</if>
+            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrDaiqianCardById" parameterType="Long" resultMap="ZyjrDaiqianCardResult">
+        <include refid="selectZyjrDaiqianCardVo"/>
+        where id = #{id}
+    </select>
+    <select id="selectZyjrDaiqianCardByT" parameterType="String" resultMap="ZyjrDaiqianCardResult">
+        <include refid="selectZyjrDaiqianCardVo"/>
+        where transaction_code = #{transactionCode}
+    </select>
+        
+    <insert id="insertZyjrDaiqianCard" parameterType="ZyjrDaiqianCard" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_daiqian_card
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pic != null">pic,</if>
+            <if test="cardNo != null">card_no,</if>
+            <if test="code != null">code,</if>
+            <if test="state != null">state,</if>
+            <if test="transactionCode != null">transaction_code,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pic != null">#{pic},</if>
+            <if test="cardNo != null">#{cardNo},</if>
+            <if test="code != null">#{code},</if>
+            <if test="state != null">#{state},</if>
+            <if test="transactionCode != null">#{transactionCode},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrDaiqianCard" parameterType="ZyjrDaiqianCard">
+        update zyjr_daiqian_card
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="pic != null">pic = #{pic},</if>
+            <if test="cardNo != null">card_no = #{cardNo},</if>
+            <if test="code != null">code = #{code},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrDaiqianCardById" parameterType="Long">
+        delete from zyjr_daiqian_card where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrDaiqianCardByIds" parameterType="String">
+        delete from zyjr_daiqian_card where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

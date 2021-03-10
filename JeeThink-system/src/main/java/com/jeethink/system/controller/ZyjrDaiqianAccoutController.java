@@ -68,6 +68,8 @@ public class ZyjrDaiqianAccoutController extends BaseController
     private SysUserMapper sysUserMapper;
     @Autowired
     private ZyjrBorrowerMapper zyjrBorrowerMapper;
+    @Autowired
+    private ZyjrDaiqianCardMapper zyjrDaiqianCardMapper;
     /**
      * 查询【请填写功能名称】列表
      */
@@ -78,6 +80,28 @@ public class ZyjrDaiqianAccoutController extends BaseController
         startPage();
         List<ZyjrDaiqianAccout> list = zyjrDaiqianAccoutService.selectZyjrDaiqianAccoutList(zyjrDaiqianAccout);
         return getDataTable(list);
+    }
+
+    @PostMapping("insertCard")
+    public AjaxResult insertCard(ZyjrDaiqianCard zyjrDaiqianCard){
+        ZyjrDaiqian as=examineMapper.selByDaiqian(zyjrDaiqianCard.getTransactionCode());
+        ZyjrDaiqianCard gsp=zyjrDaiqianCardMapper.selectZyjrDaiqianCardByT(zyjrDaiqianCard.getTransactionCode());
+        if(as!=null){
+            as.setCardno(zyjrDaiqianCard.getState());
+            examineMapper.updateByDaiqian2(as);
+        }else{
+            ZyjrDaiqian d=new ZyjrDaiqian();
+            d.setCardno(zyjrDaiqianCard.getState());
+            d.setTransactionCode(zyjrDaiqianCard.getTransactionCode());
+            examineMapper.insertDaiqian2(d);
+        }
+        if(gsp!=null){
+            zyjrDaiqianCard.setId(gsp.getId());
+            zyjrDaiqianCardMapper.updateZyjrDaiqianCard(zyjrDaiqianCard);
+            return AjaxResult.success();
+        }
+        zyjrDaiqianCardMapper.insertZyjrDaiqianCard(zyjrDaiqianCard);
+        return AjaxResult.success();
     }
 
 
@@ -253,6 +277,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
             map.put("zhanghu",as.getAccount());
             map.put("baoxian",as.getInsurance());
             map.put("tijiao",as.getTijiao());
+            map.put("cardno",as.getCardno());
             return AjaxResult.success(map);
         }
         map.put("gps",null);
@@ -260,6 +285,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
         map.put("zhanghu",null);
         map.put("baoxian",null);
         map.put("tijiao",null);
+        map.put("cardno",null);
         return AjaxResult.success(map);
     }
 
