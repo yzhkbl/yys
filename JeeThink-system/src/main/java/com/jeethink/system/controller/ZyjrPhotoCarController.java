@@ -98,7 +98,7 @@ public class ZyjrPhotoCarController extends BaseController
                 return AjaxResult.success(pic);*/
             }
         List<String> pic = new ArrayList<>();
-        if (list != null) {
+        if (q.getCarPhoto() != null) {
             for (int i = 0; i < list.size(); i++) {
                 //String asd = androidUpload.upload(list.get(i).getFilePath());
                 SysFileInfo info = new SysFileInfo();

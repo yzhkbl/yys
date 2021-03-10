@@ -79,7 +79,7 @@ public class ZyjrLiushuiController extends BaseController
 
         }
         List<String> pic = new ArrayList<>();
-        if (list != null) {
+        if (q.getLiushuiPhoto() != null) {
             for (int i = 0; i < list.size(); i++) {
                 //String asd = androidUpload.upload(list.get(i).getFilePath());
                 ZyjrGrantPhoto info = new ZyjrGrantPhoto();
