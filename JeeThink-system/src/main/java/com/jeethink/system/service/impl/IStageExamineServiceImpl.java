@@ -154,8 +154,12 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         ZyjrPhotoHouse zyjrPhotoHouse = zyjrPhotoHouseMapper.selectZyjrPhotoHouseById(userId, transactionCode);
         ZyjrPhotoLender zyjrPhotoLender = zyjrPhotoLenderMapper.selectZyjrPhotoLenderById(userId, transactionCode);
         ZyjrLiushui zyjrLiushui = zyjrLiushuiMapper.selectZyjrLiushuiById(transactionCode);
-        map.put("liushui",zyjrGrantPhotoMapper.findLiushui(zyjrLiushui.getId()));
-        map.put("house",sysFileInfoMapper.photoHouse(zyjrPhotoHouse.getId()));
+        if(zyjrLiushui!=null) {
+            map.put("liushui", zyjrGrantPhotoMapper.findLiushui(zyjrLiushui.getId()));
+        }
+        if(zyjrPhotoHouse!=null) {
+            map.put("house", sysFileInfoMapper.photoHouse(zyjrPhotoHouse.getId()));
+        }
         /**if(zyjrAllowApplicant!=null&&zyjrAllowBasics!=null&&zyjrAllowContacts!=null&&zyjrCarLoan!=null&&zyjrPhotoCar!=null&&zyjrPhotoCredit!=null
         &&zyjrPhotoHouse!=null&&zyjrPhotoLender!=null){
             if(zyjrCompanyGuarantee!=null||zyjrPeopleGuarantee!=null) {
@@ -164,7 +168,7 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         }*/
         List<String> lists=new ArrayList<>();
         if (zyjrPhotoCar != null) {
-            /*map.put("photoCar", sysFileInfoMapper.photoCar(zyjrPhotoCar.getId()));*/
+            /**map.put("photoCar", sysFileInfoMapper.photoCar(zyjrPhotoCar.getId()));*/
        /*     map.put("photoCredit", sysFileInfoMapper.photoCredit(zyjrPhotoCredit.getId()));
             map.put("photoHouse", sysFileInfoMapper.photoHouse(zyjrPhotoHouse.getId()));
             map.put("photoLender", sysFileInfoMapper.photoLender(zyjrPhotoLender.getId()));*/
