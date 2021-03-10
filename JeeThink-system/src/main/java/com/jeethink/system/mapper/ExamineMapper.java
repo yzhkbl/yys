@@ -154,5 +154,5 @@ public interface ExamineMapper {
 
     SubmitVo findSubmit(String transactionCode);
 
-
+    ZyjrCarLoan findCar(String transactionCode);
 }

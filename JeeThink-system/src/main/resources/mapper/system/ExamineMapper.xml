@@ -987,4 +987,9 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
         left join zyjr_daihou d on a.transaction_code=d.transaction_code
         where a.transaction_code=#{transactionCode}
     </select>
+    <select id="findCar" resultType="com.jeethink.system.domain.ZyjrCarLoan">
+        select *
+        from zyjr_car_loan
+        where transaction_code=#{transactionCode}
+    </select>
 </mapper>

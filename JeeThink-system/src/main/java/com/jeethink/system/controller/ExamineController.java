@@ -5,10 +5,7 @@ import com.jeethink.common.core.domain.AjaxResult;
 import com.jeethink.common.core.page.TableDataInfo;
 import com.jeethink.common.utils.DateUtils;
 import com.jeethink.system.domain.*;
-import com.jeethink.system.domain.vo.GrantPhoto;
-import com.jeethink.system.domain.vo.fileInfoDto;
-import com.jeethink.system.domain.vo.fileInfoVo;
-import com.jeethink.system.domain.vo.orderVo;
+import com.jeethink.system.domain.vo.*;
 import com.jeethink.system.mapper.*;
 import com.jeethink.system.service.IExamineService;
 import com.jeethink.system.util.DataUtil;
@@ -16,6 +13,7 @@ import com.jeethink.system.util.WebSocket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @RestController
@@ -480,6 +478,40 @@ public class ExamineController extends BaseController {
     @GetMapping("/total/submit")
     public AjaxResult findSubmit(String transactionCode){
         return AjaxResult.success(examineMapper.findSubmit(transactionCode));
+    }
+
+
+    @GetMapping("/loan")
+    public AjaxResult countGrant(String transactionCode){
+        ZyjrCarLoan zyjrCarLoan = examineMapper.findCar(transactionCode);
+        ZyjrFundSide zyjrFundSide = examineMapper.findFundSide(transactionCode);
+        CarLoan carLoan = new CarLoan();
+        carLoan.setFundSide(zyjrFundSide.getSideName());
+        carLoan.setRepaymentTerm(zyjrCarLoan.getRepaymentTerm());
+        if(zyjrCarLoan.getRepaymentTerm()==24){
+            BigDecimal a = new BigDecimal(0.06);
+            carLoan.setDkfl(a);
+        }
+        if(zyjrCarLoan.getRepaymentTerm()==36) {
+            BigDecimal a = new BigDecimal(0.09);
+            carLoan.setDkfl(a);
+        }
+        carLoan.setActualPrice(zyjrCarLoan.getActualPrice());
+        carLoan.setLoanAmount(zyjrCarLoan.getLoanAmount());
+        carLoan.setProductType(zyjrCarLoan.getProductType());
+        carLoan.setLoanProduct(zyjrCarLoan.getLoanProduct());
+        carLoan.setInterestRate(zyjrCarLoan.getInterestRate());
+        carLoan.setGpsCost(zyjrCarLoan.getGpsCost());
+        carLoan.setDeposit(zyjrCarLoan.getDeposit());
+        BigDecimal a = carLoan.getInterestRate();
+        BigDecimal b = carLoan.getDkfl();
+        BigDecimal c = carLoan.getLoanAmount();
+        carLoan.setFuwufei((a.subtract(b)).multiply(c));
+        carLoan.setSqsf(carLoan.getActualPrice().subtract(carLoan.getLoanAmount()));
+        carLoan.setZdke(carLoan.getFuwufei().add(carLoan.getLoanAmount()));
+        BigDecimal d = new BigDecimal(3369);
+        carLoan.setSqsf(d);
+        return AjaxResult.success(carLoan);
     }
 }
 

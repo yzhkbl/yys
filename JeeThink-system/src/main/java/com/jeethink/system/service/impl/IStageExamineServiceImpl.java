@@ -146,9 +146,9 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         ZyjrFundSide zyjrFundSide = examineMapper.findFundSide(transactionCode);
         map.put("fundSide",zyjrFundSide);
         //ZyjrCompanyGuarantee zyjrCompanyGuarantee = zyjrCompanyGuaranteeMapper.selectZyjrCompanyGuaranteeById(userId, transactionCode);
-        //map.put("companyGuarantee",zyjrCompanyGuarantee);
+        //map.put("companyGuarantee",zyjrCompanyGuarantee);//担保公司
         //ZyjrPeopleGuarantee zyjrPeopleGuarantee = zyjrPeopleGuaranteeMapper.selectZyjrPeopleGuaranteeById(userId, transactionCode);
-        //map.put("peopleGuarantee",zyjrPeopleGuarantee);
+        //map.put("peopleGuarantee",zyjrPeopleGuarantee);//担保人
         ZyjrPhotoCar zyjrPhotoCar = zyjrPhotoCarMapper.selectZyjrPhotoCarById(userId, transactionCode);
         ZyjrPhotoCredit zyjrPhotoCredit = zyjrPhotoCreditMapper.selectZyjrPhotoCreditById(userId, transactionCode);
         ZyjrPhotoHouse zyjrPhotoHouse = zyjrPhotoHouseMapper.selectZyjrPhotoHouseById(userId, transactionCode);
