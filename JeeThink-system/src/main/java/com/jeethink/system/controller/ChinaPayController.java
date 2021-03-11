@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 @Controller
 @RequestMapping("/pay")
@@ -24,7 +25,8 @@ public class ChinaPayController {
 
     @GetMapping("code")
     @ResponseBody
-    public AjaxResult pay1(String carNo) {
+    public AjaxResult pay1() {
+        String carNo="6217858000074521656";
         System.err.println("11");
         SecssUtil secssUtil=new SecssUtil();
         String s = DateUtils.dateTimeNow(DateUtils.YYYYMMDDHHMMSS);
@@ -38,15 +40,17 @@ public class ChinaPayController {
         map.put("MerOrderNo",carNo);
         map.put("OriTranType",9910);
         secssUtil.encryptData("{'CarNo':"+carNo+"}");
+        System.err.println(secssUtil.getEncValue());
         map.put("CardTranData",secssUtil.getEncValue());
         map.put("TranReserved",0);
         map.put("TimeStamp",s);
         map.put("RemoteAddr","114.215.186.186");
         secssUtil.sign(map);
+        System.err.println(secssUtil.getSign());
         map.put("Signature",secssUtil.getSign());
-        JSONObject json = new JSONObject().fromObject(map);
-        JSONObject result = HttpPostUtil.doPostRequestJSON("https://newpayment-test.chinapay.com/CTITS/service/rest/forward/syn/000000000017/0/0/0/0/0", json);
-        return AjaxResult.success(result);
+        //JSONObject json = new JSONObject().fromObject(map);
+       // JSONObject result = HttpPostUtil.doPostRequestJSON("https://newpayment-test.chinapay.com/CTITS/service/rest/forward/syn/000000000017/0/0/0/0/0", json);
+        return AjaxResult.success();
     }
 
     @GetMapping("code2")

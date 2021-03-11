@@ -108,7 +108,14 @@ public class ZyjrDaiqianAccoutController extends BaseController
     public AjaxResult cardInfo(String transactionCode){
         ZyjrBorrower zyjrBorrower = zyjrBorrowerMapper.selectById(transactionCode);
         ZyjrDaiqianCard zyjrDaiqianCard = zyjrDaiqianCardMapper.selectZyjrDaiqianCardByT(transactionCode);
-        zyjrDaiqianCard.setName(zyjrBorrower.getUserName());
+        if(zyjrDaiqianCard!=null){
+            zyjrDaiqianCard.setName(zyjrBorrower.getUserName());
+        }else{
+            ZyjrDaiqianCard zyjrDaiqianCard2=new ZyjrDaiqianCard();
+            zyjrDaiqianCard2.setName(zyjrBorrower.getUserName());
+            return AjaxResult.success(zyjrDaiqianCard2);
+        }
+
         return AjaxResult.success(zyjrDaiqianCard);
     }
 
