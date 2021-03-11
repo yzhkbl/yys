@@ -35,7 +35,7 @@ public class ZyjrGrantServiceImpl implements IZyjrGrantService
     public ZyjrGrant2 selectZyjrGrantById(String transactionCode)
     {   ZyjrFundSide zyjrFundSide = examineMapper.findFundSide(transactionCode);
         ZyjrGrant2 zyjrGrant2 = zyjrGrantMapper.selectZyjrGrantById(transactionCode);
-        if(zyjrGrant2==null){
+        if(zyjrGrant2==null&&zyjrFundSide!=null){
             ZyjrGrant2 z = new ZyjrGrant2();
             z.setMortgageChannel(zyjrFundSide.getSideName());
             return z;

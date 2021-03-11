@@ -5,10 +5,7 @@ import com.jeethink.common.core.domain.AjaxResult;
 import com.jeethink.common.core.page.TableDataInfo;
 import com.jeethink.common.utils.DateUtils;
 import com.jeethink.system.domain.*;
-import com.jeethink.system.domain.vo.GrantPhoto;
-import com.jeethink.system.domain.vo.fileInfoDto;
-import com.jeethink.system.domain.vo.fileInfoVo;
-import com.jeethink.system.domain.vo.orderVo;
+import com.jeethink.system.domain.vo.*;
 import com.jeethink.system.mapper.*;
 import com.jeethink.system.service.IExamineService;
 import com.jeethink.system.util.DataUtil;
@@ -16,6 +13,7 @@ import com.jeethink.system.util.WebSocket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @RestController
@@ -480,6 +478,60 @@ public class ExamineController extends BaseController {
     @GetMapping("/total/submit")
     public AjaxResult findSubmit(String transactionCode){
         return AjaxResult.success(examineMapper.findSubmit(transactionCode));
+    }
+
+
+    @GetMapping("/loan")
+    public AjaxResult countGrant(String transactionCode){
+        ZyjrCarLoan zyjrCarLoan = examineMapper.findCar(transactionCode);
+        ZyjrFundSide zyjrFundSide = examineMapper.findFundSide(transactionCode);
+        CarLoan carLoan = new CarLoan();
+        carLoan.setFundSide(zyjrFundSide.getSideName());
+        carLoan.setRepaymentTerm(zyjrCarLoan.getRepaymentTerm());
+        if(zyjrCarLoan.getRepaymentTerm()==24){
+            BigDecimal a = new BigDecimal(6);
+            carLoan.setDkfl(a);
+        }
+        if(zyjrCarLoan.getRepaymentTerm()==36) {
+            BigDecimal a = new BigDecimal(9);
+            carLoan.setDkfl(a);
+        }
+        carLoan.setActualPrice(zyjrCarLoan.getActualPrice());
+        carLoan.setLoanAmount(zyjrCarLoan.getLoanAmount());
+        carLoan.setProductType(zyjrCarLoan.getProductType());
+        carLoan.setLoanProduct(zyjrCarLoan.getLoanProduct());
+        BigDecimal e = new BigDecimal(100);
+        carLoan.setInterestRate(zyjrCarLoan.getInterestRate());
+        carLoan.setGpsCost(zyjrCarLoan.getGpsCost());
+        carLoan.setDeposit(zyjrCarLoan.getDeposit());
+        BigDecimal a = carLoan.getInterestRate();
+        BigDecimal b = carLoan.getDkfl();
+        BigDecimal c = carLoan.getLoanAmount();
+        carLoan.setFuwufei(((a.subtract(b)).multiply(c).divide(e)).setScale(0,BigDecimal.ROUND_UP));
+        carLoan.setSqsf((carLoan.getActualPrice().subtract(carLoan.getLoanAmount())).setScale(0,BigDecimal.ROUND_UP));
+        carLoan.setZdke((carLoan.getFuwufei().add(carLoan.getLoanAmount())).setScale(0,BigDecimal.ROUND_UP));
+        BigDecimal qi = new BigDecimal(1);
+        BigDecimal qi1 = new BigDecimal(carLoan.getRepaymentTerm());
+        BigDecimal benjin = carLoan.getLoanAmount().divide(qi1,2,BigDecimal.ROUND_UP);
+        System.err.println(benjin);
+        BigDecimal benjin1 = carLoan.getLoanAmount().subtract(benjin.multiply(qi1.subtract(qi)));
+        System.err.println(benjin1);
+        BigDecimal persxf = (carLoan.getLoanAmount().multiply(carLoan.getDkfl())).divide(qi1,2,BigDecimal.ROUND_UP);
+        System.err.println(persxf);
+        BigDecimal sxf1 = (carLoan.getLoanAmount().multiply(carLoan.getDkfl())).subtract(persxf.multiply(qi1.subtract(qi)));
+        System.err.println(sxf1);
+        BigDecimal perbenjin1 = carLoan.getFuwufei().divide(qi1,2,BigDecimal.ROUND_UP);
+        System.err.println(perbenjin1);
+        BigDecimal benjin11 = carLoan.getFuwufei().subtract(perbenjin1.multiply(qi1.subtract(qi)));
+        System.err.println(benjin11);
+        BigDecimal persxf1 = (carLoan.getFuwufei().multiply(carLoan.getDkfl())).divide(qi1,2,BigDecimal.ROUND_UP);
+        System.err.println(persxf1);
+        BigDecimal sxf11 = (carLoan.getFuwufei().multiply(carLoan.getDkfl())).subtract(persxf1.multiply(qi1.subtract(qi)));
+        System.err.println(sxf11);
+        BigDecimal yuehuan = benjin1.add(sxf1.divide(e)).add(benjin11).add(sxf11.divide(e)).setScale(0,BigDecimal.ROUND_UP);
+        System.err.println(yuehuan);
+        carLoan.setSqyg(yuehuan);
+        return AjaxResult.success(carLoan);
     }
 }
 
