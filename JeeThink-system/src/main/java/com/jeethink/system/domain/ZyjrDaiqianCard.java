@@ -34,6 +34,15 @@ public class ZyjrDaiqianCard extends BaseEntity
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
     private String state;
     String transactionCode;
+    String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getTransactionCode() {
         return transactionCode;
@@ -97,6 +106,7 @@ public class ZyjrDaiqianCard extends BaseEntity
             .append("cardNo", getCardNo())
             .append("code", getCode())
             .append("state", getState())
+                .append("transactionCode",getTransactionCode())
             .toString();
     }
 }

@@ -43,6 +43,8 @@ public class ZyjrAllowBasicsServiceImpl implements IZyjrAllowBasicsService
     private ZyjrGrantInstalmentsController zyjrGrantInstalmentsController;
     @Autowired
     private ExamineMapper examineMapper;
+    @Autowired
+    private ZyjrDaiqianCardMapper zyjrDaiqianCardMapper;
 
     /**
      * 查询【请填写功能名称】
@@ -154,6 +156,11 @@ public class ZyjrAllowBasicsServiceImpl implements IZyjrAllowBasicsService
             pic.setGpsId(zyjrGps.getId().toString());
             List<ZyjrPic> zyjrPics = zyjrPicMapper.selectZyjrPicList(pic);
             map.put("pic",zyjrPics);
+        }
+        ZyjrDaiqianCard zyjrDaiqianCard = zyjrDaiqianCardMapper.selectZyjrDaiqianCardByT(transactionCode);
+        map.put("bank",null);
+        if(zyjrDaiqianCard!=null){
+            map.put("bank",zyjrDaiqianCard);
         }
         ZyjrInsurance zyjrInsurance = zyjrInsuranceMapper.selectZyjrInsuranceByIds(transactionCode);
         map.put("Insurance",zyjrInsurance);
