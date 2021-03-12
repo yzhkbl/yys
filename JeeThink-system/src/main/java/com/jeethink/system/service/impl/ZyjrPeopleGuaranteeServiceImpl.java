@@ -26,9 +26,10 @@ public class ZyjrPeopleGuaranteeServiceImpl implements IZyjrPeopleGuaranteeServi
      * @return 【请填写功能名称】
      */
     @Override
-    public ZyjrPeopleGuarantee selectZyjrPeopleGuaranteeById(Long userId,String transactionCode)
+    public List<ZyjrPeopleGuarantee> selectZyjrPeopleGuaranteeById(Long userId,String transactionCode)
     {
-        return zyjrPeopleGuaranteeMapper.selectZyjrPeopleGuaranteeById(userId,transactionCode);
+        List<ZyjrPeopleGuarantee>list = zyjrPeopleGuaranteeMapper.selectZyjrPeopleGuaranteeById(userId,transactionCode);
+        return list;
     }
 
     /**

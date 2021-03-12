@@ -13,10 +13,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="mortgageCity"    column="mortgage_city"    />
         <result property="mortgageChannel"    column="mortgage_channel"    />
         <result property="transactionCode"    column="transaction_code"    />
+        <result property="orderState"    column="order_state"    />
     </resultMap>
 
     <sql id="selectZyjrGrantVo">
-        select id, policy_type, insurance_company, insurance_amount, policy_code, mortgage_city, mortgage_channel, transaction_code from zyjr_grant
+        select id, policy_type, insurance_company, insurance_amount, policy_code, mortgage_city, mortgage_channel, transaction_code,order_state from zyjr_grant
     </sql>
 
     <select id="selectZyjrGrantList" parameterType="ZyjrGrant2" resultMap="ZyjrGrantResult">
@@ -29,6 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="mortgageCity != null  and mortgageCity != ''"> and mortgage_city = #{mortgageCity}</if>
             <if test="mortgageChannel != null  and mortgageChannel != ''"> and mortgage_channel = #{mortgageChannel}</if>
             <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
+            <if test="orderState != null  and orderState != ''"> and order_state = #{orderState}</if>
         </where>
     </select>
     
@@ -47,6 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="mortgageCity != null">mortgage_city,</if>
             <if test="mortgageChannel != null">mortgage_channel,</if>
             <if test="transactionCode != null">transaction_code,</if>
+            <if test="orderState != null">order_state,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="policyType != null">#{policyType},</if>
@@ -56,6 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="mortgageCity != null">#{mortgageCity},</if>
             <if test="mortgageChannel != null">#{mortgageChannel},</if>
             <if test="transactionCode != null">#{transactionCode},</if>
+            <if test="orderState != null">#{orderState},</if>
          </trim>
     </insert>
 
@@ -69,8 +73,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="mortgageCity != null">mortgage_city = #{mortgageCity},</if>
             <if test="mortgageChannel != null">mortgage_channel = #{mortgageChannel},</if>
             <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+            <if test="orderState != null">order_state = #{orderState},</if>
         </trim>
-        where id = #{id}
+        where transaction_code = #{transactionCode}
     </update>
 
     <delete id="deleteZyjrGrantById" parameterType="Long">

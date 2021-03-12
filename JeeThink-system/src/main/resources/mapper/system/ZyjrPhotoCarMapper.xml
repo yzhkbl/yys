@@ -9,10 +9,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="userId"    column="user_id"    />
         <result property="transactionCode"    column="transaction_code"    />
         <result property="orderState"    column="order_state"    />
+        <result property="carSize"    column="car_size"    />
     </resultMap>
 
     <sql id="selectZyjrPhotoCarVo">
-        select id, user_id, transaction_code, order_state from zyjr_photo_car
+        select id, user_id, transaction_code, order_state,car_size from zyjr_photo_car
     </sql>
 
     <select id="selectZyjrPhotoCarList" parameterType="ZyjrPhotoCar" resultMap="ZyjrPhotoCarResult">
@@ -21,6 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null "> and user_id = #{userId}</if>
             <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
             <if test="orderState != null "> and order_state = #{orderState}</if>
+            <if test="carSize != null  and carSize != ''"> and car_size = #{carSize}</if>
         </where>
     </select>
     
@@ -39,11 +41,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null">user_id,</if>
             <if test="transactionCode != null">transaction_code,</if>
             <if test="orderState != null">order_state,</if>
+            <if test="carSize != null">car_size,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId != null">#{userId},</if>
             <if test="transactionCode != null">#{transactionCode},</if>
             <if test="orderState != null">#{orderState},</if>
+            <if test="carSize != null">#{carSize},</if>
          </trim>
     </insert>
 
@@ -53,6 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null">user_id = #{userId},</if>
             <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
             <if test="orderState != null">order_state = #{orderState},</if>
+            <if test="carSize != null">car_size = #{carSize},</if>
         </trim>
         where transaction_code=#{transactionCode}
     </update>

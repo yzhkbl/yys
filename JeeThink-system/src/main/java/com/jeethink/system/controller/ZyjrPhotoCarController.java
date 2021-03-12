@@ -53,6 +53,7 @@ public class ZyjrPhotoCarController extends BaseController
     public AjaxResult testFiles(fileInfoVo q){
         JSONArray jsonarray = JSONArray.fromObject(q.getCarPhoto());
         List<SysFileInfo> list = (List)JSONArray.toList(jsonarray, SysFileInfo.class);
+        //System.err.println(q);
         ZyjrPhotoCar zyjrPhotoCar = new ZyjrPhotoCar();
         if(q.getCarId()!=null){
                 SysFileInfo infos=new SysFileInfo();
@@ -71,12 +72,16 @@ public class ZyjrPhotoCarController extends BaseController
                 zyjrPhotoCar.setOrderState(q.getOrderState());
                 zyjrPhotoCar.setTransactionCode(q.getTransactionCode());
                 zyjrPhotoCar.setUserId(q.getUserId());
+                zyjrPhotoCar.setCarSize(q.getCarSize());
+                //zyjrPhotoCar.setMainSize(q.getMainSize());
                 zyjrPhotoCarService.updateZyjrPhotoCar(zyjrPhotoCar);
             }else{
 
                 zyjrPhotoCar.setOrderState(q.getOrderState());
                 zyjrPhotoCar.setTransactionCode(q.getTransactionCode());
                 zyjrPhotoCar.setUserId(q.getUserId());
+                zyjrPhotoCar.setCarSize(q.getCarSize());
+                //zyjrPhotoCar.setMainSize(q.getMainSize());
                 zyjrPhotoCarService.insertZyjrPhotoCar(zyjrPhotoCar);
                /* List<String> pic = new ArrayList<>();
                 if (list != null) {

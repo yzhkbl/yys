@@ -1,5 +1,6 @@
 package com.jeethink.system.domain;
 
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.jeethink.common.annotation.Excel;
@@ -11,6 +12,7 @@ import com.jeethink.common.core.domain.BaseEntity;
  * @author jeethink
  * @date 2021-03-10
  */
+@Data
 public class ZyjrGrant2 extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -45,6 +47,8 @@ public class ZyjrGrant2 extends BaseEntity
     /** $column.columnComment */
     @Excel(name = "抵押渠道")
     private String transactionCode;
+
+    private Integer orderState;
 
     public void setId(Long id) 
     {

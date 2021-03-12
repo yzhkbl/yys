@@ -26,9 +26,10 @@ public class ZyjrCompanyGuaranteeServiceImpl implements IZyjrCompanyGuaranteeSer
      * @return 【请填写功能名称】
      */
     @Override
-    public ZyjrCompanyGuarantee selectZyjrCompanyGuaranteeById(Long userId,String transactionCode)
+    public List<ZyjrCompanyGuarantee> selectZyjrCompanyGuaranteeById(Long userId,String transactionCode)
     {
-        return zyjrCompanyGuaranteeMapper.selectZyjrCompanyGuaranteeById(userId,transactionCode);
+        List<ZyjrCompanyGuarantee> list = zyjrCompanyGuaranteeMapper.selectZyjrCompanyGuaranteeById(userId,transactionCode);
+        return list;
     }
 
     /**

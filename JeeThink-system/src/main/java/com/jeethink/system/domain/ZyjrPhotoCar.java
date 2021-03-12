@@ -1,5 +1,6 @@
 package com.jeethink.system.domain;
 
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.jeethink.common.annotation.Excel;
@@ -11,6 +12,7 @@ import com.jeethink.common.core.domain.BaseEntity;
  * @author jeethink
  * @date 2020-12-22
  */
+@Data
 public class ZyjrPhotoCar extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -29,6 +31,9 @@ public class ZyjrPhotoCar extends BaseEntity
     /** 订单状态 */
     @Excel(name = "订单状态")
     private Integer orderState;
+
+    private String carSize;     //二手车图片数量
+
 
     public void setId(Long id) 
     {

@@ -346,10 +346,7 @@ public class ExamineController extends BaseController {
     public AjaxResult relationName(String transactionCode){
         return AjaxResult.success(examineMapper.relationName(transactionCode));
     }
-    @GetMapping("/guarantee/name")
-    public AjaxResult guaranteeName(String transactionCode){
-        return AjaxResult.success(examineMapper.guName(transactionCode));
-    }
+
 
     @GetMapping("/relation/id")
     public AjaxResult relationById(Long id){
@@ -511,25 +508,60 @@ public class ExamineController extends BaseController {
         BigDecimal qi = new BigDecimal(1);
         BigDecimal qi1 = new BigDecimal(carLoan.getRepaymentTerm());
         BigDecimal benjin = carLoan.getLoanAmount().divide(qi1,2,BigDecimal.ROUND_UP);
-        System.err.println(benjin);
+        //System.err.println(benjin);
         BigDecimal benjin1 = carLoan.getLoanAmount().subtract(benjin.multiply(qi1.subtract(qi)));
-        System.err.println(benjin1);
+        //System.err.println(benjin1);
         BigDecimal persxf = (carLoan.getLoanAmount().multiply(carLoan.getDkfl())).divide(qi1,2,BigDecimal.ROUND_UP);
-        System.err.println(persxf);
+        //System.err.println(persxf);
         BigDecimal sxf1 = (carLoan.getLoanAmount().multiply(carLoan.getDkfl())).subtract(persxf.multiply(qi1.subtract(qi)));
-        System.err.println(sxf1);
+        //System.err.println(sxf1);
         BigDecimal perbenjin1 = carLoan.getFuwufei().divide(qi1,2,BigDecimal.ROUND_UP);
-        System.err.println(perbenjin1);
+        //System.err.println(perbenjin1);
         BigDecimal benjin11 = carLoan.getFuwufei().subtract(perbenjin1.multiply(qi1.subtract(qi)));
-        System.err.println(benjin11);
+        //System.err.println(benjin11);
         BigDecimal persxf1 = (carLoan.getFuwufei().multiply(carLoan.getDkfl())).divide(qi1,2,BigDecimal.ROUND_UP);
-        System.err.println(persxf1);
+        //System.err.println(persxf1);
         BigDecimal sxf11 = (carLoan.getFuwufei().multiply(carLoan.getDkfl())).subtract(persxf1.multiply(qi1.subtract(qi)));
-        System.err.println(sxf11);
+        //System.err.println(sxf11);
         BigDecimal yuehuan = benjin1.add(sxf1.divide(e)).add(benjin11).add(sxf11.divide(e)).setScale(0,BigDecimal.ROUND_UP);
-        System.err.println(yuehuan);
+        //System.err.println(yuehuan);
         carLoan.setSqyg(yuehuan);
         return AjaxResult.success(carLoan);
+    }
+
+    @GetMapping("/guarantee/name")
+    public AjaxResult guName(String transactionCode){
+        List<RelationName> p = examineMapper.guName(transactionCode);
+        List<RelationName> c = examineMapper.cmName(transactionCode);
+        Map<String,Object>lajihao = new HashMap<>();
+        lajihao.put("danbaoren",p);
+        lajihao.put("danbaogongsi",c);
+        return AjaxResult.success(lajihao);
+    }
+
+    @GetMapping("/find/gu")
+    public AjaxResult findByGu(Long id){
+        return AjaxResult.success(examineMapper.findByGu(id));
+    }
+
+    @GetMapping("/find/cm")
+    public AjaxResult findByCm(Long id){
+        return AjaxResult.success(examineMapper.findByCm(id));
+    }
+
+
+    @GetMapping("/photo/size")
+    public AjaxResult photoSize(String transactionCode){
+        PhotoSize photoSize = new PhotoSize();
+        PhotoSize a = examineMapper.carSize(transactionCode);
+        PhotoSize b = examineMapper.mainSize(transactionCode);
+        if(a!=null) {
+            photoSize.setCarSize(a.getCarSize());
+        }
+        if(b!=null){
+            photoSize.setMainSize(b.getMainSize());
+        }
+        return AjaxResult.success(photoSize);
     }
 }
 
