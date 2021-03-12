@@ -246,7 +246,6 @@ public class ZyjrDaiqianAccoutController extends BaseController
     @PostMapping("tijiao")
     public AjaxResult tijiao(String transactionCode){
         ZyjrDaiqian a=examineMapper.selByDaiqian(transactionCode);
-        System.err.println(a);
         if(a!=null&&a.getGps()!=null&&a.getAccount()!=null&&a.getGpsPic()!=null){
             a.setTijiao("1");
             examineMapper.updateByDaiqian2(a);
