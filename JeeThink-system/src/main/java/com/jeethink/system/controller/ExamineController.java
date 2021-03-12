@@ -81,8 +81,6 @@ public class ExamineController extends BaseController {
         return AjaxResult.success(borrower);
     }
 
-
-
     @RequestMapping("/find/relation")
     public AjaxResult findRelation(Integer userId){
         List<ZyjrRelation> relation = examineService.findByRelation(userId);
@@ -226,13 +224,13 @@ public class ExamineController extends BaseController {
         }
         }
         Map<String,Integer> map=new HashMap<>();
-        map.put("a",a);
-        map.put("b",d);
-        map.put("c",c);
-        map.put("d",b);
-        map.put("e",e);
-        map.put("f",f);
-        map.put("g",f);
+        map.put("a",a);//待电子签约
+        map.put("b",d);//待上传贷前资料
+        map.put("c",c);//审核中
+        map.put("d",b);//秒拒通过未提单
+        map.put("e",e);//待面签
+        map.put("f",f);//未抵押
+        map.put("g",f);//已放款
         return AjaxResult.success(map);
     }
 

@@ -18,8 +18,8 @@ import sign.common.rsa.RSAUtil;
 import sign.common.rsa.RSAkeyConstant;
 import sign.common.util.StringUtil;
 
-import javax.servlet.http.HttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 
 @Controller
