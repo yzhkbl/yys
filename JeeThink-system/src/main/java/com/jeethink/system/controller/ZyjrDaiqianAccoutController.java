@@ -106,6 +106,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
 
     @GetMapping("cardInfo")
     public AjaxResult cardInfo(String transactionCode){
+        ZyjrDaiqian daiqian=examineMapper.selDaiqianById(transactionCode);
         ZyjrBorrower zyjrBorrower = zyjrBorrowerMapper.selectById(transactionCode);
         ZyjrDaiqianCard zyjrDaiqianCard = zyjrDaiqianCardMapper.selectZyjrDaiqianCardByT(transactionCode);
         if(zyjrDaiqianCard!=null){
@@ -114,6 +115,10 @@ public class ZyjrDaiqianAccoutController extends BaseController
             ZyjrDaiqianCard zyjrDaiqianCard2=new ZyjrDaiqianCard();
             zyjrDaiqianCard2.setName(zyjrBorrower.getUserName());
             return AjaxResult.success(zyjrDaiqianCard2);
+        }
+
+        if(daiqian!=null){
+            zyjrDaiqianCard.setState(daiqian.getCardno());
         }
 
         return AjaxResult.success(zyjrDaiqianCard);
@@ -241,7 +246,7 @@ public class ZyjrDaiqianAccoutController extends BaseController
     @PostMapping("tijiao")
     public AjaxResult tijiao(String transactionCode){
         ZyjrDaiqian a=examineMapper.selByDaiqian(transactionCode);
-        if(a!=null&&a.getGps()!=null&&a.getAccount()!=null&&a.getInsurance()!=null&&a.getGpsPic()!=null){
+        if(a!=null&&a.getGps()!=null&&a.getAccount()!=null&&a.getGpsPic()!=null){
             a.setTijiao("1");
             examineMapper.updateByDaiqian2(a);
             WebSocket webSocket=new WebSocket();

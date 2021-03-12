@@ -98,7 +98,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update zyjr_gps
         <trim prefix="SET" suffixOverrides=",">
             <if test="zyjrCarId != null">zyjr_car_id = #{zyjrCarId},</if>
-            <if test="bianhao != null">bianhao_pic = #{bianhao},</if>
+            <if test="bianhao != null">bianhao = #{bianhao},</if>
             <if test="yuanjingPic != null">yuanjing_pic = #{yuanjingPic},</if>
             <if test="jinjingPic != null">jinjing_pic = #{jinjingPic},</if>
             <if test="industryWired != null and industryWired != ''">Industry_wired = #{industryWired},</if>

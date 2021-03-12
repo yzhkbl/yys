@@ -5,6 +5,7 @@ import com.jeethink.common.utils.DateUtils;
 import com.jeethink.system.domain.vo.ChinaPaySelect;
 import com.jeethink.system.util.HttpClientUtil;
 import com.jeethink.system.util.HttpPostUtil;
+import com.jeethink.system.util.SignUtil;
 import com.jeethink.system.util.Test2;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -27,8 +28,6 @@ public class ChinaPayController {
     @ResponseBody
     public AjaxResult pay1() {
         String carNo="6217858000074521656";
-        System.err.println("11");
-        SecssUtil secssUtil=new SecssUtil();
         String s = DateUtils.dateTimeNow(DateUtils.YYYYMMDDHHMMSS);
         Map<String,Object> map=new HashMap<>();
         map.put("Version",20150922);
@@ -39,18 +38,18 @@ public class ChinaPayController {
         map.put("TranType",0504);
         map.put("MerOrderNo",carNo);
         map.put("OriTranType",9910);
-        secssUtil.encryptData("{'CarNo':"+carNo+"}");
-        System.err.println(secssUtil.getEncValue());
-        map.put("CardTranData",secssUtil.getEncValue());
+        String ss=SignUtil.decryptData("{'CarNo':"+carNo+"}");
+        System.err.println(ss);
+        map.put("CardTranData",ss);
         map.put("TranReserved",0);
         map.put("TimeStamp",s);
         map.put("RemoteAddr","114.215.186.186");
-        secssUtil.sign(map);
-        System.err.println(secssUtil.getSign());
-        map.put("Signature",secssUtil.getSign());
-        //JSONObject json = new JSONObject().fromObject(map);
-       // JSONObject result = HttpPostUtil.doPostRequestJSON("https://newpayment-test.chinapay.com/CTITS/service/rest/forward/syn/000000000017/0/0/0/0/0", json);
-        return AjaxResult.success();
+        String aa=SignUtil.sign(map);
+        System.err.println(aa);
+        map.put("Signature",aa);
+        JSONObject json = new JSONObject().fromObject(map);
+        JSONObject result = HttpPostUtil.doPostRequestJSON("https://newpayment-test.chinapay.com/CTITS/service/rest/forward/syn/000000000017/0/0/0/0/0", json);
+        return AjaxResult.success(result);
     }
 
     @GetMapping("code2")
