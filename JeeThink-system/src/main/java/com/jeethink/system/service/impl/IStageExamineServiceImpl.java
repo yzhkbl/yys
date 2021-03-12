@@ -138,25 +138,36 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         //map.put("basics",zyjrAllowBasics);
         ZyjrAllowContacts zyjrAllowContacts = zyjrAllowContactsMapper.selectZyjrAllowContactsById(userId, transactionCode);
         map.put("contacts",zyjrAllowContacts);
-        //ZyjrDebtService zyjrDebtService = zyjrDebtServiceMapper.selectZyjrDebtServiceById(userId, transactionCode);
-        //map.put("debtService",zyjrDebtService);
+        ZyjrDebtService zyjrDebtService = zyjrDebtServiceMapper.selectZyjrDebtServiceById(userId, transactionCode);
+        map.put("debtService",zyjrDebtService);
         ZyjrCarLoan zyjrCarLoan = zyjrCarLoanMapper.selectZyjrCarLoanById(userId, transactionCode);
         map.put("carLoan",zyjrCarLoan);
 
+        ZyjrCommonApplicant zyjrCommonApplicant = zyjrCommonApplicantMapper.selectZyjrCommonApplicantById(transactionCode);
+        map.put("common",zyjrCommonApplicant);
+        ZyjrGrantVisit zyjrGrantVisit = zyjrGrantVisitMapper.selectZyjrGrantVisitById(transactionCode);
+        map.put("visit", zyjrGrantPhotoMapper.findVisit(zyjrGrantVisit.getId()));
+
         ZyjrFundSide zyjrFundSide = examineMapper.findFundSide(transactionCode);
         map.put("fundSide",zyjrFundSide);
-        //ZyjrCompanyGuarantee zyjrCompanyGuarantee = zyjrCompanyGuaranteeMapper.selectZyjrCompanyGuaranteeById(userId, transactionCode);
-        //map.put("companyGuarantee",zyjrCompanyGuarantee);//担保公司
-        //ZyjrPeopleGuarantee zyjrPeopleGuarantee = zyjrPeopleGuaranteeMapper.selectZyjrPeopleGuaranteeById(userId, transactionCode);
-        //map.put("peopleGuarantee",zyjrPeopleGuarantee);//担保人
+        List<ZyjrCompanyGuarantee> zyjrCompanyGuarantee = zyjrCompanyGuaranteeMapper.selectZyjrCompanyGuaranteeById(userId, transactionCode);
+        map.put("companyGuarantee",zyjrCompanyGuarantee);
+        List<ZyjrPeopleGuarantee> zyjrPeopleGuarantee = zyjrPeopleGuaranteeMapper.selectZyjrPeopleGuaranteeById(userId, transactionCode);
+        map.put("peopleGuarantee",zyjrPeopleGuarantee);
         ZyjrPhotoCar zyjrPhotoCar = zyjrPhotoCarMapper.selectZyjrPhotoCarById(userId, transactionCode);
+        map.put("car", sysFileInfoMapper.photoCar(zyjrPhotoCar.getId()));
         ZyjrPhotoCredit zyjrPhotoCredit = zyjrPhotoCreditMapper.selectZyjrPhotoCreditById(userId, transactionCode);
+        map.put("credit",sysFileInfoMapper.photoCredit(zyjrPhotoCredit.getId()));
         ZyjrPhotoHouse zyjrPhotoHouse = zyjrPhotoHouseMapper.selectZyjrPhotoHouseById(userId, transactionCode);
         ZyjrPhotoLender zyjrPhotoLender = zyjrPhotoLenderMapper.selectZyjrPhotoLenderById(userId, transactionCode);
+        map.put("qita",sysFileInfoMapper.photoLender(zyjrPhotoLender.getId()));
         ZyjrLiushui zyjrLiushui = zyjrLiushuiMapper.selectZyjrLiushuiById(transactionCode);
+        List<String> list=new ArrayList<>();
+        map.put("liushui", list);
         if(zyjrLiushui!=null) {
             map.put("liushui", zyjrGrantPhotoMapper.findLiushui(zyjrLiushui.getId()));
         }
+        map.put("house", list);
         if(zyjrPhotoHouse!=null) {
             map.put("house", sysFileInfoMapper.photoHouse(zyjrPhotoHouse.getId()));
         }
@@ -373,9 +384,9 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         Map<String, Object> map = examineController.findPhoto(userId,transactionCode);
         ZyjrDebtService zyjrDebtService = zyjrDebtServiceMapper.selectZyjrDebtServiceById(userId, transactionCode);
         map.put("debtService",zyjrDebtService);
-        ZyjrCompanyGuarantee zyjrCompanyGuarantee = zyjrCompanyGuaranteeMapper.selectZyjrCompanyGuaranteeById(userId, transactionCode);
+        List<ZyjrCompanyGuarantee> zyjrCompanyGuarantee = zyjrCompanyGuaranteeMapper.selectZyjrCompanyGuaranteeById(userId, transactionCode);
         map.put("companyGuarantee",zyjrCompanyGuarantee);
-        ZyjrPeopleGuarantee zyjrPeopleGuarantee = zyjrPeopleGuaranteeMapper.selectZyjrPeopleGuaranteeById(userId, transactionCode);
+        List<ZyjrPeopleGuarantee> zyjrPeopleGuarantee = zyjrPeopleGuaranteeMapper.selectZyjrPeopleGuaranteeById(userId, transactionCode);
         map.put("peopleGuarantee",zyjrPeopleGuarantee);
         ZyjrCommonApplicant zyjrCommonApplicant = zyjrCommonApplicantMapper.selectZyjrCommonApplicantById(transactionCode);
         map.put("common",zyjrCommonApplicant);

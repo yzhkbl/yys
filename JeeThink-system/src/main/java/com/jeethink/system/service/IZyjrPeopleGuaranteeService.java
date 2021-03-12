@@ -17,7 +17,7 @@ public interface IZyjrPeopleGuaranteeService
      * @param userId 【请填写功能名称】ID
      * @return 【请填写功能名称】
      */
-    public ZyjrPeopleGuarantee selectZyjrPeopleGuaranteeById(Long userId,String transactionCode);
+    public List<ZyjrPeopleGuarantee> selectZyjrPeopleGuaranteeById(Long userId,String transactionCode);
 
     /**
      * 查询【请填写功能名称】列表

@@ -17,7 +17,7 @@ public interface IZyjrCompanyGuaranteeService
      * @param userId 【请填写功能名称】ID
      * @return 【请填写功能名称】
      */
-    public ZyjrCompanyGuarantee selectZyjrCompanyGuaranteeById(Long userId,String transactionCode);
+    public List<ZyjrCompanyGuarantee> selectZyjrCompanyGuaranteeById(Long userId,String transactionCode);
 
     /**
      * 查询【请填写功能名称】列表

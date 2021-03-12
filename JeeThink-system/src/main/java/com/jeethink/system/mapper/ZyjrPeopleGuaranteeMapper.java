@@ -18,7 +18,7 @@ public interface ZyjrPeopleGuaranteeMapper
      * @param userId 【请填写功能名称】ID
      * @return 【请填写功能名称】
      */
-    public ZyjrPeopleGuarantee selectZyjrPeopleGuaranteeById(@Param("userId") Long userId,@Param("transactionCode") String transactionCode);
+    public List<ZyjrPeopleGuarantee> selectZyjrPeopleGuaranteeById(@Param("userId") Long userId,@Param("transactionCode") String transactionCode);
 
     /**
      * 查询【请填写功能名称】列表

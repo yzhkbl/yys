@@ -71,12 +71,14 @@ public class ZyjrPhotoLenderController extends BaseController
             zyjrPhotoLender.setOrderState(q.getOrderState());
             zyjrPhotoLender.setTransactionCode(q.getTransactionCode());
             zyjrPhotoLender.setUserId(q.getUserId());
+            zyjrPhotoLender.setMainSize(q.getMainSize());
             zyjrPhotoLenderService.updateZyjrPhotoLender(zyjrPhotoLender);
         } else {
 
             zyjrPhotoLender.setOrderState(q.getOrderState());
             zyjrPhotoLender.setTransactionCode(q.getTransactionCode());
             zyjrPhotoLender.setUserId(q.getUserId());
+            zyjrPhotoLender.setMainSize(q.getMainSize());
             zyjrPhotoLenderService.insertZyjrPhotoLender(zyjrPhotoLender);
 
         }

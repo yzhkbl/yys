@@ -69,7 +69,7 @@ public interface ExamineMapper {
     DqVo selectDQ2(String transactionCode);
     DqVo selectDQ3(String transactionCode);
     List<Huankuan> selectHuankuanList();
-    List<orderVo> findOrder(@Param("userId") Long userId,@Param("progress") Integer progress);
+    List<orderVo> findOrder(@Param("userId") Long userId,@Param("progress") Integer progress);//全部订单
     List<orderVo> findOrder2(Long userId);
     List<orderVo> findOrder3(Long userId);
 
@@ -82,7 +82,7 @@ public interface ExamineMapper {
     ZyjrStartPage Start(String transactionCode);
 
 
-    List<CarSeriseGroup> findGroup();
+    List<CarSeriseGroup> findGroup();/**车辆信息*/
     List<CarSeries> findSeries(Integer brandId);
     List<CarInfo> findInfo(@Param("brandId") Integer brandId,@Param("groupId") Integer groupId);
 
@@ -118,13 +118,15 @@ public interface ExamineMapper {
 
     List<cities> selectC(String pid);
 
-    List<orderVo>searchOrder(@Param("search") String search,@Param("userId") Long userId);
+    List<orderVo>searchOrder(@Param("search") String search,@Param("userId") Long userId);//安卓订单搜索框
 
     List<RelationName>relationName(String transactionCode);//补充关联人的列表
     ZyjrRelation findById(Long id);
 
     List<RelationName>guName(String transactionCode);//补充担保人的列表
-    //ZyjrRelation findByGu(Long id);
+    List<RelationName>cmName(String transactionCode);
+    ZyjrGuarantee findByGu(Long id);//id查询担保人
+    ZyjrGuarantee findByCm(Long id);//id查询担保公司
 
     Bairong selectBairong(Bairong b);
 
@@ -137,11 +139,11 @@ public interface ExamineMapper {
     int updateGrantState(ZyjrSubmitStateGrant q);
     ZyjrSubmitStateGrant findGrantState(String transactionCode);
 
-    AllowStateVo allowList(String transactionCode);
-    GrantStateVo grantList(String transactionCode);
+    AllowStateVo allowList(String transactionCode);//准入信息填写状态
+    GrantStateVo grantList(String transactionCode);//授信信息填写状态
 
 
-    int insertFundSide(ZyjrFundSide zyjrFundSide);
+    int insertFundSide(ZyjrFundSide zyjrFundSide);//资金方：准入
     ZyjrFundSide findFundSide(String transactionCode);
     int updateFundSide(ZyjrFundSide zyjrFundSide);
 
@@ -150,9 +152,13 @@ public interface ExamineMapper {
 
     int updateByBairong(Bairong borrower);
 
-    OpinionVo findApType(@Param("transactionCode") String transactionCode);
+    OpinionVo findApType(@Param("transactionCode") String transactionCode);//历史审核意见及审核人
 
-    SubmitVo findSubmit(String transactionCode);
+    SubmitVo findSubmit(String transactionCode);//提交状态
 
     ZyjrCarLoan findCar(String transactionCode);
+
+    PhotoSize carSize(String transactionCode);//图片数量
+    PhotoSize mainSize(String transactionCode);
+
 }
