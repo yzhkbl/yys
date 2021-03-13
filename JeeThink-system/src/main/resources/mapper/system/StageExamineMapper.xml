@@ -190,19 +190,20 @@
     </delete>
     <insert id="addSupplement" parameterType="com.jeethink.system.domain.ZyjrSupplement">
         insert into zyjr_supplement
-        (id,gongchangren,gtsqr,danbaoren,transaction_code)
+        (id,gongchangren,gtsqr,danbaoren,jiafang,transaction_code)
         values
-        (#{id},#{gongchangren},#{gtsqr},#{danbaoren},#{transactionCode})
+        (#{id},#{gongchangren},#{gtsqr},#{danbaoren},#{jiafang},#{transactionCode})
     </insert>
     <update id="updateSupplement" parameterType="com.jeethink.system.domain.ZyjrSupplement">
         update zyjr_supplement
         set gongchangren=#{gongchangren},
         gtsqr=#{gtsqr},
-        danbaoren=#{danbaoren}
+        danbaoren=#{danbaoren},
+        jiafang=#{jiafang}
         where transaction_code=#{transactionCode}
     </update>
     <select id="findSupplement" resultType="com.jeethink.system.domain.ZyjrSupplement">
-        select id,gongchangren,gtsqr,danbaoren,transaction_code
+        select id,gongchangren,gtsqr,danbaoren,jiafang,transaction_code
         from zyjr_supplement
         where transaction_code=#{transactionCode}
     </select>
