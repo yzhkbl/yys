@@ -617,7 +617,7 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
         where order_state=0 and user_id = #{userId}
     </update>
     <select id="findOrder" resultType="com.jeethink.system.domain.vo.orderVo">
-        select distinct b.transaction_code,b.mianqian,b.credit_power,b.contract_state,b.user_name,b.id_card,a.car_information,a.car_type,c.progress,c.approval_type,d.create_time,d.credit_state,b.phone_number
+        select distinct b.transaction_code,b.mianqian,b.credit_power,b.contract_state,b.user_name,b.id_card,a.car_information,a.car_type,c.progress,c.approval_type,d.create_time,d.credit_state,b.phone_number,a.intention_price,a.loan_money
         from zyjr_borrower b
         left join zyjr_business a on a.transaction_code=b.transaction_code
         left join zyjr_order_progress c on c.transaction_code=b.transaction_code
@@ -627,7 +627,7 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
         order by d.create_time desc
     </select>
     <select id="findOrder2" resultType="com.jeethink.system.domain.vo.orderVo">
-        select distinct b.transaction_code,b.mianqian,b.credit_power,b.contract_state,b.user_name,b.id_card,a.car_information,a.car_type,c.progress,c.approval_type,d.create_time,d.credit_state,b.phone_number
+        select distinct b.transaction_code,b.mianqian,b.credit_power,b.contract_state,b.user_name,b.id_card,a.car_information,a.car_type,c.progress,c.approval_type,d.create_time,d.credit_state,b.phone_number,a.intention_price,a.loan_money
         from zyjr_borrower b
         left join zyjr_business a on a.transaction_code=b.transaction_code
         left join zyjr_order_progress c on c.transaction_code=b.transaction_code
@@ -637,7 +637,7 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
         order by d.create_time desc
     </select>
     <select id="findOrder3" resultType="com.jeethink.system.domain.vo.orderVo">
-        select distinct b.transaction_code,b.mianqian,b.credit_power,b.contract_state,b.user_name,b.id_card,a.car_information,a.car_type,c.progress,c.approval_type,d.create_time,d.credit_state,b.phone_number
+        select distinct b.transaction_code,b.mianqian,b.credit_power,b.contract_state,b.user_name,b.id_card,a.car_information,a.car_type,c.progress,c.approval_type,d.create_time,d.credit_state,b.phone_number,a.intention_price,a.loan_money
         from zyjr_borrower b
         left join zyjr_business a on a.transaction_code=b.transaction_code
         left join zyjr_order_progress c on c.transaction_code=b.transaction_code
