@@ -53,10 +53,12 @@ public class ZyjrCompanyGuaranteeServiceImpl implements IZyjrCompanyGuaranteeSer
     @Override
     public int insertZyjrCompanyGuarantee(ZyjrCompanyGuarantee zyjrCompanyGuarantee)
     {
-        if(selectZyjrCompanyGuaranteeById(zyjrCompanyGuarantee.getUserId(),zyjrCompanyGuarantee.getTransactionCode())==null) {
-            return zyjrCompanyGuaranteeMapper.insertZyjrCompanyGuarantee(zyjrCompanyGuarantee);
-        }else {
+        if(zyjrCompanyGuarantee.getId()!=null) {
             return zyjrCompanyGuaranteeMapper.updateZyjrCompanyGuarantee(zyjrCompanyGuarantee);
+
+        }else {
+            return zyjrCompanyGuaranteeMapper.insertZyjrCompanyGuarantee(zyjrCompanyGuarantee);
+            //return zyjrCompanyGuaranteeMapper.updateZyjrCompanyGuarantee(zyjrCompanyGuarantee);
         }
     }
 

@@ -115,7 +115,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="orderState != null">order_state = #{orderState},</if>
             <if test="userId != null">user_id = #{userId},</if>
         </trim>
-        where user_id = #{userId} and transaction_code=#{transactionCode}
+        where id=#{id}
     </update>
 
     <delete id="deleteZyjrPeopleGuaranteeById" parameterType="Long">

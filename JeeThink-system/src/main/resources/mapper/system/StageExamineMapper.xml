@@ -55,7 +55,7 @@
     <update id="updateOpinion" parameterType="com.jeethink.system.domain.ZyjrRepeatOpinion">
         update zyjr_repeat_opinion
         set advise=#{advise},
-        approval_type=#{approvalType},
+        approval_type=#{approvalType}
         where transaction_code=#{transactionCode}
     </update>
 
@@ -107,7 +107,7 @@
     <update id="updateGrantOpinion" parameterType="com.jeethink.system.domain.ZyjrGrantOpinion">
         update zyjr_grant_opinion
         set advise=#{advise},
-        approval_type=#{approvalType},
+        approval_type=#{approvalType}
         where transaction_code=#{transactionCode}
     </update>
     <select id="findGrantOpinion" resultType="com.jeethink.system.domain.ZyjrGrantOpinion">
@@ -198,7 +198,7 @@
         update zyjr_supplement
         set gongchangren=#{gongchangren},
         gtsqr=#{gtsqr},
-        danbaoren=#{danbaoren},
+        danbaoren=#{danbaoren}
         where transaction_code=#{transactionCode}
     </update>
     <select id="findSupplement" resultType="com.jeethink.system.domain.ZyjrSupplement">
