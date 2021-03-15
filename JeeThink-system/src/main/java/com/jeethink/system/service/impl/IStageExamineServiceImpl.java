@@ -153,10 +153,7 @@ public class IStageExamineServiceImpl implements IStageExamineService {
             map.put("common", zyjrCommonApplicant);
         }
         ZyjrGrantVisit zyjrGrantVisit = zyjrGrantVisitMapper.selectZyjrGrantVisitById(transactionCode);
-        map.put("visit", null);
-        if(zyjrGrantVisit!=null) {
-            map.put("visit", list);
-        }
+        map.put("visit", list);
         if(zyjrGrantVisit!=null) {
             map.put("visit", zyjrGrantPhotoMapper.findVisit(zyjrGrantVisit.getId()));
         }
