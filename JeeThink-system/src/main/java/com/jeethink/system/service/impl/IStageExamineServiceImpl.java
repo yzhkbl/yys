@@ -140,14 +140,23 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         ZyjrAllowContacts zyjrAllowContacts = zyjrAllowContactsMapper.selectZyjrAllowContactsById(userId, transactionCode);
         map.put("contacts",zyjrAllowContacts);
         ZyjrDebtService zyjrDebtService = zyjrDebtServiceMapper.selectZyjrDebtServiceById(userId, transactionCode);
-        map.put("debtService",zyjrDebtService);
+        map.put("debtService", null);
+        if(zyjrDebtService!=null) {
+            map.put("debtService", zyjrDebtService);
+        }
         ZyjrCarLoan zyjrCarLoan = zyjrCarLoanMapper.selectZyjrCarLoanById(userId, transactionCode);
         map.put("carLoan",zyjrCarLoan);
 
         ZyjrCommonApplicant zyjrCommonApplicant = zyjrCommonApplicantMapper.selectZyjrCommonApplicantById(transactionCode);
-        map.put("common",zyjrCommonApplicant);
+        map.put("common", null);
+        if(zyjrCommonApplicant!=null) {
+            map.put("common", zyjrCommonApplicant);
+        }
         ZyjrGrantVisit zyjrGrantVisit = zyjrGrantVisitMapper.selectZyjrGrantVisitById(transactionCode);
-        map.put("visit",list);
+        map.put("visit", null);
+        if(zyjrGrantVisit!=null) {
+            map.put("visit", list);
+        }
         if(zyjrGrantVisit!=null) {
             map.put("visit", zyjrGrantPhotoMapper.findVisit(zyjrGrantVisit.getId()));
         }
