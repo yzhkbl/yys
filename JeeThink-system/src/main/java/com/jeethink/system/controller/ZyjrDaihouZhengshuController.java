@@ -80,7 +80,9 @@ public class ZyjrDaihouZhengshuController extends BaseController
         json.put("msg","操作成功");
         json.put("code",200);
         json.put("data",null);
+        //state 保存状态
         json.put("state","0");
+        //state2 提交状态
         json.put("state2","0");
         json.put("data2",null);
         if(Daihou!=null){

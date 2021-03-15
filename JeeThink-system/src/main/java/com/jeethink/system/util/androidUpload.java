@@ -47,7 +47,7 @@ public class androidUpload {
                 InputStream in = new ByteArrayInputStream(imageByte);
                 FileOutputStream fos = new FileOutputStream(f);
                 // BufferedOutputStream bos = new BufferedOutputStream(fos);
-                byte[] buf = new byte[1024];
+                byte[] buf = new byte[2048];
                 int length;
                 length = in.read(buf, 0, buf.length);
 

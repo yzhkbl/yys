@@ -108,11 +108,14 @@ public class ExamineController extends BaseController {
     @RequestMapping("/add/start")   //秒批提交
     public AjaxResult addByStart(ZyjrStartPage q){
         examineService.addByStart(q);
-        ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
-        zyjrOrderProgress.setTransactionCode(q.getTransactionCode());
-        zyjrOrderProgress.setApprovalType(0);
-        zyjrOrderProgress.setProgress(0);
-        examineMapper.insertOrderProgress(zyjrOrderProgress);
+        ZyjrBorrower zyjrBorrower=zyjrBorrowerMapper.selectById(q.getTransactionCode());
+        if(zyjrBorrower.getCreditPower()==0){
+            ZyjrOrderProgress zyjrOrderProgress=new ZyjrOrderProgress();
+            zyjrOrderProgress.setTransactionCode(q.getTransactionCode());
+            zyjrOrderProgress.setApprovalType(0);
+            zyjrOrderProgress.setProgress(0);
+            examineMapper.insertOrderProgress(zyjrOrderProgress);
+        }
         WebSocket webSocket=new WebSocket();
         String date=DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS,new Date()).substring(11,19);
         webSocket.sendMessage("秒批来新单了,"+date+",银行岗,"+q.getTransactionCode()+"");

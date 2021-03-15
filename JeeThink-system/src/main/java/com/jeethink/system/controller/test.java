@@ -1172,12 +1172,12 @@ public class test extends BaseController {
         }
         Map<String,Object> map=new HashMap<>();
         map.put("fangkuan",fang);
-        if(b.size()>0&&fang!=0.0){
+        if(b.size()>0&&fang>0){
         map.put("junjian",fang/b.size());
         }else{
             map.put("junjian",fang);
         }
-        map.put("junjian",fang/b.size());
+       // map.put("junjian",fang/b.size());
         SysUser user=iSysUserService.selectUserById(Long.parseLong(userId));
         ZyjrYejiYue zyjrYejiYue=new ZyjrYejiYue();
         zyjrYejiYue.setBeginTime(a.substring(0,7)+"-01");
@@ -1476,7 +1476,6 @@ public class test extends BaseController {
     @ResponseBody
     @PostMapping("inform")
     public AjaxResult a(@RequestBody Inform inform){
-        System.err.println(inform);
         if(inform!=null&&inform.getReq()!=null&&inform.getReq().getTransType()!=null&&inform.getReq().getTransType()==1){
             examineMapper.updateStarts2(inform.getPub().getOrderNo());
         }else if(inform!=null&&inform.getReq()!=null&&inform.getReq().getTransType()!=null&&inform.getReq().getTransType()==4){
