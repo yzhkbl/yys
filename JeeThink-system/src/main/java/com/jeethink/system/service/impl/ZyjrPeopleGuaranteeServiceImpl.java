@@ -53,10 +53,11 @@ public class ZyjrPeopleGuaranteeServiceImpl implements IZyjrPeopleGuaranteeServi
     @Override
     public int insertZyjrPeopleGuarantee(ZyjrPeopleGuarantee zyjrPeopleGuarantee)
     {
-        if(selectZyjrPeopleGuaranteeById(zyjrPeopleGuarantee.getUserId(),zyjrPeopleGuarantee.getTransactionCode())==null) {
-            return zyjrPeopleGuaranteeMapper.insertZyjrPeopleGuarantee(zyjrPeopleGuarantee);
-        }else {
+        if(zyjrPeopleGuarantee.getId()!=null) {
             return zyjrPeopleGuaranteeMapper.updateZyjrPeopleGuarantee(zyjrPeopleGuarantee);
+        }else {
+            return zyjrPeopleGuaranteeMapper.insertZyjrPeopleGuarantee(zyjrPeopleGuarantee);
+
         }
     }
 

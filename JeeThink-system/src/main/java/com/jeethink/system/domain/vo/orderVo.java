@@ -2,6 +2,7 @@ package com.jeethink.system.domain.vo;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -28,5 +29,8 @@ public class orderVo {
     private String mianqian;
     private String creditState;     //征信是否通过
     private String phoneNumber;
+
+    private BigDecimal intentionPrice;
+    private BigDecimal loanMoney;
 
 }

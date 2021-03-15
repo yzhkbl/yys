@@ -125,8 +125,8 @@ public interface ExamineMapper {
 
     List<RelationName>guName(String transactionCode);//补充担保人的列表
     List<RelationName>cmName(String transactionCode);
-    ZyjrGuarantee findByGu(Long id);//id查询担保人
-    ZyjrGuarantee findByCm(Long id);//id查询担保公司
+    ZyjrPeopleGuarantee findByGu(Long id);//id查询担保人
+    ZyjrCompanyGuarantee findByCm(Long id);//id查询担保公司
 
     Bairong selectBairong(Bairong b);
 

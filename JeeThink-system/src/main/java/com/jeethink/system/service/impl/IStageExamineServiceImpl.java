@@ -132,6 +132,7 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         map.put("borrower", examineDao.findByBorrower(transactionCode));
         map.put("relation",examineDao.findByRelation(transactionCode));
         map.put("guarantee",examineDao.findByGuarantee(transactionCode));
+        List<String> list=new ArrayList<>();
         ZyjrAllowApplicant zyjrAllowApplicant = zyjrAllowApplicantMapper.selectZyjrAllowApplicantById(userId, transactionCode);
         map.put("applicant",zyjrAllowApplicant);
         //ZyjrAllowBasics zyjrAllowBasics = zyjrAllowBasicsMapper.selectZyjrAllowBasicsById(userId, transactionCode);
@@ -139,14 +140,23 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         ZyjrAllowContacts zyjrAllowContacts = zyjrAllowContactsMapper.selectZyjrAllowContactsById(userId, transactionCode);
         map.put("contacts",zyjrAllowContacts);
         ZyjrDebtService zyjrDebtService = zyjrDebtServiceMapper.selectZyjrDebtServiceById(userId, transactionCode);
-        map.put("debtService",zyjrDebtService);
+        map.put("debtService", null);
+        if(zyjrDebtService!=null) {
+            map.put("debtService", zyjrDebtService);
+        }
         ZyjrCarLoan zyjrCarLoan = zyjrCarLoanMapper.selectZyjrCarLoanById(userId, transactionCode);
         map.put("carLoan",zyjrCarLoan);
 
         ZyjrCommonApplicant zyjrCommonApplicant = zyjrCommonApplicantMapper.selectZyjrCommonApplicantById(transactionCode);
-        map.put("common",zyjrCommonApplicant);
+        map.put("common", null);
+        if(zyjrCommonApplicant!=null) {
+            map.put("common", zyjrCommonApplicant);
+        }
         ZyjrGrantVisit zyjrGrantVisit = zyjrGrantVisitMapper.selectZyjrGrantVisitById(transactionCode);
-        map.put("visit", zyjrGrantPhotoMapper.findVisit(zyjrGrantVisit.getId()));
+        map.put("visit", list);
+        if(zyjrGrantVisit!=null) {
+            map.put("visit", zyjrGrantPhotoMapper.findVisit(zyjrGrantVisit.getId()));
+        }
 
         ZyjrFundSide zyjrFundSide = examineMapper.findFundSide(transactionCode);
         map.put("fundSide",zyjrFundSide);
@@ -162,7 +172,7 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         ZyjrPhotoLender zyjrPhotoLender = zyjrPhotoLenderMapper.selectZyjrPhotoLenderById(userId, transactionCode);
         map.put("qita",sysFileInfoMapper.photoLender(zyjrPhotoLender.getId()));
         ZyjrLiushui zyjrLiushui = zyjrLiushuiMapper.selectZyjrLiushuiById(transactionCode);
-        List<String> list=new ArrayList<>();
+
         map.put("liushui", list);
         if(zyjrLiushui!=null) {
             map.put("liushui", zyjrGrantPhotoMapper.findLiushui(zyjrLiushui.getId()));

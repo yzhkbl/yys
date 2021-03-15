@@ -8,5 +8,6 @@ public class ZyjrSupplement {
     private Integer gongchangren;   //共偿人
     private Integer gtsqr;          //共同申请人
     private Integer danbaoren;      //担保人
+    private Integer jiafang;        //家访
     private String transactionCode;
 }

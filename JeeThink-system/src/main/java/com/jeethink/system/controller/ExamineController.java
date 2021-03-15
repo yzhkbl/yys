@@ -484,7 +484,9 @@ public class ExamineController extends BaseController {
         ZyjrCarLoan zyjrCarLoan = examineMapper.findCar(transactionCode);
         ZyjrFundSide zyjrFundSide = examineMapper.findFundSide(transactionCode);
         CarLoan carLoan = new CarLoan();
-        carLoan.setFundSide(zyjrFundSide.getSideName());
+        if(zyjrFundSide!=null) {
+            carLoan.setFundSide(zyjrFundSide.getSideName());
+        }
         carLoan.setRepaymentTerm(zyjrCarLoan.getRepaymentTerm());
         if(zyjrCarLoan.getRepaymentTerm()==24){
             BigDecimal a = new BigDecimal(6);
