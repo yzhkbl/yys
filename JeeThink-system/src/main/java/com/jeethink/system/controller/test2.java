@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
+import sign.common.des.DESBase64Coder;
 import sign.common.http.HttpPostUtil;
 import sign.common.login.EscapeLogin;
 import sign.common.param.ApiResponse;
@@ -21,17 +23,50 @@ import sign.common.util.StringUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
+import java.net.URLDecoder;
 
 @Controller
 public class test2 {
     @Autowired
     private ZyjrBorrowerMapper zyjrBorrowerMapper;
+    public static String getRequestData(HttpServletRequest request) throws IOException {
+        String result = "";
+
+        String dataStr;
+        try {
+            InputStream in = request.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+            dataStr = null;
+            StringBuilder sb = new StringBuilder();
+
+            while((dataStr = br.readLine()) != null) {
+                sb.append(dataStr);
+            }
+
+            String reqBody = sb.toString();
+            result = URLDecoder.decode(reqBody, "UTF-8");
+        } catch (Exception var7) {
+            result = "";
+            var7.printStackTrace();
+        }
+
+        if (StringUtil.isNotEmpty(result)) {
+            JSONObject requestJSON = JSONObject.fromObject(result);
+            if (requestJSON.containsKey("privatekey")) {
+                String privatekey = requestJSON.getString("privatekey");
+                dataStr = requestJSON.getString("data");
+                result = DESBase64Coder.decrypt(dataStr, privatekey);
+            }
+        }
+
+        return result;
+    }
 
     @RequestMapping("/pullSignReport")
     @ResponseBody
     @EscapeLogin
     public ApiResponse pullSignReport(HttpServletRequest request) throws IOException{
-        String requestData = HttpPostUtil.getRequestData(request);
+        String requestData = getRequestData(request);
 
         JSONObject requestJSON = JSONObject.fromObject(requestData);
 

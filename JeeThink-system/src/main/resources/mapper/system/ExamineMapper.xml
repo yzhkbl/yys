@@ -40,9 +40,9 @@
          order by g.create_time desc
     </select>
     <select id="selectP"
-            resultType="com.jeethink.system.domain.vo.provinces">
+            resultType="com.jeethink.system.domain.vo.provinces"  parameterType="com.jeethink.system.domain.vo.provinces">
         select *
-        from dcc_provinces
+        from dcc_provinces where province like concat('%', #{province}, '%')
     </select>
     <select id="selectRegion"
             resultType="com.jeethink.system.domain.vo.Region">
@@ -54,7 +54,7 @@
             resultType="com.jeethink.system.domain.vo.cities">
         select *
         from dcc_cities
-        where provinceid=#{pid}
+        where city=#{city}
     </select>
     <insert id="insertBorrower" parameterType="com.jeethink.system.domain.ZyjrBorrower">
         insert into zyjr_borrower

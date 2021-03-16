@@ -32,13 +32,13 @@ public class SignUtil {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-        p.setProperty("signPwd", "1");
+        p.setProperty("", "");
+     /*   p.setProperty("signPwd", "1");
         p.setProperty("signCertType", "PKCS12");
         p.setProperty("signInvalidFields", "Signature,CertId");
         p.setProperty("signInvalidFields", "Signature,CertId");
         p.setProperty("verifyFilePathKey", "C:/cer/cp_test.cer");
-        p.setProperty("signatureField", "Signature");
+        p.setProperty("signatureField", "Signature");*/
 
 
         secssUtil.init(p);
