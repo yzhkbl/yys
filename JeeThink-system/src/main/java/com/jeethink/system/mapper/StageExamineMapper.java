@@ -21,6 +21,7 @@ public interface StageExamineMapper {
     ZyjrStartPage findByStartPage(String transactionCode);
     /**银行岗信息录入*/
     int insertBank(ZyjrDetails q);
+    int updateBank(ZyjrDetails q);
     /**征信详情回显*/
     ZyjrDetails findByDetails(String transactionCode);
 

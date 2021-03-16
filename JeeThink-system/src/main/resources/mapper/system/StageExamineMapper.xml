@@ -37,6 +37,12 @@
         values
         (#{id},#{transactionCode},#{details})
     </insert>
+    <update id="updateBank" parameterType="com.jeethink.system.domain.ZyjrDetails">
+        update zyjr_details
+        set transaction_code=#{transactionCode},
+        details=#{details}
+        where transaction_code=#{transactionCode}
+    </update>
     <select id="findByDetails" resultType="com.jeethink.system.domain.ZyjrDetails">
         select id,transaction_code,details
         from zyjr_details

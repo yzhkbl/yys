@@ -114,8 +114,11 @@ public class IStageExamineServiceImpl implements IStageExamineService {
 
     @Override
     public int addBankDetails(ZyjrDetails q) {
-        int count = examineDao.insertBank(q);
-        return count;
+        if(examineDao.findByDetails(q.getTransactionCode())!=null){
+            return examineDao.updateBank(q);
+        }else {
+            return examineDao.insertBank(q);
+        }
     }
 
     @Override
