@@ -114,8 +114,11 @@ public class IStageExamineServiceImpl implements IStageExamineService {
 
     @Override
     public int addBankDetails(ZyjrDetails q) {
-        int count = examineDao.insertBank(q);
-        return count;
+        if(examineDao.findByDetails(q.getTransactionCode())!=null){
+            return examineDao.updateBank(q);
+        }else {
+            return examineDao.insertBank(q);
+        }
     }
 
     @Override
@@ -161,13 +164,22 @@ public class IStageExamineServiceImpl implements IStageExamineService {
         ZyjrFundSide zyjrFundSide = examineMapper.findFundSide(transactionCode);
         map.put("fundSide",zyjrFundSide);
         List<ZyjrCompanyGuarantee> zyjrCompanyGuarantee = zyjrCompanyGuaranteeMapper.selectZyjrCompanyGuaranteeById(userId, transactionCode);
-        map.put("companyGuarantee",zyjrCompanyGuarantee);
+        map.put("companyGuarantee", list);
+        if(zyjrCompanyGuarantee!=null) {
+            map.put("companyGuarantee", zyjrCompanyGuarantee);
+        }
         List<ZyjrPeopleGuarantee> zyjrPeopleGuarantee = zyjrPeopleGuaranteeMapper.selectZyjrPeopleGuaranteeById(userId, transactionCode);
-        map.put("peopleGuarantee",zyjrPeopleGuarantee);
+        map.put("peopleGuarantee", list);
+        if(zyjrPeopleGuarantee!=null) {
+            map.put("peopleGuarantee", zyjrPeopleGuarantee);
+        }
         ZyjrPhotoCar zyjrPhotoCar = zyjrPhotoCarMapper.selectZyjrPhotoCarById(userId, transactionCode);
         map.put("car", sysFileInfoMapper.photoCar(zyjrPhotoCar.getId()));
         ZyjrPhotoCredit zyjrPhotoCredit = zyjrPhotoCreditMapper.selectZyjrPhotoCreditById(userId, transactionCode);
-        map.put("credit",sysFileInfoMapper.photoCredit(zyjrPhotoCredit.getId()));
+        map.put("credit", null);
+        if(zyjrPhotoCredit!=null) {
+            map.put("credit", sysFileInfoMapper.photoCredit(zyjrPhotoCredit.getId()));
+        }
         ZyjrPhotoHouse zyjrPhotoHouse = zyjrPhotoHouseMapper.selectZyjrPhotoHouseById(userId, transactionCode);
         ZyjrPhotoLender zyjrPhotoLender = zyjrPhotoLenderMapper.selectZyjrPhotoLenderById(userId, transactionCode);
         map.put("qita",sysFileInfoMapper.photoLender(zyjrPhotoLender.getId()));
