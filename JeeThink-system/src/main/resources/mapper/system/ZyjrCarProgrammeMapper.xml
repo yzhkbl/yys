@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrCarProgrammeMapper">
+    
+    <resultMap type="ZyjrCarProgramme" id="ZyjrCarProgrammeResult">
+        <result property="id"    column="id"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="name"    column="name"    />
+        <result property="code"    column="code"    />
+        <result property="icbc"    column="icbc"    />
+        <result property="carBrand"    column="car_brand"    />
+        <result property="remark"    column="remark"    />
+        <result property="type"    column="type"    />
+        <result property="area"    column="area"    />
+        <result property="carId"    column="car_id"    />
+        <result property="brandInput"    column="brand_input"    />
+        <result property="areaInput"    column="area_input"    />
+    </resultMap>
+
+    <sql id="selectZyjrCarProgrammeVo">
+        select id, create_by,brand_input,area_input, create_time, update_by, update_time, name, code, icbc, car_brand, remark, type, area, car_id from zyjr_car_programme
+    </sql>
+
+    <select id="selectZyjrCarProgrammeList" parameterType="ZyjrCarProgramme" resultMap="ZyjrCarProgrammeResult">
+        <include refid="selectZyjrCarProgrammeVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="icbc != null  and icbc != ''"> and icbc = #{icbc}</if>
+            <if test="carBrand != null  and carBrand != ''"> and car_brand = #{carBrand}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="carId != null  and carId != ''"> and car_id = #{carId}</if>
+            <if test="brandInput != null  and brandInput != ''"> and brand_input = #{brandInput}</if>
+            <if test="areaInput != null  and areaInput != ''"> and area_input = #{areaInput}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrCarProgrammeById" parameterType="Integer" resultMap="ZyjrCarProgrammeResult">
+        <include refid="selectZyjrCarProgrammeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrCarProgramme" parameterType="ZyjrCarProgramme" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_car_programme
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="name != null">name,</if>
+            <if test="code != null">code,</if>
+            <if test="icbc != null">icbc,</if>
+            <if test="carBrand != null">car_brand,</if>
+            <if test="remark != null">remark,</if>
+            <if test="type != null">type,</if>
+            <if test="area != null">area,</if>
+            <if test="carId != null">car_id,</if>
+            <if test="brandInput != null">brand_input,</if>
+            <if test="areaInput != null">area_input,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="name != null">#{name},</if>
+            <if test="code != null">#{code},</if>
+            <if test="icbc != null">#{icbc},</if>
+            <if test="carBrand != null">#{carBrand},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="type != null">#{type},</if>
+            <if test="area != null">#{area},</if>
+            <if test="carId != null">#{carId},</if>
+            <if test="brandInput != null">#{brandInput},</if>
+            <if test="areaInput != null">#{areaInput},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrCarProgramme" parameterType="ZyjrCarProgramme">
+        update zyjr_car_programme
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="code != null">code = #{code},</if>
+            <if test="icbc != null">icbc = #{icbc},</if>
+            <if test="carBrand != null">car_brand = #{carBrand},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="area != null">area = #{area},</if>
+            <if test="carId != null">car_id = #{carId},</if>
+            <if test="brandInput != null">brand_input = #{brandInput},</if>
+            <if test="areaInput != null">area_input = #{areaInput},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrCarProgrammeById" parameterType="Integer">
+        delete from zyjr_car_programme where car_id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrCarProgrammeByIds" parameterType="String">
+        delete from zyjr_car_programme where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

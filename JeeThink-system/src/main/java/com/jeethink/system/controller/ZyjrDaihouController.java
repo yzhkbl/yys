@@ -240,10 +240,10 @@ public class ZyjrDaihouController extends BaseController
                 zyjrCailiaoMapper.insertZyjrCailiao(zyjrCailiao);
             }
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaihou.getTransactionCode(),"贷后通过",stringsList);
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaihou.getTransactionCode(),"贷后通过",stringsList,zyjrDaihou.getOpinion());
             Xiaoxi xiaoxi=new Xiaoxi();
             xiaoxi.setCode(zyjrDaihou.getTransactionCode());
-            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在贷后通过了！(订单号"+zyjrDaihou.getTransactionCode()+")");
+            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在贷后通过了！(订单号"+zyjrDaihou.getTransactionCode()+"),通过意见:"+zyjrDaihou.getOpinion());
             xiaoxi.setDate(date);
             xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);
@@ -258,19 +258,19 @@ public class ZyjrDaihouController extends BaseController
             zyjrDaihou2.setState("2");
             zyjrDaihouMapper.updateZyjrDaihou(zyjrDaihou2);
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaihou.getTransactionCode(),"贷后退回",stringsList);
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaihou.getTransactionCode(),"贷后退回",stringsList,zyjrDaihou.getOpinion());
             Xiaoxi xiaoxi=new Xiaoxi();
             xiaoxi.setCode(zyjrDaihou.getTransactionCode());
-            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在贷后退回了！(订单号"+zyjrDaihou.getTransactionCode()+")");
+            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在贷后退回了！(订单号"+zyjrDaihou.getTransactionCode()+"),退回意见:"+zyjrDaihou.getOpinion());
             xiaoxi.setDate(date);
             xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);
         }else if(zyjrDaihou!=null&&zyjrDaihou.getState().equals("3")){
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaihou.getTransactionCode(),"贷后拒绝",stringsList);
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaihou.getTransactionCode(),"贷后拒绝",stringsList,zyjrDaihou.getOpinion());
             Xiaoxi xiaoxi=new Xiaoxi();
             xiaoxi.setCode(zyjrDaihou.getTransactionCode());
-            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在贷后拒绝了！(订单号"+zyjrDaihou.getTransactionCode()+")");
+            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在贷后拒绝了！(订单号"+zyjrDaihou.getTransactionCode()+"),拒绝意见:"+zyjrDaihou.getOpinion());
             xiaoxi.setDate(date);
             xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);

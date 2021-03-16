@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrCarRateMapper">
+    
+    <resultMap type="ZyjrCarRate" id="ZyjrCarRateResult">
+        <result property="id"    column="id"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="stage"    column="stage"    />
+        <result property="interestRate"    column="interest_rate"    />
+        <result property="ratePayable"    column="rate_payable"    />
+        <result property="chargeableRate"    column="chargeable_rate"    />
+        <result property="programmeId"    column="programme_id"    />
+    </resultMap>
+
+    <sql id="selectZyjrCarRateVo">
+        select id, create_by, create_time, update_by, update_time, stage, interest_rate, rate_payable, chargeable_rate, programme_id from zyjr_car_rate
+    </sql>
+
+    <select id="selectZyjrCarRateList" parameterType="ZyjrCarRate" resultMap="ZyjrCarRateResult">
+        <include refid="selectZyjrCarRateVo"/>
+        <where>  
+            <if test="stage != null  and stage != ''"> and stage = #{stage}</if>
+            <if test="interestRate != null  and interestRate != ''"> and interest_rate = #{interestRate}</if>
+            <if test="ratePayable != null  and ratePayable != ''"> and rate_payable = #{ratePayable}</if>
+            <if test="chargeableRate != null  and chargeableRate != ''"> and chargeable_rate = #{chargeableRate}</if>
+            <if test="programmeId != null  and programmeId != ''"> and programme_id = #{programmeId}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrCarRateById" parameterType="Integer" resultMap="ZyjrCarRateResult">
+        <include refid="selectZyjrCarRateVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrCarRate" parameterType="ZyjrCarRate" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_car_rate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="stage != null">stage,</if>
+            <if test="interestRate != null">interest_rate,</if>
+            <if test="ratePayable != null">rate_payable,</if>
+            <if test="chargeableRate != null">chargeable_rate,</if>
+            <if test="programmeId != null">programme_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="stage != null">#{stage},</if>
+            <if test="interestRate != null">#{interestRate},</if>
+            <if test="ratePayable != null">#{ratePayable},</if>
+            <if test="chargeableRate != null">#{chargeableRate},</if>
+            <if test="programmeId != null">#{programmeId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrCarRate" parameterType="ZyjrCarRate">
+        update zyjr_car_rate
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="stage != null">stage = #{stage},</if>
+            <if test="interestRate != null">interest_rate = #{interestRate},</if>
+            <if test="ratePayable != null">rate_payable = #{ratePayable},</if>
+            <if test="chargeableRate != null">chargeable_rate = #{chargeableRate},</if>
+            <if test="programmeId != null">programme_id = #{programmeId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrCarRateById" parameterType="Integer">
+        delete from zyjr_car_rate where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrCarRateByIds" parameterType="String">
+        delete from zyjr_car_rate where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
