@@ -159,7 +159,7 @@ public class test extends BaseController {
                 String sd = DataUtil.data(zyjrRelation.getStartDate());
                 s.setStartDate(sd);
                 s.setIsQueryCredit(0);
-                s.setUserRelationship(2);
+                s.setUserRelationship(Integer.parseInt(zyjrRelation.getPeopleShip()));
                 s.setCompany(zyjrRelation.getCompany());
                 s.setCompanyAddress(zyjrRelation.getCompanyAddress());
                 s.setYearIncome(zyjrRelation.getYearIncome());
