@@ -117,11 +117,13 @@ public class test extends BaseController {
          */
         ZyjrBusiness business = b.selectById(codes);
         List<spouse> lists = new ArrayList<>();
+//        关联人
         ZyjrRelation relation2 =new ZyjrRelation();
         relation2.setTransactionCode(codes);
         List<ZyjrRelation> relation=r.selectZyjrRelationList(relation2);
-
+//        借款人
         ZyjrBorrower borrowerById = o.selectById(codes);
+//        担保人
         ZyjrGuarantee guarantee2 = new ZyjrGuarantee();
         guarantee2.setTransactionCode(codes);
         List<ZyjrGuarantee> guarantee=g.selectZyjrGuaranteeList(guarantee2);
@@ -143,7 +145,9 @@ public class test extends BaseController {
         List<Pics> lenp = new ArrayList<>();
         List<Pics> guaranteep = new ArrayList<>();
 
-
+        /**
+         * 判断当前借款人是否有关联人
+         */
         if (relation.size()>0) {
             for (ZyjrRelation zyjrRelation : relation) {
                 spouse s = new spouse();

@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectZyjrRelationList" parameterType="ZyjrRelation" resultMap="ZyjrRelationResult">
         <include refid="selectZyjrRelationVo"/>
         <where>
-            order_state = 1
+            order_state = 0
             <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
             <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
             <if test="bankCardNo != null  and bankCardNo != ''"> and bank_card_no = #{bankCardNo}</if>
