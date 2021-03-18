@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectZyjrDaihouVo">
-        select id, state, opinion,operator, user_id, transaction_code, zhengshu, baoxian, qita, lvben, tiche from zyjr_daihou
+        select id, state,tijiao, opinion,operator, user_id, transaction_code, zhengshu, baoxian, qita, lvben, tiche from zyjr_daihou
     </sql>
 
     <select id="selectZyjrDaihouList" parameterType="ZyjrDaihou" resultMap="ZyjrDaihouResult">
