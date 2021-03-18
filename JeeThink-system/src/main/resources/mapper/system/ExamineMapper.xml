@@ -30,7 +30,7 @@
         left join zyjr_car_loan f on a.transaction_code=f.transaction_code
         left join zyjr_start_page g on a.transaction_code=g.transaction_code
         <where>
-
+            b.id is not null
             <if test="createTime != null  and createTime != ''"> and b.user_name like concat('%', #{createTime}, '%') </if>
             <if test="state ==1"> and  e.state is not null and (e.state !=2 and e.state!=3)   </if>
             <if test="state ==2"> and  e.state is not null or (e.state !=3 and e.state!=1)  </if>

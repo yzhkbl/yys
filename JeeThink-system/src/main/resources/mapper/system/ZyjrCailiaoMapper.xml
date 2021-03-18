@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         left join zyjr_business d on a.transaction_code=d.transaction_code
         left join zyjr_car_loan f on a.transaction_code=f.transaction_code
          left join zyjr_start_page g on a.transaction_code=g.transaction_code
-        where a.state="1"
+        where a.state="1" and c.id is not null
     </select>
 
     <select id="selectZyjrCailiaoList2" parameterType="ZyjrCailiao" resultMap="ZyjrCailiaoResult">
@@ -37,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         left join zyjr_business d on a.transaction_code=d.transaction_code
         left join zyjr_car_loan f on a.transaction_code=f.transaction_code
          left join zyjr_start_page g on a.transaction_code=g.transaction_code
-        where a.state="1" and a.transaction_code=#{transactionCode}
+        where a.state="1" and a.transaction_code=#{transactionCode} and c.id is not null
     </select>
     
     <select id="selectZyjrCailiaoById" parameterType="Long" resultMap="ZyjrCailiaoResult">

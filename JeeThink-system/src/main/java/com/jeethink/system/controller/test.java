@@ -97,13 +97,8 @@ public class test extends BaseController {
     private static String zCode = "zxsqs";
 
 
-    @GetMapping("code2")
-    @ResponseBody
-    public AjaxResult fi2nd() {
-        Test2.ceshis();
-    return AjaxResult.success();
-    }
 
+    //汇融的征信进件
     @ApiOperation("查询参数列表")
     @PostMapping("code")
     @ResponseBody
@@ -330,6 +325,8 @@ public class test extends BaseController {
         }
         return AjaxResult.error("错误", result);
     }
+
+    //之前给php写的接口 php人应该跑路了
     @ResponseBody
     @PostMapping("php")
     public AjaxResult ss(@RequestBody PhpVo phpVo){
@@ -347,7 +344,7 @@ public class test extends BaseController {
         return  AjaxResult.success(jsons);
     }
 
-
+    //秒批电子签约需要调用的发起确认接口
     @ApiOperation("发起确认")
     @PostMapping("ok")
     @ResponseBody
@@ -358,7 +355,7 @@ public class test extends BaseController {
 
         return AjaxResult.success(a);
     }
-
+    //汇融的当前状态接口
     @ApiOperation("查询状态")
     @GetMapping("selectState")
     @ResponseBody
@@ -419,7 +416,7 @@ public class test extends BaseController {
         }
         return AjaxResult.success("操作成功",results);
     }
-
+    //放款结果查询
     @GetMapping("getInfo")
     @ResponseBody
     public AjaxResult fin(String transactionCode) {
@@ -460,7 +457,7 @@ public class test extends BaseController {
 
         return json;
     }
-
+    //汇融的工具
     public static JSONObject encryptData(String data, String dataPublicKey, String signPrivateKey, String assurerNo
             , String bankType, String busiCode, String platNo, String orderNo) {
         JSONObject request = new JSONObject();
@@ -494,7 +491,7 @@ public class test extends BaseController {
         return AjaxResult.success("操作成功",as);
         //return AjaxResult.success("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3363295869,2467511306&fm=26&gp=0.jpg");
     }
-
+    //PC的图片上传
     @RequestMapping(value = {"/ceshi2"}, method = RequestMethod.POST)
     @ResponseBody
     @ApiOperation("111111111")
@@ -510,7 +507,7 @@ public class test extends BaseController {
         }
         return AjaxResult.success();
     }
-
+    //
     @RequestMapping(value = {"zhengshi"}, method = RequestMethod.POST)
     @ResponseBody
     @ApiOperation("111111111")
@@ -540,7 +537,7 @@ public class test extends BaseController {
         return AjaxResult.success(info);
     }
 
-
+    //更改电子签约状态并跳转到index页面
     @RequestMapping(value = {"/ceshi3"}, method = RequestMethod.GET)
     @ApiOperation("111111111")
     public String ceshi3(String transactionCode) {
@@ -555,7 +552,7 @@ public class test extends BaseController {
          //examineService.okPurchase(transactionCode);
         return "index";
     }
-
+    //作废
     @RequestMapping(value = {"/ceshi4"}, method = RequestMethod.GET)
     @ResponseBody
     @ApiOperation("111111111")
@@ -566,7 +563,7 @@ public class test extends BaseController {
         o.updateZyjrBorrower(a);
         return AjaxResult.success();
     }
-
+    //通过路径删除图片
     @RequestMapping(value = {"/delete"}, method = RequestMethod.GET)
     @ResponseBody
     @ApiOperation("111111111")
@@ -588,7 +585,7 @@ public class test extends BaseController {
 
         return AjaxResult.success(a);
     }
-
+    //通过路径删除图片
     @RequestMapping(value = {"/delete2"}, method = RequestMethod.GET)
     @ResponseBody
     @ApiOperation("111111111")
@@ -610,6 +607,7 @@ public class test extends BaseController {
 
         return AjaxResult.success();
     }
+    //获取百融token并存入redis中29分钟
 
     @RequestMapping(value = {"/getByToken"}, method = RequestMethod.GET)
     @ResponseBody
@@ -624,7 +622,7 @@ public class test extends BaseController {
         redisCache.setCacheObject("getByToken",c[7],29, TimeUnit.MINUTES);
         return AjaxResult.success(c[7]);
     }
-
+    //百融接口
     @RequestMapping(value = {"/getByMelting"}, method = RequestMethod.POST)
     @ResponseBody
     @ApiOperation("getByMelting")
@@ -655,7 +653,7 @@ public class test extends BaseController {
     }
 
 
-
+//精针咕
     @ResponseBody
     @GetMapping("jinzhengu")
     public AjaxResult wc(){
@@ -668,7 +666,7 @@ public class test extends BaseController {
         }
         return AjaxResult.success(map);
     }
-
+    //准入的职务下拉框
     @ResponseBody
     @GetMapping("occptn")
     public AjaxResult zwc(){
@@ -684,6 +682,7 @@ public class test extends BaseController {
         } );
         return AjaxResult.success("操作成功",list);
     }
+    //上报材料开卡回显
     @ResponseBody
     @GetMapping("kaika")
     public AjaxResult kaika(String transactionCode){
@@ -873,7 +872,7 @@ public class test extends BaseController {
         json.put("state",null);
         return json;
     }
-
+    //视频面签
     @ResponseBody
     @GetMapping("mianqian")
     public AjaxResult mianqian(String transactionCode){
@@ -895,6 +894,7 @@ public class test extends BaseController {
 
         return AjaxResult.success();
     }
+    //上传pdf文件安卓的
     @ResponseBody
     @PostMapping("pdf")
     public AjaxResult pdf(@RequestParam(name = "file",required = false) MultipartFile file) throws IOException {
@@ -905,14 +905,14 @@ public class test extends BaseController {
         return AjaxResult.success("操作成功","http://114.215.186.186:8080"+upload);
 
     }
-
+    //消息列表
     @ResponseBody
     @PostMapping("userlist")
     public AjaxResult sss(String userId){
         List<Xiaoxi> list=examineMapper.selByUserId(userId);
         return AjaxResult.success(list);
     }
-
+    //精针咕返回的网页详情
     @ResponseBody
     @PostMapping("jzgInfor")
     public AjaxResult jzg(String transactionCode){
@@ -923,7 +923,7 @@ public class test extends BaseController {
         return AjaxResult.success();
     }
 
-
+    //上报银行开卡保存
     @ResponseBody
     @PostMapping("card")
     public AjaxResult kaika(@RequestBody ZyjrCard zyjrcard){
@@ -967,6 +967,7 @@ public class test extends BaseController {
         JSONObject results = HttpPostUtil.doPostRequestJSON("http://114.55.55.41:18999/bank/route", jsons);
         return  AjaxResult.success("操作成功",results);
     }
+    //上报银行放款保存
     @ResponseBody
     @PostMapping("fangkuan")
     public AjaxResult kaika(@RequestBody FenqiVo fenqiVo){
@@ -1035,7 +1036,7 @@ public class test extends BaseController {
 
         return  AjaxResult.success("操作成功",results);
     }
-
+    //修改密码
     @ResponseBody
     @PostMapping("PWD")
     public AjaxResult pWD(Long userId,String newPassword,String oldPassword){
@@ -1073,7 +1074,7 @@ public class test extends BaseController {
         }
         return AjaxResult.error("修改密码异常，请联系管理员");
     }
-
+    //获取验证码
     @ResponseBody
     @PostMapping("phone")
     public AjaxResult smsCode(String phone)  {
@@ -1089,6 +1090,7 @@ public class test extends BaseController {
         Message.a(phone,codes);
         return AjaxResult.success();
     }
+    //验证验证码
     @ResponseBody
     @PostMapping("phone2")
     public AjaxResult smsCode2(String phone,String code)  {
@@ -1109,6 +1111,7 @@ public class test extends BaseController {
         json.put("data",null);
         return json;
     }
+    //
     @ResponseBody
     @PostMapping("selectH")
     public AjaxResult smsCsode(String phone)  {
@@ -1118,7 +1121,7 @@ public class test extends BaseController {
         return AjaxResult.success(zyjrAllowApplicants);
     }
 
-
+    //修改密码
     @ResponseBody
     @PostMapping("phoneCode")
     public AjaxResult codes(String newPassword,String phone,String code){
@@ -1149,13 +1152,14 @@ public class test extends BaseController {
         json.put("data",null);
         return json;
     }
+    //更新业绩
     @ResponseBody
     @PostMapping("updataYeji")
     public AjaxResult ss(@RequestBody ZyjrYejiYue zyjrYejiYue){
         zyjrYejiYueMapper.updateZyjrYejiYue(zyjrYejiYue);
        return AjaxResult.success();
     }
-
+   //业绩详情
     @ResponseBody
     @PostMapping("getUserInfo")
     public AjaxResult ss(String userId) throws ParseException {
@@ -1220,7 +1224,7 @@ public class test extends BaseController {
         map.put("date",a.substring(5,7));
         return  AjaxResult.success(map);
     }
-
+    //业绩详情
     @ResponseBody
     @PostMapping("getYeji")
     public AjaxResult cc(@RequestBody DateVo dateVo) throws ParseException {
@@ -1350,7 +1354,7 @@ public class test extends BaseController {
         map.put("yearmu",yearmu);
         return AjaxResult.success(map);
     }
-
+        //还款列表
     @ResponseBody
     @GetMapping("getHuankuan")
     public TableDataInfo list()
@@ -1359,7 +1363,7 @@ public class test extends BaseController {
         List<Huankuan> list=examineMapper.selectHuankuanList();
         return getDataTable(list);
     }
-
+    //合同详情
     @ResponseBody
     @GetMapping("hetong")
     public AjaxResult hetong(String transactionCode){
@@ -1380,6 +1384,7 @@ public class test extends BaseController {
         map.put("gongchangren",zyjrDebtService);
         return AjaxResult.success(map);
     }
+    //
     @ResponseBody
     @GetMapping("brand")
     public AjaxResult s() throws NoSuchPaddingException, BadPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, UnsupportedEncodingException, InvalidKeyException, InvalidKeySpecException {
@@ -1421,7 +1426,7 @@ public class test extends BaseController {
         });
         return AjaxResult.success("操作成功",lists);
     }
-
+    //精真估
     @ResponseBody
     @GetMapping("cartype")
     public AjaxResult ssss(Long makeId) throws NoSuchPaddingException, BadPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, UnsupportedEncodingException, InvalidKeyException, InvalidKeySpecException {
@@ -1449,7 +1454,7 @@ public class test extends BaseController {
 
         return AjaxResult.success(lists);
     }
-
+    //精真估
     @ResponseBody
     @GetMapping("series")
     public AjaxResult series(Long modelId) throws NoSuchPaddingException, BadPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, UnsupportedEncodingException, InvalidKeyException, InvalidKeySpecException {
@@ -1477,6 +1482,7 @@ public class test extends BaseController {
 
         return AjaxResult.success(lists);
     }
+    //通知
     @ResponseBody
     @PostMapping("inform")
     public AjaxResult a(@RequestBody Inform inform){
