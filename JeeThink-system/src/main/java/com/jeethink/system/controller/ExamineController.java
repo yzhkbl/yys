@@ -568,5 +568,11 @@ public class ExamineController extends BaseController {
         }
         return AjaxResult.success(photoSize);
     }
+
+
+    @GetMapping("/delete/order")
+    public AjaxResult deleteOrder(String transactionCode){
+        return toAjax(examineMapper.deleteOrderTotal(transactionCode));
+    }
 }
 

@@ -1,5 +1,6 @@
 package com.jeethink.system.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,9 +62,13 @@ public class ZyjrOverdueNewServiceImpl implements IZyjrOverdueNewService
     public int insertZyjrOverdueNew(ZyjrOverdueNew zyjrOverdueNew)
     {
         if(selectZyjrOverdueNewById(zyjrOverdueNew.getTransactionCode())!=null){
-            return zyjrOverdueNewMapper.updateZyjrOverdueNew(zyjrOverdueNew);
+            ZyjrOverdueNew date = zyjrOverdueNewMapper.selectZyjrOverdueNewById(zyjrOverdueNew.getTransactionCode());
+            date.setTime(new Date());
+            return zyjrOverdueNewMapper.updateZyjrOverdueNew(date);
         }else {
-            return zyjrOverdueNewMapper.insertZyjrOverdueNew(zyjrOverdueNew);
+            ZyjrOverdueNew date = zyjrOverdueNewMapper.selectZyjrOverdueNewById(zyjrOverdueNew.getTransactionCode());
+            date.setTime(new Date());
+            return zyjrOverdueNewMapper.insertZyjrOverdueNew(date);
         }
     }
 

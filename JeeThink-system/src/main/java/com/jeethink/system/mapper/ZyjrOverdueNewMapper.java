@@ -63,4 +63,5 @@ public interface ZyjrOverdueNewMapper
     ZyjrOverdueNew findOverdue(String transactionCode);
     //OverdueCar findCar(String transactionCode);
     BorrowerVo findBorrower(String transactionCode);
+
 }

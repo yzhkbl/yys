@@ -21,10 +21,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="surcharge"    column="surcharge"    />
         <result property="continuity"    column="continuity"    />
         <result property="transactionCode"    column="transaction_code"    />
+        <result property="time"    column="time"    />
     </resultMap>
 
     <sql id="selectZyjrOverdueNewVo">
-        select id, borrower, id_card, phone_number, bank_card, should_stages, repayment_date, by_stages, loan_amount, repayment_amount, late_fee, overdue_amount, cumulative, surcharge, continuity, transaction_code from zyjr_overdue_new
+        select id, borrower, id_card, phone_number, bank_card, should_stages, repayment_date, by_stages, loan_amount, repayment_amount, late_fee, overdue_amount, cumulative, surcharge, continuity, transaction_code,time from zyjr_overdue_new
     </sql>
 
     <select id="selectZyjrOverdueNewList" parameterType="ZyjrOverdueNew" resultMap="ZyjrOverdueNewResult">
@@ -45,6 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="surcharge != null "> and surcharge = #{surcharge}</if>
             <if test="continuity != null "> and continuity = #{continuity}</if>
             <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
+            <if test="time != null  and time != ''"> and time = #{time}</if>
         </where>
     </select>
     
@@ -71,6 +73,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="surcharge != null">surcharge,</if>
             <if test="continuity != null">continuity,</if>
             <if test="transactionCode != null">transaction_code,</if>
+            <if test="time != null">time,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="borrower != null">#{borrower},</if>
@@ -88,6 +91,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="surcharge != null">#{surcharge},</if>
             <if test="continuity != null">#{continuity},</if>
             <if test="transactionCode != null">#{transactionCode},</if>
+            <if test="time != null">#{time},</if>
          </trim>
     </insert>
 
@@ -109,6 +113,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="surcharge != null">surcharge = #{surcharge},</if>
             <if test="continuity != null">continuity = #{continuity},</if>
             <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+            <if test="time != null">time = #{time},</if>
         </trim>
         where transaction_code = #{transactionCode}
     </update>

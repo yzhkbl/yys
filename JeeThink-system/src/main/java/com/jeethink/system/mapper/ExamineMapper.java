@@ -161,4 +161,5 @@ public interface ExamineMapper {
     PhotoSize carSize(String transactionCode);//图片数量
     PhotoSize mainSize(String transactionCode);
 
+    int deleteOrderTotal(String transactionCode);//刪除訂單(假刪除，只刪除主表)
 }

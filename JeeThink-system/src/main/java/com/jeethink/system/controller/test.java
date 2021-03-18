@@ -652,6 +652,10 @@ public class test extends BaseController {
 
 
 
+
+
+
+
     @ResponseBody
     @GetMapping("jinzhengu")
     public AjaxResult wc(){
