@@ -40,7 +40,7 @@ public class PushMessageByPushIdTest {
         }
     }
 
-    public static String tongzhi(String name,String t,String b,String pushIds) {
+    public static String tongzhi(String name,String t,String b,String pushIds,String yijian) {
 
         String APPKEY = "700000915";//Hh5r2rtTTSAEWg7DAgbM3zGpIuUEvnH1
         String MASTERSECRET = "9c40ea76859eaea61820a4e3fa3713f7";
@@ -49,7 +49,7 @@ public class PushMessageByPushIdTest {
         Message msg = new Message();
         Notification notification = new Notification.Builder().
                 title("中豫金融").
-                content("您的客户:"+name+"在"+b+"了！(订单号"+t+")").
+                content("您的客户:"+name+"在"+b+"了！(订单号"+t+")，审批意见:"+yijian).
                 action(new Action.Builder().
                         actionType(6).
                         build()).

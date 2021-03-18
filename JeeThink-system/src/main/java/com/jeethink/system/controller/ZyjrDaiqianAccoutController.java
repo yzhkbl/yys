@@ -150,17 +150,14 @@ public class ZyjrDaiqianAccoutController extends BaseController
             zyjrOrderProgress.setProgress(4);
             examineMapper.updateOrderProgress(zyjrOrderProgress);
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaiqian.getTransactionCode(),"贷前通过",stringsList);
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaiqian.getTransactionCode(),zyjrDaiqian.getOpinion(),"贷前通过",stringsList);
             Xiaoxi xiaoxi=new Xiaoxi();
             xiaoxi.setCode(zyjrDaiqian.getTransactionCode());
-            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"贷前通过了！(订单号"+zyjrDaiqian.getTransactionCode()+")");
+            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"贷前通过了！(订单号"+zyjrDaiqian.getTransactionCode()+"),通过意见："+zyjrDaiqian.getOpinion());
             xiaoxi.setDate(date);
             xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);
         }else if(as!=null&&zyjrDaiqian.getState()!=null&&zyjrDaiqian.getState().equals("2")){
-            as.setGps("2");
-            as.setInsurance("2");
-            as.setAccount("2");
             as.setTijiao("0");
             as.setState("2");
             as.setGpsPic("2");
@@ -169,19 +166,19 @@ public class ZyjrDaiqianAccoutController extends BaseController
             zyjrGrantImage.setOrderState(2);
             zyjrGrantImageMapper.updateZyjrGrantImage(zyjrGrantImage);
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaiqian.getTransactionCode(),"贷前退回",stringsList);
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaiqian.getTransactionCode(),zyjrDaiqian.getOpinion(),"贷前退回",stringsList);
             Xiaoxi xiaoxi=new Xiaoxi();
             xiaoxi.setCode(zyjrDaiqian.getTransactionCode());
-            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"贷前退回了！(订单号"+zyjrDaiqian.getTransactionCode()+")");
+            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"贷前退回了！(订单号"+zyjrDaiqian.getTransactionCode()+"),退回意见："+zyjrDaiqian.getOpinion());
             xiaoxi.setDate(date);
             xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);
         }else if(as!=null&&zyjrDaiqian.getState()!=null&&zyjrDaiqian.getState().equals("3")){
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaiqian.getTransactionCode(),"贷前拒绝",stringsList);
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(),zyjrDaiqian.getTransactionCode(),"贷前拒绝",stringsList,zyjrDaiqian.getOpinion());
             Xiaoxi xiaoxi=new Xiaoxi();
             xiaoxi.setCode(zyjrDaiqian.getTransactionCode());
-            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"贷前拒绝了！(订单号"+zyjrDaiqian.getTransactionCode()+")");
+            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"贷前拒绝了！(订单号"+zyjrDaiqian.getTransactionCode()+"),拒绝意见："+zyjrDaiqian.getOpinion());
             xiaoxi.setDate(date);
             xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);

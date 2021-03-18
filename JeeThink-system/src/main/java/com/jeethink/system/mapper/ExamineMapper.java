@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface ExamineMapper {
     List<Region> selectRegion(Region r);
-    List<provinces> selectP();
+    provinces selectP(String province);
     List<ZyjrDaiqian> selectAllList(ZyjrDaiqian zyjrAllowBasics);
     ZyjrDaiqian selByDaiqian(String transactionCode);
     int insertDaiqian(ZyjrDaiqian zyjrDaiqian);
@@ -116,7 +116,7 @@ public interface ExamineMapper {
     int updateDiya(ZyjrDiya q);
     ZyjrDiya findDiya(String transactionCode);
 
-    List<cities> selectC(String pid);
+    cities selectC(String city);
 
     List<orderVo>searchOrder(@Param("search") String search,@Param("userId") Long userId);//安卓订单搜索框
 

@@ -96,7 +96,7 @@ public class ZyjrCar extends BaseEntity
     private String oneCarState;
     private String twoCarState;
     private String threeCarState;
-
+    private List<ZyjrCarProgramme> zyjrCarProgramme;
 
     /** id */
     private Long id;
@@ -109,6 +109,14 @@ public class ZyjrCar extends BaseEntity
 
     private String type;
     String pid;
+
+    public List<ZyjrCarProgramme> getZyjrCarProgramme() {
+        return zyjrCarProgramme;
+    }
+
+    public void setZyjrCarProgramme(List<ZyjrCarProgramme> zyjrCarProgramme) {
+        this.zyjrCarProgramme = zyjrCarProgramme;
+    }
 
     public String getPid() {
         return pid;

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.jeethink.common.core.domain.entity.SysUser;
 import com.jeethink.common.utils.StringUtils;
 import com.jeethink.common.utils.http.HttpUtils;
 import com.jeethink.system.domain.*;
@@ -62,6 +63,12 @@ public class ZyjrJzgAddOrderController extends BaseController
     private ZyjrCarLoanMapper zyjrCarLoanMapper;
     @Autowired
     private ExamineMapper examineMapper;
+    @Autowired
+    private ZyjrBorrowerMapper zyjrBorrowerMapper;
+    @Autowired
+    private SysUserMapper sysUserMapper;
+
+
     private static final String userId="18686";
     private static final String tokenId="177";
     private static final String tokenKey="82CF76A1-3C3A-4E0B-9969-1789137982F5";
@@ -144,7 +151,7 @@ public class ZyjrJzgAddOrderController extends BaseController
         return AjaxResult.success(zyjrPics);
     }
 
-    @GetMapping("/get")
+   /* @GetMapping("/get")
     public AjaxResult sd(String pid){
         if(pid!=null){
            List<cities> l= examineMapper.selectC(pid);
@@ -165,15 +172,23 @@ public class ZyjrJzgAddOrderController extends BaseController
             return valueVo;
         }).collect(Collectors.toList());
         return AjaxResult.success(list);
-    }
+    }*/
+
+
 
     @ApiOperation("11111111")
     @PostMapping("/ceshi")
     public AjaxResult ad(@RequestBody JingVo jingVo)  {
+        ZyjrBorrower zyjrBorrower=zyjrBorrowerMapper.selectById(jingVo.getTransactionCode());
+        SysUser user=sysUserMapper.selectUserById(Long.parseLong(zyjrBorrower.getUserId().toString()));
+        ZyjrStartPage startPage=examineMapper.findByStarts(jingVo.getTransactionCode());
         ZyjrJzgAddOrder jzgorder=zyjrJzgAddOrderMapper.selectZyjrJzgAddOrderByTransactionCode(jingVo.getTransactionCode());
         ZyjrPhotoCar c=zyjrPhotoCarMapper.selectByT(jingVo.getTransactionCode());
         List<SysFileInfo> list = sysFileInfoMapper.photoCar(c.getId());
         ZyjrCarLoan a=zyjrCarLoanMapper.selectHandle(jingVo.getTransactionCode());
+        String[] strings=startPage.getBusinessPlace().split(" ");
+        provinces provinces=examineMapper.selectP(strings[0]);
+        cities cities= examineMapper.selectC(strings[1]);
         Map<String,String> map=new HashMap<>();
         map.put("tokenId","177");
         map.put("programmeId","5");
@@ -181,8 +196,8 @@ public class ZyjrJzgAddOrderController extends BaseController
         map.put("orderNum",a.getTransactionCode());
         map.put("vin",a.getVinCode());
         map.put("regionCodeStyle","1");
-        map.put("provinceId",jingVo.getProvinceId());
-        map.put("cityId",jingVo.getCityId());
+        map.put("provinceId",provinces.getProvinceid());
+        map.put("cityId",cities.getCityid());
         map.put("productType","1");
         List<jzgVo> jzgvo=new ArrayList<>();
         for (SysFileInfo sysFileInfo : list) {
@@ -194,8 +209,8 @@ public class ZyjrJzgAddOrderController extends BaseController
 
         JSONArray json3=new JSONArray().fromObject(jzgvo);
         map.put("imageList",json3.toString());
-        map.put("orderName",jingVo.getOrderName());
-        map.put("orderPhone",jingVo.getOrderPhone());
+        map.put("orderName",user.getNickName());
+        map.put("orderPhone",user.getPhonenumber());
         // map.put("carLicense",a.getCarLicense());
         //map.put("service",a.getService());
         map.put("engineNum",a.getEngineCode());

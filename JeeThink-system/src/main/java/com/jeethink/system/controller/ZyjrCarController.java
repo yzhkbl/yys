@@ -8,16 +8,11 @@ import com.jeethink.common.utils.SecurityUtils;
 import com.jeethink.common.utils.file.FileUploadUtils;
 import com.jeethink.common.utils.file.FileUtils;
 import com.jeethink.common.utils.ip.IpUtils;
-import com.jeethink.system.domain.SysFileInfo;
-import com.jeethink.system.domain.ZyjrCarAccount;
-import com.jeethink.system.domain.ZyjrCarParent;
+import com.jeethink.system.domain.*;
 import com.jeethink.system.domain.vo.Linkman;
 import com.jeethink.system.domain.vo.StoreInformation;
 import com.jeethink.system.domain.vo.carVo;
-import com.jeethink.system.mapper.ExamineMapper;
-import com.jeethink.system.mapper.SysFileInfoMapper;
-import com.jeethink.system.mapper.ZyjrCarAccountMapper;
-import com.jeethink.system.mapper.ZyjrCarParentMapper;
+import com.jeethink.system.mapper.*;
 import com.jeethink.system.service.IZyjrCarAccountService;
 import com.jeethink.system.util.androidUpload;
 import io.swagger.annotations.Api;
@@ -29,7 +24,6 @@ import com.jeethink.common.annotation.Log;
 import com.jeethink.common.core.controller.BaseController;
 import com.jeethink.common.core.domain.AjaxResult;
 import com.jeethink.common.enums.BusinessType;
-import com.jeethink.system.domain.ZyjrCar;
 import com.jeethink.system.service.IZyjrCarService;
 import com.jeethink.common.utils.poi.ExcelUtil;
 import com.jeethink.common.core.page.TableDataInfo;
@@ -62,6 +56,10 @@ ZyjrCarController extends BaseController {
     private ZyjrCarAccountMapper zyjrCarAccountMapper;
     @Autowired
     private ZyjrCarParentMapper zyjrCarParentMapper;
+    @Autowired
+    private ZyjrCarProgrammeMapper zyjrCarProgrammeMapper;
+    @Autowired
+    private ZyjrCarRateMapper zyjrCarRateMapper;
 
 
     /**
@@ -170,7 +168,18 @@ ZyjrCarController extends BaseController {
     @PreAuthorize("@ss.hasPermi('organization:car:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id) {
-        return AjaxResult.success(zyjrCarService.selectZyjrCarById(id));
+        ZyjrCar zyjrCar = zyjrCarService.selectZyjrCarById(id);
+        ZyjrCarProgramme zyjrCarProgramme=new ZyjrCarProgramme();
+        zyjrCarProgramme.setCarId(id.toString());
+        List<ZyjrCarProgramme> zyjrCarProgrammes = zyjrCarProgrammeMapper.selectZyjrCarProgrammeList(zyjrCarProgramme);
+        for (ZyjrCarProgramme carProgramme : zyjrCarProgrammes) {
+            ZyjrCarRate zyjrCarRate=new ZyjrCarRate();
+            zyjrCarRate.setProgrammeId(carProgramme.getId().toString());
+            List<ZyjrCarRate> zyjrCarRates = zyjrCarRateMapper.selectZyjrCarRateList(zyjrCarRate);
+            carProgramme.setZyjrCarRate(zyjrCarRates);
+        }
+        zyjrCar.setZyjrCarProgramme(zyjrCarProgrammes);
+        return AjaxResult.success(zyjrCar);
     }
 
     /**
@@ -181,6 +190,16 @@ ZyjrCarController extends BaseController {
     @PostMapping
     public AjaxResult add(@RequestBody ZyjrCar zyjrCar) {
         int a = zyjrCarService.insertZyjrCar(zyjrCar);
+        if(zyjrCar!=null&&zyjrCar.getZyjrCarProgramme().size()>0){
+            for (ZyjrCarProgramme zyjrCarProgramme : zyjrCar.getZyjrCarProgramme()) {
+                zyjrCarProgramme.setCarId(zyjrCar.getId().toString());
+                zyjrCarProgrammeMapper.insertZyjrCarProgramme(zyjrCarProgramme);
+                for (ZyjrCarRate zyjrCarRate : zyjrCarProgramme.getZyjrCarRate()) {
+                    zyjrCarRate.setProgrammeId(zyjrCarProgramme.getId().toString());
+                    zyjrCarRateMapper.insertZyjrCarRate(zyjrCarRate);
+                }
+            }
+        }
 
         return toAjax(a);
     }
@@ -401,7 +420,19 @@ ZyjrCarController extends BaseController {
     @Log(title = "车商信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody ZyjrCar zyjrCar) {
-        return toAjax(zyjrCarService.updateZyjrCar(zyjrCar));
+        int a=zyjrCarService.updateZyjrCar(zyjrCar);
+        if(zyjrCar!=null&&zyjrCar.getZyjrCarProgramme().size()>0){
+            zyjrCarProgrammeMapper.deleteZyjrCarProgrammeById(Integer.parseInt(zyjrCar.getId().toString()));
+            for (ZyjrCarProgramme zyjrCarProgramme : zyjrCar.getZyjrCarProgramme()) {
+                zyjrCarProgramme.setCarId(zyjrCar.getId().toString());
+                zyjrCarProgrammeMapper.insertZyjrCarProgramme(zyjrCarProgramme);
+                for (ZyjrCarRate zyjrCarRate : zyjrCarProgramme.getZyjrCarRate()) {
+                    zyjrCarRate.setProgrammeId(zyjrCarProgramme.getId().toString());
+                    zyjrCarRateMapper.insertZyjrCarRate(zyjrCarRate);
+                }
+            }
+        }
+        return toAjax(a);
     }
 
     /**

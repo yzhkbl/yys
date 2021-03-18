@@ -52,6 +52,14 @@ public class ChinaPayController {
         return AjaxResult.success(result);
     }
 
+    public static void main(String[] args) {
+        Map<String,String> map=new HashMap<>();
+        map.put("1","1");
+        SecssUtil secssUtil=new SecssUtil();
+        secssUtil.sign(map);
+        System.err.println(secssUtil.getSign());
+    }
+
     @GetMapping("code2")
     @ResponseBody
     public AjaxResult fi2nd(String carNo) {

@@ -251,16 +251,16 @@ public class IStageExamineServiceImpl implements IStageExamineService {
             //String date = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, new Date()).substring(11, 19);
             webSocket.sendMessage("终审已通过," + date + ",贷前资料审核," + q.getTransactionCode() + "");
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), q.getTransactionCode(), "终审通过", stringsList);
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), q.getTransactionCode(), "终审通过", stringsList,q.getAdvise());
             Xiaoxi xiaoxi=new Xiaoxi();
             xiaoxi.setCode(q.getTransactionCode());
-            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在终审通过了！(订单号"+q.getTransactionCode()+")");
+            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在终审通过了！(订单号"+q.getTransactionCode()+"),通过意见:"+q.getAdvise());
             xiaoxi.setDate(date2);
             xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);
         } else if (q.getApprovalType() == 2) {
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), q.getTransactionCode(), "终审退回", stringsList);
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), q.getTransactionCode(), "终审退回", stringsList,q.getAdvise());
 
             ZyjrAllowOpinion zyjrAllowOpinion = new ZyjrAllowOpinion();
             zyjrAllowOpinion.setTransactionCode(q.getTransactionCode());
@@ -268,16 +268,16 @@ public class IStageExamineServiceImpl implements IStageExamineService {
             zyjrAllowOpinionMapper.updateZyjrAllowOpinion(zyjrAllowOpinion);
             Xiaoxi xiaoxi=new Xiaoxi();
             xiaoxi.setCode(q.getTransactionCode());
-            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在终审退回了！(订单号"+q.getTransactionCode()+")");
+            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在终审退回了！(订单号"+q.getTransactionCode()+"),退回意见:"+q.getAdvise());
             xiaoxi.setDate(date2);
             xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);
         } else if (q.getApprovalType() == 3) {
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), q.getTransactionCode(), "终审拒绝", stringsList);
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), q.getTransactionCode(), "终审拒绝", stringsList,q.getAdvise());
             Xiaoxi xiaoxi=new Xiaoxi();
             xiaoxi.setCode(q.getTransactionCode());
-            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在终审拒绝了！(订单号"+q.getTransactionCode()+")");
+            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在终审拒绝了！(订单号"+q.getTransactionCode()+"),拒绝意见:"+q.getAdvise());
             xiaoxi.setDate(date2);
             xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);
@@ -342,10 +342,10 @@ public class IStageExamineServiceImpl implements IStageExamineService {
             examineMapper.updateGrantState(zyjrSubmitStateGrant);
 
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), q.getTransactionCode(), "授信退回", stringsList);
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), q.getTransactionCode(), "授信退回", stringsList,q.getAdvise());
             Xiaoxi xiaoxi=new Xiaoxi();
             xiaoxi.setCode(q.getTransactionCode());
-            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在授信退回了！(订单号"+q.getTransactionCode()+")");
+            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在授信退回了！(订单号"+q.getTransactionCode()+"),退回意见:"+q.getAdvise());
             xiaoxi.setDate(date2);
             xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);
@@ -356,19 +356,19 @@ public class IStageExamineServiceImpl implements IStageExamineService {
             zyjrOrderProgress.setProgress(3);
             examineMapper.updateOrderProgress(zyjrOrderProgress);
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), q.getTransactionCode(), "授信通过", stringsList);
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), q.getTransactionCode(), "授信通过", stringsList,q.getAdvise());
             Xiaoxi xiaoxi=new Xiaoxi();
             xiaoxi.setCode(q.getTransactionCode());
-            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在授信通过了！(订单号"+q.getTransactionCode()+")");
+            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在授信通过了！(订单号"+q.getTransactionCode()+"),通过意见:"+q.getAdvise());
             xiaoxi.setDate(date2);
             xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);
         } else {
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), q.getTransactionCode(), "授信拒绝", stringsList);
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), q.getTransactionCode(), "授信拒绝", stringsList,q.getAdvise());
             Xiaoxi xiaoxi=new Xiaoxi();
             xiaoxi.setCode(q.getTransactionCode());
-            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在授信拒绝了！(订单号"+q.getTransactionCode()+")");
+            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在授信拒绝了！(订单号"+q.getTransactionCode()+"),拒绝意见:"+q.getAdvise());
             xiaoxi.setDate(date2);
             xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);

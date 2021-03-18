@@ -80,10 +80,10 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
              zyjrSubmitStateAllow.setTransactionCode(zyjrAllowOpinion.getTransactionCode());
              examineMapper.updateAllowState(zyjrSubmitStateAllow);*/
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), zyjrAllowOpinion.getTransactionCode(), "初审退回", stringsList);
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), zyjrAllowOpinion.getTransactionCode(), "初审退回", stringsList,zyjrAllowOpinion.getAdvise());
             Xiaoxi xiaoxi=new Xiaoxi();
             xiaoxi.setCode(zyjrAllowOpinion.getTransactionCode());
-            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在初审退回了！(订单号"+zyjrAllowOpinion.getTransactionCode()+")");
+            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在初审退回了！(订单号"+zyjrAllowOpinion.getTransactionCode()+"),退回意见："+zyjrAllowOpinion.getAdvise());
             xiaoxi.setDate(date2);
             xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);
@@ -93,19 +93,19 @@ public class ZyjrAllowOpinionServiceImpl implements IZyjrAllowOpinionService
             //String date = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, new Date()).substring(11, 19);
             webSocket.sendMessage("终审来新单了," + date + ",终审," + zyjrAllowOpinion.getTransactionCode() + "");
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), zyjrAllowOpinion.getTransactionCode(), "初审通过", stringsList);
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), zyjrAllowOpinion.getTransactionCode(), "初审通过", stringsList,zyjrAllowOpinion.getAdvise());
             Xiaoxi xiaoxi=new Xiaoxi();
             xiaoxi.setCode(zyjrAllowOpinion.getTransactionCode());
-            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在初审通过了！(订单号"+zyjrAllowOpinion.getTransactionCode()+")");
+            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在初审通过了！(订单号"+zyjrAllowOpinion.getTransactionCode()+"),通过意见："+zyjrAllowOpinion.getAdvise());
             xiaoxi.setDate(date2);
             xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);
         } else if (zyjrAllowOpinion.getApprovalType() == 3) {
             String stringsList = sysUserMapper.selectId(zyjrBorrower.getUserId());
-            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), zyjrAllowOpinion.getTransactionCode(), "初审拒绝", stringsList);
+            PushMessageByPushIdTest.tongzhi(zyjrBorrower.getUserName(), zyjrAllowOpinion.getTransactionCode(), "初审拒绝", stringsList,zyjrAllowOpinion.getAdvise());
             Xiaoxi xiaoxi=new Xiaoxi();
             xiaoxi.setCode(zyjrAllowOpinion.getTransactionCode());
-            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在初审拒绝了！(订单号"+zyjrAllowOpinion.getTransactionCode()+")");
+            xiaoxi.setData("您的客户:"+zyjrBorrower.getUserName()+"在初审拒绝了！(订单号"+zyjrAllowOpinion.getTransactionCode()+"),拒绝意见："+zyjrAllowOpinion.getAdvise());
             xiaoxi.setDate(date2);
             xiaoxi.setUser(zyjrBorrower.getUserId().toString());
             examineMapper.insertXiaoxi(xiaoxi);
