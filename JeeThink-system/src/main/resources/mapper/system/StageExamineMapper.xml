@@ -213,4 +213,18 @@
         from zyjr_supplement
         where transaction_code=#{transactionCode}
     </select>
+    <select id="myCustomer" resultType="com.jeethink.system.domain.vo.ZyjrGrant">
+        select distinct b.id, a.team,e.create_time,d.grant_id,d.grant_by,a.car_information, d.actual_price, d.loan_amount, d.repayment_term, a.car_type, b.user_id, b.order_state,
+        b.transaction_code,b.user_name as name,c.approval_type,f.submit_state
+        from zyjr_borrower b
+        left join zyjr_start_page e on b.transaction_code=e.transaction_code
+        left join zyjr_business a on b.transaction_code=a.transaction_code
+        left join zyjr_car_loan d on b.transaction_code=d.transaction_code
+        left join zyjr_grant_opinion c on b.transaction_code=c.transaction_code
+        left join zyjr_submit_state_grant f on b.transaction_code=f.transaction_code
+        left join zyjr_daiqian g on b.transaction_code=g.transaction_code
+        left join zyjr_daihou h on b.transaction_code=h.transaction_code
+        where a.update_by=#{userId} or d.allow_id=#{userId} or d.repeat_id=#{userId} or d.grant_id=#{userId} or g.user_id=#{userId} or h.user_id=#{userId}
+        order by e.create_time desc
+    </select>
 </mapper>

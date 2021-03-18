@@ -45,13 +45,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="cheliangyanse"    column="cheliangyanse"    />
         <result property="gpsCost"    column="gps_cost"    />
         <result property="beizhu"    column="beizhu"    />
+        <result property="agentRate"    column="agent_rate"    />
     </resultMap>
 
     <sql id="selectZyjrCarLoanVo">
         select id, car_type, vin_code, brand, car_series, car_year, displacement, gear, style, engine_code, fuel_type,
         mileage, start_date, actual_price, loan_amount, repayment_term, interest_rate, deposit, transaction_code, order_state,
         user_id ,allow_id,repeat_id,grant_id,allow_by,repeat_by,grant_id,seller_name,seller_id,seller_code,approval_type,
-        product_type,loan_product,loan_state,cheliangleixing,chepaileixing,yongtu,cheliangyanse,gps_cost,beizhu
+        product_type,loan_product,loan_state,cheliangleixing,chepaileixing,yongtu,cheliangyanse,gps_cost,beizhu,agent_rate
         from zyjr_car_loan
     </sql>
 
@@ -150,6 +151,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="cheliangyanse != null">cheliangyanse,</if>
             <if test="gpsCost != null">gps_cost,</if>
             <if test="beizhu != null">beizhu,</if>
+            <if test="agentRate != null">agent_rate,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="carType != null">#{carType},</if>
@@ -191,6 +193,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="cheliangyanse != null">#{cheliangyanse},</if>
             <if test="gpsCost != null">#{gpsCost},</if>
             <if test="beizhu != null">#{beizhu},</if>
+            <if test="agentRate != null">#{agentRate},</if>
          </trim>
     </insert>
 
@@ -236,6 +239,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="cheliangyanse != null">cheliangyanse=#{cheliangyanse},</if>
             <if test="gpsCost != null">gps_cost=#{gpsCost},</if>
             <if test="beizhu != null">beizhu=#{beizhu},</if>
+            <if test="agentRate != null">agent_rate=#{agentRate},</if>
         </trim>
         where user_id = #{userId} and transaction_code=#{transactionCode}
     </update>
@@ -282,6 +286,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="cheliangyanse != null">cheliangyanse=#{cheliangyanse},</if>
             <if test="gpsCost != null">gps_cost=#{gpsCost},</if>
             <if test="beizhu != null">beizhu=#{beizhu},</if>
+            <if test="agentRate != null">agent_rate=#{agentRate},</if>
         </trim>
         where transaction_code=#{transactionCode}
     </update>

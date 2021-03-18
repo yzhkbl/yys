@@ -479,7 +479,7 @@ public class ExamineController extends BaseController {
     }
 
 
-    @GetMapping("/loan")
+    @GetMapping("/loan")//授信贷款信息
     public AjaxResult countGrant(String transactionCode){
         ZyjrCarLoan zyjrCarLoan = examineMapper.findCar(transactionCode);
         ZyjrFundSide zyjrFundSide = examineMapper.findFundSide(transactionCode);

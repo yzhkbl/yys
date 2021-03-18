@@ -126,6 +126,7 @@ public class ZyjrCarLoan extends BaseEntity
     private String cheliangyanse;   //车辆颜色
 
     private String beizhu;
+    private BigDecimal agentRate;//对车商费率
 
     public BigDecimal getIntentionPrice() {
         return intentionPrice;
