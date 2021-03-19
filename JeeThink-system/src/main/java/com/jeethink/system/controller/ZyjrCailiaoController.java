@@ -79,7 +79,7 @@ public class ZyjrCailiaoController extends BaseController
         ExcelUtil<ZyjrCailiao> util = new ExcelUtil<ZyjrCailiao>(ZyjrCailiao.class);
         return util.exportExcel(list, "cailiao");
     }
-
+    //上报材料的立即处理
     @PostMapping("/go")
     public AjaxResult post(@RequestBody ZyjrCailiao zyjrCailiao){
         if(zyjrCailiao.getUserId()==null){
@@ -125,6 +125,7 @@ public class ZyjrCailiaoController extends BaseController
 
         return AjaxResult.success();
     }
+    //测试
     @GetMapping("demaxiya")
     public AjaxResult gg(){
         Region region=new Region();
@@ -133,7 +134,7 @@ public class ZyjrCailiaoController extends BaseController
         List<Region> a=examineMapper.selectRegion(region);
         return AjaxResult.success(a);
     }
-
+    //放款的回显
     @GetMapping("fenqi")
     public AjaxResult getfenqi(String transactionCode){
         ZyjrBusiness b=zyjrBusinessMapper.selectById(transactionCode);

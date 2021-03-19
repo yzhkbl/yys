@@ -31,8 +31,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectZyjrBusinessList" parameterType="ZyjrBusiness" resultMap="ZyjrBusinessResult">
          select a.id, a.team,a.operator,a.update_by,c.create_time,c.credit_state,a.false_operator,a.false_operator_id, a.car_information, a.intention_price, a.loan_money, a.repay_period, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name
-         from zyjr_business a
-         left join zyjr_borrower b on a.transaction_code=b.transaction_code
+         from  zyjr_borrower b
+         left join zyjr_business a on a.transaction_code=b.transaction_code
          left join zyjr_start_page c on a.transaction_code=c.transaction_code
          left join zyjr_details d on a.transaction_code=d.transaction_code
         <where>
@@ -56,8 +56,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     <select id="selectZyjrBusinessjujueList" parameterType="ZyjrBusiness" resultMap="ZyjrBusinessResult">
          select a.id, a.team,a.operator,a.update_by,c.create_time,c.credit_state,a.false_operator,a.false_operator_id, a.car_information, a.intention_price, a.loan_money, a.repay_period, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name
-         from zyjr_business a
-         left join zyjr_borrower b on a.transaction_code=b.transaction_code
+         from zyjr_borrower  b
+         left join zyjr_business a on a.transaction_code=b.transaction_code
          left join zyjr_start_page c on a.transaction_code=c.transaction_code
         <where>
             a.order_state = 1 and b.mianqian is null
@@ -77,8 +77,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     <select id="selectZyjrBusinesstongguoList" parameterType="ZyjrBusiness" resultMap="ZyjrBusinessResult">
          select a.id, a.team,a.operator,a.update_by,c.create_time,c.credit_state,a.false_operator,a.false_operator_id, a.car_information, a.intention_price, a.loan_money, a.repay_period, a.car_type, a.user_id, a.order_state,a.transaction_code,b.user_name
-         from zyjr_business a
-         left join zyjr_borrower b on a.transaction_code=b.transaction_code
+         from  zyjr_borrower b
+         left join zyjr_business a on a.transaction_code=b.transaction_code
          left join zyjr_start_page c on a.transaction_code=c.transaction_code
         left join zyjr_details d on a.transaction_code=d.transaction_code
         <where>
