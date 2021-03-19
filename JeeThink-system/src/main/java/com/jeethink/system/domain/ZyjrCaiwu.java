@@ -39,15 +39,15 @@ public class ZyjrCaiwu extends BaseEntity
 
     /** 图片 */
     @Excel(name = "图片")
-    private String pic;
+    private String transactionCode;
 
-    /** $column.columnComment */
-    @Excel(name = "图片")
-    private String pics;
+    public String getTransactionCode() {
+        return transactionCode;
+    }
 
-    /** $column.columnComment */
-    @Excel(name = "图片")
-    private String picss;
+    public void setTransactionCode(String transactionCode) {
+        this.transactionCode = transactionCode;
+    }
 
     public void setId(Long id)
     {
@@ -94,33 +94,7 @@ public class ZyjrCaiwu extends BaseEntity
     {
         return time;
     }
-    public void setPic(String pic) 
-    {
-        this.pic = pic;
-    }
 
-    public String getPic() 
-    {
-        return pic;
-    }
-    public void setPics(String pics) 
-    {
-        this.pics = pics;
-    }
-
-    public String getPics() 
-    {
-        return pics;
-    }
-    public void setPicss(String picss) 
-    {
-        this.picss = picss;
-    }
-
-    public String getPicss() 
-    {
-        return picss;
-    }
 
     @Override
     public String toString() {
@@ -131,9 +105,7 @@ public class ZyjrCaiwu extends BaseEntity
             .append("money", getMoney())
             .append("remark", getRemark())
             .append("time", getTime())
-            .append("pic", getPic())
-            .append("pics", getPics())
-            .append("picss", getPicss())
+
             .toString();
     }
 }

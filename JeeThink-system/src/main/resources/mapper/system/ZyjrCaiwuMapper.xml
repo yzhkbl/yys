@@ -11,13 +11,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="money"    column="money"    />
         <result property="remark"    column="remark"    />
         <result property="time"    column="time"    />
-        <result property="pic"    column="pic"    />
-        <result property="pics"    column="pics"    />
-        <result property="picss"    column="picss"    />
+        <result property="transactionCode"    column="transaction_code"    />
+
     </resultMap>
 
     <sql id="selectZyjrCaiwuVo">
-        select id, mode, zhanghu, money, remark, time, pic, pics, picss from zyjr_caiwu
+        select id, mode, zhanghu, money, remark, time, transaction_code from zyjr_caiwu
     </sql>
 
     <select id="selectZyjrCaiwuList" parameterType="ZyjrCaiwu" resultMap="ZyjrCaiwuResult">
@@ -27,15 +26,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="zhanghu != null  and zhanghu != ''"> and zhanghu = #{zhanghu}</if>
             <if test="money != null  and money != ''"> and money = #{money}</if>
             <if test="time != null "> and time = #{time}</if>
-            <if test="pic != null  and pic != ''"> and pic = #{pic}</if>
-            <if test="pics != null  and pics != ''"> and pics = #{pics}</if>
-            <if test="picss != null  and picss != ''"> and picss = #{picss}</if>
+            <if test="transactionCode != null  and transactionCode != ''"> and transaction_code = #{transactionCode}</if>
+
         </where>
     </select>
     
     <select id="selectZyjrCaiwuById" parameterType="Long" resultMap="ZyjrCaiwuResult">
         <include refid="selectZyjrCaiwuVo"/>
         where id = #{id}
+    </select>
+    <select id="selectZyjrCaiwuByT" parameterType="String" resultMap="ZyjrCaiwuResult">
+        <include refid="selectZyjrCaiwuVo"/>
+        where transaction_code = #{id}
     </select>
         
     <insert id="insertZyjrCaiwu" parameterType="ZyjrCaiwu" useGeneratedKeys="true" keyProperty="id">
@@ -46,9 +48,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="money != null">money,</if>
             <if test="remark != null">remark,</if>
             <if test="time != null">time,</if>
-            <if test="pic != null">pic,</if>
-            <if test="pics != null">pics,</if>
-            <if test="picss != null">picss,</if>
+            <if test="transactionCode != transaction_code">transaction_code,</if>
+
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="mode != null">#{mode},</if>
@@ -56,9 +57,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="money != null">#{money},</if>
             <if test="remark != null">#{remark},</if>
             <if test="time != null">#{time},</if>
-            <if test="pic != null">#{pic},</if>
-            <if test="pics != null">#{pics},</if>
-            <if test="picss != null">#{picss},</if>
+            <if test="transactionCode != null">#{transactionCode},</if>
+
          </trim>
     </insert>
 
@@ -70,9 +70,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="money != null">money = #{money},</if>
             <if test="remark != null">remark = #{remark},</if>
             <if test="time != null">time = #{time},</if>
-            <if test="pic != null">pic = #{pic},</if>
-            <if test="pics != null">pics = #{pics},</if>
-            <if test="picss != null">picss = #{picss},</if>
+            <if test="transactionCode != null">transaction_code = #{transactionCode},</if>
+
         </trim>
         where id = #{id}
     </update>

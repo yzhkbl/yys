@@ -49,6 +49,8 @@ public class ZyjrCaiwuController extends BaseController
     private ZyjrCarMapper zyjrCarMapper;
     @Autowired
     private ZyjrPicMapper zyjrPicMapper;
+    @Autowired
+    private ZyjrCaiwuMapper zyjrCaiwuMapper;
 
     /**
      * 查询【请填写功能名称】列表
@@ -89,6 +91,8 @@ public class ZyjrCaiwuController extends BaseController
         ZyjrCarAccount zyjrCarAccount=new ZyjrCarAccount();
         zyjrCarAccount.setZyjrCarId(zyjrDaiqianAccout.getCarid());
         List<ZyjrCarAccount> zyjrCarAccounts = zyjrCarAccountMapper.selectZyjrCarAccountList(zyjrCarAccount);
+        ZyjrCaiwu zyjrCaiwu=zyjrCaiwuMapper.selectZyjrCaiwuByT(transactionCode);
+
         Object data = ajaxResult.get("data");
         Map<String,Object> map=new HashMap<>();
         map.put("xiaoshoutuandui",business.getTeam());
@@ -101,6 +105,13 @@ public class ZyjrCaiwuController extends BaseController
         map.put("cheliangleixing",zyjrCarLoan.getCheliangleixing());
         map.put("yewuquyu",zyjrCar.getArea());
         map.put("fenqiqishu",business.getRepayPeriod());
+        map.put("pic",null);
+        if(zyjrCaiwu!=null){
+            ZyjrPic zyjrPic=new ZyjrPic();
+            zyjrPic.setCaiwu(zyjrCaiwu.getId().toString());
+            List<ZyjrPic> zyjrPics = zyjrPicMapper.selectZyjrPicList(zyjrPic);
+            map.put("pic",zyjrPics);
+        }
 
 
 

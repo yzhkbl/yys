@@ -18,6 +18,7 @@ public interface ZyjrCaiwuMapper
      * @return 【请填写功能名称】
      */
     public ZyjrCaiwu selectZyjrCaiwuById(Long id);
+    ZyjrCaiwu selectZyjrCaiwuByT(String transactionCode);
 
     /**
      * 查询【请填写功能名称】列表
@@ -58,4 +59,6 @@ public interface ZyjrCaiwuMapper
      * @return 结果
      */
     public int deleteZyjrCaiwuByIds(Long[] ids);
+
+
 }
