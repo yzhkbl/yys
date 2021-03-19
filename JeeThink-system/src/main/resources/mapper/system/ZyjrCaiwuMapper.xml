@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrCaiwuMapper">
+    
+    <resultMap type="ZyjrCaiwu" id="ZyjrCaiwuResult">
+        <result property="id"    column="id"    />
+        <result property="mode"    column="mode"    />
+        <result property="zhanghu"    column="zhanghu"    />
+        <result property="money"    column="money"    />
+        <result property="remark"    column="remark"    />
+        <result property="time"    column="time"    />
+        <result property="pic"    column="pic"    />
+        <result property="pics"    column="pics"    />
+        <result property="picss"    column="picss"    />
+    </resultMap>
+
+    <sql id="selectZyjrCaiwuVo">
+        select id, mode, zhanghu, money, remark, time, pic, pics, picss from zyjr_caiwu
+    </sql>
+
+    <select id="selectZyjrCaiwuList" parameterType="ZyjrCaiwu" resultMap="ZyjrCaiwuResult">
+        <include refid="selectZyjrCaiwuVo"/>
+        <where>  
+            <if test="mode != null  and mode != ''"> and mode = #{mode}</if>
+            <if test="zhanghu != null  and zhanghu != ''"> and zhanghu = #{zhanghu}</if>
+            <if test="money != null  and money != ''"> and money = #{money}</if>
+            <if test="time != null "> and time = #{time}</if>
+            <if test="pic != null  and pic != ''"> and pic = #{pic}</if>
+            <if test="pics != null  and pics != ''"> and pics = #{pics}</if>
+            <if test="picss != null  and picss != ''"> and picss = #{picss}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrCaiwuById" parameterType="Long" resultMap="ZyjrCaiwuResult">
+        <include refid="selectZyjrCaiwuVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrCaiwu" parameterType="ZyjrCaiwu" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_caiwu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mode != null">mode,</if>
+            <if test="zhanghu != null">zhanghu,</if>
+            <if test="money != null">money,</if>
+            <if test="remark != null">remark,</if>
+            <if test="time != null">time,</if>
+            <if test="pic != null">pic,</if>
+            <if test="pics != null">pics,</if>
+            <if test="picss != null">picss,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="mode != null">#{mode},</if>
+            <if test="zhanghu != null">#{zhanghu},</if>
+            <if test="money != null">#{money},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="time != null">#{time},</if>
+            <if test="pic != null">#{pic},</if>
+            <if test="pics != null">#{pics},</if>
+            <if test="picss != null">#{picss},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrCaiwu" parameterType="ZyjrCaiwu">
+        update zyjr_caiwu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mode != null">mode = #{mode},</if>
+            <if test="zhanghu != null">zhanghu = #{zhanghu},</if>
+            <if test="money != null">money = #{money},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="time != null">time = #{time},</if>
+            <if test="pic != null">pic = #{pic},</if>
+            <if test="pics != null">pics = #{pics},</if>
+            <if test="picss != null">picss = #{picss},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrCaiwuById" parameterType="Long">
+        delete from zyjr_caiwu where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrCaiwuByIds" parameterType="String">
+        delete from zyjr_caiwu where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

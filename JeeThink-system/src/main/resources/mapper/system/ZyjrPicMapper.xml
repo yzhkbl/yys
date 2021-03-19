@@ -10,10 +10,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="filePath"    column="file_path"    />
         <result property="gpsId"    column="gps_id"    />
         <result property="jinzhengu"    column="jinzhengu"    />
+        <result property="caiwu"    column="caiwu"    />
     </resultMap>
 
     <sql id="selectZyjrPicVo">
-        select id, file_name,jinzhengu, file_path,gps_id from zyjr_pic
+        select id, file_name,jinzhengu,caiwu, file_path,gps_id from zyjr_pic
     </sql>
 
     <select id="selectZyjrPicList" parameterType="ZyjrPic" resultMap="ZyjrPicResult">
@@ -23,6 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="filePath != null  and filePath != ''"> and file_path = #{filePath}</if>
             <if test="gpsId != null  and gpsId != ''"> and gps_id = #{gpsId}</if>
             <if test="jinzhengu != null  and jinzhengu != ''"> and jinzhengu = #{jinzhengu}</if>
+            <if test="caiwu != null  and caiwu != ''"> and caiwu = #{caiwu}</if>
         </where>
     </select>
     
@@ -38,12 +40,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="filePath != null">file_path,</if>
             <if test="gpsId != null">gps_id,</if>
             <if test="jinzhengu != null">jinzhengu,</if>
+            <if test="caiwu != null">caiwu,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="fileName != null">#{fileName},</if>
             <if test="filePath != null">#{filePath},</if>
             <if test="gpsId != null">#{gpsId},</if>
             <if test="jinzhengu != null">#{jinzhengu},</if>
+            <if test="caiwu != null">#{caiwu},</if>
          </trim>
     </insert>
 
@@ -53,6 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="fileName != null">file_name = #{fileName},</if>
             <if test="filePath != null">file_path = #{filePath},</if>
             <if test="jinzhengu != null">jinzhengu = #{jinzhengu},</if>
+            <if test="caiwu != null">caiwu = #{caiwu},</if>
         </trim>
         where id = #{id}
     </update>
@@ -62,6 +67,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
     <delete id="deleteZyjrPicById2" parameterType="String">
         delete from zyjr_pic where jinzhengu = #{id}
+    </delete>
+    <delete id="deleteZyjrPicById3" parameterType="String">
+        delete from zyjr_pic where caiwu = #{id}
     </delete>
 
     <delete id="deleteZyjrPicByIds" parameterType="String">

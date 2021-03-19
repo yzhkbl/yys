@@ -28,6 +28,15 @@ public class ZyjrPic
 
     private String gpsId;
     private String jinzhengu;
+    private String caiwu;
+
+    public String getCaiwu() {
+        return caiwu;
+    }
+
+    public void setCaiwu(String caiwu) {
+        this.caiwu = caiwu;
+    }
 
     public String getJinzhengu() {
         return jinzhengu;
