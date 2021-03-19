@@ -26,6 +26,7 @@ public interface ZyjrDaihouMapper
      * @return 【请填写功能名称】集合
      */
     public List<ZyjrDaihou> selectZyjrDaihouList(ZyjrDaihou zyjrDaihou);
+    public List<ZyjrDaihou> selectZyjrDaihouLists(ZyjrDaihou zyjrDaihou);
 
     /**
      * 新增【请填写功能名称】

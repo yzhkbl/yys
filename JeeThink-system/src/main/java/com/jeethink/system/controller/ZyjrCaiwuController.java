@@ -51,17 +51,58 @@ public class ZyjrCaiwuController extends BaseController
     private ZyjrPicMapper zyjrPicMapper;
     @Autowired
     private ZyjrCaiwuMapper zyjrCaiwuMapper;
+    @Autowired
+    private ZyjrZhanghuMapper zyjrZhanghuMapper;
+    @Autowired
+    private ZyjrDaihouMapper zyjrDaihouMapper;
 
     /**
      * 查询【请填写功能名称】列表
      */
     @GetMapping("/list")
-    public TableDataInfo list(ZyjrCaiwu zyjrCaiwu)
+    public TableDataInfo list(ZyjrDaihou zyjrCaiwu)
     {
         startPage();
-        List<ZyjrCaiwu> list = zyjrCaiwuService.selectZyjrCaiwuList(zyjrCaiwu);
-        return getDataTable(list);
+        List<ZyjrDaihou> zyjrDaihous = zyjrDaihouMapper.selectZyjrDaihouLists(zyjrCaiwu);
+        return getDataTable(zyjrDaihous);
     }
+
+    @GetMapping("/lists")
+    public TableDataInfo list(ZyjrZhanghu zyjrZhanghu)
+    {
+        startPage();
+        List<ZyjrZhanghu> zyjrZhanghus = zyjrZhanghuMapper.selectZyjrZhanghuList(zyjrZhanghu);
+        return getDataTable(zyjrZhanghus);
+    }
+
+    @PostMapping("/insert")
+    public AjaxResult listss(@RequestBody ZyjrZhanghu zyjrZhanghu)
+    {
+
+        return toAjax(zyjrZhanghuMapper.insertZyjrZhanghu(zyjrZhanghu));
+    }
+
+    @GetMapping("/delete")
+    public AjaxResult del(Long id)
+    {
+
+        return toAjax(zyjrZhanghuMapper.deleteZyjrZhanghuById(id));
+    }
+
+    @GetMapping("/deletePic")
+    public AjaxResult sel(ZyjrPic zyjrPic)
+    {
+
+        return toAjax(zyjrPicMapper.deleteZyjrPicById4(zyjrPic));
+    }
+
+    @GetMapping("/tingyong")
+    public AjaxResult dsl(ZyjrZhanghu zyjrZhanghu)
+    {
+
+        return toAjax(zyjrZhanghuMapper.updateZyjrZhanghu(zyjrZhanghu));
+    }
+
 
     /**
      * 导出【请填写功能名称】列表
@@ -105,12 +146,16 @@ public class ZyjrCaiwuController extends BaseController
         map.put("cheliangleixing",zyjrCarLoan.getCheliangleixing());
         map.put("yewuquyu",zyjrCar.getArea());
         map.put("fenqiqishu",business.getRepayPeriod());
+        map.put("caiwu",zyjrCaiwu);
         map.put("pic",null);
+        map.put("zhanghus",null);
         if(zyjrCaiwu!=null){
             ZyjrPic zyjrPic=new ZyjrPic();
             zyjrPic.setCaiwu(zyjrCaiwu.getId().toString());
             List<ZyjrPic> zyjrPics = zyjrPicMapper.selectZyjrPicList(zyjrPic);
             map.put("pic",zyjrPics);
+            ZyjrZhanghu zyjrZhanghu = zyjrZhanghuMapper.selectZyjrZhanghuById(zyjrCaiwu.getZhanghu());
+            map.put("zhanghus",zyjrZhanghu);
         }
 
 
@@ -126,6 +171,13 @@ public class ZyjrCaiwuController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody ZyjrCaiwu zyjrCaiwu)
     {
+        ZyjrCaiwu zyjrCaiwu1 = zyjrCaiwuMapper.selectZyjrCaiwuByT(zyjrCaiwu.getTransactionCode());
+        if(zyjrCaiwu1!=null){
+
+            zyjrCaiwu.setId(zyjrCaiwu1.getId());
+            zyjrCaiwuService.updateZyjrCaiwu(zyjrCaiwu);
+            return AjaxResult.success(zyjrCaiwu.getId());
+        }
         zyjrCaiwuService.insertZyjrCaiwu(zyjrCaiwu);
         return AjaxResult.success(zyjrCaiwu.getId());
     }

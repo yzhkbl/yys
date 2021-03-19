@@ -37,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     <select id="selectZyjrCaiwuByT" parameterType="String" resultMap="ZyjrCaiwuResult">
         <include refid="selectZyjrCaiwuVo"/>
-        where transaction_code = #{id}
+        where transaction_code = #{transactionCode}
     </select>
         
     <insert id="insertZyjrCaiwu" parameterType="ZyjrCaiwu" useGeneratedKeys="true" keyProperty="id">
@@ -48,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="money != null">money,</if>
             <if test="remark != null">remark,</if>
             <if test="time != null">time,</if>
-            <if test="transactionCode != transaction_code">transaction_code,</if>
+            <if test="transactionCode != null">transaction_code,</if>
 
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">

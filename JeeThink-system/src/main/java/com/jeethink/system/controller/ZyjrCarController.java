@@ -2,6 +2,7 @@ package com.jeethink.system.controller;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.jeethink.common.utils.DateUtils;
 import com.jeethink.common.utils.SecurityUtils;
@@ -245,9 +246,14 @@ ZyjrCarController extends BaseController {
         }
         ZyjrCar a = new ZyjrCar();
         if(storeInformation.getPid()==null&&storeInformation.getBazaar()!=null){
+
             ZyjrCarParent zyjrCarParent=new ZyjrCarParent();
             zyjrCarParent.setName(storeInformation.getBazaar());
-            zyjrCarParentMapper.insertZyjrCarParent(zyjrCarParent);
+            List<ZyjrCarParent> zyjrCarParents = zyjrCarParentMapper.selectZyjrCarParentList(zyjrCarParent);
+            if(zyjrCarParents.size()<1){
+                zyjrCarParentMapper.insertZyjrCarParent(zyjrCarParent);
+            }
+
             a.setPid(zyjrCarParent.getId().toString());
         }
         if(storeInformation.getStatus().equals("add")){
@@ -332,6 +338,7 @@ ZyjrCarController extends BaseController {
             int ceshi = zyjrCarService.updateZyjrCar(a);
             String pics=storeInformation.getPic().substring(1,storeInformation.getPic().length() - 1);
             String[] pic=pics.split(", ");
+            sysFileInfoMapper.deleteSysFileInfoById(a.getId());
             for (String s : pic) {
                 //   String asd=androidUpload.upload(s);
                 SysFileInfo sysFileInfo=new SysFileInfo();

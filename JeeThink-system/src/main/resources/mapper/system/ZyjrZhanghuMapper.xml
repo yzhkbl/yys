@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.system.mapper.ZyjrZhanghuMapper">
+    
+    <resultMap type="ZyjrZhanghu" id="ZyjrZhanghuResult">
+        <result property="id"    column="id"    />
+        <result property="accountName"    column="account_name"    />
+        <result property="bankName"    column="bank_name"    />
+        <result property="account"    column="account"    />
+        <result property="zhanghuhuming"    column="zhanghuhuming"    />
+        <result property="del"    column="del"    />
+    </resultMap>
+
+    <sql id="selectZyjrZhanghuVo">
+        select id, account_name, bank_name, account,del, zhanghuhuming from zyjr_zhanghu
+    </sql>
+
+    <select id="selectZyjrZhanghuList" parameterType="ZyjrZhanghu" resultMap="ZyjrZhanghuResult">
+        <include refid="selectZyjrZhanghuVo"/>
+        <where>  
+            <if test="accountName != null  and accountName != ''"> and account_name like concat('%', #{accountName}, '%')</if>
+            <if test="bankName != null  and bankName != ''"> and bank_name like concat('%', #{bankName}, '%')</if>
+            <if test="account != null  and account != ''"> and account = #{account}</if>
+            <if test="zhanghuhuming != null  and zhanghuhuming != ''"> and zhanghuhuming = #{zhanghuhuming}</if>
+            <if test="del != null  and del != ''"> and del = #{del}</if>
+        </where>
+    </select>
+    
+    <select id="selectZyjrZhanghuById" parameterType="Long" resultMap="ZyjrZhanghuResult">
+        <include refid="selectZyjrZhanghuVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZyjrZhanghu" parameterType="ZyjrZhanghu" useGeneratedKeys="true" keyProperty="id">
+        insert into zyjr_zhanghu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="accountName != null">account_name,</if>
+            <if test="bankName != null">bank_name,</if>
+            <if test="account != null">account,</if>
+            <if test="zhanghuhuming != null">zhanghuhuming,</if>
+            <if test="del != null">del,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="accountName != null">#{accountName},</if>
+            <if test="bankName != null">#{bankName},</if>
+            <if test="account != null">#{account},</if>
+            <if test="zhanghuhuming != null">#{zhanghuhuming},</if>
+            <if test="del != null">#{del},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZyjrZhanghu" parameterType="ZyjrZhanghu">
+        update zyjr_zhanghu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="accountName != null">account_name = #{accountName},</if>
+            <if test="bankName != null">bank_name = #{bankName},</if>
+            <if test="account != null">account = #{account},</if>
+            <if test="zhanghuhuming != null">zhanghuhuming = #{zhanghuhuming},</if>
+            <if test="del != null">del = #{del},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZyjrZhanghuById" parameterType="Long">
+        delete from zyjr_zhanghu where id = #{id}
+    </delete>
+
+    <delete id="deleteZyjrZhanghuByIds" parameterType="String">
+        delete from zyjr_zhanghu where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

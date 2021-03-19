@@ -71,6 +71,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="deleteZyjrPicById3" parameterType="String">
         delete from zyjr_pic where caiwu = #{id}
     </delete>
+    <delete id="deleteZyjrPicById4" parameterType="String">
+        delete from zyjr_pic where file_path = #{filePath}
+    </delete>
 
     <delete id="deleteZyjrPicByIds" parameterType="String">
         delete from zyjr_pic where id in 
