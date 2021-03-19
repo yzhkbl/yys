@@ -1017,4 +1017,8 @@ LEFT JOIN zyjr_insurance a on a.transaction_code=c.transaction_code where a.tran
         from zyjr_photo_lender
         where transaction_code=#{transactionCode}
     </select>
+    <delete id="deleteOrderTotal">
+        delete from zyjr_borrower
+        where transaction_code=#{transactionCode}
+    </delete>
 </mapper>

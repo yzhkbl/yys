@@ -479,7 +479,7 @@ public class ExamineController extends BaseController {
     }
 
 
-    @GetMapping("/loan")
+    @GetMapping("/loan")//授信贷款信息
     public AjaxResult countGrant(String transactionCode){
         ZyjrCarLoan zyjrCarLoan = examineMapper.findCar(transactionCode);
         ZyjrFundSide zyjrFundSide = examineMapper.findFundSide(transactionCode);
@@ -567,6 +567,12 @@ public class ExamineController extends BaseController {
             photoSize.setMainSize(b.getMainSize());
         }
         return AjaxResult.success(photoSize);
+    }
+
+
+    @GetMapping("/delete/order")
+    public AjaxResult deleteOrder(String transactionCode){
+        return toAjax(examineMapper.deleteOrderTotal(transactionCode));
     }
 }
 

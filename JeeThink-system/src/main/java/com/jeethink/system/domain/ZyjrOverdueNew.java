@@ -1,6 +1,9 @@
 package com.jeethink.system.domain;
 
 import java.math.BigDecimal;
+import java.util.Date;
+
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.jeethink.common.annotation.Excel;
@@ -12,6 +15,7 @@ import com.jeethink.common.core.domain.BaseEntity;
  * @author jeethink
  * @date 2021-01-29
  */
+@Data
 public class ZyjrOverdueNew extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -78,6 +82,7 @@ public class ZyjrOverdueNew extends BaseEntity
     /** 订单编号 */
     @Excel(name = "订单编号")
     private String transactionCode;
+    private Date time;
 
     public void setId(Long id) 
     {

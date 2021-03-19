@@ -30,17 +30,18 @@ public interface StageExamineMapper {
     int insertOpinion(ZyjrRepeatOpinion q);
     int updateOpinion(ZyjrRepeatOpinion q);
     ZyjrRepeatOpinion findOpinion(String transactionCode);
-    List<ZyjrGrant> list(@Param("name") String name,@Param("approvalType") Integer approvalType);
+    List<ZyjrGrant> list(@Param("name") String name,@Param("approvalType") Integer approvalType);//复审列表
 
 
-    List<ZyjrGrant> findGrant(@Param("name") String name,@Param("approvalType") Integer approvalType);
+    List<ZyjrGrant> findGrant(@Param("name") String name,@Param("approvalType") Integer approvalType);//授信列表
     int insertGrantOpinion(ZyjrGrantOpinion q);
     int updateGrantOpinion(ZyjrGrantOpinion q);
     ZyjrGrantOpinion findGrantOpinion(String transactionCode);
 
     GrantVo findByGrant(String transactionCode);
 
-    List<ZyjrGrant>findAllow(@Param("name") String name,@Param("approvalType") Integer approvalType);
+    List<ZyjrGrant>findAllow(@Param("name") String name,@Param("approvalType") Integer approvalType);//初审列表
+    List<ZyjrGrant>myCustomer(Long userId);
 
     //上牌
     List<ShangpaiDiyaVo>findShangpai();
@@ -59,4 +60,6 @@ public interface StageExamineMapper {
     int addSupplement(ZyjrSupplement q);
     int updateSupplement(ZyjrSupplement q);
     ZyjrSupplement findSupplement(String transactionCode);
+
+
 }

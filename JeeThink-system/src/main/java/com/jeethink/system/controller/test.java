@@ -325,8 +325,6 @@ public class test extends BaseController {
         }
         return AjaxResult.error("错误", result);
     }
-
-    //之前给php写的接口 php人应该跑路了
     @ResponseBody
     @PostMapping("php")
     public AjaxResult ss(@RequestBody PhpVo phpVo){
@@ -344,7 +342,7 @@ public class test extends BaseController {
         return  AjaxResult.success(jsons);
     }
 
-    //秒批电子签约需要调用的发起确认接口
+
     @ApiOperation("发起确认")
     @PostMapping("ok")
     @ResponseBody
@@ -355,7 +353,7 @@ public class test extends BaseController {
 
         return AjaxResult.success(a);
     }
-    //汇融的当前状态接口
+
     @ApiOperation("查询状态")
     @GetMapping("selectState")
     @ResponseBody
@@ -607,7 +605,6 @@ public class test extends BaseController {
 
         return AjaxResult.success();
     }
-    //获取百融token并存入redis中29分钟
 
     @RequestMapping(value = {"/getByToken"}, method = RequestMethod.GET)
     @ResponseBody

@@ -221,4 +221,12 @@ public class StageExamineController extends BaseController {
         map.put("right",zyjrGrant2);
         return AjaxResult.success(map);
     }
+
+    /**我的客户*/
+    @GetMapping("/my/customer")
+    public TableDataInfo myCustomer(Long userId){
+        startPage();
+        List<ZyjrGrant>list = stageExamineMapper.myCustomer(userId);
+        return getDataTable(list);
+    }
 }
