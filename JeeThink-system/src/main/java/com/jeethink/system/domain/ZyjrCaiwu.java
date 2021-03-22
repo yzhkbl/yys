@@ -26,15 +26,15 @@ public class ZyjrCaiwu extends BaseEntity
 
     /** 打款账户id */
     @Excel(name = "打款账户id")
-    private String zhanghu;
+    private Long zhanghu;
 
     /** 打款金额 */
     @Excel(name = "打款金额")
     private String money;
 
     /** 打款时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "打款时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "打款时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date time;
 
     /** 图片 */
@@ -67,12 +67,12 @@ public class ZyjrCaiwu extends BaseEntity
     {
         return mode;
     }
-    public void setZhanghu(String zhanghu) 
+    public void setZhanghu(Long zhanghu)
     {
         this.zhanghu = zhanghu;
     }
 
-    public String getZhanghu() 
+    public Long getZhanghu()
     {
         return zhanghu;
     }
