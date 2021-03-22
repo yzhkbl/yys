@@ -1,6 +1,9 @@
 package com.jeethink.system.controller;
 
 import java.util.List;
+
+import com.jeethink.system.domain.vo.OverdueVo;
+import com.jeethink.system.mapper.ZyjrOverdueNewMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +35,17 @@ public class ZyjrOverdueNewController extends BaseController
 {
     @Autowired
     private IZyjrOverdueNewService zyjrOverdueNewService;
+    @Autowired
+    private ZyjrOverdueNewMapper zyjrOverdueNewMapper;
+
+
+    @GetMapping("/yuqi")
+    public TableDataInfo yuqi(){
+        startPage();
+        List<OverdueVo>list = zyjrOverdueNewMapper.yuqi();
+        return getDataTable(list);
+    }
+
 
     /**
      * 查询【请填写功能名称】列表

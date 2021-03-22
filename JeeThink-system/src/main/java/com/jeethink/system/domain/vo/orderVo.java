@@ -33,4 +33,9 @@ public class orderVo {
     private BigDecimal actualPrice;//车辆价格
     private BigDecimal loanAmount;//贷款金额
 
+    private String style; //意向车型
+    private BigDecimal daikuanjine; //总贷款额
+    private BigDecimal repaymentTerm;//贷款期数
+    private BigDecimal interestRate;  //对客费率
+
 }

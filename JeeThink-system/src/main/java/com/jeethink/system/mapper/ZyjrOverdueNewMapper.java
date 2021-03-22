@@ -3,6 +3,7 @@ package com.jeethink.system.mapper;
 import java.util.List;
 import com.jeethink.system.domain.ZyjrOverdueNew;
 import com.jeethink.system.domain.vo.BorrowerVo;
+import com.jeethink.system.domain.vo.OverdueVo;
 
 /**
  * 【请填写功能名称】Mapper接口
@@ -63,5 +64,7 @@ public interface ZyjrOverdueNewMapper
     ZyjrOverdueNew findOverdue(String transactionCode);
     //OverdueCar findCar(String transactionCode);
     BorrowerVo findBorrower(String transactionCode);
+
+    List<OverdueVo>yuqi();
 
 }

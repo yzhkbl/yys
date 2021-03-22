@@ -143,4 +143,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         left join zyjr_car_loan c on a.transaction_code=c.transaction_code
         where a.transaction_code=#{transactionCode}
     </select>
+    <select id="yuqi" resultType="com.jeethink.system.domain.vo.OverdueVo">
+        select distinct time,borrower,bank_card,by_stages,loan_amount,repayment_amount,repayment_date,should_stages,fund_side
+        from zyjr_overdue_new
+    </select>
 </mapper>
