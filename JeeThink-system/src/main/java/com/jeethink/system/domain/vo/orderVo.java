@@ -30,7 +30,7 @@ public class orderVo {
     private String creditState;     //征信是否通过
     private String phoneNumber;
 
-    private BigDecimal intentionPrice;
-    private BigDecimal loanMoney;
+    private BigDecimal actualPrice;//车辆价格
+    private BigDecimal loanAmount;//贷款金额
 
 }
