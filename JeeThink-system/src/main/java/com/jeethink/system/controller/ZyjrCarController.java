@@ -180,6 +180,10 @@ ZyjrCarController extends BaseController {
             carProgramme.setZyjrCarRate(zyjrCarRates);
         }
         zyjrCar.setZyjrCarProgramme(zyjrCarProgrammes);
+        ZyjrCarAccount zyjrCarAccount=new ZyjrCarAccount();
+        zyjrCarAccount.setZyjrCarId(id.toString());
+        List<ZyjrCarAccount> zyjrCarAccounts = zyjrCarAccountMapper.selectZyjrCarAccountList(zyjrCarAccount);
+        zyjrCar.setZyjrCarAccount(zyjrCarAccounts);
         return AjaxResult.success(zyjrCar);
     }
 
